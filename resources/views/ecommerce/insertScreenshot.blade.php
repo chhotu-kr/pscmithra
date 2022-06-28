@@ -7,10 +7,10 @@
     <div class="col-9">
       <div class="row">
           <div class="col-8">
-              <h6 class="border-5 border-start border-danger ps-1 fw-bold">ManageTopic</h6>
+              <h6 class="border-5 border-start border-danger ps-1 fw-bold h4">ManageTopic</h6>
           </div>
           <div class="col-4">
-            <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#basicModal">
+            <button type="button" class="btn btn-primary rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#basicModal">
                 Add screenshot
               </button>
               <div class="modal fade" id="basicModal" tabindex="-1">
@@ -51,11 +51,9 @@
         </div>
         
       </div>
+     
   </div>
-      
-  </div><!-- End Page Title -->
-
-  {{-- <section class="section">
+  <section class="section">
     <div class="row">
       <div class="col-lg-12">
 
@@ -65,24 +63,31 @@
             <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
 
             <!-- Table with stripped rows -->
-            <table class="table datatable">
+            <table class="table ">
               <thead>
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">TopicName</th>
-                  <th scope="col">SubjectName</th>
+                  <th scope="col">Title</th>
+                  <th scope="col"> Url</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                  @foreach ($topic as $req)
+                  @foreach ($screenshot as $pro)
                       <tr>
-                          <td>{{$req->id}}</td>
-                          <td>{{$req->topic_name}}</td>
-                          <td>{{$req->subject->sub_name}}</td>
+                          <td>{{$pro->id}}</td>
+                          <td>{{$pro->product->title}}</td>
+                          <td>{{$pro->scr_url}}</td>
+                         
+                          
                           <td>
-                              <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                              <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a>
+                              
+                              <form action="{{route('screenshot.destroy',[$pro])}}" method="POST">
+                                @method('delete')
+                              @csrf
+                              <input type="submit" value="X" class="btn btn-outline-danger">
+                              <a href="{{route('screenshot.edit',[$pro])}}" class="btn btn-outline-primary">Edit</a>
+                              </form>
                           </td>
                       </tr>
                   @endforeach
@@ -96,7 +101,11 @@
 
       </div>
     </div>
-  </section> --}}
+  </section>   
+      
+  </div><!-- End Page Title -->
+
+  
 
 </main><!-- End #main -->
 

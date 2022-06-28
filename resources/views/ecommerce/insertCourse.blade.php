@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3" id="ac">
                             <label>Text</label>
-                            <input type="text" name="text" class="form-control" required>
+                            <textarea name="text" id="validationTooltip01" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
                         </div>
                         <div class="mb-3" id="bc">
                             <label>QuizId</label>

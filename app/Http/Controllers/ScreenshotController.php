@@ -13,7 +13,7 @@ class ScreenshotController extends Controller
         //
         $data['product']=Product::all();
         $data['screenshot']=Screenshot::all();
-        return view('admin.ecommerce.insertScreenshot',$data);
+        return view('ecommerce.insertScreenshot',$data);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class ScreenshotController extends Controller
         $data->slugid=md5($request->screenshot .time());
         $data->scr_url=$request->scr_url;
         $data->save();
-        return redirect('/screenshot');
+        return redirect()->route('screenshot.index');
     }
 
     
@@ -42,11 +42,11 @@ class ScreenshotController extends Controller
     
     public function edit(Screenshot $screenshot)
     {
-        //
-        // $data['product']=Product::all();
-        // $data['screenshot']=Screenshot::find('$id');
+        
+        $data['product']=Product::all();
+        $data['screenshot']=$screenshot;
 
-        // return view('admin.ecommerce.editScreenshot');
+        return view('ecommerce.editScreenshot',$data);
     }
 
     
@@ -54,25 +54,18 @@ class ScreenshotController extends Controller
     {
         //
         
-        // $screenshot->product_id=$request->product_id;
-        // $screenshot->slugid=md5($request->screenshot .time());
-        // $screenshot->url=$request->url;
-        // $screenshot->save();
-        // return redirect('/screenshot');
+        $screenshot->product_id=$request->product_id;
+        $screenshot->slugid=md5($request->screenshot .time());
+        $screenshot->scr_url=$request->scr_url;
+        $screenshot->save();
+        return redirect()->route('screenshot.index');
     }
 
     
-    public function destroy(Screenshot $screenshot,$slug)
+    public function destroy(Screenshot $screenshot)
     {
-        //
-        $item= Screenshot::where('slugid', $slug)->first();
         
-        if (!empty($item)) {
-            $item->delete();
-            session()->flash('success', 'Service has been deleted !!!');
-        } else {
-            session()->flash('error', 'Please try again !!!');
-        }
-        return redirect('/');
+        $screenshot->delete();
+        return redirect()->route('screenshot.index');
     }
 }

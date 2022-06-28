@@ -13,7 +13,7 @@ class MemberShipController extends Controller
     {
         //
         $data['membership']= MemberShip::all();
-        return view('admin.ecommerce.manageMembership',$data);
+        return view('ecommerce.manageMembership',$data);
       
     }
 
@@ -22,7 +22,7 @@ class MemberShipController extends Controller
     {
         //
         $data['membership']= MemberShip::all();
-        return view('admin.ecommerce.insertMemberShip',$data);
+        return view('ecommerce.insertMemberShip',$data);
     }
 
     
@@ -50,7 +50,7 @@ class MemberShipController extends Controller
     {
         //
         $data['membership']=$membership;
-        return view('admin.ecommerce.editMembership',$data);
+        return view('ecommerce.editMembership',$data);
     }
 
     public function update(Request $request, MemberShip $membership)

@@ -15,7 +15,7 @@ class CourseController extends Controller
         $data['course']=Course::all();
         $data['product']=Product::all();
 
-        return view('admin.ecommerce.manageCourse',$data);
+        return view('ecommerce.manageCourse',$data);
     }
 
     
@@ -24,7 +24,7 @@ class CourseController extends Controller
         //
         $data['course']=Course::all();
         $data['product']=Product::all();
-        return view('admin.ecommerce.insertCourse',$data);
+        return view('ecommerce.insertCourse',$data);
     }
 
     
@@ -63,7 +63,7 @@ class CourseController extends Controller
         //
         $data['course']=$course;
         $data['product']=Product::all();
-        return view('admin.ecommerce.editCourse',$data);
+        return view('ecommerce.editCourse',$data);
 
     }
 

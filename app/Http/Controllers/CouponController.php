@@ -13,13 +13,15 @@ class CouponController extends Controller
     {
         //
         $data['coupon']= Coupon::all();
-        return view('admin.ecommerce.insertCoupon',$data);
+        return view('ecommerce.manageCoupon',$data);
     }
 
     
     public function create()
     {
         //
+        $data['coupon']= Coupon::all();
+        return view('ecommerce.insertCoupon',$data);
     }
 
 
@@ -31,7 +33,7 @@ class CouponController extends Controller
         $data->percent=$request->percent;
         $data->slugid=md5($request->code .time());
         $data->save();
-        return redirect('/coupon');
+        return redirect()->route('coupon.index');
         
     }
 
@@ -58,5 +60,7 @@ class CouponController extends Controller
     public function destroy(coupon $coupon)
     {
         //
+        $coupon->delete();
+        return redirect()->route('coupon.index');
     }
 }

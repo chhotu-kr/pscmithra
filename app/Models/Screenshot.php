@@ -15,7 +15,7 @@ class Screenshot extends Model
       'scr_url',
     ];
 
-    public function screenshot(){
-      return $this->hasOne(Screenshot::class,'product_id','id');
+    public function product(){
+      return $this->hasOne(Product::class,'id','product_id');
     }
 }

@@ -91,45 +91,20 @@
               <i class="bi bi-circle"></i><span>Manage Address</span>
             </a>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('screenshot.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Screenshot</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('coupon.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Coupon</span>
+            </a>
+          </li>  
         </ul>
       </li><!-- End Charts Nav -->
 
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('product.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Product</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('membership.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Membership</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('coupon.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Coupon</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('screenshot.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Screenshot</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('pdf.index')}}">
-          <i class="bi bi-bar-chart"></i><span>PDF</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('course.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Course</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('address.index')}}">
-          <i class="bi bi-bar-chart"></i><span>Address</span>
-        </a>
-      </li>  --}}
+      
 
      
   </aside><!-- End Sidebar-->

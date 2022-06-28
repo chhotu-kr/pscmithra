@@ -30,7 +30,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Details</label>
-                                <textarea name="details" id="" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea name="details" id="" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
                             </div>
                             <div class="mb-3">
                                <input type="submit" value="Create" class="btn btn-primary w-100">
