@@ -62,21 +62,28 @@
              add_row();               
             });
         });
+
+        
         function remove(id){
-          console.log(id);
+          tinymce.execCommand('mceRemoveControl', true, "textarea"+id);
+          document.getElementById("Divv"+id).remove();
         }
     
         function add_row(){
-          var index = $('input[name="question_add_id[]"]').length+1;
+          var index = $('textarea[name="question_add_id[]"]').length+1;
           
 var id ="Divv"+index;
+var tinymceID= "textarea"+index;
+var tinymceidd= "textareaoption1"+index;
+var tinymceiddd= "textareaoption2"+index;
+var tinymceadd= "textareaoption3"+index;
+var tinymceaddd= "textareaoption4"+index;
+                
 
 
-            var html =  '<div id="'+id+'"> <a href="" id="" onclick="remove('+id+');" class="btn btn-danger"></a>'+ 
-                   ` 
-                     <div class="col-md-12 position-relative">
-                      <label for="addbutton" class="form-label">Language_id</label>
-                      <select class="form-select" name="language_id[]" id="addbutton" required>
+            var html =  '<div id="'+id+'"> <a id="'+index+'" onclick="remove(this.id);" class="btn btn-danger"></a>'; 
+                   
+            html+=      `<div class="col-md-12 position-relative"><label for="addbutton" class="form-label">Language_id</label> <select class="form-select" name="language_id[]" id="addbutton" required>
                         <option selected disabled value="0">Choose your correct ans</option>
                          @foreach ($language as $item)
                              <option value="{{$item->id}}">{{$item->languagename}}</option>
@@ -89,45 +96,60 @@ var id ="Divv"+index;
                     </div>
                       <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Question</label>
-                        <input type="text" class="tinymce-editor form-control" name="question_add_id[]" id="validationTooltip01"  required>
+                        `;
+                   html+='<div><textarea  class=" tinymce-editor form-control" name="question_add_id[]" id="'+tinymceID+'"></textarea> </div>';
                         
+                       html+= `
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip01" class="form-label">Option1</label>
-                        <input type="text" class="form-control" name="option1[]" id="validationTooltip01"  required>
+                        <label for="validationTooltip01" class="form-label">Option1</label>`;
+                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option1[]" id="'+tinymceidd+'"></textarea> </div>';
+                        
+                       html+= `
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip01" class="form-label">Option2</label>
-                        <input type="text" class="form-control" name="option2[]" id="validationTooltip01"  required>
+                        <label for="validationTooltip01" class="form-label">Option2</label>`;
+                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option2[]" id="'+tinymceiddd+'"></textarea> </div>';
+                        
+                       html+= `
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip01" class="form-label">Option3</label>
-                        <input type="text" class="form-control" name="option3[]" id="validationTooltip01"  required>
+                        <label for="validationTooltip01" class="form-label">Option3</label>`;
+                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option3[]" id="'+tinymceadd+'"></textarea> </div>';
+                        
+                       html+= `
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip01" class="form-label">Option4</label>
-                        <input type="text" class="form-control" name="option4[]" id="validationTooltip01"  required>
+                        <label for="validationTooltip01" class="form-label">Option4</label>`;
+                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option4[]" id="'+tinymceaddd+'"></textarea> </div>';
+                        
+                       html+= `
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
-                    </div>
                     </div>`;
             $("#viewww").append(html);
-             
+             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceID);
+            tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceidd);
+            tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceiddd);
+            tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceadd);
+            tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceaddd);
         }
+           
+      
     </script>
      
        
