@@ -14,7 +14,7 @@ class PdfController extends Controller
         //
         $data['product']=Product::all();
         $data['pdf']=Pdf::all();
-        return view('admin.ecommerce.managePdf',$data);
+        return view('ecommerce.managePdf',$data);
     }
 
     
@@ -23,7 +23,7 @@ class PdfController extends Controller
         //
         $data['product']=Product::all();
         $data['pdf']=Pdf::all();
-        return view('admin.ecommerce.insertPdf',$data);
+        return view('ecommerce.insertPdf',$data);
     }
 
     
@@ -49,7 +49,7 @@ class PdfController extends Controller
     
         $data['product']=Product::all();
         $data['pdf']=$pdf;
-        return view('admin.ecommerce.editPdf',$data);
+        return view('ecommerce.editPdf',$data);
     }
 
     

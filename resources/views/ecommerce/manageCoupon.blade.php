@@ -10,10 +10,10 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Course</h4>
+                        <h4 class="text-theme ps-2">Manage Coupon</h4>
                     </div>
                     <div class="col-4">
-                      <a href="{{route('course.create')}}" class="btn btn-outline-success">Add Modules</a> 
+                        <a href="{{route('coupon.create')}}" class="btn btn-outline-success">Add New Coupon</a>
                     </div>
                 </div>
                 <section class="section">
@@ -30,39 +30,27 @@
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">Title</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col">CourseUrl</th>
-                                  <th scope="col"> Type</th>
-                                  <th scope="col">Text</th>
-                                  <th scope="col">QuizId</th>
-                                  <th scope="col">IsFree</th>
-                                  <th scope="col">Index</th>
-                                  
+                                  <th scope="col">Code</th>
+                                  <th scope="col">Percent</th>
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                  @foreach ($course as $cour)
+                                  @foreach ($coupon as $pro)
                                       <tr>
-                                          <td>{{$cour->id}}</td>
-                                          <td>{{$cour->product->title}}</td>
-                                          <td>{{$cour->name}}</td>
-                                          <td>{{$cour->course_url}}</td>
-                                          <td>{{$cour->type}}</td>
-                                          <td>{{$cour->Text}}</td>
-                                          <td>{{$cour->quiz_id}}</td>
-                                          <td>{{$cour->is_free}}</td>
-                                          <td>{{$cour->index}}</td>
+                                          <td>{{$pro->id}}</td>
+                                          <td>{{$pro->code}}</td>
+                                          <td>{{$pro->percent}}</td>
+                                         
                                           
                                           <td>
-                                            <a href="{{route('course.create')}}" class="btn btn-outline-success">Add Modules</a>
-                                              {{-- <form action="{{route('course.destroy',[$cour])}}" method="POST">
+                                              
+                                              <form action="{{route('coupon.destroy',[$pro])}}" method="POST">
                                                 @method('delete')
                                               @csrf
                                               <input type="submit" value="X" class="btn btn-outline-danger">
-                                              <a href="{{route('course.edit',[$cour])}}" class="btn btn-outline-primary">Edit</a>
-                                              </form> --}}
+                                              {{-- <a href="{{route('coupon.edit',[$pro])}}" class="btn btn-outline-primary">Edit</a> --}}
+                                              </form>
                                           </td>
                                       </tr>
                                   @endforeach

@@ -68,7 +68,7 @@
                   
                     <div class="col-md-12 position-relative">
                       <label for="validationTooltip01" class="form-label">Description</label>
-                     <textarea name="description" id="validationTooltip01" cols="30" rows="5" class="form-control"></textarea>
+                     <textarea name="description" id="validationTooltip01" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
                       <div class="valid-tooltip">
                         Looks good!
                       </div>

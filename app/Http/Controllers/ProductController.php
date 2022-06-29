@@ -18,7 +18,7 @@ class ProductController extends Controller
         $data['subject']=Subject::all();
         $data['topic']=Topic::all();
         
-        return view('admin.ecommerce.manageProduct',$data);
+        return view('ecommerce.manageProduct',$data);
     }
 
     
@@ -28,7 +28,7 @@ class ProductController extends Controller
         $data['product']=Product::all();
         $data['subject']=Subject::all();
         $data['topic']=Topic::all();
-        return view('admin.ecommerce.insertProduct',$data);
+        return view('ecommerce.insertProduct',$data);
     }
 
     
@@ -66,7 +66,7 @@ class ProductController extends Controller
         $data['product']=$product;
         $data['subject']=Subject::all();
         $data['topic']=Topic::all();
-        return view('admin.ecommerce.editProduct',$data);
+        return view('ecommerce.editProduct',$data);
     }
 
     

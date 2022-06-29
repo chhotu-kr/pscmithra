@@ -14,7 +14,7 @@ class AddressController extends Controller
         //
         $data['product']=Product::all();
         $data['address']=Address::all();
-        return view('admin.ecommerce.manageAddress',$data);
+        return view('ecommerce.manageAddress',$data);
     }
 
    
@@ -23,7 +23,7 @@ class AddressController extends Controller
         //
         $data['address'] = Address::all();
         $data['product'] = Product::all();
-        return view('admin.ecommerce.insertAddress',$data);
+        return view('ecommerce.insertAddress',$data);
     }
 
     
@@ -52,7 +52,7 @@ class AddressController extends Controller
         //
         $data['address']=$address;
         $data['product']=Product::all();
-        return view('admin.ecommerce.editAddress',$data);
+        return view('ecommerce.editAddress',$data);
         
     }
 
@@ -73,17 +73,7 @@ class AddressController extends Controller
 
     public function destroy(Address $address)
     {
-        // 
-        // $item = Address::where('slugid',$slug)->first();
-        
-        // if(!empty($item)){
-        //     $item->delete();
-        //     session()->flash('success', 'Service has been deleted !!!'); 
-        // }
-
-        // else{
-        //     session()->flash('error', 'Please try again !!!');
-        // } 
+       
        $address->delete();
         return redirect()->route('address.index');
     }
