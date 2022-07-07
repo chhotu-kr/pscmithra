@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CSC-Mitra</title>
+    <title>PscMithra</title>
     <!-- CSS only -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/owl.theme.default.css') }}">
@@ -23,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container">
-            <a href="{{route('home')}}" class="navbar-brand fw-bold">CSC-Mirta</a>
+            <a href="{{ route('home') }}" class="navbar-brand fw-bold"><h3><b>PsC-Mithra</b></h3></a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="" class="btn btn-warning rounded-pill ms-1 pe-5 ps-5">Buy Now </a>
                 </li>
@@ -33,28 +37,13 @@
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-danger">
         <div class="container">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="{{route('home')}}" class="nav-link "> <b>Home</b> </a></li>
-                <li class="nav-item"><a href="{{route('bpsc')}}" class="nav-link fw-bold">Practice Exams</a></li>
-                <li class="nav-item"><a href="{{route('course')}}" class="nav-link fw-bold">Courses</a></li>
-                <li class="nav-item"><a href="{{route('pattern')}}" class="nav-link fw-bold">Pattern</a></li>
-                <li class="nav-item"><a href="{{route('pricing')}}" class="nav-link fw-bold">Pricing</a></li>
-                <li class="nav-item"><a href="{{route('syllabus')}}" class="nav-link fw-bold">Syllabus</a></li>
-                <li class="nav-item"><a href="{{route('about')}}" class="nav-link fw-bold">About Us</a></li>
-                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link fw-bold">Contact Us</a></li>
-                <div class="dropdown show">
-                    <a class="btn btn-info dropdown-toggle" href="#"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      More
-                    </a>
-                  
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                <li class="nav-item"><a href="{{route('exam.category')}}" class="nav-link fw-bold text-white">Mock test</a></li>
+                <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Quizes</a></li>
+                <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Live exam</a></li>
+                <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Study material</a></li>
             </ul>
         </div>
     </nav>

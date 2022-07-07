@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId("subject_id")->constrained();
             $table->foreignId("topic_id")->constrained();
             
-            
+            $table->string('name');
             $table->string('rightans');
             $table->string('slugid');
             $table->string('isVerified')->nullable();

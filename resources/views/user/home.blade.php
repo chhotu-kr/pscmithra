@@ -1,15 +1,15 @@
-@extends('base')
+@extends('user.base')
 @section('content')
     <div class="container mt-5">
         <div class="row mt-5">
             <div class=" mt-5">
-                <h1 class="py-2 mt-5 fw-bold lh-3">Csc MiTrA - <br>
+                <h1 class="py-2 mt-5 fw-bold lh-3">Psc MiThrA - <br>
                     Online Learning and <br>
                     Examination System
                 </h1>
             </div>
         </div>
-        <a href="" class="btn btn-warning text-light fw-bold rounded-pill pe-5 ps-5 mb-5 mt-5">GET STARTED</a>
+        <a href="" class="btn btn-success text-light fw-bold rounded-pill pe-5 ps-5 mb-5 mt-5">GET STARTED</a>
     </div>
     <div class="container-fluid mt-5" style="background:rgb(223, 223, 223)">
         <div class="row mt-5">
@@ -17,15 +17,15 @@
                 <h3 class=" mt-5">Practice Exams And Exam Categories</h3>
                 <div class="col-8 mx-auto mt-5">
                     <ul class="nav nav-pills cs-nav-pills text-ceneter">
-                        <li class="nav-item"><a href="{{route('bpsc')}}" class="btn btn-warning me-2">BPSC</a></li>
-                        <li class="nav-item"><a href="{{route('physics')}}" class="btn btn-secondary me-2">Physics</a></li>
-                        <li class="nav-item"><a href="{{route('chemistery')}}" class="btn btn-secondary me-2">Chemistry</a></li>
-                        <li class="nav-item"><a href="{{route('biology')}}" class="btn btn-secondary me-2">Biology</a></li>
-                        <li class="nav-item"><a href="{{route('math')}}" class="btn btn-secondary me-2">Maths</a></li>
-                        <li class="nav-item"><a href="{{route('commerce')}}" class="btn btn-secondary me-2">Commerce</a></li>
-                        <li class="nav-item"><a href="{{route('bba')}}" class="btn btn-secondary me-2">BBA</a></li>
-                        <li class="nav-item"><a href="{{route('bca')}}" class="btn btn-secondary me-2">BCA</a></li>
-                        <li class="nav-item"><a href="{{route('bsc')}}" class="btn btn-secondary me-2">Bsc</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-warning me-2">BPSC</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Physics</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Chemistry</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Biology</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Maths</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Commerce</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">BBA</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">BCA</a></li>
+                        <li class="nav-item"><a href="" class="btn btn-secondary me-2">Bsc</a></li>
                         <li class="nav-item"><a href="" class="btn btn-secondary me-2">Mock Test</a></li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
             <div class="row mt-5">
                 <div class="col-3">
                     <div class="card">
-                        <img src="{{ asset('images/mathformula.jpeg') }}" alt="" height="200px">
+                        <img src="{{ asset('images/django.jpg') }}" alt="" height="200px">
                         <div class="card-body">
                             <h4>MATHS FORMULA</h4>
                             <P>MARKS:36 <span class="float-end">30 min</span></P>
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="col-3 mx-auto mt-5 ">
-                <a href="{{route('bpsc')}}" class="btn btn-primary ps-5 pe-5 mt-5 mb-4 py-2"><b>Browse All Exams</b></a>
+                <a href="" class="btn btn-primary ps-5 pe-5 mt-5 mb-4 py-2"><b>Browse All Exams</b></a>
             </div>
         </div>
         <div class="row mt-5">
@@ -180,5 +180,5 @@
             </div>
         </div>
     </div>
-    @include('footer')
+    @include('user.footer')
 @endsection
