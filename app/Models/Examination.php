@@ -17,7 +17,6 @@ class examination extends Model
         'exam_name',
         'rightmarks',
         'wrongmarks',
-       
         'time_duration',
 
     ];
