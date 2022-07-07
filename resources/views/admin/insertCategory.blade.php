@@ -4,14 +4,14 @@
       @include('admin.side')
         <div class="container">
             <div class="row">
-                <div class="col-9">
-                  <h2 class="text-theme text-warning h4 ps-2"> Manage Category </h2> 
+                <div class="col-12">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                    Add Category
+                   </button>
                 </div>
                 
-                <div class="col-3">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-                   Add Category
-                  </button>
+          
+                 
     
                   <div class="modal fade" id="largeModal" tabindex="-1">
                     <div class="modal-dialog modal-lg">
@@ -68,7 +68,7 @@
       
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Datatables</h5>
+                  <h5 class="card-title">Manage Category</h5>
                   
 
                   <!-- Table with stripped rows -->
@@ -76,7 +76,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Exam_Id</th>
+                        <th scope="col">Exam</th>
                         <th scope="col">category</th>
                         <th scope="col">Action</th>
                         
@@ -87,7 +87,7 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->exam->examname}}</td>
-                                  <td>{{$item->category}}</td>
+                                  <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
                                   <td>
                                      <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     

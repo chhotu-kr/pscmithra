@@ -1,20 +1,20 @@
 <div class="container mt-5 ">
     <div class="row">
         <div class="col-4 mt-5">
-            <h1>Csc Mitra</h1>
+            <h1>Psc Mithra</h1>
             <p>Follow Us On</p>
 
         </div>
         <div class="col-4 mt-5">
             <h2>Need Help</h2>
-                <ul class="navbar-nav lh-1">
-                    <li class="nav-item"><a href="" class="nav-link">Practice Exam</a> </li>
-                    <li class="nav-item"><a href="" class="nav-link">Lms</a> </li>
-                    <li class="nav-item"><a href="" class="nav-link">About Us</a> </li>
-                    <li class="nav-item"><a href="" class="nav-link">Contact Us</a> </li>
-                    <li class="nav-item"><a href="" class="nav-link">Terms & Conditions</a> </li>
-                    <li class="nav-item"><a href="" class="nav-link">Privacy And Policy</a> </li>
-                </ul>
+            <ul class="navbar-nav lh-1">
+                <li class="nav-item"><a href="" class="nav-link">Practice Exam</a> </li>
+                <li class="nav-item"><a href="" class="nav-link">Lms</a> </li>
+                <li class="nav-item"><a href="" class="nav-link">About Us</a> </li>
+                <li class="nav-item"><a href="" class="nav-link">Contact Us</a> </li>
+                <li class="nav-item"><a href="" class="nav-link">Terms & Conditions</a> </li>
+                <li class="nav-item"><a href="" class="nav-link">Privacy And Policy</a> </li>
+            </ul>
         </div>
         <div class="col-4 mt-5">
             <div class="row">
@@ -25,10 +25,14 @@
         </div>
     </div>
 </div>
-<div class="container-fluid mt-5"  style="background:rgb(223, 223, 223)">
+<div class="container-fluid mt-5" style="background:rgb(223, 223, 223)">
     <div class="row">
-        <p class="py-2 text-center mt-3">© Copyright © 2022  Csc Mirtra . All Rights Reserved.</p>
+        <p class="py-2 text-center mt-3">© Copyright © 2022 Csc Mirtra . All Rights Reserved.</p>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('dist/owl.carousel.min.js')}}">
-<link rel="stylesheet" href="{{asset('dist/owl.carousel.js')}}">
+<link rel="stylesheet" href="{{ asset('dist/owl.carousel.min.js') }}">
+<link rel="stylesheet" href="{{ asset('dist/owl.carousel.js') }}">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+</script>

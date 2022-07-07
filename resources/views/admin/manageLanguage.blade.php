@@ -6,13 +6,13 @@
     <div class="pagetitle">
       
         <div class="row">
-            <div class="col-8">
-                <h6 class="border-5 border-start border-danger ps-1 mt-2   h4 text-theme text-warning">ManageExam</h6>
+            <div class="col-12">
+              <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Add Language
+              </button>
             </div>
-            <div class="col-4">
-                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
-                    Add Language
-                  </button>
+      
+               
                   <div class="modal fade" id="basicModal" tabindex="-1">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -57,7 +57,7 @@
   
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
+              <h5 class="card-title">Manage Language</h5>
               
   
               <!-- Table with stripped rows -->
@@ -66,7 +66,7 @@
                   <tr>
                     <th scope="col">Id</th>
                    
-                    <th scope="col">LanguageName</th>
+                    <th scope="col">Language Name</th>
                     <th scope="col">Action</th>
                     
                   </tr>

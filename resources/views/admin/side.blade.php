@@ -26,14 +26,14 @@
         </ul>
       </li><!-- End Tables Nav -->
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed"  href="{{route('manage.topic')}}">
           <i class="bi bi-bar-chart"></i><span>Topic</span>
         </a>
         
      
         
-      </li><!-- End Tables Nav -->
+      </li><!-- End Tables Nav --> --}}
 
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{route('manage.question')}}">
@@ -46,10 +46,10 @@
           <i class="bi bi-bar-chart"></i><span>Category</span>
         </a>
       </li> 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed"  href="{{route('insert.subcategory')}}">
           <i class="bi bi-bar-chart"></i><span>SubCategory</span>
-        </a>
+        </a> --}}
       <li class="nav-item">
         <a class="nav-link collapsed"  href="{{route('insert.language')}}">
           <i class="bi bi-bar-chart"></i><span>Language</span>

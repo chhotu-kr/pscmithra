@@ -11,9 +11,9 @@ class TopicController extends Controller
 {
     //
 
-    public function show(){
+    public function show($subject_id){
 
-        $data['topic']= Topic::all();
+        $data['topic']= Topic::where("subject_id",$subject_id)->get();
         $data['subject']= Subject::all();
 
         return view('admin.manageTopic',$data);
@@ -25,7 +25,7 @@ class TopicController extends Controller
         $data->topic_name= $request->topic_name;
         $data->subject_id= $request->subject_id;
         $data->save();
-        return redirect('/manage');
+        return redirect()->back();
     }
     public function edit( topic $topic,$id){
         $data['subject']= Subject::all();

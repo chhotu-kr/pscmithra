@@ -9,11 +9,8 @@
             
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Question</h4>
-                    </div>
-                    <div class="col-4">
-                        <a href="{{route('question.create')}}" class="btn btn-outline-primary">Add New Question</a>
+                    <div class="col-12 mb-3">
+                      <a href="{{route('question.create')}}" class="btn btn-primary">Add New Question</a>
                     </div>
                 </div>
                 <section class="section">
@@ -21,7 +18,7 @@
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title">Manage Question</h5>
                             
                 
                             <!-- Table with stripped rows -->
@@ -29,7 +26,7 @@
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">SubjectName</th>
+                                  <th scope="col">Subject Name</th>
                                   <th scope="col">question_id</th>
                                   <th scope="col">Question</th>
                                   <th scope="col">Option1</th>

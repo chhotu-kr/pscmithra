@@ -20,6 +20,9 @@ class Category extends Model
     public function exam(){
         return $this->hasOne(Exam::class,'id', 'exam_id');
     }
+    public function subcat(){
+        return $this->hasMany(SubCategory::class,'category_id','id');
+    }
 
     
 }

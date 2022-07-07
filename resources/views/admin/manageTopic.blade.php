@@ -6,13 +6,12 @@
   <div class="pagetitle">
     <div class="col-9">
       <div class="row">
-          <div class="col-8">
-              <h6 class="border-5 border-start border-danger ps-1 fw-bold">ManageTopic</h6>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
+              Add Topic
+            </button>
           </div>
-          <div class="col-4">
-            <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#basicModal">
-                Add Topic
-              </button>
+         
               <div class="modal fade" id="basicModal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -60,7 +59,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Datatables</h5>
+            <h5 class="card-title">Manage Topic</h5>
             
 
             <!-- Table with stripped rows -->

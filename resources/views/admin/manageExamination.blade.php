@@ -9,12 +9,10 @@
             
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Examination</h4>
+                    <div class="col-12 mb-3">
+                      <a href="{{route('examination.create')}}" class="btn btn-primary">Add Examination</a> 
                     </div>
-                    <div class="col-4">
-                      <a href="{{route('examination.create')}}" class="btn btn-outline-success">Add Examination</a> 
-                    </div>
+              
                 </div>
                 <section class="section">
                     <div class="row">
@@ -22,7 +20,7 @@
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title">Manage Examination</h5>
                             {{--  --}}
                 
                             <!-- Table with stripped rows -->
