@@ -30,13 +30,15 @@
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">ExamId</th>
-                                  <th scope="col">Category</th>
-                                  <th scope="col">SubCategory</th>
-                                  <th scope="col"> ExamName</th>
-                                  <th scope="col">RightMarks</th>
-                                  <th scope="col">WrongMarks</th>
-                                  <th scope="col">TimeDuration</th>
+                                  <th scope="col">Exam<br>Id</th>
+                                  <th scope="col">Category<br>Name</th>
+                                  <th scope="col">SubCategory<br>Name</th>
+                                  {{-- <th scope="col">Question<br>Name</th> --}}
+                                  <th scope="col">Start<br>At</th>
+                                  <th scope="col"> Exam<br>Name</th>
+                                  <th scope="col">Right<br>Marks</th>
+                                  <th scope="col">Wrong<br>Marks</th>
+                                  <th scope="col">Time</th>
                                   
                                   
                                   <th scope="col">Action</th>
@@ -49,15 +51,18 @@
                                           <td>{{$cour->exam->examname}}</td>
                                           <td>{{$cour->category->category}}</td>
                                           <td>{{$cour->subcategory->subcategory}}</td>
+                                          {{-- <td>{{$cour->secondquestion->question}}</td> --}}
+                                          <td>{{$cour->startat}}</td>
                                           <td>{{$cour->exam_name}}</td>
                                           <td>{{$cour->rightmarks}}</td>
                                           <td>{{$cour->wrongmarks}}</td>
                                           <td>{{$cour->time_duration}}</td>
-                                          <
+                                          
                                           
                                           <td>
                                             <a href="" class="btn btn-outline-secondary">Edit</a>
                                             <a href="" class="btn btn-outline-warning">Delete</a>
+                                            <a href="{{route('examquestion.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
                                           </td>
                                       </tr>
                                   @endforeach

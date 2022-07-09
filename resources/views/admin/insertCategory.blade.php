@@ -87,7 +87,9 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->exam->examname}}</td>
-                                  <td>{{$item->category}}</td>
+                                  <td>
+                                    <a href="{{ route("view.subcategory",['id'=>$item->id])}}" class="nav-link">{{$item->category}}</a>
+                                  </td>
                                   <td>
                                      <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     

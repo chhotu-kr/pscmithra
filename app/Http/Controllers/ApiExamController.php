@@ -9,4 +9,7 @@ class ApiExamController extends Controller
     public function index(){
         return Exam::all();
     }
+    public function show(){
+        return "nghjgj";
+    }
 }

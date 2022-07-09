@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('exam_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id');
-            $table->foreignId('question_id');
+            $table->foreignId('exam_id')->constrained();
+            $table->foreignId('question_id')->constrained();
             $table->integer('serialno');
             $table->string('slugid');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

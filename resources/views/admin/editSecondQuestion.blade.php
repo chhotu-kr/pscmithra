@@ -7,7 +7,7 @@
         </div>
         <div class="col-12">
            <div class="card">
-            <div class="card-header ps-2 h4">InsertQuestion</div>
+            <div class="card-header ps-2 h4">Edit SecondQuestion</div>
             <div class="card-body">
                 <form action="{{ route('secondquestion.Update', $secondquestion) }}" class="row g-3 needs-validation" method="POST" novalidate>
                       

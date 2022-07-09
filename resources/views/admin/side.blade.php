@@ -35,8 +35,13 @@
         
       </li><!-- End Tables Nav -->
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed"  href="{{route('manage.question')}}">
+          <i class="bi bi-bar-chart"></i><span>Question</span>
+        </a>
+      </li>  --}}
+      <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{route('manage.quiz')}}">
           <i class="bi bi-bar-chart"></i><span>Question</span>
         </a>
       </li> 
@@ -60,6 +65,11 @@
           <i class="bi bi-bar-chart"></i><span>Examination</span>
         </a>
       </li>
+      {{-- <li class="nav-item">
+        <a class="nav-link collapsed"  href="{{route('examquestion.index')}}">
+          <i class="bi bi-bar-chart"></i><span>ExamQuestion</span>
+        </a>
+      </li> --}}
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -101,6 +111,12 @@
               <i class="bi bi-circle"></i><span>Manage Coupon</span>
             </a>
           </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('study.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Study</span>
+            </a>
+          </li>  
+          
         </ul>
       </li><!-- End Charts Nav -->
 

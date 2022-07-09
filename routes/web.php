@@ -5,7 +5,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SecondQuestionController;
-use App\Http\Controllers\TestController;
+// use App\Http\Controllers\TestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\LanguageController;
@@ -15,13 +15,13 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ScreenshotController;
 use App\Http\Controllers\PdfController;
-use App\Http\Controllers\BookController;
+// use App\Http\Controllers\BookController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController,HomeController,StudyController};
 use Illuminate\Support\Facades\Route;
 
 // Home Page Route 
-use App\Http\Controller\user\HomeController;
+// use App\Http\Controller\user\HomeController;
 
 
 /*
@@ -43,10 +43,12 @@ Route::get('/', function () {
 Route::get('/',[ExamController::class,'index'])->name('manage.exam');
 Route::get('/subjects',[SubjectController::class,'index'])->name('manage.subject');
 Route::get('/manage',[TopicController::class,'show'])->name('manage.topic');
-Route::get('/manageQuestion',[QuestionController::class,'index'])->name('manage.question');
+Route::get('/manageQuestion/{id}',[QuestionController::class,'index'])->name('manage.question');
+Route::get('/managequiz',[QuestionController::class,'show'])->name('manage.quiz');
 Route::get('/secondquestion',[SecondQuestionController::class,'index'])->name('insert.secondquestion');
 Route::get('/category',[CategoryController::class,'index'])->name('insert.category');
 Route::get('/subcategory',[SubCategoryController::class,'index'])->name('insert.subcategory');
+Route::get('/subcategory/{id}',[SubCategoryController::class,'subCategory'])->name("view.subcategory");
 Route::get('/language',[LanguageController::class,'index'])->name('insert.language');
 Route::get('/examination',[ExaminationController::class,'index'])->name('manage.examination'); 
 
@@ -54,9 +56,6 @@ Route::get('/examination',[ExaminationController::class,'index'])->name('manage.
 Route::get('questioncreate',[QuestionController::class,'create'])->name('question.create');
 Route::get('examinationcreate',[ExaminationController::class,'Create'])->name('examination.create');
 
-//Route::get('/subject/{subject_id}',[QuestionController::class,'filter'])->name('filter');
-
-//Route::get('/insert',[ExamController::class,'create'])->name('insert');
 
 
 //delete method
@@ -99,41 +98,10 @@ Route::post('/categorystore',[CategoryController::class,'store'])->name('categor
 Route::post('/subcategorystore',[SubCategoryController::class,'store'])->name('subcategory.store'); 
 Route::post('/languagestore',[LanguageController::class,'store'])->name('language.store'); 
  
-//ecommerce get method
-// Route::get('/membership',[MemberShipController::class,'index'])->name('insert.membership');
-// Route::get('/coupon',[CouponController::class,'index'])->name('insert.coupon');
-// Route::get('/product',[ProductController::class,'index'])->name('insert.product');
-// Route::get('/screenshot',[ScreenshotController::class,'index'])->name('insert.screenshot');
-// Route::get('/pdf',[PdfController::class,'index'])->name('insert.pdf');
-// //Route::get('/book',[BookController::class,'index'])->name('insert.book');
-// Route::get('/course',[CourseController::class,'index'])->name('insert.course');
-// Route::get('/address',[AddressController::class,'index'])->name('insert.address');
 
-// //ecommerce edit method
+// ecommerce
 
-// Route::get('/membershipUpdate/{id}',[MemberShipController::class,'edit'])->name('editmembersgip');
-// Route::get('/productUpdate/{id}',[ProductController::class,'edit'])->name('editproduct');
-// Route::get('/addressUpdate/{id}',[AddressController::class,'edit'])->name('editaddress');
 
-// //ecoomerce update method
-
-// Route::post('/productUpdate/{id}',[ProductController::class,'update'])->name('product.Update');
-// Route::put('/addressUpdate/{id}',[AddressController::class,'update'])->name('address.Update');
-
-// //ecommerce delete method
-// Route::get('/removeproduct/{id}',[ProductController::class,'destroy'])->name('removeproduct');
-// Route::get('/removeaddress/{id}',[AddressController::class,'destroy'])->name('removeaddress');
-
-// //ecoomerce store method
-
-// Route::post('membershipstore',[MemberShipController::class,'store'])->name('membership.store');
-// Route::post('couponstore',[CouponController::class,'store'])->name('coupon.store');
-// Route::post('productstore',[ProductController::class,'store'])->name('product.store');
-// Route::post('screenshotstore',[ScreenshotController::class,'store'])->name('screenshot.store');
-// Route::post('pdfstore',[PdfController::class,'store'])->name('pdf.store');
-// Route::post('bookstore',[BookController::class,'store'])->name('book.store');
-// Route::post('coursestore',[CourseController::class,'store'])->name('course.store');
-// Route::post('addressstore',[AddressController::class,'store'])->name('address.store');
 Route::resources([
     'membership'=>MemberShipController::class,
     'coupon'=>CouponController::class,
@@ -144,7 +112,20 @@ Route::resources([
     'address'=>AddressController::class,
     'cart'=>CartController::class,
     'examquestion'=>ExamQuestionController::class,
-]);
+    'study'=>StudyController::class,
+    
+ ]);
+
+// User Register And Login
+Route::match(["get","post"],"/signup",[AuthController::class,"signup"])->name('signup');
+Route::match(["get","post"],"/login",[AuthController::class,"login"])->name('login');
+Route::get("/logout",[AuthController::class,"logout"])->name("logout");
+Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');
+
+//Admin Register And login
+Route::match(["get","post"],"/adminsignup",[AuthController::class,"adminSignup"])->name('admin.signup');
+Route::match(["get","post"],"/adminlogin",[AuthController::class,"adminLogin"])->name('admin.login');
+Route::get('/admin/dashboard',[HomeController::class,'adminIndex'])->name('admin.dashboard');
 
 
 

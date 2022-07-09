@@ -8,6 +8,8 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\Examination;
 use App\Models\Exam;
+use App\Models\SecondQuestion;
+
 class ExaminationController extends Controller
 {
     //
@@ -16,6 +18,7 @@ class ExaminationController extends Controller
         $data['examination']=Examination::all();
         $data['category']=Category::all();
         $data['subcategory']=SubCategory::all();
+        $data['secondquestion']=SecondQuestion::all();
         return view('admin.manageExamination',$data);
     }
     public function Create(){
@@ -23,6 +26,7 @@ class ExaminationController extends Controller
         $data['examination']=Examination::all();
         $data['category']=Category::all();
         $data['subcategory']=SubCategory::all();
+        $data['secondquestion']=SecondQuestion::all();
         return view('admin.insertExamination',$data);
     }
 
@@ -32,6 +36,8 @@ class ExaminationController extends Controller
         $data->category_id=$request->category_id;
         $data->subcategory_id=$request->subcategory_id;
         $data->exam_name=$request->exam_name;
+        $data->question=$request->question;
+        $data->startat=$request->startat;
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;
         $data->time_duration=$request->time_duration;

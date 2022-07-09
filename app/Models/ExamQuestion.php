@@ -18,7 +18,7 @@ class ExamQuestion extends Model
     ];
 
     public function exam(){
-        return $this->hasOne(ExamQuestion::class,'id','exam_id');
+        return $this->hasOne(Exam::class,'id','exam_id');
     }
     public function secondquestion(){
         return $this->hasOne(SecondQuestion::class,"id","question_id");
