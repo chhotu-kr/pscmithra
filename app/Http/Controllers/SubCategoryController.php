@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
-                                                                                                                                                                                                         
-    public function index()
-    {                                                                                                                                                                               
+    
+    public function index($category_id)
+    {
         //
-        $data['subcategory']= SubCategory::all();
+        $data['subcategory']= SubCategory::where('category_id',$category_id)->get();
         $data['category']=Category::all();
         return view('admin/insertsubCategory',$data);
     }
@@ -33,7 +33,7 @@ class SubCategoryController extends Controller
         $data->category_id=$request->category_id;
         $data->subcategory=$request->subcategory;
         $data->save();
-        return redirect('/subcategory');
+        return redirect()->back();
     }
     public function subCategory($category_id){
         $data['subcategory'] = SubCategory::where("category_id",$category_id)->get();

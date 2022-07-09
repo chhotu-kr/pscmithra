@@ -4,14 +4,14 @@
         @include('admin.side')
         <div class="container">
           <div class="row">
-              <div class="col-9">
-                <h2 class="text-theme text-warning h4 ps-2"> Manage Category </h2> 
+              <div class="col-12">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                  Add Subcategory
+                 </button>
               </div>
               
-              <div class="col-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-                 Add SubCategory
-                </button>
+       
+                
   
                 <div class="modal fade" id="largeModal" tabindex="-1">
                   <div class="modal-dialog modal-lg">
@@ -65,7 +65,7 @@
     
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Datatables</h5>
+                <h5 class="card-title">Manage Subcategory</h5>
                 
     
                 <!-- Table with stripped rows -->
@@ -73,8 +73,8 @@
                   <thead>
                     <tr>
                       <th scope="col">Id</th>
-                      <th scope="col">Category_Id</th>
-                      <th scope="col">SubCategory</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Subcategory</th>
                       <th scope="col">Action</th>
                       
                     </tr>

@@ -16,4 +16,9 @@ class Subject extends Model
         "image",
         "slogid",
     ];
+
+
+    public function subtopic(){
+        return $this->hasMany(Topic::class,'subject_id','id');
+    }
 }

@@ -21,8 +21,11 @@ use App\Http\Controllers\{AddressController,CartController,ExamQuestionControlle
 use Illuminate\Support\Facades\Route;
 
 // Home Page Route 
-// use App\Http\Controller\user\HomeController;
-
+//use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\ExamCatController;
+use App\Http\Controllers\user\ExamSubCatController;
+use App\Http\Controllers\user\PrdController;
+use App\Http\Controllers\user\SubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,13 +45,11 @@ Route::get('/', function () {
 //get method
 Route::get('/',[ExamController::class,'index'])->name('manage.exam');
 Route::get('/subjects',[SubjectController::class,'index'])->name('manage.subject');
-Route::get('/manage',[TopicController::class,'show'])->name('manage.topic');
-Route::get('/manageQuestion/{id}',[QuestionController::class,'index'])->name('manage.question');
-Route::get('/managequiz',[QuestionController::class,'show'])->name('manage.quiz');
+Route::get('/manage/{id}',[TopicController::class,'show'])->name('manage.topic');
+Route::get('/manageQuestion',[QuestionController::class,'index'])->name('manage.question');
 Route::get('/secondquestion',[SecondQuestionController::class,'index'])->name('insert.secondquestion');
 Route::get('/category',[CategoryController::class,'index'])->name('insert.category');
-Route::get('/subcategory',[SubCategoryController::class,'index'])->name('insert.subcategory');
-Route::get('/subcategory/{id}',[SubCategoryController::class,'subCategory'])->name("view.subcategory");
+Route::get('/subcategory/{id}',[SubCategoryController::class,'index'])->name('insert.subcategory');
 Route::get('/language',[LanguageController::class,'index'])->name('insert.language');
 Route::get('/examination',[ExaminationController::class,'index'])->name('manage.examination'); 
 
@@ -132,7 +133,13 @@ Route::get('/admin/dashboard',[HomeController::class,'adminIndex'])->name('admin
 
 // // HOME PAGE
 
-// Route::get('/home',[HomeController::class,'index'])->name('home');
+Route::get('/exam-category',[ExamCatController::class,'exam'])->name('exam.category');
+Route::get('/exam-filter/{id}',[ExamCatController::class,'filter'])->name('exam.filter');
+Route::get('/home',[HomeController::class,'index'])->name('home');
+Route::get('/prd',[PrdController::class,'prd'])->name('product');
+
+Route::get('/exam-sub',[SubController::class,'sub'])->name('user.subject');
+
 // Route::get('/exam-bpcs',[HomeController::class,'exam'])->name('bpsc');
 // Route::get('/exam-bba',[HomeController::class,'bba'])->name('bba');
 // Route::get('/exam-bca',[HomeController::class,'bca'])->name('bca');
@@ -160,3 +167,4 @@ Route::get('/admin/dashboard',[HomeController::class,'adminIndex'])->name('admin
 
 // // contact pages route
 // Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+

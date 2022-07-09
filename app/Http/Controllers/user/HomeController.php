@@ -7,101 +7,101 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-      // home page
+    // home page
 
-      public function index(){
-
-        return view("home");
-    }   
+    public function index(){
+        
+        return view("user.home");
+    }
 
 
             // Exam courses
 
-    public function exam(){
+    // public function exam(){
 
-        return view('exam.bpsc');
-    }
+    //     return view('exam.bpsc');
+    // }
 
-    public function bba(){
+    // public function bba(){
 
-        return view('exam.bba');
-    }
+    //     return view('exam.bba');
+    // }
 
-    public function bca(){
+    // public function bca(){
 
-        return view('exam.bca');
-    }
+    //     return view('exam.bca');
+    // }
 
-    public function biology(){
+    // public function biology(){
 
-        return view('exam.biology');
-    }
+    //     return view('exam.biology');
+    // }
 
-    public function bsc(){
+    // public function bsc(){
 
-        return view('exam.bsc');
-    }
+    //     return view('exam.bsc');
+    // }
 
-    public function chemistery(){
+    // public function chemistery(){
 
-        return view('exam.chemistery');
-    }
+    //     return view('exam.chemistery');
+    // }
 
-    public function commerce(){
+    // public function commerce(){
 
-        return view('exam.commerce');
-    }
+    //     return view('exam.commerce');
+    // }
 
-    public function math(){
+    // public function math(){
 
-        return view('exam.math');
-    }
+    //     return view('exam.math');
+    // }
 
-    public function physics(){
+    // public function physics(){
 
-        return view('exam.physics');
-    }
+    //     return view('exam.physics');
+    // }
 
 
-    // About Pages
+    // // About Pages
 
-    public function about(){
+    // public function about(){
 
-        return view('about');
-    }
+    //     return view('about');
+    // }
 
-     // course Pages
+    //  // course Pages
 
-     public function course(){
+    //  public function course(){
 
-        return view('courses');
-    }
+    //     return view('courses');
+    // }
 
-     // Pattern Pages
+    //  // Pattern Pages
 
-     public function pattern(){
+    //  public function pattern(){
 
-        return view('pattern');
-    }
+    //     return view('pattern');
+    // }
 
-     // Pricing Page
+    //  // Pricing Page
 
-     public function pricing(){
+    //  public function pricing(){
 
-        return view('pricing');
-    }
+    //     return view('pricing');
+    // }
 
-     // syllabus Page
+    //  // syllabus Page
 
-     public function syllabus(){
+    //  public function syllabus(){
 
-        return view('syllabus');
-    }
-     // contact Page 
+    //     return view('syllabus');
+    // }
+    //  // contact Page 
 
-     public function contact(){
+    //  public function contact(){
 
-        return view('contact');
+    //     return view('contact');
     
-     }
+    //  }
 }

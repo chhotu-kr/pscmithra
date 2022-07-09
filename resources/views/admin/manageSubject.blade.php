@@ -6,13 +6,13 @@
   <div class="pagetitle">
     <div class="col-9">
       <div class="row">
-          <div class="col-8">
-              <h5 class="text-theme mt-3 h3">Manage Subject</h5>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+              Add Subject
+            </button>
           </div>
-          <div class="col-4">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
-                  Add Subject
-                </button>
+        
+  
                 <div class="modal fade" id="basicModal" tabindex="-1">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -54,7 +54,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Datatables</h5>
+            <h5 class="card-title">Manage Subject</h5>
             
 
             <!-- Table with stripped rows -->
@@ -62,7 +62,7 @@
               <thead>
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">SubjectName</th>
+                  <th scope="col">Subject Name</th>
                   <th scope="col">Image</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -71,7 +71,7 @@
                   @foreach ($subject as $new)
                       <tr>
                           <td>{{$new->id}}</td>
-                          <td>{{$new->sub_name}}</td>
+                          <td><a href="{{route('manage.topic',['id'=>$new->id])}}">{{$new->sub_name}}</a></td>
                           <td>{{$new->image}}</td>
                           <td>
                               <a href="{{route('subject.Update',['id'=>$new->id])}}" class="btn btn-outline-success">Edit</a>
