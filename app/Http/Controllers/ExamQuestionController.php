@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExamQuestion;
-use App\Models\Question;
+use App\Models\SecondQuestion;
 use App\Models\Exam;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class ExamQuestionController extends Controller
     {
         //
         $data['examquestion']=ExamQuestion::all();
-        $data['question']=Question::all();
+        $data['secondquestion']=SecondQuestion::all();
         $data['exam']=Exam::all();
        return view('admin.insertExamquestion',$data);
     }
@@ -69,11 +69,13 @@ class ExamQuestionController extends Controller
      * @param  \App\Models\ExamQuestion  $examQuestion
      * @return \Illuminate\Http\Response
      */
-    public function edit(ExamQuestion $examQuestion,$id)
+    public function edit(ExamQuestion $examquestion)
     {
         //
-        $data['examquestion'] = ExamQuestion::find($id);
-       return view('admin.editQuestion',$data);
+        $data['secondquestion']=SecondQuestion::all();
+        $data['examquestion'] = $examquestion;
+        $data['exam'] = Exam::all();
+       return view('admin.editExamquestion',$data);
     }
 
     /**
@@ -83,16 +85,16 @@ class ExamQuestionController extends Controller
      * @param  \App\Models\ExamQuestion  $examQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExamQuestion $examQuestion)
+    public function update(Request $request, ExamQuestion $examquestion)
     {
         //
         
       
-        $examQuestion-> exam_id = $request->exam_id;
-        $examQuestion-> question_id = $request->question_id;
-        $examQuestion-> serialno = $request->serialno;
-         $examQuestion-> slugid = md5($request->examname . time());
-         $examQuestion->save();
+        $examquestion-> exam_id = $request->exam_id;
+        $examquestion-> question_id = $request->question_id;
+        $examquestion-> serialno = $request->serialno;
+         $examquestion-> slugid = md5($request->examname . time());
+         $examquestion->save();
           return redirect()->route('examquestion.index');
     }
 
@@ -102,7 +104,7 @@ class ExamQuestionController extends Controller
      * @param  \App\Models\ExamQuestion  $examQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExamQuestion $examQuestion)
+    public function destroy(ExamQuestion $examquestion)
     {
         
         // $item= ExamQuestion::where('slugid', $slug)->first();
@@ -114,7 +116,7 @@ class ExamQuestionController extends Controller
         //     session()->flash('error', 'Please try again !!!');
         // }
 
-        $examQuestion->delete();
+        $examquestion->delete();
        
         return redirect()->route('examquestion.index');
     }

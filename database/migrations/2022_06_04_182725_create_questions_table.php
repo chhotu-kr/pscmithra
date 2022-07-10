@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('slugid');
             $table->string('isVerified')->nullable();
             $table->timestamps();
+            
+            
+           
         });
     }
 

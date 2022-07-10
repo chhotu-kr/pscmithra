@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('exam_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->foreignId('subcategory_id')->constrained('sub_categories');
+            $table->foreignId('question')->constrained();
             $table->string('exam_name');
+            $table->string('startat');
             $table->string('rightmarks');
             $table->string('wrongmarks');
             $table->string('slugid');

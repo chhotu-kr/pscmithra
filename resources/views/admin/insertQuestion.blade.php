@@ -18,7 +18,10 @@
                           @csrf
                           
                             <livewire:subjects />
-                            
+                            <div class="mb-3">
+                              <label>Name</label>
+                              <input type="text" name="name" class="form-control" required>
+                            </div>
                             <div class="col-md-12">
                               <label for="validationCustom04" class="form-label">RightAns</label>
                               <select class="form-select" name="rightans" id="validationCustom04" required>

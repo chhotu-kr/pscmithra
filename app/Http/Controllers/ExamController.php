@@ -50,4 +50,6 @@ class ExamController extends Controller
         }
         return redirect('/');
     }
+
+   
 }

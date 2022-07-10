@@ -16,24 +16,15 @@ class QuestionController extends Controller
     
 
 
-    public function index( Request $request,$subject_id=Null)
+    public function index($question_id)
     {
-        // search
-
-      /*  if($request->has('find')){
-            $search = $request->search;
-            $data['subjects'] = Subject::where('sub_name',"LIKE","%$search%")->get();
-
-        }
-
-        elseif($subject_id !=Null){
-            $data['subjects']=Subject::where('topic_name',"id")->get();
-        }
-        */
+       
 
         
-        $data['question']= Question::all();
-        $data['secondquestion']= SecondQuestion::all();
+        
+        $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
+
+        
         $data['language']= Language::all();
         
         $data['topic']= Topic::all();
@@ -48,6 +39,8 @@ class QuestionController extends Controller
         $data['topic']=Topic::where('subject_id',$id)->get();
         return view('admin/manageQuestion',$data);
     }
+
+
     */
 
     public function create()
@@ -72,6 +65,7 @@ class QuestionController extends Controller
         $data= new Question();
         $data->subject_id=$request->subject_id;
         $data->topic_id=$request->topic_id;
+        $data->name=$request->name;
         
         $data->rightans=$request->rightans;
         $data-> slugid = md5($request->question_add_id[0] . time());
@@ -95,19 +89,19 @@ class QuestionController extends Controller
             $que->slugid=md5($request->question_add_id[$i].$request->language_id[$i] . time());
             $que->save();
         }
-         return redirect('/manageQuestion');
+         return redirect('/manageQuiz');
     }
    
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Question $question)
     {
         //
+
+        $data['question']= Question::all();
+    
+       return view('admin/manageQuiz',$data);
+
     }
 
     
@@ -127,6 +121,7 @@ class QuestionController extends Controller
       
         $question->subject_id=$request->subject_id;
         $question->topic_id=$request->topic_id;
+        $question->name=$request->name;
         $question->rightans=$request->rightans;
         $question-> slugid = md5($request->question . time());
         $question->isverified=$request->isVerified;
