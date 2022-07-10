@@ -2,84 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Study;
+use App\Models\study;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class StudyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         //
+        $data['study']=Study::all();
+        $data['category']=Category::all();
+        $data['subcategory']=SubCategory::all();
+        return view('ecommerce.insertStudy',$data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
+        // $data['category']=Category::all();
+        // $data['subcategory']=SubCategory::all();
+        // return view('ecommerce.insertStudy',$data);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
+        $data = new study();
+        $data->category_id=$request->category_id;
+        $data->subcategory_id=$request->subcategory_id;
+        $data->content=$request->content;
+
+        $data->save();
+        return redirect()->route('study.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Study  $study
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Study $study)
+    public function show(study $study)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Study  $study
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Study $study)
+    
+    public function edit(study $study)
     {
         //
+        $data['study']=$study;
+        $data['category']=Category::all();
+        $data['subcategory']=SubCategory::all();
+        return view('ecommerce.editStudy',$data);
+        
+       
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Study  $study
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Study $study)
+    
+    public function update(Request $request, study $study)
     {
         //
+
+        $study->category_id=$request->category_id;
+        $study->subcategory_id=$request->subcategory_id;
+        $study->content=$request->content;
+
+        $study->save();
+        return redirect()->route('study.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Study  $study
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Study $study)
+    
+    public function destroy(study $study)
     {
         //
+        $study->delete();
+        return redirect()->route('study.index');
     }
 }

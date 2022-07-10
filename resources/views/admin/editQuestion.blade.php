@@ -42,6 +42,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mb-3">
+                      <label>Name</label>
+                      <input type="text" name="name" class="form-control" value="{{$question->name}} required">
+                    </div>
                  <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip04" class="form-label">RightAns</label>

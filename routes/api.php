@@ -1,9 +1,12 @@
 <?php
+
+use App\Http\Controllers\Api\Apiv1Controller;
 use App\Http\Controllers\ApiExamController;
 use App\Http\Controllers\ApiSubjectController;
 use App\Http\Controllers\ApiCartController;
 use App\Http\Controllers\ApiCategoryController;
 use App\Http\Controllers\ApiCouponController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,22 +20,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('exam',ApiExamController::class);
-Route::apiResource('subject',ApiSubjectController::class);
-Route::apiResource('cart',ApiCartController::class);
-Route::apiResource('category',ApiCategoryController::class);
-Route::apiResource('coupon',ApiCouponController::class);
-Route::apiResource('subcategory',App\Http\Controllers\ApiSubCategoryController::class);
-Route::apiResource('examination',App\Http\Controllers\ApiExaminationController::class);
-Route::apiResource('topic',App\Http\Controllers\TopicApiController::class);
-Route::apiResource('screenshot',App\Http\Controllers\TopicApiController::class);
-Route::apiResource('question',App\Http\Controllers\QuestionApiController::class);
-Route::apiResource('language',App\Http\Controllers\LanguageApiController::class);
-Route::apiResource('product',App\Http\Controllers\ProductApiController::class);
-Route::apiResource('secondquestion',App\Http\Controllers\ApiSecondQuestionController::class);
-Route::apiResource('membership',App\Http\Controllers\ApiMembershipController::class);
-Route::apiResource('pdf',App\Http\Controllers\ApiPdfController::class);
-Route::apiResource('address',App\Http\Controllers\ApiAddressController::class);
+
+Route::post("login", [Apiv1Controller::class, "api_login"])->name("api.login");
+Route::get("sign", [Apiv1Controller::class, "index"])->name("api.sign");
+Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup");
+
+
+//category
+Route::get('/category/{id}',[Apiv1Controller::class,'category'])->name('api.category');
+Route::get('/subcategory/{id}',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

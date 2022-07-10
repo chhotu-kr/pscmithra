@@ -28,8 +28,9 @@ class SecondQuestion extends Model
     public function language(){
         return $this->hasOne(Language::class,"id","language_id");
     }
-    public function question(){
-        return $this->hasOne(Question::class,"id","question_id");
+
+    public function quest(){
+        return $this->belongsTo(Question::class);
     }
 }
 

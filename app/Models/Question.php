@@ -14,6 +14,7 @@ class Question extends Model
     protected $fillable =[
      'subject_id',        
      'topic_id',        
+     'name',        
              
      'rightans',        
      'slugid',                
@@ -28,4 +29,7 @@ class Question extends Model
     public function topic(){
         return $this->hasOne(Topic::class,'id','topic_id');
     }
+    public function secondquestion(){
+        return $this->hasMany(SecondQuestion::class);
+      }
 }

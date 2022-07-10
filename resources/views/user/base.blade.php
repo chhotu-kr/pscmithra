@@ -27,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container">
-            <a href="{{ route('home') }}" class="navbar-brand fw-bold"><h3><b>PSCMithra</b></h3></a>
+            <a href="{{ route('home') }}" class="navbar-brand fw-bold"><h3><b>PsC-Mithra</b></h3></a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="" class="btn btn-warning rounded-pill ms-1 pe-5 ps-5">Buy Now </a>
                 </li>

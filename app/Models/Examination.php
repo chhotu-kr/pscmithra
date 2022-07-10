@@ -31,5 +31,8 @@ class examination extends Model
     public function subcategory(){
         return $this->hasOne(SubCategory::class,'id','subcategory_id');
     }
+    public function secondquestion(){
+        return $this->hasOne(SecondQuestion::class,'id','question');
+    }
    
 }

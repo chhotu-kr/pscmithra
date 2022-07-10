@@ -16,4 +16,7 @@ class Language extends Model
       'languagename',
       'slugid',
     ];
+  // public function secondquestion(){
+  //   return $this->hasMany(SecondQuestion::class);
+  // }
 }

@@ -37,7 +37,7 @@
                             <label for="validationTooltip04" class="form-label">Question</label>
                             <select class="form-select" name="question_id" id="validationTooltip04" required>
                               <option selected disabled value="0">Choose your exam</option>
-                              @foreach ($question as $item)
+                              @foreach ($secondquestion as $item)
                                   <option value="{{$item->id}}">{{$item->question}}</option>
                               @endforeach
                             </select>
@@ -80,25 +80,36 @@
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">ExamName</th>
+                  <th scope="col">Question</th>
                   <th scope="col">SerialNo</th>
                   <th scope="col">Action</th>
                   
                 </tr>
               </thead>
               <tbody>
-                 {{-- @foreach ($exam as $item)
+                 @foreach ($examquestion as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td>{{$item->examname}}</td>
+                            <td>{{$item->exam->examname}}</td>
+                            <td>{{$item->secondquestion->question}}</td>
+                            <td>{{$item->serialno}}</td>
                            
                             <td>
-                               <a href="{{route('exam.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+
+                              <form action="{{route('examquestion.destroy',[$item])}}" method="POST">
+                                @method('delete')
+                                @csrf
+                                
+                              <input type="submit" value="X" class="btn btn-outline-primary">
+                              <a href="{{route('examquestion.edit',[$item])}}" class="btn btn-outline-success">Edit</a>
+                              </form>
+                               
                               
                               
-                                <a href="{{route('examremove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
