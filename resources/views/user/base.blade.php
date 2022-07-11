@@ -31,8 +31,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="" class="btn btn-warning rounded-pill ms-1 pe-5 ps-5">Buy Now </a>
                 </li>
-                <li class="nav-item"><a href="" class="btn btn-danger ms-1">Create Account</a></li>
-                <li class="nav-item"><a href="" class="btn btn-success ms-1">Sign In</a></li>
+                <li class="nav-item"><a href="{{route('signup')}}" class="btn btn-danger ms-1">Create Account</a></li>
+                <li class="nav-item"><a href="{{route('user.login')}}" class="btn btn-success ms-1">Sign In</a></li>
             </ul>
         </div>
     </nav>

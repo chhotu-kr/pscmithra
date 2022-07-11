@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ExamQuestion;
 use App\Models\SecondQuestion;
+use App\Models\Question;
 use App\Models\Exam;
+use App\Models\Topic;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class ExamQuestionController extends Controller
@@ -14,7 +17,35 @@ class ExamQuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
+    {
+        //
+        $data['examquestion']=ExamQuestion::all();
+        $data['subject']=Subject::all();
+        $data['secondquestion']=SecondQuestion::all();
+        $data['exam']=Exam::all();
+
+        // return dd($data);
+       return view('admin.manageExamquestion',$data);
+    }
+
+    public function submit($question_id){
+      
+        $questionId = ExamQuestion::select('question_id')->where('exam_id', $question_id)->get()->toArray();
+        $data=Question::whereNotIn('id',$questionId)->get();
+        
+        // return redirect()->route('check.index');
+        return dd($data);
+            }
+
+    public function filter($exam_id){
+        $data['examquestion']=ExamQuestion::where('exam_id',$exam_id)->get();
+        $data['exam']=Exam::all();
+        $data['secondquestion']=SecondQuestion::all();
+        return view('admin/insertExamquestion',$data);
+    }
+
+    public function create()
     {
         //
         $data['examquestion']=ExamQuestion::all();
@@ -23,22 +54,6 @@ class ExamQuestionController extends Controller
        return view('admin.insertExamquestion',$data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
@@ -49,42 +64,25 @@ class ExamQuestionController extends Controller
         $data-> serialno = $request->serialno;
          $data-> slugid = md5($request->examquestion . time());
          $data->save();
-          return redirect()->route('examquestion.index');
+          return redirect()->route('manage.examquestion');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ExamQuestion  $examQuestion
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(ExamQuestion $examQuestion)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ExamQuestion  $examQuestion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ExamQuestion $examquestion)
+    public function edit(ExamQuestion $examquestion,$id)
     {
         //
         $data['secondquestion']=SecondQuestion::all();
-        $data['examquestion'] = $examquestion;
+        $data['examquestion'] = ExamQuestion::find($id);
         $data['exam'] = Exam::all();
        return view('admin.editExamquestion',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ExamQuestion  $examQuestion
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, ExamQuestion $examquestion)
     {
         //
@@ -95,28 +93,23 @@ class ExamQuestionController extends Controller
         $examquestion-> serialno = $request->serialno;
          $examquestion-> slugid = md5($request->examname . time());
          $examquestion->save();
-          return redirect()->route('examquestion.index');
+          return redirect()->route('examquestion.update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ExamQuestion  $examQuestion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ExamQuestion $examquestion)
+   
+    public function destroy(ExamQuestion $examquestion,$slug)
     {
         
-        // $item= ExamQuestion::where('slugid', $slug)->first();
+        $item= ExamQuestion::where('slugid', $slug)->first();
         
-        // if (!empty($item)) {
-        //     $item->delete();
-        //     session()->flash('success', 'Service has been deleted !!!');
-        // } else {
-        //     session()->flash('error', 'Please try again !!!');
-        // }
+        if (!empty($item)) {
+            $item->delete();
+            session()->flash('success', 'Service has been deleted !!!');
+        } else {
+            session()->flash('error', 'Please try again !!!');
+        }
 
-        $examquestion->delete();
+      
        
         return redirect()->route('examquestion.index');
     }

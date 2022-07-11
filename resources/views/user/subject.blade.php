@@ -8,7 +8,7 @@
                         @foreach ($subject as $sub)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    <button class="accordion-button collapsed ps-3" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#rocking{{ $loop->iteration }}" aria-expanded="false"
                                         aria-controls="flush-collapseOne">
                                         {{ $sub->sub_name }}

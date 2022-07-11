@@ -100,6 +100,6 @@ class SecondQuestionController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect('/secondquestion');
+        return redirect('/managequestion');
     }
 }

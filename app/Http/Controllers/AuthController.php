@@ -50,7 +50,7 @@ class AuthController extends Controller
             $auth = $req->only("contact","password");
 
             if(Auth::guard("web")->attempt($auth)){
-                return redirect()->route('dashboard');
+                return redirect()->route('user.dashboard');
             }
             else{
                 // $req->session()->flash("error","login with incorrect details try again");
@@ -63,10 +63,12 @@ class AuthController extends Controller
     }
 
     public function logout(Request $req){
-        $req->session()->flush();
-        Auth::logout();
+        // $req->session()->flush();
+        // Auth::logout();
 
-        return redirect()->route("login");
+        Auth::guard('web')->logout();
+
+        return redirect()->route("user.login");
     }
 
     // Admin Login And SignUp
@@ -100,7 +102,7 @@ class AuthController extends Controller
             // ]);
 
             $auth = $request->only("email","password");
-             //print_r(Auth::guard("admin")->attempt($auth));
+            //  print_r(Auth::guard("admin")->attempt($auth));
             // return dd(Auth::guard("admin"));
             if(Auth::guard("admin")->attempt($auth)){
                 
@@ -114,6 +116,15 @@ class AuthController extends Controller
             
         }
         return view("adminRegister.Login");
+    }
+
+    public function Adminlogout(Request $req){
+        // $req->session()->flush();
+        // Auth::logout();
+
+        Auth::guard('admin')->logout();
+
+        return redirect()->route("admin.login");
     }
 
     
