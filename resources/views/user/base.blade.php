@@ -43,7 +43,8 @@
                 <li class="nav-item"><a href="{{route('exam.category')}}" class="nav-link fw-bold text-white">Mock test</a></li>
                 <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Quizes</a></li>
                 <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Live exam</a></li>
-                <li class="nav-item"><a href="" class="nav-link fw-bold text-white">Study material</a></li>
+                <li class="nav-item"><a href="{{route('product')}}" class="nav-link fw-bold text-white">Cart</a></li>
+                <li class="nav-item"><a href="{{route('user.subject')}}" class="nav-link fw-bold text-white">Study material</a></li>
             </ul>
         </div>
     </nav>

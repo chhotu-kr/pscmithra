@@ -56,8 +56,11 @@ Route::get('/category',[CategoryController::class,'index'])->name('insert.catego
 Route::get('/subcategory/{id}',[SubCategoryController::class,'index'])->name('insert.subcategory');
 Route::get('/language',[LanguageController::class,'index'])->name('insert.language');
 Route::get('/examination',[ExaminationController::class,'index'])->name('manage.examination'); 
-Route::get('/examquestion',[ExamQuestionController::class,'index'])->name('manage.examquestion'); 
+
 Route::get('/check/{id}',[ExamQuestionController::class,'index'])->name('check.index');
+
+
+Route::get('/managequiz',[QuestionController::class,'show'])->name('manage.quiz');
 
 //create method
 Route::get('questioncreate',[QuestionController::class,'create'])->name('question.create');
