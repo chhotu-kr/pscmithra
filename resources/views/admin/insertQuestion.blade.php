@@ -110,7 +110,7 @@ var tinymceaddd= "textareaoption4"+index;
                     
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip01" class="form-label">Option1</label>`;
-                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option1[]" id="'+tinymceidd+'"></textarea> </div>';
+                       html+='<div><textarea  class="tinymce-editor form-control" name="option1[]" id="'+tinymceidd+'"></textarea> </div>';
                         
                        html+= `
                         <div class="valid-tooltip">
@@ -119,7 +119,7 @@ var tinymceaddd= "textareaoption4"+index;
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip01" class="form-label">Option2</label>`;
-                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option2[]" id="'+tinymceiddd+'"></textarea> </div>';
+                       html+='<div><textarea  class="form-control" name="option2[]" id="'+tinymceiddd+'"></textarea> </div>';
                         
                        html+= `
                         <div class="valid-tooltip">
@@ -147,6 +147,8 @@ var tinymceaddd= "textareaoption4"+index;
             $("#viewww").append(html);
              tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceID);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceidd);
+            tinymce.EditorMaager.
+            tinymce.EditorManager.execCommand('mceFocus',false,tinymceidd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceiddd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceadd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceaddd);

@@ -22,23 +22,27 @@
                           <div class="card-body">
                             <h5 class="card-title">Manage Examination</h5>
                             {{--  --}}
-                
+                            <div class = "table-responsive" style="white-space: nowrap;"> 
                             <!-- Table with stripped rows -->
-                            <table class="table">
+                            <table id="example" class="display">
                               <thead>
                                 <tr>
-                                  <th scope="col">id</th>
-                                  <th scope="col">Exam<br>Id</th>
-                                  <th scope="col">Category<br>Name</th>
-                                  <th scope="col">SubCategory<br>Name</th>
-                                  {{-- <th scope="col">Question<br>Name</th> --}}
+                                  <th >id</th>
+                                  <th class="col-1" >Exam Id</th>
+                                  <th >Category Name</th>
+                                  <th >SubCategory Name</th>
+                                  {{-- <th>Question Name</th> --}}
+                                  <th scope="col">Start At</th>
+                                  <th scope="col"> Exam Name</th>
+                                  <th scope="col">Right Marks</th>
+                                  <th scope="col">Wrong Marks</th>
+                                  <th scope="col">Time</th>
+                                  
                                   <th scope="col">Start<br>At</th>
                                   <th scope="col"> Exam<br>Name</th>
                                   <th scope="col">Right<br>Marks</th>
                                   <th scope="col">Wrong<br>Marks</th>
                                   <th scope="col">Time</th>
-                                  
-                                  
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
@@ -56,6 +60,12 @@
                                           <td>{{$cour->wrongmarks}}</td>
                                           <td>{{$cour->time_duration}}</td>
                                           
+
+                                          <td>{{$cour->startat}}</td>
+                                          <td>{{$cour->exam_name}}</td>
+                                          <td>{{$cour->rightmarks}}</td>
+                                          <td>{{$cour->wrongmarks}}</td>
+                                          <td>{{$cour->time_duration}}</td>
                                           
                                           <td>
                                             <a href="" class="btn btn-outline-secondary">Edit</a>
@@ -71,7 +81,7 @@
                 
                           </div>
                         </div>
-                
+                        </div>
                       </div>
                     </div>
                   </section>   
