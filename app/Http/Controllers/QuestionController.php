@@ -18,20 +18,12 @@ class QuestionController extends Controller
 
     public function index($question_id)
     {
-       
-
-        
-        
-        $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
-
-        
-        $data['language']= Language::all();
-        
+       $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
+       $data['language']= Language::all();
         $data['topic']= Topic::all();
         $data['subject']= Subject::all();
-
-
-       return view('admin/manageQuestion',$data);
+        
+        return view('admin/manageQuestion',$data);
     }
       /*
     public function filter(Request $request,$cat_id){
@@ -140,6 +132,6 @@ class QuestionController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect('/manageQuestion');
+        return redirect('/manageQuiz');
     }
 }

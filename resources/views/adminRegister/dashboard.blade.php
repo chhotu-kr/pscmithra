@@ -52,7 +52,7 @@
 
         </h3>
         <ul class="navbar-nav">
-            <li class="nav-item"><a href="" class="nav-link text-white fw-bold me-4">LogOut</a></li>
+            <li class="nav-item"><a href="{{route('admin.logout')}}" class="nav-link text-white fw-bold me-4">LogOut</a></li>
             {{-- <li class="nav-item"><a href="" class="nav-link text-white fw-bold">SignIn</a></li>
             <li class="nav-item"><a href="" class="nav-link text-white fw-bold">LogOut</a></li> --}}
         </ul>

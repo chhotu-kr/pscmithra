@@ -10,11 +10,9 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Product</h4>
+                      <a href="{{route('product.create')}}" class="btn btn-outline-primary">Add New Product</a>
                     </div>
-                    <div class="col-4">
-                        <a href="{{route('product.create')}}" class="btn btn-outline-primary">Add New Product</a>
-                    </div>
+                   
                 </div>
                 <section class="section">
                     <div class="row">
@@ -22,7 +20,7 @@
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title text-theme ps-2">Manage Product</h5>
                             
                 
                             <!-- Table with stripped rows -->
