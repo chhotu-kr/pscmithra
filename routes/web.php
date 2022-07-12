@@ -17,15 +17,16 @@ use App\Http\Controllers\ScreenshotController;
 use App\Http\Controllers\PdfController;
 // use App\Http\Controllers\BookController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController,HomeController,StudyController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController,PublicController,StudyController};
 use Illuminate\Support\Facades\Route;
 
 // Home Page Route 
-//use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ExamCatController;
 use App\Http\Controllers\user\ExamSubCatController;
 use App\Http\Controllers\user\PrdController;
 use App\Http\Controllers\user\SubController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,25 +38,34 @@ use App\Http\Controllers\user\SubController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
+
+
+
+
+
 //get method
-Route::get('/',[ExamController::class,'index'])->name('manage.exam');
+
+Route::get('/',[HomeController::class,'index']);
+Route::get('/Exam',[ExamController::class,'index'])->name('manage.exam');
 Route::get('/subjects',[SubjectController::class,'index'])->name('manage.subject');
 Route::get('/manage/{id}',[TopicController::class,'show'])->name('manage.topic');
-Route::get('/manageQuestion',[QuestionController::class,'index'])->name('manage.question');
+Route::get('/manageQuestion/{id}',[QuestionController::class,'index'])->name('manage.question');
+Route::get('/manageQuiz',[QuestionController::class,'show'])->name('manage.quiz');
 Route::get('/secondquestion',[SecondQuestionController::class,'index'])->name('insert.secondquestion');
 Route::get('/category',[CategoryController::class,'index'])->name('insert.category');
 Route::get('/subcategory/{id}',[SubCategoryController::class,'index'])->name('insert.subcategory');
 Route::get('/language',[LanguageController::class,'index'])->name('insert.language');
 Route::get('/examination',[ExaminationController::class,'index'])->name('manage.examination'); 
+
+Route::get('/check/{id}',[ExamQuestionController::class,'index'])->name('check.index');
+
+
 Route::get('/managequiz',[QuestionController::class,'show'])->name('manage.quiz');
+
 //create method
 Route::get('questioncreate',[QuestionController::class,'create'])->name('question.create');
 Route::get('examinationcreate',[ExaminationController::class,'Create'])->name('examination.create');
+Route::get('examquestioncreate',[ExamQuestionController::class,'Create'])->name('examquestion.create');
 
 
 
@@ -68,6 +78,7 @@ Route::get('/removesecondquestion/{id}',[SecondQuestionController::class,'destro
 Route::get('/removecategory/{id}',[CategoryController::class,'destroy'])->name('removecategory');
 Route::get('/removesubcategory/{id}',[SubCategoryController::class,'destroy'])->name('removesubcategory');
 Route::get('/removelanguage/{id}',[LanguageController::class,'slugDelete'])->name('removelanguage');
+Route::get('/removelanguage/{id}',[ExamQuestionController::class,'destroy'])->name('remove.examquestion');
 
 
 //edit method
@@ -78,6 +89,7 @@ Route::get('/questionUpdate/{id}',[QuestionController::class,'edit'])->name('que
 Route::get('/secondquestionUpdate/{id}',[SecondQuestionController::class,'edit'])->name('secondquestionedit');
 Route::get('/categoryUpdate/{id}',[CategoryController::class,'edit'])->name('categoryedit');
 Route::get('/languageUpdate/{id}',[LanguageController::class,'edit'])->name('languageedit');
+Route::get('/examquestionUpdate/{id}',[ExamQuestionController::class,'edit'])->name('examquestion.edit');
 
 //update mehtod
 Route::post('/examUpdate/{id}',[ExamController::class,'update'])->name('exam.Update');
@@ -87,6 +99,7 @@ Route::post('/questionUpdate/{id}',[QuestionController::class,'update'])->name('
 Route::post('/secondquestionUpdate/{id}',[SecondQuestionController::class,'update'])->name('secondquestion.Update');
 Route::post('/categoryUpdate/{id}',[CategoryController::class,'update'])->name('category.Update');
 Route::post('/languageUpdate/{id}',[LanguageController::class,'update'])->name('language.Update');
+Route::post('/examquestionUpdate/{id}',[ExamQuestionController::class,'update'])->name('examquestion.Update');
 
 //post method
 Route::post('/examstore',[ExamController::class,'store'])->name('examstore');
@@ -98,6 +111,7 @@ Route::post('/examinationstore',[ExaminationController::class,'storeExamination'
 Route::post('/categorystore',[CategoryController::class,'store'])->name('category.store'); 
 Route::post('/subcategorystore',[SubCategoryController::class,'store'])->name('subcategory.store'); 
 Route::post('/languagestore',[LanguageController::class,'store'])->name('language.store'); 
+Route::post('/examquestionstore',[ExamQuestionController::class,'store'])->name('examquestion.store'); 
  
 
 // ecommerce
@@ -112,22 +126,40 @@ Route::resources([
     'course'=>CourseController::class,
     'address'=>AddressController::class,
     'cart'=>CartController::class,
-    'examquestion'=>ExamQuestionController::class,
+    // 'examquestion'=>ExamQuestionController::class,
     'study'=>StudyController::class,
     
  ]);
 
+ // examquestion filter
+
+ Route::get('/filter/{id}',[ExamQuestionController::class,'filter'])->name('question.filter');
+//  Route::get('/show/{id}',[ExamQuestionController::class,'index'])->name('show.check');
+ Route::get('/sub',[ExamQuestionController::class,'submit'])->name('submit.check');
+
+
 // User Register And Login
 Route::match(["get","post"],"/signup",[AuthController::class,"signup"])->name('signup');
-Route::match(["get","post"],"/login",[AuthController::class,"login"])->name('login');
+Route::match(["get","post"],"/login",[AuthController::class,"login"])->name('user.login');
 Route::get("/logout",[AuthController::class,"logout"])->name("logout");
-Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');
+Route::get("admin/logout",[AuthController::class,"Adminlogout"])->name("admin.logout");
+
 
 //Admin Register And login
 Route::match(["get","post"],"/adminsignup",[AuthController::class,"adminSignup"])->name('admin.signup');
 Route::match(["get","post"],"/adminlogin",[AuthController::class,"adminLogin"])->name('admin.login');
-Route::get('/admin/dashboard',[HomeController::class,'adminIndex'])->name('admin.dashboard');
 
+// Admin middleware
+Route::prefix('admin')->middleware('auth:admin')->group(function(){
+    Route::get('/dashboard',[PublicController::class,'adminIndex'])->name('admin.dashboard');
+
+});
+
+// User middleware
+Route::prefix('user')->middleware('auth:web')->group(function(){
+    Route::get('/home',[PublicController::class,'index'])->name('user.dashboard');
+
+});
 
 
 
@@ -135,7 +167,7 @@ Route::get('/admin/dashboard',[HomeController::class,'adminIndex'])->name('admin
 
 Route::get('/exam-category',[ExamCatController::class,'exam'])->name('exam.category');
 Route::get('/exam-filter/{id}',[ExamCatController::class,'filter'])->name('exam.filter');
-Route::get('/home',[HomeController::class,'index'])->name('home');
+Route::get('/homee',[HomeController::class,'index'])->name('home');
 Route::get('/prd',[PrdController::class,'prd'])->name('product');
 
 Route::get('/exam-sub',[SubController::class,'sub'])->name('user.subject');

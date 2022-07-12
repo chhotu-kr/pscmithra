@@ -70,13 +70,14 @@
                                           <td>
                                             <a href="" class="btn btn-outline-secondary">Edit</a>
                                             <a href="" class="btn btn-outline-warning">Delete</a>
-                                            <a href="{{route('examquestion.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
+                                            <a href="{{route('check.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
                                           </td>
                                       </tr>
                                   @endforeach
                                 
                               </tbody>
                             </table>
+                           </div>
                             <!-- End Table with stripped rows -->
                 
                           </div>

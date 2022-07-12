@@ -9,9 +9,9 @@
             
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-12 mb-3">
+                    {{-- <div class="col-12 mb-3">
                       <a href="{{route('question.create')}}" class="btn btn-primary">Add New Question</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <section class="section">
                     
