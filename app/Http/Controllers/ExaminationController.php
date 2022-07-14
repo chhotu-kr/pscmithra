@@ -41,7 +41,7 @@ class ExaminationController extends Controller
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;
         $data->time_duration=$request->time_duration;
-       
+        $data-> slugid = md5($request->exam_name . time());
         $data->save();
         return redirect('/examination');
     } 
