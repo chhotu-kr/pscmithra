@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\study;
+use App\Models\Study;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
