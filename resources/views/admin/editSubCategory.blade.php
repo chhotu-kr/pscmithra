@@ -11,7 +11,7 @@
                   <div class="card">
                     <div class="card-header">Edit Subject</div>
                     <div class="card-body">
-                        <form action="{{route('subcategory.update',$subcategory)}}" class=" row g-3 needs-validation" method="post" novalidate>
+                        <form action="{{route('subcategory.Update', $subcategory)}}" class=" row g-3 needs-validation" method="post" novalidate>
               
                             @csrf
                           <div class=" position-relative">
@@ -19,7 +19,7 @@
                           <select class="form-select" name="category_id" id="validationTooltip04" required>
                             <option selected disabled value="">Choose Your Category</option>
                             @foreach ($category as $item)
-                            <option value="{{$item->id}}">{{$item->id}}</option>
+                            <option value="{{$item->id}}">{{$item->category}}</option>
                             @endforeach
                           </select>
                           <div class="invalid-tooltip">
@@ -28,7 +28,7 @@
                           </div>
                           <div class=" position-relative">
                           <label for="validationTooltip05" class="form-label">SubCategory</label>
-                          <input type="text" class="form-control" name="subcategory" id="validationTooltip05" value="{{$subCategory->subcategory}}" required>
+                          <input type="text" class="form-control" name="subcategory" id="validationTooltip05" value="{{$subcategory->subcategory}}" required>
                           <div class="invalid-tooltip">
                             Please provide a valid category.
                           </div>

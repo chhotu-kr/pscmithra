@@ -35,11 +35,11 @@ class SubCategoryController extends Controller
         $data->save();
         return redirect()->back();
     }
-    public function subCategory($category_id){
-        $data['subcategory'] = SubCategory::where("category_id",$category_id)->get();
-        $data['category']=Category::all();
-        return view('admin/insertsubCategory',$data);
-    }
+    // public function subCategory($category_id){
+    //     $data['subcategory'] = SubCategory::where("category_id",$category_id)->get();
+    //     $data['category']=Category::all();
+    //     return view('admin/insertsubCategory',$data);
+    // }
 
       
     public function show(SubCategory $subCategory)
@@ -48,15 +48,26 @@ class SubCategoryController extends Controller
     }
 
     
-    public function edit(SubCategory $subCategory)
+    public function edit(SubCategory $subCategory,$id)
     {
         //
+      
+        $data['subcategory']=SubCategory::find($id);
+        $data['category']=Category::all();
+
+        return view('admin.editSubCategory',$data);
     }
 
     
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, SubCategory $subcategory,$id)
     {
         //
+        $subcategory=SubCategory::find($id);
+        $subcategory->slugid=md5($request->subcategory .time());
+        $subcategory->category_id=$request->category_id;
+        $subcategory->subcategory=$request->subcategory;
+        $subcategory->save();
+        return redirect('/subcategory');
     }
 
     

@@ -14,7 +14,6 @@
            <div class="card-body">
             <form action="{{ route('category.Update',$category)}}" method="POST">
               @csrf
-                 
                     <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Exam_Id</label>
                         <select class="form-select" name="exam_id" id="validationTooltip04" required>

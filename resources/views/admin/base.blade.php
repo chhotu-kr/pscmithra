@@ -28,7 +28,8 @@
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
   <!-- Template Main CSS File -->
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
    {{-- icon link --}}

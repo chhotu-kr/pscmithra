@@ -1,4 +1,4 @@
-@extends('admin/base')
+{{-- @extends('admin/base')
 @section('content')
 <main>
     <div class="container">
@@ -74,4 +74,4 @@
 
     </div>
   </main><!-- End #main -->
-@endsection
+@endsection --}}
