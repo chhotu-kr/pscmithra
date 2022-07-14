@@ -6,49 +6,56 @@
             <div class="col-3">
                 @include('admin.side')
             </div>
-            <div class="col-9">
-                <section class="section">
-                    <div class="row">
-                      <div class="col-lg-12">
-                
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">Manage Topic</h5>
-                            
-                
-                            <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                              <thead>
-                                <tr>
-                                  <th scope="col">id</th>
-                                  <th scope="col">Role</th>
-                                
-                                  <th scope="col">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                  @foreach ($role as $req)
-                                      <tr>
-                                          <td>{{$req->id}}</td>
-                                
-                                          <td>{{$req->name}}</td>
-                                          <td>
-                                              {{-- <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                                              <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> --}}
-                                          </td>
-                                      </tr>
-                                  @endforeach
-                                
-                              </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-                
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-2">
+                    <a href="{{route('add.role')}}" class="btn btn-primary">Add Role</a>
+                  </div>
+                  <div class="col-10">
+                    <section class="section">
+                      <div class="row">
+                        <div class="col-lg-12">
+                  
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Manage Role</h5>
+                              
+                  
+                              <!-- Table with stripped rows -->
+                              <table class="table datatable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Role</th>
+                                  
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($role as $req)
+                                        <tr>
+                                            <td>{{$req->id}}</td>
+                                  
+                                            <td>{{$req->name}}</td>
+                                            <td>
+                                                {{-- <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
+                                                <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> --}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                  
+                                </tbody>
+                              </table>
+                              <!-- End Table with stripped rows -->
+                  
+                            </div>
                           </div>
+                  
                         </div>
-                
                       </div>
-                    </div>
-                  </section>
+                    </section>
+                  </div>
+                </div>
             </div>
         </div>
        </div>

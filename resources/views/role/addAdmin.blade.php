@@ -7,33 +7,26 @@
                 @include('admin.side')
             </div>
             <div class="col-12">
-                <form action="" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label>name</label>
-                        <input type="text" name="name" class="form-control">
+                <div class="card">
+                    <div class="card-header">Add Role</div>
+                    <div class="card-body">
+                        <form action="{{route('store.role')}}" class="needs validation" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label>name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Slug</label>
+                                <input type="text" name="slug" class="form-control" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <input type="submit" value="submit" class="btn btn-primary btn-lg float-end">
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="text" name="email" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="text" name="password" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <select name="role" id="" class="form-control">
-                            <label for="" class="form-label">Role</label>
-                            <option value="0">Select role</option>
-                            @foreach ($role as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <input type="submit" value="submit" class="btn btn-primary">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
       </div>

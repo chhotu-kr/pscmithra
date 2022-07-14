@@ -42,8 +42,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::get('/filter',[FilterController::class,'FilterExamquestion'])->name('filter');
-Route::get('/addadmin',[RoleController::class,'getAdmin']);
-Route::match(['get','post'],'/role',[RoleController::class,'getRole']);
+Route::get('/addadmin',[RoleController::class,'getAdmin'])->name('add.role');
+Route::post('/addadmin/store',[RoleController::class,'store'])->name('store.role');
+Route::match(['get','post'],'/role',[RoleController::class,'getRole'])->name('manage.role');
+
+// .........Admin.............
+Route::get('/admin',[RoleController::class,'adminRole'])->name('get.admin');
+Route::post('/admin',[RoleController::class,'StoreAdminRole'])->name('store.admin');
+
 
 // category homepage
 Route::get('/mock-test',[ExamCategoryController::class,'getMocktest'])->name('user.mocktest');
