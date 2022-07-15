@@ -18,4 +18,9 @@ class StudymetrialChapter extends Model
     public function studymetrialcategory(){
         return $this->hasOne(StudymetrialCategory::class,'id','studymetrialcategory_id');
     }
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

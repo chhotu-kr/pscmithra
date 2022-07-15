@@ -8,40 +8,50 @@
             </div>
             <div class="col-12">
                <div class="card">
-                <div class="card-header">Add Admin</div>
+                <div class="card-header"><button type="button" class="btn btn-primary">Add Admin</button></div>
                 <div class="card-body">
-                    <form action="{{route('store.admin')}}" method="POST" class="needs validation">
-                        @csrf
-                      
-                        <div class="mb-3">
-                            <label>name</label>
-                            <input type="text" name="name" class="form-control" required>
+                    <section class="section">
+                        <div class="row">
+                          <div class="col-lg-12">
+                    
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Manage Role</h5>
+                                
+                    
+                                <!-- Table with stripped rows -->
+                                <table class="table datatable">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">id</th>
+                                      <th scope="col">Role</th>
+                                    
+                                      <th scope="col">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      @foreach ($admin as $req)
+                                          <tr>
+                                              <td>{{$req->id}}</td>
+                                    
+                                              <td>{{$req->name}}</td>
+                                              <td>
+                                                  {{-- <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
+                                                  <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> --}}
+                                              </td>
+                                          </tr>
+                                      @endforeach
+                                    
+                                  </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+                    
+                              </div>
+                            </div>
+                    
+                          </div>
                         </div>
-                        <div class="mb-3">
-                            <label>Email</label>
-                            <input type="text" name="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label>Contact</label>
-                            <input type="text" name="contact" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <select name="role" id="" class="form-control" required>
-                                <label for="" class="form-label">Role</label>
-                                <option value="0">Select role</option>
-                                @foreach ($role as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <input type="submit" value="submit" class="btn btn-primary w-100">
-                        </div>
-                    </form>
+                      </section>
                 </div>
                </div>
             </div>

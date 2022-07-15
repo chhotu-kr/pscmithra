@@ -29,7 +29,16 @@ Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup"
 //category
 Route::get('/category/{id}',[Apiv1Controller::class,'category'])->name('api.category');
 Route::get('/subcategory/{id}',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
+// ....studymetrialcategory......
 
+Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
+Route::get('/chapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
+// .... User.......
+// Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
+
+// .....Examination........
+
+Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
