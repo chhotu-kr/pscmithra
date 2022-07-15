@@ -17,10 +17,8 @@ class ExamQuestionController extends Controller
     {
         //
         $data['id']= $id;
-        $data['examquestion']=ExamQuestion::all();
-        $data['subject']=Subject::all();
-        $data['secondquestion']=SecondQuestion::all();
-        $data['exam']=Exam::all();
+        $data['examquestion']=ExamQuestion::with('question.secondquestion.language')->get();
+       
 
         // return dd($data);
        return view('admin.manageExamquestion',compact('data'));
@@ -43,12 +41,12 @@ class ExamQuestionController extends Controller
 
         $questionId = ExamQuestion::select('question_id')->where('exam_id', $request->eID)->get()->toArray();
        
-        $data=Question::with('subject')->with('topic')
-        ->where('topic_id',$request->id)
+        $data=Question::with('secondquestion.language')->
+        where('topic_id',$request->id)
         ->whereNotIn('id',$questionId)
         ->get();
         
-         return response()->json($data);
+        return response()->json($data);
        // return redirect()->route('examquestion.create');
     }
 

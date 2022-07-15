@@ -30,25 +30,30 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                 {{-- @foreach ($data as $item)
+                                 @foreach ($data['examquestion'] as $item)
                                         <tr>
                                         
                                        
-                                            <td>{{$item->id}}</td>
+                                           
                                             
                                             <td>{{$item->question->name}}</td>
-                                            <td>{{$item->question->secondquestion->language->name}}</td>
+                                            <td>
+                                              @foreach ($item->question->secondquestion as $itema)
+                                                  {{$itema->language->languagename.", "}}
+                                              @endforeach
+                                            </td>
+                                            {{-- <td>{{$item->question->secondquestion->language->name}}</td> --}}
                                             
                                            
                                             <td>
                                               <a href="{{route('examquestion.edit',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                               </tbody>
                             </table>
-                            <input type="submit" class="btn btn-primary" id="btn">
-                      </form>
+                            {{-- <input type="submit" class="btn btn-primary" id="btn"> --}}
+                      
                              
                             
                              
