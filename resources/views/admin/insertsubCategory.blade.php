@@ -86,7 +86,7 @@
                                 <td>{{$item->category->category}}</td>
                                 <td>{{$item->subcategory}}</td>
                                 <td>
-                                   <a href="" class="btn btn-outline-success">Edit</a>
+                                   <a href="{{route('subcategory.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                   
                                   
                                     <a href="{{route('removesubcategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>

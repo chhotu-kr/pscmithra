@@ -14,12 +14,11 @@ class AuthController extends Controller
     public function signup(Request $req){
 
         if($req->isMethod("post")){
-            // $req->validate([
-            //     'name' => 'required',
-            //     'contact' => 'required',
-            //     'email' => 'required:email|unique:users',
-            //     'password' => 'required|min:6'
-            // ]);
+            $req->validate([
+                'name' => 'required',
+                'contact' => 'required|unique:users',
+                'password' => 'required|min:6'
+            ]);
 
             $user = new User();
             $user->name = $req->name;
@@ -30,11 +29,11 @@ class AuthController extends Controller
             $user->password = Hash::make($req->password); 
             $user->save();
 
-            return redirect()->route("login");
+            return redirect()->route("user.login");
            
         }
         else{
-            return view("userRegister.Register");
+            return view("user.Register");
         }
     }
 
@@ -50,7 +49,7 @@ class AuthController extends Controller
             $auth = $req->only("contact","password");
 
             if(Auth::guard("web")->attempt($auth)){
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.index');
             }
             else{
                 // $req->session()->flash("error","login with incorrect details try again");
@@ -59,7 +58,7 @@ class AuthController extends Controller
            
             
         }
-        return view("userRegister.login");
+        return view("user.login");
     }
 
     public function logout(Request $req){

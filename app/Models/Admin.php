@@ -27,4 +27,8 @@ class Admin extends Authenticatable
     {
         return $query->where('is_active',1);
     }
+
+    public function role(){
+        return $this->hasOne(Role::class,'id','role_id');
+    }
 }

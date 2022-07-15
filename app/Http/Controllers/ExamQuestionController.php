@@ -12,31 +12,45 @@ use Illuminate\Http\Request;
 
 class ExamQuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index($id)
     {
         //
+        $data['id']= $id;
         $data['examquestion']=ExamQuestion::all();
         $data['subject']=Subject::all();
         $data['secondquestion']=SecondQuestion::all();
         $data['exam']=Exam::all();
 
         // return dd($data);
-       return view('admin.manageExamquestion',$data);
+       return view('admin.manageExamquestion',compact('data'));
     }
 
-    public function submit($question_id){
-      
-        $questionId = ExamQuestion::select('question_id')->where('exam_id', $question_id)->get()->toArray();
-        $data=Question::whereNotIn('id',$questionId)->get();
-        
-        // return redirect()->route('check.index');
-        return dd($data);
+    public function submit(Request $request){
+
+        if($request->isMethod("post")){
+            $value = $request->data;
+
+            foreach($value as $item){
+                $inserting_array[] = [
+                        'question_id' => $item,
+                        'exam_id' => $request->exam_id
+                ];
             }
+            ExamQuestion::insert($inserting_array);
+            return redirect()->back();
+        }
+
+        $questionId = ExamQuestion::select('question_id')->where('exam_id', $request->eID)->get()->toArray();
+       
+        $data=Question::with('subject')->with('topic')
+        ->where('topic_id',$request->id)
+        ->whereNotIn('id',$questionId)
+        ->get();
+        
+         return response()->json($data);
+       // return redirect()->route('examquestion.create');
+    }
 
     public function filter($exam_id){
         $data['examquestion']=ExamQuestion::where('exam_id',$exam_id)->get();
@@ -45,14 +59,10 @@ class ExamQuestionController extends Controller
         return view('admin/insertExamquestion',$data);
     }
 
-    public function create()
+    public function create($id)
     {
-        //
-        $data['examquestion']=ExamQuestion::all();
-        $data['secondquestion']=SecondQuestion::all();
-        $data['exam']=Exam::all();
-       return view('admin.insertExamquestion',$data);
-    }
+
+       return view('admin.insertExamquestion',compact('id')); }
 
     public function store(Request $request)
     {

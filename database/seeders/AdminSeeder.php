@@ -50,6 +50,12 @@ class AdminSeeder extends Seeder
        Permission::insert([
             ['name'=>'Add Post','slug'=>'add-post'],
             ['name'=>'Delete Post','slug'=>'delete-post'],
+           
+            ['name'=>'Add Question','slug'=>'add-question'],
+            ['name'=>'Delete Question','slug'=>'delete-question'],
+            ['name'=>'Edit Question','slug'=>'edit-question'],
+            ['name'=>'View Question','slug'=>'view-question'],
+           
         ]);
 
         //Assign Role

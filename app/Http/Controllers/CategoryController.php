@@ -53,9 +53,10 @@ class CategoryController extends Controller
     }
 
     
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category,$id)
     {
         //
+        $category=Category::find($id);
         $category->slugid=md5($request->category .time());
         $category->exam_id=$request->exam_id;
         $category->category=$request->category;
