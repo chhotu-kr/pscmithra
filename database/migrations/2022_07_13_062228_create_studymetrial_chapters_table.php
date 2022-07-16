@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('studymetrial_chapters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('studymetrialcategory_id')->constrained('studymetrial_Chapters');
+            $table->foreignId('studymetrialcategory_id')->constrained('studymetrial_categories');
             $table->string('slugid');
             $table->timestamps();
         });
