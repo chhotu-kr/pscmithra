@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("login", [Apiv1Controller::class, "api_login"])->name("api.login");
-Route::get("sign", [Apiv1Controller::class, "index"])->name("api.sign");
+Route::get("sign/{contact}", [Apiv1Controller::class, "index"])->name("api.sign");
 Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup");
 
 

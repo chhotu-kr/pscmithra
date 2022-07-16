@@ -6,18 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\User;
 use App\Models\Exam;
 use App\Models\Examination;
-use App\Models\category;
+use App\Models\Category;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
-use App\Models\subcategory;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Validator;
 class Apiv1Controller extends Controller
 {
-    public function index(){
-        return User::all();
+    public function index($contact){
+        $user = User::where('contact',$contact)->first();
+        if(!$user){
+            return response()->json(['msg' => 'Account not exist','status'=>true]);
+        }
+        return response()->json(['msg' => 'Account allready exist','status'=>false]);
     }
 
     //user signup api
@@ -79,19 +83,28 @@ class Apiv1Controller extends Controller
         //     return response()->json(['status' =>true,'msg'=>'User Exist','data'=>,'pas'=>$password]);
         // }
 
+        if(empty($request->contact))
+        {
+            return response()->json(['msg' => 'Enter Mobile Number','status'=>false]);
+        }
+        if(empty($request->password))
+        {
+            return response()->json(['msg' => 'Enter Password','status'=>false]);
+        }
+
         $user = User::where('contact',$request->contact)->first();
         if(!$user){
-            return response()->json(['error' => 'user not found.'], 401);
+            return response()->json(['msg' => 'user not found.','status'=>false,]);
         }
         
         if (!Hash::check($request->password,$user->password)) {
-            return response()->json(['error' => 'please enter right password'], 401);
+            return response()->json(['msg' => 'Enter correct Password','status'=>false]);
         } else {
-            auth()->login($user);
+            //auth()->login($user);
             // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
             // return response()->json(['token' => $token], 200);
 
-            return response()->json(['login' => 'User logIn']);
+            return response()->json(['msg' => 'Data Fetched','status'=>true,'data'=>$user]);
         }
 
     }
@@ -101,15 +114,15 @@ class Apiv1Controller extends Controller
 
     public function category($exam_id){
      $data['category']=Category::where('exam_id',$exam_id)->get();
-     $data['exam']=Exam::all();
-     return response($data);
+    
+     return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
     public function subcategory($category_id){
       
-     $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
+     $data=SubCategory::where('category_id',$category_id)->get();
    
-     return response($data);
+     return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     //  echo $data;
     }
 
@@ -117,7 +130,8 @@ class Apiv1Controller extends Controller
         return StudymetrialCategory::all();
     }
     public function get_StudyChapter($studymetrialcategory_id){
-       $data['studymetrialchapter']=StudymetrialChapter::where('studymetrialcategory_id',$studymetrialcategory_id)->get();
+
+       $data=StudymetrialChapter::where('studymetrialcategory_id',$studymetrialcategory_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
