@@ -116,6 +116,22 @@
               <i class="bi bi-circle"></i><span>Manage Study</span>
             </a>
           </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('insert.book')}}">
+              <i class="bi bi-circle"></i><span>Manage Book</span>
+            </a>
+          </li>  
+          
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('insertmetrial.create')}}">
+              <i class="bi bi-circle"></i><span>Manage StudyMetrialCategory</span>
+            </a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('insertchapter.create')}}">
+              <i class="bi bi-circle"></i><span>Manage StudyMetrialChapter</span>
+            </a>
+          </li>  
           
         </ul>
       </li><!-- End Charts Nav -->

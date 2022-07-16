@@ -21,19 +21,20 @@ class AdminSeeder extends Seeder
             'email' => 'user@gmail.com',
             'contact' => '6209460649',
             'password' => bcrypt('12345678'),
+            'slugid' =>'21eraxyade79z'
         ];
 
         User::create($user);
 
         $admin = [
             [ 'name' => 'admin', 'email' => 'admin@gmail.com', 'contact' => '9534843305',
-            'password' => bcrypt('password'),],
+            'password' => bcrypt('password'),'slugid' =>'356eiuxyade89w'],
 
             [ 'name' => 'Editor', 'email' => 'editor@gmail.com', 'contact' => '6209460649',
-            'password' => bcrypt('password'),],
+            'password' => bcrypt('password'),'slugid' =>'34erret65ydre',],
 
             [ 'name' => 'Author', 'email' => 'author@gmail.com', 'contact' => '9263096585',
-            'password' => bcrypt('password'),],
+            'password' => bcrypt('password'),'slugid' =>'34errxyade89w'],
             
            
            

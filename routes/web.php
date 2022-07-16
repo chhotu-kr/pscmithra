@@ -18,7 +18,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BookController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 
 use Illuminate\Support\Facades\Route;
@@ -67,7 +67,7 @@ Route::get('/catlive-test',[ExamCategoryController::class,'getCat_Livetest'])->n
 Route::get('/Exam',[ExamController::class,'index'])->name('manage.exam');
 Route::get('/subjects',[SubjectController::class,'index'])->name('manage.subject');
 Route::get('/insertMetrial',[StudymetrialCategoryController::class,'index'])->name('insertmetrial.create');
-Route::get('/insertchapter',[StudymetrialChapterController::class,'index'])->name('insertchpter.create');
+Route::get('/insertchapter',[StudymetrialChapterController::class,'index'])->name('insertchapter.create');
 Route::get('/manage/{id}',[TopicController::class,'show'])->name('manage.topic');
 Route::get('/manageQuestion/{id}',[QuestionController::class,'index'])->name('manage.question');
 Route::get('/manageQuiz',[QuestionController::class,'show'])->name('manage.quiz');
@@ -100,7 +100,7 @@ Route::get('/removequestion/{id}',[QuestionController::class,'destroy'])->name('
 Route::get('/removesecondquestion/{id}',[SecondQuestionController::class,'destroy'])->name('removesecondquestion');
 Route::get('/removecategory/{id}',[CategoryController::class,'destroy'])->name('removecategory');
 Route::get('/removesubcategory/{id}',[SubCategoryController::class,'destroy'])->name('removesubcategory');
-Route::get('/removelanguage/{id}',[LanguageController::class,'slugDelete'])->name('removelanguage');
+Route::get('/deletelanguage/{id}',[LanguageController::class,'slugDelete'])->name('removelanguage');
 Route::get('/removelanguage/{id}',[ExamQuestionController::class,'destroy'])->name('remove.examquestion');
 
 
@@ -161,6 +161,13 @@ Route::resources([
     'study'=>StudyController::class,
     
  ]);
+
+ // ..........Book table route.........
+ Route::get('/book',[BookController::class,'index'])->name('insert.book');
+ Route::post('/store',[BookController::class,'BookStore'])->name('books.store');
+ Route::get('/bookupdate/{id}',[BookController::class,'edit'])->name('books.edit');
+ Route::post('/bookupdate/{id}',[BookController::class,'update'])->name('books.update');
+ Route::get('removebook/{id}',[BookController::class,'destroy'])->name('books.delete');
 
  // examquestion filter
 

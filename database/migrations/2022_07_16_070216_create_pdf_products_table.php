@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('pdf_products', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("email")->unique();
-            $table->string("contact")->unique();
-            $table->string("password",255);
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('pdf_id')->constrained();
             $table->string('slugid');
-            $table->boolean("is_active")->default(true);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('pdf_products');
     }
 };

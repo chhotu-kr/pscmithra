@@ -35,7 +35,7 @@
                                         
                                        
                                            
-                                            
+                                          <td>{{$item->id}}</td>
                                             <td>{{$item->question->name}}</td>
                                             <td>
                                               @foreach ($item->question->secondquestion as $itema)
@@ -46,7 +46,7 @@
                                             
                                            
                                             <td>
-                                              <a href="{{route('examquestion.edit',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                              <a href="{{route('examquestion.edit',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
