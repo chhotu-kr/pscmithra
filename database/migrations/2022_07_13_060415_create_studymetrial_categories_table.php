@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('studymetrial_categories', function (Blueprint $table) {
+        Schema::create('smcategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('image');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('studymetrial_categories');
+        Schema::dropIfExists('smcategories');
     }
 };
