@@ -39,7 +39,7 @@ class ExamQuestionController extends Controller
             return redirect()->back();
         }
 
-        $questionId = ExamQuestion::select('question_id')->where('exam_id', $request->eID)->get()->toArray();
+        $questionId = ExamQuestion::select('question_id')->where('examination_id', $request->eID)->get()->toArray();
        
         $data=Question::with('secondquestion.language')->
         where('topic_id',$request->id)

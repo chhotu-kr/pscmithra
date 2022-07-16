@@ -60,10 +60,10 @@
                   <th scope="col">Id</th>
                  
                   <th scope="col">Name</th>
-                  <th scope="col"> Subject Name</th>
-                  <th scope="col">topic Name</th>
+                  <th scope="col"> Language</th>
+                  {{-- <th scope="col">topic Name</th> --}}
                   
-                  <th scope="col">Action</th>
+                  {{-- <th scope="col">Action</th> --}}
                   
                 </tr>
               </thead>
@@ -124,7 +124,7 @@ $(function() {
          url:"{{ route('submit.check') }}",
          data:{'id':Id ,'eID':examid},
          success:function(data){
-         
+         console.log(data);
           Html="";
           $.each(data, function(index, value) {
 console.log(value);
