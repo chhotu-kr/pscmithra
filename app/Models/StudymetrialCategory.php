@@ -16,4 +16,9 @@ class StudymetrialCategory extends Model
         "slugid",
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
 }

@@ -41,14 +41,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/filter',[FilterController::class,'FilterExamquestion'])->name('filter');
-Route::get('/addadmin',[RoleController::class,'getAdmin'])->name('add.role');
-Route::post('/addadmin/store',[RoleController::class,'store'])->name('store.role');
+
+ Route::get('/addadmin',[RoleController::class,'getAdmin'])->name('add.admin');
+Route::post('/role',[RoleController::class,'store'])->name('store.role');
 Route::match(['get','post'],'/role',[RoleController::class,'getRole'])->name('manage.role');
 
 // .........Admin.............
-Route::get('/admin',[RoleController::class,'adminRole'])->name('get.admin');
-Route::post('/admin',[RoleController::class,'StoreAdminRole'])->name('store.admin');
+Route::get('/addrole',[RoleController::class,'get_Addrole'])->name('add.role');
+Route::get('/adminrole',[RoleController::class,'adminRole'])->name('get.admin');
+// Route::post('/admin',[RoleController::class,'StoreAdminRole'])->name('store.role');
 
 
 // category homepage

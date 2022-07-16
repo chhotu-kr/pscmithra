@@ -127,13 +127,18 @@ $(function() {
          
           Html="";
           $.each(data, function(index, value) {
-
+console.log(value);
             Html+=`<tr>
               <td><input type='checkbox' value='${value.id}' name='data[]'></td>
               <td>${value.id}</td>
               <td>${value.name}</td>
-              <td>${value.topic.topic_name}</td>
-              <td>${value.subject.sub_name}</td>
+              
+              <td>`;
+                lang='';
+                $.each(value.secondquestion,function(ind,val){
+lang+=val.language.languagename+', ';
+              });
+                Html+=lang+`</td>
               </tr>`;
           });
 

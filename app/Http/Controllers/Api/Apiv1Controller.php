@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Exam;
+use App\Models\Examination;
 use App\Models\category;
+use App\Models\StudymetrialCategory;
+use App\Models\StudymetrialChapter;
 use App\Models\subcategory;
 use Illuminate\Support\Facades\Validator;
 class Apiv1Controller extends Controller
@@ -109,6 +112,58 @@ class Apiv1Controller extends Controller
      return response($data);
     //  echo $data;
     }
+
+    public function get_StudyMetrial(){
+        return StudymetrialCategory::all();
+    }
+    public function get_StudyChapter($studymetrialcategory_id){
+       $data['studymetrialchapter']=StudymetrialChapter::where('studymetrialcategory_id',$studymetrialcategory_id)->get();
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+    }
+
+    // public function get_Examination($exam_id,$category_id,$subcategory_id){
+    //     $data['examination']=Examination::where(['exam_id',$exam_id],['category_id',$category_id],['subcategory_id',$subcategory_id])->get();
+
+    //     return response($data);
+
+    //     // echo $data;
+    // }
+    public function get_Examination(Request $request){
+
+        
+        $exam_id=$request->exam_id;
+        if(empty($exam_id)){
+            return response()->json(['msg'=>'Enter Exam Id','status'=>false]);
+        }
+        $category_id=$request->category_id;
+        if(empty($category_id)){
+            return response()->json(['msg'=>'Enter Category Id','status'=>false]);
+        }
+        $subcategory_id=$request->subcategory_id;
+        if(empty($subcategory_id)){
+            return response()->json(['msg'=>'Enter SubCategory Id','status'=>false]);
+        }
+
+        $data=Examination::where('exam_id',$exam_id)->
+        where('category_id',$category_id)->
+        where('subcategory_id',$subcategory_id)->get();
+
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+    }
+
+    // public function getExamination($category_id){
+    //     $data['examination']=Examination::where('category_id',$category_id)->get();
+
+    //     return response($data);
+
+    //     // echo $data;
+    // }
+
+    // public function get_Detail($slugid){
+    //     $data['user']=User::where('slugid',$slugid)->get();
+
+    //     return response($data);
+    // }
 
       
 }
