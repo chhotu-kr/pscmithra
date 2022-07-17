@@ -45,14 +45,16 @@
 
 
                           </td>
-                          <td><a href="{{route('manage.question',['id'=>$req->id])}}" class="nav-link">{{$req->name}}</a></td>
+                          <td>{{$req->name}}</td>
+                          {{-- <td><a href="{{route('manage.question',['id'=>$req->id])}}" class="nav-link">{{$req->name}}</a></td> --}}
                           <td>{{$req->rightans}}</td>
                           
                           
                           <td>
-                            {{-- <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
+                            <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
                             <a href="{{route('removequestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>   
-                        --}}
+                       
+                        <a href="{{route('manage.question',['id'=>$req->id])}}" class=" btn btn-outline-info rounded-pill">Manage Question</a>
                                
                           </td>
                           

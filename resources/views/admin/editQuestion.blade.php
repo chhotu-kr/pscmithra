@@ -19,7 +19,7 @@
                         <div class="col-md-6 position-relative">
                             <label for="validationTooltip04" class="form-label">Subject</label>
                             <select class="form-select" name="subject_id" id="validationTooltip04" required>
-                              <option selected disabled value="0">main subject</option>
+                              <option selected disabled value="0">Select your subject</option>
                              
                               @foreach ($subject as $item)
                                   <option value="{{$item->id}}">{{$item->sub_name}}</option>
@@ -32,7 +32,7 @@
                         <div class="col-md-6 position-relative">
                             <label for="validationTooltip04" class="form-label">Topic</label>
                             <select class="form-select" name="topic_id" id="validationTooltip04" required>
-                              <option selected disabled value="0">Main Topic</option>
+                              <option selected disabled value="0">Select your Topic</option>
                               @foreach ($topic as $req)
                                 <option value="{{$req->id}}">{{$req->topic_name}}</option>  
                               @endforeach
@@ -50,7 +50,7 @@
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip04" class="form-label">RightAns</label>
                         <select class="form-select" name="rightans" id="validationTooltip04" required>
-                          <option selected disabled value="">Choose correct ans</option>
+                          <option selected disabled value="">Select your correct ans</option>
                           <option>option1</option>
                           <option>option2</option>
                           <option>option3</option>

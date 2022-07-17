@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('studymetrial_chapters', function (Blueprint $table) {
+        Schema::create('sm_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-             $table->foreignId('smcategories_id')->constrained();
+            $table->string('image');
             $table->string('slugid');
             $table->timestamps();
         });
     }
-// sdad
+
     /**
      * Reverse the migrations.
      *
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('studymetrial_chapters');
+        Schema::dropIfExists('sm_categories');
     }
 };

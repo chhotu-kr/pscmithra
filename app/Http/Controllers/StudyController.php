@@ -17,16 +17,17 @@ class StudyController extends Controller
         $data['study']=Study::all();
         $data['category']=Category::all();
         $data['subcategory']=SubCategory::all();
-        return view('ecommerce.insertStudy',$data);
+        return view('ecommerce.manageStudy',$data);
     }
 
    
     public function create()
     {
         //
-        // $data['category']=Category::all();
-        // $data['subcategory']=SubCategory::all();
-        // return view('ecommerce.insertStudy',$data);
+        $data['study']=Study::all();
+        $data['category']=Category::all();
+        $data['subcategory']=SubCategory::all();
+        return view('ecommerce.insertStudy',$data);
 
     }
 

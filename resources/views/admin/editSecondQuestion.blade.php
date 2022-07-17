@@ -13,10 +13,10 @@
                       
                     @csrf
                     
-                    <div class="col-md-6 position-relative">
+                    <div class="col-md-12 position-relative">
                       <label for="validationTooltip04" class="form-label">Language_id</label>
                       <select class="form-select" name="language_id" id="validationTooltip04" required>
-                        <option selected disabled value="0">Choose your correct ans</option>
+                        <option selected disabled value="0">Choose your correct language</option>
                          @foreach ($language as $item)
                              <option value="{{$item->id}}">{{$item->languagename}}</option>
                          @endforeach
@@ -26,10 +26,10 @@
                         Please select a valid language.
                       </div>
                     </div>
-                    <div class="col-md-6 position-relative">
+                    {{-- <div class="col-md-6 position-relative">
                       <label for="validationTooltip04" class="form-label">Question_id</label>
                       <select class="form-select" name="question_id" id="validationTooltip04" required>
-                        <option selected disabled value="0">Choose your question_id</option>
+                        <option selected disabled value="0">Select your correct question</option>
                          @foreach ($question as $sub)
                              <option value="{{$sub->id}}">{{$sub->id}}</option>
                          @endforeach
@@ -38,7 +38,7 @@
                       <div class="invalid-tooltip">
                         Please select a valid language.
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Question</label>
                         <input type="text" class="form-control" name="question" id="validationTooltip01" value="{{$secondquestion->question}}"  required>
