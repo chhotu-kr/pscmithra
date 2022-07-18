@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('studies', function (Blueprint $table) {
+        Schema::create('sm_chapters', function (Blueprint $table) {
             $table->id();
-            $table->string('slugid')->nullable();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('subcategory_id')->constrained('sub_categories');
-            $table->text('content');
+            $table->string('name');
+             $table->foreignId('sm_categories_id')->constrained();
+            $table->string('slugid');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('studies');
+        Schema::dropIfExists('sm_chapters');
     }
 };

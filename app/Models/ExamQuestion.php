@@ -11,14 +11,14 @@ class ExamQuestion extends Model
 
     protected $table= ('exam_questions');
     protected $fillable = [
-        'exam_id',
+        'examination_id',
         'question_id',
         'serialno',
         'slugid',
     ];
 
     public function exam(){
-        return $this->hasOne(Exam::class,'id','exam_id');
+        return $this->hasOne(Examination::class,'id','examination_id');
     }
     public function secondquestion(){
         return $this->hasMany(SecondQuestion::class,"question_id","question_id");

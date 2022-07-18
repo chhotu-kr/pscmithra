@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('smcategories', function (Blueprint $table) {
+        Schema::create('metas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->string('slugid');
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('study_materials_id')->constrained();
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('smcategories');
+        Schema::dropIfExists('metas');
     }
 };

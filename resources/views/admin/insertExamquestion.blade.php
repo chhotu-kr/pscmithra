@@ -88,7 +88,7 @@
                --}}
                   </tbody>
             </table>
-            <input type="hidden" value="{{$id}}" name="exam_id">
+            <input type="hidden" value="{{$id}}" name="examination_id">
             <input type="submit" class="btn btn-primary" id="btn">
       </form>
         </div>

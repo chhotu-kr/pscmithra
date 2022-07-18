@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ExamQuestion;
 use App\Models\SecondQuestion;
 use App\Models\Question;
-use App\Models\Exam;
+use App\Models\Examination;
 use App\Models\Topic;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class ExamQuestionController extends Controller
             foreach($value as $item){
                 $inserting_array[] = [
                         'question_id' => $item,
-                        'exam_id' => $request->exam_id
+                        'examination_id' => $request->examination_id
                 ];
             }
             ExamQuestion::insert($inserting_array);
@@ -50,9 +50,9 @@ class ExamQuestionController extends Controller
        // return redirect()->route('examquestion.create');
     }
 
-    public function filter($exam_id){
-        $data['examquestion']=ExamQuestion::where('exam_id',$exam_id)->get();
-        $data['exam']=Exam::all();
+    public function filter($examination_id){
+        $data['examquestion']=ExamQuestion::where('examination_id',$examination_id)->get();
+        $data['exam']=Examination::all();
         $data['secondquestion']=SecondQuestion::all();
         return view('admin/insertExamquestion',$data);
     }
@@ -67,7 +67,7 @@ class ExamQuestionController extends Controller
         //
 
         $data = new ExamQuestion();
-        $data-> exam_id = $request->exam_id;
+        $data-> examination_id = $request->examination_id;
         $data-> question_id = $request->question_id;
         $data-> serialno = $request->serialno;
          $data-> slugid = md5($request->examquestion . time());
@@ -86,7 +86,7 @@ class ExamQuestionController extends Controller
         //
         $data['secondquestion']=SecondQuestion::all();
         $data['examquestion'] = ExamQuestion::find($id);
-        $data['exam'] = Exam::all();
+        $data['exam'] = Examination::all();
        return view('admin.editExamquestion',$data);
     }
 
@@ -96,7 +96,7 @@ class ExamQuestionController extends Controller
         //
         
       
-        $examquestion-> exam_id = $request->exam_id;
+        $examquestion-> examination_id = $request->examination_id;
         $examquestion-> question_id = $request->question_id;
         $examquestion-> serialno = $request->serialno;
          $examquestion-> slugid = md5($request->examname . time());

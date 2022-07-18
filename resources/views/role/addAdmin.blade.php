@@ -8,7 +8,7 @@
             </div>
             <div class="col-12">
                <div class="card">
-               <div class="card-header"></div>
+               <div class="card-header"><span class="fw-bold text-dark">Add Admin</span></div>
                <div class="card-body">
                 <form action="{{route('store.role')}}" method="POST">
                     @csrf

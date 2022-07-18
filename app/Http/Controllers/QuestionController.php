@@ -19,6 +19,7 @@ class QuestionController extends Controller
     public function index($question_id)
     {
        $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
+        $data['question_id']= $question_id;
        $data['language']= Language::all();
         $data['topic']= Topic::all();
         $data['subject']= Subject::all();

@@ -5,13 +5,13 @@
        <div class="container">
          <div class="row">
            
-             <h6 class="text-theme h4 text-danger  ps-2">Manage Question</h6>
+             <h6 class="text-theme h4 text-danger  ps-2">Insert Question</h6>
            
            <div class="col-12">
                     <div class="card">
-                      <div class="card-header h4">
-                        Insert Question
-                      </div>
+                      {{-- <div class="card-header">
+                       <span class="text-theme ps-2 fw-bold textsecondary"> Insert Question</span>
+                      </div> --}}
                       <div class="card-body">
                         <form action="{{ route('insertquestion.store') }}" id="button" class="row g-3 needs-validation" method="POST" novalidate>
                       
