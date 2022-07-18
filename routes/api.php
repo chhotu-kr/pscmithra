@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Subcategory;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,7 +29,7 @@ Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup"
 
 //category
 Route::get('/category/{id}',[Apiv1Controller::class,'category'])->name('api.category');
-Route::get('/subcategory/{id}',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
+Route::get('/subcategory',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
 // ....studymetrialcategory......
 
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
