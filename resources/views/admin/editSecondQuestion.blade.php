@@ -16,7 +16,7 @@
                     <div class="col-md-12 position-relative">
                       <label for="validationTooltip04" class="form-label">Language_id</label>
                       <select class="form-select" name="language_id" id="validationTooltip04" required>
-                        <option selected disabled value="0">Choose your correct language</option>
+                        <option selected disabled value="{{$secondquestion->language_id}}">{{$secondquestion->language->languagename}}</option>
                          @foreach ($language as $item)
                              <option value="{{$item->id}}">{{$item->languagename}}</option>
                          @endforeach
@@ -75,7 +75,7 @@
                           Looks good!
                         </div>
                     </div>
-                    <div class="col-md-12 position-relative">
+                    {{-- <div class="col-md-12 position-relative">
                         <label for="validationTooltip04" class="form-label">RightAns</label>
                         <select class="form-select" name="rightans" id="validationTooltip04" value="{{$secondquestion->rightans}}" required>
                           <option selected  value="0">Choose your correct ans</option>
@@ -89,11 +89,11 @@
                         <div class="invalid-tooltip">
                           Please select a valid answer.
                         </div>
-                      </div>
+                      </div> --}}
                     
                     
                     <div class="col-md-12">
-                      <button class="btn btn-primary w-100" type="submit">Create</button>
+                      <button class="btn btn-primary w-100" type="submit">Update</button>
                     </div>
                   </form>
             </div>

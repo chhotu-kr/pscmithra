@@ -70,8 +70,9 @@ Route::get('/insertMetrial',[StudymetrialCategoryController::class,'index'])->na
 Route::get('/insertchapter',[StudymetrialChapterController::class,'index'])->name('insertchapter.create');
 Route::get('/manage/{id}',[TopicController::class,'show'])->name('manage.topic');
 Route::get('/manageQuestion/{id}',[QuestionController::class,'index'])->name('manage.question');
+//Route::get('/Question/{id}',[SecondQuestionController::class,'index'])->name('show.question');
 Route::get('/manageQuiz',[QuestionController::class,'show'])->name('manage.quiz');
-Route::get('/secondquestion',[SecondQuestionController::class,'index'])->name('insert.secondquestion');
+Route::get('/secondquestion/{id}',[SecondQuestionController::class,'create'])->name('insert.secondquestion');
 Route::get('/category',[CategoryController::class,'index'])->name('insert.category');
 Route::get('/subcategory/{id}',[SubCategoryController::class,'index'])->name('insert.subcategory');
 Route::get('/language',[LanguageController::class,'index'])->name('insert.language');
@@ -86,6 +87,7 @@ Route::get('/managequiz',[QuestionController::class,'show'])->name('manage.quiz'
 Route::get('questioncreate',[QuestionController::class,'create'])->name('question.create');
 Route::get('examinationcreate',[ExaminationController::class,'Create'])->name('examination.create');
 Route::get('examquestioncreate/{id}',[ExamQuestionController::class,'Create'])->name('examquestion.create');
+// Route::get('/secondquestion',[SecondQuestionController::class,'create'])->name('insert.secondquestion');
 
 
 
@@ -137,7 +139,7 @@ Route::post('/metrialstore',[StudymetrialCategoryController::class,'store'])->na
 Route::post('/chapterstore',[StudymetrialChapterController::class,'store'])->name('studychapter.store');
 Route::post('/topictstore',[TopicController::class,'insert'])->name('topictstore');
 Route::post('/insertquestiontstore',[QuestionController::class,'store'])->name('insertquestion.store');
-Route::post('/insertsecondquestiontstore',[SecondQuestionController::class,'store'])->name('insertsecondquestion.store');
+Route::post('/insertsecondquestion',[SecondQuestionController::class,'store'])->name('insertsecondquestion.store');
 Route::post('/examinationstore',[ExaminationController::class,'storeExamination'])->name('examination.store'); 
 Route::post('/categorystore',[CategoryController::class,'store'])->name('category.store'); 
 Route::post('/subcategorystore',[SubCategoryController::class,'store'])->name('subcategory.store'); 

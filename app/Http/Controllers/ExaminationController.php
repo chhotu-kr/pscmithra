@@ -36,7 +36,7 @@ class ExaminationController extends Controller
         $data->category_id=$request->category_id;
         $data->subcategory_id=$request->subcategory_id;
         $data->exam_name=$request->exam_name;
-        $data->question=$request->question;
+        // $data->question=$request->question;
         $data->startat=$request->startat;
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;

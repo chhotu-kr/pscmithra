@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="row">
                   <div class="col-3 mb-3">
-                    <a href="{{route('question.create')}}" class="btn btn-outline-success">Add New Question</a>
+                    <a href="{{ route('insert.secondquestion',['id'=>$question_id])}}" class="btn btn-outline-success">Add New Question</a>
                   </div>
                 </div>
                 <section class="section">
@@ -33,6 +33,7 @@
                                   <th scope="col">Option2</th>
                                   <th scope="col">Option3</th>
                                   <th scope="col">Option4</th>
+                                  <th scope="col">Action</th>
                                   {{-- <th scope="col">Action</th> --}}
                                   
                                 </tr>
@@ -49,20 +50,23 @@
                                           <td>{{$req->option3}}</td>
                                           <td>{{$req->option4}}</td>
                                           
-                                          <td>
-                                            {{-- <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
-                                            <a href="{{route('removesecondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>    --}}
-                                       {{--                                           
+                                          {{-- <td>
+                                            <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
+                                            <a href="{{route('removesecondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a> 
+                                                                                  
                                               <form action="{{route('membership.destroy',[$req])}}" method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <input type="submit" value="X" class="btn btn-outline-danger">
                                                 <a href="{{route('membership.edit',[$req])}}" class="btn btn-outline-primary">Edit</a>
-                                                </form> --}}
+                                                </form>
 
                                                
+                                          </td>  --}}
+                                          <td>
+                                            <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
+                                            <a href="{{route('removequestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">X</a>   
                                           </td>
-                                          
                                       </tr>
                                   @endforeach
                                 
