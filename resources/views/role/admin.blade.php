@@ -36,7 +36,7 @@
                                       <td>{{$req->id}}</td>
                             
                                       <td>{{$req->name}}</td>
-                                      {{-- <td>{{$req->adminName}}</td> --}}
+                                      {{-- <td>{{$req->Name}}</td> --}}
                                       <td>{{$req->email}}</td>
                                       <td>{{$req->contact}}</td>
                                       

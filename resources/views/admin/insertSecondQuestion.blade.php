@@ -14,7 +14,7 @@
                       
                     @csrf
                     
-                    <div class="col-md-6 position-relative">
+                    <div class="col-md-12 position-relative">
                       <label for="validationTooltip04" class="form-label">Language_id</label>
                       <select class="form-select" name="language_id" id="validationTooltip04" required>
                         <option selected disabled value="0">Choose your correct ans</option>

@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="row">
                   <div class="col-3 mb-3">
-                    <a href="{{ route('insert.secondquestion',['id'=>$question_id])}}" class="btn btn-outline-success">Add New Question</a>
+                    <a href="{{ route('insert.secondquestion',['id'=>$question_id])}}" class="btn btn-primary">Add New Question</a>
                   </div>
                 </div>
                 <section class="section">
@@ -26,7 +26,7 @@
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">Subject Name</th>
+                                  <th scope="col">Language</th>
                                   <th scope="col">question_id</th>
                                   <th scope="col">Question</th>
                                   <th scope="col">Option1</th>
@@ -41,6 +41,7 @@
                               <tbody>
                                   @foreach ($secondquestion as $req)
                                       <tr>
+                                        {{-- <td>{{$req}}</td> --}}
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->language->languagename}}</td>
                                           <td>{{$req->question_id}}</td>
@@ -65,7 +66,7 @@
                                           </td>  --}}
                                           <td>
                                             <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
-                                            <a href="{{route('removequestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">X</a>   
+                                            <a href="{{route('remove.secondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">X</a>
                                           </td>
                                       </tr>
                                   @endforeach

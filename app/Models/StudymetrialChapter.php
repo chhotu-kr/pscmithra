@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class StudymetrialChapter extends Model
 {
     use HasFactory;
-
+    protected $table="sm_chapters";
     protected $fillable = [
         "name",
-        "studymetrialcategory_id",
+        "sm_categories_id",
         "slugid",
     ];
 
     public function studymetrialcategory(){
-        return $this->hasOne(StudymetrialCategory::class,'id','studymetrialcategory_id');
+        return $this->hasOne(StudymetrialCategory::class,'id','sm_categories_id');
     }
 
     protected $hidden = [

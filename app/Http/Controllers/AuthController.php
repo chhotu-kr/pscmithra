@@ -80,7 +80,7 @@ class AuthController extends Controller
            
             $admin->email = $request->email;
             $admin->contact = $request->contact;
-            
+            $admin->slugid = md5($request->name .time());
             $admin->password = $request->password; 
             $admin->save();
 

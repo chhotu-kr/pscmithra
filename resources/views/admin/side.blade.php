@@ -82,8 +82,13 @@
             </a>
           </li>
           <li>
-            <a href="{{route('course.index')}}">
+            <a href="{{route('manage.course')}}">
               <i class="bi bi-circle"></i><span>Manage Course</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('manage.module')}}">
+              <i class="bi bi-circle"></i><span>Manage Module</span>
             </a>
           </li>
           <li>

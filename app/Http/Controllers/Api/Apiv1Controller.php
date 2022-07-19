@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Study;
 use App\Models\Exam;
 use App\Models\Examination;
 use App\Models\Category;
@@ -137,12 +138,20 @@ $category_id = $request->category_id;
     //  echo $data;
     }
 
+
+    public function get_StudyMetrial(){
+        $data=StudymetrialCategory::all();
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+    }
+    public function get_StudyChapter($sm_categories_id){
+
     // public function get_StudyMetrial(){
     //     return StudymetrialCategory::all();
     // }
     public function get_StudyChapter($studymetrialcategory_id){
 
-       $data=StudymetrialChapter::where('studymetrialcategory_id',$studymetrialcategory_id)->get();
+
+       $data=StudymetrialChapter::where('sm_categories_id',$sm_categories_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
@@ -153,6 +162,8 @@ $category_id = $request->category_id;
 
     //     // echo $data;
     // }
+
+    // .............Examination...........
     public function get_Examination(Request $request){
 
         
@@ -176,6 +187,23 @@ $category_id = $request->category_id;
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
+    // ..........studymetrial API...........
+
+    public function get_SMetrial(Request $request){
+      $sm_categories_id=$request->sm_categories_id;
+      if(empty($sm_categories_id)){
+        return response()->json(['msg'=>'Enter SmCategory Id','status'=>false]);
+      }
+        $sm_chapters_id=$request->sm_chapters_id;
+        if(empty($sm_chapters_id)){
+            return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
+        } 
+
+        $data=Study::where('sm_categories_id',$sm_categories_id)->
+        where('sm_chapters_id',$sm_chapters_id)->get();
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+    }
+
     // public function getExamination($category_id){
     //     $data['examination']=Examination::where('category_id',$category_id)->get();
 
@@ -190,5 +218,7 @@ $category_id = $request->category_id;
     //     return response($data);
     // }
 
+
       
+ 
 }

@@ -30,7 +30,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">StudyMetrialCategoryName</label>
-                            <select name="studymetrialcategory_id" id="" class="form-select" required>
+                            <select name="sm_categories_id" id="" class="form-select" required>
                             <option value="0">Main StudyMetrialCategoryName</option>
                             @foreach ($studymetrialcategory as $new)
                                 <option value="{{$new->id}}">{{$new->name}}</option>

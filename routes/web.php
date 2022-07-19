@@ -17,9 +17,11 @@ use App\Http\Controllers\ScreenshotController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BookController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+// use App\Http\Controllers\CourseController;
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BookController, ModuleController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
+use App\Http\Controllers\CourseController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -43,7 +45,7 @@ use Illuminate\Support\Facades\Route;
 */
 
  Route::get('/addadmin',[RoleController::class,'getAdmin'])->name('add.admin');
-Route::post('/role',[RoleController::class,'store'])->name('store.role');
+ Route::post('/adminrole',[RoleController::class,'store'])->name('store.role');
 Route::match(['get','post'],'/role',[RoleController::class,'getRole'])->name('manage.role');
 
 // .........Admin.............
@@ -99,7 +101,7 @@ Route::get('/studymetrialdelete/{id}',[StudymetrialCategoryController::class,'de
 Route::get('/studychapterdelete/{id}',[StudymetrialChapterController::class,'destroy'])->name('studychapter.delete');
 Route::get('/topicdelete/{id}',[TopicController::class,'destroy'])->name('topicdelete');
 Route::get('/removequestion/{id}',[QuestionController::class,'destroy'])->name('removequestion');
-Route::get('/removesecondquestion/{id}',[SecondQuestionController::class,'destroy'])->name('removesecondquestion');
+Route::get('/removesecondquestion/{id}',[SecondQuestionController::class,'delete'])->name('remove.secondquestion');
 Route::get('/removecategory/{id}',[CategoryController::class,'destroy'])->name('removecategory');
 Route::get('/removesubcategory/{id}',[SubCategoryController::class,'destroy'])->name('removesubcategory');
 Route::get('/deletelanguage/{id}',[LanguageController::class,'slugDelete'])->name('removelanguage');
@@ -136,7 +138,7 @@ Route::post('/examquestionUpdate/{id}',[ExamQuestionController::class,'update'])
 Route::post('/examstore',[ExamController::class,'store'])->name('examstore');
 Route::post('/subjectstore',[SubjectController::class,'insertSubject'])->name('subjectstore');
 Route::post('/metrialstore',[StudymetrialCategoryController::class,'store'])->name('studymetrial.store');
-Route::post('/chapterstore',[StudymetrialChapterController::class,'store'])->name('studychapter.store');
+Route::post('/chapters',[StudymetrialChapterController::class,'store'])->name('studychapter.store');
 Route::post('/topictstore',[TopicController::class,'insert'])->name('topictstore');
 Route::post('/insertquestiontstore',[QuestionController::class,'store'])->name('insertquestion.store');
 Route::post('/insertsecondquestion',[SecondQuestionController::class,'store'])->name('insertsecondquestion.store');
@@ -156,7 +158,7 @@ Route::resources([
     'product'=>ProductController::class,
     'screenshot'=>ScreenshotController::class,
     'pdf'=>PdfController::class,
-    'course'=>CourseController::class,
+    // 'course'=>CourseController::class,
     'address'=>AddressController::class,
     'cart'=>CartController::class,
     // 'examquestion'=>ExamQuestionController::class,
@@ -170,6 +172,24 @@ Route::resources([
  Route::get('/bookupdate/{id}',[BookController::class,'edit'])->name('books.edit');
  Route::post('/bookupdate/{id}',[BookController::class,'update'])->name('books.update');
  Route::get('removebook/{id}',[BookController::class,'destroy'])->name('books.delete');
+
+ // ..........Coursetable route...............
+ Route::get('/course',[CourseController::class,'index'])->name('manage.course');
+ Route::get('/coursecreate',[CourseController::class,'create'])->name('course.create');
+ Route::post('/savecourse',[CourseController::class,'CourseStore'])->name('course.store');
+ Route::get('/updateCourse/{id}',[CourseController::class,'CourseEdit'])->name('course.edit');
+ Route::post('/updateCourse/{id}',[CourseController::class,'CourseUpdate'])->name('course.update');
+ Route::get('/removeCourse/{id}',[CourseController::class,'CourseDelete'])->name('course.remove');
+
+ //................Modules table route
+
+ Route::get('/modules',[ModuleController::class,'index'])->name('manage.module');
+ Route::get('/modulecreate',[ModuleController::class,'create'])->name('module.create');
+ Route::post('/modulestore',[ModuleController::class,'store'])->name('module.store');
+ Route::get('/modulesupdate/{id}',[ModuleController::class,'edit'])->name('module.edit');
+ Route::post('/modulesupdate/{id}',[ModuleController::class,'update'])->name('update.module');
+ Route::get('/modulesremove/{id}',[ModuleController::class,'delete'])->name('module.remove');
+
 
  // examquestion filter
 
