@@ -39,6 +39,7 @@ Route::get('/chapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('s
 // .....Examination........
 
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
+Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

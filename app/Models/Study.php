@@ -9,21 +9,27 @@ class study extends Model
 {
     use HasFactory;
 
-    protected $table ='studies';
+    protected $table ='study_materials';
 
     protected $fillable = [
        
-        'category_id',
-        'subcategory_id',
+        'sm_categories_id',
+        'sm_chapters_id',
         'content',
         
 
     ];
 
+    
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function category(){
-        return $this->hasOne(Category::class,'id','category_id');
+        return $this->hasOne(StudymetrialCategory::class,'id','sm_categories_id');
     }
     public function subcategory(){
-        return $this->hasOne(SubCategory::class,'id','subcategory_id');
+        return $this->hasOne(StudymetrialChapter::class,'id','sm_chapters_id');
     }
 }

@@ -98,8 +98,8 @@
                    @foreach ($study as $item)
                           <tr>
                               <td>{{$item->id}}</td>
-                              <td>{{$item->category->category}}</td>
-                              <td>{{$item->subcategory->subcategory}}</td>
+                              <td>{{$item->name}}</td>
+                              <td>{{$item->name}}</td>
                               <td>{{$item->content}}</td>
                               <td>
 

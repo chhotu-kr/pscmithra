@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Study;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\SubCategory;
+use App\Models\Meta;
+use App\Models\StudymetrialCategory;
+use App\Models\StudymetrialChapter;
+// use App\Models\Category;
+// use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class StudyController extends Controller
@@ -15,8 +18,8 @@ class StudyController extends Controller
     {
         //
         $data['study']=Study::all();
-        $data['category']=Category::all();
-        $data['subcategory']=SubCategory::all();
+        $data['studymetrialcategory']=StudymetrialCategory::all();
+        $data['studymetrialchapter']=StudymetrialChapter::all();
         return view('ecommerce.manageStudy',$data);
     }
 
@@ -25,8 +28,8 @@ class StudyController extends Controller
     {
         //
         $data['study']=Study::all();
-        $data['category']=Category::all();
-        $data['subcategory']=SubCategory::all();
+        $data['studymetrialcategory']=StudymetrialCategory::all();
+        $data['studymetrialchapter']=StudymetrialChapter::all();
         return view('ecommerce.insertStudy',$data);
 
     }
@@ -35,11 +38,17 @@ class StudyController extends Controller
     {
         //
         $data = new study();
-        $data->category_id=$request->category_id;
-        $data->subcategory_id=$request->subcategory_id;
+        $data->sm_categories_id=$request->sm_categories_id;
+        $data->sm_chapters_id=$request->sm_chapters_id;
         $data->content=$request->content;
 
         $data->save();
+         $meta= new Meta();
+         $meta->study_materials_id=$data->id;
+         $meta->title=$request->title;
+         $meta->description=$request->description;
+         $meta->save();
+
         return redirect()->route('study.index');
     }
 
@@ -53,8 +62,8 @@ class StudyController extends Controller
     {
         //
         $data['study']=$study;
-        $data['category']=Category::all();
-        $data['subcategory']=SubCategory::all();
+        $data['studymetrialcategory']=StudymetrialCategory::all();
+        $data['studymetrialchapter']=StudymetrialChapter::all();
         return view('ecommerce.editStudy',$data);
         
        
@@ -65,8 +74,8 @@ class StudyController extends Controller
     {
         //
 
-        $study->category_id=$request->category_id;
-        $study->subcategory_id=$request->subcategory_id;
+        $study->sm_categories_id=$request->sm_categories_id;
+        $study->sm_chapters_id=$request->sm_chapters_id;
         $study->content=$request->content;
 
         $study->save();

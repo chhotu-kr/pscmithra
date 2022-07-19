@@ -108,10 +108,10 @@ class QuestionController extends Controller
     }
 
     
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Question $question,$id)
     {
         //
-      
+         $question=Question::find($id);
         $question->subject_id=$request->subject_id;
         $question->topic_id=$request->topic_id;
         $question->name=$request->name;
@@ -119,7 +119,7 @@ class QuestionController extends Controller
         $question-> slugid = md5($request->question . time());
         $question->isverified=$request->isVerified;
         $question->save();
-        return redirect('/manageQuestion');
+        return redirect()->route('manage.quiz');
     }
 
     

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StudymetrialCategory extends Model
 {
     use HasFactory;
-    // protected $table = 'StudymetrialCategory';
+     protected $table = 'sm_categories';
 
     protected $fillable = [
         "name",

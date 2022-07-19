@@ -31,7 +31,7 @@ class StudymetrialChapterController extends Controller
 
         $data = new StudymetrialChapter();
         $data->name= $request->name;
-        $data->studymetrialcategory_id= $request->studymetrialcategory_id;
+        $data->sm_categories_id= $request->sm_categories_id;
         
        $data-> slugid = md5($request->name . time());
          $data->save();
@@ -60,7 +60,7 @@ class StudymetrialChapterController extends Controller
         
         $studymetrialchapter=StudymetrialChapter::find($id);
         $studymetrialchapter->name= $request->name;
-        $studymetrialchapter->studymetrialcategory_id= $request->studymetrialcategory_id;
+        $studymetrialchapter->sm_categories_id= $request->sm_categories_id;
         
         $studymetrialchapter-> slugid = md5($request->name . time());
         $studymetrialchapter->save();

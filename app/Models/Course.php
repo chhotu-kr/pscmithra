@@ -12,19 +12,22 @@ class Course extends Model
     protected $table = "courses";
 
     protected $fillable =[
-        'product_id',
-        'slugid',
+        // 'product_id',
+        // 'slugid',
        
+        // 'name',
+        // 'course_url',
+        // 'text',
+        // 'type',
+        // 'quiz_id',
+       
+        // 'is_free',
+        // 'index',
         'name',
-        'course_url',
-        'text',
-        'type',
-        'quiz_id',
-       
-        'is_free',
-        'index',
+        'slugid',
+        'createdby',
     ];
-    public function product(){
-        return $this->hasOne(Product::class,'id','product_id');
-    }
+    // public function product(){
+    //     return $this->hasOne(Product::class,'id','product_id');
+    // }
 }

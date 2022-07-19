@@ -12,7 +12,7 @@
                   <h6 class="text-theme h5 ps-2 mt-2"> Edit Question</h6>
                </div>
                <div class="card-body">
-                <form action="{{route('question.Update',$question)}}" method="POST" >
+                <form action="{{route('question.Update',$question)}}" method="POST">
                     @csrf
                 
                     <div class="row">
@@ -44,13 +44,14 @@
                     </div>
                     <div class="mb-3">
                       <label>Name</label>
-                      <input type="text" name="name" class="form-control" value="{{$question->name}} required">
+                      <input type="text" name="name" class="form-control" value="{{$question->name}}" required>
                     </div>
                  <div class="row">
-                    <div class="col-md-6 position-relative">
+                    <div class="col-md-12 position-relative">
                         <label for="validationTooltip04" class="form-label">RightAns</label>
-                        <select class="form-select" name="rightans" id="validationTooltip04" required>
-                          <option selected disabled value="">Select your correct ans</option>
+                        <select class="form-select" name="rightans" id="validationTooltip04" value="{{$question->rightans}}" required>
+      
+                          <option selected disabled value="0">Select your correct ans</option>
                           <option>option1</option>
                           <option>option2</option>
                           <option>option3</option>

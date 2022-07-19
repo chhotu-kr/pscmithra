@@ -9,9 +9,9 @@
             <div class="col-12">
                 <div class="row">
                   <div class="col-2">
-                    <a href="{{route('add.role')}}" class="btn btn-primary">Add Role</a>
+                    <a href="{{route('add.role')}}" class="btn btn-primary mb-3">Add Role</a>
                   </div>
-                  <div class="col-10">
+                  <div class="col-12">
                     <section class="section">
                       <div class="row">
                         <div class="col-lg-12">

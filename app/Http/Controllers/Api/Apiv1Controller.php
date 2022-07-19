@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Study;
 use App\Models\Exam;
 use App\Models\Examination;
 use App\Models\Category;
@@ -127,11 +128,12 @@ class Apiv1Controller extends Controller
     }
 
     public function get_StudyMetrial(){
-        return StudymetrialCategory::all();
+        $data=StudymetrialCategory::all();
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
-    public function get_StudyChapter($studymetrialcategory_id){
+    public function get_StudyChapter($sm_categories_id){
 
-       $data=StudymetrialChapter::where('studymetrialcategory_id',$studymetrialcategory_id)->get();
+       $data=StudymetrialChapter::where('sm_categories_id',$sm_categories_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
@@ -142,6 +144,8 @@ class Apiv1Controller extends Controller
 
     //     // echo $data;
     // }
+
+    // .............Examination...........
     public function get_Examination(Request $request){
 
         
@@ -165,6 +169,23 @@ class Apiv1Controller extends Controller
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
+    // ..........studymetrial API...........
+
+    public function get_SMetrial(Request $request){
+      $sm_categories_id=$request->sm_categories_id;
+      if(empty($sm_categories_id)){
+        return response()->json(['msg'=>'Enter SmCategory Id','status'=>false]);
+      }
+        $sm_chapters_id=$request->sm_chapters_id;
+        if(empty($sm_chapters_id)){
+            return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
+        } 
+
+        $data=Study::where('sm_categories_id',$sm_categories_id)->
+        where('sm_chapters_id',$sm_chapters_id)->get();
+        return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+    }
+
     // public function getExamination($category_id){
     //     $data['examination']=Examination::where('category_id',$category_id)->get();
 
@@ -179,5 +200,7 @@ class Apiv1Controller extends Controller
     //     return response($data);
     // }
 
+
       
+ 
 }

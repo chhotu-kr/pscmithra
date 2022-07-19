@@ -34,7 +34,7 @@ foreach($permi  as $itemd){
 
     print_r( $itemd->slug);
     $contains = Str::contains($a[1], $itemd->slug);
-    echo $contains;
+     echo $contains;
 if($contains){
     $data[$i]['per']=$itemd;
 }
@@ -50,7 +50,7 @@ $i++;
 }
 
 
-     //   return view('role.addRole',$permi);
+        //return view('role.addRole',$permi);
     }
     public function getAdmin(){
         $data['role']=Role::all();
@@ -71,7 +71,7 @@ $i++;
         $role->role_id=$request->role;
         $role->timestamps=false;
         $role->save();
-        return redirect('/addadmin');
+        return redirect()->route('store.role');
 
         // 
     }
