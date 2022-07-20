@@ -11,9 +11,11 @@ use App\Models\Study;
 use App\Models\Exam;
 use App\Models\Examination;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
-use App\Models\Subcategory;
+
+
 use Illuminate\Support\Facades\Validator;
 class Apiv1Controller extends Controller
 {
@@ -87,6 +89,7 @@ class Apiv1Controller extends Controller
         if(empty($request->contact))
         {
             return response()->json(['msg' => 'Enter Mobile Number','status'=>false]);
+        
         }
         if(empty($request->password))
         {
@@ -114,24 +117,39 @@ class Apiv1Controller extends Controller
     //category
 
     public function category($exam_id){
-     $data['category']=Category::where('exam_id',$exam_id)->get();
-    
+     $data=Category::where('exam_id',$exam_id)->get();
      return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
-    public function subcategory($category_id){
-      
+    public function subcategory(Request $request){
+$exam_id = $request->exam_id;
+$category_id = $request->category_id;
+
+        if(empty($exam_id)){
+            return response()->json(['msg'=>'Enter Exam Id','status'=>false]);
+        }
+        if(empty($category_id)){
+            return response()->json(['msg'=>'Enter Category Id','status'=>false]);
+        }
+
      $data=SubCategory::where('category_id',$category_id)->get();
    
      return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     //  echo $data;
     }
 
+
     public function get_StudyMetrial(){
         $data=StudymetrialCategory::all();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
     public function get_StudyChapter($sm_categories_id){
+
+    // public function get_StudyMetrial(){
+    //     return StudymetrialCategory::all();
+    // }
+    public function get_StudyChapter($studymetrialcategory_id){
+
 
        $data=StudymetrialChapter::where('sm_categories_id',$sm_categories_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
