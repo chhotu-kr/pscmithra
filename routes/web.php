@@ -174,7 +174,7 @@ Route::resources([
  Route::get('removebook/{id}',[BookController::class,'destroy'])->name('books.delete');
 
  // ..........Coursetable route...............
- Route::get('/course',[CourseController::class,'index'])->name('manage.course');
+ Route::get('/course',[CourseController::class,'index'])->name('course.index');
  Route::get('/coursecreate',[CourseController::class,'create'])->name('course.create');
  Route::post('/savecourse',[CourseController::class,'CourseStore'])->name('course.store');
  Route::get('/updateCourse/{id}',[CourseController::class,'CourseEdit'])->name('course.edit');
@@ -260,3 +260,4 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 // // contact pages route
 // Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
+Route::get('/show',[ModuleController::class,'get_Examination'])->name('show.examination');

@@ -32,4 +32,11 @@ class study extends Model
     public function subcategory(){
         return $this->hasOne(StudymetrialChapter::class,'id','sm_chapters_id');
     }
+    public function study(){
+        return $this->hasOne(Meta::class,'study_materials_id','id');
+    }
+    public function course(){
+        return $this->hasOne(Course::class,'id','course_id');
+    }
+
 }

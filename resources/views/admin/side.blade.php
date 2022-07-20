@@ -82,15 +82,15 @@
             </a>
           </li>
           <li>
-            <a href="{{route('manage.course')}}">
+            <a href="{{route('course.index')}}">
               <i class="bi bi-circle"></i><span>Manage Course</span>
             </a>
           </li>
-          <li>
+          {{-- <li>
             <a href="{{route('manage.module')}}">
               <i class="bi bi-circle"></i><span>Manage Module</span>
             </a>
-          </li>
+          </li> --}}
           <li>
             <a href="{{route('pdf.index')}}">
               <i class="bi bi-circle"></i><span>Manage Pdf</span>
@@ -118,7 +118,7 @@
           </li>  
           <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('study.index')}}">
-              <i class="bi bi-circle"></i><span>Manage Study</span>
+              <i class="bi bi-circle"></i><span>Manage StudyMetrial</span>
             </a>
           </li>  
           <li class="nav-item">

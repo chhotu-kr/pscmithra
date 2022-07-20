@@ -76,7 +76,7 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12 py-3">
-          <a href="{{route('study.create')}}" class="btn btn-outline-warning mb-3">Add Study</a>
+          <a href="{{route('study.create')}}" class="btn btn-primary mb-3">Add StudyMetrial</a>
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-theme">Manage Study</h5>
@@ -87,8 +87,8 @@
                 <thead>
                   <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">CategoryName</th>
-                    <th scope="col">SubCategoryName</th>
+                    <th scope="col">SmCategory</th>
+                    <th scope="col">SmChapter</th>
                     <th scope="col">Content</th>
                     <th scope="col">Action</th>
                     
@@ -98,8 +98,8 @@
                    @foreach ($study as $item)
                           <tr>
                               <td>{{$item->id}}</td>
-                              <td>{{$item->name}}</td>
-                              <td>{{$item->name}}</td>
+                              <td>{{$item->category->name}}</td>
+                              <td>{{$item->subcategory->name}}</td>
                               <td>{{$item->content}}</td>
                               <td>
 

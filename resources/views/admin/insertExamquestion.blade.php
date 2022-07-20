@@ -127,7 +127,7 @@ $(function() {
          console.log(data);
           Html="";
           $.each(data, function(index, value) {
-console.log(value);
+
             Html+=`<tr>
               <td><input type='checkbox' value='${value.id}' name='data[]'></td>
               <td>${value.id}</td>
@@ -135,8 +135,7 @@ console.log(value);
               
               <td>`;
                 lang='';
-                $.each(value.secondquestion,function(ind,val){
-lang+=val.language.languagename+', ';
+                $.each(value.secondquestion,function(ind,val){lang+=val.language.languagename+', ';
               });
                 Html+=lang+`</td>
               </tr>`;

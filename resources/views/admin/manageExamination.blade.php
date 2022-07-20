@@ -38,11 +38,11 @@
                                   <th scope="col">Wrong Marks</th>
                                   <th scope="col">Time</th>
                                   
-                                  <th scope="col">Start<br>At</th>
+                                  {{-- <th scope="col">Start<br>At</th>
                                   <th scope="col"> Exam<br>Name</th>
                                   <th scope="col">Right<br>Marks</th>
                                   <th scope="col">Wrong<br>Marks</th>
-                                  <th scope="col">Time</th>
+                                  <th scope="col">Time</th> --}}
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
@@ -61,11 +61,11 @@
                                           <td>{{$cour->time_duration}}</td>
                                           
 
-                                          <td>{{$cour->startat}}</td>
+                                          {{-- <td>{{$cour->startat}}</td>
                                           <td>{{$cour->exam_name}}</td>
                                           <td>{{$cour->rightmarks}}</td>
                                           <td>{{$cour->wrongmarks}}</td>
-                                          <td>{{$cour->time_duration}}</td>
+                                          <td>{{$cour->time_duration}}</td> --}}
                                           
                                           <td>
                                             <a href="" class="btn btn-outline-secondary">Edit</a>

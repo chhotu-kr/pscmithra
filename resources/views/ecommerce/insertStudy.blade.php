@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <span class="text-theme ps-2 fw-bold text-info h4">Add Study</span>
+                    <span class="text-theme ps-2 fw-bold text-info h4">Add StudyMetrial</span>
                   </div>
                   <div class="card-body">
                     <form action="{{route('study.store')}}" class="row g-3 needs-validation" method="post" novalidate>

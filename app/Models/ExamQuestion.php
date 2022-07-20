@@ -17,9 +17,7 @@ class ExamQuestion extends Model
         'slugid',
     ];
 
-    public function exam(){
-        return $this->hasOne(Examination::class,'id','examination_id');
-    }
+   
     public function secondquestion(){
         return $this->hasMany(SecondQuestion::class,"question_id","question_id");
     }
