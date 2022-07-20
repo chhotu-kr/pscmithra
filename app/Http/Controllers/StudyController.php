@@ -18,8 +18,7 @@ class StudyController extends Controller
     {
         //
         $data['study']=Study::all();
-        $data['studymetrialcategory']=StudymetrialCategory::all();
-        $data['studymetrialchapter']=StudymetrialChapter::all();
+    
         return view('ecommerce.manageStudy',$data);
     }
 
@@ -28,6 +27,7 @@ class StudyController extends Controller
     {
         //
         $data['study']=Study::all();
+        // $data['meta']=Meta::all();
         $data['studymetrialcategory']=StudymetrialCategory::all();
         $data['studymetrialchapter']=StudymetrialChapter::all();
         return view('ecommerce.insertStudy',$data);
@@ -41,6 +41,7 @@ class StudyController extends Controller
         $data->sm_categories_id=$request->sm_categories_id;
         $data->sm_chapters_id=$request->sm_chapters_id;
         $data->content=$request->content;
+        // $data->slugid= md5()
 
         $data->save();
          $meta= new Meta();
@@ -60,26 +61,34 @@ class StudyController extends Controller
     
     public function edit(study $study)
     {
-        //
-        $data['study']=$study;
-        $data['studymetrialcategory']=StudymetrialCategory::all();
-        $data['studymetrialchapter']=StudymetrialChapter::all();
+        
+        
+         $data['study']=$study;
+        // $data['meta']=Meta::all();
+         $data['smcy']=StudymetrialCategory::all();
+         $data['smc']=StudymetrialChapter::all();
         return view('ecommerce.editStudy',$data);
         
        
     }
 
     
-    public function update(Request $request, study $study)
+    public function update(Request $request,$study)
     {
-        //
+        // //
+        // $study=Study::find($study->id);
+        // $study->sm_categories_id=$request->sm_categories_id;
+        // $study->sm_chapters_id=$request->sm_chapters_id;
+        // $study->content=$request->content;
 
-        $study->sm_categories_id=$request->sm_categories_id;
-        $study->sm_chapters_id=$request->sm_chapters_id;
-        $study->content=$request->content;
-
-        $study->save();
-        return redirect()->route('study.index');
+        // $study->save();
+        //  $meta=Meta::find($meta->id);
+       
+        // $meta->title=$request->title;
+        // $meta->description=$request->description;
+        // $meta->save();
+      return dd($study);
+        // return redirect()->route('study.index');
     }
 
     

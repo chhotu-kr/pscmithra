@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 use App\Models\Module;
 use App\Models\Course;
+use App\Models\Examination;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
     //
+    public function get_Examination(){
+        $data['exami']=Examination::with('examQ')->where("exam_id",4)->get();
+        return response()->json($data);
+    }
     public function index(){
        
         $data['module']=Module::all();

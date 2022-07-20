@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained();
             $table->string('slugid');
-            $table->enum('type',['voice','text','test'])->default('text');
+            $table->enum('type',['voice','quiz','video','text'])->default('text');
             $table->string('name');
             $table->string('url')->nullable();
             $table->text('text')->nullable();
