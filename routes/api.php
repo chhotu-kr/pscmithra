@@ -25,6 +25,7 @@ use App\Models\Subcategory;
 Route::post("login", [Apiv1Controller::class, "api_login"])->name("api.login");
 Route::get("sign/{contact}", [Apiv1Controller::class, "index"])->name("api.sign");
 Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup");
+Route::post("send-otp", [Apiv1Controller::class, "api_sendOTP"])->name("api.signup");
 
 
 //category
@@ -33,7 +34,7 @@ Route::get('/subcategory',[Apiv1Controller::class,'subcategory'])->name('api.sub
 // ....studymetrialcategory......
 
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
-Route::get('/chapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
+Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
@@ -41,6 +42,7 @@ Route::get('/chapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('s
 
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
+Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

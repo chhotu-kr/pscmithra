@@ -48,10 +48,10 @@ class ExamSeeder extends Seeder
          ];
          StudymetrialChapter::insert($chapter);
          $sm = [
-            ['id' => '1','slugid'=>'wvrfv4fd','sm_categories_id' => '1','sm_chapters_id' => '1','content' => '`<h4>London is the capital city of England</h4>`',],
-            ['id' => '2','slugid'=>'wvm2xfd','sm_categories_id' => '1','sm_chapters_id' => '1','content' => '`<h4>Each HTML heading has a default size</h4>`',],
-            ['id' => '3','slugid'=>'wty24fd','sm_categories_id' => '2','sm_chapters_id' => '2','content' => '`<h4>It is important to use headings to show the document structure</h4>`',],
-            ['id' => '4','slugid'=>'qvgw634','sm_categories_id' => '2','sm_chapters_id' => '2','content' => '`<h4>It is important to use headings to show the document structure</h4>`',],
+            ['id' => '1','slugid'=>'wvrfv4fd','sm_categories_id' => '1','name'=>'new','sm_chapters_id' => '1','content' => '`<h4>London is the capital city of England</h4>`',],
+            ['id' => '2','slugid'=>'wvm2xfd','sm_categories_id' => '1','name'=>'new1','sm_chapters_id' => '1','content' => '`<h4>Each HTML heading has a default size</h4>`',],
+            ['id' => '3','slugid'=>'wty24fd','sm_categories_id' => '2','name'=>'new2','sm_chapters_id' => '2','content' => '`<h4>It is important to use headings to show the document structure</h4>`',],
+            ['id' => '4','slugid'=>'qvgw634','sm_categories_id' => '2','name'=>'new3','sm_chapters_id' => '2','content' => '`<h4>It is important to use headings to show the document structure</h4>`',],
             // ['id' => '5','slugid'=>'qeqfr34','sm_categories_id' => '2','sm_chapters_id' => '1',],
             // ['id' => '6','slugid'=>'qtyw634','sm_categories_id' => '2','sm_chapters_id' => '1',],
             
