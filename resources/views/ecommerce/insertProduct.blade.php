@@ -103,7 +103,7 @@
           type:'get',
          dataType:'json',
          contentType:'application/json',
-         url:"{{ route('product.show') }}",
+          url:"{{ route('addproductbook.show') }}",
          data:{},
          success:function(data){
          console.log(data);
@@ -136,12 +136,12 @@
          }
         });
       }
-      else if(responseID=="Course"){
+      else if(responseID=="course"){
         $.ajax({
           type:'get',
          dataType:'json',
          contentType:'application/json',
-         url:"{{ route('product.show') }}",
+         url:"{{ route('CourseProduct.show') }}",
          data:{},
          success:function(data){
          console.log(data);
@@ -160,7 +160,7 @@
                                   Html+=`<tr>
                                     <td><input type='checkbox' value='${value.id}'name='data'></td>
                                     <td>${value.id}</td>
-                                    <td>${value.bookname}</td>
+                                    <td>${value.name}</td>
 
 
                                     </tr>`;
@@ -174,12 +174,12 @@
          }
         });
       }
-      else if(responseID=="Pdf"){
+      else if(responseID=="pdf"){
         $.ajax({
           type:'get',
          dataType:'json',
          contentType:'application/json',
-         url:"{{ route('product.show') }}",
+        url:"{{ route('Pdf.Product.show') }}",
          data:{},
          success:function(data){
         //  console.log(data);
@@ -199,7 +199,7 @@
                                   Html+=`<tr>
                                     <td><input type='checkbox' value='${value.id}'name='data'></td>
                                     <td>${value.id}</td>
-                                    <td>${value.bookname}</td>
+                                    <td>${value.name}</td>
 
 
                                     </tr>`;

@@ -263,4 +263,6 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 // Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
 Route::get('/show',[ModuleController::class,'get_Examination'])->name('show.examination');
-Route::get('/productshow',[ProductController::class,'get_Product'])->name('product.show');
+Route::get('/addproduct-bookshow',[ProductController::class,'get_Book'])->name('addproductbook.show');
+Route::get('/Course-productshow',[ProductController::class,'get_Course'])->name('CourseProduct.show');
+Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.Product.show');
