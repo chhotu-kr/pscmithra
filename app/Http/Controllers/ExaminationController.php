@@ -14,19 +14,19 @@ class ExaminationController extends Controller
 {
     //
     public function index(){
-        $data['exam']=Exam::all();
+        // $data['exam']=Exam::all();
         $data['examination']=Examination::all();
-        $data['category']=Category::all();
-        $data['subcategory']=SubCategory::all();
-        $data['secondquestion']=SecondQuestion::all();
+        // $data['category']=Category::all();
+        // $data['subcategory']=SubCategory::all();
+        // $data['secondquestion']=SecondQuestion::all();
         return view('admin.manageExamination',$data);
     }
     public function Create(){
         $data['exam']=Exam::all();
         $data['examination']=Examination::all();
-        $data['category']=Category::all();
-        $data['subcategory']=SubCategory::all();
-        $data['secondquestion']=SecondQuestion::all();
+         $data['category']=Category::all();
+         $data['subcategory']=SubCategory::all();
+         $data['secondquestion']=SecondQuestion::all();
         return view('admin.insertExamination',$data);
     }
 
@@ -44,5 +44,29 @@ class ExaminationController extends Controller
         $data-> slugid = md5($request->exam_name . time());
         $data->save();
         return redirect('/examination');
-    } 
+    }
+
+     public function edit($id){
+        $data['examination']=Examination::find($id);
+        $data['exam']=Exam::all();
+        $data['category']=category::all();
+        $data['subcategory']=subcategory::all();
+        return view('admin.editExamination',$data); 
+    }
+
+    public function update(Request $request,$id){
+        $examination=Examination::find($id);
+        $examination->exam_id=$request->exam_id;
+        $examination->category_id=$request->category_id;
+        $examination->subcategory_id=$request->subcategory_id;
+        $examination->exam_name=$request->exam_name;
+        // $data->question=$request->question;
+        $examination->startat=$request->startat;
+        $examination->rightmarks=$request->rightmarks;
+        $examination->wrongmarks=$request->wrongmarks;
+        $examination->time_duration=$request->time_duration;
+        $examination-> slugid = md5($request->exam_name . time());
+        $examination->save();
+        return redirect('/examination');
+    }
 }

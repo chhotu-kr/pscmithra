@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Subject;
 use App\Models\Topic;
-
+use App\Models\Book;
+use App\Models\BookProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function get_Product(){
+      $data=Book::with('product')->where('product',1)->get();
+     
     
+         
+        return response()->json($data);
+    }
     public function index()
     {
         //
@@ -35,6 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+       
         $data = new Product();
         $data->subject_id=$request->subject_id;
         $data->topic_id=$request->topic_id;
@@ -51,6 +59,12 @@ class ProductController extends Controller
         
         $data->bycount=$request->bycount;
         $data->save();
+
+        if($request->type=='book'){
+            $book_product=new BookProduct();;
+            $book_product->product_id=$data->id;
+            $book_product->book_id=$request->data;
+        }
         return redirect()->route('product.index');
     }
 

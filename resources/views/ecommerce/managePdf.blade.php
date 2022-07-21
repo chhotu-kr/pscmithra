@@ -39,7 +39,7 @@
                                   @foreach ($pdf as $pro)
                                       <tr>
                                           <td>{{$pro->id}}</td>
-                                          <td>{{$pro->product->title}}</td>
+                                          <td>{{$pro->name}}</td>
                                           <td>{{$pro->pdf_url}}</td>
                                          
                                           

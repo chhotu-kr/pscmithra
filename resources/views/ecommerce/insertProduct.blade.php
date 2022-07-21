@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-12 position-relative">
                       <label for="" class="form-label">Type</label>
-                      <select name="type" id="validationTooltip01" class="form-select" required>
+                      <select name="type" id="selected" class="form-select" required>
                         <option value="0">Select Type</option>
                         <option value="book">Book</option>
                         <option value="course">Course</option>
@@ -49,6 +49,7 @@
                         </div>
                     </div>
                    </div>
+                   <div id ="extend"></div>
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Price</label>
@@ -92,4 +93,127 @@
      </div>
      
    </main>
+  <script>
+    $('#selected').change(function(){
+      var responseID = $(this).val();
+       console.log(responseID);
+      if(responseID=="book"){
+        // console.log("hgfhjfjvjhhnbnm");
+        $.ajax({
+          type:'get',
+         dataType:'json',
+         contentType:'application/json',
+         url:"{{ route('product.show') }}",
+         data:{},
+         success:function(data){
+         console.log(data);
+         Html=`<table class="table datatable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                              
+                                <th scope="col">Name</th>
+                                <th scope="col">Count</th>
+                                
+                                </tr>
+                              </thead>
+                              <tbody>`;
+                                $.each(data, function(index, value){
+                                  Html+=`<tr>
+                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td>${value.id}</td>
+                                    <td>${value.bookname}</td>
+
+
+                                    </tr>`;
+                                });Html+=`</tbody>
+                                
+                                       </table>`;
+
+                                       $("#extend").html(Html);
+
+
+         }
+        });
+      }
+      else if(responseID=="Course"){
+        $.ajax({
+          type:'get',
+         dataType:'json',
+         contentType:'application/json',
+         url:"{{ route('product.show') }}",
+         data:{},
+         success:function(data){
+         console.log(data);
+         Html=`<table class="table datatable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                              
+                                <th scope="col">Name</th>
+                             
+                                
+                                </tr>
+                              </thead>
+                              <tbody>`;
+                                $.each(data, function(index, value){
+                                  Html+=`<tr>
+                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td>${value.id}</td>
+                                    <td>${value.bookname}</td>
+
+
+                                    </tr>`;
+                                });Html+=`</tbody>
+                                
+                                       </table>`;
+
+                                       $("#extend").html(Html);
+
+
+         }
+        });
+      }
+      else if(responseID=="Pdf"){
+        $.ajax({
+          type:'get',
+         dataType:'json',
+         contentType:'application/json',
+         url:"{{ route('product.show') }}",
+         data:{},
+         success:function(data){
+        //  console.log(data);
+         Html=`<table class="table datatable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                              
+                                <th scope="col">Name</th>
+                                
+                                
+                                </tr>
+                              </thead>
+                              <tbody>`;
+                                $.each(data, function(index, value){
+                                   //console.log(data);
+                                  Html+=`<tr>
+                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td>${value.id}</td>
+                                    <td>${value.bookname}</td>
+
+
+                                    </tr>`;
+                                });Html+=`</tbody>
+                                
+                                       </table>`;
+
+                                       $("#extend").html(Html);
+
+
+         }
+        });
+      }
+       
+    });
+  </script>
 @endsection

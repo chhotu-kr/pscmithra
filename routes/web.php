@@ -120,6 +120,7 @@ Route::get('/categoryUpdate/{id}',[CategoryController::class,'edit'])->name('cat
 Route::get('/subcategoryUpdate/{id}',[SubCategoryController::class,'edit'])->name('subcategoryedit');
 Route::get('/languageUpdate/{id}',[LanguageController::class,'edit'])->name('languageedit');
 Route::get('/examquestionUpdate/{id}',[ExamQuestionController::class,'edit'])->name('examquestion.edit');
+Route::get('examinationUpdate/{id}',[ExaminationController::class,'edit'])->name('examination->edit');
 
 //update mehtod
 Route::post('/examUpdate/{id}',[ExamController::class,'update'])->name('exam.Update');
@@ -133,6 +134,7 @@ Route::post('/categoryUpdate/{id}',[CategoryController::class,'update'])->name('
 Route::post('/subcategoryUpdate/{id}',[SubCategoryController::class,'update'])->name('subcategory.Update');
 Route::post('/languageUpdate/{id}',[LanguageController::class,'update'])->name('language.Update');
 Route::post('/examquestionUpdate/{id}',[ExamQuestionController::class,'update'])->name('examquestion.Update');
+Route::post('examinationUpdate/{id}',[ExaminationController::class,'update'])->name('examination.update');
 
 //post method
 Route::post('/examstore',[ExamController::class,'store'])->name('examstore');
@@ -261,3 +263,4 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 // Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
 Route::get('/show',[ModuleController::class,'get_Examination'])->name('show.examination');
+Route::get('/productshow',[ProductController::class,'get_Product'])->name('product.show');
