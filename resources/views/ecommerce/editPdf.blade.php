@@ -5,7 +5,7 @@
 
   <div class="pagetitle">
     <div class="row">
-      <div class="col-9">
+      <div class="col-12">
         <div class="card">
           <div class="card-header">Edit PDF</div>
           <div class="card-body">
@@ -14,13 +14,8 @@
               @csrf
              
              <div class="mb-3">
-              <label for="">ProductName</label>
-              <select name="product_id" id="" class="form-select" value="{{$pdf->product_id}}" required>
-              <option value="0">select productName</option>
-              @foreach ($product as $pro)
-                  <option value="{{$pro->id}}">{{$pro->title}}</option>
-              @endforeach
-              </select>
+              <label for="">Name</label>
+              <input type="text" name="name" class="form-control" value="{{$pdf->name}}"  required>
              </div>
             <div class="mb-3">
               <label for="">PDF Url</label>

@@ -11,6 +11,8 @@ use App\Models\Course;
 use App\Models\BookProduct;
 use App\Models\CourseProduct;
 use App\Models\PdfProduct;
+use App\Models\PdfSubscription;
+use App\Models\PdfSubscriptionProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -30,6 +32,12 @@ class ProductController extends Controller
     public function get_Pdf(){
         $data=Pdf::all();
         return response()->json($data);
+    }
+
+    public function get_PdfSubscription(){
+        $data=PdfSubscription::all();
+        return response()->json($data);
+    
     }
     public function index()
     {
@@ -95,6 +103,14 @@ class ProductController extends Controller
             $pdf_product->pdf_id=$request->data;
 
             $pdf_product->save();
+        }
+        else if($request->type=='ebook'){
+            $pdfsubs=new PdfSubscriptionProduct();
+            $pdfsubs->product_id=$data->id;
+            // $pdfsubs->slugid=md5("ghjfyfdt" .time()."hjfwhfgfffhf");
+            $pdfsubs->pdf_subscriptions_id=$request->data;
+
+            $pdfsubs->save();
         }
         return redirect()->route('product.index');
     }

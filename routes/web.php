@@ -18,9 +18,10 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BookController, ModuleController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -192,7 +193,37 @@ Route::resources([
  Route::post('/modulesupdate/{id}',[ModuleController::class,'update'])->name('update.module');
  Route::get('/modulesremove/{id}',[ModuleController::class,'delete'])->name('module.remove');
 
+ //...........Blogcategory................
+ Route::get('/blogcategory',[BlogCategoryController::class,'index'])->name('blog.category');
+ Route::post('/categoryblog',[BlogCategoryController::class,'store'])->name('blogcategory.store');
+ Route::get('/blogcategoryupdate/{id}',[BlogCategoryController::class,'edit'])->name('blogcategory.edit');
+ Route::post('/blogcategoryupdate/{id}',[BlogCategoryController::class,'update'])->name('blogcategory.update');
+ Route::get('/blogcatremove/{id}',[BlogCategoryController::class,'destroy'])->name('blogcategory.remove');
 
+ // .............Blog..............
+
+ Route::get('/manageblog',[BlogController::class,'index'])->name('blog.index');
+ Route::get('/blog',[BlogController::class,'create'])->name('blog.create');
+ Route::post('/blogstore',[BlogController::class,'store'])->name('blog.store');
+ Route::get('/blogupdate/{id}',[BlogController::class,'edit'])->name('blog.edit');
+ Route::post('/blogupdate/{id}',[BlogController::class,'update'])->name('blog.update');
+ Route::get('/blogremove/{id}',[BlogController::class,'destroy'])->name('blog.destroy');
+
+//..........pdfsubscription........,
+
+Route::get('/pdf-subscription',[PdfSubscriptionController::class,'index'])->name('manage.pdfsubs');
+Route::get('/pdfsubscription',[PdfSubscriptionController::class,'create'])->name('pdfsubs.create');
+Route::post('/pdfsubs',[PdfSubscriptionController::class,'store'])->name('pdfsubs.store');
+Route::get('/pdfsubsupdate/{id}',[PdfSubscriptionController::class,'edit'])->name('pdfsubs.edit');
+Route::post('/pdfsubsupdate/{id}',[PdfSubscriptionController::class,'update'])->name('pdfsubs.update');
+Route::get('/pdfsubsremove/{id}',[PdfSubscriptionController::class,'destroy'])->name('pdfsubs.destroy');
+// .........itempdfsubscription.............
+Route::get('/itempdf/{id}',[ItemPdfSubscriptionController::class,'index'])->name('manage.item');
+Route::get('/item-Pdf',[ItemPdfSubscriptionController::class,'create'])->name('item.pdfsubs');
+Route::post('/item-Pdfsave',[ItemPdfSubscriptionController::class,'store'])->name('itempdf.store');
+Route::get('/item-Pdfupdate/{id}',[ItemPdfSubscriptionController::class,'edit'])->name('itempdf.edit');
+Route::post('/item-Pdfupdate/{id}',[ItemPdfSubscriptionController::class,'update'])->name('itempdf.update');
+Route::get('/removeitem_pdf/{id}',[ItemPdfSubscriptionController::class,'delete'])->name('itempdfsubs.destroy'); 
  // examquestion filter
 
  Route::get('/filter/{id}',[ExamQuestionController::class,'filter'])->name('question.filter');
@@ -266,3 +297,6 @@ Route::get('/show',[ModuleController::class,'get_Examination'])->name('show.exam
 Route::get('/addproduct-bookshow',[ProductController::class,'get_Book'])->name('addproductbook.show');
 Route::get('/Course-productshow',[ProductController::class,'get_Course'])->name('CourseProduct.show');
 Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.Product.show');
+// pdf subscription
+
+ Route::get('/ebook',[ProductController::class,'get_PdfSubscription'])->name('pdf.subscription');

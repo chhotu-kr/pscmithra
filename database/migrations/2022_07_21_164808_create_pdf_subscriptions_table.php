@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('pdf_subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('slugid');
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('address_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->enum('type',['weekly','monthly'])->default('monthly');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('pdf_subscriptions');
     }
 };

@@ -5,7 +5,7 @@
 
   <div class="pagetitle">
     <div class="row">
-      <div class="col-9">
+      <div class="col-12">
         <div class="card">
           <div class="card-header">Insert PDF</div>
           <div class="card-body">
@@ -20,7 +20,7 @@
               <input type="text" name="pdf_url" class="form-control" required>
             </div>
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary float-end ">Create</button>
             </div>
           </form>
           </div>

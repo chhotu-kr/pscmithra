@@ -43,13 +43,23 @@
                         <option value="book">Book</option>
                         <option value="course">Course</option>
                         <option value="pdf">Pdf</option>
+                        <option value="plan">Plan</option>
+                        <option value="ebook">Ebook</option>
                     </select>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                    </div>
-                   <div id ="extend"></div>
+                   {{-- <div id ="extend"></div> --}}
+                   <div class="row">
+                    <div class="col-6">
+                      <a href="" class="btn btn-outline-dark mt-3">AddMock Test</a>
+                    </div>
+                    <div class="col-6">
+                      <a href="" class="btn btn-outline-dark mt-3 float-end">Add LiveExam</a>
+                    </div>
+                   </div>
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Price</label>
@@ -81,7 +91,7 @@
                       Looks good!
                     </div>
                 </div>
-                 
+                <div id ="extend"></div>
                     
                     <div class="col-md-12">
                       <button class="btn btn-primary w-100" type="submit">Create</button>
@@ -112,8 +122,9 @@
                                 <tr>
                                   <th scope="col">#</th>
                               
+                                <th scope="col">id</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Count</th>
+                          
                                 
                                 </tr>
                               </thead>
@@ -136,7 +147,7 @@
          }
         });
       }
-      else if(responseID=="course"){
+      else if(responseID =="course"){
         $.ajax({
           type:'get',
          dataType:'json',
@@ -149,7 +160,7 @@
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
-                              
+                                  <th scope="col">id</th>
                                 <th scope="col">Name</th>
                              
                                 
@@ -187,7 +198,7 @@
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
-                              
+                                  <th scope="col">id</th>
                                 <th scope="col">Name</th>
                                 
                                 
@@ -200,6 +211,46 @@
                                     <td><input type='checkbox' value='${value.id}'name='data'></td>
                                     <td>${value.id}</td>
                                     <td>${value.name}</td>
+
+
+                                    </tr>`;
+                                });Html+=`</tbody>
+                                
+                                       </table>`;
+
+                                       $("#extend").html(Html);
+
+
+         }
+        });
+      }
+      else if(responseID == "ebook"){
+        $.ajax({
+          type:'get',
+         dataType:'json',
+         contentType:'application/json',
+        url:"{{route('pdf.subscription')}}",
+         data:{},
+         success:function(data){
+          console.log(data);
+         Html=`<table class="table datatable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">id</th>
+                                <th scope="col">Name</th>
+                                
+                                
+                                </tr>
+                              </thead>
+                              <tbody>`;
+                                $.each(data, function(index, value){
+                                   console.log(data);
+                                  Html+=`<tr>
+                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td>${value.id}</td>
+                                    <td>${value.name}</td>
+                                    
 
 
                                     </tr>`;

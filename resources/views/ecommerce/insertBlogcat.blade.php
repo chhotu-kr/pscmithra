@@ -8,7 +8,7 @@
       <div class="row">
           <div class="col-12">
             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
-              Add Book
+              Add BlogCategory
             </button>
           </div>
           
@@ -20,13 +20,13 @@
                         <h5 class="modal-title">Add Book Type</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <form action="{{route('books.store')}}" method="POST">
+                      <form action="{{route('blogcategory.store')}}" method="POST">
                           @csrf
                         
                       <div class="modal-body">
                         <div class="mb-3">
-                            <label for="" class="h6">Book Name</label>
-                            <input type="text" name="bookname" class="form-control" required>
+                            <label for="" class="h6">Name</label>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                        
                         <div class="mb-3">
@@ -52,7 +52,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Manage Book</h5>
+            <h5 class="card-title">Manage BlogCategory</h5>
             
 
             <!-- Table with stripped rows -->
@@ -60,22 +60,22 @@
               <thead>
                 <tr>
                   <th scope="col">Id</th>
-                  <th scope="col">Book Name</th>
+                  <th scope="col"> Name</th>
                   <th scope="col">Action</th>
                   
                 </tr>
               </thead>
               <tbody>
-                 @foreach ($book as $item)
+                 @foreach ($blogcat as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td>{{$item->bookname}}</td>
+                            <td>{{$item->name}}</td>
                            
                             <td>
-                               <a href="{{route('books.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                               <a href="{{route('blogcategory.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                               
                               
-                                <a href="{{route('books.delete',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                <a href="{{route('blogcategory.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

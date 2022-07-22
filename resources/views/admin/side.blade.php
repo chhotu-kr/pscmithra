@@ -126,6 +126,21 @@
               <i class="bi bi-circle"></i><span>Manage Book</span>
             </a>
           </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('manage.pdfsubs')}}">
+              <i class="bi bi-circle"></i><span>Manage PdfSubscription</span>
+            </a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('blog.category')}}">
+              <i class="bi bi-circle"></i><span>Manage BlogCategory</span>
+            </a>
+          </li>  
+          {{-- <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('manage.item')}}">
+              <i class="bi bi-circle"></i><span>Manage ItemPdfsubscription</span>
+            </a>
+          </li>   --}}
           
           <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('insertmetrial.create')}}">

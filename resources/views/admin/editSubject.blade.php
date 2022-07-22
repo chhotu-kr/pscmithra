@@ -7,7 +7,7 @@
             @include('admin.side')
         </div>
           <h6 class="text-theme ps-2 h4">Edit subject</h6>
-                <div class="col-9">
+                <div class="col-12">
                   <div class="card">
                     <div class="card-header">Edit Subject</div>
                     <div class="card-body">
@@ -23,7 +23,7 @@
                       </div>
                      
                       <div class="mb-3">
-                       <button type="submit" class="btn btn-primary w-100">submit</button>
+                       <button type="submit" class="btn btn-primary w-100">Update</button>
                      
                       </div>
                     </form>
