@@ -11,9 +11,12 @@ class ModuleController extends Controller
 {
     //
     public function get_Examination(){
-        $data['exami']=Examination::with('examQ')->where("exam_id",4)->get();
+       
+        $data=Examination::with('examQ')->where("exam_id",4)->get();
         return response()->json($data);
     }
+
+
     public function index(){
        
         $data['module']=Module::all();

@@ -12,7 +12,7 @@ class PdfController extends Controller
     public function index()
     {
         //
-        $data['product']=Product::all();
+        // $data['product']=Product::all();
         $data['pdf']=Pdf::all();
         return view('ecommerce.managePdf',$data);
     }
@@ -21,7 +21,7 @@ class PdfController extends Controller
     public function create()
     {
         //
-        $data['product']=Product::all();
+        // $data['product']=Product::all();
         $data['pdf']=Pdf::all();
         return view('ecommerce.insertPdf',$data);
     }
@@ -31,7 +31,7 @@ class PdfController extends Controller
     {
         //
         $data = new Pdf();
-        $data->product_id=$request->product_id;
+        $data->name=$request->name;
         $data->slugid=md5($request->pdf .time());
         $data->pdf_url=$request->pdf_url;
         $data->save();
@@ -47,7 +47,7 @@ class PdfController extends Controller
     public function edit(Pdf $pdf)
     {
     
-        $data['product']=Product::all();
+        // $data['product']=Product::all();
         $data['pdf']=$pdf;
         return view('ecommerce.editPdf',$data);
     }
@@ -55,7 +55,7 @@ class PdfController extends Controller
     
     public function update(Request $request, Pdf $pdf)
     {
-         $pdf->product_id=$request->product_id;
+         $pdf->name=$request->name;
          $pdf->slugid=md5($request->screenshot .time());
          $pdf->pdf_url=$request->pdf_url;
          $pdf->save();

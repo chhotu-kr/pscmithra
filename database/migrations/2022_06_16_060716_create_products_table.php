@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
           
-           $table->enum('type', ['pdf', 'course','book'])->default('pdf');
+           $table->enum('type', ['pdf', 'course','book','plan','ebook'])->default('pdf');
             $table->float('price');
             $table->integer('bycount');
             $table->string('bannerimage');
