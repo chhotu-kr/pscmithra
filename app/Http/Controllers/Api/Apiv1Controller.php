@@ -221,7 +221,9 @@ $category_id = $request->category_id;
     // .............Examination...........
     public function get_Examination(Request $request){
 
-        
+        if(empty($request->user)){
+            return response()->json(['msg'=>'Enter User Id','status'=>false]);
+        }
         $exam_id=$request->exam_id;
         if(empty($exam_id)){
             return response()->json(['msg'=>'Enter Exam Id','status'=>false]);

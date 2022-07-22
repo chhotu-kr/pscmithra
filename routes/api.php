@@ -35,6 +35,7 @@ Route::get('/subcategory',[Apiv1Controller::class,'subcategory'])->name('api.sub
 
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
 Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
+Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
