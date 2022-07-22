@@ -6,10 +6,10 @@
             <div class="col-3">
                 @include('admin.side')
             </div>
-            <h6 class="text-theme h4 ps-2 text-danger">Add Test</h6>
+            <h6 class="text-theme h4 ps-2 text-danger">Add Examination</h6>
             <div class="col-12">
                <div class="card">
-                   <div class="card-header text-warning text-theme ps-2 shadow h5">Insert Test Type</div>
+                   <div class="card-header text-warning text-theme ps-2 shadow h5">Insert Examination Type</div>
                    <div class="card-body">
                     <form action="{{route('examination.store')}}" method="POST">
                         @csrf

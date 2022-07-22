@@ -68,7 +68,7 @@
                                           <td>{{$cour->time_duration}}</td> --}}
                                           
                                           <td>
-                                            <a href="" class="btn btn-outline-secondary">Edit</a>
+                                            <a href="{{route('examination.update',['id'=>$cour->id])}}" class="btn btn-outline-secondary">Edit</a>
                                             <a href="" class="btn btn-outline-warning">Delete</a>
                                             <a href="{{route('check.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
                                           </td>

@@ -98,20 +98,20 @@
         </div>
     </div>
 
-    <form action="">
+    {{-- <form action="" method="post">
         @csrf
        
       
         
-          {{-- <input type="submit" class="btn btn-primary" id="btn"> --}}
-    </form>
+          <input type="submit" class="btn btn-primary" id="btn">
+    </form> --}}
 </main>
 <script>
     $('#selected').change(function(){
         var responseID = $(this).val();
         console.log(responseID);
 if(responseID=="video"|| responseID=="voice"){
-    console.log("hgfhjfjvjhhnbnm");
+    // console.log("hgfhjfjvjhhnbnm");
 
     html=` <div class="row">
                         <div class="col-6">
@@ -126,7 +126,7 @@ if(responseID=="video"|| responseID=="voice"){
     $.ajax({
          type:'get',
          dataType:'json',
-        contentType:'application/json',
+         contentType:'application/json',
          url:"{{ route('show.examination') }}",
          data:{},
          success:function(data){
@@ -146,8 +146,9 @@ if(responseID=="video"|| responseID=="voice"){
 
             Html+=`<tr>
               <td><input type='checkbox' value='${value.id}' name='quiz_id'></td>
-              <td>${value.id}</td>
+              
               <td>${value.exam_name}</td>
+              <td>${value.exam_q.length}</td>
               
               
               </tr>`;

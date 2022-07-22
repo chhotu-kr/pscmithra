@@ -11,7 +11,7 @@
           <h6 class="border-5 border-start border-danger ps-1 mt-2   h4 text-theme text-warning">Add Examquestion</h6>
         </div>
         <div class="card-body">
-          <input  id="idd" value="{{$id}}">
+          <input type="hidden"  id="idd" value="{{$id}}">
           {{-- <form action="{{route('examquestion.store')}}" method="POST">
             @csrf
           
@@ -52,7 +52,7 @@
           @csrf
           <livewire:subjects /> 
         
-          {{-- <th><input class="" name="exam" value="question_id" ></th> --}}
+          {{-- <th><input class="hidden" name="exam" value="question_id" ></th> --}}
           <table class="table datatable">
               <thead>
                 <tr>

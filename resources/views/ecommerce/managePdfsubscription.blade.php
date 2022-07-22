@@ -10,48 +10,50 @@
             <div class="col-lg-12">
                 <div class="row">
                     {{-- <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Pdf</h4>
+                        <h4 class="text-theme ps-2">Manage Address</h4>
                     </div> --}}
                     <div class="col-4">
-                        <a href="{{route('pdf.create')}}" class="btn btn-outline-success mb-3">Add New Pdf</a>
+                        <a href="{{route('pdfsubs.create')}}" class="btn btn-primary mb-3">Add pdfSubscription</a>
                     </div>
                 </div>
                 <section class="section">
-                    <div class="row">
-                      <div class="col-lg-12">
+                    
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Manage Pdf</h5>
+                            <h5 class="card-title">Manage Blog</h5>
                             
                 
                             <!-- Table with stripped rows -->
-                            <table class="table ">
+                            <table class="table datatable">
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">Title</th>
-                                  <th scope="col">Pdf Url</th>
+                                  <th scope="col">Name</th>
+                                  {{-- <th scope="col">Type</th> --}}
+                                  
+                                 
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                  @foreach ($pdf as $pro)
+                                  @foreach ($pdf_subs as $req)
                                       <tr>
-                                          <td>{{$pro->id}}</td>
-                                          <td>{{$pro->name}}</td>
-                                          <td>{{$pro->pdf_url}}</td>
+                                          <td>{{$req->id}}</td>
+                                          <td>{{$req->name}}</td>
+                                          {{-- <td>{{$req->type}}</td> --}}
                                          
-                                          
+                                          {{-- <td>{{$req->description}}</td>
+                                          <td>{{$req->rightby}}</td>
+                                          --}}
                                           <td>
-                                              
-                                              <form action="{{route('pdf.destroy',[$pro])}}" method="POST">
-                                                @method('delete')
-                                              @csrf
-                                              <input type="submit" value="X" class="btn btn-outline-danger">
-                                              <a href="{{route('pdf.edit',[$pro])}}" class="btn btn-outline-primary">Edit</a>
-                                              </form>
+                                             <a href="{{route('pdfsubs.update',['id'=>$req->id])}}" class="btn btn-outline-primary">Edit</a>
+                                             <a href="{{route('pdfsubs.destroy',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                             <a href="{{route('manage.item',['id'=>$req->id])}}" class="btn btn-outline-secondary">Manage PdSubProduct</a>
+
+                                               
                                           </td>
+                                          
                                       </tr>
                                   @endforeach
                                 
@@ -62,9 +64,8 @@
                           </div>
                         </div>
                 
-                      </div>
-                    </div>
-                  </section>   
+                  </section>  
+      
             </div>
         </div>
        </div>

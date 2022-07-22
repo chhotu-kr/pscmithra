@@ -10,7 +10,7 @@ class Pdf extends Model
     use HasFactory;
     protected $table = ('pdfs');
     protected $fillable =[
-      'product_id',
+      'name',
       'slug_id',
       'pdf_url',
     ];

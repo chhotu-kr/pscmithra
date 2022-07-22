@@ -70,7 +70,7 @@ class ExamQuestionController extends Controller
         $data-> examination_id = $request->examination_id;
         $data-> question_id = $request->question_id;
         $data-> serialno = $request->serialno;
-         $data-> slugid = md5($request->examquestion . time());
+         $data-> slugid = md5('dfegfe'. time().'ff454tgw');
          $data->save();
           return redirect()->route('manage.examquestion');
     }

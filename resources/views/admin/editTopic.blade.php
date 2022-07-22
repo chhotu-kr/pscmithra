@@ -7,7 +7,7 @@
                 @include('admin.side')
             </div>
             <h6 class="text-theme ps-2 h4">Edit Topic</h6>
-            <div class="col-9">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">Edit Topic</div>
                
@@ -22,14 +22,18 @@
                       <div class="mb-3">
                         <label for="">SubjectName</label>
                         <select name="subject_id" id="" class="form-select" required>
-                        <option value="0">Main Subject</option>
+                        <option value="0">Select Subject</option>
                         @foreach ($subject as $new)
-                            <option value="{{$new->id}}">{{$new->sub_name}}</option>
+                        <option value="{{ $new->id }}"
+                            @if ($new->id==$topic->subject_id)
+                                selected="selected"
+                            @endif
+                          >{{ $new->sub_name}}</option>
                         @endforeach
                         </select>
                       </div>
                       <div class="mb-3">
-                       <button type="submit" class="btn btn-primary w-100">submit</button>
+                       <button type="submit" class="btn btn-primary w-100">Update</button>
                      
                       </div>
                     </form>

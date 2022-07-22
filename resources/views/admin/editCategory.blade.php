@@ -17,9 +17,13 @@
                     <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Exam_Id</label>
                         <select class="form-select" name="exam_id" id="validationTooltip04" required>
-                          <option selected disabled value="">Choose Your Category</option>
+                          <option selected disabled value="">Select Your Category</option>
                           @foreach ($exam as $item)
-                          <option value="{{$item->id}}">{{$item->examname}}</option>
+                          <option value="{{ $item->id }}"
+                            @if ($item->id==$category->exam_id)
+                                selected="selected"
+                            @endif
+                          >{{ $item->examname}}</option>
                           @endforeach
                         </select>
                         <div class="invalid-tooltip">

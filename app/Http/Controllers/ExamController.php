@@ -27,7 +27,7 @@ class ExamController extends Controller
       $data-> examname = $req->examname;
        $data-> slugid = md5($req->examname . time());
        $data->save();
-        return redirect('/');
+        return redirect('/Exam');
     }
 
     public function update(Request $req,$id){
@@ -35,7 +35,7 @@ class ExamController extends Controller
         $exam-> examname = $req->examname;
          $exam-> slugid = md5($req->examname . time());
          $exam->save();
-          return redirect('/');
+          return redirect('/Exam');
 
     }
 
@@ -48,7 +48,7 @@ class ExamController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect('/');
+        return redirect('/Exam');
     }
 
    
