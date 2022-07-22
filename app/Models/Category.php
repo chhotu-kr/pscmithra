@@ -16,6 +16,10 @@ class Category extends Model
         'exam_id',
         'category',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     public function exam(){
         return $this->hasOne(Exam::class,'id', 'exam_id');
