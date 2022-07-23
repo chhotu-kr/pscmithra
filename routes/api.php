@@ -44,6 +44,7 @@ Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
+Route::get('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
