@@ -17,13 +17,13 @@ class Topic extends Component
     public $topic_id;
 
 
-    public function mount($dd){
+    public function mount(){
 
-        return dd($dd);
-        // $this->subject= Topic::all();
+        // return dd($dd);
+        $this->subject= Topic::all();
        
 
-        // $this->get_topics();
+        $this->get_topics();
     }
   
 

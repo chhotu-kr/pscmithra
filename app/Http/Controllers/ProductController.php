@@ -13,6 +13,8 @@ use App\Models\CourseProduct;
 use App\Models\PdfProduct;
 use App\Models\PdfSubscription;
 use App\Models\PdfSubscriptionProduct;
+// use App\Models\PlanProduct;
+use App\Models\ProductPlan;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -111,7 +113,18 @@ class ProductController extends Controller
             $pdfsubs->pdf_subscriptions_id=$request->data;
 
             $pdfsubs->save();
-        }
+        }else if($request->type='plan'){
+
+            if(!empty($request->liveexamduration) ||!empty($request->liveexam)){
+                $planproduct = new ProductPlan();
+                $planproduct->product_id=$data->id;
+                $planproduct->liveexam=$request->liveexam;
+                $planproduct->examduration=$request->liveexamduration;
+                $planproduct->save();
+                
+             }
+            
+         }
         return redirect()->route('product.index');
     }
 

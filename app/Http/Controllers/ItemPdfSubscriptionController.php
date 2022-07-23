@@ -15,8 +15,8 @@ class ItemPdfSubscriptionController extends Controller
     //     $data=Product::all();
     //     return response()->json($data);
     // }
-    public function index($pdf_subscriptions_id){
-        $data['itempdfsubs']=ItemPdfSubscription::where('pdf_subscriptions_id',$pdf_subscriptions_id)->get();
+    public function index(){
+        // $data['itempdfsubs']=ItemPdfSubscription::where('pdf_subscriptions_id',$pdf_subscriptions_id)->get();
         $data['itempdfsubs']=ItemPdfSubscription::all();
 
         return view('ecommerce.manageItempdfsubs',$data);

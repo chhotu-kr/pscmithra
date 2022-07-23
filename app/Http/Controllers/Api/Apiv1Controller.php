@@ -177,10 +177,12 @@ class Apiv1Controller extends Controller
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-    public function subcategory(Request $request)
-    {
-        $exam_id = $request->exam_id;
-        $category_id = $request->category_id;
+
+    public function subcategory(Request $request){
+     $exam_id = $request->exam_id;
+     $category_id = $request->category_id;
+
+
 
         if (empty($exam_id)) {
             return response()->json(['msg' => 'Enter Exam Id', 'status' => false]);
@@ -201,27 +203,22 @@ class Apiv1Controller extends Controller
         $data = StudymetrialCategory::all();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+
+
+
+
     public function get_StudyChapter($sm_categories_id)
     {
 
-        // public function get_StudyMetrial(){
-        //     return StudymetrialCategory::all();
-        // }
-        // public function get_StudyChapter($studymetrialcategory_id){
+       
+
 
 
         $data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-    // public function get_Examination($exam_id,$category_id,$subcategory_id){
-    //     $data['examination']=Examination::where(['exam_id',$exam_id],['category_id',$category_id],['subcategory_id',$subcategory_id])->get();
-
-    //     return response($data);
-
-    //     // echo $data;
-    // }
-
+   
     // .............Examination...........
     public function get_Examination(Request $request)
     {
@@ -265,6 +262,9 @@ class Apiv1Controller extends Controller
     }
 
 
+    //............product Api..............
+
+
     public function get_SMetrial_data(Request $request)
     {
         $sm_categories_id = $request->categories_id;
@@ -275,6 +275,28 @@ class Apiv1Controller extends Controller
         if (empty($sm_chapters_id)) {
             return response()->json(['msg' => 'Enter SmChapter Id', 'status' => false]);
         }
+
+          $sm_chapters_id=$request->chapters_id;
+          if(empty($sm_chapters_id)){
+              return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
+          } 
+          $sm_id=$request->sm_id;
+          if(empty($sm_id) ){
+            if($sm_id!=0){
+              return response()->json(['msg'=>'Enter SmChapter Id','status'=>$request->sm_id]); }
+          } 
+  if($sm_id==0){
+    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
+    where('sm_chapters_id',$sm_chapters_id)->get();
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+  }else{
+    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
+    where('sm_chapters_id',$sm_chapters_id)->where('id',$sm_id)->get();
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+  }
+    
+      }
+
         $sm_id = $request->sm_id;
         if (empty($sm_id)) {
             if ($sm_id != 0) {
@@ -310,6 +332,7 @@ $Attemp->userId = $examination_id;
 $Attemp->save();
 return response()->json(['msg' => 'Exam Created', 'status' => true,'data'=>$Attemp]);
 }
+
 
 
     // public function getExamination($category_id){
