@@ -16,7 +16,10 @@ class SubCategory extends Model
         'category_id',
         'subcategory',
     ];
-
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function category(){
         return $this->hasOne(Category::class,'id','category_id');
     }

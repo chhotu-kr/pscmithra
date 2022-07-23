@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slugid')->nullable();
             $table->foreignId('sm_categories_id')->constrained();
             $table->foreignId('sm_chapters_id')->constrained();
+            $table->text('name');
             $table->text('content');
             $table->timestamps();
         

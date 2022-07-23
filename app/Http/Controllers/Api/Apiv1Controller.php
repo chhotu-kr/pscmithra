@@ -31,30 +31,42 @@ class Apiv1Controller extends Controller
 
     public function api_signup(Request $request){
        
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required',
-                'contact' => 'required',
-                'password' => 'required|min:8'
-            ]);
-    
-            if($validator->fails()){
-                return response(['error' => $validator->errors()]);
+       
+            if(empty($request->contact)){
+                return response()->json(['msg' => 'Enter Mobile Number','status'=>false]);
             }
-    
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'contact' => $request->contact,
-                'password' => Hash::make($request->password)
-            ]);
-    
+            if(empty($request->password)){
+                return response()->json(['msg' => 'Enter Password','status'=>false]);
+            }
+            $user = User::where('contact',$request->contact)->first();
+            if($user){
+                return response()->json(['msg' => 'Account Already Exist','status'=>false]);
+            }
+            $user = new User();
+            $user->name = $request->name;
+            $user->contact = $request->contact;
+            $user->slugid = md5($request->name .time());
+            $user->password = Hash::make($request->password); 
+            
+       
+        $user->save();
+        $user['type'] ='mobile';
             // $accessToken = $user->createToken('authToken')->accessToken;
     
             // return response([ 'user' => $user, 'access_token' => $accessToken]);
-       return "inserted successfull";
+            return response()->json(['msg' => 'Data Fetched','status'=>true,'data'=>$user]);
       
     }
+
+public function api_sendOTP(Request $request){
+    if(empty($request->contact)){
+        return response()->json(['status' => false, 'msg' => 'Enter mobile number']);
+    }
+    $randomNumber = random_int(1000, 9999);
+    $data['otp']=$randomNumber;
+    return response()->json(['status' => true, 'msg' => 'Otp Send','data'=>$data]);
+
+}
 
     //user login api
     public function api_login(Request $request)
@@ -86,30 +98,73 @@ class Apiv1Controller extends Controller
         //     return response()->json(['status' =>true,'msg'=>'User Exist','data'=>,'pas'=>$password]);
         // }
 
-        if(empty($request->contact))
-        {
-            return response()->json(['msg' => 'Enter Mobile Number','status'=>false]);
         
+
+
+        if(empty($request->type)){
+            return response()->json(['msg' => 'Enter Login Type','status'=>false]);
         }
-        if(empty($request->password))
-        {
+
+
+        
+if($request->type==="mobile"){
+    if(empty($request->contact))
+    {
+        return response()->json(['msg' => 'Enter Mobile Number','status'=>false]);
+    
+    }
+    if(empty($request->password))
+    {
+        return response()->json(['msg' => 'Enter Password','status'=>false]);
+    }
+
+    $user = User::where('contact',$request->contact)->first();
+    if(!$user){
+        return response()->json(['msg' => 'user not found.','status'=>false,]);
+    }
+    
+    if (!Hash::check($request->password,$user->password)) {
+        return response()->json(['msg' => 'Enter correct Password','status'=>false]);
+    } else {
+        //auth()->login($user);
+        // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
+        // return response()->json(['token' => $token], 200);
+$user['type'] =$request->type;
+        return response()->json(['msg' => 'Data Fetched','status'=>true,'data'=>$user]);
+    }
+        
+    }else if($request->type==="gmail"){
+        if(empty($request->email)){
+            return response()->json(['msg' => 'Enter Email','status'=>false]);
+        }
+        if(empty($request->password)){
             return response()->json(['msg' => 'Enter Password','status'=>false]);
         }
-
-        $user = User::where('contact',$request->contact)->first();
-        if(!$user){
-            return response()->json(['msg' => 'user not found.','status'=>false,]);
+        if(empty($request->name)){
+            return response()->json(['msg' => 'Enter Name','status'=>false]);
         }
-        
-        if (!Hash::check($request->password,$user->password)) {
-            return response()->json(['msg' => 'Enter correct Password','status'=>false]);
-        } else {
-            //auth()->login($user);
-            // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
-            // return response()->json(['token' => $token], 200);
-
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            $user['type'] =$request->type;
             return response()->json(['msg' => 'Data Fetched','status'=>true,'data'=>$user]);
+        }else{
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->slugid = md5($request->name .time());
+        $user->password = Hash::make($request->password); 
+        $user->save();
+        $user['type'] =$request->type;
+        return response()->json(['msg' => 'Data Fetched','status'=>true,'data'=>$user]);
         }
+    }
+   
+        // $accessToken = $user->createToken('authToken')->accessToken;
+
+        // return response([ 'user' => $user, 'access_token' => $accessToken]);
+       
+
+
 
     }
 
@@ -148,7 +203,11 @@ class Apiv1Controller extends Controller
     // public function get_StudyMetrial(){
     //     return StudymetrialCategory::all();
     // }
+<<<<<<< HEAD
     public function get_StudyChapter($sm_categories_id){
+=======
+    // public function get_StudyChapter($studymetrialcategory_id){
+>>>>>>> bef31d7c59d56bd47298441ca8d4714f99619625
 
 
        $data=StudymetrialChapter::where('sm_categories_id',$sm_categories_id)->get();
@@ -192,13 +251,42 @@ class Apiv1Controller extends Controller
             return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
         } 
 
-        $data=Study::where('sm_categories_id',$sm_categories_id)->
+        $data=Study::select('name','id')->where('sm_categories_id',$sm_categories_id)->
         where('sm_chapters_id',$sm_chapters_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
+<<<<<<< HEAD
     //............product Api..............
     
+=======
+
+    public function get_SMetrial_data(Request $request){
+        $sm_categories_id=$request->categories_id;
+        if(empty($sm_categories_id)){
+          return response()->json(['msg'=>'Enter SmCategory Id','status'=>false]);
+        }
+          $sm_chapters_id=$request->chapters_id;
+          if(empty($sm_chapters_id)){
+              return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
+          } 
+          $sm_id=$request->sm_id;
+          if(empty($sm_id) ){
+            if($sm_id!=0){
+              return response()->json(['msg'=>'Enter SmChapter Id','status'=>$request->sm_id]); }
+          } 
+  if($sm_id==0){
+    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
+    where('sm_chapters_id',$sm_chapters_id)->get();
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+  }else{
+    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
+    where('sm_chapters_id',$sm_chapters_id)->where('id',$sm_id)->get();
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+  }
+    
+      }
+>>>>>>> bef31d7c59d56bd47298441ca8d4714f99619625
 
     // public function getExamination($category_id){
     //     $data['examination']=Examination::where('category_id',$category_id)->get();
