@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('admin/base')
 @section('content')
 
    <main class="main" id="main">
@@ -51,15 +51,16 @@
                         </div>
                     </div>
                    </div>
-                   {{-- <div id ="extend"></div> --}}
+                  
+                   <div id ="extend"></div>
                    <div class="row">
-                    <div class="col-6">
+                    {{-- <div class="col-6">
                       <a href="" class="btn btn-outline-dark mt-3">AddMock Test</a>
                     </div>
                     <div class="col-6">
-                      <a href="" class="btn btn-outline-dark mt-3 float-end">Add LiveExam</a>
+                      <a href="" onclick="myFunction()" class="btn btn-outline-dark mt-3 float-end">Add LiveExam</a>
                     </div>
-                   </div>
+                   </div> --}}
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Price</label>
@@ -92,9 +93,9 @@
                     </div>
                 </div>
                 <div id ="extend"></div>
-                    
+                 
                     <div class="col-md-12">
-                      <button class="btn btn-primary w-100" type="submit">Create</button>
+                      <button class="btn btn-primary w-100 mt-3" name="lkk" value="pppp" type="submit">Create</button>
                     </div>
                   </form>
             </div>
@@ -214,7 +215,8 @@
 
 
                                     </tr>`;
-                                });Html+=`</tbody>
+                                });
+                                Html+=`</tbody>
                                 
                                        </table>`;
 
@@ -264,7 +266,76 @@
          }
         });
       }
-       
+      else if(responseID == "plan"){console.log(responseID)
+
+       Html=`
+        <div class="row">
+          <div class="col-6">
+            <a id="mockTest" onclick="addMock();"  class="btn btn-primary">Add Mocktest</a>
+          
+            </div>
+          <div class="col-6">`;
+            Html+='<a id="live" onclick="kkk();"  class="btn btn-primary">Add Liveexam</a>';
+           Html+= `</div>
+          </div>
+          
+          <div id ="planE"></div>`;
+
+          $("#extend").html(Html);
+      }
+
+      
     });
-  </script>
+
+function addMock(){
+  
+  Html =` <livewire:categories />`;
+  $("#planE").append(Html);
+     
+    
+}
+    
+function kkk(){
+  var index = $('input[name="liveexamduration"]').length+1;
+  if(index<=1){
+  Html           =`<div class="row mt-3" id="liveExamDiv">
+    <div class="col-5">
+                  <label>Time Duration(In Days)</label>
+                 <input type="number" class="form-control" name="liveexamduration">
+                 </div>
+                 <div class="col-5">
+                  <label>No of Live Exam</label>
+                   <input type="number" class="form-control" name="liveexam">
+                 </div>
+              <div class="col-2">
+                <a  class="btn btn-danger mt-4" onclick="remove('liveExamDiv');" >X</a>
+                </div>
+                   </div>`;
+                $("#planE").append(Html);
+     
+}}
+function remove(id){
+        
+          document.getElementById(id).remove();
+        }
+
+    // $(document).ready(function(){
+    //         $("#live").OnClick(function(){
+    //           Html           ="<p>jhfhf</p>";
+    //             $("#planE").append(Html);
+     
+    //         });
+    //     });
+
+//         $(document).on('click', 'live .btn', function(){ 
+//           Html           ="<p>jhfhf</p>";
+//                 $("#planE").append(Html);
+    
+        
+//  });
+function myFunction() {
+  document.getElementById("planE").innerHTML = "Hello World";
+}
+
+</script>
 @endsection

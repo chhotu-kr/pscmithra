@@ -18,8 +18,10 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->foreignId('category_id')->constrained()->nullable();
             $table->foreignId('subcategory_id')->constrained('sub_categories')->nullable();
-            $table->string('freemocktest')->default('0');
-            $table->string('livetest')->default('0');
+            $table->string('freemocktest')->nullable();
+            $table->string('livetest')->nullable();
+            $table->bigInteger('examduration');
+            $table->bigInteger('liveexamduration');
             $table->timestamps();
         });
     }

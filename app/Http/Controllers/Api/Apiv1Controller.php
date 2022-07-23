@@ -122,8 +122,8 @@ class Apiv1Controller extends Controller
     }
 
     public function subcategory(Request $request){
-$exam_id = $request->exam_id;
-$category_id = $request->category_id;
+     $exam_id = $request->exam_id;
+     $category_id = $request->category_id;
 
         if(empty($exam_id)){
             return response()->json(['msg'=>'Enter Exam Id','status'=>false]);
@@ -143,26 +143,19 @@ $category_id = $request->category_id;
         $data=StudymetrialCategory::all();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
-    public function get_StudyChapter($sm_categories_id){
+    // public function get_StudyChapter($sm_categories_id){
 
     // public function get_StudyMetrial(){
     //     return StudymetrialCategory::all();
     // }
-    public function get_StudyChapter($studymetrialcategory_id){
+    public function get_StudyChapter($sm_categories_id){
 
 
        $data=StudymetrialChapter::where('sm_categories_id',$sm_categories_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
 
-    // public function get_Examination($exam_id,$category_id,$subcategory_id){
-    //     $data['examination']=Examination::where(['exam_id',$exam_id],['category_id',$category_id],['subcategory_id',$subcategory_id])->get();
-
-    //     return response($data);
-
-    //     // echo $data;
-    // }
-
+   
     // .............Examination...........
     public function get_Examination(Request $request){
 
@@ -203,6 +196,9 @@ $category_id = $request->category_id;
         where('sm_chapters_id',$sm_chapters_id)->get();
         return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
     }
+
+    //............product Api..............
+    
 
     // public function getExamination($category_id){
     //     $data['examination']=Examination::where('category_id',$category_id)->get();
