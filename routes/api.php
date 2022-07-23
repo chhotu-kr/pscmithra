@@ -35,6 +35,7 @@ Route::get('/subcategory',[Apiv1Controller::class,'subcategory'])->name('api.sub
 
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
 Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
+Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
@@ -43,6 +44,7 @@ Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->na
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
+Route::get('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
