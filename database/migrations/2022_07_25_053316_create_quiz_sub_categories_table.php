@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pdf_subscription_products', function (Blueprint $table) {
+        Schema::create('quiz_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('pdf_subscriptions_id')->constrained();
+            $table->foreignId('quiz_categories')->constrained();
+            $table->string('name');
             $table->string('slugid');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pdf_subscription_products');
+        Schema::dropIfExists('quiz_sub_categories');
     }
 };

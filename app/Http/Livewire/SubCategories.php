@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\SubCategory;
+use Livewire\Component;
+
 class SubCategories extends Component
 {
+    
     public $category;
     public $subcategories = [];
     public $categoryId;
@@ -27,10 +29,9 @@ class SubCategories extends Component
 
     public function get_subcategories(){
         if($this->categoryId != ''){
-            $this->subcategories = SubCategory::where("category_id",$this->category_Id)->get();
+            $this->subcategories = SubCategory::where("category_id",$this->categoryId)->get();
         }
     }
-
     public function render()
     {
         return view('livewire.sub-categories');

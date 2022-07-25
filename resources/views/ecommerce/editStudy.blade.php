@@ -65,6 +65,13 @@
                                   </div>
                                 </div>
                                 <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Name</label>
+                                  <input type="text" class="form-control" name="name" id="validationTooltip05" value="{{$study->name}}" required>
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid title.
+                                  </div>
+                                </div>
+                                <div class=" position-relative">
                                   <label for="validationTooltip05" class="form-label">Description</label>
                                   <input type="text" class="form-control" name="description" id="validationTooltip05" value="{{$study->study->description}}" required>
                                   <div class="invalid-tooltip">

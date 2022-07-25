@@ -46,6 +46,14 @@ Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('stud
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
 Route::get('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 
+//........product......
+Route::get('/product',[Apiv1Controller::class,'get_Product'])->name('product.show');
+
+//........cart.........
+Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');
+Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart.delete');
+//........Coupon..........
+Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

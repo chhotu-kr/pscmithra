@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\AttempedExam;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
 use App\Models\Exam;
+use App\Models\Coupon;
+use App\Models\Product;
 use App\Models\Examination;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -203,6 +206,15 @@ class Apiv1Controller extends Controller
         $data = StudymetrialCategory::all();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+    // public function get_StudyChapter($sm_categories_id){
+
+    // public function get_StudyMetrial(){
+    //     return StudymetrialCategory::all();
+    // }
+
+
+    
+
 
 
 
@@ -263,6 +275,10 @@ class Apiv1Controller extends Controller
 
 
     //............product Api..............
+    
+
+
+    //............product Api..............
 
 
     public function get_SMetrial_data(Request $request)
@@ -289,7 +305,8 @@ class Apiv1Controller extends Controller
     $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
     where('sm_chapters_id',$sm_chapters_id)->get();
     return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
-  }else{
+  }
+  else{
     $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
     where('sm_chapters_id',$sm_chapters_id)->where('id',$sm_id)->get();
     return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
@@ -297,20 +314,7 @@ class Apiv1Controller extends Controller
     
       }
 
-    //     $sm_id = $request->sm_id;
-    //     if (empty($sm_id)) {
-    //         if ($sm_id != 0) {
-    //             return response()->json(['msg' => 'Enter SmChapter Id', 'status' => $request->sm_id]);
-    //         }
-    //     }
-    //     if ($sm_id == 0) {
-    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->get();
-    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    //     } else {
-    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->where('id', $sm_id)->get();
-    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    //     }
-    // }
+
 public function preareExam(Request $request){
 if(empty($request->user)){
     return response()->json(['msg' => 'Enter User', 'status' => false]);
@@ -335,21 +339,32 @@ return response()->json(['msg' => 'Exam Created', 'status' => true,'data'=>$Atte
 
 
 
-    // public function getExamination($category_id){
-    //     $data['examination']=Examination::where('category_id',$category_id)->get();
+public function get_Product(){
+    $data=Product::all();
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);  
+}
 
-    //     return response($data);
+public function Add_To_Cart(){
+    $data=Cart::all();
 
-    //     // echo $data;
-    // }
+    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
+}
 
-    // public function get_Detail($slugid){
-    //     $data['user']=User::where('slugid',$slugid)->get();
+public function DeleteCart(Cart $cart){
+    $cart->delete();
 
-    //     return response($data);
-    // }
+return response()->json(['msg'=>'Data deleted','status'=>true,'data'=>$cart]); 
+}
 
-
-
-
+ public function get_Verification($code){
+ $coupon=Coupon::where('code',$code)->first();
+ if(!$coupon){
+   
+        return response()->json(['msg' => 'Coupon not exist','status'=>true]);
+    }
+     else{
+        return response()->json(['msg' => 'Coupon allready used','status'=>false]);
+     }
+ }     
+ 
 }

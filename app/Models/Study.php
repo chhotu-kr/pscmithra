@@ -16,6 +16,7 @@ class study extends Model
         'sm_categories_id',
         'sm_chapters_id',
         'content',
+        'name',
         
 
     ];
