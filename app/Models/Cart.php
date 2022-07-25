@@ -13,6 +13,7 @@ class Cart extends Model
         'slugid',
         'product_id',
         'user_id',
+        'address_id',
     ];
 
     public function product(){
@@ -22,4 +23,12 @@ class Cart extends Model
     public function address(){
         return $this->hasOne(Address::class,'id','address_id');
     }
+    public function user(){
+        return $this->hasOne(User::class,'id','address_id');
+    }
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

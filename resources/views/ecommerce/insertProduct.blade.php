@@ -51,7 +51,7 @@
                         </div>
                     </div>
                    </div>
-                  
+                 
                    <div id ="extend"></div>
                    <div class="row">
                     {{-- <div class="col-6">
@@ -61,6 +61,8 @@
                       <a href="" onclick="myFunction()" class="btn btn-outline-dark mt-3 float-end">Add LiveExam</a>
                     </div>
                    </div> --}}
+
+                   <livewire:exam/>
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Price</label>
@@ -85,6 +87,7 @@
                         Looks good!
                       </div>
                   </div>
+                  {{-- <livewire:categories/> --}}
                   <div class="col-md-12 position-relative">
                     <label for="validationTooltip01" class="form-label">Image</label>
                     <input type="file" class="form-control" name="bannerimage" id="validationTooltip01"  required>
@@ -266,21 +269,11 @@
          }
         });
       }
-      else if(responseID == "plan"){console.log(responseID)
+      else if(responseID == "plan"){
+        console.log(responseID)
 
-       Html=`
-        <div class="row">
-          <div class="col-6">
-            <a id="mockTest" onclick="addMock();"  class="btn btn-primary">Add Mocktest</a>
-          
-            </div>
-          <div class="col-6">`;
-            Html+='<a id="live" onclick="kkk();"  class="btn btn-primary">Add Liveexam</a>';
-           Html+= `</div>
-          </div>
-          
-          <div id ="planE"></div>`;
-
+          Html = `;
+       
           $("#extend").html(Html);
       }
 
@@ -289,7 +282,17 @@
 
 function addMock(){
   
-  Html =` <livewire:categories />`;
+  Html =`
+        <div class="container">
+        <div class="row">
+    
+        <div class="col-2">
+        <a class="btn text-white btn-danger btn-sm"  >X</a>
+      </div>
+    </div>
+    </div>
+   
+      `;
   $("#planE").append(Html);
      
     
@@ -333,9 +336,9 @@ function remove(id){
     
         
 //  });
-function myFunction() {
-  document.getElementById("planE").innerHTML = "Hello World";
-}
+// function myFunction() {
+//   document.getElementById("planE").innerHTML = "Hello World";
+// }
 
 </script>
 @endsection

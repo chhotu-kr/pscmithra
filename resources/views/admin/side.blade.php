@@ -97,6 +97,11 @@
             </a>
           </li>
           <li>
+            <a href="{{route('cart.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Cart</span>
+            </a>
+          </li>
+          <li>
             <a href="{{route('product.index')}}">
               <i class="bi bi-circle"></i><span>Manage Product</span>
             </a>

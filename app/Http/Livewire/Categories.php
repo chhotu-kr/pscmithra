@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\SubCategory;
+
 class Categories extends Component
 {
     public $category;
@@ -12,20 +13,36 @@ class Categories extends Component
     public $categoryId;
     public $subcategory_id;
 
-    public function mount(){
-        $this->category= Category::where('exam_id',2)->get();
+    // public $inputs= [] ;
+    // protected $listeners = ['remove_mocktest'=>"remove_mocktest"];
+
+    public $iddd;
+
+
+
+public function removecall($id){
+   //
+    $this->emit('remove_mocktest',$id);
+}
+
+
+    public function mount($iass){
+
+         $this->iddd = $iass;
+
+        $this->category= Category::all();
 
         $this->get_subcategories();
     }
 
-    public function updatedCategoryId(){
+    public function updatedcategoryId(){
         $this->get_subcategories();
 
     }
 
     public function get_subcategories(){
         if($this->categoryId != ''){
-            $this->subcategories = SubCategory::where("category_id",$this->categoryId)->get();
+            $this->subcategories= SubCategory::where("category_id",$this->categoryId)->get();
         }
     }
     public function render()

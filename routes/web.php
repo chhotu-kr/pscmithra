@@ -18,10 +18,9 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
-
 
 
 use Illuminate\Support\Facades\Route;
@@ -300,3 +299,28 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
 // pdf subscription
 
  Route::get('/ebook',[ProductController::class,'get_PdfSubscription'])->name('pdf.subscription');
+
+ //.........QuizCategory...........
+ Route::get('/quiz',[QuizCategoryController::class,'index'])->name('quiz.category');
+ Route::post('/quizcat',[QuizCategoryController::class,'store'])->name('quizcat.store');
+ Route::get('/quizupdate/{id}',[QuizCategoryController::class,'edit'])->name('quizcategory.edit');
+ Route::post('/quizupdate/{id}',[QuizCategoryController::class,'update'])->name('quizcategory.update');
+ Route::get('/quizremove/{id}',[QuizCategoryController::class,'destroy'])->name('quizcategory.remove');
+
+ //.............quizSubCategory..............
+ Route::get('/quizSub',[QuizSubCategoryController::class,'index'])->name('quiz.Subcategory');
+ Route::post('/quizsubcat',[QuizSubCategoryController::class,'store'])->name('quizsubcat.store');
+ Route::get('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'edit'])->name('quizSubcat.edit');
+ Route::post('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'update'])->name('quizSubcat.update');
+ Route::get('/quizSubremove/{id}',[QuizSubCategoryController::class,'destroy'])->name('quizsubcategory.remove');
+ 
+ //..........quiz chapter.........
+ Route::get('/quiz/chapter',[QuizChapterController::class,'index'])->name('quiz.chapter');
+ Route::post('/quizchapt',[QuizChapterController::class,'store'])->name('quizchapter.store');
+ Route::get('/quizchaptupdate/{id}',[QuizChapterController::class,'edit'])->name('quizchapter.edit');
+ Route::post('/quizchaptupdate/{id}',[QuizChapterController::class,'update'])->name('quizchapter.update');
+ Route::get('/quizchaptremove/{id}',[QuizChapterController::class,'destroy'])->name('quizchapter.remove');
+
+ //........QuizTopic........
+ Route::get('/quiz/topic',[QuizTopicController::class,'index'])->name('quiz.topic');
+ Route::post('/quiztopic',[QuizTopicController::class,'store'])->name('quiztopic.store');

@@ -56,6 +56,37 @@ class AdminSeeder extends Seeder
             ['name'=>'Delete Question','slug'=>'delete-question'],
             ['name'=>'Edit Question','slug'=>'edit-question'],
             ['name'=>'View Question','slug'=>'view-question'],
+
+            ['name'=>'Add examination','slug'=>'add-examination'],
+            ['name'=>'Delete examination','slug'=>'delete-examination'],
+            ['name'=>'Edit examination','slug'=>'edit-examination'],
+            ['name'=>'View examination','slug'=>'view-examination'],
+
+            ['name'=>'Add category','slug'=>'add-category'],
+            ['name'=>'Delete category','slug'=>'delete-category'],
+            ['name'=>'Edit category','slug'=>'edit-category'],
+            ['name'=>'View category','slug'=>'view-category'],
+           
+
+            ['name'=>'Add subcategory','slug'=>'add-subcategory'],
+            ['name'=>'Delete subcategory','slug'=>'delete-subcategory'],
+            ['name'=>'Edit subcategory','slug'=>'edit-subcategory'],
+            ['name'=>'View subcategory','slug'=>'view-subcategory'],
+
+            ['name'=>'Add subject','slug'=>'add-subject'],
+            ['name'=>'Delete subject','slug'=>'delete-subject'],
+            ['name'=>'Edit subject','slug'=>'edit-subject'],
+            ['name'=>'View subject','slug'=>'view-subject'],
+
+            ['name'=>'Add topic','slug'=>'add-topic'],
+            ['name'=>'Delete topic','slug'=>'delete-topic'],
+            ['name'=>'Edit topic','slug'=>'edit-topic'],
+            ['name'=>'View topic','slug'=>'view-topic'],
+
+            ['name'=>'Add product','slug'=>'add-topic'],
+            ['name'=>'Delete product','slug'=>'delete-product'],
+            ['name'=>'Edit product','slug'=>'edit-product'],
+            ['name'=>'View product','slug'=>'view-product'],
            
         ]);
 
