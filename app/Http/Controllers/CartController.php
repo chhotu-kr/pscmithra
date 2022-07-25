@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -15,8 +16,9 @@ class CartController extends Controller
         $data['cart']=Cart::all();
         $data['product']=Product::all();
         $data['address']=Address::all();
+        $data['user']=User::all();
 
-        return view('admin.ecommerce.insertCart',$data);
+        return view('ecommerce.insertCart',$data);
     }
 
     public function create()
@@ -32,6 +34,7 @@ class CartController extends Controller
         $data->slugid=md5($request->cart .time());
         $data->product_id=$request->product_id;
         $data->address_id=$request->address_id;
+        $data->user_id=$request->user_id;
         $data->save();
        
         return redirect()->route('cart.index');
@@ -61,6 +64,7 @@ class CartController extends Controller
         $cart->slugid=md5($request->cart .time());
         $cart->product_id=$request->product_id;
         $cart->user_id=$request->user_id;
+        $cart->address_id=$request->address_id;
         $cart->save();
         return redirect()->route('cart.index');
     }

@@ -1,3 +1,3 @@
 <div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
+    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 </div>

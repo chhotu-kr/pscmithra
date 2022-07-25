@@ -23,6 +23,7 @@ class Subjects extends Component
         $this->get_topics();
 
     }
+    
 
     public function get_topics(){
         if($this->subjectId != ''){

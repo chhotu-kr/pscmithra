@@ -30,4 +30,8 @@ class Product extends Model
     public function topic(){
         return $this->hasOne(Topic::class,'id','topic_id');
     }
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
