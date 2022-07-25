@@ -97,7 +97,7 @@ class ExamSeeder extends Seeder
             <h6>Heading 6</h6>
             
             </body>
-            </html>',],
+            </html>'],
 
             
          ];
