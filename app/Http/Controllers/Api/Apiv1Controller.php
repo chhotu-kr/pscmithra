@@ -212,7 +212,7 @@ class Apiv1Controller extends Controller
     //     return StudymetrialCategory::all();
     // }
 
-    public function get_StudyChapter($sm_categories_id){
+
     
 
 
@@ -314,20 +314,7 @@ class Apiv1Controller extends Controller
     
       }
 
-        $sm_id = $request->sm_id;
-        if (empty($sm_id)) {
-            if ($sm_id != 0) {
-                return response()->json(['msg' => 'Enter SmChapter Id', 'status' => $request->sm_id]);
-            }
-        }
-        if ($sm_id == 0) {
-            $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->get();
-            return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-        } else {
-            $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->where('id', $sm_id)->get();
-            return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-        }
-    }
+     
 public function preareExam(Request $request){
 if(empty($request->user)){
     return response()->json(['msg' => 'Enter User', 'status' => false]);
