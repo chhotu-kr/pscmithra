@@ -71,7 +71,7 @@
                                           <td>
                                             <a href="{{route('quizexamination.update',['id'=>$cour->id])}}" class="btn btn-outline-secondary">Edit</a>
                                             <a href="{{route('quizexamination.remove',['id'=> $cour->slugid])}}" class="btn btn-outline-warning">Delete</a>
-                                            {{-- <a href="{{route('check.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a> --}}
+                                            <a href="{{route('manage.quizquestion',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
                                           </td>
                                       </tr>
                                   @endforeach
