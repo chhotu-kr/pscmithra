@@ -15,6 +15,12 @@ class QuizSubCategoryController extends Controller
         return view('quiz.insertQuizSubCat',$data);
     }
 
+    public function filter($quiz_categories){
+        $data['quizsubcat']=QuizSubCategory::where('quiz_categories',$quiz_categories)->get();
+        $data['quizcategory']=QuizCategory::all();
+        return view('quiz.insertQuizSubCat',$data);
+    }
+
     public function store(Request $request){
         $data= new QuizSubCategory();
         $data->name=$request->name;

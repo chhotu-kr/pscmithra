@@ -18,11 +18,10 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
-
-
+use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
 
 // Home Page Route 
@@ -314,14 +313,35 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::get('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'edit'])->name('quizSubcat.edit');
  Route::post('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'update'])->name('quizSubcat.update');
  Route::get('/quizSubremove/{id}',[QuizSubCategoryController::class,'destroy'])->name('quizsubcategory.remove');
+ Route::get('/subcat/filter/{id}',[QuizSubCategoryController::class,'filter'])->name('subcat.filter');
  
  //..........quiz chapter.........
- Route::get('/quiz/chapter',[QuizChapterController::class,'index'])->name('quiz.chapter');
+ Route::get('/quiz/chapter/{id}',[QuizChapterController::class,'index'])->name('quiz.chapter');
  Route::post('/quizchapt',[QuizChapterController::class,'store'])->name('quizchapter.store');
  Route::get('/quizchaptupdate/{id}',[QuizChapterController::class,'edit'])->name('quizchapter.edit');
  Route::post('/quizchaptupdate/{id}',[QuizChapterController::class,'update'])->name('quizchapter.update');
  Route::get('/quizchaptremove/{id}',[QuizChapterController::class,'destroy'])->name('quizchapter.remove');
 
  //........QuizTopic........
- Route::get('/quiz/topic',[QuizTopicController::class,'index'])->name('quiz.topic');
+ Route::get('/quiz/topic/{id}',[QuizTopicController::class,'index'])->name('quiz.topic');
  Route::post('/quiztopic',[QuizTopicController::class,'store'])->name('quiztopic.store');
+ Route::get('/quiztopicupdate/{id}',[QuizTopicController::class,'edit'])->name('quiztopic.edit');
+ Route::post('/quiztopicupdate/{id}',[QuizTopicController::class,'update'])->name('quiztopic.update');
+ Route::get('/quiztopicremove/{id}',[QuizTopicController::class,'destroy'])->name('quiztopic.remove');
+
+ //.........QuizExamination............
+
+ Route::get('/quizExamination',[QuizExaminationController::class,'index'])->name('quiz.examination');
+ Route::get('/quizExami',[QuizExaminationController::class,'create'])->name('quizexamination.create');
+ Route::post('/quizExamstore',[QuizExaminationController::class,'store'])->name('quizexamination.store');
+ Route::get('/quizExamupdate/{id}',[QuizExaminationController::class,'edit'])->name('quizexamination.edit');
+ Route::post('/quizExamupdate/{id}',[QuizExaminationController::class,'update'])->name('quizexamination.update');
+ Route::get('/quizexaminationremove/{id}',[QuizExaminationController::class,'destroy'])->name('quizexamination.remove');
+
+ //..........LiveTest............
+ Route::get('/live/test',[LiveTestController::class,'index'])->name('live.test');
+ Route::get('/live/testcreate',[LiveTestController::class,'create'])->name('livetest.create');
+ Route::post('/live/teststore',[LiveTestController::class,'store'])->name('livetest.store');
+ Route::get('/Live/testupdate/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
+ Route::post('/Live/testupdate/{id}',[LiveTestController::class,'update'])->name('livetest.update');
+ Route::get('/Livetestremove/{id}',[LiveTestController::class,'destroy'])->name('livetest.remove');

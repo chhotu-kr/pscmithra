@@ -9,7 +9,7 @@
         
     </select>
     <label for="" class="mt-3">Topic</label>
-    <select wire:model="topic_id" name="topic_id"  class="form-control mt-3">
+    <select wire:model="topic_id" name="topic_id" id="ikkkk"  class="form-control mt-3">
      <option>select</option>
         @foreach ($topics as $item)
             <option value="{{$item->id}}">{{$item->topic_name}}</option>
