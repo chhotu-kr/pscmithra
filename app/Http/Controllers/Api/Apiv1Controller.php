@@ -314,7 +314,7 @@ class Apiv1Controller extends Controller
     
       }
 
-     
+
 public function preareExam(Request $request){
 if(empty($request->user)){
     return response()->json(['msg' => 'Enter User', 'status' => false]);

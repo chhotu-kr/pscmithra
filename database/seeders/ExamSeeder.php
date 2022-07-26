@@ -49,7 +49,9 @@ class ExamSeeder extends Seeder
          StudymetrialChapter::insert($chapter);
          $sm = [
 
+
             ['id' => '1','slugid'=>'wvrfv4fd','name'=>'content','sm_categories_id' => '1','sm_chapters_id' => '1','content' => '<html>
+
             <body>
             
             <h1>Heading 1</h1>
@@ -62,6 +64,7 @@ class ExamSeeder extends Seeder
             </body>
             </html>
             ',],
+
             ['id' => '2','slugid'=>'wvm2xfd','name'=>'audio','sm_categories_id' => '1','sm_chapters_id' => '1','content' => '<html>
             <body>
             
@@ -74,7 +77,9 @@ class ExamSeeder extends Seeder
             
             </body>
             </html>',],
+
             ['id' => '3','slugid'=>'wty24fd','name'=>'video','sm_categories_id' => '2','sm_chapters_id' => '2','content' => '<html>
+
             <body>
             
             <h1>Heading 1</h1>
@@ -86,7 +91,9 @@ class ExamSeeder extends Seeder
             
             </body>
             </html>',],
+
             ['id' => '4','slugid'=>'qvgw634','name'=>'pdf','sm_categories_id' => '2','sm_chapters_id' => '2','content' => '<html>
+
             <body>
             
             <h1>Heading 1</h1>
