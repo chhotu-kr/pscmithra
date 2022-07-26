@@ -25,13 +25,13 @@
                             <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">id</th>
-                                  <th scope="col">Language</th>
-                                  <th scope="col">question_id</th>
-                                  <th scope="col">Question</th>
-                                  <th scope="col">Option1</th>
-                                  <th scope="col">Option2</th>
-                                  <th scope="col">Option3</th>
+                                  <th >id</th>
+                                  <th >Language</th>
+                                  <th>question_id</th>
+                                  <th >Question</th>
+                                  <th >Option1</th>
+                                  <th >Option2</th>
+                                  <th >Option3</th>
                                   <th scope="col">Option4</th>
                                   <th scope="col">Action</th>
                                   {{-- <th scope="col">Action</th> --}}

@@ -1,23 +1,4 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
-    {{-- <div>
-        If your happiness depends on money, you will never be happy with yourself.
-        <label for="" class="">Category</label>
-        <select wire:model="categoryId" id="category_id" name="category_id" class=" form-select  mt-3">
-            <option >select</option>
-            @foreach ($category as $client)
-                <option value="{{$client->id}}">{{$client->category}}</option>
-            @endforeach
-            
-        </select>
-        <label for="" class="mt-3">SubCategory</label>
-        <select wire:model="subcategory_id" name="subcategory_id" id="kkkk" class="form-control mt-3">
-         <option>select</option>
-            @foreach ($subcategories as $item)
-                <option value="{{$item->id}}">{{$item->subcategory}}</option>
-            @endforeach
-        </select>
-    </div> --}}
     <div class="row">
         <div class="col-2 mt-3">
                 <label for="" style="font-size: 12px">Category</label>
@@ -49,10 +30,9 @@
            </div>
            {{-- <a class="btn text-white btn-info btn-sm" wire:click.prevent="add({{$i}})">Add</a> --}}
 
-        
+           <div class="col-2 mt-6">
+            <button class="btn btn-danger btn-sm" wire:click.prevent="removecall({{$iddd}})"> X </button>
+        </div> 
         </div>
-        <div class="col col-lg-4">
-            <button class="btn btn-danger btn-sm" wire:click.prevent="removecall({{$iddd}})">Remove</button>
-        </div>   
     </div>
 </div>

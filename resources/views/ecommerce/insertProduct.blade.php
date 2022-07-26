@@ -36,20 +36,7 @@
                           Looks good!
                         </div>
                     </div>
-                    <div class="col-md-12 position-relative">
-                      <label for="" class="form-label">Type</label>
-                      <select name="type" id="selected" class="form-select" required>
-                        <option value="0">Select Type</option>
-                        <option value="book">Book</option>
-                        <option value="course">Course</option>
-                        <option value="pdf">Pdf</option>
-                        <option value="plan">Plan</option>
-                        <option value="ebook">Ebook</option>
-                    </select>
-                        <div class="valid-tooltip">
-                          Looks good!
-                        </div>
-                    </div>
+                    <livewire:plan-type/>
                    </div>
                  
                    <div id ="extend"></div>
@@ -62,7 +49,7 @@
                     </div>
                    </div> --}}
 
-                   <livewire:exam/>
+                  
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Price</label>
@@ -272,9 +259,9 @@
       else if(responseID == "plan"){
         console.log(responseID)
 
-          Html = `;
+          
        
-          $("#extend").html(Html);
+        // $("#extend").html(Html);
       }
 
       

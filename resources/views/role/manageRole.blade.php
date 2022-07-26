@@ -1,15 +1,16 @@
 @extends('admin.base')
 @section('content')
+@include('admin.side')
     <main class="main" id="main">
        <div class="container">
         <div class="row">
             <div class="col-3">
-                @include('admin.side')
+             
             </div>
             <div class="col-12">
                 <div class="row">
                   <div class="col-2">
-                    <a href="{{route('add.role')}}" class="btn btn-primary mb-3">Add Role</a>
+                    <a href="{{route('show.role')}}" class="btn btn-primary mb-3">Add Role</a>
                   </div>
                   <div class="col-12">
                     <section class="section">
@@ -19,10 +20,10 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Manage Role</h5>
-                              
+                              <div class = "table-responsive" style="white-space: nowrap;" > 
                   
                               <!-- Table with stripped rows -->
-                              <table class="table datatable">
+                              <table  id="with" style="width:100%">
                                 <thead>
                                   <tr>
                                     <th scope="col">id</th>
@@ -34,12 +35,12 @@
                                 <tbody>
                                     @foreach ($role as $req)
                                         <tr>
-                                            <td>{{$req->id}}</td>
+                                            <td scope="col">{{$req->id}}</td>
                                   
-                                            <td>{{$req->name}}</td>
-                                            <td>
-                                                {{-- <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                                                <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> --}}
+                                            <td scope="col">{{$req->name}}</td>
+                                            <td scope="col">
+                                                 <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
+                                                <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> 
                                             </td>
                                         </tr>
                                     @endforeach
@@ -47,7 +48,7 @@
                                 </tbody>
                               </table>
                               <!-- End Table with stripped rows -->
-                  
+                              </div>
                             </div>
                           </div>
                   

@@ -12,19 +12,18 @@
           <div class="card-body">
             <h5 class="card-title">Datatables</h5>
             
-
+            <div class = "table-responsive" style="white-space: nowrap;"> 
             <!-- Table with stripped rows -->
-            <table class="table">
+            <table class="table" id="with" style="width:100%">
               <thead>
                 <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">SubjectName</th>
-                  <th scope="col">TopicName</th>
-                 
-                  <th scope="col">Language</th>
-                  <th scope="col">name</th>
-                  <th scope="col">rightans</th>
-                  <th scope="col">Action</th>
+                  <th >id</th>
+                  <th >SubjectName</th>
+                  <th  >TopicName</th>
+                 <th >Language</th>
+                  <th>name</th>
+                  <th>rightans</th>
+                  <th>Action</th>
                  
                   
                 </tr>
@@ -63,6 +62,7 @@
                 
               </tbody>
             </table>
+            </div>
             <!-- End Table with stripped rows -->
 
           </div>

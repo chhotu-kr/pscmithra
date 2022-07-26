@@ -11,7 +11,7 @@ class BookController extends Controller
 
     public function index(){
         $data['book']=Book::all();
-        return view('ecommerce.InsertBook',$data);
+        return view('ecommerce.insertBook',$data);
     }
 
     public function BookStore(Request $request){
