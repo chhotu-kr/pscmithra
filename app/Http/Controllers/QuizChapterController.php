@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class QuizChapterController extends Controller
 {
     //
-    public function index(){
-        $data['quizchapter']=QuizChapter::all();
+    public function index($quiz_sub_categories){
+        $data['quizchapter']=QuizChapter::where('quiz_sub_categories',$quiz_sub_categories)->get();
         $data['quizsubcat']=QuizSubCategory::all();
         return view('quiz.insertQuizchat',$data);
     }
@@ -23,7 +23,7 @@ class QuizChapterController extends Controller
         $data->slugid=md5($request->quiz_Chapter .time());
         $data->save();
 
-        return redirect()->route('quiz.chapter');
+        return redirect()->back();
     }
 
     public function edit($id){

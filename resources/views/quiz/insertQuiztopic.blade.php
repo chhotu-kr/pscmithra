@@ -27,7 +27,7 @@
                           @csrf
                           
                           <div class=" position-relative">
-                            <label for="validationTooltip04" class="form-label">QuizSubCategory</label>
+                            <label for="validationTooltip04" class="form-label">QuizChapter</label>
                             <select class="form-select" name="quiz_chapters" id="validationTooltip04" required>
                               <option selected disabled value="0">Select Your QuizChapter</option>
                               @foreach ($quizchapter as $item)
@@ -88,17 +88,17 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->name}}</td>
-                                  <td>{{$item->quizchapt->name}}</td>
+                                  <td>{{$item->quizChat->name}}</td>
                                  
                                   <td>
-                                     {{-- <a href="{{route('quizchapter.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                     <a href="{{route('quiztopic.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     
                                     
-                                      <a href="{{route('quizchapter.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a> --}}
-                                      <a href="" class="btn btn-outline-danger">ManageQuizSubCategory</a>
+                                      <a href="{{route('quiztopic.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                      {{-- <a href="" class="btn btn-outline-danger">ManageQuizSubCategory</a> --}}
                                       
                               </tr>
-                          @endforeach
+                        @endforeach
                     </tbody>
                   </table>
                   <!-- End Table with stripped rows -->

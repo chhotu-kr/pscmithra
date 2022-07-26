@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('examinations', function (Blueprint $table) {
+        Schema::create('live_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id')->constrained();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('subcategory_id')->constrained('sub_categories');
             $table->string('exam_name');
             $table->string('startat');
             $table->float('rightmarks');
             $table->float('wrongmarks');
-            $table->string('slugid');
+            $table->string('slugid')->nullable();
             $table->integer('time_duration');
             $table->timestamps();
         });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('examinations');
+        Schema::dropIfExists('live_tests');
     }
 };

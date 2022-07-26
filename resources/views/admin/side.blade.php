@@ -178,7 +178,38 @@
          
         </ul>
       </li><!-- End Charts Nav -->
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Quiz</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{route('quiz.category')}}">
+              <i class="bi bi-circle"></i><span>Manage QuizCategory</span>
+            </a>
+          </li>
+          {{-- <li>
+            <a href="{{route('quiz.Subcategory')}}">
+              <i class="bi bi-circle"></i><span>Manage QuizSubCategory</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('quiz.chapter')}}">
+              <i class="bi bi-circle"></i><span>Manage QuizChapter</span>
+            </a>
+          </li>
+          <li>--}}
+            <a href="{{route('live.test')}}">
+              <i class="bi bi-circle"></i><span>Manage LiveTest</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('quiz.examination')}}">
+              <i class="bi bi-circle"></i><span>Manage QuizExamination</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
       
 
      
