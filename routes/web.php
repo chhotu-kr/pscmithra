@@ -18,7 +18,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Models\QuizExamination;
@@ -104,7 +104,7 @@ Route::get('/removesecondquestion/{id}',[SecondQuestionController::class,'delete
 Route::get('/removecategory/{id}',[CategoryController::class,'destroy'])->name('removecategory');
 Route::get('/removesubcategory/{id}',[SubCategoryController::class,'destroy'])->name('removesubcategory');
 Route::get('/deletelanguage/{id}',[LanguageController::class,'slugDelete'])->name('removelanguage');
-Route::get('/removelanguage/{id}',[ExamQuestionController::class,'destroy'])->name('remove.examquestion');
+Route::get('/removeexamquestion/{id}',[ExamQuestionController::class,'destroy'])->name('remove.examquestion');
 
 
 //edit method
@@ -344,3 +344,13 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::get('/Live/testupdate/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
  Route::post('/Live/testupdate/{id}',[LiveTestController::class,'update'])->name('livetest.update');
  Route::get('/Livetestremove/{id}',[LiveTestController::class,'destroy'])->name('livetest.remove');
+
+ //............QuizQuestion.........
+
+ Route::get('/manage/quizques/{id}',[QuizQuestionController::class,'index'])->name('manage.quizquestion');
+ Route::get('/quizques/create/{id}',[QuizQuestionController::class,'create'])->name('quizquestion.create');
+ Route::post('/quizques/store',[QuizQuestionController::class,'store'])->name('quizquestion.store');
+ Route::get('/quizques/update/{id}',[QuizQuestionController::class,'edit'])->name('quizquestion.edit');
+ Route::post('/quizques/update/{id}',[QuizQuestionController::class,'update'])->name('quizquestion.update');
+ Route::get('/quizques/remove/{id}',[QuizQuestionController::class,'destroy'])->name('quizquestion.destroy');
+ Route::post('/quiz/question',[QuizQuestionController::class,'QuizSubmit'])->name('quizQues.submit');
