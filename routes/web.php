@@ -45,10 +45,11 @@ use Illuminate\Support\Facades\Route;
 
  Route::get('/addadmin',[RoleController::class,'getAdmin'])->name('add.admin');
  Route::post('/adminrole',[RoleController::class,'store'])->name('store.role');
+ Route::post('/addrole',[RoleController::class,'store_role'])->name('add.role');
 Route::match(['get','post'],'/role',[RoleController::class,'getRole'])->name('manage.role');
 
 // .........Admin.............
-Route::get('/addrole',[RoleController::class,'get_Addrole'])->name('add.role');
+Route::get('/showrole',[RoleController::class,'get_Addrole'])->name('show.role');
 Route::get('/adminrole',[RoleController::class,'adminRole'])->name('get.admin');
 // Route::post('/admin',[RoleController::class,'StoreAdminRole'])->name('store.role');
 

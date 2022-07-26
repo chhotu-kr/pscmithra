@@ -16,17 +16,17 @@ public function mount(){
 
 }
  
-    public function add()
+    public function add($type)
     {
 
-        return dd('type');
-
-//         $id = count($this->inputs);
         
-// $ia['type'] = $type;
-// $ia['id'] = $id;
 
-//          $this->inputs[] = $ia;
+        $id = count($this->inputs);
+        
+$ia['type'] = $type;
+$ia['id'] = $id;
+
+          $this->inputs[] = $ia;
 
     }
 

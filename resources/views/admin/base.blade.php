@@ -28,7 +28,7 @@
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   
-
+  <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
@@ -86,7 +86,7 @@
 <script src="{{ asset('assets/vendor/chart.js/chart.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/quill/quill.min.js')}}"></script>
-<!-- <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script> -->
+<script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
 <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
 
@@ -94,12 +94,33 @@
 <script src="{{ asset('assets/js/main.js')}}"></script>
 <script>
 $(document).ready(function () {
-  $('#example').DataTable({
-      order: [[3, 'desc']],
+  $('#withNot').DataTable({
+      scrollX:false
+  });
+  $('#with').DataTable({
       scrollX:true
   });
 });
+
+
 </script>
+<script>
+            window.onload = function()
+        {
+            $('#withNot').DataTable({
+      scrollX:false
+  });
+  $('#with').DataTable({
+      scrollX:true
+  });
+        }  
+
+                   
+                   
+                   
+    
+              </script>
+
 <!-- Vendor CSS Files -->
 <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -107,7 +128,7 @@ $(document).ready(function () {
 <link href="{{asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
 <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
 <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-<!-- <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet"> -->
+<link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
 @livewireScripts

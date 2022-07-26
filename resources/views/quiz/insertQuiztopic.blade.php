@@ -72,7 +72,7 @@
                   
 
                   <!-- Table with stripped rows -->
-                  <table class="table datatable">
+                  <table class="table datatable cell-border" id="with" style="width:100%">
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
@@ -88,7 +88,7 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->name}}</td>
-                                  <td>{{$item->quizChat->name}}</td>
+                                  <td>{{$item->quizchapt->name}}</td>
                                  
                                   <td>
                                      <a href="{{route('quiztopic.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>

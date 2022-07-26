@@ -181,9 +181,10 @@ class Apiv1Controller extends Controller
     }
 
 
-    public function subcategory(Request $request){
-     $exam_id = $request->exam_id;
-     $category_id = $request->category_id;
+    public function subcategory(Request $request)
+    {
+        $exam_id = $request->exam_id;
+        $category_id = $request->category_id;
 
 
 
@@ -221,22 +222,21 @@ class Apiv1Controller extends Controller
 
     public function get_StudyChapter($sm_categories_id)
     {
-
-       
-
-
-
-        $data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get();
+$data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-   
+
     // .............Examination...........
     public function get_Examination(Request $request)
     {
 
         if (empty($request->user)) {
-            return response()->json(['msg' => 'Enter User Id', 'status' => false]);
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
         $exam_id = $request->exam_id;
         if (empty($exam_id)) {
@@ -250,8 +250,18 @@ class Apiv1Controller extends Controller
         if (empty($subcategory_id)) {
             return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
         }
-
+        $Attemp = array();
+        $Attemp = AttempedExam::where('users_id', $user_id->id)->pluck('examinations_id')->toArray();
         $data = Examination::where('exam_id', $exam_id)->where('category_id', $category_id)->where('subcategory_id', $subcategory_id)->get();
+
+        foreach ($data as $single) {
+            if (in_array($single->id, $Attemp)) {
+                $single['type'] = "Start";
+            } else {
+                $single['type'] = "Result";
+            }
+        }
+
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
@@ -292,50 +302,64 @@ class Apiv1Controller extends Controller
             return response()->json(['msg' => 'Enter SmChapter Id', 'status' => false]);
         }
 
-          $sm_chapters_id=$request->chapters_id;
-          if(empty($sm_chapters_id)){
-              return response()->json(['msg'=>'Enter SmChapter Id','status'=>false]); 
-          } 
-          $sm_id=$request->sm_id;
-          if(empty($sm_id) ){
-            if($sm_id!=0){
-              return response()->json(['msg'=>'Enter SmChapter Id','status'=>$request->sm_id]); }
-          } 
-  if($sm_id==0){
-    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
-    where('sm_chapters_id',$sm_chapters_id)->get();
-    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
-  }
-  else{
-    $data=Study::select('name','id','content')->where('sm_categories_id',$sm_categories_id)->
-    where('sm_chapters_id',$sm_chapters_id)->where('id',$sm_id)->get();
-    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
-  }
-    
-      }
+        $sm_chapters_id = $request->chapters_id;
+        if (empty($sm_chapters_id)) {
+            return response()->json(['msg' => 'Enter SmChapter Id', 'status' => false]);
+        }
+        $sm_id = $request->sm_id;
+        if (empty($sm_id)) {
+            if ($sm_id != 0) {
+                return response()->json(['msg' => 'Enter SmChapter Id', 'status' => $request->sm_id]);
+            }
+        }
+        if ($sm_id == 0) {
+            $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->get();
+            return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+        } else {
+            $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->where('id', $sm_id)->get();
+            return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+        }
+    }
 
+    //     $sm_id = $request->sm_id;
+    //     if (empty($sm_id)) {
+    //         if ($sm_id != 0) {
+    //             return response()->json(['msg' => 'Enter SmChapter Id', 'status' => $request->sm_id]);
+    //         }
+    //     }
+    //     if ($sm_id == 0) {
+    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->get();
+    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    //     } else {
+    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->where('id', $sm_id)->get();
+    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    //     }
+    // }
+    public function preareExam(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->examination)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examination)->first();
 
-public function preareExam(Request $request){
-if(empty($request->user)){
-    return response()->json(['msg' => 'Enter User', 'status' => false]);
-}
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
 
-if(empty($request->examination)){
-    return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-}
-$examination_id =  Examination::select('id')->where("slugid",$request->examination)->first();
-
-if(!$examination_id){
-    return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-}
-
-$Attemp = new AttempedExam();
-$Attemp->slugid = md5($request->user.time());
-$Attemp->examination_Id = $examination_id;
-$Attemp->userId = $examination_id;
-$Attemp->save();
-return response()->json(['msg' => 'Exam Created', 'status' => true,'data'=>$Attemp]);
-}
+        $Attemp = new AttempedExam();
+        $Attemp->slugid = md5($request->user . time());
+        $Attemp->examinations_id = $examination_id->id;
+        $Attemp->users_id = $user_id->id;
+        $Attemp->save();
+        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Attemp]);
+    }
 
 
 

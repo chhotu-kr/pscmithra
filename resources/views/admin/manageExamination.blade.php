@@ -24,7 +24,7 @@
                             {{--  --}}
                             <div class = "table-responsive" style="white-space: nowrap;"> 
                             <!-- Table with stripped rows -->
-                            <table id="example" class="display">
+                            <table id="with" class="display">
                               <thead>
                                 <tr>
                                   <th >id</th>
