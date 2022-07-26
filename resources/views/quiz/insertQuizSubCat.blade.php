@@ -95,7 +95,7 @@
                                     
                                     
                                       <a href="{{route('quizsubcategory.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
-                                      <a href="" class="btn btn-outline-danger">ManageQuizSubCategory</a>
+                                      <a href="{{route('quiz.chapter',['id'=>$item->id])}}" class="btn btn-outline-secondary">ManageQuizChapter</a>
                                       
                               </tr>
                           @endforeach

@@ -7,12 +7,12 @@
         <div class="col-3">
         @include('admin.side')
         </div>
-        <h2 class="text-theme ps-2 mt-2 h4">Edit QuizChapter</h2>
+        <h2 class="text-theme ps-2 mt-2 h4">Edit QuizTopic</h2>
         <div class="col-12">
          <div class="card">
-           <div class="card-header"><h6 class="text-theme h5 ps-2">Edit QuizChapter</h6></div>
+           <div class="card-header"><h6 class="text-theme h5 ps-2">Edit QuizTopic</h6></div>
            <div class="card-body">
-            <form action="{{ route('quizchapter.update', $quizchapter)}}" method="POST">
+            <form action="{{ route('quiztopic.update', $quiztop)}}" method="POST">
               @csrf
                 <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">QuizChapter</label>

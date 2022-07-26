@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuizTopic extends Model
+class LiveTest extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'quiz_chapters',
-        'name',
+        'start_at',
+        'exam_name',
+        'rightmarks',
+        'wrongmarks',
+        'time_duration',
         'slugid',
     ];
-    public function quizchapt(){
-        return $this->hasOne(QuizChapter::class,'id','quiz_chapters');
-    }
 }

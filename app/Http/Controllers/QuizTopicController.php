@@ -11,8 +11,8 @@ class QuizTopicController extends Controller
 {
     //
 
-    public function index(){
-        $data['quiztop']=QuizTopic::all();
+    public function index($quiz_chapters){
+        $data['quiztop']=QuizTopic::where('quiz_chapters',$quiz_chapters);
         $data['quizchapter']=QuizChapter::all();
 
         return view('quiz.insertQuiztopic',$data);
@@ -25,7 +25,7 @@ class QuizTopicController extends Controller
         $data->slugid=md5($request->quiz_Topic .time());
         $data->save();
 
-        return redirect()->route('quiz.topic');
+        return redirect()->back();
     }
     
     public function edit($id){
@@ -35,5 +35,25 @@ class QuizTopicController extends Controller
         return view('quiz.editQuiztopic',$data);
     }
 
-    public function
+    public function update(Request $request,$id){
+        $quiztop=QuizTopic::find($id);
+        $quiztop->name=$request->name;
+        $quiztop->quiz_chapters=$request->quiz_chapters;
+        $quiztop->slugid=md5($request->quiz_Topic .time());
+        $quiztop->save();
+
+        return redirect()->route('quiz.topic'); 
+    }
+
+    public function destroy($slug){
+        $sub=QuizTopic::where('slugid',$slug)->first();
+    if (!empty($sub)) {
+        $sub->delete();
+        session()->flash('success', 'Service has been deleted !!!');
+    } else {
+        session()->flash('error', 'Please try again !!!');
+    }
+    return redirect()->route('quiz.topic'); 
+
+    }
 }
