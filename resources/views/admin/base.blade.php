@@ -27,8 +27,8 @@
   <link href="{{ asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-  <link href="{{ asset('assets/vendor/simple-datatables/style.css')}}">
-
+  
+  <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
@@ -93,19 +93,34 @@
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js')}}"></script>
 <script>
-$(document).onDomChange(function () {
+$(document).ready(function () {
   $('#withNot').DataTable({
       scrollX:false
   });
- 
-});
-
-function domUpdateDelayExperiment() {
   $('#with').DataTable({
       scrollX:true
   });
-}
+});
+
+
 </script>
+<script>
+            window.onload = function()
+        {
+            $('#withNot').DataTable({
+      scrollX:false
+  });
+  $('#with').DataTable({
+      scrollX:true
+  });
+        }  
+
+                   
+                   
+                   
+    
+              </script>
+
 <!-- Vendor CSS Files -->
 <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">

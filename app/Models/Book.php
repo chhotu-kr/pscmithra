@@ -13,4 +13,8 @@ class Book extends Model
         'slugid',
         'bookname',
     ];
+
+    public function authors(){
+        return $this->hasOne(Author::class,'id','authors_id');
+    }
 }

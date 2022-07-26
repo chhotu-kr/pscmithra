@@ -19,13 +19,12 @@
         @if($planType == 'plan')
         <livewire:exam/>
         @else
-        <div class="card">
-            <div class="card-body">
+        
                 <h5 class="card-title">Select {{$planType}}</h5>
                 <div class="table-responsive" style="white-space: nowrap;">
 
                     <!-- Table with stripped rows -->
-                    <table id="with" class="datatable table" style="width:100%">
+                    <table class="datatable table" id ="example" style="width:100%">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -47,29 +46,28 @@
 
                         </tbody>
                     </table>
-              <script>
-                      $(document).ready(function () {
-  $('#withNot').DataTable({
-      scrollX:false
-  });
-  $('#with').DataTable({
-      scrollX:true
-  });
-});
-              </script>
+          
                     <!-- End Table with stripped rows -->
-                </div>
-            </div>
+                
         </div>
 
 
-
-
-
-
+        
+        <script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
 
         @endif
+      
         @endif
 
     </div>
+    
 </div>

@@ -12,7 +12,7 @@ class QuizTopicController extends Controller
     //
 
     public function index($quiz_chapters){
-        $data['quiztop']=QuizTopic::where('quiz_chapters',$quiz_chapters);
+        $data['quiztop']=QuizTopic::where('quiz_chapters',$quiz_chapters)->get();
         $data['quizchapter']=QuizChapter::all();
 
         return view('quiz.insertQuiztopic',$data);
