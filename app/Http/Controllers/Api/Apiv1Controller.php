@@ -214,7 +214,7 @@ class Apiv1Controller extends Controller
     // }
 
 
-    
+
 
 
 
@@ -222,7 +222,7 @@ class Apiv1Controller extends Controller
 
     public function get_StudyChapter($sm_categories_id)
     {
-$data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get();
+        $data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
@@ -285,7 +285,7 @@ $data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get()
 
 
     //............product Api..............
-    
+
 
 
     //............product Api..............
@@ -363,32 +363,39 @@ $data = StudymetrialChapter::where('sm_categories_id', $sm_categories_id)->get()
 
 
 
-public function get_Product(){
-    $data=Product::all();
-    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);  
-}
-
-public function Add_To_Cart(){
-    $data=Cart::all();
-
-    return response()->json(['msg'=>'Data Fetched','status'=>true,'data'=>$data]);
-}
-
-public function DeleteCart(Cart $cart){
-    $cart->delete();
-
-return response()->json(['msg'=>'Data deleted','status'=>true,'data'=>$cart]); 
-}
-
- public function get_Verification($code){
- $coupon=Coupon::where('code',$code)->first();
- if(!$coupon){
-   
-        return response()->json(['msg' => 'Coupon not exist','status'=>true]);
+    public function get_Product()
+    {
+        $data = Product::all();
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-     else{
-        return response()->json(['msg' => 'Coupon allready used','status'=>false]);
-     }
- }     
- 
+
+    public function Add_To_Cart()
+    {
+        $data = Cart::all();
+
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
+    public function DeleteCart(Cart $cart)
+    {
+        $cart->delete();
+
+        return response()->json(['msg' => 'Data deleted', 'status' => true, 'data' => $cart]);
+    }
+
+    public function get_Verification($code)
+    {
+        $coupon = Coupon::where('code', $code)->first();
+        if (!$coupon) {
+
+            return response()->json(['msg' => 'Coupon not exist', 'status' => true]);
+        } else {
+            return response()->json(['msg' => 'Coupon allready used', 'status' => false]);
+        }
+    }
+
+///////////////////////////Quiz////////////////////////////////////////////////////
+
+
+
 }
