@@ -24,4 +24,23 @@ class AuthorController extends Controller
 
         return redirect()->route('insert.index');
     }
+
+    public function edit($id){
+    $data['author']=Author::find($id);
+
+    return view('ecommerce.insertAuthor',$data);
+    }
+
+    public function update(Request $request,$id){
+      $author=Author::find($id);
+      $author->name=$request->name();
+      $author->slugid=md5($request->author .time());
+      $author->save();
+
+        return redirect()->route('insert.index');
+    }
+
+    public function destroy($slug){
+        $sub=Author::where('slugid',$slug)->first();
+    }
 }
