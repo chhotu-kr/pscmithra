@@ -23,13 +23,12 @@
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
                          <form action="{{route('quizchapter.store')}}" class="row g-3 needs-validation" method="post" novalidate>
-                            
                           @csrf
                           
                           <div class=" position-relative">
                             <label for="validationTooltip04" class="form-label">QuizSubCategory</label>
                             <select class="form-select" name="quiz_sub_categories" id="validationTooltip04" required>
-                              <option selected disabled value="0">Select Your QuizSubCategory</option>
+                              <option selected disabled >Select Your QuizSubCategory</option>
                               @foreach ($quizsubcat as $item)
                               <option value="{{$item->id}}">{{$item->name}}</option>
                               @endforeach

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('quiz_chapters')->constrained();
             $table->string('name');
+            $table->string('image')->nullable();
             $table->string('slugid');
             $table->timestamps();
         });

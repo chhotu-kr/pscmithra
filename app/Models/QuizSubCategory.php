@@ -14,7 +14,15 @@ class QuizSubCategory extends Model
         'name',
         'slugid',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function quizcat(){
         return $this->hasOne(QuizCategory::class,'id','quiz_categories');
+    }
+
+    public function chapter(){
+        return $this->hasMany(QuizChapter::class,'quiz_sub_categories','id');
     }
 }

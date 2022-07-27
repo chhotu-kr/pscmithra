@@ -14,6 +14,10 @@ class QuizTopic extends Model
         'name',
         'slugid',
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function quizchapt(){
         return $this->hasOne(QuizChapter::class,'id','quiz_chapters');
     }

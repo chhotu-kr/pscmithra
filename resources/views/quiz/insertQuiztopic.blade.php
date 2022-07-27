@@ -72,7 +72,7 @@
                   
 
                   <!-- Table with stripped rows -->
-                  <table class="table datatable cell-border" id="with" style="width:100%">
+                  <table class="" id="with" style="width:100%">
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
@@ -104,7 +104,7 @@
                   <!-- End Table with stripped rows -->
       
                 </div>
-              </div>
+            
       
             </div>
           </div>
