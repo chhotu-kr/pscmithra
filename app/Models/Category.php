@@ -13,7 +13,6 @@ class Category extends Model
 
     protected $fillable=[
         'slugid',
-       
         'category',
     ];
     protected $hidden = [

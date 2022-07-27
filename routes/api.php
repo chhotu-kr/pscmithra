@@ -29,8 +29,13 @@ Route::post("send-otp", [Apiv1Controller::class, "api_sendOTP"])->name("api.sign
 
 
 //category
-Route::get('/category/{id}',[Apiv1Controller::class,'category'])->name('api.category');
-Route::get('/subcategory',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
+Route::group(["prefix" => "mocktest"], function ($router) {
+
+Route::get('/category',[Apiv1Controller::class,'mockTestCategory'])->name('api.category');
+Route::get('/subcategory/{id}',[Apiv1Controller::class,'subcategory'])->name('api.subcategory');
+});
+
+
 // ....studymetrialcategory......
 
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
@@ -56,4 +61,10 @@ Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::group(["prefix" => "quiz"], function ($router) {
+Route::post('/category',[Apiv1Controller::class,'quizCategory']);
+Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);
+Route::post('/chapter',[Apiv1Controller::class,'quizChapter']);
+Route::post('/topic',[Apiv1Controller::class,'quizTopic']);
 });

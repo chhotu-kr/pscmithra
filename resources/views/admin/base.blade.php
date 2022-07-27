@@ -104,22 +104,7 @@ $(document).ready(function () {
 
 
 </script>
-<script>
-            window.onload = function()
-        {
-            $('#withNot').DataTable({
-      scrollX:false
-  });
-  $('#with').DataTable({
-      scrollX:true
-  });
-        }  
 
-                   
-                   
-                   
-    
-              </script>
 
 <!-- Vendor CSS Files -->
 <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">

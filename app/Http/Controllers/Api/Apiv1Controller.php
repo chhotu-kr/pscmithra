@@ -15,6 +15,9 @@ use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Examination;
 use App\Models\Category;
+use App\Models\QuizCategory;
+use App\Models\QuizChapter;
+use App\Models\QuizSubCategory;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
@@ -174,27 +177,15 @@ class Apiv1Controller extends Controller
 
     //category
 
-    public function category($exam_id)
+    public function mockTestCategory()
     {
-        $data = Category::where('exam_id', $exam_id)->get();
+        $data = Category::all();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
 
-    public function subcategory(Request $request)
+    public function subcategory($category_id)
     {
-        $exam_id = $request->exam_id;
-        $category_id = $request->category_id;
-
-
-
-        if (empty($exam_id)) {
-            return response()->json(['msg' => 'Enter Exam Id', 'status' => false]);
-        }
-        if (empty($category_id)) {
-            return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
-        }
-
         $data = SubCategory::where('category_id', $category_id)->get();
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -394,8 +385,75 @@ class Apiv1Controller extends Controller
         }
     }
 
-///////////////////////////Quiz////////////////////////////////////////////////////
+    ///////////////////////////Quiz////////////////////////////////////////////////////
+
+    public function quizCategory(Request $request)
+    {$rcheck =$this->__checkUser($request);
+
+        if(!empty($this->__checkUser($request))){
+            return response()->json($rcheck);
+        }
+        
+        $data = QuizCategory::withCount('subcategory')->get();
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    public function quizSubCategory(Request $request)
+    {
+
+        $rcheck =$this->__checkUser($request);
+
+        if(!empty($this->__checkUser($request))){
+            return response()->json($rcheck);
+        }
+        if (empty($request->category)) {
+            return response()->json(['msg' => 'Enter Cateogry', 'status' => false]);
+        }
+        $data = QuizSubCategory::where('quiz_categories', $request->category)->withCount('chapter')->get();
 
 
 
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    public function quizChapter(Request $request)
+    {
+        $rcheck =$this->__checkUser($request);
+
+        if(!empty($this->__checkUser($request))){
+            return response()->json($rcheck);
+        }
+        if (empty($request->subCategory)) {
+            return response()->json(['msg' => 'Enter SubCateogry', 'status' => false]);
+        }
+        $data = QuizChapter::where('quiz_sub_categories', $request->subCategory)->withCount('topic')->get();
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    public function quizTopic(Request $request)
+    {
+
+        $rcheck =$this->__checkUser($request);
+
+        if(!empty($this->__checkUser($request))){
+            return response()->json($rcheck);
+        }
+
+
+        if (empty($request->chapter)) {
+            return response()->json(['msg' => 'Enter Chapter', 'status' => false]);
+        }
+       
+        $data = QuizChapter::where('quiz_sub_categories', $request->chapter)->get();
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    public function __checkUser(Request $request)
+    {
+        if (empty($request->user)) {
+            return ['msg' => 'Enter User', 'status' => false];
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return ['msg' => 'Invalid User ID', 'status' => false];
+        }else{
+            return ;
+        }
+    }
 }
