@@ -11,7 +11,7 @@ class examination extends Model
     protected $table ='examinations';
 
     protected $fillable = [
-        'exam_id',
+       
         'category_id',
         'subcategory_id',
         'exam_name',
@@ -26,9 +26,7 @@ class examination extends Model
         'updated_at',
     ];
 
-    public function exam(){
-        return $this->hasOne(Exam::class,'id','exam_id');
-    }
+  
 
     public function category(){
         return $this->hasOne(Category::class,'id','category_id');

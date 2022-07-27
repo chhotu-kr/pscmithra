@@ -16,17 +16,16 @@ class CategorySeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        //
+    {      //
         $category = [
-            ['id' => '1','exam_id'=>'1','category' => 'Banking','slugid'=>'wer434fd',],
-            ['id' => '2','exam_id'=>'1','category' => 'Railway','slugid'=>'werg55634',],
-            ['id' => '3','exam_id' => '2','category'=>'SSC','slugid'=>'wesfr0fd74',],
-            ['id' => '4','exam_id' => '2','category'=>'MTS','slugid'=>'wesfr0fd34',],
-            ['id' => '5','exam_id' => '3','category'=>'NEET','slugid'=>'wesfr2erd34',],
-            ['id' => '6','exam_id' => '3','category'=>'UPSC','slugid'=>'wesfr2erd3j',],
-            ['id' => '7','exam_id' => '4','category'=>'UPSC NDA','slugid'=>'435sfr2erd34',],
-            ['id' => '8','exam_id' => '4','category'=>'IBPS','slugid'=>'435sfr2erda4',],
+            ['id' => '1','category' => 'Banking','slugid'=>'wer434fd',],
+            ['id' => '2','category' => 'Railway','slugid'=>'werg55634',],
+            ['id' => '3','category'=>'SSC','slugid'=>'wesfr0fd74',],
+            ['id' => '4','category'=>'MTS','slugid'=>'wesfr0fd34',],
+            ['id' => '5','category'=>'NEET','slugid'=>'wesfr2erd34',],
+            ['id' => '6','category'=>'UPSC','slugid'=>'wesfr2erd3j',],
+            ['id' => '7','category'=>'UPSC NDA','slugid'=>'435sfr2erd34',],
+            ['id' => '8','category'=>'IBPS','slugid'=>'435sfr2erda4',],
            
             
          ];

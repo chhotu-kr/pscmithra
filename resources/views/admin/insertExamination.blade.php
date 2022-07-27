@@ -13,7 +13,7 @@
                    <div class="card-body">
                     <form action="{{route('examination.store')}}" method="POST">
                         @csrf
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="validationTooltip04" class="form-label">Exam_id</label>
                             <select class="form-select" name="exam_id" id="validationTooltip04" required>
                               <option selected disabled value="">Choose your exam</option>
@@ -23,7 +23,7 @@
                             </select>
     
                             
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="validationTooltip04" class="form-label">Category_id</label>
                             <select class="form-select" name="category_id" id="validationTooltip04" required>

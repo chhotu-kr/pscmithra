@@ -28,7 +28,7 @@
                               <thead>
                                 <tr>
                                   <th >id</th>
-                                  <th class="col-1" >Exam Id</th>
+                                
                                   <th >Category Name</th>
                                   <th >SubCategory Name</th>
                                   {{-- <th>Question Name</th> --}}
@@ -50,7 +50,7 @@
                                   @foreach ($examination as $cour)
                                       <tr>
                                           <td>{{$cour->id}}</td>
-                                          <td>{{$cour->exam->examname}}</td>
+                                       
                                           <td>{{$cour->category->category}}</td>
                                           <td>{{$cour->subcategory->subcategory}}</td>
                                           {{-- <td>{{$cour->secondquestion->question}}</td> --}}

@@ -22,7 +22,7 @@ class ExaminationController extends Controller
         return view('admin.manageExamination',$data);
     }
     public function Create(){
-        $data['exam']=Exam::all();
+      
         $data['examination']=Examination::all();
          $data['category']=Category::all();
          $data['subcategory']=SubCategory::all();
@@ -32,7 +32,7 @@ class ExaminationController extends Controller
 
     public function storeExamination(Request $request){
         $data= new Examination();
-        $data->exam_id=$request->exam_id;
+      
         $data->category_id=$request->category_id;
         $data->subcategory_id=$request->subcategory_id;
         $data->exam_name=$request->exam_name;
@@ -48,7 +48,7 @@ class ExaminationController extends Controller
 
      public function edit($id){
         $data['examination']=Examination::find($id);
-        $data['exam']=Exam::all();
+     
         $data['category']=category::all();
         $data['subcategory']=subcategory::all();
         return view('admin.editExamination',$data); 
@@ -56,7 +56,7 @@ class ExaminationController extends Controller
 
     public function update(Request $request,$id){
         $examination=Examination::find($id);
-        $examination->exam_id=$request->exam_id;
+       
         $examination->category_id=$request->category_id;
         $examination->subcategory_id=$request->subcategory_id;
         $examination->exam_name=$request->exam_name;

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id')->constrained();
+      
             $table->foreignId('category_id')->constrained();
             $table->foreignId('subcategory_id')->constrained('sub_categories');
             $table->string('exam_name');

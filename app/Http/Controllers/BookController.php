@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Author;
 class BookController extends Controller
 {
     //
 
     public function index(){
         $data['book']=Book::all();
+        $data['author']=Author::all();
         return view('ecommerce.insertBook',$data);
     }
 
     public function BookStore(Request $request){
         $data= new Book();
-        $data->bookname=$request->bookname;
+        $data->name=$request->name;
+        $data->authors_id=$request->authors_id;
         $data->slugid=md5($request->bookname .time());
         $data->save();
         return redirect()->route('insert.book');
@@ -25,13 +28,15 @@ class BookController extends Controller
 
     public function edit($id){
         $data['book']=Book::find($id);
-
+        $data['author']=Author::all();
         return view('ecommerce.editBook',$data);
     }
 
     public function update(Request $request,$id){
          $book=Book::find($id);
-        $book->bookname=$request->bookname;
+        $book->name=$request->name;
+        
+        $book->authors_id=$request->authors_id;
          $book->slugid=md5($request->bookname .time());
         $book->save();
         return redirect()->route('insert.book');

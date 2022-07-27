@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         //
         $data['category']=Category::all();
-        $data['exam']=Exam::all();
+       
        return view('admin.insertCategory',$data);
     }
 
@@ -30,7 +30,7 @@ class CategoryController extends Controller
         //
         $data = new Category();
         $data->slugid=md5($request->category .time());
-        $data->exam_id=$request->exam_id;
+       
         $data->category=$request->category;
         $data->save();
         return redirect('/category');
@@ -46,7 +46,7 @@ class CategoryController extends Controller
     public function edit(Category $category,$id)
     {
         //
-        $data['exam']=Exam::all();
+      
         $data['category']=Category::find($id);
 
         return view('admin.editCategory',$data);
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         //
         $category=Category::find($id);
         $category->slugid=md5($request->category .time());
-        $category->exam_id=$request->exam_id;
+       
         $category->category=$request->category;
         $category->save();
         return redirect('/category');

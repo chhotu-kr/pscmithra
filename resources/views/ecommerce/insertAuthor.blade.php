@@ -8,7 +8,7 @@
       <div class="row">
           <div class="col-12">
             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
-              Add Book
+              Add Author
             </button>
           </div>
           
@@ -17,15 +17,15 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">Add Book Type</h5>
+                        <h5 class="modal-title">Add Author Type</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <form action="{{route('books.store')}}" method="POST">
+                      <form action="{{route('author.store')}}" method="POST">
                           @csrf
                         
                       <div class="modal-body">
 
-                        <div class=" position-relative">
+                        {{-- <div class=" position-relative">
                           <label for="validationTooltip04" class="form-label">Author</label>
                           <select class="form-select" name="authors_id" id="validationTooltip04" required>
                             <option selected disabled value="">Select Your Author</option>
@@ -36,9 +36,9 @@
                           <div class="invalid-tooltip">
                             Please select a valid id.
                           </div>
-                         </div>
+                        </div> --}}
                         <div class="mb-3">
-                            <label for="" class="h6">Book Name</label>
+                            <label for="" class="h6">Author Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
                        
@@ -79,16 +79,16 @@
                 </tr>
               </thead>
               <tbody>
-                 @foreach ($book as $item)
+                 @foreach ($author as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                            
                             <td>
-                               <a href="{{route('books.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                               {{-- <a href="{{route('books.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                               
                               
-                                <a href="{{route('books.delete',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                <a href="{{route('books.delete',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a> --}}
                             </td>
                         </tr>
                     @endforeach
