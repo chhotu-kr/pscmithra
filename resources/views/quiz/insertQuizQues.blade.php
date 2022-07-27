@@ -8,14 +8,14 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h6 class="border-5 border-start border-danger ps-1 mt-2   h4 text-theme text-warning">Add Examquestion</h6>
+          <h6 class="border-5 border-start border-danger ps-1 mt-2   h4 text-theme text-warning">Add Quizquestion</h6>
         </div>
         <div class="card-body">
           <input type="hidden"  id="idd" value="{{$id}}">
          
-        <form action="{{route('submit.check')}}" method="POST">
+        <form action="{{route('quizQues.submit')}}" method="POST">
           @csrf
-          <livewire:subjects /> 
+          <livewire:quiz-categories/>
         
           {{-- <th><input class="hidden" name="exam" value="question_id" ></th> --}}
           <table class="table datatable">
@@ -35,7 +35,7 @@
                 
                   </tbody>
             </table>
-            <input type="hidden" value="{{$id}}" name="examination_id">
+            <input type="hidden" value="{{$id}}" name="quiz_examinations_id">
             <input type="submit" class="btn btn-primary" id="btn">
       </form>
         </div>
@@ -55,7 +55,7 @@
 
 
 $(function() {
-    $("#ikkkk").change(function() {
+    $("#ddddd").change(function() {
 
       var Id = $(this).val();
       

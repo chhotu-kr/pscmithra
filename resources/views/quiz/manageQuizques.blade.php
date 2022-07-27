@@ -4,7 +4,7 @@
         
         @include('admin.side')
       <div class="container">
-        <a href="{{route('examquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add ExamQuestion</a>   
+        <a href="{{route('quizquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add QuizQuestion</a>   
         <div class="row">
           {{-- <p>{{$data}}</p> --}}
         
@@ -30,7 +30,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                 @foreach ($data['examquestion'] as $item)
+                                 @foreach ($data['quizquestion'] as $item)
                                         <tr>
                                         
                                        
@@ -46,7 +46,7 @@
                                             
                                            
                                             <td>
-                                              <a href="{{route('remove.examquestion',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
+                                              <a href="{{route('examquestion.edit',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
