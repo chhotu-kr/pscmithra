@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->foreignId('study_materials_id')->constrained();
             $table->foreignId('blog_id')->constrained();
+            $table->string('page');
             $table->string('title');
             $table->text('description');
             $table->timestamps();
