@@ -58,7 +58,7 @@ return redirect('/role');
 
     public function store(Request $request)
     {
-         return dd($request);
+        //  return dd($request);
         $data = new Admin();
         $data->name = $request->name;
         $data->email = $request->email;
@@ -95,6 +95,17 @@ return redirect('/role');
 
     //     // return dd($data->id);
     //     return redirect('/admin');
+    // }
+
+    // public function edit($id){
+    // $data['role']=Admin::find($id);
+    // $data['role']=Role::find('$id');
+
+    // return view('admin.editAdmin',compact('data'));
+    // }
+
+    // public function update(Request $request,$id){
+      
     // }
 
 }

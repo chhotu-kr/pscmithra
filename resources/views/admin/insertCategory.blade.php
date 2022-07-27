@@ -22,7 +22,7 @@
                         </div>
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
-                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" novalidate>
+                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             
                           @csrf
                           

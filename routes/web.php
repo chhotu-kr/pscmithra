@@ -308,12 +308,12 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::get('/quizremove/{id}',[QuizCategoryController::class,'destroy'])->name('quizcategory.remove');
 
  //.............quizSubCategory..............
- Route::get('/quizSub',[QuizSubCategoryController::class,'index'])->name('quiz.Subcategory');
+ Route::get('/quizSub{id}',[QuizSubCategoryController::class,'index'])->name('quiz.Subcategory');
  Route::post('/quizsubcat',[QuizSubCategoryController::class,'store'])->name('quizsubcat.store');
  Route::get('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'edit'])->name('quizSubcat.edit');
  Route::post('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'update'])->name('quizSubcat.update');
  Route::get('/quizSubremove/{id}',[QuizSubCategoryController::class,'destroy'])->name('quizsubcategory.remove');
- Route::get('/subcat/filter/{id}',[QuizSubCategoryController::class,'filter'])->name('subcat.filter');
+ //Route::get('/subcat/filter/{id}',[QuizSubCategoryController::class,'filter'])->name('subcat.filter');
  
  //..........quiz chapter.........
  Route::get('/quiz/chapter/{id}',[QuizChapterController::class,'index'])->name('quiz.chapter');

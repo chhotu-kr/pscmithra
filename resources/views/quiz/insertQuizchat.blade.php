@@ -25,7 +25,7 @@
                          <form action="{{route('quizchapter.store')}}" class="row g-3 needs-validation" method="post" novalidate>
                           @csrf
                           
-                          <div class=" position-relative">
+                          {{-- <div class=" position-relative">
                             <label for="validationTooltip04" class="form-label">QuizSubCategory</label>
                             <select class="form-select" name="quiz_sub_categories" id="validationTooltip04" required>
                               <option selected disabled >Select Your QuizSubCategory</option>
@@ -36,7 +36,8 @@
                             <div class="invalid-tooltip">
                               Please select a valid id.
                             </div>
-                          </div>
+                          </div> --}}
+                          <input type="hidden" name="quiz_sub_categories" value="{{$id}}">
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" id="validationTooltip05" required>

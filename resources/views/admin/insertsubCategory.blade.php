@@ -21,10 +21,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form action="{{route('subcategory.store')}}" class=" row g-3 needs-validation" method="post" novalidate>
+                        <form action="{{route('subcategory.store')}}" class=" row g-3 needs-validation" enctype="multipart/form-data" method="post" novalidate>
               
                           @csrf
-                        <div class=" position-relative">
+                        {{-- <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Category_Id</label>
                         <select class="form-select" name="category_id" id="validationTooltip04" required>
                           <option selected disabled value="">Choose Your Category</option>
@@ -35,7 +35,9 @@
                         <div class="invalid-tooltip">
                           Please select a valid id.
                         </div>
-                        </div>
+                        </div> --}}
+
+                        <input type="hidden" value="{{$id}}" name="category_id">
                         <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">SubCategory</label>
                         <input type="text" class="form-control" name="subcategory" id="validationTooltip05" required>

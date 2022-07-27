@@ -13,7 +13,7 @@ class QuizTopicController extends Controller
 
     public function index($quiz_chapters){
         $data['quiztop']=QuizTopic::where('quiz_chapters',$quiz_chapters)->get();
-        $data['quizchapter']=QuizChapter::all();
+        $data['id']=$quiz_chapters;
 
         return view('quiz.insertQuiztopic',$data);
     }
@@ -42,7 +42,7 @@ class QuizTopicController extends Controller
         $quiztop->slugid=md5($request->quiz_Topic .time());
         $quiztop->save();
 
-        return redirect()->route('quiz.topic'); 
+        return redirect()->back();
     }
 
     public function destroy($slug){
@@ -53,7 +53,7 @@ class QuizTopicController extends Controller
     } else {
         session()->flash('error', 'Please try again !!!');
     }
-    return redirect()->route('quiz.topic'); 
+    return redirect()->back();
 
     }
 }

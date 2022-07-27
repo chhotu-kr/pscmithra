@@ -11,7 +11,7 @@
                   <div class="card">
                     <div class="card-header">Edit SubCategory</div>
                     <div class="card-body">
-                        <form action="{{route('subcategory.Update', $subcategory)}}" class=" row g-3 needs-validation" method="post" novalidate>
+                        <form action="{{route('subcategory.Update', $subcategory)}}" class=" row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
               
                             @csrf
                           <div class=" position-relative">
@@ -33,6 +33,13 @@
                           <div class=" position-relative">
                           <label for="validationTooltip05" class="form-label">SubCategory</label>
                           <input type="text" class="form-control" name="subcategory" id="validationTooltip05" value="{{$subcategory->subcategory}}" required>
+                          <div class="invalid-tooltip">
+                            Please provide a valid category.
+                          </div>
+                          </div>
+                          <div class=" position-relative">
+                          <label for="validationTooltip05" class="form-label">Image</label>
+                          <input type="file" class="form-control" name="subcategory" id="validationTooltip05" value="{{$subcategory->image}}" required>
                           <div class="invalid-tooltip">
                             Please provide a valid category.
                           </div>
