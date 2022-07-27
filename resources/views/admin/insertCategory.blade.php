@@ -34,6 +34,13 @@
                               Please provide a valid category.
                             </div>
                           </div>
+                          <div class=" position-relative">
+                            <label for="validationTooltip05" class="form-label">Image</label>
+                            <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                            <div class="invalid-tooltip">
+                              Please provide a valid image.
+                            </div>
+                          </div>
                           <div class="col-12">
                             <button class="btn btn-primary w-100" type="submit">Create</button>
                           </div>

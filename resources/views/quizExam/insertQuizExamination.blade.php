@@ -85,15 +85,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="">RightMarks</label>
-                            <input type="text" name="rightmarks" class="form-control" required>
+                            <input type="number" name="rightmarks" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="">WrongMarks</label>
-                            <input type="text" name="wrongmarks" class="form-control" required>
+                            <input type="number" name="wrongmarks" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="">TimeDuration(In Minute)</label>
-                            <input type="text" name="time_duration" class="form-control" required>
+                            <input type="number" name="time_duration" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary w-100">Create</button>

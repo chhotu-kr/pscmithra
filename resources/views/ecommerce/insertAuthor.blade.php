@@ -85,10 +85,10 @@
                             <td>{{$item->name}}</td>
                            
                             <td>
-                               {{-- <a href="{{route('books.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                               <a href="{{route('author.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                               
                               
-                                <a href="{{route('books.delete',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a> --}}
+                                <a href="{{route('author.destroy',['id'=>$item->slug])}}" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

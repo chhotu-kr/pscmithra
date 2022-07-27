@@ -16,10 +16,7 @@ class QuizExaminationController extends Controller
     public function index(){
 
         $data['quiz_exami']=QuizExamination::all();
-        $data['quizcat']=QuizCategory::all();        
-        $data['quizsub']=QuizSubCategory::all();        
-        $data['quizchapt']=QuizChapter::all();        
-        $data['quiztopic']=QuizTopic::all();
+       
         
         return view('quizExam.manageQuizExamination',$data);
 
@@ -39,14 +36,17 @@ class QuizExaminationController extends Controller
     public function store(Request $request){
         $data=new QuizExamination();
         $data->quiz_categories_id=$request->quiz_categories;
-        $data->quiz_sub_categories_id=$request->quiz_sub_categories;
-        $data->quiz_chapters_id=$request->quiz_chapters;
-        $data->quiz_topics_id=$request->quiz_topic;
+        if(!empty($request->quiz_sub_categories)){
+        $data->quiz_sub_categories_id=$request->quiz_sub_categories;}
+        if(!empty($request->quiz_chapters)){
+        $data->quiz_chapters_id=$request->quiz_chapters;}
+        if(!empty($request->quiz_topic)){
+        $data->quiz_topics_id=$request->quiz_topic;}
         $data->exam_name=$request->exam_name;
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;
         $data->time_duration=$request->time_duration;
-        $data->slugid=md5($request->quizexamination .time());
+        $data->slugid=md5($request->quizexamination.time());
 
         $data->save();
 

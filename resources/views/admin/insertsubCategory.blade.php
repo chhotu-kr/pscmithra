@@ -40,7 +40,14 @@
                         <label for="validationTooltip05" class="form-label">SubCategory</label>
                         <input type="text" class="form-control" name="subcategory" id="validationTooltip05" required>
                         <div class="invalid-tooltip">
-                          Please provide a valid category.
+                          Please provide a valid subcategory.
+                        </div>
+                        </div>
+                        <div class=" position-relative">
+                        <label for="validationTooltip05" class="form-label">image</label>
+                        <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                        <div class="invalid-tooltip">
+                          Please provide a valid image.
                         </div>
                         </div>
                         

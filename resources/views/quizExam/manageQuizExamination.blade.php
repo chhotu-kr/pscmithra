@@ -24,7 +24,7 @@
                             {{--  --}}
                             <div class = "table-responsive" style="white-space: nowrap;"> 
                             <!-- Table with stripped rows -->
-                            <table id="example" class="display">
+                            <table  id="with" style="width:100%">
                               <thead>
                                 <tr>
                                   <th >id</th>
@@ -52,9 +52,24 @@
                                       <tr>
                                           <td>{{$cour->id}}</td>
                                           <td>{{$cour->quizCat->name}}</td>
-                                          {{-- <td>{{$cour->quizsubcat->name}}</td> --}}
+
+                                          @if(!empty($cour->quiz_sub_categories_id ))
+                                          <td>{{$cour->quizsubcat->name}}</td>
+                                          @else
+                                          <td> - </td>
+                                          @endif
+
+                                          @if(!empty($cour->quiz_chapters_id ))
                                           <td>{{$cour->quizChat->name}}</td>
+                                          @else
+                                          <td> - </td>
+                                          @endif
+
+                                          @if(!empty($cour->quiz_topics_id))
                                           <td>{{$cour->quiztopic->name}}</td>
+                                         @else
+                                          <td>-</td>
+                                          @endif
                                           
                                           <td>{{$cour->exam_name}}</td>
                                           <td>{{$cour->rightmarks}}</td>

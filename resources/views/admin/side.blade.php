@@ -86,6 +86,11 @@
               <i class="bi bi-circle"></i><span>Manage Course</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('insert.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Author</span>
+            </a>
+          </li>
           {{-- <li>
             <a href="{{route('manage.module')}}">
               <i class="bi bi-circle"></i><span>Manage Module</span>

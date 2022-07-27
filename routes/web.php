@@ -18,7 +18,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Models\QuizExamination;
@@ -355,3 +355,9 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::post('/quizques/update/{id}',[QuizQuestionController::class,'update'])->name('quizquestion.update');
  Route::get('/quizques/remove/{id}',[QuizQuestionController::class,'destroy'])->name('quizquestion.destroy');
  Route::post('/quiz/question',[QuizQuestionController::class,'QuizSubmit'])->name('quizQues.submit');
+//...........Author Route...............
+ Route::get('/author',[AuthorController::class,'index'])->name('insert.index');
+ Route::post('/author/store',[AuthorController::class,'store'])->name('author.store');
+ Route::get('/update/author/{id}',[AuthorController::class,'edit'])->name('author.edit');
+ Route::post('/update/author/{id}',[AuthorController::class,'update'])->name('author.update');
+ Route::get('/remove/author/{id}',[AuthorController::class,'destroy'])->name('author.destroy');
