@@ -14,7 +14,7 @@
            <div class="card-body">
             <form action="{{ route('category.Update',$category)}}" method="POST">
               @csrf
-                    <div class=" position-relative">
+                    {{-- <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Exam_Id</label>
                         <select class="form-select" name="exam_id" id="validationTooltip04" required>
                           <option selected disabled value="">Select Your Category</option>
@@ -30,7 +30,7 @@
                           Please select a valid id.
                         </div>
                       </div>
-                 </div>
+                 </div> --}}
                
               
                   <div class="position-relative">
@@ -40,7 +40,7 @@
                 
               
                <div class="mb-3">
-                 <button type="submit" class="btn btn-primary mt-3 w-100">submit</button>
+                 <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
                </div>
              </form>  
            </div>

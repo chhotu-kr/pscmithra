@@ -26,18 +26,7 @@
                             
                           @csrf
                           
-                          <div class=" position-relative">
-                            <label for="validationTooltip04" class="form-label">Exam_Id</label>
-                            <select class="form-select" name="exam_id" id="validationTooltip04" required>
-                              <option selected disabled value="0">Choose Your Category</option>
-                              @foreach ($exam as $item)
-                              <option value="{{$item->id}}">{{$item->examname}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-tooltip">
-                              Please select a valid id.
-                            </div>
-                          </div>
+                         
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Category</label>
                             <input type="text" class="form-control" name="category" id="validationTooltip05" required>
@@ -86,7 +75,7 @@
                        @foreach ($category as $item)
                               <tr>
                                   <td>{{$item->id}}</td>
-                                  <td>{{$item->exam->examname}}</td>
+                               
                                   <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
                                   <td>
                                      <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>

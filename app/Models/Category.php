@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $fillable=[
         'slugid',
-        'exam_id',
+       
         'category',
     ];
     protected $hidden = [
@@ -21,9 +21,7 @@ class Category extends Model
         'updated_at',
     ];
 
-    public function exam(){
-        return $this->hasOne(Exam::class,'id', 'exam_id');
-    }
+    
     public function subcat(){
         return $this->hasMany(SubCategory::class,'category_id','id');
     }
