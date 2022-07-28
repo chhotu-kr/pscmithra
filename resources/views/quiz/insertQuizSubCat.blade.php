@@ -17,7 +17,7 @@
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">Insert QuizCategory</h5>
+                          <h5 class="modal-title">Insert QuizSubCategory</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -26,7 +26,7 @@
                             
                           @csrf
                           
-                          <div class=" position-relative">
+                          {{-- <div class=" position-relative">
                             <label for="validationTooltip04" class="form-label">QuizCategory</label>
                             <select class="form-select" name="quiz_categories" id="validationTooltip04" required>
                               <option selected disabled value="0">Choose Your QuizCategory</option>
@@ -37,7 +37,9 @@
                             <div class="invalid-tooltip">
                               Please select a valid id.
                             </div>
-                          </div>
+                          </div> --}}
+
+                          <input  name="quiz_categories" value="{{$id}}" class="form-control" hidden>
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" id="validationTooltip05" required>

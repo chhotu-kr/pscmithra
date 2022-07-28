@@ -14,7 +14,7 @@ class SubCategoryController extends Controller
     {
         //
         $data['subcategory']= SubCategory::where('category_id',$category_id)->get();
-        $data['category']=Category::all();
+        $data['id']=$category_id;
         return view('admin/insertsubCategory',$data);
     }
 
@@ -32,6 +32,10 @@ class SubCategoryController extends Controller
         $data->slugid=md5($request->subcategory .time());
         $data->category_id=$request->category_id;
         $data->subcategory=$request->subcategory;
+        //image work
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('images'),$filename);
+        $data->image = $filename;
         $data->save();
         return redirect()->back();
     }
@@ -66,8 +70,12 @@ class SubCategoryController extends Controller
         $subcategory->slugid=md5($request->subcategory .time());
         $subcategory->category_id=$request->category_id;
         $subcategory->subcategory=$request->subcategory;
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $subcategory->image = $filename;
         $subcategory->save();
-        return redirect('/subcategory');
+        return redirect()->back();
     }
 
     
@@ -84,6 +92,6 @@ class SubCategoryController extends Controller
         else{
             session()->flash('error', 'Please try again !!!');
         } 
-        return redirect('/subcategory');
+        return redirect()->back();
     }
 }

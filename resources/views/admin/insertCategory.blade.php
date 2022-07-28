@@ -22,7 +22,7 @@
                         </div>
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
-                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" novalidate>
+                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             
                           @csrf
                           
@@ -32,6 +32,13 @@
                             <input type="text" class="form-control" name="category" id="validationTooltip05" required>
                             <div class="invalid-tooltip">
                               Please provide a valid category.
+                            </div>
+                          </div>
+                          <div class=" position-relative">
+                            <label for="validationTooltip05" class="form-label">Image</label>
+                            <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                            <div class="invalid-tooltip">
+                              Please provide a valid image.
                             </div>
                           </div>
                           <div class="col-12">

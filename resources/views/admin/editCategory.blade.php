@@ -37,6 +37,10 @@
                     <label for="validationTooltip04" class="ps-2">Category</label>
                     <input type="text" name="category" class="form-control" id="validationTooltip04" value="{{ $category->category}}" required>
                 </div>
+                  <div class="position-relative">
+                    <label for="validationTooltip04" class="ps-2">Image</label>
+                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $category->image}}" required>
+                </div>
                 
               
                <div class="mb-3">

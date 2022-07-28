@@ -12,7 +12,7 @@ class QuizChapterController extends Controller
     //
     public function index($quiz_sub_categories){
         $data['quizchapter']=QuizChapter::where('quiz_sub_categories',$quiz_sub_categories)->get();
-        $data['quizsubcat']=QuizSubCategory::all();
+        $data['id']=$quiz_sub_categories;
         return view('quiz.insertQuizchat',$data);
     }
 
@@ -40,7 +40,7 @@ class QuizChapterController extends Controller
         $quizchapter->slugid=md5($request->quiz_Chapter .time());
         $quizchapter->save();
 
-        return redirect()->route('quiz.chapter'); 
+        return redirect()->back();
     }
 
     public function destroy($slug){
@@ -51,6 +51,6 @@ class QuizChapterController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect()->route('quiz.chapter'); 
+        return redirect()->back(); 
     }
 }

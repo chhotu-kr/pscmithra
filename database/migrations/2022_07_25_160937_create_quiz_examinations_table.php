@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('quiz_examinations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quiz_categories_id')->constrained();
-            $table->foreignId('quiz_sub_categories_id')->constrained()->nullable();
-            $table->foreignId('quiz_chapters_id')->constrained()->nullable();
-            $table->foreignId('quiz_topics_id')->constrained()->nullable();
+            $table->foreignId('quiz_sub_categories_id')->nullable()->constrained();
+            $table->foreignId('quiz_chapters_id')->nullable()->constrained();
+            $table->foreignId('quiz_topics_id')->nullable()->constrained();
             $table->string('exam_name');
             $table->float('rightmarks');
             $table->float('wrongmarks');

@@ -32,6 +32,10 @@ class CategoryController extends Controller
         $data->slugid=md5($request->category .time());
        
         $data->category=$request->category;
+        //image
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('images'),$filename);
+        $data->image = $filename;
         $data->save();
         return redirect('/category');
     }
@@ -60,6 +64,10 @@ class CategoryController extends Controller
         $category->slugid=md5($request->category .time());
        
         $category->category=$request->category;
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $category->image = $filename;
         $category->save();
         return redirect('/category');
         

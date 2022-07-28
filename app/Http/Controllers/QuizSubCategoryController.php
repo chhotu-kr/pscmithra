@@ -9,17 +9,19 @@ use App\Models\QuizCategory;
 class QuizSubCategoryController extends Controller
 {
     //
-    public function index(){
-        $data['quizsubcat']=QuizSubCategory::all();
-        $data['quizcategory']=QuizCategory::all();
+    public function index($quiz_categories){
+        $data['quizsubcat']=QuizSubCategory::where('quiz_categories',$quiz_categories)->get();
+        $data['id']=$quiz_categories;
+        // $data['quizsubcat']=QuizSubCategory::all();
+        // $data['quizcategory']=QuizCategory::all();
         return view('quiz.insertQuizSubCat',$data);
     }
 
-    public function filter($quiz_categories){
-        $data['quizsubcat']=QuizSubCategory::where('quiz_categories',$quiz_categories)->get();
-        $data['quizcategory']=QuizCategory::all();
-        return view('quiz.insertQuizSubCat',$data);
-    }
+    // public function filter($quiz_categories){
+    //     $data['quizsubcat']=QuizSubCategory::where('quiz_categories',$quiz_categories)->get();
+    //     $data['quizcategory']=QuizCategory::all();
+    //     return view('quiz.insertQuizSubCat',$data);
+    // }
 
     public function store(Request $request){
         $data= new QuizSubCategory();
@@ -28,10 +30,11 @@ class QuizSubCategoryController extends Controller
         $data->slugid=md5($request->quiz_SubCategory .time());
         $data->save();
 
-        return redirect()->route('quiz.Subcategory');
+        return redirect()->back();
     }
     public function edit($id){
       $data['quizsubcat']=QuizSubCategory::find($id);
+     
       $data['quizcategory']=QuizCategory::all();
       return view('quiz/editQuizSubcat',$data);
     }
@@ -43,7 +46,7 @@ class QuizSubCategoryController extends Controller
         $quizsubcat->slugid=md5($request->quiz_SubCategory .time());
         $quizsubcat->save();
 
-        return redirect()->route('quiz.Subcategory');
+        return redirect()->back();
     }
 
     public function destroy($slug){
@@ -54,7 +57,7 @@ class QuizSubCategoryController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect()->route('quiz.Subcategory');
+        return redirect()->back();
     
     }
 }

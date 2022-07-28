@@ -26,7 +26,7 @@
                             
                           @csrf
                           
-                          <div class=" position-relative">
+                          {{-- <div class=" position-relative">
                             <label for="validationTooltip04" class="form-label">QuizChapter</label>
                             <select class="form-select" name="quiz_chapters" id="validationTooltip04" required>
                               <option selected disabled value="0">Select Your QuizChapter</option>
@@ -37,7 +37,10 @@
                             <div class="invalid-tooltip">
                               Please select a valid id.
                             </div>
-                          </div>
+                          </div> --}}
+
+                          <input type="hidden" name="quiz_chapters" value="{{$id}}">
+
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" id="validationTooltip05" required>
@@ -68,7 +71,7 @@
       
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Manage QuizChapter</h5>
+                  <h5 class="card-title">Manage QuizTopic</h5>
                   
 
                   <!-- Table with stripped rows -->
