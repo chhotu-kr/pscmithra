@@ -229,10 +229,10 @@ class Apiv1Controller extends Controller
         if (!$user_id) {
             return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
-        $exam_id = $request->exam_id;
-        if (empty($exam_id)) {
-            return response()->json(['msg' => 'Enter Exam Id', 'status' => false]);
-        }
+        // $exam_id = $request->exam_id;
+        // if (empty($exam_id)) {
+        //     return response()->json(['msg' => 'Enter Exam Id', 'status' => false]);
+        // }
         $category_id = $request->category_id;
         if (empty($category_id)) {
             return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
@@ -243,7 +243,7 @@ class Apiv1Controller extends Controller
         }
         $Attemp = array();
         $Attemp = AttempedExam::where('users_id', $user_id->id)->pluck('examinations_id')->toArray();
-        $data = Examination::where('exam_id', $exam_id)->where('category_id', $category_id)->where('subcategory_id', $subcategory_id)->get();
+        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)->get();
 
         foreach ($data as $single) {
             if (in_array($single->id, $Attemp)) {
