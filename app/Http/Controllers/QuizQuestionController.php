@@ -23,7 +23,7 @@ class QuizQuestionController extends Controller
     }
 
     public function create($id){
-        return view('quiz.insertQuizques',compact('id'));
+        return view('quiz.insertQuizQues',compact('id'));
     }
 
     public function QuizSubmit(Request $request){
