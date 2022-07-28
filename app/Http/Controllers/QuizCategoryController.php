@@ -19,6 +19,11 @@ class QuizCategoryController extends Controller
         $data= new QuizCategory();
         $data->name=$request->name;
         $data->slugid=md5($request->quiz_Category .time());
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $data->image = $filename;
+       
         $data->save();
 
         return redirect()->route('quiz.category');
@@ -32,6 +37,11 @@ class QuizCategoryController extends Controller
         $quizcategory=QuizCategory::find($id);
         $quizcategory->name=$request->name;
          $quizcategory->slugid=md5($request->quiz_Category .time());
+          //image
+          $filename = $request->image->getClientOriginalName();
+          $request->image->move(('images'),$filename);
+          $quizcategory->image = $filename;
+        
         $quizcategory->save();
 
         return redirect()->route('quiz.category');

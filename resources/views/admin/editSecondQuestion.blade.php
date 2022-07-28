@@ -12,7 +12,7 @@
                 <form action="{{ route('secondquestion.Update', $secondquestion) }}" class="row g-3 needs-validation" method="POST" novalidate>
                       
                     @csrf
-                    
+                    {{-- @method('put') --}}
                     <div class="col-md-6 position-relative">
                       <label for="validationTooltip04" class="form-label">Language_id</label>
                       <select class="form-select" name="language_id" id="validationTooltip04" required>

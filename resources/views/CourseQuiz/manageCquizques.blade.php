@@ -4,7 +4,7 @@
         
         @include('admin.side')
       <div class="container">
-        <a href="{{route('quizquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add QuizQuestion</a>   
+        <a href="{{route('Cquizquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add CourseQuizQuestion</a>   
         <div class="row">
           {{-- <p>{{$data}}</p> --}}
         
@@ -16,7 +16,7 @@
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">ManageExamQuestion</h5>
+                            <h5 class="card-title">ManageCourseQuizQuestion</h5>
                             <table class="table datatable">
                               <thead>
                                 <tr>
@@ -30,7 +30,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                 @foreach ($data['quizquestion'] as $item)
+                                 @foreach ($data['cqq'] as $item)
                                         <tr>
                                         
                                        
@@ -46,7 +46,7 @@
                                             
                                            
                                             <td>
-                                              <a href="{{route('remove.examquestion',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                              <a href="{{route('examquestion.edit',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -193,6 +193,12 @@
               <i class="bi bi-circle"></i><span>Manage QuizCategory</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('manage.course.quiz')}}">
+              <i class="bi bi-circle"></i><span>Manage CourseQuiz</span>
+            </a>
+          </li>
+         
           {{-- <li>
             <a href="{{route('quiz.Subcategory')}}">
               <i class="bi bi-circle"></i><span>Manage QuizSubCategory</span>

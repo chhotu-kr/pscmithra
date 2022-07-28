@@ -100,9 +100,10 @@ class SecondQuestionController extends Controller
     }
 
     
-    public function update(Request $request, SecondQuestion $secondQuestion)
+    public function update(Request $request, SecondQuestion $secondQuestion,$id)
     {
         //
+        $secondQuestion=SecondQuestion::find($id);
         $secondQuestion->language_id=$request->language_id;
         $secondQuestion->question_id=$request->question_id;
         $secondQuestion->slugid=md5($request->question .time());

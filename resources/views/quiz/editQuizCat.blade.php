@@ -12,7 +12,7 @@
          <div class="card">
            <div class="card-header"><h6 class="text-theme h5 ps-2">Edit QuizCategory</h6></div>
            <div class="card-body">
-            <form action="{{ route('quizcategory.update',$quizcategory)}}" method="POST">
+            <form action="{{ route('quizcategory.update',$quizcategory)}}" enctype="multipart/form-data" method="POST">
               @csrf
                     {{-- <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Exam_Id</label>
@@ -36,6 +36,10 @@
                   <div class="position-relative">
                     <label for="validationTooltip04" class="ps-2">name</label>
                     <input type="text" name="name" class="form-control" id="validationTooltip04" value="{{ $quizcategory->name}}" required>
+                </div>
+                  <div class="position-relative">
+                    <label for="validationTooltip04" class="ps-2">Image</label>
+                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $quizcategory->image}}" required>
                 </div>
                 
               

@@ -22,7 +22,7 @@
                         </div>
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
-                         <form action="{{route('quizcat.store')}}" class="row g-3 needs-validation" method="post" novalidate>
+                         <form action="{{route('quizcat.store')}}" class="row g-3 needs-validation" enctype="multipart/form-data" method="post" novalidate>
                             
                           @csrf
                           
@@ -44,9 +44,15 @@
                             <div class="invalid-tooltip">
                               Please provide a valid quizcategory.
                             </div>
+                          <div class=" position-relative">
+                            <label for="validationTooltip05" class="form-label">Image</label>
+                            <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                            <div class="invalid-tooltip">
+                              Please provide a valid quizcategory.
+                            </div>
                           </div>
                           <div class="col-12">
-                            <button class="btn btn-primary w-100" type="submit">Create</button>
+                            <button class="btn btn-primary w-100 mt-3" type="submit">Create</button>
                           </div>
                         </form><!-- End Custom Styled Validation with Tooltips -->
                         </div>
@@ -78,6 +84,7 @@
                         <th scope="col">Id</th>
                      
                         <th scope="col">Name</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Action</th>
                         
                       </tr>
@@ -87,7 +94,9 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->name}}</td>
-                                 
+                                  <td>
+                                    <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
+                                </td>
                                   <td>
                                      <a href="{{route('quizcategory.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     

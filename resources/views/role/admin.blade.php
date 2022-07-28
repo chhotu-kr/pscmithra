@@ -42,8 +42,8 @@
                                       
                                       
                                       <td>
-                                          <a href="" class="btn btn-outline-primary" disabled>Edit</a>
-                                          <a href="" class="btn btn-outline-danger">Delete</a>
+                                          <a href="{{route('admin.update',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
+                                          <a href="{{route('admin.remove',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>
                                       </td>
                                   </tr>
                               @endforeach

@@ -28,6 +28,10 @@ class QuizSubCategoryController extends Controller
         $data->name=$request->name;
         $data->quiz_categories=$request->quiz_categories;
         $data->slugid=md5($request->quiz_SubCategory .time());
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $data->image = $filename;
         $data->save();
 
         return redirect()->back();
@@ -44,6 +48,10 @@ class QuizSubCategoryController extends Controller
        $quizsubcat->name=$request->name;
         $quizsubcat->quiz_categories=$request->quiz_categories;
         $quizsubcat->slugid=md5($request->quiz_SubCategory .time());
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $quizsubcat->image = $filename;
         $quizsubcat->save();
 
         return redirect()->back();
