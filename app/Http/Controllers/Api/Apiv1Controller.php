@@ -388,11 +388,7 @@ class Apiv1Controller extends Controller
     ///////////////////////////Quiz////////////////////////////////////////////////////
 
     public function quizCategory(Request $request)
-    {$rcheck =$this->__checkUser($request);
-
-        if(!empty($this->__checkUser($request))){
-            return response()->json($rcheck);
-        }
+    {
         
         $data = QuizCategory::withCount('subcategory')->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -400,11 +396,7 @@ class Apiv1Controller extends Controller
     public function quizSubCategory(Request $request)
     {
 
-        $rcheck =$this->__checkUser($request);
-
-        if(!empty($this->__checkUser($request))){
-            return response()->json($rcheck);
-        }
+      
         if (empty($request->category)) {
             return response()->json(['msg' => 'Enter Cateogry', 'status' => false]);
         }
@@ -416,11 +408,7 @@ class Apiv1Controller extends Controller
     }
     public function quizChapter(Request $request)
     {
-        $rcheck =$this->__checkUser($request);
-
-        if(!empty($this->__checkUser($request))){
-            return response()->json($rcheck);
-        }
+      
         if (empty($request->subCategory)) {
             return response()->json(['msg' => 'Enter SubCateogry', 'status' => false]);
         }
@@ -430,11 +418,7 @@ class Apiv1Controller extends Controller
     public function quizTopic(Request $request)
     {
 
-        $rcheck =$this->__checkUser($request);
-
-        if(!empty($this->__checkUser($request))){
-            return response()->json($rcheck);
-        }
+      
 
 
         if (empty($request->chapter)) {
