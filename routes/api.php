@@ -59,6 +59,10 @@ Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');
 Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart.delete');
 //........Coupon..........
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
+//............blog............
+Route::get('/blog/{id}',[Apiv1Controller::class,'get_Blog'])->name('blog.show');
+Route::post('/blog/store',[Apiv1Controller::class,'get_BlockCategory'])->name('blog.store');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

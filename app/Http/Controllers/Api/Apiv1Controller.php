@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Blog;
 use App\Models\AttempedExam;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -464,4 +465,36 @@ class Apiv1Controller extends Controller
             return;
         }
     }
+
+    public function get_Blog($category_id){
+
+        $data=Blog::where('category_id',$category_id)->get();
+
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+       
+
+
+    }
+
+   public function get_BlockCategory(Request $request){
+
+    // $data=Blog::where('id',$request->id)->where('category_id',$request->category_id)->get();
+    $id=$request->id;
+    if(empty($request->id)){
+        return response()->json(['msg'=>'Enter id', 'Status'=> false]);
+    }
+
+    $category_id=$request->id;
+
+    if (empty($request->id)) {
+        return response()->json(['msg' => 'Enter Category', 'status' => false]);
+    }
+
+    else{
+        $data=Blog::where('id',$request->id)->where('category_id',$request->category_id)->get();
+        return response()->json(['msg'=>'Data Fetched','Status'=>true,'data'=>$data]);
+    }
+
+   
+   }
 }

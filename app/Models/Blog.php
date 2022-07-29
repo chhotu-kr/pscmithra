@@ -16,6 +16,11 @@ class Blog extends Model
         'righby',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function categ(){
         return $this->hasOne(Category::class,'id','category_id');
     }

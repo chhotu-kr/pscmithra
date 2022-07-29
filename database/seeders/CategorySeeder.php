@@ -74,5 +74,8 @@ class CategorySeeder extends Seeder
         
      ];
    Topic::insert($topic);
+
+      
+   
     }
 }

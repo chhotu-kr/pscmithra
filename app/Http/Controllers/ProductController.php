@@ -115,13 +115,31 @@ class ProductController extends Controller
             $pdfsubs->save();
         }else if($request->type='plan'){
 
-            if(!empty($request->liveexamduration) ||!empty($request->liveexam)){
+            
+            if(!empty($request->liveD) ||!empty($request->liveN)){
                 $planproduct = new ProductPlan();
                 $planproduct->product_id=$data->id;
-                $planproduct->liveexam=$request->liveexam;
-                $planproduct->examduration=$request->liveexamduration;
+                $planproduct->freemocktest=$request->liveN;
+                $planproduct->examduration=$request->liveD;
                 $planproduct->save();
-                
+             }
+             $co = count($request->category_id);
+
+             for($i=0;$i<$co;$i++  ){
+
+                $planproduct = new ProductPlan();
+                $planproduct->product_id=$data->id;
+if($request->category_id[$i]!=-1){
+    $planproduct->category_id=$request->category_id[$i];
+}
+if($request->subcategory_id[$i]!=-1){
+    $planproduct->subcategory_id=$request->subcategory_id[$i];
+}
+
+                $planproduct->freemocktest=$request->mocktestN[$i];
+                $planproduct->examduration=$request->mocktestD[$i];
+                $planproduct->save();
+
              }
             
          }

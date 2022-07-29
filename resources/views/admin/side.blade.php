@@ -146,6 +146,11 @@
               <i class="bi bi-circle"></i><span>Manage BlogCategory</span>
             </a>
           </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('blog.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Blog</span>
+            </a>
+          </li>  
           {{-- <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('manage.item')}}">
               <i class="bi bi-circle"></i><span>Manage ItemPdfsubscription</span>
@@ -196,6 +201,17 @@
           <li>
             <a href="{{route('manage.course.quiz')}}">
               <i class="bi bi-circle"></i><span>Manage CourseQuiz</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('manage.image')}}">
+              <i class="bi bi-circle"></i><span>Manage BackgroundImage</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{{route('manage.page')}}">
+              <i class="bi bi-circle"></i><span>Manage PageProduct</span>
             </a>
           </li>
          

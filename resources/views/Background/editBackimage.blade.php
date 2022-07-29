@@ -7,12 +7,12 @@
         <div class="col-3">
         @include('admin.side')
         </div>
-        <h2 class="text-theme ps-2 mt-2 h4">Edit Category</h2>
+        <h2 class="text-theme ps-2 mt-2 h4">Edit BackgroundImage</h2>
         <div class="col-12">
          <div class="card">
-           <div class="card-header"><h6 class="text-theme h5 ps-2">Edit Category</h6></div>
+           <div class="card-header"><h6 class="text-theme h5 ps-2">Edit BackgroundImage</h6></div>
            <div class="card-body">
-            <form action="{{ route('category.Update',$category)}}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('image.update',$bi)}}" enctype="multipart/form-data" method="POST">
               @csrf
                     {{-- <div class=" position-relative">
                         <label for="validationTooltip04" class="form-label">Exam_Id</label>
@@ -34,12 +34,12 @@
                
               
                   <div class="position-relative">
-                    <label for="validationTooltip04" class="ps-2">Category</label>
-                    <input type="text" name="category" class="form-control" id="validationTooltip04" value="{{ $category->category}}" required>
+                    <label for="validationTooltip04" class="ps-2">PageName</label>
+                    <input type="text" name="pagename" class="form-control" id="validationTooltip04" value="{{ $bi->pagename}}" required>
                 </div>
                   <div class="position-relative">
                     <label for="validationTooltip04" class="ps-2">Image</label>
-                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $category->image}}" required>
+                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $bi->image}}" required>
                 </div>
                 
               

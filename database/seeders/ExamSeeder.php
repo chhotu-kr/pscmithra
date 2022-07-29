@@ -24,7 +24,7 @@ class ExamSeeder extends Seeder
             ['id' => '1','examname' => 'Mock Test','slugid'=>'wer43434',],
             ['id' => '2','examname' => 'Quiz','slugid'=>'wesfr3434',],
             ['id' => '3','examname' => 'Live Exam','slugid'=>'wesfr34fd34',],
-            ['id' => '4','examname' => 'Course Quiz','slugid'=>'wevb3434',],
+            ['id' => '4','examname' => 'Course Quiz','slugid'=>'wevb343tr4',],
             
          ];
  
