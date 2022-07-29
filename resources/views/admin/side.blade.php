@@ -146,6 +146,11 @@
               <i class="bi bi-circle"></i><span>Manage BlogCategory</span>
             </a>
           </li>  
+          <li class="nav-item">
+            <a class="nav-link collapsed"  href="{{route('blog.index')}}">
+              <i class="bi bi-circle"></i><span>Manage Blog</span>
+            </a>
+          </li>  
           {{-- <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('manage.item')}}">
               <i class="bi bi-circle"></i><span>Manage ItemPdfsubscription</span>

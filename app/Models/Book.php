@@ -15,6 +15,11 @@ class Book extends Model
         'authors_id',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function authors(){
         return $this->hasOne(Author::class,'id','authors_id');
     }
