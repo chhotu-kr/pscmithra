@@ -63,6 +63,7 @@ return redirect('/role');
         $data->name = $request->name;
         $data->email = $request->email;
         $data->contact = $request->contact;
+        $data->slugid=md5($request->admin .time());
         $data->password = Hash::make($request->password);
         $data->save();
         $role = new users_roles();
@@ -97,15 +98,40 @@ return redirect('/role');
     //     return redirect('/admin');
     // }
 
-    // public function edit($id){
-    // $data['role']=Admin::find($id);
-    // $data['role']=Role::find('$id');
+    public function edit($id){
+    $data['role']=Admin::find($id);
+    $data['role']=Role::find($id);
 
-    // return view('admin.editAdmin',compact('data'));
-    // }
+    return view('role.editAddAdmin',compact('data'));
+    }
 
-    // public function update(Request $request,$id){
-      
-    // }
+    public function update(Request $request,$id){
+        $data = Admin::find($id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->contact = $request->contact;
+        $data->slugid=md5($request->admin .time());
+        $data->password = Hash::make($request->password);
+        $data->save();
+        // $role = new users_roles();
+        $role=Role::find($id);
+        $role->admin_id = $data->id;
+        $role->role_id = $request->role;
+        $role->timestamps = false;
+        $role->save();
+        return redirect()->route('store.role');
+    }
+
+    public function destroy($slug){
+    $req=Admin::where('slugid',$slug)->first();
+    if (!empty($req)) {
+        $req->delete();
+        session()->flash('success', 'Service has been deleted !!!');
+    } else {
+        session()->flash('error', 'Please try again !!!');
+    }
+
+    return redirect()->route('store.role');
+    }
 
 }

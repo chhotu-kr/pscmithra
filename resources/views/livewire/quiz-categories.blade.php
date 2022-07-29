@@ -28,7 +28,7 @@
     </select>
     @if(!empty($quiztopics))
     <label for="" class="mt-3">QuizTopic</label>
-    <select name="quiz_topic" id="ddddd"  class="form-control mt-3">
+    <select name="quiz_topic"   class="form-control mt-3">
      <option value="">select</option>
         @foreach ($quiztopics as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>

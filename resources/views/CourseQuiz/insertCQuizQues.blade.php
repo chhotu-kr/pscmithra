@@ -13,7 +13,7 @@
         <div class="card-body">
           <input type="hidden"  id="idd" value="{{$id}}">
          
-        <form action="{{route('quizQues.submit')}}" method="POST">
+        <form action="{{route('Cquizquestion.store')}}" method="POST">
           @csrf
           <livewire:subjects/>
         
@@ -67,7 +67,7 @@ $(function() {
          type:'get',
          dataType:'json',
         contentType:'application/json',
-         url:"{{ route('quizQues.submit') }}",
+         url:"{{ route('CquizQues.submit') }}",
          data:{'id':Id ,'eID':examid },
          success:function(data){
          console.log(data);
