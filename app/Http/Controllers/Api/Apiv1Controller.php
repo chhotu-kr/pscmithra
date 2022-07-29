@@ -17,6 +17,7 @@ use App\Models\Examination;
 use App\Models\Category;
 use App\Models\QuizCategory;
 use App\Models\QuizChapter;
+use App\Models\QuizExamination;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\SubCategory;
@@ -425,26 +426,26 @@ class Apiv1Controller extends Controller
 
     public function get_Quiz(Request $request)
     {
-        if (empty($request->user)) {
-            return response()->json(['msg' => 'Enter User', 'status' => false]);
-        }
-        $user_id =  User::select('id')->where("slugid", $request->user)->first();
-        if (!$user_id) {
-            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-        }
+        // if (empty($request->user)) {
+        //     return response()->json(['msg' => 'Enter User', 'status' => false]);
+        // }
+        // $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        // if (!$user_id) {
+        //     return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        // }
         $category_id = $request->category_id;
         if (empty($category_id)) {
             return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
         }
-        $subcategory_id = $request->subcategory_id;
-        if (empty($subcategory_id)) {
-            return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
-        }
+        
+        
 
-        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
-            ->leftjoin('attemped_exams', function ($join) {
-                $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 1);
-            })
+        $data = QuizExamination::where('quiz_categories_id', $category_id)
+        ->where('quiz_sub_categories_id', $request->subcategory_id)->where('quiz_chapters_id', $request->quizChapter)
+        ->where('quiz_topics_id', $request->topic_id)
+            // ->leftjoin('attemped_exams', function ($join) {
+            //     $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 1);
+            // })
             //->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.remain_time = 0 and attemped_exams.type = "result"   THEN 0 ELSE examinations.time_duration  END) AS ddr'))            
             ->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);

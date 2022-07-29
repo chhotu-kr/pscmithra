@@ -67,4 +67,5 @@ Route::post('/category',[Apiv1Controller::class,'quizCategory']);
 Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);
 Route::post('/chapter',[Apiv1Controller::class,'quizChapter']);
 Route::post('/topic',[Apiv1Controller::class,'quizTopic']);
+Route::post('/getQuiz',[Apiv1Controller::class,'get_Quiz']);
 });
