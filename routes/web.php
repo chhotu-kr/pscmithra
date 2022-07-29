@@ -18,9 +18,10 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BlogCategoryController, BlogController, BookController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
+
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
 
@@ -355,9 +356,33 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::post('/quizques/update/{id}',[QuizQuestionController::class,'update'])->name('quizquestion.update');
  Route::get('/quizques/remove/{id}',[QuizQuestionController::class,'destroy'])->name('quizquestion.destroy');
  Route::post('/quiz/question',[QuizQuestionController::class,'QuizSubmit'])->name('quizQues.submit');
+
+ //..........CourseQuizQuestion............
+
+ Route::get('/manage/Cquizques/{id}',[CourseQuizQuestionController::class,'index'])->name('manage.Cquizquestion');
+ Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('Cquizquestion.create');
+ Route::post('/quizques/store',[CourseQuizQuestionController::class,'store'])->name('Cquizquestion.store');
+ Route::get('/quizques/update/{id}',[CourseQuizQuestionController::class,'edit'])->name('Cquizquestion.edit');
+ Route::post('/quizques/update/{id}',[CourseQuizQuestionController::class,'update'])->name('Cquizquestion.update');
+ Route::get('/quizques/remove/{id}',[CourseQuizQuestionController::class,'destroy'])->name('Cquizquestion.destroy');
+ Route::post('/quiz/question',[CourseQuizQuestionController::class,'CourseQuizSubmit'])->name('CquizQues.submit');
+
+
 //...........Author Route...............
  Route::get('/author',[AuthorController::class,'index'])->name('insert.index');
  Route::post('/author/store',[AuthorController::class,'store'])->name('author.store');
  Route::get('/update/author/{id}',[AuthorController::class,'edit'])->name('author.edit');
  Route::post('/update/author/{id}',[AuthorController::class,'update'])->name('author.update');
  Route::get('/remove/author/{id}',[AuthorController::class,'destroy'])->name('author.destroy');
+//............CourseQuiz..............
+Route::get('/manage/course/quiz',[CourseQuizController::class,'index'])->name('manage.course.quiz');
+Route::get('/course/quiz',[CourseQuizController::class,'create'])->name('course.quiz');
+ Route::post('/course/quiz/store',[CourseQuizController::class,'store'])->name('coursequiz.store');
+ Route::get('/course/quiz/update/{id}',[CourseQuizController::class,'edit'])->name('coursequiz.edit');
+ Route::post('/course/quiz/update/{id}',[CourseQuizController::class,'update'])->name('coursequiz.update');
+ Route::get('/course/quiz/remove/{id}',[CourseQuizController::class,'destroy'])->name('coursequiz.remove');
+
+ //..........ADDAdmin..............
+ Route::get('update/admin/{id}',[RoleController::class,'edit'])->name('admin.edit');
+ Route::get('remove/admin/{id}',[RoleController::class,'destroy'])->name('admin.remove');
+ Route::post('update/admin/{id}',[RoleController::class,'update'])->name('admin.update');

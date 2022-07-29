@@ -56,7 +56,7 @@
                                           <td>
                                             <a href="{{route('livetest.update',['id'=>$cour->id])}}" class="btn btn-outline-secondary">Edit</a>
                                             <a href="{{route('livetest.remove',['id'=>$cour->slugid])}}" class="btn btn-outline-danger">Delete</a>
-                                            {{-- <a href="{{route('check.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a> --}}
+                                            <a href="{{route('manage.question',['id'=>$cour->id])}}" class=" btn btn-outline-info rounded-pill">Manage Question</a>
                                           </td>
                                       </tr>
                                   @endforeach

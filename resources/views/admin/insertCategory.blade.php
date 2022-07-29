@@ -72,8 +72,9 @@
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Exam</th>
+                        
                         <th scope="col">category</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Action</th>
                         
                       </tr>
@@ -84,6 +85,9 @@
                                   <td>{{$item->id}}</td>
                                
                                   <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
+                                  <td>
+                                    <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
+                                </td>
                                   <td>
                                      <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     
