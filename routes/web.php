@@ -18,7 +18,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
+use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 
@@ -386,3 +386,17 @@ Route::get('/course/quiz',[CourseQuizController::class,'create'])->name('course.
  Route::get('update/admin/{id}',[RoleController::class,'edit'])->name('admin.edit');
  Route::get('remove/admin/{id}',[RoleController::class,'destroy'])->name('admin.remove');
  Route::post('update/admin/{id}',[RoleController::class,'update'])->name('admin.update');
+
+ //........BackgroundImage...........
+ Route::get('/background/image',[BackgroundImageController::class,'index'])->name('manage.image');
+ Route::post('/background/image/store',[BackgroundImageController::class,'store'])->name('image.store');
+ Route::get('/background/image/update/{id}',[BackgroundImageController::class,'edit'])->name('image.edit');
+ Route::post('/background/image/update/{id}',[BackgroundImageController::class,'update'])->name('image.update');
+ Route::get('/background/image/remove/{id}',[BackgroundImageController::class,'destroy'])->name('image.remove');
+
+ //...........PageProduct............
+ Route::get('page/product/',[PageProductController::class,'index'])->name('manage.page');
+ Route::post('page/product/store',[PageProductController::class,'store'])->name('page.store');
+ Route::get('page/product/update/{id}',[PageProductController::class,'edit'])->name('page.edit');
+ Route::post('page/product/update/{id}',[PageProductController::class,'update'])->name('page.update');
+ Route::get('page/product/remove/{id}',[PageProductController::class,'destroy'])->name('page.remove');

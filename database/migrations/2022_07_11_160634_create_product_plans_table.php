@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('Plan_Products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
-            $table->foreignId('category_id')->constrained()->nullable();
-            $table->foreignId('subcategory_id')->constrained('sub_categories')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained();
+            $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories');
             $table->string('freemocktest')->nullable();
             $table->string('livetest')->nullable();
             $table->bigInteger('examduration');
-            $table->bigInteger('liveexamduration');
+           
             $table->timestamps();
         });
     }

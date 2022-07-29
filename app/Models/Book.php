@@ -11,7 +11,8 @@ class Book extends Model
 
     protected $fillable =[
         'slugid',
-        'bookname',
+        'name',
+        'authors_id',
     ];
 
     public function authors(){

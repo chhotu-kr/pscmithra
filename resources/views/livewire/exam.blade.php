@@ -21,10 +21,26 @@
 
 @foreach($inputs as $value)
 @if($value['type']=="Live")
+<h6>Live Exam</h6>
+<div class="row">
+    <div class="col-2 " >
+        <label style="font-size: 12px">Time Duration(In Days)</label>
+       <input type="number" class="form-control" name="liveD">
+       </div>
+       <div class="col-2">
+        <label style="font-size: 12px">No of Live Exam</label>
+         <input type="number" class="form-control" name="liveN">
+       </div>
+       <div class="col-2 ">
+        <button class="btn btn-danger btn-sm" wire:click.prevent="remove_mocktest({{$value['id']}})"> X </button>
+    </div> 
+</div>
 @endif
 @endforeach
 @foreach($inputs as $value)
 @if($value['type']!="Live")
+<h6>Mock Test</h6>
+
 @livewire('categories', ["iass"=>$value['id']] ,key($value['id']))
 @endif
 @endforeach

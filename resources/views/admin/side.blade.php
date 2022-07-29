@@ -198,6 +198,17 @@
               <i class="bi bi-circle"></i><span>Manage CourseQuiz</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('manage.image')}}">
+              <i class="bi bi-circle"></i><span>Manage BackgroundImage</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{{route('manage.page')}}">
+              <i class="bi bi-circle"></i><span>Manage PageProduct</span>
+            </a>
+          </li>
          
           {{-- <li>
             <a href="{{route('quiz.Subcategory')}}">
