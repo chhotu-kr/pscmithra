@@ -309,7 +309,7 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::get('/quizremove/{id}',[QuizCategoryController::class,'destroy'])->name('quizcategory.remove');
 
  //.............quizSubCategory..............
- Route::get('/quizSub{id}',[QuizSubCategoryController::class,'index'])->name('quiz.Subcategory');
+ Route::get('/quizSub/{id}',[QuizSubCategoryController::class,'index'])->name('quiz.Subcategory');
  Route::post('/quizsubcat',[QuizSubCategoryController::class,'store'])->name('quizsubcat.store');
  Route::get('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'edit'])->name('quizSubcat.edit');
  Route::post('/quizsubcatupdate/{id}',[QuizSubCategoryController::class,'update'])->name('quizSubcat.update');
