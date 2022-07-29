@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Category;
 use App\Models\SubCategory;
 use Livewire\Component;
 
@@ -16,7 +17,7 @@ class SubCategories extends Component
     public function mount(){
 
         // return dd($dd);
-        $this->category= SubCategory::all();
+        $this->category= Category::all();
        
 
         $this->get_subcategories();

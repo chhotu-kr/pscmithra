@@ -18,11 +18,12 @@ use App\Models\Category;
 use App\Models\QuizCategory;
 use App\Models\QuizChapter;
 use App\Models\QuizSubCategory;
+use App\Models\QuizTopic;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
 
-
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -221,7 +222,6 @@ class Apiv1Controller extends Controller
     // .............Examination...........
     public function get_Examination(Request $request)
     {
-
         if (empty($request->user)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
         }
@@ -229,10 +229,6 @@ class Apiv1Controller extends Controller
         if (!$user_id) {
             return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
-        // $exam_id = $request->exam_id;
-        // if (empty($exam_id)) {
-        //     return response()->json(['msg' => 'Enter Exam Id', 'status' => false]);
-        // }
         $category_id = $request->category_id;
         if (empty($category_id)) {
             return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
@@ -241,19 +237,14 @@ class Apiv1Controller extends Controller
         if (empty($subcategory_id)) {
             return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
         }
-        $Attemp = array();
-        $Attemp = AttempedExam::where('users_id', $user_id->id)->pluck('examinations_id')->toArray();
-        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)->get();
 
-        foreach ($data as $single) {
-            if (in_array($single->id, $Attemp)) {
-                $single['type'] = "Start";
-            } else {
-                $single['type'] = "Result";
-            }
-        }
-
-
+        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
+            ->leftjoin('attemped_exams', function ($join) {
+                $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 1);
+            })
+            //->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result"  THEN 0 ELSE (CASE WHEN attemped_exams.remain_time != 0  THEN attemped_exams.remain_time ELSE examinations.time_duration  END)  END) AS ddr'))            
+             ->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.type = "resume" THEN "Resume" ELSE "Start" END) AS is_user'))
+            ->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
@@ -360,6 +351,13 @@ class Apiv1Controller extends Controller
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
+
+    public function getProductFilter()
+    {
+        $data = Product::where('type');
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
     public function Add_To_Cart()
     {
         $data = Cart::all();
@@ -389,14 +387,14 @@ class Apiv1Controller extends Controller
 
     public function quizCategory(Request $request)
     {
-        
+
         $data = QuizCategory::withCount('subcategory')->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
     public function quizSubCategory(Request $request)
     {
 
-      
+
         if (empty($request->category)) {
             return response()->json(['msg' => 'Enter Cateogry', 'status' => false]);
         }
@@ -408,7 +406,7 @@ class Apiv1Controller extends Controller
     }
     public function quizChapter(Request $request)
     {
-      
+
         if (empty($request->subCategory)) {
             return response()->json(['msg' => 'Enter SubCateogry', 'status' => false]);
         }
@@ -417,17 +415,42 @@ class Apiv1Controller extends Controller
     }
     public function quizTopic(Request $request)
     {
-
-      
-
-
         if (empty($request->chapter)) {
             return response()->json(['msg' => 'Enter Chapter', 'status' => false]);
         }
-       
-        $data = QuizChapter::where('quiz_sub_categories', $request->chapter)->get();
+
+        $data = QuizTopic::where('quiz_chapters', $request->chapter)->get();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+
+    public function get_Quiz(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        $category_id = $request->category_id;
+        if (empty($category_id)) {
+            return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
+        }
+        $subcategory_id = $request->subcategory_id;
+        if (empty($subcategory_id)) {
+            return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
+        }
+
+        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
+            ->leftjoin('attemped_exams', function ($join) {
+                $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 1);
+            })
+            //->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.remain_time = 0 and attemped_exams.type = "result"   THEN 0 ELSE examinations.time_duration  END) AS ddr'))            
+            ->get();
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
+
     public function __checkUser(Request $request)
     {
         if (empty($request->user)) {
@@ -436,8 +459,8 @@ class Apiv1Controller extends Controller
         $user_id =  User::select('id')->where("slugid", $request->user)->first();
         if (!$user_id) {
             return ['msg' => 'Invalid User ID', 'status' => false];
-        }else{
-            return ;
+        } else {
+            return;
         }
     }
 }
