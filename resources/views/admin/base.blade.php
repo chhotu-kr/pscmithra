@@ -14,7 +14,16 @@
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+      tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+      "HTML-CSS": {
+        linebreaks: { automatic: true, width: "container" }          
+      }              
+   });
+</script>
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">

@@ -147,8 +147,6 @@ var tinymceaddd= "textareaoption4"+index;
             $("#viewww").append(html);
              tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceID);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceidd);
-            tinymce.EditorMaager.
-            tinymce.EditorManager.execCommand('mceFocus',false,tinymceidd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceiddd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceadd);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceaddd);
