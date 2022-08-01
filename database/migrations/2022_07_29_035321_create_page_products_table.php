@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('page_products', function (Blueprint $table) {
             $table->id();
             $table->string('pagename');
-            $table->foreignId('page_products_id')->constrained();
+            $table->foreignId('products_id')->constrained();
             $table->string('slugid')->nullable();
             $table->timestamps();
         });

@@ -460,9 +460,9 @@ class Apiv1Controller extends Controller
         return response()->json(['msg'=>'Enter id', 'Status'=> false]);
     }
 
-    $category_id=$request->id;
+    $category_id=$request->category_id;
 
-    if (empty($request->id)) {
+    if (empty($request->category_id)) {
         return response()->json(['msg' => 'Enter Category', 'status' => false]);
     }
 

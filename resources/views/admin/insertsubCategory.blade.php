@@ -52,6 +52,8 @@
                           Please provide a valid image.
                         </div>
                         </div>
+
+                        {{-- <input type="file" name="image[]" multiple class="form-control" accept="image/*"> --}}
                         
                         <div class="col-12">
                         <button class="btn btn-primary mt-3 w-100" type="submit">Create</button>
