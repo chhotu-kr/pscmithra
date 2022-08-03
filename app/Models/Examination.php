@@ -16,6 +16,7 @@ class Examination extends Model
         'subcategory_id',
         'exam_name',
         'marks',
+        'type',
         'slugid',
         
         'time_duration',

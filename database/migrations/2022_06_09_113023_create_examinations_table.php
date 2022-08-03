@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slugid');
             $table->string('marks');
             $table->integer('time_duration');
-            ///Erum live/not d:not
+            $table->enum('type',['live','not'])->default('not');
             $table->timestamps();
         });
     }
