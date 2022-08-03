@@ -13,6 +13,7 @@
                    <div class="card-body">
                     <form action="{{route('examination.store')}}" method="POST">
                         @csrf
+                       <livewire:category.categories/>
                         {{-- <div class="mb-3">
                             <label for="validationTooltip04" class="form-label">Exam_id</label>
                             <select class="form-select" name="exam_id" id="validationTooltip04" required>
@@ -24,7 +25,7 @@
     
                             
                         </div> --}}
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="validationTooltip04" class="form-label">Category_id</label>
                             <select class="form-select" name="category_id" id="validationTooltip04" required>
                               <option selected disabled value="0">Select category</option>
@@ -45,9 +46,9 @@
                           @endforeach
                             </select>
                             <div class="invalid-tooltip">
-                              Please select a valid ExamName.
+                              Please select a valid subcategory.
                             </div>
-                          </div>
+                          </div> --}}
                         {{-- <div class="mb-3">
                             <label for="validationTooltip04" class="form-label">Question</label>
                             <select class="form-select" name="question" id="validationTooltip04" required>
@@ -60,26 +61,27 @@
                               Please select a valid ExamName.
                             </div>
                           </div> --}}
-                        <div class="mb-3">
-                            <label for="">StartAt</label>
-                            <input type="text" name="startat" class="form-control" required>
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="">Exam_name</label>
                             <input type="text" name="exam_name" class="form-control" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="">RightMarks</label>
-                            <input type="text" name="rightmarks" class="form-control" required>
+                       <div class="row">
+                        <div class="col-6">
+                           
+                          <div class="mb-3">
+                           <label for="">Marks</label>
+                           <input type="text" name="marks" class="form-control" required>
+                          </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="">WrongMarks</label>
-                            <input type="text" name="wrongmarks" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
+                        <div class="col-6">
+                          <div class="mb-3">
                             <label for="">TimeDuration</label>
                             <input type="text" name="time_duration" class="form-control" required>
                         </div>
+                        </div>
+                       </div>
+                       
                         <div class="mb-3">
                             <button class="btn btn-outline-primary w-100">Create</button>
                         </div>

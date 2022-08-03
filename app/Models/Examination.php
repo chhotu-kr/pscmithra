@@ -15,8 +15,9 @@ class examination extends Model
         'category_id',
         'subcategory_id',
         'exam_name',
-        'rightmarks',
-        'wrongmarks',
+        'marks',
+        'slugid',
+        
         'time_duration',
 
     ];
