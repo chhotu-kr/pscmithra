@@ -14,6 +14,8 @@ class SecondQuestion extends Model
     protected $fillable =[
      'language_id',        
      'question_id',        
+     'direction',        
+     'explanation',        
      'question',        
      'option1',        
      'option2',        

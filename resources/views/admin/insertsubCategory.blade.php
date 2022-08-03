@@ -52,6 +52,8 @@
                           Please provide a valid image.
                         </div>
                         </div>
+
+                        {{-- <input type="file" name="image[]" multiple class="form-control" accept="image/*"> --}}
                         
                         <div class="col-12">
                         <button class="btn btn-primary mt-3 w-100" type="submit">Create</button>
@@ -96,7 +98,7 @@
                                 <td>{{$item->category->category}}</td>
                                 <td>{{$item->subcategory}}</td>
                                 <td>
-                                  <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
+                                  <img src="{{asset("upload/".$item->image)}}" width="40" height="40" alt="">
                               </td>
                                 <td>
                                    <a href="{{route('subcategory.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>

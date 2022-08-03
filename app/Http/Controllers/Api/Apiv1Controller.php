@@ -495,6 +495,13 @@ class Apiv1Controller extends Controller
     public function getExamData()
     {
 
+
+    $category_id=$request->category_id;
+
+    if (empty($request->category_id)) {
+        return response()->json(['msg' => 'Enter Category', 'status' => false]);
+    }
+
         //  $data = Examination::with(['secondquestion','secondquestion.language'])->get();
         //     //$data = ExamQuestion::with(['secondquestion','secondquestion.language'])->get();
         //     $data = ExamQuestion::where('examination_id',1)->leftjoin('second_questions as s','exam_questions.examination_id','s.question_id')
@@ -503,6 +510,7 @@ class Apiv1Controller extends Controller
 
         // //$data = SecondQuestion::where('question_id',2) ->join('languages as o','language_id','o.id') ->select('o.languagename',DB::raw('(concat(question," sdasdadad ",option1)) as question'))
         // ->get();
+
 
         // foreach($data as $t){
 

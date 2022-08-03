@@ -10,20 +10,25 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/remixicon.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/magnifypopup.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/odometer.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/lightbox.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/animation.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/jqueru-ui-min.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/swiper-bundle.min.css')}}">
-    <link rel="stylesheet" href="{{asset('new/assets/css/vendor/tipped.min.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/icomoon.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/remixicon.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/magnifypopup.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/odometer.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/lightbox.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/animation.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/jqueru-ui-min.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/tipped.min.css')}}">
 
     <!-- Site Stylesheet -->
-    <link rel="stylesheet" href="new/assets/css/app.css">
+    <link rel="stylesheet" href="{{asset('newlms/assets/css/app.css')}}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+
 
 </head>
 
@@ -43,7 +48,7 @@
                 <div class="header-top-right">
                     <ul class="header-info">
                         <li><a href="{{route('user.login')}}">Login</a></li>
-                        <li><a href="{{route('user.signup')}}">Register</a></li>
+                        <li><a href="{{route('user.register')}}">Register</a></li>
                         <li><a href="tel:+011235641231"><i class="icon-phone"></i>Call: 123 4561 5523</a></li>
                     </ul>
                 </div>
@@ -56,7 +61,7 @@
             <div class="header-navbar">
                 <div class="header-brand">
                     <div class="logo">
-                        <a href="index.php">
+                        <a href="{{route('view.home')}}">
                             <img class="logo-light" src="images/logo/logo-dark.png" alt="Logo">
                         </a>
                     </div>
@@ -64,21 +69,21 @@
                 <div class="header-mainnav">
                     <nav class="mainmenu-nav">
                         <ul class="mainmenu">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="{{route('user.mocktest')}}">Mock Text</a></li>
+                            <li><a href="{{route('view.home')}}">Home</a></li>
+                            <li><a href="{{route('view.category')}}">Mock Text</a></li>
                             <li class="has-droupdown"><a href="#">Study Materials</a>
                                 <ul class="submenu">
-                                    <li><a href="#">Course 1</a></li>
-                                    <li><a href="#">Course 1</a></li>
-                                    <li><a href="#">Course 1</a></li>
-                                    <li><a href="#">Course 1</a></li>
-                                    <li><a href="#">Course 1</a></li>
-                                    <li><a href="#">Course 1</a></li>
+                                    <li><a href="course.php">Course 1</a></li>
+                                    <li><a href="course.php">Course 2</a></li>
+                                    <li><a href="course.php">Course 3</a></li>
+                                    <li><a href="course.php">Course 4</a></li>
+                                    <li><a href="course.php">Course 5</a></li>
+                                    <li><a href="course.php">Course 6</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{route('user.quiztest')}}">Quizes</a></li>
-                            <li><a href="{{route('user.livetest')}}">Live Exam</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{route('view.quiz')}}">Quizes</a></li>
+                            <li><a href="#">Live Exam</a></li>
+                            <li><a href="contact.php">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -112,7 +117,7 @@
         <div class="inner">
             <div class="header-top">
                 <div class="logo">
-                    <a href="index.php">
+                    <a href="{{route('view.home')}}">
                         <img src="images/logo/logo-dark.png" alt="Logo">
                     </a>
                 </div>
@@ -123,8 +128,8 @@
                 </div>
             </div>
             <ul class="mainmenu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Mock Text</a></li>
+                <li><a href="{{route('view.home')}}">Home</a></li>
+                <li><a href="{{route('view.category')}}">Mock Text</a></li>
                 <li class="has-droupdown"><a href="#">Study Materials</a>
                     <ul class="submenu">
                         <li><a href="#">Course 1</a></li>
@@ -145,7 +150,7 @@
                         <li><a href="#">Course 1</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Quizes</a></li>
+                <li><a href="{{route('view.quiz')}}">Quizes</a></li>
                 <li><a href="#">Live Exam</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
@@ -168,8 +173,11 @@
             </div>
         </div>
     </div>
-@section('content')
-@show
+@section('pscmithra')
     
-
+@show
 </header>
+
+
+</body>
+</html>

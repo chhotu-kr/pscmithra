@@ -144,6 +144,7 @@ var tinymceaddd= "textareaoption4"+index;
                           Looks good!
                         </div>
                     </div>`;
+                    
             $("#viewww").append(html);
              tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceID);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceidd);

@@ -124,7 +124,7 @@
                                   Html+=`<tr>
                                     <td><input type='checkbox' value='${value.id}'name='data'></td>
                                     <td>${value.id}</td>
-                                    <td>${value.bookname}</td>
+                                    <td>${value.name}</td>
 
 
                                     </tr>`;
