@@ -41,6 +41,7 @@ Route::get('/subcategory/{id}',[Apiv1Controller::class,'subcategory'])->name('ap
 Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('study.category');
 Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
 Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
+Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
@@ -60,8 +61,9 @@ Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart
 //........Coupon..........
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 //............blog............
-Route::get('/blog/{id}',[Apiv1Controller::class,'get_Blog'])->name('blog.show');
-Route::post('/blog/store',[Apiv1Controller::class,'get_BlockCategory'])->name('blog.store');
+Route::post('/blogcategory',[Apiv1Controller::class,'getBlogCategory']);
+Route::post('/blogList',[Apiv1Controller::class,'getBlog']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

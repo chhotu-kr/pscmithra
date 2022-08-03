@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Category;
 class BlogController extends Controller
 {
@@ -17,8 +18,8 @@ class BlogController extends Controller
     }
 
     public function create(){
-        $data['blog']=Blog::all();
-        $data['category']=Category::all();
+        
+        $data['category']=BlogCategory::all();
 
         return view('ecommerce.insertBlog',$data);
     }
@@ -29,7 +30,7 @@ class BlogController extends Controller
        $blog->title=$request->title;
        $blog->description=$request->description;
        $blog->rightby=$request->rightby;
-    //    $blog->slugid=md5($request->title .time());
+        $blog->slugid=md5($request->title .time());
        $blog->save();
 
        return redirect()->route('blog.index');
