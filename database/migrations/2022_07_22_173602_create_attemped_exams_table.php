@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('examinations_id')->constrained();
             $table->enum('type', ['resume', 'result'])->default('resume');
             $table->string('slugid');
+            $table->integer('remain_time')->default('0');
             $table->timestamps();
         });
     }

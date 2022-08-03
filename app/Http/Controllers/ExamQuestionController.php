@@ -32,7 +32,8 @@ class ExamQuestionController extends Controller
             foreach($value as $item){
                 $inserting_array[] = [
                         'question_id' => $item,
-                        'examination_id' => $request->examination_id
+                        'examination_id' => $request->examination_id,
+                        'slugid' => md5('dfegfe'. time().'ff454tgw')
                 ];
             }
             ExamQuestion::insert($inserting_array);

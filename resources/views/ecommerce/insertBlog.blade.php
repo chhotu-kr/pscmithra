@@ -28,7 +28,7 @@
                       <select   name="category_id" class=" form-select" id="validationTooltip01"  required>
                           <option >select</option>
                           @foreach ($category as $item)
-                              <option value="{{$item->id}}">{{$item->category}}</option>
+                              <option value="{{$item->id}}">{{$item->name}}</option>
                           @endforeach
                           
                       </select>
