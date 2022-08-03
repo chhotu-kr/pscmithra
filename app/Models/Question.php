@@ -14,8 +14,7 @@ class Question extends Model
     protected $fillable =[
      'subject_id',        
      'topic_id',        
-     'name',        
-             
+     'name',            
      'rightans',        
      'slugid',                
      'isverified',        

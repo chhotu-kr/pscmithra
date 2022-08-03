@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class examination extends Model
+class Examination extends Model
 {
     use HasFactory;
     protected $table ='examinations';
@@ -36,10 +36,13 @@ class examination extends Model
         return $this->hasOne(SubCategory::class,'id','subcategory_id');
     }
     public function examQ(){
-        return $this->hasMany(Examquestion::class,'examination_id','id');
+        return $this->hasMany(ExamQuestion::class, 'examination_id','id');
     }
-    public function secondquestion(){
-        return $this->hasOne(SecondQuestion::class,'id','question');
+    // public function secondquestion(){
+    //     return $this->hasOne(SecondQuestion::class,'id','question');
+    // }
+    public function attm(){
+        return $this->hasOne(AttempedExam::class,'examinations_id','id');
     }
    
 }
