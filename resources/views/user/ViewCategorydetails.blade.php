@@ -12,18 +12,18 @@
                 <h1 class="title">Category</h1>
             </div>
             <ul class="education-breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('view.home')}}">Home</a></li>
                 <li class="separator"><i class="icon-angle-right"></i></li>
                 <li class="breadcrumb-item active" aria-current="page">Category Details</li>
             </ul>
         </div>
     </div>
     <ul class="shape-group">
-        <li class="shape-1"><img src="assets/images/about/shape-22.png" alt="shape"></li>
-        <li class="shape-2 scene"><img data-depth="2" src="assets/images/about/shape-13.png" alt="shape"></li>
-        <li class="shape-3 scene"><img data-depth="-2" src="assets/images/about/shape-15.png" alt="shape"></li>
-        <li class="shape-4"><img src="assets/images/about/shape-22.png" alt="shape"></li>
-        <li class="shape-5 scene"><img data-depth="2" src="assets/images/about/shape-07.png" alt="shape"></li>
+        <li class="shape-1"><img src="{{asset('newlms/assets/images/about/shape-22.png')}}" alt="shape"></li>
+        <li class="shape-2 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-13.png')}}" alt="shape"></li>
+        <li class="shape-3 scene"><img data-depth="-2" src="{{asset('newlms/assets/images/about/shape-15.png')}}" alt="shape"></li>
+        <li class="shape-4"><img src="{{asset('newlms/assets/images/about/shape-22.png" alt="shape')}}"></li>
+        <li class="shape-5 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
 </div>
 
@@ -33,8 +33,8 @@
     <div class="container">
         <div class="row row--30">
             <div class="col-lg-4">
-                <div class="education-blog-sidebar">
-                    
+                {{-- <div class="education-blog-sidebar">
+                   
                     <div class="education-blog-widget widget-categories">
                         <div class="inner">
                             <h4 class="widget-title">Categories</h4>
@@ -61,10 +61,11 @@
                             <a href="#" class="education-btn btn-medium">Start Now <i class="icon-4"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                <livewire:form/>
             </div>
 
-            <div class="col-lg-8">
+            {{-- <div class="col-lg-8">
                 
                 <div class="blog-details-content">
                     <div class="entry-content">
@@ -199,7 +200,7 @@
 
                 </div>
 
-            </div>
+            </div> --}}
             
         </div>
     </div>

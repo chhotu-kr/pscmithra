@@ -75,8 +75,8 @@ class QuestionController extends Controller
             $que->language_id=$request->language_id[$i];
             $que->question_id=$data->id;
             $que->question=$request->question_add_id[$i];
-            $que->direction=$request->direction[$i];
-            $que->explanation=$request->explanation[$i];
+            // $que->direction=$request->direction[$i];
+            // $que->explanation=$request->explanation[$i];
             $que->option1=$request->option1[$i];
             $que->option2=$request->option2[$i];
             $que->option3=$request->option3[$i];

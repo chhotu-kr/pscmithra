@@ -19,7 +19,7 @@
                     <div class="features-list" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
                         <div class="features-box color-extra02-style edublink-svg-animate">
                             <div class="icon">
-                                <img class="svgInject" src="{{asset('newlms\assets\images\animated-svg-icons/online-class.svg" alt="animated icon')}}">
+                                <img class="svgInject" src="{{asset('newlms\assets\images\animated-svg-icons\online-class.svg')}}" alt="animated icon">
                                 <!-- <i class="icon-5"></i> -->
                             </div>
                             <div class="content">
@@ -68,10 +68,12 @@
                 <button data-filter="*" class="is-checked">
                     <span class="filter-text">All</span>
                 </button>
-                <button data-filter=".ESEGATEEC">
-                    <span class="filter-text">ESE & GATE EC</span>
-                </button>
-                <button data-filter=".IAS">
+               @foreach ($category as $item)
+               <button  data-filter=".ESEGATEEC">
+                <span class="">{{$item->category}}</span>
+            </button>
+               @endforeach
+                {{-- <button data-filter=".IAS">
                     <span class="filter-text">IAS</span>
                 </button>
                 <button data-filter=".IASHindi">
@@ -94,25 +96,28 @@
                 </button>
                 <button data-filter=".CLATUG">
                     <span class="filter-text">CLAT UG</span>
-                </button>
+                </button> --}}
             </div>
             <div class="isotope-list gallery-grid-wrap">
                 <div id="animated-thumbnials">
 
                     <div class="row g-5">
-
+                     {{-- {{$subcategory}} --}}
+                    @foreach ($subcategory as $item)
                     <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item ESEGATEEC" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
                         <div class="categorie-grid categorie-style-2 color-primary-style edublink-svg-animate">
                             <div class="icon">
-                                <i class="icon-9"></i>
+                                {{-- <i class="icon-9"></i> --}}
+                                <img src="{{asset("upload/".$item->image)}}"  width="70" height="70"  alt=""> 
                             </div>
                             <div class="content">
-                                <h5 class="title">Business Management</h5>
+                                <h5 class="title">{{$item->subcategory}}</h5>
                             </div>
                         </div>
-                    </div>
+                    </div> 
+                    @endforeach
 
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IAS" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                    {{-- <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IAS" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                         <div class="categorie-grid categorie-style-2 color-secondary-style">
                             <div class="icon">
                                 <i class="icon-10 art-design"></i>
@@ -198,7 +203,7 @@
                                 <h5 class="title">Video & Photography</h5>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 </div>
@@ -306,6 +311,54 @@
             </div>
         </div>
         <div class="row g-5">
+            @foreach ($pro as $item)
+            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                <div class="education-product">
+                    <div class="inner">
+                        <div class="thumbnail">
+                           
+                            <a href="{{route('view.coursedetails')}}">
+                                {{-- <img src="{{asset('newlms\assets\img\desk-top-publishing.jpg')}}" alt="Shop Images"> --}}
+                                @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
+                                {{-- <img src="{{asset("images/".$item->bannerimage)}}"  alt=""> --}}
+                               
+                            </a>
+                            <div class="product-hover-info">
+                                <ul>
+                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="title"><a href="{{route('view.coursedetails')}}">{{$item->description}}</a></h3>
+                            <div class="price">Rs {{$item->price}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            {{-- <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                <div class="education-product">
+                    <div class="inner">
+                        <div class="thumbnail">
+                            <a href="course-details.php">
+                                <img src="{{asset('newlms\assets\img\the-magic-book-cover-img.png')}}" alt="Shop Images">
+                            </a>
+                            <div class="product-hover-info">
+                                <ul>
+                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
+                            <div class="price">Rs 70.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                 <div class="education-product">
                     <div class="inner">
@@ -347,49 +400,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <div class="education-product">
-                    <div class="inner">
-                        <div class="thumbnail">
-                            <a href="course-details.php">
-                                <img src="{{asset('newlms\assets\img\desk-top-publishing.jpg')}}" alt="Shop Images">
-                            </a>
-                            <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                            <div class="price">Rs 70.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <div class="education-product">
-                    <div class="inner">
-                        <div class="thumbnail">
-                            <a href="course-details.php">
-                                <img src="{{asset('newlms\assets\img\the-magic-book-cover-img.png')}}" alt="Shop Images">
-                            </a>
-                            <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                            <div class="price">Rs 70.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> --}}
          
         
      

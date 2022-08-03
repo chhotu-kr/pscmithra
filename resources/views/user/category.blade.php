@@ -72,20 +72,22 @@
             <h2 class="title">Select Your  <span class="color-primary">Exam Category</span></h2>
         </div>
         <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+            @foreach ($cate as $item)
             <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
+                <a href="{{route('view.categorydetails')}}">
                     <div class="categorie-grid categorie-style-3 color-primary-style">
                         <div class="icon">
                             <i class="icon-9"></i>
                         </div>
                         <div class="content">
-                            <h5 class="title">PO, Clerk, SO, Insurance</h5>
+                            <h5 class="title">{{$item->category}}</h5>
                         </div>
                     </div>
                 </a>
                 
             </div>
-            <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+            @endforeach
+            {{-- <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                 <a href="category-details.php">
                 <div class="categorie-grid categorie-style-3 color-secondary-style">
                     <div class="icon">
@@ -193,12 +195,12 @@
                 </div>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 
 <div class="edu-gallery-area edu-section-gap">
-    <div class="container">
+    <div class="container mt-5">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
         </div>
@@ -207,10 +209,12 @@
                 <button data-filter="*" class="is-checked">
                     <span class="filter-text">All</span>
                 </button>
-                <button data-filter=".ESEGATEEC">
-                    <span class="filter-text">ESE & GATE EC</span>
-                </button>
-                <button data-filter=".IAS">
+               @foreach ($cate as $item)
+               <button data-filter=".ESEGATEEC">
+                <span class="filter-text">{{$item->category}}</span>
+            </button>
+               @endforeach
+                {{-- <button data-filter=".IAS">
                     <span class="filter-text">IAS</span>
                 </button>
                 <button data-filter=".IASHindi">
@@ -233,25 +237,29 @@
                 </button>
                 <button data-filter=".CLATUG">
                     <span class="filter-text">CLAT UG</span>
-                </button>
+                </button> --}}
             </div>
             <div class="isotope-list gallery-grid-wrap">
                 <div id="animated-thumbnials">
 
-                    <div class="row g-5">
+                 <div class="row g-5">
 
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item ESEGATEEC" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-primary-style edublink-svg-animate">
-                            <div class="icon">
-                                <i class="icon-9"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Business Management</h5>
-                            </div>
+                   @foreach ($subcategory as $item)
+                   <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item ESEGATEEC" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
+                     <div class="categorie-grid categorie-style-2 color-primary-style edublink-svg-animate">
+                        <div class="icon">
+                            <i class="icon-9"></i>
                         </div>
-                    </div>
+                        <div class="content">
+                            <h5 class="title">{{$item->subcategory}}</h5>
+                        </div>
+                     </div>
+                   </div>
+                   @endforeach
+                 </div>
+                 
 
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IAS" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                    {{-- <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IAS" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                         <div class="categorie-grid categorie-style-2 color-secondary-style">
                             <div class="icon">
                                 <i class="icon-10 art-design"></i>
@@ -337,10 +345,10 @@
                                 <h5 class="title">Video & Photography</h5>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
-                </div>
+             
             </div>
         </div>
     </div>

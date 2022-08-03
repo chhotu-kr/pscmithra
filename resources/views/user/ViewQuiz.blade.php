@@ -197,30 +197,32 @@
                     <form id="regForm" action="/action_page.php">
                       <h1>Quizes </h1>
                       <!-- One "tab" for each step in the form: -->
-                      <div class="tab">
-                        <div class="quition-no">
-                            <h5>1/5</h5>
-                        </div>
-                        <p class="quition-para">1. Which of the following sentences is correct</p>
-                        <div class="form-group">
-                          <input type="radio" id="1" class="vh" name="mca">
-                          <label for="1">When its raining ,people's umbrella are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="2" class="vh" name="mca">
-                          <label for="2">When its raining,people's umbrella are all your going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="3" class="vh" name="mca">
-                          <label for="3">When its raining,peoples umbrella's are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="4" class="vh" name="mca">
-                          <label for="4">None of the above</label>
-                        </div>
+                     @foreach ($sec as $item)
+                     <div class="tab">
+                      <div class="quition-no">
+                          <h5>1/5</h5>
                       </div>
+                      <p class="quition-para">{{$item->question}}</p>
+                      <div class="form-group">
+                        <input type="radio" id="1" class="vh" name="mca">
+                        <label for="1">{{$item->option1}}</label>
+                      </div>
+                      <div class="form-group">
+                        <input type="radio" id="2" class="vh" name="mca">
+                        <label for="2">{{$item->option2}}</label>
+                      </div>
+                      <div class="form-group">
+                        <input type="radio" id="3" class="vh" name="mca">
+                        <label for="3">{{$item->option3}}</label>
+                      </div>
+                      <div class="form-group">
+                        <input type="radio" id="4" class="vh" name="mca">
+                        <label for="4">{{$item->option4}}</label>
+                      </div>
+                    </div>
+                     @endforeach
     
-                      <div class="tab">
+                      {{-- <div class="tab">
                         <div class="quition-no">
                             <h5>2/5</h5>
                         </div>
@@ -309,7 +311,7 @@
                           <input type="radio" id="20" class="vh" name="mca4">
                           <label for="20">None of the above</label>
                         </div>
-                      </div>
+                      </div> --}}
     
                       <div style="overflow:auto;">
                         <div style="float:right;">
