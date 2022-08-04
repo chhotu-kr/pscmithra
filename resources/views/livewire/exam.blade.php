@@ -4,10 +4,10 @@
 
     <div class="row">
         <div class="col col-lg-2">
-            <button type="button" class="btn text-white btn-info btn-sm" wire:click.prevent="add('asdasd')">Add MockTest</button>
+            <button type="button" class="btn text-white btn-info btn-sm mt-2" wire:click.prevent="add('asdasd')">Add MockTest</button>
         </div>
         <div class="col col-lg-2">
-            <button type="button" class="btn text-white btn-info btn-sm" wire:click.prevent="add('Live')">Add LiveTest</button>
+            <button type="button" class="btn text-white btn-info btn-sm mt-2" wire:click.prevent="add('Live')">Add LiveTest</button>
         </div>
 
     </div>
@@ -32,7 +32,7 @@
          <input type="number" class="form-control" name="liveN">
        </div>
        <div class="col-2 ">
-        <button class="btn btn-danger btn-sm" wire:click.prevent="remove_mocktest({{$value['id']}})"> X </button>
+        <button class="btn btn-danger btn-sm mt-4" wire:click.prevent="remove_mocktest({{$value['id']}})"> X </button>
     </div> 
 </div>
 @endif

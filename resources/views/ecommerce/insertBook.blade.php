@@ -73,6 +73,7 @@
               <thead>
                 <tr>
                   <th scope="col">Id</th>
+                  <th scope="col">Author Name</th>
                   <th scope="col">Book Name</th>
                   <th scope="col">Action</th>
                   
@@ -82,6 +83,7 @@
                  @foreach ($book as $item)
                         <tr>
                             <td>{{$item->id}}</td>
+                            <td>{{$item->authors->name}}</td>
                             <td>{{$item->name}}</td>
                            
                             <td>

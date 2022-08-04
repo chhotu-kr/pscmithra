@@ -86,7 +86,7 @@
                                
                                   <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
                                   <td>
-                                    <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
+                                    <img src="{{asset("upload/".$item->image)}}" width="40" height="40" alt="">
                                 </td>
                                   <td>
                                      <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>

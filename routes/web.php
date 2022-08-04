@@ -21,7 +21,7 @@ use App\Http\Controllers\FilterController;
 use App\Http\Controllers\{AddressController,CartController,ExamQuestionController,AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController,StudymetrialCategoryController,StudymetrialChapterController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
-
+use App\Http\Controllers\user\HomeController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
 
@@ -55,14 +55,36 @@ Route::get('/adminrole',[RoleController::class,'adminRole'])->name('get.admin');
 // Route::post('/admin',[RoleController::class,'StoreAdminRole'])->name('store.role');
 
 
-// category homepage
-Route::get('/mock-test',[ExamCategoryController::class,'getMocktest'])->name('user.mocktest');
-Route::get('/quiz-test',[ExamCategoryController::class,'getQuiztest'])->name('user.quiztest');
-Route::get('/live-test',[ExamCategoryController::class,'getLivetest'])->name('user.livetest');
-// .............SubCategory homepage ...........
-Route::get('/catmock-test',[ExamCategoryController::class,'getCat_Mocktest'])->name('user.catmocktest');
-Route::get('/catquiz-test',[ExamCategoryController::class,'getCat_Quiztest'])->name('user.catquiztest');
-Route::get('/catlive-test',[ExamCategoryController::class,'getCat_Livetest'])->name('user.catlivetest');
+
+//............//..............//...........User Page.............//................//...............//
+
+Route::get('/view/home',[HomeController::class,'get_ViewHome'])->name('view.home');
+Route::get('/mock-test/category',[HomeController::class,'get_Category'])->name('view.category');
+Route::get('/mock-test/category/details',[HomeController::class,'get_ViewCatDetails'])->name('view.categorydetails');
+Route::get('/view/blog',[HomeController::class,'get_ViewBlog'])->name('view.blog');
+Route::get('/view/blog/details',[HomeController::class,'get_ViewBlogDetails'])->name('view.blogdetails');
+Route::get('/view/course',[HomeController::class,'get_ViewCourse'])->name('view.course');
+Route::get('/view/course/details',[HomeController::class,'get_ViewCourseDetails'])->name('view.coursedetails');
+Route::get('/view/quiz',[HomeController::class,'get_ViewQuiz'])->name('view.quiz');
+Route::get('/mock-test/study/metrial',[HomeController::class,'get_Study_Metrial'])->name('view.studymetrial');
+Route::get('/user/login',[HomeController::class,'get_Login'])->name('user.login');
+Route::get('/user/register',[HomeController::class,'get_Register'])->name('user.register');
+Route::get('/mock-test/quiz/category',[HomeController::class,'get_QuizCate'])->name('quiz.category');
+Route::get('/mock-test/quiz/subcategory',[HomeController::class,'get_QuizSubCate'])->name('quiz.subcategory');
+Route::get('/mock-test/quiz/chapter',[HomeController::class,'get_QuizChapt'])->name('quiz.chapter');
+
+//................calling Data ..........
+
+ Route::get('/view/home/{id}',[HomeController::class,'filter'])->name('filter.cate');
+
+// // category homepage
+// Route::get('/mock-test',[ExamCategoryController::class,'getMocktest'])->name('user.mocktest');
+// Route::get('/quiz-test',[ExamCategoryController::class,'getQuiztest'])->name('user.quiztest');
+// Route::get('/live-test',[ExamCategoryController::class,'getLivetest'])->name('user.livetest');
+// // .............SubCategory homepage ...........
+// Route::get('/catmock-test',[ExamCategoryController::class,'getCat_Mocktest'])->name('user.catmocktest');
+// Route::get('/catquiz-test',[ExamCategoryController::class,'getCat_Quiztest'])->name('user.catquiztest');
+// Route::get('/catlive-test',[ExamCategoryController::class,'getCat_Livetest'])->name('user.catlivetest');
 
 //get method
 
@@ -360,7 +382,7 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  //..........CourseQuizQuestion............
 
  Route::get('/manage/Cquizques/{id}',[CourseQuizQuestionController::class,'index'])->name('manage.Cquizquestion');
- Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('Cquizquestion.create');
+ Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('quizquestion.create');
  Route::post('/quizques/store',[CourseQuizQuestionController::class,'store'])->name('Cquizquestion.store');
  Route::get('/quizques/update/{id}',[CourseQuizQuestionController::class,'edit'])->name('Cquizquestion.edit');
  Route::post('/quizques/update/{id}',[CourseQuizQuestionController::class,'update'])->name('Cquizquestion.update');
@@ -400,3 +422,5 @@ Route::get('/course/quiz',[CourseQuizController::class,'create'])->name('course.
  Route::get('page/product/update/{id}',[PageProductController::class,'edit'])->name('page.edit');
  Route::post('page/product/update/{id}',[PageProductController::class,'update'])->name('page.update');
  Route::get('page/product/remove/{id}',[PageProductController::class,'destroy'])->name('page.remove');
+
+ 

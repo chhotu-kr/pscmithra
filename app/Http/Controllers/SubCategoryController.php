@@ -34,7 +34,7 @@ class SubCategoryController extends Controller
         $data->subcategory=$request->subcategory;
         //image work
         $filename = $request->image->getClientOriginalName();
-        $request->image->move(('images'),$filename);
+        $request->image->move(('upload'),$filename);
         $data->image = $filename;
         $data->save();
         return redirect()->back();
@@ -72,7 +72,7 @@ class SubCategoryController extends Controller
         $subcategory->subcategory=$request->subcategory;
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $subcategory->image = $filename;
         $subcategory->save();
         return redirect()->back();

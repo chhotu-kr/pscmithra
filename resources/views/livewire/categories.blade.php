@@ -31,7 +31,7 @@
            {{-- <a class="btn text-white btn-info btn-sm" wire:click.prevent="add({{$i}})">Add</a> --}}
 
            <div class="col-2 mt-6">
-            <button class="btn btn-danger btn-sm" wire:click.prevent="removecall({{$iddd}})"> X </button>
+            <button class="btn btn-danger btn-sm" style="margin-top: 30%" wire:click.prevent="removecall({{$iddd}})"> X </button>
         </div> 
         </div>
     </div>

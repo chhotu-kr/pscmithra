@@ -34,7 +34,7 @@ class CategoryController extends Controller
         $data->category=$request->category;
         //image
         $filename = $request->image->getClientOriginalName();
-        $request->image->move(('images'),$filename);
+        $request->image->move(('upload'),$filename);
         $data->image = $filename;
         $data->save();
         return redirect('/category');
@@ -66,7 +66,7 @@ class CategoryController extends Controller
         $category->category=$request->category;
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $category->image = $filename;
         $category->save();
         return redirect('/category');

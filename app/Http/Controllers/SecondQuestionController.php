@@ -50,6 +50,8 @@ class SecondQuestionController extends Controller
         $data->language_id=$request->language_id;
         $data->question_id=$request->question_id;
         $data->slugid=md5($request->question .time());
+        $data->direction=$request->direction;
+        $data->explanation=$request->explanation;
         $data->question=$request->question;
         $data->option1=$request->option1;
         $data->option2=$request->option2;
@@ -107,6 +109,8 @@ class SecondQuestionController extends Controller
         $secondQuestion->language_id=$request->language_id;
         $secondQuestion->question_id=$request->question_id;
         $secondQuestion->slugid=md5($request->question .time());
+        $secondQuestion->direction=$request->direction;
+        $secondQuestion->explanation=$request->explanation;
         $secondQuestion->question=$request->question;
         $secondQuestion->option1=$request->option1;
         $secondQuestion->option2=$request->option2;
