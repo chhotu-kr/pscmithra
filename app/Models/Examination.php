@@ -15,8 +15,10 @@ class Examination extends Model
         'category_id',
         'subcategory_id',
         'exam_name',
-        'rightmarks',
-        'wrongmarks',
+        'marks',
+        'type',
+        'slugid',
+        
         'time_duration',
 
     ];

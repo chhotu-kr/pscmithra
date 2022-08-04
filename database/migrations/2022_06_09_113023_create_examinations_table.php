@@ -15,15 +15,13 @@ return new class extends Migration
     {
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
-      
             $table->foreignId('category_id')->constrained();
             $table->foreignId('subcategory_id')->constrained('sub_categories');
             $table->string('exam_name');
-            $table->string('startat');
-            $table->float('rightmarks');
-            $table->float('wrongmarks');
             $table->string('slugid');
+            $table->string('marks');
             $table->integer('time_duration');
+            $table->enum('type',['live','not'])->default('not');
             $table->timestamps();
         });
     }
