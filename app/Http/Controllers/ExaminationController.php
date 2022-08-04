@@ -37,9 +37,10 @@ class ExaminationController extends Controller
         $data->subcategory_id=$request->subcategory_id;
         $data->exam_name=$request->exam_name;
         // $data->question=$request->question;
-        $data->startat=$request->startat;
-        $data->rightmarks=$request->rightmarks;
-        $data->wrongmarks=$request->wrongmarks;
+       
+        $data->marks=$request->marks;
+        $data->type=$request->type;
+      
         $data->time_duration=$request->time_duration;
         $data-> slugid = md5($request->exam_name . time());
         $data->save();
@@ -61,9 +62,8 @@ class ExaminationController extends Controller
         $examination->subcategory_id=$request->subcategory_id;
         $examination->exam_name=$request->exam_name;
         // $data->question=$request->question;
-        $examination->startat=$request->startat;
-        $examination->rightmarks=$request->rightmarks;
-        $examination->wrongmarks=$request->wrongmarks;
+        $examination->type=$request->type;
+        $examination->marks=$request->marks;
         $examination->time_duration=$request->time_duration;
         $examination-> slugid = md5($request->exam_name . time());
         $examination->save();
