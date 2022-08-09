@@ -248,7 +248,7 @@ class Apiv1Controller extends Controller
         }
 
         $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
-            ->with('category', 'subcategory','lang.language')->with(['attm' => function ($q) use ($user_id) {
+            ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
                 $q->where('users_id', $user_id->id);
             }])
             // ->leftjoin('attemped_exams', function ($join) use ($user_id) {
@@ -260,26 +260,25 @@ class Apiv1Controller extends Controller
             //  WHEN attemped_exams.type IS NULL or attemped_exams.type = "" THEN "Start" ELSE "Result" END) AS is_user'))
 
             ->get()->map(function ($item) {
-             //    return $item;
+                //    return $item;
 
                 $free = $item->isFree;
                 $type = "Buy";
-               
+
 
                 if (empty($item->attm)) {
-                    
+
                     if ($free) {
                         $type = "Start";
                     } else {
-
                     }
-
                 } else {
                     $type = $item->attm->type;
                 }
                 return collect([
                     "id" => $item->slugid,
                     "categoryId" => $item->category->id,
+                    "name" => $item->exam_name,
                     "categoryName" => $item->category->category,
                     "subbCategoryId" => $item->subcategory->id,
                     "subCategoryName" => $item->subcategory->subcategory,
@@ -287,13 +286,11 @@ class Apiv1Controller extends Controller
                     "totalQues" => $item->noQues,
                     "type" => $type,
                     "totalTimeinMints" => $item->time_duration,
-                    "languages"=>$item->lang->map(function($lang){
+                    "languages" => $item->lang->map(function ($lang) {
                         return collect([
-"name"=>$lang->language->languagename,
-"id"=>$lang->language->id
+                            "name" => $lang->language->languagename,
+                            "id" => $lang->language->id
                         ]);
-
-
                     })
                 ]);
             });
@@ -395,14 +392,16 @@ class Apiv1Controller extends Controller
         $Attemp->save();
 
         $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
-        $insertData = [];
+       // $insertData = [];
         foreach ($examQuestion as $value) {
-            $insertData[]  = [
-                'users_id' =>  $user_id->id,
-                'questions_id' => $value
-            ];
+            
+            $mock = new mockattempquestion();
+            $mock->users_id =  $user_id->id;
+            $mock->questions_id = $value;
+            $mock->attemped_exams_id = $Attemp->id;
+            $mock->save();
         }
-        mockattempquestion::insert($insertData);
+     //   mockattempquestion::insert($insertData);
 
         return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Attemp]);
     }
@@ -566,7 +565,7 @@ class Apiv1Controller extends Controller
         //     $data [$t['languagename'].'Html']=$t['question'];
         // }
 
-        $data = AttempedExam::with('examination.examQ.question.secondquestion.language','language')->with(['examination.examQ.question.mockAttemp' => function ($q) {
+        $data = AttempedExam::with('examination.examQ.question.secondquestion.language', 'language')->with(['examination.examQ.question.mockAttemp' => function ($q) {
             $q->where('users_id', 1);
         }])->where('examinations_id', 1)->where('users_id', 1)->
             // with(['examQ' => function ($query) {
@@ -602,8 +601,8 @@ class Apiv1Controller extends Controller
                     }
 
                     return collect([
-                        "languageId"=>$d->language->id,
-                        "languageName"=>$d->language->languagename,
+                        "languageId" => $d->language->id,
+                        "languageName" => $d->language->languagename,
 
                         "examId" => $d->examination->id,
                         "time" => $examremaintime,
