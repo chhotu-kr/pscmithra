@@ -19,6 +19,7 @@ use App\Models\Examination;
 use App\Models\Category;
 use App\Models\ExamQuestion;
 use App\Models\Language;
+use App\Models\mockattempquestion;
 use App\Models\QuizCategory;
 use App\Models\QuizChapter;
 use App\Models\QuizExamination;
@@ -28,7 +29,7 @@ use App\Models\SecondQuestion;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
-
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;
@@ -247,12 +248,55 @@ class Apiv1Controller extends Controller
         }
 
         $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
-            ->leftjoin('attemped_exams', function ($join) {
-                $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 2);
-            })
-            //  ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result"  THEN 0 ELSE (CASE WHEN attemped_exams.remain_time != 0  THEN attemped_exams.remain_time ELSE examinations.time_duration  END)END) AS ddr'))            
-            ->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.type = "resume" THEN "Resume" ELSE "Result" END) AS is_user'))
-            ->get();
+            ->with('category', 'subcategory','lang.language')->with(['attm' => function ($q) use ($user_id) {
+                $q->where('users_id', $user_id->id);
+            }])
+            // ->leftjoin('attemped_exams', function ($join) use ($user_id) {
+
+            //     $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', $user_id->id);
+            // })
+            // //  ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result"  THEN 0 ELSE (CASE WHEN attemped_exams.remain_time != 0  THEN attemped_exams.remain_time ELSE examinations.time_duration  END)END) AS ddr'))            
+            // ->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.type = "resume" THEN "Resume" 
+            //  WHEN attemped_exams.type IS NULL or attemped_exams.type = "" THEN "Start" ELSE "Result" END) AS is_user'))
+
+            ->get()->map(function ($item) {
+             //    return $item;
+
+                $free = $item->isFree;
+                $type = "Buy";
+               
+
+                if (empty($item->attm)) {
+                    
+                    if ($free) {
+                        $type = "Start";
+                    } else {
+
+                    }
+
+                } else {
+                    $type = $item->attm->type;
+                }
+                return collect([
+                    "id" => $item->slugid,
+                    "categoryId" => $item->category->id,
+                    "categoryName" => $item->category->category,
+                    "subbCategoryId" => $item->subcategory->id,
+                    "subCategoryName" => $item->subcategory->subcategory,
+                    "totalTimeinMints" => $item->time_duration,
+                    "totalQues" => $item->noQues,
+                    "type" => $type,
+                    "totalTimeinMints" => $item->time_duration,
+                    "languages"=>$item->lang->map(function($lang){
+                        return collect([
+"name"=>$lang->language->languagename,
+"id"=>$lang->language->id
+                        ]);
+
+
+                    })
+                ]);
+            });
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
@@ -347,7 +391,19 @@ class Apiv1Controller extends Controller
         $Attemp->slugid = md5($request->user . time());
         $Attemp->examinations_id = $examination_id->id;
         $Attemp->users_id = $user_id->id;
+        $Attemp->language_id = $request->language;
         $Attemp->save();
+
+        $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
+        $insertData = [];
+        foreach ($examQuestion as $value) {
+            $insertData[]  = [
+                'users_id' =>  $user_id->id,
+                'questions_id' => $value
+            ];
+        }
+        mockattempquestion::insert($insertData);
+
         return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Attemp]);
     }
 
@@ -495,13 +551,6 @@ class Apiv1Controller extends Controller
     public function getExamData()
     {
 
-
-    $category_id=$request->category_id;
-
-    if (empty($request->category_id)) {
-        return response()->json(['msg' => 'Enter Category', 'status' => false]);
-    }
-
         //  $data = Examination::with(['secondquestion','secondquestion.language'])->get();
         //     //$data = ExamQuestion::with(['secondquestion','secondquestion.language'])->get();
         //     $data = ExamQuestion::where('examination_id',1)->leftjoin('second_questions as s','exam_questions.examination_id','s.question_id')
@@ -517,8 +566,9 @@ class Apiv1Controller extends Controller
         //     $data [$t['languagename'].'Html']=$t['question'];
         // }
 
-        $data = AttempedExam::with('examination.examQ.question.secondquestion.language')->
-            //where('examinations.id',1 )->
+        $data = AttempedExam::with('examination.examQ.question.secondquestion.language','language')->with(['examination.examQ.question.mockAttemp' => function ($q) {
+            $q->where('users_id', 1);
+        }])->where('examinations_id', 1)->where('users_id', 1)->
             // with(['examQ' => function ($query) {
             //     $query->with(['secondquestion' => function ($quu) {
             //         $quu->leftjoin('languages', 'languages.id', 'language_id');
@@ -537,41 +587,46 @@ class Apiv1Controller extends Controller
             // })
             // ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result" THEN 0 ELSE END) AS ddr'))            
             //  
-            get()->map(function ($d) {
+            get()
+            ->map(function ($d) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
                 } else if ($d['type'] = "resume") {
 
                     $examremaintime = 0;
-                        if ($d->type == 'resume' && $d->remain_time == 0) {
-                            $examremaintime = $d->examination->time_duration;
-                        } else if ($d->type == 'resume' && $d->remain_time != 0) {
-                            $examremaintime = $d->remain_time;
-                        }
+                    if ($d->type == 'resume' && $d->remain_time == 0) {
+                        $examremaintime = $d->examination->time_duration;
+                    } else if ($d->type == 'resume' && $d->remain_time != 0) {
+                        $examremaintime = $d->remain_time;
+                    }
 
                     return collect([
-                        "examId"=>$d->examination->id,
-                        "time"=>$examremaintime,
-                        "wMarks"=>$d->examination->wrongmarks,
-                        "rMarks"=>$d->examination->rightmarks,
-"questionslist"=>$d->examination->examQ->map(function ($fff){
-    return collect([
-        "questionId"=>$fff->question->id,
-        "ques"=>$fff->secondquestion->map(function($ques){
-            return $ques->language->languagename;
-       }),
-        "question"=>$fff->secondquestion
-        
-        ->map(function($ques){
-              return collect([
-                "language"=>$ques->language->languagename,
-                "QuestioninHtml"=>$ques->question.$ques->option1 .$ques->option2.$ques->option3.$ques->option4
-              ]);
-         })
+                        "languageId"=>$d->language->id,
+                        "languageName"=>$d->language->languagename,
 
-    ]);
-})
+                        "examId" => $d->examination->id,
+                        "time" => $examremaintime,
+                        "wMarks" => $d->examination->wrongmarks,
+                        "rMarks" => $d->examination->rightmarks,
+                        'noQues' => $d->examination->noQues,
+                        "questionslist" => $d->examination->examQ->map(function ($fff) {
+                            return collect([
+                                "questionId" => $fff->question->id,
+                                "ques" => $fff->secondquestion->map(function ($ques) {
+                                    return $ques->language->languagename;
+                                }),
+                                "question" => $fff->secondquestion
+
+                                    ->map(function ($ques) {
+                                        return collect([
+                                            "language" => $ques->language->languagename,
+                                            "QuestioninHtml" => $ques->direction . $ques->question . $ques->option1 . $ques->option2 . $ques->option3 . $ques->option4
+                                        ]);
+                                    })
+
+                            ]);
+                        })
                     ]);
                 }
             });

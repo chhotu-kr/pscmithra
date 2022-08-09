@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attemped_exams', function (Blueprint $table) {
+        Schema::create('mockattempquestions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained();
-            $table->foreignId('examinations_id')->constrained();
-            $table->enum('type', ['resume', 'result'])->default('resume');
-            $table->string('slugid');
-            $table->foreignId('language_id')->constrained();
-            $table->integer('remain_time')->default('0');
-            $table->integer('totalmarks')->default('0');
+            $table->foreignId('questions_id')->constrained();
+            $table->foreignId('attempExamId')->constrained();
+            $table->enum('QuesSeen',['true','false'])->default('false');
+            $table->string('QuesSelect')->nullable();
+            $table->integer('time')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attemped_exams');
+        Schema::dropIfExists('mockattempquestions');
     }
 };

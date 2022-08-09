@@ -18,6 +18,7 @@
                           @csrf
                           
                             <livewire:subjects />
+                            <livewire:admin.question.addquestion />
                             <div class="mb-3">
                               <label>Name</label>
                               <input type="text" name="name" class="form-control" required>
@@ -26,10 +27,10 @@
                               <label for="validationCustom04" class="form-label">RightAns</label>
                               <select class="form-select" name="rightans" id="validationCustom04" required>
                                 <option selected disabled value="">select your answer</option>
-                                <option value="option1">option1</option>
-                                <option value="option2">option2</option>
-                                <option value="option3">option3</option>
-                                <option value="option4">option4</option>
+                                <option value="selOpt1">option1</option>
+                                <option value="selOpt2">option2</option>
+                                <option value="selOpt3">option3</option>
+                                <option value="selOpt4">option4</option>
                               </select>
                               <div class="invalid-feedback">
                                 Please select a valid state.

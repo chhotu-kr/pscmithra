@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attemped_exams', function (Blueprint $table) {
+        Schema::create('mocktest_examination_languages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
             $table->foreignId('examinations_id')->constrained();
-            $table->enum('type', ['resume', 'result'])->default('resume');
-            $table->string('slugid');
-            $table->foreignId('language_id')->constrained();
-            $table->integer('remain_time')->default('0');
-            $table->integer('totalmarks')->default('0');
+            $table->foreignId('languages_id')->constrained();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attemped_exams');
+        Schema::dropIfExists('mocktest_examination_languages');
     }
 };
