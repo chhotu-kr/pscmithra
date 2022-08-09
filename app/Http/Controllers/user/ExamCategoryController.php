@@ -36,4 +36,14 @@ class ExamCategoryController extends Controller
     //     $data=SubCategory::where('category_id',3)->get();
     //     return view('user.category',compact('data'));
     // }
+
+    public function index(){
+        return view('indexq');
+    }
+
+    public function store(Request $request){
+        $imageName=$request->bannerimage->getClientOriginalName();
+        $request->bannerimage()->move('upload',$imageName);
+        return response()->json(['uploaded'=>'/upload'.$imageName]);
+    }
 }

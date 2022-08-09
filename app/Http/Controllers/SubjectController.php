@@ -27,7 +27,7 @@ class SubjectController extends Controller
       $data->image = $filename;
       $data-> slugid = md5($re->examname . time());
         $data->save();
-        return redirect('/subjects');
+        return redirect('/admin/subjects');
     }
      
     public function edit($id){
@@ -45,7 +45,7 @@ class SubjectController extends Controller
        $subject->image = $filename;
        $subject-> slugid = md5($re->examname . time());
          $subject->save();
-         return redirect('/subjects');  
+         return redirect('/admin/subjects');  
     }
 
     public function remove($slug){
@@ -58,6 +58,6 @@ class SubjectController extends Controller
             session()->flash('error', 'Please try again !!!');
         }
       
-        return redirect('/subjects');
+        return redirect('/admin/subjects');
     }
 }

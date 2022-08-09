@@ -39,8 +39,8 @@
                                   
                                             <td scope="col">{{$req->name}}</td>
                                             <td scope="col">
-                                                 <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                                                <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a> 
+                                                 <a href="{{route('update.role',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
+                                                <a href="" class="btn btn-outline-danger">Delete</a> 
                                             </td>
                                         </tr>
                                     @endforeach

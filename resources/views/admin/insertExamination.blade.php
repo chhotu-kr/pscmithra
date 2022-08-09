@@ -29,14 +29,12 @@
                                   <option value="">Select Type</option>
                                   <option value="live">live</option>
                                   <option value="not">not</option>
-                                  {{-- <option value="pdf">Pdf</option>
-                                  <option value="plan">Plan</option>
-                                  <option value="ebook">Ebook</option> --}}
+                                 
                               </select>
                               <div class="valid-tooltip">
                                   Looks good!
                               </div>
-                          </div>
+                            </div>
                           </div>
                         </div>
                        <div class="row">
@@ -44,13 +42,13 @@
                            
                           <div class="mb-3">
                            <label for="">Marks</label>
-                           <input type="text" name="marks" class="form-control" required>
+                           <input type="text" name="marks" class="form-control ms-2" required>
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="mb-3">
                             <label for="">TimeDuration</label>
-                            <input type="text" name="time_duration" class="form-control" required>
+                            <input type="number" name="time_duration" class="form-control" required>
                         </div>
                         </div>
                        </div>

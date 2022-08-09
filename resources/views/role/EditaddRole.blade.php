@@ -10,18 +10,18 @@
                 <div class="card">
                     <div class="card-header">Add Role</div>
                     <div class="card-body">
-                        <form action="{{route('add.role')}}" class="needs validation" method="POST">
+                        <form action="{{route('update.role',$rol)}}" class="needs validation" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label>Name Role</label>
-                                <input type="text" name="name" class="form-control" required>
+                                <input type="text" name="name" class="form-control" value="{{$rol->name}}" required>
                             </div>
                             {{-- <div class="mb-3">
                                 <label>Slug</label>
                                 <input type="text" name="slug" class="form-control" required>
                             </div>
                             --}}
-                            
+                            {{-- {{$data}} --}}
                             @foreach ($data as $key => $value)
                             <div class="m-2">
                            <h5 class="fw-bold">• {{ucfirst($key)}} </h5>

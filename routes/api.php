@@ -54,6 +54,7 @@ Route::get('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepare
 
 //........product......
 Route::get('/product',[Apiv1Controller::class,'get_Product'])->name('product.show');
+Route::get('/product/show',[Apiv1Controller::class,'Product'])->name('product.index');
 
 //........cart.........
 Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');

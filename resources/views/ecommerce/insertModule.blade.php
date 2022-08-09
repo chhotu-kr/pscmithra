@@ -59,7 +59,7 @@
                         <div class="col-6">
                             <div class="mb-3">
                                 <label>Index</label>
-                                <input type="text" name="index" class="form-control" required>
+                                <input type="number" name="index" class="form-control" required>
                             </div>
                         </div>
                        </div>
@@ -110,7 +110,7 @@
     $('#selected').change(function(){
         var responseID = $(this).val();
         console.log(responseID);
-if(responseID=="video"|| responseID=="voice"){
+ if(responseID=="video"|| responseID=="voice"){
     // console.log("hgfhjfjvjhhnbnm");
 
     html=` <div class="row">
@@ -122,7 +122,7 @@ if(responseID=="video"|| responseID=="voice"){
                         </div>`;
                         $("#extend").html(html);
 
-}else if(responseID=="quiz"){
+   }  else if(responseID=="quiz"){
     $.ajax({
          type:'get',
          dataType:'json',
@@ -162,7 +162,7 @@ if(responseID=="video"|| responseID=="voice"){
           $("#extend").html(Html);
          }
       });
-}
+    }
 
 
     
@@ -171,9 +171,9 @@ if(responseID=="video"|| responseID=="voice"){
     //   console.log(Id + "and " + examid)
      
 
-    });                                                        
+ });                                                        
        
     
-    </script>  
+</script>  
 @endsection
 

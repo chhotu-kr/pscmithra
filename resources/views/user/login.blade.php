@@ -33,14 +33,15 @@
                     <div class="login-form-box">
                         <h3 class="title">Sign in</h3>
                         <p>Don’t have an account? <a href="{{route('user.register')}}">Sign up</a></p>
-                        <form>
+                        <form action="{{route('user.login')}}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label for="current-log-email">Username or email*</label>
-                                <input type="email" name="current-log-email" id="current-log-email" placeholder="Email or username">
+                                <input type="text" name="contact" id="current-log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
                                 <label for="current-log-password">Password*</label>
-                                <input type="password" name="current-log-password" id="current-log-password" placeholder="Password">
+                                <input type="password" name="password" id="current-log-password" placeholder="Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">
@@ -51,7 +52,7 @@
                                 <a href="#" class="password-reset">Lost your password?</a>
                             </div>
                             <div class="form-group">
-                                <button type="button" class="education-btn btn-medium">Sign in <i class="icon-4"></i></button>
+                                <button type="submit" class="education-btn btn-medium">Sign in <i class="icon-4"></i></button>
                             </div>
                         </form>
                     </div>

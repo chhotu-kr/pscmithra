@@ -492,7 +492,7 @@ class Apiv1Controller extends Controller
     }
 
 
-    public function getExamData()
+    public function getExamData(Request $request)
     {
 
 
@@ -629,5 +629,14 @@ class Apiv1Controller extends Controller
         // });
 
         return response()->json($data);
+    }
+
+    public function Product(){
+      
+        // return  ['product' => DB::Product('product')->paginate(2)];
+
+        $data =Product::Paginate(2);
+
+        return response()->json(['$msg'=>'Data Fatched', 'Status'=>true, 'data'=>$data]);
     }
 }
