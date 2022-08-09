@@ -8,6 +8,8 @@ use App\Models\QuizCategory;
 use App\Models\QuizSubCategory;
 use App\Models\QuizChapter;
 use App\Models\QuizTopic;
+use App\Models\Language;
+use App\Models\QuizExaminationLanguage;
 use Illuminate\Http\Request;
 
 class QuizExaminationController extends Controller
@@ -15,7 +17,7 @@ class QuizExaminationController extends Controller
     //
     public function index(){
 
-        $data['quiz_exami']=QuizExamination::all();
+        $data['quiz_exami']=QuizExamination::with('lang.language')->get();
        
         
         return view('quizExam.manageQuizExamination',$data);
@@ -28,7 +30,7 @@ class QuizExaminationController extends Controller
         $data['quizsub']=QuizSubCategory::all();        
         $data['quizchapt']=QuizChapter::all();        
         $data['quiztopic']=QuizTopic::all();
-        
+        $data['lang'] = Language::all();
         return view('quizExam.insertQuizExamination',$data);
  
     }
@@ -43,14 +45,24 @@ class QuizExaminationController extends Controller
         if(!empty($request->quiz_topic)){
         $data->quiz_topics_id=$request->quiz_topic;}
         $data->exam_name=$request->exam_name;
+        $data->noquizques=$request->noquizques;
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;
+        $data->marks=$request->marks;
+        $data->isFree=$request->isfree;
         $data->time_duration=$request->time_duration;
         $data->slugid=md5($request->quizexamination.time());
 
         $data->save();
 
-        return redirect()->route('quiz.examination');
+        $insertD = [];
+
+        $myArray = explode(',', $request->lang);
+        foreach ($myArray as $va) {
+            $insertD[]=["quiz_examination_id"=>$data->id,"language_id"=>$va];
+        }
+QuizExaminationLanguage::insert($insertD);
+        return redirect()->back();
 
     }
 

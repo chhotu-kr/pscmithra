@@ -259,7 +259,8 @@ class Apiv1Controller extends Controller
             // ->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.type = "resume" THEN "Resume" 
             //  WHEN attemped_exams.type IS NULL or attemped_exams.type = "" THEN "Start" ELSE "Result" END) AS is_user'))
 
-            ->get()->map(function ($item) {
+            ->get()
+            ->map(function ($item) {
                 //    return $item;
 
                 $free = $item->isFree;
@@ -293,7 +294,8 @@ class Apiv1Controller extends Controller
                         ]);
                     })
                 ]);
-            });
+            })
+            ;
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
@@ -587,48 +589,49 @@ class Apiv1Controller extends Controller
             // ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result" THEN 0 ELSE END) AS ddr'))            
             //  
             get()
-            ->map(function ($d) {
+            // ->map(function ($d) {
 
-                if ($d['type'] != "resume") {
-                    return "Test not resume";
-                } else if ($d['type'] = "resume") {
+            //     if ($d['type'] != "resume") {
+            //         return "Test not resume";
+            //     } else if ($d['type'] = "resume") {
 
-                    $examremaintime = 0;
-                    if ($d->type == 'resume' && $d->remain_time == 0) {
-                        $examremaintime = $d->examination->time_duration;
-                    } else if ($d->type == 'resume' && $d->remain_time != 0) {
-                        $examremaintime = $d->remain_time;
-                    }
+            //         $examremaintime = 0;
+            //         if ($d->type == 'resume' && $d->remain_time == 0) {
+            //             $examremaintime = $d->examination->time_duration;
+            //         } else if ($d->type == 'resume' && $d->remain_time != 0) {
+            //             $examremaintime = $d->remain_time;
+            //         }
 
-                    return collect([
-                        "languageId" => $d->language->id,
-                        "languageName" => $d->language->languagename,
+            //         return collect([
+            //             "languageId" => $d->language->id,
+            //             "languageName" => $d->language->languagename,
 
-                        "examId" => $d->examination->id,
-                        "time" => $examremaintime,
-                        "wMarks" => $d->examination->wrongmarks,
-                        "rMarks" => $d->examination->rightmarks,
-                        'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) {
-                            return collect([
-                                "questionId" => $fff->question->id,
-                                "ques" => $fff->secondquestion->map(function ($ques) {
-                                    return $ques->language->languagename;
-                                }),
-                                "question" => $fff->secondquestion
+            //             "examId" => $d->examination->id,
+            //             "time" => $examremaintime,
+            //             "wMarks" => $d->examination->wrongmarks,
+            //             "rMarks" => $d->examination->rightmarks,
+            //             'noQues' => $d->examination->noQues,
+            //             "questionslist" => $d->examination->examQ->map(function ($fff) {
+            //                 return collect([
+            //                     "questionId" => $fff->question->id,
+            //                     "ques" => $fff->secondquestion->map(function ($ques) {
+            //                         return $ques->language->languagename;
+            //                     }),
+            //                     "question" => $fff->secondquestion
 
-                                    ->map(function ($ques) {
-                                        return collect([
-                                            "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $ques->direction . $ques->question . $ques->option1 . $ques->option2 . $ques->option3 . $ques->option4
-                                        ]);
-                                    })
+            //                         ->map(function ($ques) {
+            //                             return collect([
+            //                                 "language" => $ques->language->languagename,
+            //                                 "QuestioninHtml" => $ques->direction . $ques->question . $ques->option1 . $ques->option2 . $ques->option3 . $ques->option4
+            //                             ]);
+            //                         })
 
-                            ]);
-                        })
-                    ]);
-                }
-            });
+            //                 ]);
+            //             })
+            //         ]);
+            //     }
+            // })
+            ;
 
 
         // $data = SecondQuestion::leftJoin('languages','languages.id','language_id')->get()
