@@ -39,6 +39,11 @@ class Examination extends Model
     public function examQ(){
         return $this->hasMany(ExamQuestion::class, 'examination_id','id');
     }
+
+    public function lang(){
+        return $this->hasMany(mocktestExaminationLanguage::class,"examinations_id","id");
+    }
+
     // public function secondquestion(){
     //     return $this->hasOne(SecondQuestion::class,'id','question');
     // }

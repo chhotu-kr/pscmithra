@@ -19,8 +19,12 @@ return new class extends Migration
             $table->foreignId('subcategory_id')->constrained('sub_categories');
             $table->string('exam_name');
             $table->string('slugid');
-            $table->string('marks');
+            $table->float('marks');
+            $table->float('noQues');
+            $table->float('rightmarks');
+            $table->float('wrongmarks');
             $table->integer('time_duration');
+            $table->enum('isFree',['true','false'])->default('false');
             $table->enum('type',['live','not'])->default('not');
             $table->timestamps();
         });

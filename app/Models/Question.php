@@ -31,4 +31,7 @@ class Question extends Model
     public function secondquestion(){
         return $this->hasMany(SecondQuestion::class);
       }
+      public function mockAttemp(){
+        return $this->hasOne(mockattempquestion::class,'questions_id','id');
+      }
 }

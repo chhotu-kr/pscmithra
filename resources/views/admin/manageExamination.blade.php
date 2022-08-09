@@ -24,48 +24,50 @@
                             {{--  --}}
                             <div class = "table-responsive" style="white-space: nowrap;"> 
                             <!-- Table with stripped rows -->
-                            <table id="with" class="display">
+                            <table id="with" class="display" style="width:100%">
                               <thead>
                                 <tr>
                                   <th >id</th>
                                 
                                   <th >Category Name</th>
-                                  <th >SubCategory Name</th>
-                                  {{-- <th>Question Name</th> --}}
-                                
+                                  <th >SubCategory Name</th>                                                           
                                   <th scope="col"> Exam Name</th>
                                   <th scope="col">Marks</th>
-                                  
-                                  <th scope="col">Time</th>
-                                  
-                                  {{-- <th scope="col">Start<br>At</th>
-                                  <th scope="col"> Exam<br>Name</th>
-                                  <th scope="col">Right<br>Marks</th>
-                                  <th scope="col">Wrong<br>Marks</th>
-                                  <th scope="col">Time</th> --}}
+                                  <th scope="col">Time (in Mints)</th>
+                                  <th scope="col">Right Marks</th>
+                                  <th scope="col">Wrong Marks</th>
+                                  <th scope="col">No Of Questions</th>
+                                  <th scope="col">Is Free</th>
+                                  <th scope="col">Langauge</th>
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
                                   @foreach ($examination as $cour)
                                       <tr>
-                                          <td>{{$cour->id}}</td>
+                                          <td scope="col">{{$cour->id}}</td>
                                        
-                                          <td>{{$cour->category->category}}</td>
-                                          <td>{{$cour->subcategory->subcategory}}</td>
+                                          <td scope="col">{{$cour->category->category}}</td>
+                                          <td scope="col">{{$cour->subcategory->subcategory}}</td>
                                           {{-- <td>{{$cour->secondquestion->question}}</td> --}}
                                       
-                                          <td>{{$cour->exam_name}}</td>
+                                          <td scope="col">{{$cour->exam_name}}</td>
                                         
                                           <td>{{$cour->marks}}</td>
                                           <td>{{$cour->time_duration}}</td>
                                           
 
-                                          {{-- <td>{{$cour->startat}}</td>
-                                          <td>{{$cour->exam_name}}</td>
+                                          
+                                          
                                           <td>{{$cour->rightmarks}}</td>
                                           <td>{{$cour->wrongmarks}}</td>
-                                          <td>{{$cour->time_duration}}</td> --}}
+                                          <td>{{$cour->noQues}}</td> 
+                                          <td>{{$cour->isFree}}</td> 
+
+                                          <td>@foreach($cour->lang as $val)
+                                          {{$val->language->languagename}},
+                                          @endforeach</td> 
+                                          
                                           
                                           <td>
                                             <a href="{{route('examination.update',['id'=>$cour->id])}}" class="btn btn-outline-secondary">Edit</a>

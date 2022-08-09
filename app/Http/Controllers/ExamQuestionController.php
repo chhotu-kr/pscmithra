@@ -17,7 +17,7 @@ class ExamQuestionController extends Controller
     {
         //
         $data['id']= $id;
-        $data['examquestion']=ExamQuestion::with('question.secondquestion.language')->get();
+        $data['examquestion']=ExamQuestion::with('question.secondquestion.language')->where('examination_id',$id)->get();
        
 
         // return dd($data);
