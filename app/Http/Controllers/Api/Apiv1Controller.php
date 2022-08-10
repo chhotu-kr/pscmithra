@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Blog;
 use App\Models\AttempedExam;
 use App\Models\BlogCategory;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -386,7 +387,9 @@ class Apiv1Controller extends Controller
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
-
+$get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_id',$user_id->id)->first();
+     if(empty($get))
+     {
         $Attemp = new AttempedExam();
         $Attemp->slugid = md5($request->user . time());
         $Attemp->examinations_id = $examination_id->id;
@@ -404,9 +407,13 @@ class Apiv1Controller extends Controller
             $mock->attemped_exams_id = $Attemp->id;
             $mock->save();
         }
+        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' =>['testId'=>$Attemp->slugid]]);
+     }else{
+        return response()->json(['msg' => 'Exam already exist', 'status' => false]);
+     }
      //   mockattempquestion::insert($insertData);
 
-        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Attemp]);
+        
     }
 
 

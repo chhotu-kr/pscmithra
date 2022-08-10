@@ -42,6 +42,7 @@ Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('
 Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
 Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
+Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
@@ -50,7 +51,7 @@ Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
-Route::get('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
+
 
 //........product......
 Route::get('/product',[Apiv1Controller::class,'get_Product'])->name('product.show');
