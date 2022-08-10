@@ -264,18 +264,21 @@ class Apiv1Controller extends Controller
 
                 $free = $item->isFree;
                 $type = "Buy";
-
+                $TestID = "0";
 
                 if (empty($item->attm)) {
 
                     if ($free) {
                         $type = "Start";
+                        $TestID = "0";
                     } else {
                     }
                 } else {
                     $type = $item->attm->type;
+                    $TestID =  $item->attm->id;
                 }
                 return collect([
+                    "testId"=>$TestID,
                     "id" => $item->slugid,
                     "categoryId" => $item->category->id,
                     "name" => $item->exam_name,
@@ -547,7 +550,7 @@ class Apiv1Controller extends Controller
     }
 
 
-    public function getExamData()
+    public function getExamData(Request $request)
     {
 
         //  $data = Examination::with(['secondquestion','secondquestion.language'])->get();
@@ -565,9 +568,34 @@ class Apiv1Controller extends Controller
         //     $data [$t['languagename'].'Html']=$t['question'];
         // }
 
-        $data = AttempedExam::with('examination.examQ.question.secondquestion.language', 'language')->with(['examination.examQ.question.mockAttemp' => function ($q) {
-            $q->where('users_id', 1);
-        }])->where('examinations_id', 1)->where('users_id', 1)->
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->examination)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examination)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+ 
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
+
+        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use($testId,$user_id){
+            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId )->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)->
             // with(['examQ' => function ($query) {
             //     $query->with(['secondquestion' => function ($quu) {
             //         $quu->leftjoin('languages', 'languages.id', 'language_id');
@@ -601,10 +629,10 @@ class Apiv1Controller extends Controller
                     }
 
                     return collect([
+                        "testID"=>$d->slugid,
                         "languageId" => $d->language->id,
                         "languageName" => $d->language->languagename,
-
-                        "examId" => $d->examination->id,
+                        "examId" => $d->examination->slugid,
                         "time" => $examremaintime,
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
@@ -612,13 +640,24 @@ class Apiv1Controller extends Controller
                         "questionslist" => $d->examination->examQ->map(function ($fff) {
                             return collect([
                                 "questionId" => $fff->question->id,
-                                "ques" => $fff->secondquestion->map(function ($ques) {
-                                    return $ques->language->languagename;
-                                }),
-                                "question" => $fff->secondquestion
+                                
+
+                                // "ques" => $fff->question->secondquestion->map(function ($ques) {
+                                //     return collect([
+                                //         "name"=>$ques->language->languagename,
+                                //         "id"=>$ques->language->id
+                                        
+                                //     ]);
+                                // }),
+
+                             "s" => $fff->question->mockAttemp->QuesSeen,
+                             "optSel" => $fff->question->mockAttemp->QuesSelect,
+                             "time" => $fff->question->mockAttemp->time,
+                                "question" => $fff->question->secondquestion
 
                                     ->map(function ($ques) {
                                         return collect([
+                                            "id"=>$ques->language->id,
                                             "language" => $ques->language->languagename,
                                             "QuestioninHtml" => $ques->direction . $ques->question . $ques->option1 . $ques->option2 . $ques->option3 . $ques->option4
                                         ]);
@@ -628,7 +667,8 @@ class Apiv1Controller extends Controller
                         })
                     ]);
                 }
-            });
+            })
+            ;
 
 
         // $data = SecondQuestion::leftJoin('languages','languages.id','language_id')->get()
@@ -681,6 +721,12 @@ class Apiv1Controller extends Controller
         //             "": "et"
 
         // });
+
+// if(empty($data[0])){
+//     echo "Asdasdada";
+// }else{
+//     echo " asdas";
+// }
 
         return response()->json($data);
     }
