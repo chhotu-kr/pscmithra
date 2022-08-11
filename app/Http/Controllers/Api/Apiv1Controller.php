@@ -265,13 +265,13 @@ class Apiv1Controller extends Controller
 
                 $free = $item->isFree;
                 $type = "Buy";
-                $TestID = "0";
+                $TestID = "";
 
                 if (empty($item->attm)) {
 
                     if ($free) {
                         $type = "Start";
-                        $TestID = "0";
+                        $TestID = "";
                     } else {
                     }
                 } else {
@@ -406,7 +406,7 @@ class Apiv1Controller extends Controller
                 $mock->attemped_exams_id = $Attemp->id;
                 $mock->save();
             }
-            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid]]);
+            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid,"examinationId"=>$request->examination]]);
         } else {
             return response()->json(['msg' => 'Exam already exist', 'status' => false]);
         }
@@ -562,22 +562,6 @@ class Apiv1Controller extends Controller
 
     public function getExamData(Request $request)
     {
-
-        //  $data = Examination::with(['secondquestion','secondquestion.language'])->get();
-        //     //$data = ExamQuestion::with(['secondquestion','secondquestion.language'])->get();
-        //     $data = ExamQuestion::where('examination_id',1)->leftjoin('second_questions as s','exam_questions.examination_id','s.question_id')
-        //     ->join('languages as o','s.language_id','o.id')
-        //     ->select('*',DB::raw('(concat(s.question," sdasdadad ",s.option1)) as '.['asd asda']))
-
-        // //$data = SecondQuestion::where('question_id',2) ->join('languages as o','language_id','o.id') ->select('o.languagename',DB::raw('(concat(question," sdasdadad ",option1)) as question'))
-        // ->get();
-
-
-        // foreach($data as $t){
-
-        //     $data [$t['languagename'].'Html']=$t['question'];
-        // }
-
         if (empty($request->user)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
         }
@@ -687,27 +671,9 @@ class Apiv1Controller extends Controller
 
         $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
-        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)->
-            // with(['examQ' => function ($query) {
-            //     $query->with(['secondquestion' => function ($quu) {
-            //         $quu->leftjoin('languages', 'languages.id', 'language_id');
-            //     }]);
-            // }], 'assa')
-
-            // ->with(['attm' => function ($query) {
-            //     $query->select('*', DB::raw('(CASE WHEN type = "resume" THEN "Resume" ELSE "Result" END) AS is_user'))
-            //     ->where('users_id', 2);
-
-            // }])
-            // ->get()
-
-            // ->leftjoin('attemped_exams', function ($join) {
-            //     $join->on('examinations.id', '=', 'attemped_exams.examinations_id')->where('attemped_exams.users_id', 2);
-            // })
-            // ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result" THEN 0 ELSE END) AS ddr'))            
-            //  
-            get()
-            ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+        ->get()
+        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
@@ -732,16 +698,6 @@ class Apiv1Controller extends Controller
                         "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
                             return collect([
                                 "questionId" => $fff->question->id,
-
-
-                                // "ques" => $fff->question->secondquestion->map(function ($ques) {
-                                //     return collect([
-                                //         "name"=>$ques->language->languagename,
-                                //         "id"=>$ques->language->id
-
-                                //     ]);
-                                // }),
-
                                 "s" => $fff->question->mockAttemp->QuesSeen,
                                 "optSel" => $fff->question->mockAttemp->QuesSelect,
                                 "time" => $fff->question->mockAttemp->time,
@@ -760,70 +716,13 @@ class Apiv1Controller extends Controller
                     ]);
                 }
             });
-
-
-        // $data = SecondQuestion::leftJoin('languages','languages.id','language_id')->get()
-
-        // $data = $data->map(function ($user, $key) {
-        //     $examremaintime = 0;
-        //     if ($user->attm->type == 'resume' && $user->attm->remain_time == 0) {
-        //         $examremaintime = $user->time_duration;
-        //     } else if ($user->attm->type == 'resume' && $user->attm->remain_time != 0) {
-        //         $examremaintime = $user->attm->remain_time;
-        //     }
-
-
-
-
-        //     return collect([
-        //         "rightmarks" => $user->rightmarks,
-        //         "wmarks" => $user->wrongmarks,
-        //         "time" => $examremaintime,
-        //         "examID"=>$user->slugid
-        //     ]);
-        // });
-
-
-
-        //     return $user->examQ->map(function($key){
-        //         return $key['secondquestion']->map(function($keya){
-        // $ff =   $keya->languagename .' asda';
-        //     return collect([
-        //      $ff  => $keya->languagename
-        //     ]);         
-        //         });
-
-        //     });
-        // return collect([
-        //     'id' => $user->id
-        // ]); 
-
-        // "id": 1,
-        //             "language_id": 1,
-        //             "question_id": 2,
-        //             "question": "<p>safsdfsdf</p>",
-        //             "option1": "<p>sdfsdfsdfsdfsdf</p>",
-        //             "option2": "<p>sdfsdfsdfs</p>",
-        //             "option3": "<p>sdfsdfsdfsdf</p>",
-        //             "option4": "<p>dsfsdfsdfsdfsdf</p>",
-        //             "slugid": "nihil",
-        //             "created_at": "2022-07-29T10:47:05.000000Z",
-        //             "updated_at": "2022-07-29T10:47:05.000000Z",
-        //             "": "et"
-
-        // });
-
-        // if(empty($data[0])){
-        //     echo "Asdasdada";
-        // }else{
-        //     echo " asdas";
-        // }
-
-        return response()->json($data);
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
     }
 
     public function submitExam(Request $request){
-              
-        $examination_id =""; 
+              return response()->json(json_decode($request->dd));
+        
+        
+
     }
 }

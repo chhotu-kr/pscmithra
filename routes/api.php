@@ -42,6 +42,7 @@ Route::get('/studycategory',[Apiv1Controller::class,'get_StudyMetrial'])->name('
 Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->name('study.chapter');
 Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
+Route::post('/submitExam',[Apiv1Controller::class,'submitExam']);
 Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
