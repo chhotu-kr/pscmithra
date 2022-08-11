@@ -276,10 +276,10 @@ class Apiv1Controller extends Controller
                     }
                 } else {
                     $type = $item->attm->type;
-                    $TestID =  $item->attm->id;
+                    $TestID =  $item->attm->slugid;
                 }
                 return collect([
-                    "testId"=>$TestID,
+                    "testId" => $TestID,
                     "id" => $item->slugid,
                     "categoryId" => $item->category->id,
                     "name" => $item->exam_name,
@@ -387,33 +387,32 @@ class Apiv1Controller extends Controller
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
-$get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_id',$user_id->id)->first();
-     if(empty($get))
-     {
-        $Attemp = new AttempedExam();
-        $Attemp->slugid = md5($request->user . time());
-        $Attemp->examinations_id = $examination_id->id;
-        $Attemp->users_id = $user_id->id;
-        $Attemp->language_id = $request->language;
-        $Attemp->save();
+        $get = AttempedExam::where('examinations_id', $examination_id->id)->where('users_id', $user_id->id)->first();
+        if (empty($get)) {
+            $Attemp = new AttempedExam();
+            $Attemp->slugid = md5($request->user . time());
+            $Attemp->examinations_id = $examination_id->id;
+            $Attemp->users_id = $user_id->id;
+            $Attemp->language_id = $request->language;
+            $Attemp->save();
 
-        $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
-       // $insertData = [];
-        foreach ($examQuestion as $value) {
-            
-            $mock = new mockattempquestion();
-            $mock->users_id =  $user_id->id;
-            $mock->questions_id = $value;
-            $mock->attemped_exams_id = $Attemp->id;
-            $mock->save();
+            $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
+            // $insertData = [];
+            foreach ($examQuestion as $value) {
+
+                $mock = new mockattempquestion();
+                $mock->users_id =  $user_id->id;
+                $mock->questions_id = $value;
+                $mock->attemped_exams_id = $Attemp->id;
+                $mock->save();
+            }
+            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid]]);
+        } else {
+            return response()->json(['msg' => 'Exam already exist', 'status' => false]);
         }
-        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' =>['testId'=>$Attemp->slugid]]);
-     }else{
-        return response()->json(['msg' => 'Exam already exist', 'status' => false]);
-     }
-     //   mockattempquestion::insert($insertData);
+        //   mockattempquestion::insert($insertData);
 
-        
+
     }
 
 
@@ -557,6 +556,10 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
     }
 
 
+
+
+
+
     public function getExamData(Request $request)
     {
 
@@ -595,14 +598,96 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
             return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
         }
         $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
- 
+
         if (!$testId) {
             return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
         }
 
-        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use($testId,$user_id){
+
+        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        </head>
+        
+        <body>
+            <style type="text/css">
+                .btn {
+                    background-color: whitesmoke;
+                    border: 1.5px solid black;
+                    border-radius: 10px;
+                    padding: 5px;
+                    text-align: start;
+                }
+        
+                .span {
+                    color: black;
+                    font-size: 1.4rem;
+                }
+            </style>
+            <div class="m-4">
+                <div class="">';
+
+               $html1 =  '</div>
+                <div class="d-grid gap-2 mt-4">
+                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
+                        <div class="row align-items-center">
+                            <span class="col-auto span">A.</span>
+                            <div type="text" class="col">';
+        $html2  = '</div>
+                            </div>
+                        </div>
+                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
+                            <div class="row align-items-center">
+                                <span class="col-auto span">B.</span>
+                                <div type="text" class="col">';
+        $html3 = ' </div>
+                                </div>
+                            </div>
+                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
+                                <div class="row align-items-center">
+                                    <span class="col-auto span">C.</span>
+                                    <div type="text" class="col">';
+        $html4 = '</div>
+                                    </div>
+                                </div>
+                                <div class="btn" onclick="myFunction(this)" id="4">
+                                    <div class="row align-items-center">
+                                        <span class="col-auto span">D.</span>
+                                        <div type="text" class="col">';
+        $html5 =  '</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function myFunction(elem) {
+                                    for (let i = 0; i < 5; i++) {
+                                        if (elem.id == i) {
+                    
+                                            $("#" + i).css("border", "1.5px solid #90ee02");
+                                            JSInterface.select("selOpt" + elem.id);
+                                        } else {
+                                            
+                                            $("#" + i).css("border", "1.5px solid");
+                                        }
+                                    }
+                                }
+                            </script>
+                        </body>
+                        
+                        </html>';
+
+
+        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
-        }])->where('slugid', $request->testId )->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)->
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)->
             // with(['examQ' => function ($query) {
             //     $query->with(['secondquestion' => function ($quu) {
             //         $quu->leftjoin('languages', 'languages.id', 'language_id');
@@ -622,7 +707,7 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
             // ->select('examinations.*' , 'attemped_exams.*', DB::raw('(CASE WHEN attemped_exams.type = "result" THEN 0 ELSE END) AS ddr'))            
             //  
             get()
-            ->map(function ($d) {
+            ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
@@ -636,7 +721,7 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
                     }
 
                     return collect([
-                        "testID"=>$d->slugid,
+                        "testID" => $d->slugid,
                         "languageId" => $d->language->id,
                         "languageName" => $d->language->languagename,
                         "examId" => $d->examination->slugid,
@@ -644,29 +729,29 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) {
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
                             return collect([
                                 "questionId" => $fff->question->id,
-                                
+
 
                                 // "ques" => $fff->question->secondquestion->map(function ($ques) {
                                 //     return collect([
                                 //         "name"=>$ques->language->languagename,
                                 //         "id"=>$ques->language->id
-                                        
+
                                 //     ]);
                                 // }),
 
-                             "s" => $fff->question->mockAttemp->QuesSeen,
-                             "optSel" => $fff->question->mockAttemp->QuesSelect,
-                             "time" => $fff->question->mockAttemp->time,
+                                "s" => $fff->question->mockAttemp->QuesSeen,
+                                "optSel" => $fff->question->mockAttemp->QuesSelect,
+                                "time" => $fff->question->mockAttemp->time,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) {
+                                    ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
                                         return collect([
-                                            "id"=>$ques->language->id,
+                                            "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $ques->direction . $ques->question . $ques->option1 . $ques->option2 . $ques->option3 . $ques->option4
+                                            "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
                                         ]);
                                     })
 
@@ -674,8 +759,7 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
                         })
                     ]);
                 }
-            })
-            ;
+            });
 
 
         // $data = SecondQuestion::leftJoin('languages','languages.id','language_id')->get()
@@ -729,12 +813,17 @@ $get= AttempedExam::where('examinations_id',$examination_id->id)->where('users_i
 
         // });
 
-// if(empty($data[0])){
-//     echo "Asdasdada";
-// }else{
-//     echo " asdas";
-// }
+        // if(empty($data[0])){
+        //     echo "Asdasdada";
+        // }else{
+        //     echo " asdas";
+        // }
 
         return response()->json($data);
+    }
+
+    public function submitExam(Request $request){
+              
+        $examination_id =""; 
     }
 }
