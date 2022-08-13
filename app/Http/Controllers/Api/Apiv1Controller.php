@@ -720,7 +720,12 @@ class Apiv1Controller extends Controller
     }
 
     public function submitExam(Request $request){
-              return response()->json(json_decode($request->dd));
+       
+        // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
+        //       return response()->json($examination_id);
+
+              return response()->json(['msg' => 'Test Submit', 'status' => true,]);
+             // return response()->json($request);
         
         
 
