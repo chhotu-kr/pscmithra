@@ -29,7 +29,7 @@
                         <input type="text" name="password" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <select name="role" id="" class="form-control">
+                        <select name="name" id="" class="form-control">
                             <label for="" class="form-label">Role</label>
                             <option value="0">Select role</option>
                             @foreach ($role as $item)

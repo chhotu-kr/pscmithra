@@ -21,6 +21,8 @@ class RoleController extends Controller
         return view('role.manageRole', compact('role'));
     }
 
+    //.................AddRole.................//
+
     public function get_Addrole()
     {
         $permi = Permission::all();
@@ -35,6 +37,8 @@ class RoleController extends Controller
         return view('role.addRole',$data);
     }
 
+
+
     public function store_role (Request $request){
 
 $role = new Role();
@@ -44,11 +48,41 @@ $role->slug = str_replace(" ","-",strtolower($request->name));
 $role->save();
 
 Role::whereId($role->id)->first()->permissions()->attach($request->per);
-return redirect('/role');
+return redirect('/xyz@123/role');
 
 
 
 }
+
+public function editRole($id){
+$data['rol']=Role::find($id);
+$permint = array();
+$data['data'] = $permint;
+return view('role.editaddRole',$data);
+
+}
+
+public function updateRole(Request $request,$id){
+
+    $rol=Role::find($id);
+    $rol->name = $request->name;
+    $rol->slug = str_replace(" ","-",strtolower($request->name));
+    
+    $rol->save();
+    Role::whereId($rol->id)->first()->permissions()->attach($request->per);
+    $permi = Permission::find($id);
+    $permint = array();
+    foreach ($permi  as $item) {
+        $a = explode('-', $item->slug);
+        $permint[$a[1]][]=$item;  
+    }
+    
+    $data['data'] = $permint;
+
+    return redirect('/xyz@123/role');
+}
+
+//..........................Admin.....................//
     public function getAdmin()
     {
         $data['role'] = Role::all();
@@ -99,10 +133,11 @@ return redirect('/role');
     // }
 
     public function edit($id){
-    $data['role']=Admin::find($id);
+    $data['admin']=Admin::find($id);
     $data['role']=Role::find($id);
+    $data['roles']=Role::all();
 
-    return view('role.editAddAdmin',compact('data'));
+    return view('role.editAddAdmin',$data);
     }
 
     public function update(Request $request,$id){
@@ -115,8 +150,8 @@ return redirect('/role');
         $data->save();
         // $role = new users_roles();
         $role=Role::find($id);
-        $role->admin_id = $data->id;
-        $role->role_id = $request->role;
+        // $role->admin_id = $data->id;
+        $role->name = $request->name;
         $role->timestamps = false;
         $role->save();
         return redirect()->route('store.role');

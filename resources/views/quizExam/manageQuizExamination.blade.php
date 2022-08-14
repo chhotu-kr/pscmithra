@@ -30,13 +30,17 @@
                                   <th >id</th>
                                
                                   <th >QuizCategory Name</th>
-                                  {{-- <th >QuizSubCategory Name</th> --}}
+                                  <th >QuizSubCategory Name</th>
                                   <th >QuizChapter Name</th>
                                   <th >QuizCTopic Name</th>
                                   
                                   <th scope="col"> Exam Name</th>
+                                  <th scope="col"> Language</th>
                                   <th scope="col">Right Marks</th>
                                   <th scope="col">Wrong Marks</th>
+                                  <th scope="col">No Of Question</th>
+                                  <th scope="col">Type</th>
+                                  <th scope="col">IsFree</th>
                                   <th scope="col">Time</th>
                                   
                                   {{-- <th scope="col">Start<br>At</th>
@@ -72,8 +76,16 @@
                                           @endif
                                           
                                           <td>{{$cour->exam_name}}</td>
+                                          <td>@foreach($cour->lang as $val)
+                                            {{$val->language->languagename}},
+                                            @endforeach</td> 
                                           <td>{{$cour->rightmarks}}</td>
                                           <td>{{$cour->wrongmarks}}</td>
+                                          <td>{{$cour->noquizques}}</td>
+                                          <td>{{$cour->type}}</td>
+                                          <td>{{$cour->isFree}}</td>
+                                          {{-- <td>{{$cour->time_duration}}</td>
+                                          <td>{{$cour->time_duration}}</td> --}}
                                           <td>{{$cour->time_duration}}</td>
                                           
 

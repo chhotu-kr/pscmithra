@@ -7,7 +7,7 @@
     <div class="col-9">
       <div class="row">
           <div class="col-8">
-              <h6 class="border-5 border-start border-danger ps-1 fw-bold h4">ManageTopic</h6>
+              <h6 class="border-5 border-start border-danger ps-1 fw-bold h4">ManageScreenshot</h6>
           </div>
           <div class="col-4">
             <button type="button" class="btn btn-primary rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#basicModal">
@@ -59,7 +59,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Datatables</h5>
+            <h5 class="card-title">ManageScreenshot</h5>
             
 
             <!-- Table with stripped rows -->

@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('exam_questions', function (Blueprint $table) {
+        Schema::create('quiz_examination_languages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('examination_id')->constrained();
-            $table->foreignId('question_id')->constrained();
-           
-            $table->string('slugid');
+            $table->foreignId('quiz_examination_id')->constrained();
+            $table->foreignId('language_id')->constrained();
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_questions');
+        Schema::dropIfExists('quiz_examination_languages');
     }
 };

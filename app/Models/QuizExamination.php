@@ -45,4 +45,19 @@ class QuizExamination extends Model
         return $this->hasOne(SecondQuestion::class,'id','question_id');
     }
 
+
+    //  copy
+
+    public function quizexamQ(){
+        return $this->hasMany(QuizQuestion::class, 'quiz_examinations_id','id');
+    }
+
+    public function lang(){
+        return $this->hasMany(mocktestExaminationLanguage::class,"quiz_examinations_id","id");
+    }
+
+    public function quizattm(){
+        return $this->hasOne(AttempedExam::class,'quiz_examinations_id','id');
+    }
+
 }

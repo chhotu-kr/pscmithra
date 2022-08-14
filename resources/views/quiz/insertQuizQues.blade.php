@@ -13,7 +13,7 @@
         <div class="card-body">
           <input type="hidden"  id="idd" value="{{$id}}">
          
-        <form action="{{route('quizQues.submit')}}" method="POST">
+        <form action="{{route('store.quizquestion')}}" method="POST">
           @csrf
           <livewire:subjects/>
         
@@ -67,13 +67,13 @@ $(function() {
          type:'get',
          dataType:'json',
         contentType:'application/json',
-         url:"{{ route('quizQues.submit') }}",
+         url:"{{route('store.quiz')}}",
          data:{'id':Id ,'eID':examid },
          success:function(data){
-         console.log(data);
+       
           Html="";
           $.each(data, function(index, value) {
-
+            console.log(data);
             Html+=`<tr>
               <td><input type='checkbox' value='${value.id}' name='data[]'></td>
               <td>${value.id}</td>
