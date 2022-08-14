@@ -18,23 +18,23 @@
                     </div>
                     <div class="mb-3">
                         <label>Email</label>
-                        <input type="text" name="email" class="form-control" value="{{$role->email}}" required>
+                        <input type="text" name="email" class="form-control" value="{{$admin->email}}" required>
                     </div>
                     <div class="mb-3">
                         <label>Contact</label>
-                        <input type="text" name="contact" class="form-control" value="{{$role->contact}}" required>
+                        <input type="text" name="contact" class="form-control" value="{{$admin->contact}}" required>
                     </div>
                     <div class="mb-3">
                         <label>Password</label>
-                        <input type="text" name="password" class="form-control" value="{{$role->contact}}" required>
+                        <input type="text" name="password" class="form-control" value="{{$admin->password}}" required>
                     </div>
                     <div class="mb-3">
                         <select name="role" id="" class="form-control">
                             <label for="" class="form-label">Role</label>
                             <option value="0">Select role</option>
-                            @foreach ($role as $item)
+                            @foreach ($roles as $item)
                             <option value="{{ $item->id }}"
-                                @if ($item->id==$role->role)
+                                @if ($item->id==$role->name)
                                     selected="selected"
                                 @endif
                               >{{ $item->name}}</option>

@@ -165,14 +165,14 @@ if($request->subcategory_id[$i]!=-1){
 //     return response()->json('$data');
 //    }
     
-    public function update(Request $request, Product $product,$id)
+    public function update(Request $request, Product $product)
     {
         //
       
         $product->slugid=md5($request->product .time());
         $product->title=$request->title;
         $product->description=$request->description;
-        $product->pdf=$request->pdf;
+        $product->type=$request->type;
         $product->price=$request->price;
         //image work
         $filename = $request->bannerimage->getClientOriginalName();
@@ -181,6 +181,67 @@ if($request->subcategory_id[$i]!=-1){
       
         $product->bycount=$request->bycount;
         $product->save();
+
+        if($request->type=='book'){
+            $book_product=new BookProduct();
+            $book_product->product_id=$book_product->id;
+            $book_product->book_id=$request->data;
+            $book_product->slugid=md5("ghjfh" .time()."hjfhjfjhfghf");
+            $book_product->save();
+        }
+        else if($request->type=='course'){
+            $course_product=new CourseProduct();
+            $course_product->product_id=$product->id;
+            $course_product->slugid=md5("ghtrjfh" .time()."hjfhjf33fghf");
+            $course_product->course_id=$request->data;
+
+            $course_product->save();
+        }
+        else if($request->type=='pdf'){
+            $pdf_product=new PdfProduct();
+            $pdf_product->product_id=$product->id;
+            $pdf_product->slugid=md5("ghjfhtyt" .time()."hjfwrehfghf");
+            $pdf_product->pdf_id=$request->data;
+
+            $pdf_product->save();
+        }
+        else if($request->type=='ebook'){
+            $pdfsubs=new PdfSubscriptionProduct();
+            $pdfsubs->product_id=$product->id;
+            // $pdfsubs->slugid=md5("ghjfyfdt" .time()."hjfwhfgfffhf");
+            $pdfsubs->pdf_subscriptions_id=$request->data;
+
+            $pdfsubs->save();
+        }else if($request->type='plan'){
+
+            
+            if(!empty($request->liveD) ||!empty($request->liveN)){
+                $planproduct = new ProductPlan();
+                $planproduct->product_id=$product->id;
+                $planproduct->freemocktest=$request->liveN;
+                $planproduct->examduration=$request->liveD;
+                $planproduct->save();
+             }
+             $co = count($request->category_id);
+
+             for($i=0;$i<$co;$i++  ){
+
+                $planproduct = new ProductPlan();
+                $planproduct->product_id=$product->id;
+if($request->category_id[$i]!=-1){
+    $planproduct->category_id=$request->category_id[$i];
+}
+if($request->subcategory_id[$i]!=-1){
+    $planproduct->subcategory_id=$request->subcategory_id[$i];
+}
+
+                $planproduct->freemocktest=$request->mocktestN[$i];
+                $planproduct->examduration=$request->mocktestD[$i];
+                $planproduct->save();
+
+             }
+            
+         }
 
         // if($request->type=='book'){
         //      $book_product=BookProduct::find($id);

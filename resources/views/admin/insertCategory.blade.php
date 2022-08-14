@@ -5,9 +5,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-                    Add Category
-                   </button>
+                 @role('admin')
+                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                  Add Category
+                 </button>
+                 @endrole
                 </div>
                 
           
@@ -89,10 +91,22 @@
                                     <img src="{{asset("upload/".$item->image)}}" width="40" height="40" alt="">
                                 </td>
                                   <td>
-                                     <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                  
+
+                                    
+                                    <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                 
+                                    
+                                   
+
+                                    <a href="{{route('removecategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                          
+                               
+                                
                                     
                                     
-                                      <a href="{{route('removecategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                    
+                                      
                                   </td>
                               </tr>
                           @endforeach

@@ -17,17 +17,22 @@
               <select name="course_id" id="" class="form-select"  required>
               <option value="">select CourseName</option>
               @foreach ($course as $pro)
-                  <option value="{{$pro->id}}">{{$pro->name}}</option>
+              <option value="{{ $pro->id }}"
+                @if ($pro->id==$module->course_id)
+                    selected="selected"
+                @endif
+              >{{ $pro->name}}</option>
               @endforeach
               </select>
              </div>
              <div class="mb-3">
               <label>Type</label>
-                  <select name="type" id="" class="form-select">
+                  <select name="type" id="" class="form-select" value="{{$module->type}}">
                      <option value="0">Select Type</option>
                       <option value="voice">voice</option>
                       <option value="text">text</option>
-                       <option value="test">test</option>
+                       <option value="test">quiz</option>
+                       <option value="test">video</option>
                  </select>
              </div>
             <div class="mb-3">

@@ -59,10 +59,29 @@
                                   </div>
                                 
                                 
-                                <div class="mb-3">
+                               <div class="row">
+                                 <div class="col-6">
+                                  <div class="mb-3">
                                     <label for="">Exam_name</label>
                                     <input type="text" name="exam_name" class="form-control" value="{{$examination->exam_name}}" required>
+                                 </div>
+                                 </div>
+                                 <div class="col-6">
+                                  <div class="mb-3">
+                                    <label for="">Type</label>
+                                    <select  name="type" id="" class="form-select">
+                                        <option value="">Select Type</option>
+                                        <option value="live">live</option>
+                                        <option value="not">not</option>
+                                       
+                                    </select>
+                                    <div class="valid-tooltip">
+                                        Looks good!
+                                    </div>
+                                  </div>
                                 </div>
+                                </div>
+                               </div>
                                 
                                <div class="row">
                                 <div class="col-6">

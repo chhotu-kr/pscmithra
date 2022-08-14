@@ -28,7 +28,7 @@
                             </div> 
                             <div class="mb-3">
                                 <label>No Of Test</label>
-                                <input type="text" name="nooftest" class="form-control" value="{{$membership->nooftest}}" required>
+                                <input type="number" name="nooftest" class="form-control" value="{{$membership->nooftest}}" required>
                             </div>
                             <div class="mb-3">
                                 <label>Details</label>

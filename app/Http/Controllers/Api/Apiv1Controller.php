@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
 use App\Models\Exam;
+use App\Models\QuizExam;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Examination;
@@ -21,12 +22,14 @@ use App\Models\Category;
 use App\Models\ExamQuestion;
 use App\Models\Language;
 use App\Models\mockattempquestion;
+use App\Models\QuizAttemptQuestion;
 use App\Models\QuizCategory;
 use App\Models\QuizChapter;
 use App\Models\QuizExamination;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\SecondQuestion;
+use App\Models\QuizQuestion;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
@@ -260,7 +263,8 @@ class Apiv1Controller extends Controller
             // ->select('examinations.*', DB::raw('(CASE WHEN attemped_exams.type = "resume" THEN "Resume" 
             //  WHEN attemped_exams.type IS NULL or attemped_exams.type = "" THEN "Start" ELSE "Result" END) AS is_user'))
 
-            ->get()->map(function ($item) {
+            ->get()
+            ->map(function ($item) {
                 //    return $item;
 
                 $free = $item->isFree;
@@ -297,9 +301,86 @@ class Apiv1Controller extends Controller
                         ]);
                     })
                 ]);
-            });
+            })
+            ;
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+
+    //.....................quiz Examination................//
+
+    public function get_QuizExamination(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        $quiz_categories_id = $request->quiz_categories_id;
+        if (empty($quiz_categories_id)) {
+            return response()->json(['msg' => 'Enter QuizCategory Id', 'status' => false]);
+        }
+        $quiz_sub_categories_id= $request->quiz_sub_categories_id;
+        
+        $quiz_chapters_id = $request->quiz_chapters_id;
+        
+        $quiz_topics_id = $request->quiz_topics_id;
+       
+
+        $data = QuizExamination::where('quiz_categories_id', $quiz_categories_id)->where('quiz_sub_categories_id', $quiz_sub_categories_id)
+        ->where('quiz_chapters_id',$quiz_chapters_id)->where('quiz_topics_id',$quiz_topics_id)
+            ->with('quizCat', 'quizsubcat','quizChat','quiztopic', 'lang.language')->with(['attm' => function ($qc) use ($user_id) {
+                $qc->where('users_id', $user_id->id);
+            }])
+           
+
+            ->get()
+            ->map(function ($item) {
+                //    return $item;
+
+                $free = $item->isFree;
+                $type = "Buy";
+
+
+                if (empty($item->attm)) {
+
+                    if ($free) {
+                        $type = "Start";
+                    } else {
+                    }
+                } else {
+                    $type = $item->attm->type;
+                }
+                return collect([
+                    "id" => $item->slugid,
+                    "quizcategoryId" => $item->quizCat->id,
+                    "name" => $item->exam_name,
+                    "quizcategoryName" => $item->QuizCat->name,
+                    // "quizsubCategoryId" => $item->quizsubcat->id,
+                    // "quizsubCategoryName" => $item->quizsubcat->name,
+                    // "quizschapterId" => $item->quizChat->id,
+                    // "quizchapterName" => $item->quizChat->name,
+                    // "quizTopicId" => $item->quiztopic->id,
+                    // "quizTopicName" => $item->quiztopic->name,
+                    "totalTimeinMints" => $item->time_duration,
+                    // "totalQues" => $item->noQues,
+                    "type" => $type,
+                    "totalTimeinMints" => $item->time_duration,
+                    "languages" => $item->lang->map(function ($lang) {
+                        return collect([
+                           
+                            "name" => $lang->language->languagename,
+                            "id" => $lang->language->id,
+                           
+                        ]);
+                    })
+                ]);
+            })
+            ;
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
 
     // ..........studymetrial API...........
 
@@ -356,20 +437,7 @@ class Apiv1Controller extends Controller
         }
     }
 
-    //     $sm_id = $request->sm_id;
-    //     if (empty($sm_id)) {
-    //         if ($sm_id != 0) {
-    //             return response()->json(['msg' => 'Enter SmChapter Id', 'status' => $request->sm_id]);
-    //         }
-    //     }
-    //     if ($sm_id == 0) {
-    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->get();
-    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    //     } else {
-    //         $data = Study::select('name', 'id', 'content')->where('sm_categories_id', $sm_categories_id)->where('sm_chapters_id', $sm_chapters_id)->where('id', $sm_id)->get();
-    //         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    //     }
-    // }
+   
     public function preareExam(Request $request)
     {
         if (empty($request->user)) {
@@ -413,6 +481,48 @@ class Apiv1Controller extends Controller
         //   mockattempquestion::insert($insertData);
 
 
+    }
+
+    //.......................quiz prepareExam.......................//
+
+    public function preareQuizExam(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->quizexamination)) {
+            return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
+        }
+        $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
+
+        if (!$quiz_examinations_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        $Quiz = new QuizExam();
+        $Quiz->slugid = md5($request->user . time());
+        $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
+        $Quiz->users_id = $user_id->id;
+        $Quiz->language_id = $request->language;
+        $Quiz->save();
+
+        $quizQuestion =  QuizQuestion::where('quiz_examinations_id', $quiz_examinations_id->id)->pluck('question_id');
+       // $insertData = [];
+        foreach ($quizQuestion as $value) {
+            
+            $mock = new QuizAttemptQuestion();
+            $mock->users_id =  $user_id->id;
+            $mock->quiz_questions_id = $value;
+            $mock->quiz_exams_id = $Quiz->id;
+            $mock->save();
+        }
+     //   mockattempquestion::insert($insertData);
+
+        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Quiz]);
     }
 
 
@@ -554,9 +664,6 @@ class Apiv1Controller extends Controller
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-
-
-
 
 
 
@@ -719,6 +826,180 @@ class Apiv1Controller extends Controller
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
     }
 
+
+
+    //...................QuizExamData...................//
+
+
+    public function get_QuizExamData(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->quizexamination)) {
+            return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
+        }
+        $quiz_examination_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
+
+        if (!$quiz_examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  QuizExam::select('id')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
+
+
+        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        </head>
+        
+        <body>
+            <style type="text/css">
+                .btn {
+                    background-color: whitesmoke;
+                    border: 1.5px solid black;
+                    border-radius: 10px;
+                    padding: 5px;
+                    text-align: start;
+                }
+        
+                .span {
+                    color: black;
+                    font-size: 1.4rem;
+                }
+            </style>
+            <div class="m-4">
+                <div class="">';
+
+               $html1 =  '</div>
+                <div class="d-grid gap-2 mt-4">
+                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
+                        <div class="row align-items-center">
+                            <span class="col-auto span">A.</span>
+                            <div type="text" class="col">';
+        $html2  = '</div>
+                            </div>
+                        </div>
+                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
+                            <div class="row align-items-center">
+                                <span class="col-auto span">B.</span>
+                                <div type="text" class="col">';
+        $html3 = ' </div>
+                                </div>
+                            </div>
+                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
+                                <div class="row align-items-center">
+                                    <span class="col-auto span">C.</span>
+                                    <div type="text" class="col">';
+        $html4 = '</div>
+                                    </div>
+                                </div>
+                                <div class="btn" onclick="myFunction(this)" id="4">
+                                    <div class="row align-items-center">
+                                        <span class="col-auto span">D.</span>
+                                        <div type="text" class="col">';
+        $html5 =  '</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function myFunction(elem) {
+                                    for (let i = 0; i < 5; i++) {
+                                        if (elem.id == i) {
+                    
+                                            $("#" + i).css("border", "1.5px solid #90ee02");
+                                            JSInterface.select("selOpt" + elem.id);
+                                        } else {
+                                            
+                                            $("#" + i).css("border", "1.5px solid");
+                                        }
+                                    }
+                                }
+                            </script>
+                        </body>
+                        
+                        </html>';
+
+
+        $data = QuizExam::with(['examination.quizexamQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $quiz_examination_id->id)
+        ->get()
+        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+
+                if ($d['type'] != "resume") {
+                    return "Test not resume";
+                } else if ($d['type'] = "resume") {
+
+                    $examremaintime = 0;
+                    if ($d->type == 'resume' && $d->remain_time == 0) {
+                        $examremaintime = $d->examination->time_duration;
+                    } else if ($d->type == 'resume' && $d->remain_time != 0) {
+                        $examremaintime = $d->remain_time;
+                    }
+
+                    return collect([
+                        "testID" => $d->slugid,
+                        "languageId" => $d->language->id,
+                        "languageName" => $d->language->languagename,
+                        "examId" => $d->examination->slugid,
+                        "time" => $examremaintime,
+                        "wMarks" => $d->examination->wrongmarks,
+                        "rMarks" => $d->examination->rightmarks,
+                        'noQues' => $d->examination->noQues,
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                            return collect([
+                                "questionId" => $fff->question->id,
+                                "s" => $fff->question->mockAttemp->QuesSeen,
+                                "optSel" => $fff->question->mockAttemp->QuesSelect,
+                                "time" => $fff->question->mockAttemp->time,
+                                "question" => $fff->question->secondquestion
+
+                                    ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                                        return collect([
+                                            "id" => $ques->language->id,
+                                            "language" => $ques->language->languagename,
+                                            "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                        ]);
+                                    })
+
+                            ]);
+                        })
+                    ]);
+                }
+            });
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
+    }
+
+
+    public function Product(){
+      
+        // return  ['product' => DB::Product('product')->paginate(2)];
+
+        $data =Product::Paginate(2);
+
+        return response()->json(['$msg'=>'Data Fatched', 'Status'=>true, 'data'=>$data]);
+
+
     public function submitExam(Request $request){
        
         // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
@@ -730,4 +1011,7 @@ class Apiv1Controller extends Controller
         
 
     }
+
+   
+
 }

@@ -77,14 +77,15 @@
                 </div>
 
                <div class="m-3 row">
-               <div class="form-check form-switch col-sm-auto">
+                  <div class="form-check form-switch col-sm-auto">
                       <input class="form-check-input" type="checkbox" id="isFree" value="false" name="isfree" >
                       <label class="form-check-label" for="checkbox1">Is Free</label>
                     </div>
 
 
                     
-               </div>
+                   </div>
+              </div>
                <script>
 
 

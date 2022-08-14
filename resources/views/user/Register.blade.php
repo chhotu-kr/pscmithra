@@ -36,18 +36,23 @@
                     <div class="login-form-box registration-form">
                         <h3 class="title">Registration</h3>
                         <p>Already have an account? <a href="{{route('user.login')}}">Sign in</a></p>
-                        <form>
+                        <form action="{{route('user.signup')}}"  method="post">
+                            @csrf
                             <div class="form-group">
-                                <label for="reg-name">Name*</label>
-                                <input type="text" name="reg-name" id="reg-name" placeholder="Full name">
+                                <label for="reg-name">Name</label>
+                                <input type="text" name="name" id="reg-name" placeholder="Full name">
                             </div>
                             <div class="form-group">
-                                <label for="log-email">Username or email*</label>
-                                <input type="email" name="log-email" id="log-email" placeholder="Email or username">
+                                <label for="log-email">UserEmail</label>
+                                <input type="email" name="email" id="log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
-                                <label for="log-password">Password*</label>
-                                <input type="password" name="log-password" id="log-password" placeholder="Password">
+                                <label for="log-email">UserContact</label>
+                                <input type="text" name="contact" id="log-email" placeholder="Email or username">
+                            </div>
+                            <div class="form-group">
+                                <label for="log-password">Password</label>
+                                <input type="password" name="password" id="log-password" placeholder="Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">
@@ -57,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="button" class="education-btn btn-medium">Create Account <i class="icon-4"></i></button>
+                                <button type="submit" class="education-btn btn-medium">Create Account <i class="icon-4"></i></button>
                             </div>
                         </form>
                     </div>

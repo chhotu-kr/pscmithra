@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $request->image->move(('upload'),$filename);
         $data->image = $filename;
         $data->save();
-        return redirect('/category');
+        return redirect()->route('insert.category');
     }
 
     
@@ -69,7 +69,7 @@ class CategoryController extends Controller
          $request->image->move(('upload'),$filename);
          $category->image = $filename;
         $category->save();
-        return redirect('/category');
+        return redirect()->route('insert.category');
         
     }
 
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             session()->flash('error', 'Please try again !!!');
         } 
 
-        return redirect('/category');
+        return redirect()->route('insert.category');
        
     }
 }
