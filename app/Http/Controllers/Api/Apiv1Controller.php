@@ -406,7 +406,7 @@ class Apiv1Controller extends Controller
                 $mock->attemped_exams_id = $Attemp->id;
                 $mock->save();
             }
-            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid,"examinationId"=>$request->examination]]);
+            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
         } else {
             return response()->json(['msg' => 'Exam already exist', 'status' => false]);
         }
@@ -618,7 +618,7 @@ class Apiv1Controller extends Controller
             <div class="m-4">
                 <div class="">';
 
-               $html1 =  '</div>
+        $html1 =  '</div>
                 <div class="d-grid gap-2 mt-4">
                     <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
                         <div class="row align-items-center">
@@ -672,8 +672,8 @@ class Apiv1Controller extends Controller
         $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-        ->get()
-        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+            ->get()
+            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
@@ -695,19 +695,20 @@ class Apiv1Controller extends Controller
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
                             return collect([
                                 "questionId" => $fff->question->id,
+                                "attempID" => $fff->question->mockAttemp->id,
                                 "s" => $fff->question->mockAttemp->QuesSeen,
                                 "optSel" => $fff->question->mockAttemp->QuesSelect,
                                 "time" => $fff->question->mockAttemp->time,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                                    ->map(function ($ques) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                            "QuestioninHtml" => $htm1 . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
                                         ]);
                                     })
 
@@ -716,18 +717,68 @@ class Apiv1Controller extends Controller
                     ]);
                 }
             });
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-    public function submitExam(Request $request){
-       
-        // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
-        //       return response()->json($examination_id);
 
-              return response()->json(['msg' => 'Test Submit', 'status' => true,]);
-             // return response()->json($request);
-        
-        
+    public function submitExam(Request $request)
+    {
 
-    }
+        if (empty($request->userId)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+
+        if (empty($request->examId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examId)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        // $attemp = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
+        //     ->where("users_id", $user_id->id)
+        //     ->
+        //     //get();
+        //     update([
+        //         "remain_time" => 407,
+        //         "type" => $request->type
+        //         ]
+        //     );
+
+//             foreach($request->array as $index => $value){
+                
+// $dd = mockattempquestion::where('id',$value['attempID'])->where('attemped_exams_id',$testId->id)->
+// update([
+//             "QuesSeen" => "true",
+//             "QuesSelect" => $value['optSel'],
+//             "time"=>$value['time']
+//             ]
+//         );
+
+        // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
+
+               // echo json_encode($value);
+                
+          //  }
+
+//        return response()->json($dd);
+    
+}
+
+   
 }
