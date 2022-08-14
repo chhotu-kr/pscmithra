@@ -39,7 +39,7 @@ class QuizExamination extends Model
     }
 
     public function Quizexam(){
-        return $this->hasMany(Examquestion::class,'quiz_examinations_id','id');
+        return $this->hasMany(QuizQuestion::class,'quiz_examinations_id','id');
     }
     public function secondquestion(){
         return $this->hasOne(SecondQuestion::class,'id','question_id');
@@ -57,7 +57,7 @@ class QuizExamination extends Model
     }
 
     public function quizattm(){
-        return $this->hasOne(AttempedExam::class,'quiz_examinations_id','id');
+        return $this->hasOne(QuizExam::class,'quiz_examinations_id','id');
     }
 
 }

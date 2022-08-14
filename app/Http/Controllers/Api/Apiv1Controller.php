@@ -832,9 +832,9 @@ class Apiv1Controller extends Controller
         if (empty($request->quizexamination)) {
             return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
         }
-        $quiz_examination_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
+        $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
 
-        if (!$quiz_examination_id) {
+        if (!$quiz_examinations_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
 
@@ -929,9 +929,9 @@ class Apiv1Controller extends Controller
                         </html>';
 
 
-        $data = QuizExam::with(['examination.quizexamQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
-            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
-        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $quiz_examination_id->id)
+        $data = QuizExam::with(['quizexamination.quizexamQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
         ->get()
         ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
 
@@ -941,7 +941,7 @@ class Apiv1Controller extends Controller
 
                     $examremaintime = 0;
                     if ($d->type == 'resume' && $d->remain_time == 0) {
-                        $examremaintime = $d->examination->time_duration;
+                        $examremaintime = $d->quizexamination->time_duration;
                     } else if ($d->type == 'resume' && $d->remain_time != 0) {
                         $examremaintime = $d->remain_time;
                     }
@@ -952,10 +952,10 @@ class Apiv1Controller extends Controller
                         "languageName" => $d->language->languagename,
                         "examId" => $d->examination->slugid,
                         "time" => $examremaintime,
-                        "wMarks" => $d->examination->wrongmarks,
-                        "rMarks" => $d->examination->rightmarks,
-                        'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                        "wMarks" => $d->quizexamination->wrongmarks,
+                        "rMarks" => $d->quizexamination->rightmarks,
+                        'noQues' => $d->quizexamination->noQues,
+                        "questionslist" => $d->quizexamination->quizexamQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
                             return collect([
                                 "questionId" => $fff->question->id,
                                 "s" => $fff->question->mockAttemp->QuesSeen,
