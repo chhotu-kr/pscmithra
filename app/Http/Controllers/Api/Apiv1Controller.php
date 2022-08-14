@@ -762,5 +762,3 @@ class Apiv1Controller extends Controller
     }
 }
 
-   
-}
