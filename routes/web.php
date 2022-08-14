@@ -509,17 +509,19 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  //............QuizQuestion...........//
 
  Route::get('/manage/quizques/{id}',[QuizQuestionController::class,'index'])->name('manage.quizquestion');
- Route::get('/quizques/create/{id}',[QuizQuestionController::class,'create'])->name('quizquestion.create');
+ Route::get('/quiz/ques/create/{id}',[QuizQuestionController::class,'get_QuizQuestioncreate'])->name('aaaquizquestion.create');
  Route::post('/quizques/store',[QuizQuestionController::class,'store'])->name('quizquestion.store');
  Route::get('/quizques/update/{id}',[QuizQuestionController::class,'edit'])->name('quizquestion.edit');
  Route::post('/quizques/update/{id}',[QuizQuestionController::class,'update'])->name('quizquestion.update');
  Route::get('/quizques/remove/{id}',[QuizQuestionController::class,'destroy'])->name('quizquestion.destroy');
- Route::post('/quiz/question',[QuizQuestionController::class,'QuizSubmit'])->name('quizQues.submit');
+ Route::get('/quiz/question',[QuizQuestionController::class,'get_QuizSubmit'])->name('store.quiz');
+ Route::post('/quiz/question/save',[QuizQuestionController::class,'QuizQues'])->name('store.quizquestion');
+ 
 
  //..........CourseQuizQuestion..............//
 
  Route::get('/manage/Cquizques/{id}',[CourseQuizQuestionController::class,'index'])->name('manage.Cquizquestion');
- Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('quizquestion.create');
+ Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('coursequizquestion.create');
  Route::post('/quizques/store',[CourseQuizQuestionController::class,'store'])->name('Cquizquestion.store');
  Route::get('/quizques/update/{id}',[CourseQuizQuestionController::class,'edit'])->name('Cquizquestion.edit');
  Route::post('/quizques/update/{id}',[CourseQuizQuestionController::class,'update'])->name('Cquizquestion.update');
@@ -675,7 +677,7 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 //  //..........CourseQuizQuestion............
 
 //  Route::get('/manage/Cquizques/{id}',[CourseQuizQuestionController::class,'index'])->name('manage.Cquizquestion');
-//  Route::get('/quizques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('quizquestion.create');
+//  Route::get('/quiz/ques/create/{id}',[CourseQuizQuestionController::class,'create'])->name('coursequizquestion.create');
 //  Route::post('/quizques/store',[CourseQuizQuestionController::class,'store'])->name('Cquizquestion.store');
 //  Route::get('/quizques/update/{id}',[CourseQuizQuestionController::class,'edit'])->name('Cquizquestion.edit');
 //  Route::post('/quizques/update/{id}',[CourseQuizQuestionController::class,'update'])->name('Cquizquestion.update');

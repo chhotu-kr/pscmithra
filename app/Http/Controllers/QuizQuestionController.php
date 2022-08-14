@@ -22,23 +22,23 @@ class QuizQuestionController extends Controller
        return view('quiz.manageQuizques',compact('data'));
     }
 
-    public function create($id){
-        return view('quiz.insertQuizQues',compact('id'));
+    public function get_QuizQuestioncreate($id){
+       return view('quiz.insertQuizQues',compact('id'));
     }
 
-    public function QuizSubmit(Request $request){
-        if($request->isMethod("post")){
-            $value = $request->data;
+    public function get_QuizSubmit(Request $request){
+        // if($request->isMethod("post")){
+        //     $value = $request->data;
 
-            foreach($value as $item){
-                $inserting_array[] = [
-                        'question_id' => $item,
-                        'quiz_examinations_id' => $request->quiz_examinations_id
-                ];
-            }
-            QuizQuestion::insert($inserting_array);
-            return redirect()->back();
-        }
+        //     foreach($value as $item){
+        //         $inserting_array[] = [
+        //                 'question_id' => $item,
+        //                 'quiz_examinations_id' => $request->quiz_examinations_id
+        //         ];
+        //     }
+        //     QuizQuestion::insert($inserting_array);
+        //     return redirect()->back();
+        // }
 
         $questionId = QuizQuestion::select('question_id')->where('quiz_examinations_id', $request->eID)->get()->toArray();
        
@@ -48,6 +48,19 @@ class QuizQuestionController extends Controller
         ->get();
         
         return response()->json($data);
+    }
+
+    public function QuizQues(Request $request){
+        $value = $request->data;
+
+        foreach($value as $item){
+            $inserting_array[] = [
+                    'question_id' => $item,
+                    'quiz_examinations_id' => $request->quiz_examinations_id
+            ];
+        }
+        QuizQuestion::insert($inserting_array);
+        return redirect()->back();
     }
 
     public function store(Request $request){
