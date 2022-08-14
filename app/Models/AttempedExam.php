@@ -11,7 +11,7 @@ class AttempedExam extends Model
 
 
     public function examination (){
-      return  $this->belongsTo(Examination::class,'id');
+      return  $this->belongsTo(Examination::class,'examinations_id');
     }
     public function language(){
       return $this->hasOne(Language::class,"id","language_id");

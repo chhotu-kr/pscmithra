@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Blog;
 use App\Models\AttempedExam;
 use App\Models\BlogCategory;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -268,18 +269,21 @@ class Apiv1Controller extends Controller
 
                 $free = $item->isFree;
                 $type = "Buy";
-
+                $TestID = "";
 
                 if (empty($item->attm)) {
 
                     if ($free) {
                         $type = "Start";
+                        $TestID = "";
                     } else {
                     }
                 } else {
                     $type = $item->attm->type;
+                    $TestID =  $item->attm->slugid;
                 }
                 return collect([
+                    "testId" => $TestID,
                     "id" => $item->slugid,
                     "categoryId" => $item->category->id,
                     "name" => $item->exam_name,
@@ -451,27 +455,32 @@ class Apiv1Controller extends Controller
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
+        $get = AttempedExam::where('examinations_id', $examination_id->id)->where('users_id', $user_id->id)->first();
+        if (empty($get)) {
+            $Attemp = new AttempedExam();
+            $Attemp->slugid = md5($request->user . time());
+            $Attemp->examinations_id = $examination_id->id;
+            $Attemp->users_id = $user_id->id;
+            $Attemp->language_id = $request->language;
+            $Attemp->save();
 
-        $Attemp = new AttempedExam();
-        $Attemp->slugid = md5($request->user . time());
-        $Attemp->examinations_id = $examination_id->id;
-        $Attemp->users_id = $user_id->id;
-        $Attemp->language_id = $request->language;
-        $Attemp->save();
+            $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
+            // $insertData = [];
+            foreach ($examQuestion as $value) {
 
-        $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
-       // $insertData = [];
-        foreach ($examQuestion as $value) {
-            
-            $mock = new mockattempquestion();
-            $mock->users_id =  $user_id->id;
-            $mock->questions_id = $value;
-            $mock->attemped_exams_id = $Attemp->id;
-            $mock->save();
+                $mock = new mockattempquestion();
+                $mock->users_id =  $user_id->id;
+                $mock->questions_id = $value;
+                $mock->attemped_exams_id = $Attemp->id;
+                $mock->save();
+            }
+            return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid,"examinationId"=>$request->examination]]);
+        } else {
+            return response()->json(['msg' => 'Exam already exist', 'status' => false]);
         }
-     //   mockattempquestion::insert($insertData);
+        //   mockattempquestion::insert($insertData);
 
-        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Attemp]);
+
     }
 
     //.......................quiz prepareExam.......................//
@@ -657,6 +666,7 @@ class Apiv1Controller extends Controller
     }
 
 
+
     public function getExamData(Request $request)
     {
         if (empty($request->user)) {
@@ -815,6 +825,7 @@ class Apiv1Controller extends Controller
             });
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
     }
+
 
 
     //...................QuizExamData...................//
@@ -987,6 +998,18 @@ class Apiv1Controller extends Controller
         $data =Product::Paginate(2);
 
         return response()->json(['$msg'=>'Data Fatched', 'Status'=>true, 'data'=>$data]);
+
+
+    public function submitExam(Request $request){
+       
+        // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
+        //       return response()->json($examination_id);
+
+              return response()->json(['msg' => 'Test Submit', 'status' => true,]);
+             // return response()->json($request);
+        
+        
+
     }
 
    
