@@ -749,16 +749,121 @@ class Apiv1Controller extends Controller
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
     }
 
-    public function submitExam(Request $request){
-       
-        // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
-        //       return response()->json($examination_id);
+    public function submitExam(Request $request)
+    {
 
-              return response()->json(['msg' => 'Test Submit', 'status' => true,]);
-             // return response()->json($request);
-        
-        
+        if (empty($request->userId)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
 
+        if (empty($request->examId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examId)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        // $attemp = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
+        //     ->where("users_id", $user_id->id)
+        //     ->
+        //     //get();
+        //     update([
+        //         "remain_time" => 407,
+        //         "type" => $request->type
+        //         ]
+        //     );
+
+//             foreach($request->array as $index => $value){
+                
+// $dd = mockattempquestion::where('id',$value['attempID'])->where('attemped_exams_id',$testId->id)->
+// update([
+//             "QuesSeen" => "true",
+//             "QuesSelect" => $value['optSel'],
+//             "time"=>$value['time']
+//             ]
+//         );
+
+        // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
+
+               // echo json_encode($value);
+                
+          //  }
+
+//        return response()->json($dd);
+    
+}
+
+
+    public function get_Result(Request $request){
+        $user_id = $request->userId;
+        if (empty($user_id)) {
+            return response()->json(['msg' => 'Enter User Id', 'status' => false]);
+        }
+        $test_id = $request->testId;
+        if (empty($test_id)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $examination_id = $request->examinationId;
+        if (empty($examination_id)) {
+            return response()->json(['msg' => 'Enter Examination Id', 'status' => false]);
+        }
+    
+        $dda[] = [
+            "QuestionNo"=>1 ,'color'=>"#FF0000"
+        ];
+          
+        $dda[] =[
+            "QuestionNo"=>2 ,'color'=>"#008000"
+          ];
+        $dda[] =[
+            "QuestionNo"=>3 ,'color'=>"#C0C0C0"
+          ];
+          $dda[] =[
+            "QuestionNo"=>4 ,'color'=>"#C0C0C0"
+          ];
+          $dda[] =[
+            "QuestionNo"=>5 ,'color'=>"#008000"
+          ];
+          $dda[] =[
+            "QuestionNo"=>6 ,'color'=>"#FF0000"
+          ];
+          $dda[] =[
+            "QuestionNo"=>7 ,'color'=>"#C0C0C0"
+          ];
+          $dda[] =[
+            "QuestionNo"=>8 ,'color'=>"#008000"
+          ];
+          $dda[] =[
+            "QuestionNo"=>9 ,'color'=>"#FF0000"
+          ];
+          $dda[] =[
+            "QuestionNo"=>10 ,'color'=>"#C0C0C0"
+          ];
+          $dda[] =[
+            "QuestionNo"=>11 ,'color'=>"#C0C0C0"
+          ];
+
+
+
+      return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' =>['Attemped'=> 10, 'Accuracy'=> 15.3, 'Score' => 2.3, 'Percentile'=>3.5, 'Rank' => 594242
+      ,'wrong'=>5,'right'=>8, "question"=>
+    $dda
+      ]]);
     }
 }
 

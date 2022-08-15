@@ -53,11 +53,11 @@ class QuizExamination extends Model
     }
 
     public function lang(){
-        return $this->hasMany(mocktestExaminationLanguage::class,"quiz_examinations_id","id");
+        return $this->hasMany(QuizExaminationLanguage::class,"quiz_examination_id","id");
     }
 
     public function quizattm(){
-        return $this->hasOne(AttempedExam::class,'quiz_examinations_id','id');
+        return $this->hasOne(quizAttemp::class,'quiz_examinations_id','id');
     }
 
 }
