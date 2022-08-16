@@ -950,7 +950,9 @@ class Apiv1Controller extends Controller
 
         if (!$testId) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+
         }
+        return response()->json(['msg' => 'Sucess', 'status' => true]);
 
         // $attemp = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
         //     ->where("users_id", $user_id->id)
@@ -1032,9 +1034,6 @@ class Apiv1Controller extends Controller
         $dda[] = [
             "QuestionNo" => 11, 'color' => "#C0C0C0"
         ];
-
-
-
         return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
             'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
             $dda
