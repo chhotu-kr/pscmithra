@@ -1100,19 +1100,10 @@ class Apiv1Controller extends Controller
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
-
-
-
-
-
-       
-        // return response()->json(['msg' => 'Sucess', 'status' => true]);
-$type = "resume";
+        $type = "resume";
         if($request->type=="submit"){
             $type = "result";
         }
-        
-
         $testId = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
             ->where("users_id", $user->id)
             ->update([
