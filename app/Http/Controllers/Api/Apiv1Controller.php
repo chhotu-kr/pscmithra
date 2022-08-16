@@ -921,28 +921,7 @@ class Apiv1Controller extends Controller
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-    public function submitExam(Request $request)
-    {
-
-        if (empty($request->userId)) {
-            return response()->json(['msg' => 'Enter User', 'status' => false]);
-        }
-        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
-        if (!$user_id) {
-            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-        }
-
-        if (empty($request->examId)) {
-            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-        }
-        $examination_id =  Examination::select('id')->where("slugid", $request->examId)->first();
-
-        if (!$examination_id) {
-            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-        }
-
-
-    }
+    
     public function submitExam(Request $request){
        
         // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
