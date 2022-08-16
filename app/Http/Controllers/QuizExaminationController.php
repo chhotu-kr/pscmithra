@@ -10,6 +10,7 @@ use App\Models\QuizChapter;
 use App\Models\QuizTopic;
 use App\Models\Language;
 use App\Models\QuizExaminationLanguage;
+
 use Illuminate\Http\Request;
 
 class QuizExaminationController extends Controller
@@ -61,7 +62,7 @@ class QuizExaminationController extends Controller
         foreach ($myArray as $va) {
             $insertD[]=["quiz_examination_id"=>$data->id,"language_id"=>$va];
         }
-QuizExaminationLanguage::insert($insertD);
+        QuizExaminationLanguage::insert($insertD);
         return redirect()->back();
 
     }

@@ -65,7 +65,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Manage Book</h5>
+            <h5 class="card-title">Manage Author</h5>
             
 
             <!-- Table with stripped rows -->
@@ -73,7 +73,7 @@
               <thead>
                 <tr>
                   <th scope="col">Id</th>
-                  <th scope="col">Book Name</th>
+                  <th scope="col"> Name</th>
                   <th scope="col">Action</th>
                   
                 </tr>
