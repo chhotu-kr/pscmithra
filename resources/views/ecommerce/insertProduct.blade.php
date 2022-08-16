@@ -14,7 +14,7 @@
                       
                     @csrf
                     
-                    
+                 
                    <div class="row">
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Title</label>
@@ -37,6 +37,7 @@
                         </div>
                     </div>
                     <livewire:plan-type/>
+                    
                    </div>
                  
                    <div id ="extend"></div>

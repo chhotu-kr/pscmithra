@@ -500,7 +500,7 @@ class Apiv1Controller extends Controller
         $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
 
         if (!$quiz_examinations_id) {
-            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+            return response()->json(['msg' => 'Invalid QuizExam', 'status' => false]);
         }
 
         $Quiz = new QuizExam();
@@ -831,164 +831,164 @@ class Apiv1Controller extends Controller
     //...................QuizExamData...................//
 
 
-    public function get_QuizExamData(Request $request)
-    {
-        if (empty($request->user)) {
-            return response()->json(['msg' => 'Enter User', 'status' => false]);
-        }
-        $user_id =  User::select('id')->where("slugid", $request->user)->first();
-        if (!$user_id) {
-            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-        }
-        if (empty($request->quizexamination)) {
-            return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
-        }
-        $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
+    // public function get_QuizExamData(Request $request)
+    // {
+    //     if (empty($request->user)) {
+    //         return response()->json(['msg' => 'Enter User', 'status' => false]);
+    //     }
+    //     $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    //     if (!$user_id) {
+    //         return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    //     }
+    //     if (empty($request->quizexamination)) {
+    //         return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
+    //     }
+    //     $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
 
-        if (!$quiz_examinations_id) {
-            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-        }
+    //     if (!$quiz_examinations_id) {
+    //         return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    //     }
 
-        if (empty($request->testId)) {
-            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        }
-        $testId =  QuizExam::select('id')->where("slugid", $request->testId)->first();
+    //     if (empty($request->testId)) {
+    //         return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    //     }
+    //     $testId =  QuizExam::select('id')->where("slugid", $request->testId)->first();
 
-        if (!$testId) {
-            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
-        }
+    //     if (!$testId) {
+    //         return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    //     }
 
 
-        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-        </head>
+    //     $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+    //     <head>
+    //         <meta charset="UTF-8">
+    //         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    //         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    //         <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
+    //         <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+    //         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    //         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    //         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    //     </head>
         
-        <body>
-            <style type="text/css">
-                .btn {
-                    background-color: whitesmoke;
-                    border: 1.5px solid black;
-                    border-radius: 10px;
-                    padding: 5px;
-                    text-align: start;
-                }
+    //     <body>
+    //         <style type="text/css">
+    //             .btn {
+    //                 background-color: whitesmoke;
+    //                 border: 1.5px solid black;
+    //                 border-radius: 10px;
+    //                 padding: 5px;
+    //                 text-align: start;
+    //             }
         
-                .span {
-                    color: black;
-                    font-size: 1.4rem;
-                }
-            </style>
-            <div class="m-4">
-                <div class="">';
+    //             .span {
+    //                 color: black;
+    //                 font-size: 1.4rem;
+    //             }
+    //         </style>
+    //         <div class="m-4">
+    //             <div class="">';
 
-               $html1 =  '</div>
-                <div class="d-grid gap-2 mt-4">
-                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
-                        <div class="row align-items-center">
-                            <span class="col-auto span">A.</span>
-                            <div type="text" class="col">';
-        $html2  = '</div>
-                            </div>
-                        </div>
-                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
-                            <div class="row align-items-center">
-                                <span class="col-auto span">B.</span>
-                                <div type="text" class="col">';
-        $html3 = ' </div>
-                                </div>
-                            </div>
-                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
-                                <div class="row align-items-center">
-                                    <span class="col-auto span">C.</span>
-                                    <div type="text" class="col">';
-        $html4 = '</div>
-                                    </div>
-                                </div>
-                                <div class="btn" onclick="myFunction(this)" id="4">
-                                    <div class="row align-items-center">
-                                        <span class="col-auto span">D.</span>
-                                        <div type="text" class="col">';
-        $html5 =  '</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                function myFunction(elem) {
-                                    for (let i = 0; i < 5; i++) {
-                                        if (elem.id == i) {
+    //            $html1 =  '</div>
+    //             <div class="d-grid gap-2 mt-4">
+    //                 <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
+    //                     <div class="row align-items-center">
+    //                         <span class="col-auto span">A.</span>
+    //                         <div type="text" class="col">';
+    //     $html2  = '</div>
+    //                         </div>
+    //                     </div>
+    //                     <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
+    //                         <div class="row align-items-center">
+    //                             <span class="col-auto span">B.</span>
+    //                             <div type="text" class="col">';
+    //     $html3 = ' </div>
+    //                             </div>
+    //                         </div>
+    //                         <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
+    //                             <div class="row align-items-center">
+    //                                 <span class="col-auto span">C.</span>
+    //                                 <div type="text" class="col">';
+    //     $html4 = '</div>
+    //                                 </div>
+    //                             </div>
+    //                             <div class="btn" onclick="myFunction(this)" id="4">
+    //                                 <div class="row align-items-center">
+    //                                     <span class="col-auto span">D.</span>
+    //                                     <div type="text" class="col">';
+    //     $html5 =  '</div>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                         <script>
+    //                             function myFunction(elem) {
+    //                                 for (let i = 0; i < 5; i++) {
+    //                                     if (elem.id == i) {
                     
-                                            $("#" + i).css("border", "1.5px solid #90ee02");
-                                            JSInterface.select("selOpt" + elem.id);
-                                        } else {
+    //                                         $("#" + i).css("border", "1.5px solid #90ee02");
+    //                                         JSInterface.select("selOpt" + elem.id);
+    //                                     } else {
                                             
-                                            $("#" + i).css("border", "1.5px solid");
-                                        }
-                                    }
-                                }
-                            </script>
-                        </body>
+    //                                         $("#" + i).css("border", "1.5px solid");
+    //                                     }
+    //                                 }
+    //                             }
+    //                         </script>
+    //                     </body>
                         
-                        </html>';
+    //                     </html>';
 
 
-        $data = QuizExam::with(['quizexamination.quizexamQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
-            $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
-        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
-        ->get()
-        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+    //     $data = QuizExam::with(['quizexamination.quizexamQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+    //         $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
+    //     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
+    //     ->get()
+    //     ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
 
-                if ($d['type'] != "resume") {
-                    return "Test not resume";
-                } else if ($d['type'] = "resume") {
+    //             if ($d['type'] != "resume") {
+    //                 return "Test not resume";
+    //             } else if ($d['type'] = "resume") {
 
-                    $examremaintime = 0;
-                    if ($d->type == 'resume' && $d->remain_time == 0) {
-                        $examremaintime = $d->quizexamination->time_duration;
-                    } else if ($d->type == 'resume' && $d->remain_time != 0) {
-                        $examremaintime = $d->remain_time;
-                    }
+    //                 $examremaintime = 0;
+    //                 if ($d->type == 'resume' && $d->remain_time == 0) {
+    //                     $examremaintime = $d->quizexamination->time_duration;
+    //                 } else if ($d->type == 'resume' && $d->remain_time != 0) {
+    //                     $examremaintime = $d->remain_time;
+    //                 }
 
-                    return collect([
-                        "testID" => $d->slugid,
-                        "languageId" => $d->language->id,
-                        "languageName" => $d->language->languagename,
-                        "examId" => $d->examination->slugid,
-                        "time" => $examremaintime,
-                        "wMarks" => $d->quizexamination->wrongmarks,
-                        "rMarks" => $d->quizexamination->rightmarks,
-                        'noQues' => $d->quizexamination->noQues,
-                        "questionslist" => $d->quizexamination->quizexamQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
-                            return collect([
-                                "questionId" => $fff->question->id,
-                                "s" => $fff->question->mockAttemp->QuesSeen,
-                                "optSel" => $fff->question->mockAttemp->QuesSelect,
-                                "time" => $fff->question->mockAttemp->time,
-                                "question" => $fff->question->secondquestion
+    //                 return collect([
+    //                     "testID" => $d->slugid,
+    //                     "languageId" => $d->language->id,
+    //                     "languageName" => $d->language->languagename,
+    //                     "examId" => $d->examination->slugid,
+    //                     "time" => $examremaintime,
+    //                     "wMarks" => $d->quizexamination->wrongmarks,
+    //                     "rMarks" => $d->quizexamination->rightmarks,
+    //                     'noQues' => $d->quizexamination->noQues,
+    //                     "questionslist" => $d->quizexamination->quizexamQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+    //                         return collect([
+    //                             "questionId" => $fff->question->id,
+    //                             "s" => $fff->question->mockAttemp->QuesSeen,
+    //                             "optSel" => $fff->question->mockAttemp->QuesSelect,
+    //                             "time" => $fff->question->mockAttemp->time,
+    //                             "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
-                                        return collect([
-                                            "id" => $ques->language->id,
-                                            "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
-                                        ]);
-                                    })
+    //                                 ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+    //                                     return collect([
+    //                                         "id" => $ques->language->id,
+    //                                         "language" => $ques->language->languagename,
+    //                                         "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+    //                                     ]);
+    //                                 })
 
-                            ]);
-                        })
-                    ]);
-                }
-            });
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
-    }
+    //                         ]);
+    //                     })
+    //                 ]);
+    //             }
+    //         });
+    //     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
+    // }
 
 
     public function Product(){
@@ -999,7 +999,7 @@ class Apiv1Controller extends Controller
 
         return response()->json(['$msg'=>'Data Fatched', 'Status'=>true, 'data'=>$data]);
 
-
+    }
     public function submitExam(Request $request){
        
         // $examination_id =  Examination::where("slugid", $request->examId)->with('examQ.question')->get();
@@ -1010,6 +1010,23 @@ class Apiv1Controller extends Controller
         
         
 
+    }
+
+    public function get_Result(Request $request){
+        $user_id = $request->user_id;
+        if (empty($user_id)) {
+            return response()->json(['msg' => 'Enter User Id', 'status' => false]);
+        }
+        $test_id = $request->test_id;
+        if (empty($test_id)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $examination_id = $request->examination_id;
+        if (empty($examination_id)) {
+            return response()->json(['msg' => 'Enter Examination Id', 'status' => false]);
+        }
+        
+      return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' =>['Attemped'=> 10, 'Accuracy'=> 15.3, 'Score' => 2.3, 'Percentile'=>3.5, 'Rank' => 594242]]);
     }
 
    

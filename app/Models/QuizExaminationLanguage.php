@@ -10,6 +10,6 @@ class QuizExaminationLanguage extends Model
     use HasFactory;
 
     public function language(){
-        return $this->hasOne(Language::class,"id","languages_id");
+        return $this->hasOne(Language::class,"id","language_id");
     }
 }

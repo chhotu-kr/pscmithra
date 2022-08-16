@@ -13,7 +13,7 @@
           
           </div>
           
-         
+         {{-- <livewire:examtype/> --}}
               
                 <div class="modal fade" id="basicModal" tabindex="-1">
                   <div class="modal-dialog">

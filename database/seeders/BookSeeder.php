@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\Course;
 class BookSeeder extends Seeder
 {
     /**
@@ -16,5 +17,6 @@ class BookSeeder extends Seeder
     {
         //
         Book::factory()->times(20)->create();
+        Course::factory()->times(20)->create();
     }
 }

@@ -22,10 +22,10 @@ class AuthorSeeder extends Seeder
         //
         Author::factory()->times(20)->create();
         Pdf::factory()->times(20)->create();
-        // Course::factory()->times(20)->create();
-        QuizCategory::factory()->times(10)->create();
-        Language::factory()->times(10)->create();
-        // LiveTest::factory()->times(10)->create();
+        //  Course::factory()->times(20)->create();
+        // QuizCategory::factory()->times(10)->create();
+        // Language::factory()->times(10)->create();
+        LiveTest::factory()->times(10)->create();
         
     }
 }
