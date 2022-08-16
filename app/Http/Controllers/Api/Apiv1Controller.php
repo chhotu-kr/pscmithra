@@ -253,7 +253,7 @@ class Apiv1Controller extends Controller
 
         $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
             ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
-                $q->where('users_id', $user_id->id);
+                $q->where('users_id', $user_id->id)->where('mocktesttype','normal');
             }])
             // ->leftjoin('attemped_exams', function ($join) use ($user_id) {
 
@@ -360,7 +360,7 @@ class Apiv1Controller extends Controller
         }
     }
 
-   
+
     public function preareExam(Request $request)
     {
         if (empty($request->user)) {
@@ -373,18 +373,24 @@ class Apiv1Controller extends Controller
         if (empty($request->examination)) {
             return response()->json(['msg' => 'Enter Examination', 'status' => false]);
         }
-        $examination_id =  Examination::select('id')->where("slugid", $request->examination)->first();
-
+        $examination_id =  Examination::select('id','time_duration')->where("slugid", $request->examination)->first();
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
-        $get = AttempedExam::where('examinations_id', $examination_id->id)->where('users_id', $user_id->id)->first();
+
+        if (!$request->examtype) {
+            return response()->json(['msg' => 'Invalid Exam Type', 'status' => false]);
+        }
+
+        $get = AttempedExam::where('examinations_id', $examination_id->id)->where('mocktesttype', $request->examtype)->where('users_id', $user_id->id)->first();
         if (empty($get)) {
             $Attemp = new AttempedExam();
             $Attemp->slugid = md5($request->user . time());
             $Attemp->examinations_id = $examination_id->id;
             $Attemp->users_id = $user_id->id;
             $Attemp->language_id = $request->language;
+            $Attemp->remain_time=$examination_id->time_duration*60;
+            $Attemp->mocktesttype=$request->examtype;
             $Attemp->save();
 
             $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
@@ -434,16 +440,16 @@ class Apiv1Controller extends Controller
         $Quiz->save();
 
         $quizQuestion =  QuizQuestion::where('quiz_examinations_id', $quiz_examinations_id->id)->pluck('question_id');
-       // $insertData = [];
+        // $insertData = [];
         foreach ($quizQuestion as $value) {
-            
+
             $mock = new QuizAttemptQuestion();
             $mock->users_id =  $user_id->id;
             $mock->quiz_questions_id = $value;
             $mock->quiz_exams_id = $Quiz->id;
             $mock->save();
         }
-     //   mockattempquestion::insert($insertData);
+        //   mockattempquestion::insert($insertData);
 
         return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => $Quiz]);
     }
@@ -702,8 +708,8 @@ class Apiv1Controller extends Controller
         $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-        ->get()
-        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+            ->get()
+            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
@@ -725,7 +731,7 @@ class Apiv1Controller extends Controller
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
                             return collect([
                                 "questionId" => $fff->question->id,
                                 "s" => $fff->question->mockAttemp->QuesSeen,
@@ -733,11 +739,11 @@ class Apiv1Controller extends Controller
                                 "time" => $fff->question->mockAttemp->time,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+                                    ->map(function ($ques) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                            "QuestioninHtml" => $htm1 . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
                                         ]);
                                     })
 
@@ -746,7 +752,175 @@ class Apiv1Controller extends Controller
                     ]);
                 }
             });
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' =>$data]);
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
+    public function getSolution(Request $request)
+    {
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->user)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->examination)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examination)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
+
+
+        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+        </head>
+        
+        <body>
+            <style type="text/css">
+                .btn {
+                    background-color: whitesmoke;
+                    border: 1.5px solid black;
+                    border-radius: 10px;
+                    padding: 5px;
+                    text-align: start;
+                }
+        
+                .span {
+                    color: black;
+                    font-size: 1.4rem;
+                }
+            </style>
+            <div class="m-4">
+                <div class="">';
+
+        $html1 =  '</div>
+                <div class="d-grid gap-2 mt-4">
+                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
+                        <div class="row align-items-center">
+                            <span class="col-auto span">A.</span>
+                            <div type="text" class="col">';
+        $html2  = '</div>
+                            </div>
+                        </div>
+                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
+                            <div class="row align-items-center">
+                                <span class="col-auto span">B.</span>
+                                <div type="text" class="col">';
+        $html3 = ' </div>
+                                </div>
+                            </div>
+                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
+                                <div class="row align-items-center">
+                                    <span class="col-auto span">C.</span>
+                                    <div type="text" class="col">';
+        $html4 = '</div>
+                                    </div>
+                                </div>
+                                <div class="btn" onclick="myFunction(this)" id="4">
+                                    <div class="row align-items-center">
+                                        <span class="col-auto span">D.</span>
+                                        <div type="text" class="col">';
+        $html5 =  '</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function myFunction(elem) {
+                                    for (let i = 0; i < 5; i++) {
+                                        if (elem.id == i) {
+                    
+                                            $("#" + i).css("border", "1.5px solid #90ee02");
+                                            JSInterface.select("selOpt" + elem.id);
+                                        } else {
+                                            
+                                            $("#" + i).css("border", "1.5px solid");
+                                        }
+                                    }
+                                }
+                            </script>
+                        </body>
+                        
+                        </html>';
+
+
+        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+            ->get()
+            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+
+                if ($d['type'] != "resume") {
+                    return "Test not resume";
+                } else if ($d['type'] = "resume") {
+
+                    $examremaintime = 0;
+                    if ($d->type == 'resume' && $d->remain_time == 0) {
+                        $examremaintime = $d->examination->time_duration;
+                    } else if ($d->type == 'resume' && $d->remain_time != 0) {
+                        $examremaintime = $d->remain_time;
+                    }
+
+                    return collect([
+                        "testID" => $d->slugid,
+                        "languageId" => $d->language->id,
+                        "languageName" => $d->language->languagename,
+                        "examId" => $d->examination->slugid,
+                        "time" => $examremaintime,
+                        "wMarks" => $d->examination->wrongmarks,
+                        "rMarks" => $d->examination->rightmarks,
+                        'noQues' => $d->examination->noQues,
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+// $aaa="";
+// if($fff->question->rightans===$fff->question->mockAttemp->QuesSelect){
+// $aaa =true;
+// }else{
+//     $aaa= false;
+// }
+
+                            return collect([
+                                "questionId" => $fff->question->id,
+                                "seen" => $fff->question->mockAttemp->QuesSeen,
+                                "optSel" => $fff->question->mockAttemp->QuesSelect,
+                                "time" => $fff->question->mockAttemp->time,
+                                "isRight"=>false,
+                                "question" => $fff->question->secondquestion
+                                    ->map(function ($ques) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                                        return collect([
+                                            "id" => $ques->language->id,
+                                            "language" => $ques->language->languagename,
+                                            //  "QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                        ]);
+                                    })
+
+                            ]);
+                        })
+                    ]);
+                }
+            })
+            ;
+
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
     public function submitExam(Request $request)
@@ -788,28 +962,29 @@ class Apiv1Controller extends Controller
         //         ]
         //     );
 
-//             foreach($request->array as $index => $value){
-                
-// $dd = mockattempquestion::where('id',$value['attempID'])->where('attemped_exams_id',$testId->id)->
-// update([
-//             "QuesSeen" => "true",
-//             "QuesSelect" => $value['optSel'],
-//             "time"=>$value['time']
-//             ]
-//         );
+        //             foreach($request->array as $index => $value){
+
+        // $dd = mockattempquestion::where('id',$value['attempID'])->where('attemped_exams_id',$testId->id)->
+        // update([
+        //             "QuesSeen" => "true",
+        //             "QuesSelect" => $value['optSel'],
+        //             "time"=>$value['time']
+        //             ]
+        //         );
 
         // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
 
-               // echo json_encode($value);
-                
-          //  }
+        // echo json_encode($value);
 
-//        return response()->json($dd);
-    
-}
+        //  }
+
+        //        return response()->json($dd);
+
+    }
 
 
-    public function get_Result(Request $request){
+    public function get_Result(Request $request)
+    {
         $user_id = $request->userId;
         if (empty($user_id)) {
             return response()->json(['msg' => 'Enter User Id', 'status' => false]);
@@ -822,48 +997,47 @@ class Apiv1Controller extends Controller
         if (empty($examination_id)) {
             return response()->json(['msg' => 'Enter Examination Id', 'status' => false]);
         }
-    
+
         $dda[] = [
-            "QuestionNo"=>1 ,'color'=>"#FF0000"
+            "QuestionNo" => 1, 'color' => "#FF0000"
         ];
-          
-        $dda[] =[
-            "QuestionNo"=>2 ,'color'=>"#008000"
-          ];
-        $dda[] =[
-            "QuestionNo"=>3 ,'color'=>"#C0C0C0"
-          ];
-          $dda[] =[
-            "QuestionNo"=>4 ,'color'=>"#C0C0C0"
-          ];
-          $dda[] =[
-            "QuestionNo"=>5 ,'color'=>"#008000"
-          ];
-          $dda[] =[
-            "QuestionNo"=>6 ,'color'=>"#FF0000"
-          ];
-          $dda[] =[
-            "QuestionNo"=>7 ,'color'=>"#C0C0C0"
-          ];
-          $dda[] =[
-            "QuestionNo"=>8 ,'color'=>"#008000"
-          ];
-          $dda[] =[
-            "QuestionNo"=>9 ,'color'=>"#FF0000"
-          ];
-          $dda[] =[
-            "QuestionNo"=>10 ,'color'=>"#C0C0C0"
-          ];
-          $dda[] =[
-            "QuestionNo"=>11 ,'color'=>"#C0C0C0"
-          ];
+
+        $dda[] = [
+            "QuestionNo" => 2, 'color' => "#008000"
+        ];
+        $dda[] = [
+            "QuestionNo" => 3, 'color' => "#C0C0C0"
+        ];
+        $dda[] = [
+            "QuestionNo" => 4, 'color' => "#C0C0C0"
+        ];
+        $dda[] = [
+            "QuestionNo" => 5, 'color' => "#008000"
+        ];
+        $dda[] = [
+            "QuestionNo" => 6, 'color' => "#FF0000"
+        ];
+        $dda[] = [
+            "QuestionNo" => 7, 'color' => "#C0C0C0"
+        ];
+        $dda[] = [
+            "QuestionNo" => 8, 'color' => "#008000"
+        ];
+        $dda[] = [
+            "QuestionNo" => 9, 'color' => "#FF0000"
+        ];
+        $dda[] = [
+            "QuestionNo" => 10, 'color' => "#C0C0C0"
+        ];
+        $dda[] = [
+            "QuestionNo" => 11, 'color' => "#C0C0C0"
+        ];
 
 
 
-      return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' =>['Attemped'=> 10, 'Accuracy'=> 15.3, 'Score' => 2.3, 'Percentile'=>3.5, 'Rank' => 594242
-      ,'wrong'=>5,'right'=>8, "question"=>
-    $dda
-      ]]);
+        return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
+            'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
+            $dda
+        ]]);
     }
 }
-
