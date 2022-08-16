@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('users_id')->constrained();
             $table->foreignId('examinations_id')->constrained();
             $table->enum('type', ['resume', 'result'])->default('resume');
+            $table->enum('mocktesttype', ['normal', 'reattemp'])->default('normal');
             $table->string('slugid');
             $table->foreignId('language_id')->constrained();
             $table->integer('remain_time')->default('0');

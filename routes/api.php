@@ -59,6 +59,8 @@ Route::post('/quiz-exam-cat',[Apiv1Controller::class,'get_QuizExamination']);
 Route::post('/prepare-quizexam',[Apiv1Controller::class,'preareQuizExam'])->name('prepareQuizExam');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
+Route::post('/get-resuslt',[Apiv1Controller::class,'get_Result']);
+Route::post('/get-solution',[Apiv1Controller::class,'getSolution']);
 
 //Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 
