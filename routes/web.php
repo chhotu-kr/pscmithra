@@ -717,5 +717,7 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 //  Route::get('page/product/update/{id}',[PageProductController::class,'edit'])->name('page.edit');
 //  Route::post('page/product/update/{id}',[PageProductController::class,'update'])->name('page.update');
 //  Route::get('page/product/remove/{id}',[PageProductController::class,'destroy'])->name('page.remove');
-
+Route::get('/examqw', function(){
+    return view('manageExamination');
+});
  

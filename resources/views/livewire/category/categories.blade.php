@@ -4,7 +4,7 @@
 <div class = "col-lg ">
 
 <label for="" class="">Category</label>
-    <select wire:model="categoryId" id="category_id" name="category_id" class=" form-select  mt-3">
+    <select wire:model="categoryId" id="category_id"  name="category_id" class=" form-select  mt-3">
         <option >select</option>
         @foreach ($category as $client)
             <option value="{{$client->id}}">{{$client->category}}</option>

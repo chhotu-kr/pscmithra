@@ -105,7 +105,7 @@ class AuthController extends Controller
             // return dd(Auth::guard("admin"));
             if(Auth::guard("admin")->attempt($auth)){
                 
-               return redirect()->route('admin.dashboard');
+               return redirect()->route('manage.exam');
             }
             else{
                 $request->session()->flash("error","login with incorrect details try again");

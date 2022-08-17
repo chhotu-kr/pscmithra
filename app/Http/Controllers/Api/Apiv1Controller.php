@@ -920,7 +920,7 @@ class Apiv1Controller extends Controller
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-
+        
     
     public function submitExam(Request $request){
        

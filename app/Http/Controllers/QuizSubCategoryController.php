@@ -26,6 +26,7 @@ class QuizSubCategoryController extends Controller
     public function store(Request $request){
         $data= new QuizSubCategory();
         $data->name=$request->name;
+        $data->ifnested=$request->ifnested;
         $data->quiz_categories=$request->quiz_categories;
         $data->slugid=md5($request->quiz_SubCategory .time());
          //image

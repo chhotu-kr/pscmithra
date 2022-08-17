@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('quiz_examinations_id')->constrained();
             $table->foreignId('language_id')->constrained();
             $table->enum('type',['resume','result'])->default('resume');
+            $table->enum('mocktesttype', ['normal', 'reattemp'])->default('normal');
             $table->string('slugid');
             $table->integer('remain_time')->default('0');
             $table->integer('totalmarks')->default('0');

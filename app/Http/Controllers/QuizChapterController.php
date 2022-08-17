@@ -19,8 +19,14 @@ class QuizChapterController extends Controller
     public function store(Request $request){
         $data= new QuizChapter();
         $data->name=$request->name;
+        $data->ifnested=$request->ifnested;
         $data->quiz_sub_categories=$request->quiz_sub_categories;
         $data->slugid=md5($request->quiz_Chapter .time());
+
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('images'),$filename);
+         $data->image = $filename;
         $data->save();
 
         return redirect()->back();
@@ -38,6 +44,11 @@ class QuizChapterController extends Controller
         $quizchapter->name=$request->name;
         $quizchapter->quiz_sub_categories=$request->quiz_sub_categories;
         $quizchapter->slugid=md5($request->quiz_Chapter .time());
+        //image
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('images'),$filename);
+        $quizchapter->image = $filename;
+        
         $quizchapter->save();
 
         return redirect()->back();

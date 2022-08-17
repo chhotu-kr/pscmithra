@@ -22,7 +22,7 @@
                         </div>
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
-                         <form action="{{route('quizchapter.store')}}" class="row g-3 needs-validation" method="post" novalidate>
+                         <form action="{{route('quizchapter.store')}}" class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
                           @csrf
                           
                           {{-- <div class=" position-relative">
@@ -44,7 +44,37 @@
                             <div class="invalid-tooltip">
                               Please provide a valid quizchapter.
                             </div>
+                            <div class=" position-relative">
+                              <label for="validationTooltip05" class="form-label">Image</label>
+                              <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                              <div class="invalid-tooltip">
+                                Please provide a valid quizcategory.
+                              </div>
+                            </div>
                           </div>
+                          <div class="m-3 row">
+                            <div class="form-check form-switch col-sm-auto">
+                                <input class="form-check-input" type="checkbox" id="ifnested" value="false" name="ifnested" >
+                                <label class="form-check-label" for="checkbox1">IfNested</label>
+                              </div>
+
+
+                          <script>
+                            $("#ifnested").on('change', function() {
+                               if ($(this).if(':checked')) {
+                                $(this).attr('value', 'true');
+                                  } else {
+                                     $(this).attr('value', 'false');
+                                      }
+
+                              });
+                              VirtualSelect.init({
+                                ele: '.ss',
+                                 search: false,
+                                  required: true
+                              });
+                              document.querySelector('#assaa').validate();
+                          </script>
                           <div class="col-12">
                             <button class="btn btn-primary w-100" type="submit">Create</button>
                           </div>
@@ -79,6 +109,7 @@
                      
                         <th scope="col">Name</th>
                         <th scope="col">QuizSubCategory</th>
+                        <th>Image</th>
                         <th scope="col">Action</th>
                         
                       </tr>
@@ -89,6 +120,11 @@
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->name}}</td>
                                   <td>{{$item->quizsubcat->name}}</td>
+                                  <td>
+                                    @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'200','h'=>'200']], key($item->id))
+                                    
+                                                                        
+                                  </td>
                                  
                                   <td>
                                      <a href="{{route('quizchapter.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
