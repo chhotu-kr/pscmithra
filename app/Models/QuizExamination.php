@@ -58,7 +58,7 @@ class QuizExamination extends Model
 
     public function quizattm(){
 
-        return $this->hasOne(QuizExam::class,'quiz_examinations_id','id');
+        return $this->hasOne(quizAttemp::class,'quiz_examinations_id','id');
 
         //return $this->hasOne(quizAttemp::class,'quiz_examinations_id','id');
     }

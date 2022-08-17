@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
 use App\Models\Exam;
-use App\Models\QuizExam;
+use App\Models\quizAttemp;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Examination;
@@ -432,7 +432,7 @@ class Apiv1Controller extends Controller
             return response()->json(['msg' => 'Invalid QuizExam', 'status' => false]);
         }
 
-        $Quiz = new QuizExam();
+        $Quiz = new quizAttemp();
         $Quiz->slugid = md5($request->user . time());
         $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
         $Quiz->users_id = $user_id->id;
@@ -764,8 +764,8 @@ class Apiv1Controller extends Controller
         if (!$user_id) {
             return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
-        if (empty($request->examination)) {
-            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        if (empty($request->quizexamination)) {
+            return response()->json(['msg' => 'Enter QuizExamination', 'status' => false]);
         }
 
         $quiz_examinations_id =  QuizExamination::select('id')->where("slugid", $request->quizexamination)->first();
@@ -779,7 +779,7 @@ class Apiv1Controller extends Controller
         if (empty($request->testId)) {
             return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
         }
-        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+        $testId = quizAttemp::select('id')->where("slugid", $request->testId)->first();
 
         if (!$testId) {
             return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
@@ -867,7 +867,7 @@ class Apiv1Controller extends Controller
                         </html>';
 
 
-      $data = QuizExam::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+      $data = quizAttemp::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
         ->get()

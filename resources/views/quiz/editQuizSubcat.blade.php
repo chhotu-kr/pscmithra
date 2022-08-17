@@ -40,9 +40,10 @@
                 
                   <div class="position-relative">
                     <label for="validationTooltip04" class="ps-2">Image</label>
-                    <input type="text" name="image" class="form-control" id="validationTooltip04" value="{{ $quizsubcat->image}}" required>
+                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $quizsubcat->image}}" required>
+                   
                 </div>
-                
+              
               
                <div class="mb-3">
                  <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
