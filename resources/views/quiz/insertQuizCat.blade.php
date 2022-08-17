@@ -111,6 +111,7 @@
                      
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Ifnested</th>
                         <th scope="col">Action</th>
                         
                       </tr>
@@ -120,18 +121,25 @@
                               <tr>
                                   <td>{{$item->id}}</td>
                                   <td>{{$item->name}}</td>
+                                  
                                   <td>
 @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'200','h'=>'200']], key($item->id))
 
                                     
                                 </td>
+                                <td>{{$item->ifnested}}</td>
                                   <td>
                                      <a href="{{route('quizcategory.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     
                                     
                                       <a href="{{route('quizcategory.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+
+                                      @if ($item->ifnested=='true')
                                       <a href="{{route('quiz.Subcategory',['id'=>$item->id])}}" class="btn btn-outline-secondary">ManageQuizSubCategory</a>
+                                       
+
                                       
+                                          @endif
                               </tr>
                           @endforeach
                     </tbody>
