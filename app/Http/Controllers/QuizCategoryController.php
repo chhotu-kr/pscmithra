@@ -23,9 +23,9 @@ class QuizCategoryController extends Controller
          $filename = $request->image->getClientOriginalName();
          $request->image->move(('images'),$filename);
          $data->image = $filename;
-       
+         $data->ifnested=$request->ifnested;
         $data->save();
-
+          
         return redirect()->route('quiz.category');
     }
 

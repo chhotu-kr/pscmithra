@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quiz_attempt_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained();
-            $table->foreignId('quiz_questions_id')->constrained();
+            $table->foreignId('question_id')->constrained();
             $table->foreignId('quiz_exams_id')->constrained();
             $table->enum('QuesSeen',['true','false'])->default('false');
             $table->string('QuesSelect')->nullable();

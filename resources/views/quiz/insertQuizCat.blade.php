@@ -51,6 +51,32 @@
                               Please provide a valid quizcategory.
                             </div>
                           </div>
+                          <div class="m-3 row">
+                            <div class="form-check form-switch col-sm-auto">
+                                <input class="form-check-input" type="checkbox" id="ifnested" value="false"  name="ifnested" >
+                                <label class="form-check-label" for="checkbox1">IfNested</label>
+                              </div>
+                              <script>
+                                $("#ifnested").on('change', function() {
+                                   if ($(this).is(':checked')) {
+                                    $(this).attr('value', 'true');
+                                      } else {
+                                         $(this).attr('value', 'false');
+                                          }
+
+                                  });
+                                  VirtualSelect.init({
+                                    ele: '.ss',
+                                     search: false,
+                                      required: true
+                                  });
+                                  document.querySelector('#assaa').validate();
+                              </script>
+          
+          
+                              
+                             </div>
+                        </div>
                           <div class="col-12">
                             <button class="btn btn-primary w-100 mt-3" type="submit">Create</button>
                           </div>

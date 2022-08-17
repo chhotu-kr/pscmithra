@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->enum('ifnested',['true','false'])->default('false');
             $table->string('slugid');
 
             $table->timestamps();

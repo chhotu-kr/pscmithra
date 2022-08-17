@@ -43,7 +43,7 @@ Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->na
 Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
 
-Route::post('/quizexamdata',[Apiv1Controller::class,'get_QuizExamData']);
+// Route::post('/quizexamdata',[Apiv1Controller::class,'get_QuizExamData']);
 
 Route::post('/submitExam',[Apiv1Controller::class,'submitExam']);
 Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);

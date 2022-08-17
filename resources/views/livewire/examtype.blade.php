@@ -40,6 +40,7 @@
                                 <td><input type='checkbox' value='{{$value->id}}' name='data'></td>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->exam_name}}</td>
+                                <td><button class="btn btn-success" value="start">{{$value->type}}</button></td>
 
 
                             </tr>
@@ -58,9 +59,9 @@
     $(document).ready(function() {
     $('#exampl').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        // buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print'
+        // ]
     } );
 } );
 </script>
@@ -69,5 +70,66 @@
       
         @endif
 
+
+
+        <div>
+            @if(!empty($examType))
+            @if($examType == 'not')
+            {{-- <livewire:exam/> --}}
+            {{-- @else --}}
+            
+                    <h5 class="card-title">Select {{$examType}}</h5>
+                    <div class="table-responsive" style="white-space: nowrap;">
+    
+                        <!-- Table with stripped rows -->
+                        <table class="datatable table" id ="examp" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">SubCategory</th>
+                                    <th scope="col">No Of Question</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+    
+                                @foreach($list as $value)
+                                <tr>
+                                    <td><input type='checkbox' value='{{$value->id}}' name='data'></td>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->category->category}}</td>
+                                    <td>{{$value->subcategory->subcategory}}</td>
+                                    <td>{{$value->noQues}}</td>
+                                    <td><button class="btn btn-success">{{$value->type}}</button></td>
+    
+    
+                                </tr>
+                                @endforeach
+    
+                            </tbody>
+                        </table>
+              
+                        <!-- End Table with stripped rows -->
+                    
+            </div>
+    
+    
+            
+            <script>
+        $(document).ready(function() {
+        $('#examp').DataTable( {
+            dom: 'Bfrtip',
+            // buttons: [
+            //     'copy', 'csv', 'excel', 'pdf', 'print'
+            // ]
+        } );
+    } );
+    </script>
+    
+            @endif
+          
+            @endif
+    
     </div>
 </div>
