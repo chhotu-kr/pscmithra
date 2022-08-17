@@ -15,7 +15,7 @@ class QuizQuestionController extends Controller
 
     public function index($id){
         $data['id']= $id;
-        $data['quizquestion']=QuizQuestion::with('question.secondquestion.language')->get();
+        $data['quizquestion']=QuizQuestion::with('question.secondquestion.language')->where('quiz_examinations_id',$id)->get();
        
 
         // return dd($data);
