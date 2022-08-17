@@ -56,7 +56,8 @@ class QuizQuestionController extends Controller
         foreach($value as $item){
             $inserting_array[] = [
                     'question_id' => $item,
-                    'quiz_examinations_id' => $request->quiz_examinations_id
+                    'quiz_examinations_id' => $request->quiz_examinations_id,
+                    'slugid'=>md5($item. time().$request->quiz_examinations_id)
             ];
         }
         QuizQuestion::insert($inserting_array);

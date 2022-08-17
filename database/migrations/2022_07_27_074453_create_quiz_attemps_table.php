@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained();
             $table->foreignId('quiz_examinations_id')->constrained();
-            $table->foreignId('language_id')->constrained();
-            $table->enum('type',['resume','result'])->default('resume');
+            $table->enum('type', ['resume', 'result'])->default('resume');
             $table->enum('mocktesttype', ['normal', 'reattemp'])->default('normal');
+            $table->integer('lastQues')->default(0);
             $table->string('slugid');
+            $table->foreignId('language_id')->constrained();
             $table->integer('remain_time')->default('0');
             $table->integer('totalmarks')->default('0');
             $table->timestamps();
