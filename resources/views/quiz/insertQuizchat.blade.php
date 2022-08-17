@@ -125,13 +125,17 @@
                                     
                                                                         
                                   </td>
-                                 
+                                  <td>{{$item->ifnested}}</td>
                                   <td>
                                      <a href="{{route('quizchapter.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     
                                     
                                       <a href="{{route('quizchapter.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                      @if ($item->ifnested=='true')
+
                                       <a href="{{route('quiz.topic',['id'=>$item->id])}}" class="btn btn-outline-secondary">ManageQuizTopic</a>
+                                          
+                                      @endif
                                       
                               </tr>
                           @endforeach

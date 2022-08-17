@@ -124,13 +124,16 @@
                                   <td>
                                     <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
                                 </td>
-                                 
+                                <td>{{$item->ifnested}}</td>
                                   <td>
                                      <a href="{{route('quizSubcat.update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                     
                                     
                                       <a href="{{route('quizsubcategory.remove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
-                                      <a href="{{route('quiz.chapter',['id'=>$item->id])}}" class="btn btn-outline-secondary">ManageQuizChapter</a>
+                                     @if ($item->ifnested=='true')
+                                     <a href="{{route('quiz.chapter',['id'=>$item->id])}}" class="btn btn-outline-secondary">ManageQuizChapter</a>
+                                         
+                                     @endif
                                       
                               </tr>
                           @endforeach
