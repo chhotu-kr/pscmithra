@@ -1577,57 +1577,82 @@ button:focus {outline:0;}
     }
 
     public function getexam_Result(Request $request)
-    {
-        $user_id = $request->userId;
-        if (empty($user_id)) {
-            return response()->json(['msg' => 'Enter User Id', 'status' => false]);
-        }
-        $test_id = $request->testId;
-        if (empty($test_id)) {
-            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        }
-        $examination_id = $request->examinationId;
-        if (empty($examination_id)) {
-            return response()->json(['msg' => 'Enter Examination Id', 'status' => false]);
-        }
+    { if (empty($request->userId)) {
+        return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+    if (!$user_id) {
+        return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->examinationId)) {
+        return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+    }
+    $examination_id =  Examination::select('id')->where("slugid", $request->examinationId)->first();
 
-        $dda[] = [
-            "QuestionNo" => 1, 'color' => "#FF0000"
-        ];
+    if (!$examination_id) {
+        return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    }
 
-        $dda[] = [
-            "QuestionNo" => 2, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 3, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 4, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 5, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 6, 'color' => "#FF0000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 7, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 8, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 9, 'color' => "#FF0000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 10, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 11, 'color' => "#C0C0C0"
-        ];
-        return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
-            'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
-            $dda
-        ]]);
+    if (empty($request->testId)) {
+        return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    }
+    $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+
+    if (!$testId) {
+        return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    }
+
+        // $dda[] = [
+        //     "QuestionNo" => 1, 'color' => "#FF0000"
+        // ];
+
+        // $dda[] = [
+        //     "QuestionNo" => 2, 'color' => "#008000"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 3, 'color' => "#C0C0C0"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 4, 'color' => "#C0C0C0"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 5, 'color' => "#008000"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 6, 'color' => "#FF0000"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 7, 'color' => "#C0C0C0"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 8, 'color' => "#008000"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 9, 'color' => "#FF0000"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 10, 'color' => "#C0C0C0"
+        // ];
+        // $dda[] = [
+        //     "QuestionNo" => 11, 'color' => "#C0C0C0"
+        // ];
+        // return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
+        //     'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
+        //     $dda
+        // ]]);
+
+
+        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+            ->get()
+            ;
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+
+
+
+
+
+
     }
 }
