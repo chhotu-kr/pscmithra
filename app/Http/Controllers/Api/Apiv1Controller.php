@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
 use App\Models\Exam;
-use App\Models\QuizExam;
+use App\Models\quizAttemp;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Examination;
@@ -432,6 +432,14 @@ class Apiv1Controller extends Controller
             return response()->json(['msg' => 'Invalid Exam Type', 'status' => false]);
         }
 
+
+        //$Quiz = new quizAttemp();
+        //$Quiz->slugid = md5($request->user . time());
+       // $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
+        //$Quiz->users_id = $user_id->id;
+        //$Quiz->language_id = $request->language;
+        //$Quiz->save();
+
         $get = quizAttemp::where('quiz_examinations_id', $quiz_examinations_id->id)->where('mocktesttype', $request->examtype)->where('users_id', $user_id->id)->first();
         if (empty($get)) {
             $Quiz = new quizAttemp();
@@ -441,8 +449,6 @@ class Apiv1Controller extends Controller
             $Quiz->language_id = $request->language;
             $Quiz->remain_time = $quiz_examinations_id->time_duration * 60;
             $Quiz->mocktesttype = $request->examtype;
-
-
             $Quiz->save();
 
             $quizQuestion =  QuizQuestion::where('quiz_examinations_id', $quiz_examinations_id->id)->pluck('question_id');
@@ -986,7 +992,9 @@ class Apiv1Controller extends Controller
         if (empty($request->testId)) {
             return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
         }
-        $testId =  quizAttemp::select('id')->where("slugid", $request->testId)->first();
+
+        $testId = quizAttemp::select('id')->where("slugid", $request->testId)->first();
+
 
         if (!$testId) {
             return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
@@ -1074,11 +1082,19 @@ class Apiv1Controller extends Controller
                         </html>';
 
 
-        $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
-                $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
-            }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
-            ->get()
-            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+
+      $data = quizAttemp::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
+        ->get()
+        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+
+      //  $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+     //           $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
+       //     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
+     //       ->get()
+        //    ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";

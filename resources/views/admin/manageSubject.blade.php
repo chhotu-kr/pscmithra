@@ -72,7 +72,7 @@
                       <tr>
                           <td>{{$new->id}}</td>
                           <td><a href="{{route('manage.topic',['id'=>$new->id])}}">{{$new->sub_name}}</a></td>
-                          <td>{{$new->image}}</td>
+                          <td>@livewire('imageview', ['image' => ['image' => $new->image,'w'=>'200','h'=>'200']], key($new->id))</td>
                           <td>
                               <a href="{{route('subject.Update',['id'=>$new->id])}}" class="btn btn-outline-success">Edit</a>
                               <a href="{{route('subjectdelete',['id'=>$new->slugid])}}" class="btn btn-outline-danger">Delete</a>
