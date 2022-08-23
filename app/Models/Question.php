@@ -34,6 +34,7 @@ class Question extends Model
       public function mockAttemp(){
         return $this->hasOne(mockattempquestion::class,'questions_id','id');
       }
+     
       public function quizAttemp(){
         return $this->hasOne(QuizAttemptQuestion::class,'question_id','id');
       }
