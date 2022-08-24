@@ -21,6 +21,7 @@ use App\Models\Examination;
 use App\Models\Category;
 use App\Models\ExamQuestion;
 use App\Models\Language;
+use App\Models\LiveTest;
 use App\Models\mockattempquestion;
 use App\Models\QuizAttemptQuestion;
 use App\Models\QuizCategory;
@@ -586,9 +587,7 @@ class Apiv1Controller extends Controller
     public function getBlog(Request $request)
     {
 
-        // if (empty($request->category_id)) {
-        //     return response()->json(['msg' => 'Enter Category id', 'status' => false]);
-        // }
+       
         $data = Blog::where('category_id', $request->category_id)->get();
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -1023,4 +1022,87 @@ class Apiv1Controller extends Controller
             $dda
         ]]);
     }
+
+    public function get_Livetest(){
+
+        $data=LiveTest::paginate(5);
+        
+        return response()->json(['msg'=>'Data Fateched', 'status'=>true,'data'=>$data]);
+    }
+
+    // public function liveExamData(Request $request){
+    //    if(empty($request->user)){
+    //     return response()->json(['msg'=>'Enter User', 'Status'=>false]);
+    //    }
+    //    $user_id=User::select('id')->where('slugid',$request->user)->first();
+
+    //    if(!$user_id){
+    //     return response()->json(['msg'=>'Invalid User ID','Status'=>false]);
+    //    }
+
+    //    if(empty($request->examination)){
+    //     return response()->json(['msg'=>'Enter Examination','Status'=>false]);
+    //    }
+
+    //    $examination_id=Examination::select('id')->where('slugid',$request->examination)->first();
+    //    if(!$examination_id){
+    //     return response()->json(['msg'=>'Invalid Exam','Status'=>false]);
+    //    }
+
+    //    if (empty($request->testId)) {
+    //     return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    //    }
+
+    //    $testId =  AttempedExam::select('id')->where("id", $request->testId)->first();
+
+    //    if (!$testId) {
+    //        return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    //    }
+         
+    //    $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
+    //     $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
+    // }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+    //     ->get()
+    //    ->map(function ($item) {
+    //        //    return $item;
+
+    //     //    $free = $item->isFree;
+    //     //    $type = "Buy";
+    //     //    $TestID = "";
+
+    //     //    if (empty($item->attm)) {
+
+    //     //        if ($free) {
+    //     //            $type = "Start";
+    //     //            $TestID = "";
+    //     //        } else {
+    //     //        }
+    //     //    } else {
+    //     //        $type = $item->attm->type;
+    //     //        $TestID =  $item->attm->slugid;
+    //     //    }
+    //        return collect([
+    //         //    "testId" => $TestID,
+    //            "id" => $item->slugid,
+    //            "categoryId" => $item->category->id,
+    //            "name" => $item->exam_name,
+    //            "categoryName" => $item->category->category,
+    //            "subbCategoryId" => $item->subcategory->id,
+    //            "subCategoryName" => $item->subcategory->subcategory,
+    //            "totalTimeinMints" => $item->time_duration,
+    //            "totalQues" => $item->noQues,
+    //         //    "type" => $type,
+    //            "totalTimeinMints" => $item->time_duration,
+    //            "languages" => $item->lang->map(function ($lang) {
+    //                return collect([
+    //                    "name" => $lang->language->languagename,
+    //                    "id" => $lang->language->id
+    //                ]);
+    //            })
+    //        ]);
+    //    });
+
+    //      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+      
+    // }
 }

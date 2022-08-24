@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Exam;
+use App\Models\Examination;
+use App\Models\QuizExamination;
 use App\Models\Study;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
@@ -109,5 +111,55 @@ class ExamSeeder extends Seeder
             
          ];
          Study::insert($sm);
+
+         // $examination=[
+         //   ['id'=>'1','category_id'=>'1','subcategory_id'=>'1','exam_name'=>'ACEE','slugid'=>'asdf123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'2','category_id'=>'1','subcategory_id'=>'1','exam_name'=>'AIEED','slugid'=>'lkj123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'3','category_id'=>'1','subcategory_id'=>'1','exam_name'=>'ATMA','slugid'=>'lkjh123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'4','category_id'=>'1','subcategory_id'=>'1','exam_name'=>'APPSC','slugid'=>'lkjhG123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'5','category_id'=>'2','subcategory_id'=>'2','exam_name'=>'NTPC','slugid'=>'asdfg123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'6','category_id'=>'2','subcategory_id'=>'2','exam_name'=>'RRB GROUPD','slugid'=>'a2d3fg123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'7','category_id'=>'2','subcategory_id'=>'2','exam_name'=>'RRBJE','slugid'=>'QW123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'8','category_id'=>'2','subcategory_id'=>'2','exam_name'=>'RRBALP','slugid'=>'QWer123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'9','category_id'=>'3','subcategory_id'=>'3','exam_name'=>'SSCGD','slugid'=>'QWer123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'10','category_id'=>'3','subcategory_id'=>'3','exam_name'=>'SSC CHSL','slugid'=>'QWerT1203','marks'=>'200','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'11','category_id'=>'3','subcategory_id'=>'3','exam_name'=>'SSC CPO','slugid'=>'QrT1203','marks'=>'200','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'false','type'=>'live'],
+         //   ['id'=>'12','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'CSE','slugid'=>'QUY1203','marks'=>'150','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'false','type'=>'live'],
+         //   ['id'=>'13','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'CAT','slugid'=>'QRV1203','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'14','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'CDS','slugid'=>'QTYU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //   ['id'=>'15','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'ESE','slugid'=>'QTYxcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'16','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'IBPS PO','slugid'=>'LKJxcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'17','category_id'=>'4','subcategory_id'=>'4','exam_name'=>'IBPS SO','slugid'=>'ZXCcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'18','category_id'=>'5','subcategory_id'=>'5','exam_name'=>'JEE','slugid'=>'lkhgfcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'19','category_id'=>'5','subcategory_id'=>'5','exam_name'=>'JEE MAIN','slugid'=>'FRTfcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //   ['id'=>'20','category_id'=>'5','subcategory_id'=>'5','exam_name'=>'JEE ADV','slugid'=>'FRTfcU12','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         // ];
+
+         // Examination::insert($examination);
+
+         // $quizexamination=[
+         //    ['id'=>'1','quiz_categories_id'=>'1','quiz_sub_categories_id'=>'1','quiz_chapters_id'=>'1','quiz_topics_id'=>'1','exam_name'=>'ACEE','slugid'=>'asdf123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'2','quiz_categories_id'=>'1','quiz_sub_categories_id'=>'1','quiz_chapters_id'=>'1','quiz_topics_id'=>'1','exam_name'=>'AIEED','slugid'=>'lkj123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'3','quiz_categories_id'=>'1','quiz_sub_categories_id'=>'1','quiz_chapters_id'=>'1','quiz_topics_id'=>'1','exam_name'=>'ATMA','slugid'=>'lkjh123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'4','quiz_categories_id'=>'1','quiz_sub_categories_id'=>'1','quiz_chapters_id'=>'1','quiz_topics_id'=>'1','exam_name'=>'APPSC','slugid'=>'lkjhG123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'5','quiz_categories_id'=>'2','quiz_sub_categories_id'=>'2','quiz_chapters_id'=>'2','quiz_topics_id'=>'2','exam_name'=>'NTPC','slugid'=>'asdfg123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'6','quiz_categories_id'=>'2','quiz_sub_categories_id'=>'2','quiz_chapters_id'=>'2','quiz_topics_id'=>'2','exam_name'=>'RRB GROUPD','slugid'=>'a2d3fg123','marks'=>'100','noQues'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'7','quiz_categories_id'=>'2','quiz_sub_categories_id'=>'2','quiz_chapters_id'=>'2','quiz_topics_id'=>'2','exam_name'=>'RRBJE','slugid'=>'QW123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'60','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'8','quiz_categories_id'=>'2','quiz_sub_categories_id'=>'2','quiz_chapters_id'=>'2','quiz_topics_id'=>'2','exam_name'=>'RRBALP','slugid'=>'QWer123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'9','quiz_categories_id'=>'3','quiz_sub_categories_id'=>'3','quiz_chapters_id'=>'3','quiz_topics_id'=>'3','exam_name'=>'SSCGD','slugid'=>'QWer123','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'10','quiz_categories_id'=>'3','quiz_sub_categories_id'=>'3','quiz_chapters_id'=>'3','quiz_topics_id'=>'3','exam_name'=>'SSC CHSL','slugid'=>'QWerT1203','marks'=>'200','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'11','quiz_categories_id'=>'3','quiz_sub_categories_id'=>'3','quiz_chapters_id'=>'3','quiz_topics_id'=>'3','exam_name'=>'SSC CPO','slugid'=>'QrT1203','marks'=>'200','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'false','type'=>'live'],
+         //    ['id'=>'12','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'CSE','slugid'=>'QUY1203','marks'=>'150','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'80','isFree'=>'false','type'=>'live'],
+         //    ['id'=>'13','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'CAT','slugid'=>'QRV1203','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'14','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'CDS','slugid'=>'QTYU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'live'],
+         //    ['id'=>'15','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'ESE','slugid'=>'QTYxcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'16','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'IBPS PO','slugid'=>'LKJxcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'17','quiz_categories_id'=>'4','quiz_sub_categories_id'=>'4','quiz_chapters_id'=>'4','quiz_topics_id'=>'4','exam_name'=>'IBPS SO','slugid'=>'ZXCcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'18','quiz_categories_id'=>'5','quiz_sub_categories_id'=>'5','quiz_chapters_id'=>'5','quiz_topics_id'=>'5','exam_name'=>'JEE','slugid'=>'lkhgfcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'19','quiz_categories_id'=>'5','quiz_sub_categories_id'=>'5','quiz_chapters_id'=>'5','quiz_topics_id'=>'5','exam_name'=>'JEE MAIN','slugid'=>'FRTfcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //    ['id'=>'20','quiz_categories_id'=>'5','quiz_sub_categories_id'=>'5','quiz_chapters_id'=>'5','quiz_topics_id'=>'5','exam_name'=>'JEE ADV','slugid'=>'FRTfcU12','marks'=>'100','noquizques'=>'100','rightmarks'=>'1','wrongmarks'=>'1','time_duration'=>'70','isFree'=>'true','type'=>'not'],
+         //  ];
+ 
+         //  QuizExamination::insert($quizexamination);
     }
 }

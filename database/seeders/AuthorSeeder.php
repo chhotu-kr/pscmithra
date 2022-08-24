@@ -25,7 +25,7 @@ class AuthorSeeder extends Seeder
         //  Course::factory()->times(20)->create();
         // QuizCategory::factory()->times(10)->create();
         // Language::factory()->times(10)->create();
-        LiveTest::factory()->times(10)->create();
+        // LiveTest::factory()->times(10)->create();
         
     }
 }

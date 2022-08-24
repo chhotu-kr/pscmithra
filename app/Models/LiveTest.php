@@ -17,4 +17,13 @@ class LiveTest extends Model
         'time_duration',
         'slugid',
     ];
+
+    public function examination(){
+        return $this->hasOne(Examination::class,'id','examination_id');
+    }
+
+    public function language(){
+
+        return $this->hasOne(Language::class,'id','language_id');
+    }
 }

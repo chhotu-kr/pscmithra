@@ -17,6 +17,6 @@ class BookSeeder extends Seeder
     {
         //
         Book::factory()->times(20)->create();
-        Course::factory()->times(20)->create();
+        // Course::factory()->times(20)->create();
     }
 }

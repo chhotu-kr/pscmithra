@@ -302,6 +302,14 @@ Route::get('examquestioncreate/{id}',[ExamQuestionController::class,'Create'])->
 
 Route::post('/examstore',[ExamController::class,'store'])->name('examstore');
 
+//..................................Livetest.........................//
+
+Route::get('/livetest',[LiveTestController::class,'index'])->name('manage.livetest');
+Route::get('/insert/livetest',[LiveTestController::class,'create'])->name('livetest.create');
+Route::post('/Store/livetest',[LiveTestController::class,'store'])->name('livetest.store');
+Route::get('/Update/livetest/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
+Route::post('/Update/livetest/{id}',[LiveTestController::class,'update'])->name('livetest.update');
+Route::get('/remove/livetest/{id}',[LiveTestController::class,'destroy'])->name('livetest.delete');
 
 //.................Post Method......................//
 

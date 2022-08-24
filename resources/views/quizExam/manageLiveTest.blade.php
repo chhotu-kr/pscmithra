@@ -28,6 +28,10 @@
                               <thead>
                                 <tr>
                                   <th scope="col" >id</th>
+                                 
+                                  
+                                  <th scope="col"> ExaminationName</th>
+                                  <th scope="col"> Language Name</th>
                                   <th scope="col"> Exam Name</th>
                                   <th scope="col">Start At</th>
                                  
@@ -43,6 +47,9 @@
                                   @foreach ($live as $cour)
                                       <tr>
                                           <td>{{$cour->id}}</td>
+                                        
+                                          <td>{{$cour->examination->exam_name}}</td>
+                                          <td>{{$cour->language->languagename}}</td>
                                           <td>{{$cour->exam_name}}</td>
                                           <td>{{$cour->startat}}</td>
                                          

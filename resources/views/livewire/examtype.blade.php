@@ -57,13 +57,13 @@
         
         <script>
     $(document).ready(function() {
-    $('#exampl').DataTable( {
+    $('#exampl').DataTable({
         dom: 'Bfrtip',
         // buttons: [
         //     'copy', 'csv', 'excel', 'pdf', 'print'
         // ]
     } );
-} );
+  });
 </script>
 
         @endif
