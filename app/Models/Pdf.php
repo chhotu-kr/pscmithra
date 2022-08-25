@@ -10,12 +10,12 @@ class Pdf extends Model
     use HasFactory;
     protected $table = ('pdfs');
     protected $fillable =[
-      'product_id',
+      'name',
       'slug_id',
       'pdf_url',
     ];
 
-    public function product(){
-      return $this->hasOne(Product::class,'id','product_id');
-    }
+    // public function product(){
+    //   return $this->hasOne(Product::class,'id','product_id');
+    // }
 }

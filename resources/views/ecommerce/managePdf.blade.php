@@ -9,11 +9,11 @@
             
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-8 mb-3">
+                    {{-- <div class="col-8 mb-3">
                         <h4 class="text-theme ps-2">Manage Pdf</h4>
-                    </div>
+                    </div> --}}
                     <div class="col-4">
-                        <a href="{{route('pdf.create')}}" class="btn btn-outline-success">Add New Pdf</a>
+                        <a href="{{route('pdf.create')}}" class="btn btn-outline-success mb-3">Add New Pdf</a>
                     </div>
                 </div>
                 <section class="section">
@@ -22,7 +22,7 @@
                 
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title">Manage Pdf</h5>
                             
                 
                             <!-- Table with stripped rows -->
@@ -39,7 +39,7 @@
                                   @foreach ($pdf as $pro)
                                       <tr>
                                           <td>{{$pro->id}}</td>
-                                          <td>{{$pro->product->title}}</td>
+                                          <td>{{$pro->name}}</td>
                                           <td>{{$pro->pdf_url}}</td>
                                          
                                           

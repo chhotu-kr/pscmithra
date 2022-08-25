@@ -11,6 +11,7 @@ class ExamController extends Controller
 {
     //
     public function index(){
+        
       $data['exam']= Exam::all();
     
        return view('admin.manageExam',$data);
@@ -27,7 +28,7 @@ class ExamController extends Controller
       $data-> examname = $req->examname;
        $data-> slugid = md5($req->examname . time());
        $data->save();
-        return redirect('/');
+        return redirect()->route('manage.exam');
     }
 
     public function update(Request $req,$id){
@@ -35,7 +36,7 @@ class ExamController extends Controller
         $exam-> examname = $req->examname;
          $exam-> slugid = md5($req->examname . time());
          $exam->save();
-          return redirect('/');
+          return redirect()->route('manage.exam');
 
     }
 
@@ -48,7 +49,7 @@ class ExamController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect('/');
+        return redirect()->route('manage.exam');
     }
 
    

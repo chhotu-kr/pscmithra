@@ -14,12 +14,11 @@ class AuthController extends Controller
     public function signup(Request $req){
 
         if($req->isMethod("post")){
-            // $req->validate([
-            //     'name' => 'required',
-            //     'contact' => 'required',
-            //     'email' => 'required:email|unique:users',
-            //     'password' => 'required|min:6'
-            // ]);
+            $req->validate([
+                'name' => 'required',
+                'contact' => 'required|unique:users',
+                'password' => 'required|min:6'
+            ]);
 
             $user = new User();
             $user->name = $req->name;
@@ -30,11 +29,11 @@ class AuthController extends Controller
             $user->password = Hash::make($req->password); 
             $user->save();
 
-            return redirect()->route("login");
+            return redirect()->route("user.login");
            
         }
         else{
-            return view("userRegister.Register");
+            return view("user.Register");
         }
     }
 
@@ -50,7 +49,7 @@ class AuthController extends Controller
             $auth = $req->only("contact","password");
 
             if(Auth::guard("web")->attempt($auth)){
-                return redirect()->route('dashboard');
+                return redirect()->route('user.index');
             }
             else{
                 // $req->session()->flash("error","login with incorrect details try again");
@@ -59,14 +58,15 @@ class AuthController extends Controller
            
             
         }
-        return view("userRegister.login");
+        return view("user.login");
     }
 
     public function logout(Request $req){
-        $req->session()->flush();
-        Auth::logout();
+       
 
-        return redirect()->route("login");
+        Auth::guard('web')->logout();
+
+        return redirect()->route("user.login");
     }
 
     // Admin Login And SignUp
@@ -79,7 +79,7 @@ class AuthController extends Controller
            
             $admin->email = $request->email;
             $admin->contact = $request->contact;
-            
+            $admin->slugid = md5($request->name .time());
             $admin->password = $request->password; 
             $admin->save();
 
@@ -94,17 +94,12 @@ class AuthController extends Controller
     public function adminLogin(Request $request){
         if($request->isMethod("post")){
 
-            // $req->validate([
-            //     'email' => 'required',
-            //     'password' => 'required',
-            // ]);
-
+            
             $auth = $request->only("email","password");
-             //print_r(Auth::guard("admin")->attempt($auth));
-            // return dd(Auth::guard("admin"));
+            
             if(Auth::guard("admin")->attempt($auth)){
                 
-               return redirect()->route('admin.dashboard');
+               return redirect()->route('manage.exam');
             }
             else{
                 $request->session()->flash("error","login with incorrect details try again");
@@ -114,6 +109,14 @@ class AuthController extends Controller
             
         }
         return view("adminRegister.Login");
+    }
+
+    public function Adminlogout(Request $req){
+       
+
+        Auth::guard('admin')->logout();
+
+        return redirect()->back();
     }
 
     

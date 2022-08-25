@@ -186,7 +186,8 @@
 
   tinymce.init({
     external_plugins: { tiny_mce_wiris: 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' },
-    selector: '.tinymce-editor',
+    
+    inline: true,
     plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
     imagetools_cors_hosts: ['picsum.photos'],
     menubar: 'file edit view insert format tools table help',
@@ -197,6 +198,7 @@
     autosave_prefix: '{path}{query}-{id}-',
     autosave_restore_when_empty: false,
     autosave_retention: '2m',
+     
     image_advtab: true,
     link_list: [{
         title: 'My page 1',
@@ -280,13 +282,14 @@
 
   tinymce.init({
     external_plugins: { tiny_mce_wiris: 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' },
-    selector: '.tinymce-option-editor',
+    
     plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
     imagetools_cors_hosts: ['picsum.photos'],
     menubar: 'file edit view insert format tools table help',
     toolbar: 'undo redo | bold italic underline strikethrough |tiny_mce_wiris_formulaEditor | tiny_mce_wiris_formulaEditorChemistry| fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
     toolbar_sticky: true,
-    width:500,
+    width: '100%',
+  
     height:400,
     autosave_ask_before_unload: true,
     autosave_interval: '30s',
@@ -415,3 +418,4 @@
   }
 
 })();
+

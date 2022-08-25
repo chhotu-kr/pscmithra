@@ -6,12 +6,14 @@
   <div class="pagetitle">
     
       <div class="row">
-          <div class="col-12">
+          <div class="col-4">
             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#basicModal">
               Add Exam
             </button>
+          
           </div>
           
+         {{-- <livewire:examtype/> --}}
               
                 <div class="modal fade" id="basicModal" tabindex="-1">
                   <div class="modal-dialog">
@@ -72,7 +74,9 @@
                             <td>{{$item->examname}}</td>
                            
                             <td>
-                               <a href="{{route('exam.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                        
+                             <a href="{{route('exam.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                           
                               
                               
                                 <a href="{{route('examremove',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>

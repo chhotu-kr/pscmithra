@@ -18,20 +18,13 @@ class QuestionController extends Controller
 
     public function index($question_id)
     {
-       
-
-        
-        
-        $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
-
-        
-        $data['language']= Language::all();
-        
+       $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
+        $data['question_id']= $question_id;
+       $data['language']= Language::all();
         $data['topic']= Topic::all();
         $data['subject']= Subject::all();
-
-
-       return view('admin/manageQuestion',$data);
+        
+        return view('admin/manageQuestion',$data);
     }
       /*
     public function filter(Request $request,$cat_id){
@@ -62,34 +55,40 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+
+// foreach($request->data as $ss){
+//     echo json_encode($ss['lang']);
+// }
+
         $data= new Question();
         $data->subject_id=$request->subject_id;
         $data->topic_id=$request->topic_id;
         $data->name=$request->name;
         
         $data->rightans=$request->rightans;
-        $data-> slugid = md5($request->question_add_id[0] . time());
+        $data-> slugid = md5('asdad' . time().'asd');
         $data->isverified=$request->isVerified;
         $data->save();
 
         // return dd($data);
-
         
-        $counttt = count($request->question_add_id);
-        
-        for($i=0;$i<$counttt;$i++) {
+        foreach($request->data as $ss){
             $que= new SecondQuestion();
-            $que->language_id=$request->language_id[$i];
+            $que->language_id=$ss['lang'];
             $que->question_id=$data->id;
-            $que->question=$request->question_add_id[$i];
-            $que->option1=$request->option1[$i];
-            $que->option2=$request->option2[$i];
-            $que->option3=$request->option3[$i];
-            $que->option4=$request->option4[$i];
-            $que->slugid=md5($request->question_add_id[$i].$request->language_id[$i] . time());
+            $que->question=$ss['question'];
+            $que->direction =$ss['dir'];
+            $que->explanation=$ss['exp'];
+            $que->option1=$ss['opt1'];
+            $que->option2=$ss['opt2'];
+            $que->option3=$ss['opt3'];
+            $que->option4=$ss['opt4'];
+            $que->slugid=md5('asde'.$ss['lang'].'asdasd'. time());
             $que->save();
         }
-         return redirect('/manageQuiz');
+        
+        
+          return redirect()->back();
     }
    
 
@@ -115,10 +114,10 @@ class QuestionController extends Controller
     }
 
     
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Question $question,$id)
     {
         //
-      
+         $question=Question::find($id);
         $question->subject_id=$request->subject_id;
         $question->topic_id=$request->topic_id;
         $question->name=$request->name;
@@ -126,7 +125,7 @@ class QuestionController extends Controller
         $question-> slugid = md5($request->question . time());
         $question->isverified=$request->isVerified;
         $question->save();
-        return redirect('/manageQuestion');
+        return redirect()->route('manage.quiz');
     }
 
     
@@ -140,6 +139,6 @@ class QuestionController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect('/manageQuestion');
+        return redirect('/manageQuiz');
     }
 }

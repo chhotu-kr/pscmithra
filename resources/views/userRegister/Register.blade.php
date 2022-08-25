@@ -24,7 +24,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" novalidate>
+                  <form action="{{route('user.signup')}}" class="row g-3 needs-validation" method="POST" novalidate>
                     @csrf
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
@@ -64,7 +64,7 @@
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                      <p class="small mb-0">Already have an account? <a href="{{route('user.login')}}">Log in</a></p>
                     </div>
                   </form>
 

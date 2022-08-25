@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class Admin
 {
     /**
@@ -22,9 +22,10 @@ class Admin
         // }
 
         // else{
-        //     return redirect('home')->with('error',"Only admin can access!");
+        //     return redirect('admin/dashboard')->with('error',"Only admin can access!");
 
         // }
+        
         
     }
 }

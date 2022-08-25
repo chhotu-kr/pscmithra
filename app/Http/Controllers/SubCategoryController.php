@@ -14,7 +14,7 @@ class SubCategoryController extends Controller
     {
         //
         $data['subcategory']= SubCategory::where('category_id',$category_id)->get();
-        $data['category']=Category::all();
+        $data['id']=$category_id;
         return view('admin/insertsubCategory',$data);
     }
 
@@ -32,14 +32,18 @@ class SubCategoryController extends Controller
         $data->slugid=md5($request->subcategory .time());
         $data->category_id=$request->category_id;
         $data->subcategory=$request->subcategory;
+        //image work
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('upload'),$filename);
+        $data->image = $filename;
         $data->save();
         return redirect()->back();
     }
-    public function subCategory($category_id){
-        $data['subcategory'] = SubCategory::where("category_id",$category_id)->get();
-        $data['category']=Category::all();
-        return view('admin/insertsubCategory',$data);
-    }
+    // public function subCategory($category_id){
+    //     $data['subcategory'] = SubCategory::where("category_id",$category_id)->get();
+    //     $data['category']=Category::all();
+    //     return view('admin/insertsubCategory',$data);
+    // }
 
       
     public function show(SubCategory $subCategory)
@@ -48,15 +52,30 @@ class SubCategoryController extends Controller
     }
 
     
-    public function edit(SubCategory $subCategory)
+    public function edit(SubCategory $subCategory,$id)
     {
         //
+      
+        $data['subcategory']=SubCategory::find($id);
+        $data['category']=Category::all();
+
+        return view('admin.editSubCategory',$data);
     }
 
     
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, SubCategory $subcategory,$id)
     {
         //
+        $subcategory=SubCategory::find($id);
+        $subcategory->slugid=md5($request->subcategory .time());
+        $subcategory->category_id=$request->category_id;
+        $subcategory->subcategory=$request->subcategory;
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('upload'),$filename);
+         $subcategory->image = $filename;
+        $subcategory->save();
+        return redirect()->back();
     }
 
     
@@ -73,6 +92,6 @@ class SubCategoryController extends Controller
         else{
             session()->flash('error', 'Please try again !!!');
         } 
-        return redirect('/subcategory');
+        return redirect()->back();
     }
 }

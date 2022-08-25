@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-9">
         <div class="card">
-          <div class="card-header">Edit PDF</div>
+          <div class="card-header">Edit Screenshot</div>
           <div class="card-body">
             <form action="{{route('screenshot.update', $screenshot)}}" method="POST">
                 @method('put')
@@ -18,7 +18,11 @@
               <select name="product_id" id="" class="form-select" value="{{$screenshot->product_id}}" required>
               <option value="0">select productName</option>
               @foreach ($product as $pro)
-                  <option value="{{$pro->id}}">{{$pro->title}}</option>
+              <option value="{{ $item->id }}"
+                @if ($item->id==$screenshot->product_id)
+                    selected="selected"
+                @endif
+              >{{ $item->title}}</option>
               @endforeach
               </select>
              </div>

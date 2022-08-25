@@ -17,7 +17,11 @@
               <select name="product_id" id="" class="form-select"  required>
               <option value="">select productName</option>
               @foreach ($product as $pro)
-                  <option value="{{$pro->id}}">{{$pro->title}}</option>
+              <option value="{{ $pro->id }}"
+                @if ($pro->id==$address->product_id)
+                    selected="selected"
+                @endif
+              >{{ $pro->title}}</option>
               @endforeach
               </select>
              </div>
@@ -38,7 +42,7 @@
               <input type="text" name="pincode" class="form-control" value="{{$address->pincode}}" required>
             </div>
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary w-100">Create</button>
+            <button type="submit" class="btn btn-primary w-100">Update</button>
             </div>
           </form>
           </div>

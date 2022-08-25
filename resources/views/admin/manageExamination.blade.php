@@ -22,56 +22,69 @@
                           <div class="card-body">
                             <h5 class="card-title">Manage Examination</h5>
                             {{--  --}}
-                
+                            <div class = "table-responsive" style="white-space: nowrap;"> 
                             <!-- Table with stripped rows -->
-                            <table class="table">
+                            <table id="with" class="display" style="width:100%">
                               <thead>
                                 <tr>
-                                  <th scope="col">id</th>
-                                  <th scope="col">Exam<br>Id</th>
-                                  <th scope="col">Category<br>Name</th>
-                                  <th scope="col">SubCategory<br>Name</th>
-                                  {{-- <th scope="col">Question<br>Name</th> --}}
-                                  <th scope="col">Start<br>At</th>
-                                  <th scope="col"> Exam<br>Name</th>
-                                  <th scope="col">Right<br>Marks</th>
-                                  <th scope="col">Wrong<br>Marks</th>
-                                  <th scope="col">Time</th>
-                                  
-                                  
+                                  <th >id</th>
+                                
+                                  <th >Category Name</th>
+                                  <th >SubCategory Name</th>                                                           
+                                  <th scope="col"> Exam Name</th>
+                                  <th scope="col">Marks</th>
+                                  <th scope="col">Time (in Mints)</th>
+                                  <th scope="col">Right Marks</th>
+                                  <th scope="col">Wrong Marks</th>
+                                  <th scope="col">No Of Questions</th>
+                                  <th scope="col">Is Free</th>
+                                  <th scope="col">Langauge</th>
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
                                   @foreach ($examination as $cour)
                                       <tr>
-                                          <td>{{$cour->id}}</td>
-                                          <td>{{$cour->exam->examname}}</td>
-                                          <td>{{$cour->category->category}}</td>
-                                          <td>{{$cour->subcategory->subcategory}}</td>
+                                          <td scope="col">{{$cour->id}}</td>
+                                       
+                                          <td scope="col">{{$cour->category->category}}</td>
+                                          <td scope="col">{{$cour->subcategory->subcategory}}</td>
                                           {{-- <td>{{$cour->secondquestion->question}}</td> --}}
-                                          <td>{{$cour->startat}}</td>
-                                          <td>{{$cour->exam_name}}</td>
+                                      
+                                          <td scope="col">{{$cour->exam_name}}</td>
+                                        
+                                          <td>{{$cour->marks}}</td>
+                                          <td>{{$cour->time_duration}}</td>
+                                          
+
+                                          
+                                          
                                           <td>{{$cour->rightmarks}}</td>
                                           <td>{{$cour->wrongmarks}}</td>
-                                          <td>{{$cour->time_duration}}</td>
+                                          <td>{{$cour->noQues}}</td> 
+                                          <td>{{$cour->isFree}}</td> 
+
+                                          <td>@foreach($cour->lang as $val)
+                                          {{$val->language->languagename}},
+                                          @endforeach</td> 
                                           
                                           
                                           <td>
-                                            <a href="" class="btn btn-outline-secondary">Edit</a>
+                                            <a href="{{route('examination.update',['id'=>$cour->id])}}" class="btn btn-outline-secondary">Edit</a>
                                             <a href="" class="btn btn-outline-warning">Delete</a>
-                                            <a href="{{route('examquestion.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
+                                            <a href="{{route('check.index',['id'=>$cour->id])}}" class="btn btn-outline-warning">ManageQuestion</a>
                                           </td>
                                       </tr>
                                   @endforeach
                                 
                               </tbody>
                             </table>
+                           </div>
                             <!-- End Table with stripped rows -->
                 
                           </div>
                         </div>
-                
+                        </div>
                       </div>
                     </div>
                   </section>   

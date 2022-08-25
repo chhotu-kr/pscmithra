@@ -40,12 +40,12 @@ class TopicController extends Controller
       
         
         $topic->save();
-        return redirect('/manage');
+        return redirect('/admin/manage');
       }
 
     public function destroy($id){
         $req = Topic::find($id);
         $req->delete();
-        return redirect('/manage');
+        return redirect('/admin/manage');
     }
 }

@@ -10,11 +10,12 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     
-    public function index()
+    public function index($id)
     {
         //
+        $data['category']=$id;
         $data['category']=Category::all();
-        $data['exam']=Exam::all();
+       
        return view('admin.insertCategory',$data);
     }
 
@@ -30,10 +31,14 @@ class CategoryController extends Controller
         //
         $data = new Category();
         $data->slugid=md5($request->category .time());
-        $data->exam_id=$request->exam_id;
+       
         $data->category=$request->category;
+        //image
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('upload'),$filename);
+        $data->image = $filename;
         $data->save();
-        return redirect('/category');
+        return redirect()->route('insert.category');
     }
 
     
@@ -46,21 +51,26 @@ class CategoryController extends Controller
     public function edit(Category $category,$id)
     {
         //
-        $data['exam']=Exam::all();
+      
         $data['category']=Category::find($id);
 
         return view('admin.editCategory',$data);
     }
 
     
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category,$id)
     {
         //
+        $category=Category::find($id);
         $category->slugid=md5($request->category .time());
-        $category->exam_id=$request->exam_id;
+       
         $category->category=$request->category;
+         //image
+         $filename = $request->image->getClientOriginalName();
+         $request->image->move(('upload'),$filename);
+         $category->image = $filename;
         $category->save();
-        return redirect('/category');
+        return redirect()->route('insert.category');
         
     }
 
@@ -79,7 +89,7 @@ class CategoryController extends Controller
             session()->flash('error', 'Please try again !!!');
         } 
 
-        return redirect('/category');
+        return redirect()->route('insert.category');
        
     }
 }

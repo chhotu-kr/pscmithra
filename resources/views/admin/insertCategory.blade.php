@@ -5,9 +5,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-                    Add Category
-                   </button>
+                 @role('admin')
+                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                  Add Category
+                 </button>
+                 @endrole
                 </div>
                 
           
@@ -22,27 +24,23 @@
                         </div>
                         <div class="modal-body">
                          <!-- Custom Styled Validation with Tooltips -->
-                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" novalidate>
+                         <form action="{{route('category.store')}}" class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             
                           @csrf
                           
-                          <div class=" position-relative">
-                            <label for="validationTooltip04" class="form-label">Exam_Id</label>
-                            <select class="form-select" name="exam_id" id="validationTooltip04" required>
-                              <option selected disabled value="0">Choose Your Category</option>
-                              @foreach ($exam as $item)
-                              <option value="{{$item->id}}">{{$item->examname}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-tooltip">
-                              Please select a valid id.
-                            </div>
-                          </div>
+                         
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Category</label>
                             <input type="text" class="form-control" name="category" id="validationTooltip05" required>
                             <div class="invalid-tooltip">
                               Please provide a valid category.
+                            </div>
+                          </div>
+                          <div class=" position-relative">
+                            <label for="validationTooltip05" class="form-label">Image</label>
+                            <input type="file" class="form-control" name="image" id="validationTooltip05" required>
+                            <div class="invalid-tooltip">
+                              Please provide a valid image.
                             </div>
                           </div>
                           <div class="col-12">
@@ -76,8 +74,9 @@
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Exam</th>
+                        
                         <th scope="col">category</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Action</th>
                         
                       </tr>
@@ -86,13 +85,28 @@
                        @foreach ($category as $item)
                               <tr>
                                   <td>{{$item->id}}</td>
-                                  <td>{{$item->exam->examname}}</td>
+                               
                                   <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
                                   <td>
-                                     <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                    <img src="{{asset("upload/".$item->image)}}" width="40" height="40" alt="">
+                                </td>
+                                  <td>
+                                  
+
+                                    
+                                    <a href="{{route('category.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
+                                 
+                                    
+                                   
+
+                                    <a href="{{route('removecategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                          
+                               
+                                
                                     
                                     
-                                      <a href="{{route('removecategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                    
+                                      
                                   </td>
                               </tr>
                           @endforeach

@@ -23,7 +23,7 @@
                       <div class="mb-3">
                           <label for="validationTooltip04" class="form-label">Question</label>
                           <select class="form-select" name="question_id" id="validationTooltip04" value="{{$examquestion->question}}" required>
-                            <option selected disabled value="0">Choose your exam</option>
+                            <option selected disabled value="0">Choose your question</option>
                             @foreach ($secondquestion as $item)
                                 <option value="{{$item->id}}">{{$item->question}}</option>
                             @endforeach

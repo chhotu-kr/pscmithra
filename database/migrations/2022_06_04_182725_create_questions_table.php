@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignId("subject_id")->constrained();
             $table->foreignId("topic_id")->constrained();
             
-            $table->string('name');
+            $table->longText('name');
             $table->string('rightans');
-            $table->string('slugid');
+            $table->string('slugid')->nullable();
             $table->string('isVerified')->nullable();
             $table->timestamps();
             
@@ -29,6 +29,7 @@ return new class extends Migration
            
         });
     }
+    
 
     /**
      * Reverse the migrations.

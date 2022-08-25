@@ -30,7 +30,7 @@ class LanguageController extends Controller
         $data->slugid=md5($request->language .time());
         $data->save();
 
-        return redirect('/language');
+        return redirect()->back();
     }
 
     

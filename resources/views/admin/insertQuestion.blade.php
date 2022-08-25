@@ -5,19 +5,20 @@
        <div class="container">
          <div class="row">
            
-             <h6 class="text-theme h4 text-danger  ps-2">Manage Question</h6>
+             <h6 class="text-theme h4 text-danger  ps-2">Insert Question</h6>
            
            <div class="col-12">
                     <div class="card">
-                      <div class="card-header h4">
-                        Insert Question
-                      </div>
+                      {{-- <div class="card-header">
+                       <span class="text-theme ps-2 fw-bold textsecondary"> Insert Question</span>
+                      </div> --}}
                       <div class="card-body">
                         <form action="{{ route('insertquestion.store') }}" id="button" class="row g-3 needs-validation" method="POST" novalidate>
                       
                           @csrf
                           
                             <livewire:subjects />
+                            <livewire:admin.question.addquestion />
                             <div class="mb-3">
                               <label>Name</label>
                               <input type="text" name="name" class="form-control" required>
@@ -26,10 +27,10 @@
                               <label for="validationCustom04" class="form-label">RightAns</label>
                               <select class="form-select" name="rightans" id="validationCustom04" required>
                                 <option selected disabled value="">select your answer</option>
-                                <option value="option1">option1</option>
-                                <option value="option2">option2</option>
-                                <option value="option3">option3</option>
-                                <option value="option4">option4</option>
+                                <option value="selOpt1">option1</option>
+                                <option value="selOpt2">option2</option>
+                                <option value="selOpt3">option3</option>
+                                <option value="selOpt4">option4</option>
                               </select>
                               <div class="invalid-feedback">
                                 Please select a valid state.
@@ -110,7 +111,7 @@ var tinymceaddd= "textareaoption4"+index;
                     
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip01" class="form-label">Option1</label>`;
-                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option1[]" id="'+tinymceidd+'"></textarea> </div>';
+                       html+='<div><textarea  class="tinymce-editor form-control" name="option1[]" id="'+tinymceidd+'"></textarea> </div>';
                         
                        html+= `
                         <div class="valid-tooltip">
@@ -119,7 +120,7 @@ var tinymceaddd= "textareaoption4"+index;
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip01" class="form-label">Option2</label>`;
-                       html+='<div><textarea  class=" tinymce-editor-yy form-control" name="option2[]" id="'+tinymceiddd+'"></textarea> </div>';
+                       html+='<div><textarea  class="form-control" name="option2[]" id="'+tinymceiddd+'"></textarea> </div>';
                         
                        html+= `
                         <div class="valid-tooltip">
@@ -144,6 +145,7 @@ var tinymceaddd= "textareaoption4"+index;
                           Looks good!
                         </div>
                     </div>`;
+                    
             $("#viewww").append(html);
              tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceID);
             tinymce.EditorManager.execCommand('mceAddEditor', true, tinymceidd);

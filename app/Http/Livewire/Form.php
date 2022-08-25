@@ -3,23 +3,24 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Language;
-use App\Models\SecondQuestion;
+// use App\Models\Language;
+use App\Models\Category;
+// use App\Models\SecondQuestion;
 
 class Form extends Component
 {   
-     public $templates =[];
-     public $all_templates;
-     public $SecondQuestions=[];
+    
+         public $category;
+         public $categoryId;
 
-    public function mount(){
-        $this->all_templates = SecondQuestion::all();
+      public $idd; 
+
+    public function mount($id){
+        $this->idd=$id;
+        $this->category=Category::all();
     }
 
-    public function addsecondquestion(){
-        $this->SecondQuestions[] = '';
-    }
-     
+    
 
 
     public function render()

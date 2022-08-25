@@ -9,9 +9,9 @@
             
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-12 mb-3">
-                      <a href="{{route('question.create')}}" class="btn btn-primary">Add New Question</a>
-                    </div>
+                  <div class="col-3 mb-3">
+                    <a href="{{ route('insert.secondquestion',['id'=>$question_id])}}" class="btn btn-primary">Add New Question</a>
+                  </div>
                 </div>
                 <section class="section">
                     
@@ -25,21 +25,23 @@
                             <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">id</th>
-                                  <th scope="col">Subject Name</th>
-                                  <th scope="col">question_id</th>
-                                  <th scope="col">Question</th>
-                                  <th scope="col">Option1</th>
-                                  <th scope="col">Option2</th>
-                                  <th scope="col">Option3</th>
+                                  <th >id</th>
+                                  <th >Language</th>
+                                  <th>question_id</th>
+                                  <th >Question</th>
+                                  <th >Option1</th>
+                                  <th >Option2</th>
+                                  <th >Option3</th>
                                   <th scope="col">Option4</th>
                                   <th scope="col">Action</th>
+                                  {{-- <th scope="col">Action</th> --}}
                                   
                                 </tr>
                               </thead>
                               <tbody>
                                   @foreach ($secondquestion as $req)
                                       <tr>
+                                        {{-- <td>{{$req}}</td> --}}
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->language->languagename}}</td>
                                           <td>{{$req->question_id}}</td>
@@ -49,20 +51,23 @@
                                           <td>{{$req->option3}}</td>
                                           <td>{{$req->option4}}</td>
                                           
-                                          <td>
+                                          {{-- <td>
                                             <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
-                                            <a href="{{route('removesecondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>   
-{{--                                           
+                                            <a href="{{route('removesecondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a> 
+                                                                                  
                                               <form action="{{route('membership.destroy',[$req])}}" method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <input type="submit" value="X" class="btn btn-outline-danger">
                                                 <a href="{{route('membership.edit',[$req])}}" class="btn btn-outline-primary">Edit</a>
-                                                </form> --}}
+                                                </form>
 
                                                
+                                          </td>  --}}
+                                          <td>
+                                            <a href="{{route('secondquestionedit',['id'=>$req->id])}}" class="btn btn-outline-success">Edit</a>
+                                            <a href="{{route('remove.secondquestion',['id'=>$req->slugid])}}" class="btn btn-outline-danger">X</a>
                                           </td>
-                                          
                                       </tr>
                                   @endforeach
                                 

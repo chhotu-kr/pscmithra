@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('subject_id')->constrained();
-            $table->foreignId('topic_id')->constrained()->nullable();
+            $table->foreignId('topic_id')->nullable()->constrained();
             $table->string('slugid');
             $table->string('title');
             $table->text('description');
           
-           $table->enum('type', ['pdf', 'course','book'])->default('pdf');
+           $table->enum('type', ['pdf', 'course','book','plan','ebook'])->default('pdf');
             $table->float('price');
             $table->integer('bycount');
             $table->string('bannerimage');

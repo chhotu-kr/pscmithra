@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pdfs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
+            $table->string('name');
             $table->string('slugid');
             $table->string('pdf_url');
             $table->timestamps();

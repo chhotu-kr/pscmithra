@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slugid');
             $table->foreignId('product_id')->constrained();
             $table->foreignId('address_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

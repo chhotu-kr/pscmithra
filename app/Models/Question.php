@@ -14,8 +14,7 @@ class Question extends Model
     protected $fillable =[
      'subject_id',        
      'topic_id',        
-     'name',        
-             
+     'name',            
      'rightans',        
      'slugid',                
      'isverified',        
@@ -31,5 +30,12 @@ class Question extends Model
     }
     public function secondquestion(){
         return $this->hasMany(SecondQuestion::class);
+      }
+      public function mockAttemp(){
+        return $this->hasOne(mockattempquestion::class,'questions_id','id');
+      }
+     
+      public function quizAttemp(){
+        return $this->hasOne(QuizAttemptQuestion::class,'question_id','id');
       }
 }

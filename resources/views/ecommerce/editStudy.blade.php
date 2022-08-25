@@ -8,18 +8,18 @@
                 </div>
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">Edit Study</div>
+                        <div class="card-header">Edit StudyMetrial</div>
                         <div class="card-body">
-                            <form action="{{route('study.update',$study)}}" class="row g-3 needs-validation" method="post" novalidate>
+                            <form action="{{route('study.update',$study->id)}}" class="row g-3 needs-validation" method="post" novalidate>
                           
                                 @csrf
                                 @method('put')
                                 <div class=" position-relative">
-                                  <label for="validationTooltip04" class="form-label">Category_Id</label>
-                                  <select class="form-select" name="category_id" id="validationTooltip04" required>
-                                    <option selected disabled value="0">Select Category</option>
-                                    @foreach ($category as $item)
-                                    <option value="{{$item->id}}">{{$item->category}}</option>
+                                  <label for="validationTooltip04" class="form-label">StudyMetrial</label>
+                                  <select class="form-select" name="study_material_id" id="validationTooltip04" required>
+                                    <option selected disabled value="0">Select StydyMetrial</option>
+                                    @foreach ($smcy as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                   </select>
                                   <div class="invalid-tooltip">
@@ -27,15 +27,27 @@
                                   </div>
                                 </div>
                                 <div class=" position-relative">
-                                  <label for="validationTooltip04" class="form-label">SubCategory_Id</label>
-                                  <select class="form-select" name="subcategory_id" id="validationTooltip04" required>
-                                    <option selected disabled value="0">Select SubCategory</option>
-                                    @foreach ($subcategory as $item)
-                                    <option value="{{$item->id}}">{{$item->subcategory}}</option>
+                                  <label for="validationTooltip04" class="form-label">SmCategory</label>
+                                  <select class="form-select" name="sm_categories_id" id="validationTooltip04" required>
+                                    <option selected disabled value="0">Select SmCategory</option>
+                                    @foreach ($smc as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                   </select>
                                   <div class="invalid-tooltip">
-                                    Please select a valid subcategory.
+                                    Please select a valid id.
+                                  </div>
+                                </div>
+                                <div class=" position-relative">
+                                  <label for="validationTooltip04" class="form-label">SmChapter</label>
+                                  <select class="form-select" name="sm_chapters_id" id="validationTooltip04" required>
+                                    <option selected disabled value="0">Select Smchapter</option>
+                                    @foreach ($smc as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                  </select>
+                                  <div class="invalid-tooltip">
+                                    Please select a valid smchapter.
                                   </div>
                                 </div>
                                 <div class=" position-relative">
@@ -45,10 +57,31 @@
                                     Please provide a valid content.
                                   </div>
                                 </div>
+                                <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Title</label>
+                                  <input type="text" class="form-control" name="title" id="validationTooltip05" value="{{$study->study->title}}" required>
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid title.
+                                  </div>
+                                </div>
+                                <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Name</label>
+                                  <input type="text" class="form-control" name="name" id="validationTooltip05" value="{{$study->name}}" required>
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid title.
+                                  </div>
+                                </div>
+                                <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Description</label>
+                                  <input type="text" class="form-control" name="description" id="validationTooltip05" value="{{$study->study->description}}" required>
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid description.
+                                  </div>
+                                </div>
                                 <div class="col-12">
                                   <button class="btn btn-primary w-100" type="submit">Create</button>
                                 </div>
-                              </form><!-
+                              </form>
                         </div>
                     </div>
                 </div>

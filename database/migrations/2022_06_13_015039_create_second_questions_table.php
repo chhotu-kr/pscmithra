@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('language_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->string('question');
+            $table->longText('direction');
+            $table->longText('explanation');
             $table->string('option1');
             $table->string('option2');
             $table->string('option3');
