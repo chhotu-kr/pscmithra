@@ -51,9 +51,9 @@
         <form action="{{route('submit.check')}}" method="POST">
           @csrf
           <livewire:subjects /> 
-        
+          
           {{-- <th><input class="hidden" name="exam" value="question_id" ></th> --}}
-          <table class="table datatable">
+           <table class="table datatable">
               <thead>
                 <tr>
                   <th scope="col">Checkbox</th>
@@ -61,31 +61,11 @@
                  
                   <th scope="col">Name</th>
                   <th scope="col"> Language</th>
-                  {{-- <th scope="col">topic Name</th> --}}
-                  
-                  {{-- <th scope="col">Action</th> --}}
                   
                 </tr>
               </thead>
               <tbody  id="tablebody">
                
-                 {{-- @foreach ($examquestion as $item)
-                        <tr>
-                          <td><input type="checkbox"  name="az[]" value="{{$item}}"></td>
-                       
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->exam->examname}}</td>
-                            <td>{{$item->question->subject->sub_name}}</td>
-                            <td>{{$item->question->topic->topic_name}}</td>
-                            <td>{{$item->question->name}}</td>
-                           
-                           
-                            <td>
-                             <a href="" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-               --}}
                   </tbody>
             </table>
             <input type="hidden" value="{{$id}}" name="examination_id">
@@ -148,7 +128,11 @@ $(function() {
     });
 });
    
-  // $.ajaxSetup({
+  
+</script>
+@endsection
+
+{{-- // $.ajaxSetup({
   //     headers: {
   //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   //     }
@@ -171,9 +155,5 @@ $(function() {
   //     });
 
   // });
-</script>
-@endsection
 
-
-
-
+ --}}

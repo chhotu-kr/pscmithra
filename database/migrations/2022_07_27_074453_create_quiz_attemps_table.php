@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('mocktesttype', ['normal', 'reattemp'])->default('normal');
             $table->integer('lastQues')->default(0);
             $table->string('slugid');
-            $table->foreignId('language_id')->constrained();
             $table->integer('remain_time')->default('0');
             $table->integer('totalmarks')->default('0');
             $table->timestamps();

@@ -120,6 +120,11 @@
       </a>
     </li>
     <li>
+      <a href="{{route('manage.livetest')}}">
+        <i class="bi bi-circle"></i><span>Manage Livetest</span>
+      </a>
+    </li>
+    <li>
       <a href="{{route('cart.index')}}">
         <i class="bi bi-circle"></i><span>Manage Cart</span>
       </a>

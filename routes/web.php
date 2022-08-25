@@ -61,18 +61,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/view/home',[HomeController::class,'get_ViewHome'])->name('view.home');
 Route::get('/mock-test/category',[HomeController::class,'get_Category'])->name('view.category');
-Route::get('/mock-test/category/details',[HomeController::class,'get_ViewCatDetails'])->name('view.categorydetails');
+Route::get('/mock-test/category/details/{id}',[HomeController::class,'get_ViewCatDetails'])->name('view.categorydetails');
 Route::get('/view/blog',[HomeController::class,'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details',[HomeController::class,'get_ViewBlogDetails'])->name('view.blogdetails');
 Route::get('/view/course',[HomeController::class,'get_ViewCourse'])->name('view.course');
 Route::get('/view/course/details',[HomeController::class,'get_ViewCourseDetails'])->name('view.coursedetails');
-Route::get('/view/quiz',[HomeController::class,'get_ViewQuiz'])->name('view.quiz');
+Route::get('/quizes',[HomeController::class,'get_Quiz'])->name('view.quiz');
 Route::get('/mock-test/study/metrial',[HomeController::class,'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login',[HomeController::class,'get_Login'])->name('user.login');
 Route::get('/user/register',[HomeController::class,'get_Register'])->name('user.register');
 Route::get('/mock-test/quiz/category',[HomeController::class,'get_QuizCate'])->name('quiz.category');
 Route::get('/mock-test/quiz/subcategory',[HomeController::class,'get_QuizSubCate'])->name('quiz.subcategory');
 Route::get('/mock-test/quiz/chapter',[HomeController::class,'get_QuizChapt'])->name('quiz.chapter');
+Route::get('/getexam-result',[HomeController::class,'Quiz_Result'])->name('quiz.result');
 
 //................calling Data ..........
 
@@ -302,6 +303,14 @@ Route::get('examquestioncreate/{id}',[ExamQuestionController::class,'Create'])->
 
 Route::post('/examstore',[ExamController::class,'store'])->name('examstore');
 
+//..................................Livetest.........................//
+
+Route::get('/livetest',[LiveTestController::class,'index'])->name('manage.livetest');
+Route::get('/insert/livetest',[LiveTestController::class,'create'])->name('livetest.create');
+Route::post('/Store/livetest',[LiveTestController::class,'store'])->name('livetest.store');
+Route::get('/Update/livetest/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
+Route::post('/Update/livetest/{id}',[LiveTestController::class,'update'])->name('livetest.update');
+Route::get('/remove/livetest/{id}',[LiveTestController::class,'destroy'])->name('livetest.delete');
 
 //.................Post Method......................//
 

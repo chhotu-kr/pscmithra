@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
+    {{-- <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png"> --}}
 
     <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('newlms/assets/css/vendor/icomoon.css')}}">
@@ -113,7 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="popup-mobile-menu">
+    {{-- <div class="popup-mobile-menu">
         <div class="inner">
             <div class="header-top">
                 <div class="logo">
@@ -160,7 +161,7 @@
     <div class="education-search-popup">
         <div class="content-wrap">
             <div class="site-logo">
-                <img src="images/logo/logo-dark.png" alt="Logo">
+                <img src="{{asset('newlms\assets\images/logo/logo-dark.png')}}" alt="Logo">
             </div>
             <div class="close-button">
                 <button class="close-trigger"><i class="icon-73"></i></button>
@@ -172,7 +173,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @section('pscmithra')
     
 @show

@@ -22,22 +22,13 @@ class HomeController extends Controller
             $data['subcategory']=SubCategory::all();
             $data['pro']=Product::all();
             return view('user.Viewhome',$data);
-        // if($category_id==Null){
-        //     $data['category']=Category::all();
-        //     $data['subcategory']=SubCategory::all();
-        //     return view('user.Viewhome',$data);
-        // }
-        //   else{
-        //     $data['category']=Category::all();
-        //   $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
-        // return view('user.Viewhome',$data);
-        //   }
+       
     }
 
     public function filter($category_id){
         if($category_id==Null){
                 $data['category']=Category::all();
-                // $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
+              
                 return view('user.Viewhome',$data);
             }
               else{
@@ -50,6 +41,7 @@ class HomeController extends Controller
     public function get_Category(){
         $data['subcategory']=SubCategory::all();
         $data['cate']=Category::all();
+       
         return view('user.category',$data);
     }
 
@@ -61,8 +53,10 @@ class HomeController extends Controller
     //  return view('user.category',$data);
     // }
    //................CategoryDetails................//
-    public function get_ViewCatDetails(){
-        return view('user.ViewCategorydetails');
+    public function get_ViewCatDetails($id){
+        
+        $data['catdetail']=$id;
+        return view('user.ViewCategorydetails',$data);
     }
    //...............Blog...................//
     public function get_ViewBlog(){
@@ -84,9 +78,10 @@ class HomeController extends Controller
     }
     //..............Quiz.............//
 
-    public function get_ViewQuiz(){
-        $data['sec']=SecondQuestion::all();
-        return view('user.ViewQuiz',$data);
+    public function get_Quiz(){
+        //   $data['quizcat']=$id;
+ 
+        return view('user.ViewQuiz');
     }
     //..............StudyMetrial.................//
 
@@ -125,5 +120,11 @@ class HomeController extends Controller
     $data['chapt']=QuizChapter::all();
    
     return view('user.QuizChapter',$data);
+   }
+
+   //..............liveQuiz................//
+
+   public function Quiz_Result(){
+    return view('user.liveQuiz');
    }
 }

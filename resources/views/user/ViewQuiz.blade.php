@@ -4,7 +4,10 @@
 @endsection
 @extends('user.dashboard')
 @section('pscmithra')
-<style type="text/css">
+
+
+@livewire('user.quiz',['id'=>$quizcat]);
+{{-- <style type="text/css">
     .quize-page {
         padding: 50px 0;
         position: relative;
@@ -222,97 +225,7 @@
                     </div>
                      @endforeach
     
-                      {{-- <div class="tab">
-                        <div class="quition-no">
-                            <h5>2/5</h5>
-                        </div>
-                        <p class="quition-para">2. Which of the following sentences is correct</p>
-                        <div class="form-group">
-                          <input type="radio" id="5" class="vh" name="mca1">
-                          <label for="5">When its raining ,people's umbrella are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="6" class="vh" name="mca1">
-                          <label for="6">When its raining,people's umbrella are all your going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="7" class="vh" name="mca1">
-                          <label for="7">When its raining,peoples umbrella's are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="8" class="vh" name="mca1">
-                          <label for="8">None of the above</label>
-                        </div>
-                      </div>
-    
-                      <div class="tab">
-                        <div class="quition-no">
-                            <h5>3/5</h5>
-                        </div>
-                        <p class="quition-para">3. Which of the following sentences is correct</p>
-                        <div class="form-group">
-                          <input type="radio" id="9" class="vh" name="mca2">
-                          <label for="9">When its raining ,people's umbrella are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="10" class="vh" name="mca2">
-                          <label for="10">When its raining,people's umbrella are all your going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="11" class="vh" name="mca2">
-                          <label for="11">When its raining,peoples umbrella's are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="12" class="vh" name="mca2">
-                          <label for="12">None of the above</label>
-                        </div>
-                      </div>
-    
-                      <div class="tab">
-                        <div class="quition-no">
-                            <h5>4/5</h5>
-                        </div>
-                        <p class="quition-para">4. Which of the following sentences is correct</p>
-                        <div class="form-group">
-                          <input type="radio" id="13" class="vh" name="mca3">
-                          <label for="13">When its raining ,people's umbrella are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="14" class="vh" name="mca3">
-                          <label for="14">When its raining,people's umbrella are all your going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="15" class="vh" name="mca3">
-                          <label for="15">When its raining,peoples umbrella's are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="16" class="vh" name="mca3">
-                          <label for="16">None of the above</label>
-                        </div>
-                      </div>
-                      <div class="tab">
-                        <div class="quition-no">
-                            <h5>5/5</h5>
-                        </div>
-                        <p class="quition-para">5. Which of the following sentences is correct</p>
-                        <div class="form-group">
-                          <input type="radio" id="17" class="vh" name="mca4">
-                          <label for="17">When its raining ,people's umbrella are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="18" class="vh" name="mca4">
-                          <label for="18">When its raining,people's umbrella are all your going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="19" class="vh" name="mca4">
-                          <label for="19">When its raining,peoples umbrella's are all you're going to see from above</label>
-                        </div>
-                        <div class="form-group">
-                          <input type="radio" id="20" class="vh" name="mca4">
-                          <label for="20">None of the above</label>
-                        </div>
-                      </div> --}}
-    
+                     
                       <div style="overflow:auto;">
                         <div style="float:right;">
                           <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -470,5 +383,5 @@
       //... and adds the "active" class on the current step:
       x[n].className += " active";
     }
-    </script>
+    </script> --}}
 @endsection

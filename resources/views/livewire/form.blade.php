@@ -1,17 +1,45 @@
 <div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
-      {{-- <select name="language_id" id="templates" class="form-select">
-        <option value="" class="">Choose your lnguage</option>
-        @foreach ($language as $item)
-            <option value="$item->id">{{$item->languagename}}</option>
-        @endforeach
-      </select> --}}
+    
+  {{-- <div class="card"> --}}
+    <div class="card-body">
+      <h5 class="card-title">Vertical Pills Tabs</h5>
 
-    <div class="col-lg-12">
+    
+      <div class="d-flex align-items-start">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          @foreach ($category as $item)
+                 <button  id="{{$item->slugid}}" data-bs-toggle="pill" data-bs-target="#tab-{{$item->slugid}}" type="button" role="tab" aria-controls="tab-{{$item->slugid}}"
+                                @if($item->id==$idd)
+                                 class="nav-link active"
 
-       @foreach ($category as $item)
-      @livewire('vcategories', ["id"=>$item['id'],"Name"=>$item['category']] ,key($item['id']))
-       @endforeach
+                                 @else
+                                 class="nav-link"
+                                    @endif
+                                 >{{$item->category}}</button> 
+          @endforeach
+
+         
+        </div>
+        <div class="tab-content" id="v-pills-tabContent">
+       
+            @foreach ($category as $item)
+              <div 
+                @if($item->id==$idd)
+                   class="tab-pane fade show active"
+                   @else
+                  class="tab-pane fade"
+                @endif
+                  id="tab-{{$item->slugid}}" role="tabpanel" aria-labelledby="{{$item->slugid}}">
+               @foreach ($item->subcat as $sub)
+                 {{$sub->subcategory}}
+                @endforeach
+              </div>
+            @endforeach
+        </div>
+      </div>
+
+
     </div>
+  {{-- </div> --}}
 
 </div>
