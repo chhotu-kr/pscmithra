@@ -43,26 +43,38 @@ Route::get('/studychapter/{id}',[Apiv1Controller::class,'get_StudyChapter'])->na
 Route::post('/examination',[Apiv1Controller::class,'get_Examination']);
 Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
 
-// Route::post('/quizexamdata',[Apiv1Controller::class,'get_QuizExamData']);
+ 
 
 Route::post('/submitExam',[Apiv1Controller::class,'submitExam']);
+
 Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);
 Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
+Route::post('/getsolution-exam',[Apiv1Controller::class,'getExamSolution']);
 
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
 
 // .....Examination........
 
+Route::post('/quizexamdata',[Apiv1Controller::class,'get_QuizExamination']);
+
+
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::post('/quiz-exam-cat',[Apiv1Controller::class,'get_QuizExamination']);
 Route::post('/prepare-quizexam',[Apiv1Controller::class,'preareQuizExam'])->name('prepareQuizExam');
 Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('studymetrial.show');
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
-Route::post('/get-resuslt',[Apiv1Controller::class,'get_Result']);
-Route::post('/get-solution',[Apiv1Controller::class,'getSolution']);
+//Route::post('/get-resuslt',[Apiv1Controller::class,'get_Result']);
+//Route::post('/get-solution',[Apiv1Controller::class,'getSolution']);
+Route::post('/getexam-resuslt',[Apiv1Controller::class,'getexam_Result']);
 
-//Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
+Route::post('/getquiz-resuslt',[Apiv1Controller::class,'get_Result']);
+
+Route::post('/getsolution-quiz',[Apiv1Controller::class,'get_QuizSolutions']);
+Route::post('/prepare-quiz',[Apiv1Controller::class,'preareQuizExam']);
+
+
+Route::post('/getData-quiz',[Apiv1Controller::class,'get_QuizExamData']);
 
 
 
