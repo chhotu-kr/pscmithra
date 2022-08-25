@@ -402,24 +402,25 @@ class Apiv1Controller extends Controller
             return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
         } else {
 
-            if($request->examtype=="reattemp"){
-            $get->lastQues = 0;
-            $get->type = "resume";
-            $get->language_id = $request->language;
-            $get->remain_time = $examination_id->time_duration * 60;
-            $get->save();
-            
-$testId = $get->id;
-      $data =   mockattempquestion::where('attemped_exams_id', $testId)->where('users_id', $user_id->id)->update(["QuesSeen"=>"false",
-      "QuesSelect"=> "",
-      "time"=> 0,]);
+            if ($request->examtype == "reattemp") {
+                $get->lastQues = 0;
+                $get->type = "resume";
+                $get->language_id = $request->language;
+                $get->remain_time = $examination_id->time_duration * 60;
+                $get->save();
+
+                $testId = $get->id;
+                $data =   mockattempquestion::where('attemped_exams_id', $testId)->where('users_id', $user_id->id)->update([
+                    "QuesSeen" => "false",
+                    "QuesSelect" => "",
+                    "time" => 0,
+                ]);
 
 
-                return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $get->slugid, "examinationId" => $request->examination ]]);
-            }else{
-                return response()->json(['msg' => 'Exam already exist', 'status' => false]);}
-
-            
+                return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $get->slugid, "examinationId" => $request->examination]]);
+            } else {
+                return response()->json(['msg' => 'Exam already exist', 'status' => false]);
+            }
         }
         //   mockattempquestion::insert($insertData);
 
@@ -452,7 +453,7 @@ $testId = $get->id;
 
         //$Quiz = new quizAttemp();
         //$Quiz->slugid = md5($request->user . time());
-       // $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
+        // $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
         //$Quiz->users_id = $user_id->id;
         //$Quiz->language_id = $request->language;
         //$Quiz->save();
@@ -480,10 +481,11 @@ $testId = $get->id;
             return response()->json(['msg' => 'Quiz Created', 'status' => true, 'data' => ['testId' => $Quiz->slugid, "examinationId" => $request->quizexamination]]);
         } else {
 
-            if($request->examtype=="reattemp"){
+            if ($request->examtype == "reattemp") {
                 return response()->json(['msg' => 'Quiz Created', 'status' => true, 'data' => ['testId' => $get->slugid, "examinationId" => $request->quizexamination]]);
-            }else{
-            return response()->json(['msg' => 'Quiz already exist', 'status' => false]);}
+            } else {
+                return response()->json(['msg' => 'Quiz already exist', 'status' => false]);
+            }
         }
     }
 
@@ -701,7 +703,8 @@ $testId = $get->id;
         }
 
 
-        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        $bodyStart  = `
+        <!DOCTYPE html><html class="no-js" lang="zxx">
         <head>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -711,82 +714,213 @@ $testId = $get->id;
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-        </head>
-        
-        <body>
-            <style type="text/css">
-                .btn {
-                    background-color: whitesmoke;
-                    border: 1.5px solid black;
-                    border-radius: 10px;
-                    padding: 5px;
-                    text-align: start;
-                }
-        
-                .span {
-                    color: black;
-                    font-size: 1.4rem;
-                }
-            </style>
-            <div class="m-4">
-                <div class="">';
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+.span {
+    color: black;
+    font-size: 1.4rem;
+}
 
-        $html1 =  '</div>
-                <div class="d-grid gap-2 mt-4">
-                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
-                        <div class="row align-items-center">
-                            <span class="col-auto span">A.</span>
-                            <div type="text" class="col">';
-        $html2  = '</div>
-                            </div>
-                        </div>
-                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
-                            <div class="row align-items-center">
-                                <span class="col-auto span">B.</span>
-                                <div type="text" class="col">';
-        $html3 = ' </div>
-                                </div>
-                            </div>
-                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
-                                <div class="row align-items-center">
-                                    <span class="col-auto span">C.</span>
-                                    <div type="text" class="col">';
-        $html4 = '</div>
-                                    </div>
-                                </div>
-                                <div class="btn" onclick="myFunction(this)" id="4">
-                                    <div class="row align-items-center">
-                                        <span class="col-auto span">D.</span>
-                                        <div type="text" class="col">';
-        $html5 =  '</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                function myFunction(elem) {
-                                    for (let i = 0; i < 5; i++) {
-                                        if (elem.id == i) {
-                    
-                                            $("#" + i).css("border", "1.5px solid #90ee02");
-                                            JSInterface.select("selOpt" + elem.id);
-                                        } else {
-                                            
-                                            $("#" + i).css("border", "1.5px solid");
-                                        }
-                                    }
-                                }
-                            </script>
-                        </body>
-                        
-                        </html>';
+p {
+  margin: 0;
+}
+h3 {
+      font-size: 20px;
+}
+.box-shadows {
+       box-shadow: none;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #e5dfdf;
+}
+.accordion {
+  margin-bottom: 30px;
+}
+.according_tab .card-header button {
+      border: 0;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+      padding: 0;
+}
+.card-header {
+    padding: 0 10px;
+}
+.solutions {
+
+}
+.solutions p {
+      font-size: 18px;
+    color: #000;
+}
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;  
+        height: 40px; 
+}
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+input[type="checkbox"]~label, input[type="radio"]~label {
+      border: 1px solid #b0a7a7;
+    width: 100%;
+    padding: 8px;
+}
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    background: rebeccapurple;
+    color: #fff;
+}
+
+.radio-custom + .radio-custom-label:before {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 42px;
+    opacity: 0;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+  content: '';
+   /*  content: "\f00c";
+   font-family: 'FontAwesome';
+    color: #000;*/
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 42px;
+    border-radius: 0 !important;
+    z-index: -1;
+    border-color: #03a9f4;
+    opacity: 1;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
+}
+input[type="radio"]~label::after {
+  opacity: 0 !important;
+}
+.card-header {
+  background-color: transparent;
+  text-align: center;
+      border: none;
+}
+button:focus {outline:0;}
+.question-answer {
+  display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+.question-answer p {
+
+}
+.question-answer p svg{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 2px;
+    margin-right: 15px;
+}
+@media (max-width: 767px) {
+	.radio-custom:checked + .radio-custom-label:before {
+		    height: 100% !important;
+	}
+}
+.bi-check2 {
+      color: #fff;
+    background: green;
+}
+.bi-check-all {
+  color: #fff;
+    background: red;
+}
+.bi-x {
+  color: #fff;
+    background: #3f51b5;
+}
+</style>
+
+  </head>
+<body>
+
+
+
+
+
+<div class="d-grid gap-2 mt-4 box-shadows">
+    <h4 class="question">`;
+
+       
+        $html1 = `</h4><div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
+        <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+        <label for="radio-1" class="radio-custom-label">A. <span>`;
+        $html2 = `</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
+            <input id="radio-2" class="radio-custom"name="radio-group" type="radio">
+            <label for="radio-2" class="radio-custom-label">B. <span>`;
+
+        $html3 = `</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
+            <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+            <label for="radio-3" class="radio-custom-label">C. <span>`;
+        $html4 = `</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="4" value="selOpt4">
+            <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+            <label for="radio-4" class="radio-custom-label">D. <span>`;
+        $html5 = `</span></label>
+        </div>
+        </div>       
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        
+        
+        <script>
+            function myFunction(elem) {
+                console.log("selOpt" + elem.id)
+                  JSInterface.select("selOpt" + elem.id);        
+            }
+        </script>
+        
+        </body>
+        
+        </html>`;
+       
+
+        
 
 
         $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
             ->get()
-            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+            ->map(function ($d) use ($bodyStart,$html1,$html2,$html3,$html4,$html5) {
 
                 if ($d['type'] != "resume") {
                     return "Test not resume";
@@ -806,7 +940,11 @@ $testId = $get->id;
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($bodyStart,$html1,$html2,$html3,$html4,$html5) {
+
+
+            
+
                             return collect([
                                 "questionId" => $fff->question->mockAttemp->id,
                                 "s" => $fff->question->mockAttemp->QuesSeen,
@@ -814,11 +952,15 @@ $testId = $get->id;
                                 "time" => $fff->question->mockAttemp->time,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                                    ->map(function ($ques) use ($bodyStart,$html1,$html2,$html3,$html4,$html5) {
+
+
+
+
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $htm1 . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                                            "QuestioninHtml" => $bodyStart.$ques->question .$html1.$ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
                                         ]);
                                     })
                             ]);
@@ -939,8 +1081,8 @@ $testId = $get->id;
 
 
         $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
-                $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
-            }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
+            $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
+        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
             ->get()
             ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
@@ -1104,17 +1246,17 @@ $testId = $get->id;
 
 
 
-      $data = quizAttemp::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+        $data = quizAttemp::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
-        ->get()
-        ->map(function ($d) use($htm1,$html1,$html2,$html3,$html4,$html5) {
+            ->get()
+            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
-      //  $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
-     //           $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
-       //     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
-     //       ->get()
-        //    ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                //  $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+                //           $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
+                //     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
+                //       ->get()
+                //    ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
 
                 if ($d['type'] != "resume") {
@@ -1375,7 +1517,7 @@ button:focus {outline:0;}
 
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-        '; 
+        ';
         $htmlDirection = '</div>
         </div>
       </div>
@@ -1386,7 +1528,7 @@ button:focus {outline:0;}
   
   <div class="d-grid gap-2 mt-4 box-shadows">
       <h4 class="question">';
-        
+
         $html1 =  '</h4>
         <div onclick="myFunction(this)" id="1">
             <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
@@ -1407,7 +1549,7 @@ button:focus {outline:0;}
         <div onclick="myFunction(this)" id="4">
             <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
             <label for="radio-4" class="radio-custom-label"><span>D.</span>';
-            $htmlexplain= '</label>
+        $htmlexplain = '</label>
             </div>       
         <div class="box-shadows explanation">';
         $html5 =  '</div> 
@@ -1428,7 +1570,7 @@ button:focus {outline:0;}
             $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
             ->get()
-            ->map(function ($d) use ($htm1,$htmlDirection ,$html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+            ->map(function ($d) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
 
                 if ($d['type'] == "resume") {
                     return "Test not Complete";
@@ -1448,12 +1590,12 @@ button:focus {outline:0;}
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1,$htmlDirection ,$html1, $html2, $html3, $html4, $htmlexplain, $html5) {
-                            $aaa=false;
-                            if($fff->question->rightans==$fff->question->mockAttemp->QuesSelect){
-                            $aaa =true;
-                            }else{
-                            $aaa= false;
+                        "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+                            $aaa = false;
+                            if ($fff->question->rightans == $fff->question->mockAttemp->QuesSelect) {
+                                $aaa = true;
+                            } else {
+                                $aaa = false;
                             }
                             return collect([
                                 "questionId" => $fff->question->mockAttemp->id,
@@ -1463,11 +1605,11 @@ button:focus {outline:0;}
                                 "isRight" => $aaa,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use ($htm1,$htmlDirection ,$html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+                                    ->map(function ($ques) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            "QuestioninHtml" => $htm1 .$ques->direction.$htmlDirection.$ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 .$htmlexplain.$ques->explanation. $html5
+                                            "QuestioninHtml" => $htm1 . $ques->direction . $htmlDirection . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $htmlexplain . $ques->explanation . $html5
                                         ]);
                                     })
                             ]);
@@ -1485,22 +1627,22 @@ button:focus {outline:0;}
 
 
 
-        
+
         if (empty($request->user)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
         }
 
         $user =  User::select('id')->where('slugid', $request->user)->first();
-        
+
         if (!$user) {
             return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
-        
+
         if (empty($request->examination)) {
             return response()->json(['msg' => 'Enter Examination', 'status' => false]);
         }
-      
-         $examination_id =  Examination::where("slugid", $request->examination)->first();
+
+        $examination_id =  Examination::where("slugid", $request->examination)->first();
 
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
@@ -1515,7 +1657,7 @@ button:focus {outline:0;}
         $wMarks = "-" . $examination_id->wrongmarks;
 
         $testId = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
-        ->where("users_id", $user->id)->first();
+            ->where("users_id", $user->id)->first();
 
         $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
             $join->on('questions.id', '=', 'mockattempquestions.questions_id');
@@ -1524,16 +1666,16 @@ button:focus {outline:0;}
             'mockattempquestions.*',
             DB::raw('(CASE WHEN questions.rightans = mockattempquestions.QuesSelect THEN ' . $rMarks . '
                ELSE ' . $wMarks . ' END) AS total')
-        )->where('users_id', $user->id)->where('attemped_exams_id',$testId->id)->get();
+        )->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)->get();
         $total = $total->sum('total');
-            $testIds = $testId->update(
-                [
-                    "remain_time" => $request->time,
-                    "lastQues" => $request->currentpostion,
-                    "type" => $type,
-                    "totalmarks"=>$total,
-                ]
-            );
+        $testIds = $testId->update(
+            [
+                "remain_time" => $request->time,
+                "lastQues" => $request->currentpostion,
+                "type" => $type,
+                "totalmarks" => $total,
+            ]
+        );
 
         foreach ($request->array as $index => $value) {
             if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
@@ -1614,48 +1756,49 @@ button:focus {outline:0;}
     }
 
     public function getexam_Result(Request $request)
-    { if (empty($request->userId)) {
-        return response()->json(['msg' => 'Enter User', 'status' => false]);
-    }
-    $user_id =  User::select('id')->where("slugid", $request->userId)->first();
-    if (!$user_id) {
-        return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-    }
-    if (empty($request->examinationId)) {
-        return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-    }
-    $examination_id =  Examination::select('id')->where("slugid", $request->examinationId)->first();
+    {
+        if (empty($request->userId)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->examinationId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examinationId)->first();
 
-    if (!$examination_id) {
-        return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-    }
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
 
-    if (empty($request->testId)) {
-        return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-    }
-    $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
 
-    if (!$testId) {
-        return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
-    }   
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
 
-        $data = AttempedExam::with(['examination' => function ($q) use ($testId, $user_id) {
+        $data = AttempedExam::with(
+            ['examination' => function ($q) use ($testId, $user_id) {
 
-            $q->with(['examQ' => function ($q) use ($testId, $user_id) {
+                $q->with(['examQ' => function ($q) use ($testId, $user_id) {
 
-                $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
-                         $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id','DESC');
+                    $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
+                        $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
                     }]);
-                }])->with(['attm'=>function ($aa){
-                $aa->where('mocktesttype','reattemp');
-            }]);
-
-        }]
+                }])->with(['attm' => function ($aa) {
+                    $aa->where('mocktesttype', 'reattemp');
+                }]);
+            }]
         )
-        ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-        
-        ->get()
-            
+            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+
+            ->get()
+
 
 
             ->map(function ($d) {
@@ -1663,7 +1806,7 @@ button:focus {outline:0;}
                 if ($d['type'] == "resume") {
                     return "Test not Complete";
                 } else if ($d['type'] == "result") {
-                    
+
                     return [
                         "testID" => $d->slugid,
                         "examId" => $d->examination->slugid,
@@ -1675,51 +1818,47 @@ button:focus {outline:0;}
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-"reAttempId"=> $d->examination->attm->slugid,
+                        "reAttempId" => $d->examination->attm->slugid,
 
-                        "questionslist" => $d->examination->examQ->map(function ($fff,$key)  {
+                        "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
 
                             $res = "skip";
-                            if($fff->question->mockAttemp->QuesSeen=="true"){
-                                if(empty($fff->question->mockAttemp->QuesSelect)){
+                            if ($fff->question->mockAttemp->QuesSeen == "true") {
+                                if (empty($fff->question->mockAttemp->QuesSelect)) {
                                     $color = "#797980";
                                     $res = "visited";
-                                }else if($fff->question->rightans!=$fff->question->mockAttemp->QuesSelect){
+                                } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
                                     $color = "#FF0000";
                                     $res = "wrong";
-                                }else if($fff->question->rightans=$fff->question->mockAttemp->QuesSelect){
+                                } else if ($fff->question->rightans = $fff->question->mockAttemp->QuesSelect) {
                                     $color = "#008000";
                                     $res = "right";
                                 }
-
-
-
-                            }else{
+                            } else {
                                 $color = "#3e3a3a";
                                 $res = "skip";
                             }
 
-                            
+
                             return collect([
                                 "questionId" => $fff->question->id,
-                                "color"=> $color,
+                                "color" => $color,
                                 "final" => $res,
-                                "asdasd"=>$key+1
+                                "asdasd" => $key + 1
                             ]);
                         }),
-                       
+
                     ];
                 }
             })[0];
 
 
-$data['visted'] = count($data['questionslist']->where('final','visited'));
-$data['right'] = count($data['questionslist']->where('final','right'));
-$data['wrong']= count($data['questionslist']->where('final','wrong'));
-$data['skip'] =count( $data['questionslist']->where('final','skip'));
+        $data['visted'] = count($data['questionslist']->where('final', 'visited'));
+        $data['right'] = count($data['questionslist']->where('final', 'right'));
+        $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
+        $data['skip'] = count($data['questionslist']->where('final', 'skip'));
 
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-
     }
 }
