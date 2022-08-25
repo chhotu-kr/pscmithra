@@ -20,27 +20,29 @@ class Subjects extends Component
     public function mount(){
         $this->subject= Subject::all();
        
-        $this->get_topics();
+       
        
     }
 
     public function updatedSubjectId(){
-        $this->get_topics();
-
-    }
-    
-
-    public function get_topics(){
         if($this->subjectId != ''){
             $this->topics = Topic::where("subject_id",$this->subjectId)->get();
         }
+
+    }
+
+   
+    
+
+    public function get_topics(){
+      
     }
 
     
 
     public function render()
     {
-        $this->queslist=Question::all();
+        // $this->queslist=Question::all();
         return view('livewire.subjects');
     }
 }

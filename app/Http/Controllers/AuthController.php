@@ -62,8 +62,7 @@ class AuthController extends Controller
     }
 
     public function logout(Request $req){
-        // $req->session()->flush();
-        // Auth::logout();
+       
 
         Auth::guard('web')->logout();
 
@@ -95,14 +94,9 @@ class AuthController extends Controller
     public function adminLogin(Request $request){
         if($request->isMethod("post")){
 
-            // $req->validate([
-            //     'email' => 'required',
-            //     'password' => 'required',
-            // ]);
-
+            
             $auth = $request->only("email","password");
-            //  print_r(Auth::guard("admin")->attempt($auth));
-            // return dd(Auth::guard("admin"));
+            
             if(Auth::guard("admin")->attempt($auth)){
                 
                return redirect()->route('manage.exam');
@@ -118,8 +112,7 @@ class AuthController extends Controller
     }
 
     public function Adminlogout(Request $req){
-        // $req->session()->flush();
-        // Auth::logout();
+       
 
         Auth::guard('admin')->logout();
 

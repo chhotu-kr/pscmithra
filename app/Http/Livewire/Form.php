@@ -13,10 +13,10 @@ class Form extends Component
          public $category;
          public $categoryId;
 
-       
+      public $idd; 
 
-    public function mount(){
-        
+    public function mount($id){
+        $this->idd=$id;
         $this->category=Category::all();
     }
 

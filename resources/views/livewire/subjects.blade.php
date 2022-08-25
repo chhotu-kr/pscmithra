@@ -19,7 +19,7 @@
     </select>
     </div></div>
 
-    <div class="table-responsive" style="white-space: nowrap;">
+    {{-- <div class="table-responsive" style="white-space: nowrap;">
 
         <!-- Table with stripped rows -->
         <table class="datatable table"  style="width:100%">
@@ -48,7 +48,7 @@
         </table>
 
         <!-- End Table with stripped rows -->
-    </div>
+    </div> --}}
     {{-- <script>
          $(document).ready(function() {
     $('#exampl').DataTable({

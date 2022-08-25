@@ -5,212 +5,37 @@
 @section('pscmithra')
     
 
-<div class="hero-banner hero-style-7">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-8">
-                <div class="banner-content">
-                    <h1 class="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">A Brighter Future For Students</h1>
-                    <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
-                    <div class="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                        <a href="{{route('user.login')}}" class="edu-btn btn-curved">Login <i class="icon-4"></i></a>
-                    </div>
-                    <div class="features-list" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                        <div class="features-box color-extra02-style edublink-svg-animate">
-                            <div class="icon">
-                                <img class="svgInject" src="{{asset('newlms\assets\images\animated-svg-icons\online-class.svg')}}" alt="animated icon">
-                                <!-- <i class="icon-5"></i> -->
-                            </div>
-                            <div class="content">
-                                <h5 class="title">3,020 <br>Online Courses</h5>
-                            </div>
-                        </div>
-                        <div class="features-box color-secondary-style edublink-svg-animate">
-                            <div class="icon">
-                                <img class="svgInject" src="{{asset('newlms\assets\images\animated-svg-icons/instructor.svg')}}" alt="animated icon">
-                                <!-- <i class="icon-6"></i> -->
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Top <br>Instructors</h5>
-                            </div>
-                        </div>
-                        <div class="features-box color-primary-style edublink-svg-animate">
-                            <div class="icon">
-                                <img class="svgInject" src="{{asset('newlms\assets\images\animated-svg-icons\certificate.svg')}}" alt="animated icon">
-                                <!-- <i class="icon-7"></i> -->
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Online <br> Certificates </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="main-home-slider">
+    <div class="item">
+        <img src="{{asset('newlms\assets\img\banner-images-1.jpg')}}">
     </div>
-    <div class="banner-gallery">
-        <div class="thumbnail thumbnail-1" data-sal-delay="500" data-sal="slide-up" data-sal-duration="1000">
-            <img src="{{asset('newlms\assets\img\girl-1.png')}}" alt="Girl Image">
-            
-          
-        </div>
+    <div class="item">
+        <img src="{{asset('newlms\assets\img/banner-images-1.jpg')}}">
+    </div>
+    <div class="item">
+        <img src="{{asset('newlms\assets\img/banner-images-1.jpg')}}">
     </div>
 </div>
+
+
 
 <div class="edu-gallery-area education-section-gap" style="background: transparent;">
     <div class="container">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
         </div>
-        <div class="isotope-wrapper">
-            <div class="isotop-button button-transparent isotop-filter">
-                <button data-filter="*" class="is-checked">
-                    <span class="filter-text">All</span>
-                </button>
-               @foreach ($category as $item)
-               <button  data-filter=".ESEGATEEC">
-                <span class="">{{$item->category}}</span>
-            </button>
-               @endforeach
-                {{-- <button data-filter=".IAS">
-                    <span class="filter-text">IAS</span>
-                </button>
-                <button data-filter=".IASHindi">
-                    <span class="filter-text">IAS Hindi</span>
-                </button>
-                <button data-filter=".CATMBA">
-                    <span class="filter-text">CAT & MBA</span>
-                </button>
-                <button data-filter=".CTETStateTETExams">
-                    <span class="filter-text">CTET & State TET Exams</span>
-                </button>
-                <button data-filter=".PRTTGTPGTExams">
-                    <span class="filter-text">PRT, TGT & PGT Exams</span>
-                </button>
-                <button data-filter=".UGCNETSET">
-                    <span class="filter-text">UGC NET & SET</span>
-                </button>
-                <button data-filter=".CSIRNETSET">
-                    <span class="filter-text">CSIR NET & SET</span>
-                </button>
-                <button data-filter=".CLATUG">
-                    <span class="filter-text">CLAT UG</span>
-                </button> --}}
-            </div>
-            <div class="isotope-list gallery-grid-wrap">
-                <div id="animated-thumbnials">
 
-                    <div class="row g-5">
-                     {{-- {{$subcategory}} --}}
-                    @foreach ($subcategory as $item)
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item ESEGATEEC" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-primary-style edublink-svg-animate">
-                            <div class="icon">
-                                {{-- <i class="icon-9"></i> --}}
-                                <img src="{{asset("upload/".$item->image)}}"  width="70" height="70"  alt=""> 
-                            </div>
-                            <div class="content">
-                                <h5 class="title">{{$item->subcategory}}</h5>
-                            </div>
-                        </div>
-                    </div> 
-                    @endforeach
+<div class="tabigationLink">
 
-                    {{-- <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IAS" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-secondary-style">
-                            <div class="icon">
-                                <i class="icon-10 art-design"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Arts & Design</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item IASHindi" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra01-style">
-                            <div class="icon">
-                                <i class="icon-11 personal-development"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Personal Development</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item CATMBA" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-tertiary-style">
-                            <div class="icon">
-                                <i class="icon-12 health-fitness"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Health & Fitness</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item CTETStateTETExams" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra02-style">
-                            <div class="icon">
-                                <i class="icon-13 data-science"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Data Science</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item PRTTGTPGTExams" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra03-style">
-                            <div class="icon">
-                                <i class="icon-14"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Marketing</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item UGCNETSET" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra04-style">
-                            <div class="icon">
-                                <i class="icon-15"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Business & Finance</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item CSIRNETSET" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra05-style">
-                            <div class="icon">
-                                <i class="icon-16 computer-science"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Computer Science</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 edu-gallery-grid isotope-item CLATUG" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                        <div class="categorie-grid categorie-style-2 color-extra06-style">
-                            <div class="icon">
-                                <i class="icon-17 video-photography"></i>
-                            </div>
-                            <div class="content">
-                                <h5 class="title">Video & Photography</h5>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<ul class="tabs tabSliderCat">
+    @foreach ($category as $item)
+    <li class="tab-link current" data-tab="tab-1">
+        
+        {{$item->category}}
+    </li>
+    @endforeach
+   
+</ul>
 
 <!-- Start Categories Area  -->
 <div class="features-area-2">
