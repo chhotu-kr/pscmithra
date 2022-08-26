@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
 use App\Models\Exam;
-use App\Models\quizAttemp;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Examination;
@@ -95,40 +94,10 @@ class Apiv1Controller extends Controller
         return response()->json(['status' => true, 'msg' => 'Otp Send', 'data' => $data]);
     }
 
-    //user login api
     public function api_login(Request $request)
     {
 
-        // $mobileData = $request->post('contact');
-        // $password = $request->post('password');
-
-        // $getUserDetail = null;
-
-
-
-        // if (empty($mobileData)) {
-        //     return response()->json(['status' => false, 'msg' => 'Enter mobile number']);
-        // } 
-        // if (empty($password)) {
-        //     return response()->json(['status' => false, 'msg' => 'Enter Password']);
-        // }  
-
-
-
-        // $auth = $request->only("contact","password");
-
-        // if(Auth::attempt($auth)){
-        //     $user = Auth::user();
-        //     return response()->json(['status' =>true,'msg'=>'User Exist','data'=>$user,'pas'=>$password]);
-        // } else{
-
-        //     return response()->json(['status' =>true,'msg'=>'User Exist','data'=>,'pas'=>$password]);
-        // }
-
-
-
-
-        if (empty($request->type)) {
+                if (empty($request->type)) {
             return response()->json(['msg' => 'Enter Login Type', 'status' => false]);
         }
 
@@ -215,12 +184,7 @@ class Apiv1Controller extends Controller
         $data = StudymetrialCategory::all();
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-    // public function get_StudyChapter($sm_categories_id){
-
-    // public function get_StudyMetrial(){
-    //     return StudymetrialCategory::all();
-    // }
-
+   
 
 
 
@@ -235,69 +199,7 @@ class Apiv1Controller extends Controller
     }
 
 
-    // .............Examination...........
-    public function get_Examination(Request $request)
-    {
-        if (empty($request->user)) {
-            return response()->json(['msg' => 'Enter User', 'status' => false]);
-        }
-        $user_id =  User::select('id')->where("slugid", $request->user)->first();
-        if (!$user_id) {
-            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-        }
-        $category_id = $request->category_id;
-        if (empty($category_id)) {
-            return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
-        }
-        $subcategory_id = $request->subcategory_id;
-        if (empty($subcategory_id)) {
-            return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
-        }
-
-        $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
-            ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
-                $q->where('users_id', $user_id->id)->where('mocktesttype', 'normal');
-            }])
-
-            ->get()
-            ->map(function ($item) {
-                $free = $item->isFree;
-                $type = "Buy";
-                $TestID = "";
-
-                if (empty($item->attm)) {
-
-                    if ($free) {
-                        $type = "Start";
-                        $TestID = "";
-                    } else {
-                    }
-                } else {
-                    $type = $item->attm->type;
-                    $TestID =  $item->attm->slugid;
-                }
-                return collect([
-                    "testId" => $TestID,
-                    "id" => $item->slugid,
-                    "categoryId" => $item->category->id,
-                    "name" => $item->exam_name,
-                    "categoryName" => $item->category->category,
-                    "subbCategoryId" => $item->subcategory->id,
-                    "subCategoryName" => $item->subcategory->subcategory,
-                    "totalTimeinMints" => $item->time_duration,
-                    "totalQues" => $item->noQues,
-                    "type" => $type,
-                    "totalTimeinMints" => $item->time_duration,
-                    "languages" => $item->lang->map(function ($lang) {
-                        return collect([
-                            "name" => $lang->language->languagename,
-                            "id" => $lang->language->id
-                        ]);
-                    })
-                ]);
-            });
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    }
+    
 
     // ..........studymetrial API...........
 
@@ -353,6 +255,71 @@ class Apiv1Controller extends Controller
             return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
         }
     }
+
+
+// .............Examination...........
+public function get_Examination(Request $request)
+{
+    if (empty($request->user)) {
+        return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+        return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $category_id = $request->category_id;
+    if (empty($category_id)) {
+        return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
+    }
+    $subcategory_id = $request->subcategory_id;
+    if (empty($subcategory_id)) {
+        return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
+    }
+
+    $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
+        ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
+            $q->where('users_id', $user_id->id)->where('mocktesttype', 'normal');
+        }])
+
+        ->get()
+        ->map(function ($item) {
+            $free = $item->isFree;
+            $type = "Buy";
+            $TestID = "";
+
+            if (empty($item->attm)) {
+
+                if ($free) {
+                    $type = "Start";
+                    $TestID = "";
+                } else {
+                }
+            } else {
+                $type = $item->attm->type;
+                $TestID =  $item->attm->slugid;
+            }
+            return collect([
+                "testId" => $TestID,
+                "id" => $item->slugid,
+                "categoryId" => $item->category->id,
+                "name" => $item->exam_name,
+                "categoryName" => $item->category->category,
+                "subbCategoryId" => $item->subcategory->id,
+                "subCategoryName" => $item->subcategory->subcategory,
+                "totalTimeinMints" => $item->time_duration,
+                "totalQues" => $item->noQues,
+                "type" => $type,
+                "totalTimeinMints" => $item->time_duration,
+                "languages" => $item->lang->map(function ($lang) {
+                    return collect([
+                        "name" => $lang->language->languagename,
+                        "id" => $lang->language->id
+                    ]);
+                })
+            ]);
+        });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+}
 
 
     public function preareExam(Request $request)
@@ -1691,61 +1658,13 @@ button:focus {outline:0;}
 
     public function get_Result(Request $request)
     {
-        $user_id = $request->userId;
-        if (empty($user_id)) {
-            return response()->json(['msg' => 'Enter User Id', 'status' => false]);
-        }
-        $test_id = $request->testId;
-        if (empty($test_id)) {
-            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        }
-        $examination_id = $request->quizexaminationid;
-        if (empty($examination_id)) {
-            return response()->json(['msg' => 'Enter Examination Id', 'status' => false]);
-        }
+        
+        
+      
 
-        $dda[] = [
-            "QuestionNo" => 1, 'color' => "#FF0000"
-        ];
 
-        $dda[] = [
-            "QuestionNo" => 2, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 3, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 4, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 5, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 6, 'color' => "#FF0000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 7, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 8, 'color' => "#008000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 9, 'color' => "#FF0000"
-        ];
-        $dda[] = [
-            "QuestionNo" => 10, 'color' => "#C0C0C0"
-        ];
-        $dda[] = [
-            "QuestionNo" => 11, 'color' => "#C0C0C0"
-        ];
-        return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
-            'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
-            $dda
-        ]]);
-    }
 
-    public function getexam_Result(Request $request)
-    {
+
         if (empty($request->userId)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
         }
@@ -1753,10 +1672,10 @@ button:focus {outline:0;}
         if (!$user_id) {
             return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
         }
-        if (empty($request->examinationId)) {
+        if (empty($request->quizexaminationid)) {
             return response()->json(['msg' => 'Enter Examination', 'status' => false]);
         }
-        $examination_id =  Examination::select('id')->where("slugid", $request->examinationId)->first();
+        $examination_id =  Examination::select('id')->where("slugid", $request->quizexaminationid)->first();
 
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
@@ -1765,86 +1684,37 @@ button:focus {outline:0;}
         if (empty($request->testId)) {
             return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
         }
-        $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
+        $testId =  quizAttemp::select('id','type')->where("slugid", $request->testId)->first();
 
         if (!$testId) {
             return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
         }
 
 
-        // $dda[] = [
-        //     "QuestionNo" => 1, 'color' => "#FF0000"
-        // ];
-
-        // $dda[] = [
-        //     "QuestionNo" => 2, 'color' => "#008000"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 3, 'color' => "#C0C0C0"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 4, 'color' => "#C0C0C0"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 5, 'color' => "#008000"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 6, 'color' => "#FF0000"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 7, 'color' => "#C0C0C0"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 8, 'color' => "#008000"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 9, 'color' => "#FF0000"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 10, 'color' => "#C0C0C0"
-        // ];
-        // $dda[] = [
-        //     "QuestionNo" => 11, 'color' => "#C0C0C0"
-        // ];
-        // return response()->json(['msg' => 'Data Fatched', 'status' => true, 'data' => [
-        //     'Attemped' => 10, 'Accuracy' => 15.3, 'Score' => 2.3, 'Percentile' => 3.5, 'Rank' => 594242, 'wrong' => 5, 'right' => 8, "question" =>
-        //     $dda
-        // ]]);
+        if ($testId->type == "resume") {
+            
+            return response()->json(['msg' => 'Test not Complete', 'status' => false]);
+        } 
 
 
-        $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
-            $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
-        }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-            ->get()
-            ;
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
 
-        $data = AttempedExam::with(
+
+
+$data = quizAttemp::with(
             ['examination' => function ($q) use ($testId, $user_id) {
 
                 $q->with(['examQ' => function ($q) use ($testId, $user_id) {
 
                     $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
-                        $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
+                        $q->where('quiz_examinations_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
                     }]);
-                }])->with(['attm' => function ($aa) {
+                }])->with(['quizattm' => function ($aa) {
                     $aa->where('mocktesttype', 'reattemp');
                 }]);
-            }]
-        )
+            }])
             ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-
             ->get()
-
-
-
-            ->map(function ($d) {
-
-
-                if ($d['type'] == "resume") {
-                    return "Test not Complete";
-                } else if ($d['type'] == "result") {
-
+            ->map(function ($d) {             
                     return [
                         "testID" => $d->slugid,
                         "examId" => $d->examination->slugid,
@@ -1888,7 +1758,110 @@ button:focus {outline:0;}
 
                     ];
                 }
-            })[0];
+            )[0];
+
+
+        $data['visted'] = count($data['questionslist']->where('final', 'visited'));
+        $data['right'] = count($data['questionslist']->where('final', 'right'));
+        $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
+        $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+
+
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
+    public function getexam_Result(Request $request)
+    {
+        if (empty($request->userId)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->examinationId)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->examinationId)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  AttempedExam::select('id','type')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
+
+        if ($testId->type == "resume") {
+            
+            return response()->json(['msg' => 'Test not Complete', 'status' => false]);
+        } 
+
+
+$data = AttempedExam::with(
+            ['examination' => function ($q) use ($testId, $user_id) {
+
+                $q->with(['examQ' => function ($q) use ($testId, $user_id) {
+
+                    $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
+                        $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
+                    }]);
+                }])->with(['attm' => function ($aa) {
+                    $aa->where('mocktesttype', 'reattemp');
+                }]);
+            }])
+            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+            ->get()
+            ->map(function ($d) {             
+                    return [
+                        "testID" => $d->slugid,
+                        "examId" => $d->examination->slugid,
+                        "type" => $d->mocktesttype,
+                        "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+                        "languages" => $d->examination->lang->map(function ($langg) {
+                            return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
+                        }),
+                        "wMarks" => $d->examination->wrongmarks,
+                        "rMarks" => $d->examination->rightmarks,
+                        'noQues' => $d->examination->noQues,
+                        "reAttempId" => $d->examination->attm->slugid,
+
+                        "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
+
+                            $res = "skip";
+                            if ($fff->question->mockAttemp->QuesSeen == "true") {
+                                if (empty($fff->question->mockAttemp->QuesSelect)) {
+                                    $color = "#797980";
+                                    $res = "visited";
+                                } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
+                                    $color = "#FF0000";
+                                    $res = "wrong";
+                                } else if ($fff->question->rightans = $fff->question->mockAttemp->QuesSelect) {
+                                    $color = "#008000";
+                                    $res = "right";
+                                }
+                            } else {
+                                $color = "#3e3a3a";
+                                $res = "skip";
+                            }
+
+
+                            return collect([
+                                "questionId" => $fff->question->id,
+                                "color" => $color,
+                                "final" => $res,
+                                "asdasd" => $key + 1
+                            ]);
+                        }),
+
+                    ];
+                }
+            )[0];
 
 
         $data['visted'] = count($data['questionslist']->where('final', 'visited'));
