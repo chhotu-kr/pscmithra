@@ -1,6 +1,6 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-
+{{$idd}}
     <div class="card-body">
         <h5 class="card-title">Vertical Pills Tabs</h5>
   
@@ -20,6 +20,8 @@
   
            
           </div>
+
+          {{print_r($category[0]->subcat[0]->subcategory)}}
           <div class="tab-content" id="v-pills-tabContent">
          
               @foreach ($category as $item)
@@ -31,9 +33,9 @@
                   @endif
                     id="tab-{{$item->slugid}}" role="tabpanel" aria-labelledby="{{$item->slugid}}">
                  @foreach ($item->subcat as $sub)
-                 <div class="card-body py-0">
-                    {{$sub->subcategory}}
-                </div>
+                 
+                    {{print($sub)}}
+                
                   @endforeach
                 </div>
               @endforeach

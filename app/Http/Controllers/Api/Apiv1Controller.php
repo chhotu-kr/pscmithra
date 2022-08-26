@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Study;
+use App\Models\QuizAttemptQuestion;
 use App\Models\Exam;
 use App\Models\Coupon;
 use App\Models\Product;
@@ -24,7 +25,7 @@ use App\Models\LiveTest;
 use App\Models\mockattempquestion;
 use App\Models\Question;
 use App\Models\quizAttemp;
-use App\Models\QuizAttemptQuestion;
+
 use App\Models\QuizCategory;
 use App\Models\QuizChapter;
 use App\Models\QuizExamination;
