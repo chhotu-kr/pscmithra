@@ -11,9 +11,9 @@ class quizAttemp extends Model
 
 
     
-    public function quizexamination (){
-        return  $this->belongsTo(QuizExamination::class,'id');
-}
+//     public function quizexamination (){
+//         return  $this->belongsTo(QuizExamination::class,'id');
+// }
 
     public function examination (){
         return  $this->belongsTo(QuizExamination::class,'quiz_examinations_id');
