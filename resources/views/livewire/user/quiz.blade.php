@@ -30,16 +30,31 @@
                     class="tab-pane fade"
                   @endif
                     id="tab-{{$item->slugid}}" role="tabpanel" aria-labelledby="{{$item->slugid}}">
-                 @foreach ($item->subcategory as $sub)
+                 {{-- @foreach ($item->quizcat as $sub)
                  <div class="card-body py-0">
                     {{$sub->name}}
                 </div>
-                  @endforeach
+                  @endforeach --}}
                 </div>
               @endforeach
           </div>
         </div>
   
   
-      </div>
+      </div> 
+
+      {{-- <div class="container">
+        <div class="row">
+          <div class="col-6">
+            @foreach ($quizcategory as $item)
+                <div class="card-body">{{$item->name}}</div>
+            @endforeach
+          </div>
+          <div class="col-6">
+            @foreach ($item->quizcat as $sub)
+                <div class="card-body py-0">{{$sub->name}}</div>
+            @endforeach
+          </div>
+        </div>
+      </div> --}}
 </div>

@@ -9,16 +9,19 @@ class Quiz extends Component
 {
      public $quizcategory;
      public $quizcategoryId;
+public $quizsubcategory;
+public $quisubzcategoryId;
+        public $idasd;
 
-     public $idasd;
-
-     public function mount($id){
-      $this->idasd=$id;
+     public function mount(){
+        // $this->idasd=$id;
       $this->quizcategory=QuizCategory::all();
+   
      }
 
     public function render()
     {
+   
         return view('livewire.user.quiz');
     }
 }
