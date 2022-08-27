@@ -1702,119 +1702,6 @@ button:focus {outline:0;}
         return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['examtype' => $testId->mocktesttype]]);
     }
 
-    public function get_Result(Request $request)
-    {
-        
-        
-      
-
-
-
-
-        if (empty($request->userId)) {
-            return response()->json(['msg' => 'Enter User', 'status' => false]);
-        }
-        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
-        if (!$user_id) {
-            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-        }
-        if (empty($request->quizexaminationid)) {
-            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-        }
-        $examination_id =  Examination::select('id')->where("slugid", $request->quizexaminationid)->first();
-
-        if (!$examination_id) {
-            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-        }
-
-        if (empty($request->testId)) {
-            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        }
-        $testId =  quizAttemp::select('id','type')->where("slugid", $request->testId)->first();
-
-        if (!$testId) {
-            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
-        }
-
-
-        if ($testId->type == "resume") {
-            
-            return response()->json(['msg' => 'Test not Complete', 'status' => false]);
-        } 
-
-
-
-
-
-$data = quizAttemp::with(
-            ['examination' => function ($q) use ($testId, $user_id) {
-
-                $q->with(['examQ' => function ($q) use ($testId, $user_id) {
-
-                    $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
-                        $q->where('quiz_examinations_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
-                    }]);
-                }])->with(['quizattm' => function ($aa) {
-                    $aa->where('mocktesttype', 'reattemp');
-                }]);
-            }])
-            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
-            ->get()
-            ->map(function ($d) {             
-                    return [
-                        "testID" => $d->slugid,
-                        "examId" => $d->examination->slugid,
-                        "type" => $d->mocktesttype,
-                        "time" => ($d->examination->time_duration * 60) - $d->remain_time,
-                        "languages" => $d->examination->lang->map(function ($langg) {
-                            return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
-                        }),
-                        "wMarks" => $d->examination->wrongmarks,
-                        "rMarks" => $d->examination->rightmarks,
-                        'noQues' => $d->examination->noQues,
-                        "reAttempId" => $d->examination->attm->slugid,
-
-                        "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
-
-                            $res = "skip";
-                            if ($fff->question->mockAttemp->QuesSeen == "true") {
-                                if (empty($fff->question->mockAttemp->QuesSelect)) {
-                                    $color = "#797980";
-                                    $res = "visited";
-                                } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
-                                    $color = "#FF0000";
-                                    $res = "wrong";
-                                } else if ($fff->question->rightans = $fff->question->mockAttemp->QuesSelect) {
-                                    $color = "#008000";
-                                    $res = "right";
-                                }
-                            } else {
-                                $color = "#3e3a3a";
-                                $res = "skip";
-                            }
-
-
-                            return collect([
-                                "questionId" => $fff->question->id,
-                                "color" => $color,
-                                "final" => $res,
-                                "asdasd" => $key + 1
-                            ]);
-                        }),
-
-                    ];
-                }
-            )[0];
-
-
-        $data['visted'] = count($data['questionslist']->where('final', 'visited'));
-        $data['right'] = count($data['questionslist']->where('final', 'right'));
-        $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
-        $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-
-
-        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-    }
 
     public function getexamResult(Request $request)
     {
@@ -1918,4 +1805,123 @@ $data = AttempedExam::with(
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+
+
+
+    public function get_Result(Request $request)
+    {
+        
+        
+      
+
+
+
+
+        if (empty($request->userId)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+        $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+        if (!$user_id) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+        if (empty($request->quizexaminationid)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+        $examination_id =  Examination::select('id')->where("slugid", $request->quizexaminationid)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+        }
+
+        if (empty($request->testId)) {
+            return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+        }
+        $testId =  quizAttemp::select('id','type')->where("slugid", $request->testId)->first();
+
+        if (!$testId) {
+            return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+        }
+
+
+        if ($testId->type == "resume") {
+            
+            return response()->json(['msg' => 'Test not Complete', 'status' => false]);
+        } 
+
+
+
+
+
+$data = quizAttemp::with(
+
+            ['examination' => function ($q) use ($testId, $user_id) {
+
+                $q->with(['examQ' => function ($q) use ($testId, $user_id) {
+
+                    $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
+                        $q->where('quiz_examinations_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
+                    }]);
+                }])->with(['quizattm' => function ($aa) {
+                    $aa->where('mocktesttype', 'reattemp');
+                }]);
+            }])
+            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+            ->get()
+            ->map(function ($d) {             
+                    return [
+                        "testID" => $d->slugid,
+                        "examId" => $d->examination->slugid,
+                        "type" => $d->mocktesttype,
+                        "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+                        "languages" => $d->examination->lang->map(function ($langg) {
+                            return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
+                        }),
+                        "wMarks" => $d->examination->wrongmarks,
+                        "rMarks" => $d->examination->rightmarks,
+                        'noQues' => $d->examination->noQues,
+                        "reAttempId" => $d->examination->attm->slugid,
+
+                        "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
+
+                            $res = "skip";
+                            if ($fff->question->mockAttemp->QuesSeen == "true") {
+                                if (empty($fff->question->mockAttemp->QuesSelect)) {
+                                    $color = "#797980";
+                                    $res = "visited";
+                                } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
+                                    $color = "#FF0000";
+                                    $res = "wrong";
+                                } else if ($fff->question->rightans = $fff->question->mockAttemp->QuesSelect) {
+                                    $color = "#008000";
+                                    $res = "right";
+                                }
+                            } else {
+                                $color = "#3e3a3a";
+                                $res = "skip";
+                            }
+
+
+                            return collect([
+                                "questionId" => $fff->question->id,
+                                "color" => $color,
+                                "final" => $res,
+                                "asdasd" => $key + 1
+                            ]);
+                        }),
+
+                    ];
+                }
+            )[0];
+
+
+        $data['visted'] = count($data['questionslist']->where('final', 'visited'));
+        $data['right'] = count($data['questionslist']->where('final', 'right'));
+        $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
+        $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+
+
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+
+    
 }
