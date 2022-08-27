@@ -670,208 +670,254 @@ public function get_Examination(Request $request)
         }
 
 
-        $bodyStart  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        $bodyStart  = '<!DOCTYPE html>
+        <html class="no-js" lang="zxx">
+        
         <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
-        <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style type="text/css">
-        .span {
-        color: black;
-        font-size: 1.4rem;
-        }
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
-        p {
-        margin: 0;
-        }
-        h3 {
-        font-size: 20px;
-        }
-        .box-shadows {
-        box-shadow: none;
-        padding: 10px;
-        margin-bottom: 30px;
-        border: 1px solid #e5dfdf;
-        }
-        .accordion {
-        margin-bottom: 30px;
-        }
-        .according_tab .card-header button {
-        border: 0;
-        font-size: 18px;
-        text-decoration: none;
-        color: #000;
-        padding: 0;
-        }
-        .card-header {
-        padding: 0 10px;
-        }
-        .solutions {
         
-        }
-        .solutions p {
-        font-size: 18px;
-        color: #000;
-        }
-        .checkbox-custom, .radio-custom {
-        opacity: 0;
-        position: absolute; 
-        height: 40px; 
-        }
+          <style type="text/css">
+            .hidden {
+              display: none !important;
+            }
         
-        .checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 5px;
-        cursor: pointer;
-        }
-        input[type="checkbox"]~label, input[type="radio"]~label {
-        border: 1px solid #b0a7a7;
-        width: 100%;
-        padding: 8px;
-        }
-        .checkbox-custom-label, .radio-custom-label {
-        position: relative;
-        }
+            .shown {
+              display: block;
+            }
         
-        .checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-        content: "";
-        background: #fff;
-        border: 2px solid #ddd;
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        padding: 2px;
-        margin-right: 10px;
-        text-align: center;
-        }
+            body {
+              padding: 20px;
+            }
         
-        .checkbox-custom:checked + .checkbox-custom-label:before {
-        content: "\f00c";
-        font-family: "FontAwesome";
-        background: rebeccapurple;
-        color: #fff;
-        }
+            .span {
+              color: black;
+              font-size: 1.4rem;
+            }
         
-        .radio-custom + .radio-custom-label:before {
-        border-radius: 0 !important;
-        width: 100%;
-        height: 42px;
-        opacity: 0;
-        }
+            p {
+              margin: 0;
+            }
         
-        .radio-custom:checked + .radio-custom-label:before {
-        content: "";
-        /* content: "\f00c";
-        font-family: "FontAwesome";
-        color: #000;*/
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 42px;
-        border-radius: 0 !important;
-        z-index: -1;
-        border-color: #03a9f4;
-        opacity: 1;
-        }
+            h3 {
+              font-size: 20px;
+            }
         
-        .checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-        outline: 1px solid #ddd; /* focus style */
-        }
-        input[type="radio"]~label::after {
-        opacity: 0 !important;
-        }
-        .card-header {
-        background-color: transparent;
-        text-align: center;
-        border: none;
-        }
-        button:focus {outline:0;}
-        .question-answer {
-        display: flex;
-        justify-content: end;
-        margin-top: 10px;
-        }
-        .question-answer p {
+            .box-shadows {
+              box-shadow: none;
+              padding: 10px;
+              margin-bottom: 30px;
+              border: 1px solid #e5dfdf;
+            }
         
-        }
-        .question-answer p svg{
-        width: 35px;
-        height: 35px;
-        cursor: pointer;
-        border-radius: 50px;
-        padding: 2px;
-        margin-right: 15px;
-        }
-        @media (max-width: 767px) {
-        .radio-custom:checked + .radio-custom-label:before {
-        height: 100% !important;
-        }
-        }
-        .bi-check2 {
-        color: #fff;
-        background: green;
-        }
-        .bi-check-all {
-        color: #fff;
-        background: red;
-        }
-        .bi-x {
-        color: #fff;
-        background: #3f51b5;
-        }
-        </style>
+            .accordion {
+              margin-bottom: 30px;
+            }
         
+            .according_tab .card-header button {
+              border: 0;
+              font-size: 18px;
+              text-decoration: none;
+              color: #000;
+              padding: 0;
+            }
+        
+            .card-header {
+              padding: 0 10px;
+            }
+        
+            .solutions {}
+        
+            .solutions p {
+              font-size: 18px;
+              color: #000;
+            }
+        
+            .checkbox-custom,
+            .radio-custom {
+              opacity: 0;
+              position: absolute;
+              height: 40px;
+            }
+        
+            .checkbox-custom,
+            .checkbox-custom-label,
+            .radio-custom,
+            .radio-custom-label {
+              display: inline-block;
+              vertical-align: middle;
+              margin: 5px;
+              cursor: pointer;
+            }
+        
+            input[type="checkbox"]~label,
+            input[type="radio"]~label {
+              border: 1px solid #b0a7a7;
+              width: 98%;
+              padding: 8px;
+            }
+        
+            .checkbox-custom-label,
+            .radio-custom-label {
+              position: relative;
+            }
+        
+            .checkbox-custom+.checkbox-custom-label:before,
+            .radio-custom+.radio-custom-label:before {
+              content: "";
+              background: #fff;
+              border: 2px solid #ddd;
+              display: inline-block;
+              vertical-align: middle;
+              width: 20px;
+              height: 20px;
+              padding: 2px;
+              margin-right: 10px;
+              text-align: center;
+            }
+        
+            .checkbox-custom:checked+.checkbox-custom-label:before {
+              content: "\f00c";
+              font-family: "FontAwesome";
+              background: rebeccapurple;
+              color: #fff;
+            }
+        
+            .radio-custom+.radio-custom-label:before {
+              border-radius: 0 !important;
+              width: 100%;
+              height: 28px;
+              opacity: 0;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+        
+            .radio-custom:checked+.radio-custom-label:before {
+              content: "";
+              /*  content: "\f00c";
+           font-family: "FontAwesome";
+            color: #000;*/
+              position: absolute;
+              top: 0;
+              width: 99.5%;
+              height: 28px;
+              border-radius: 0 !important;
+              z-index: -1;
+              border-color: #03a9f4;
+              opacity: 1;
+            }
+        
+            .checkbox-custom:focus+.checkbox-custom-label,
+            .radio-custom:focus+.radio-custom-label {
+              outline: 1px solid #ddd;
+              /* focus style */
+            }
+        
+            input[type="radio"]~label::after {
+              opacity: 0 !important;
+            }
+        
+            .card-header {
+              background-color: transparent;
+              text-align: center;
+              border: none;
+            }
+        
+            button:focus {
+              outline: 0;
+            }
+        
+            .question-answer {
+              display: flex;
+              justify-content: end;
+              margin-top: 10px;
+            }
+        
+            .question-answer p {}
+        
+            .question-answer p svg {
+              width: 35px;
+              height: 35px;
+              cursor: pointer;
+              border-radius: 50px;
+              padding: 2px;
+              margin-right: 15px;
+            }
+            .bi-check2 {
+              color: #fff;
+              background: green;
+            }
+            .bi-check-all {
+              color: #fff;
+              background: red;
+            }
+            .bi-x {
+              color: #fff;
+              background: #3f51b5;
+            }
+            @media (max-width: 767px) {
+              body {
+                padding: 0;
+              }
+              input[type="checkbox"]~label,
+              input[type="radio"]~label {
+                width: 93%;
+              }
+              .radio-custom:checked+.radio-custom-label:before {
+                width: 97.5%;
+                height: 91%;
+              }
+            }
+          </style>
         </head>
         <body>
-        
-        
-        
-        
-        <div class="d-grid gap-2 mt-4 box-shadows">
-        <h4 class="question">
-        ';
+         
+          <div class="d-grid gap-2 mt-4 box-shadows">
+            <h4 class="question">';
 
-        $html1 = '</h4><div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
-        <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-        <label for="radio-1" class="radio-custom-label">A. <span>';
+        $html1 = '</h4>
+        <div class="btn" onclick="myFunction(this)" id="1">
+          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-1" class="radio-custom-label">A. <span>';
         $html2 = '</span></label>
         </div>
-        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
-        <input id="radio-2" class="radio-custom"name="radio-group" type="radio">
-        <label for="radio-2" class="radio-custom-label">B. <span>';
+        <div class="btn" onclick="myFunction(this)" id="2">
+          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-2" class="radio-custom-label">B. <span>';
         
         $html3 = '</span></label>
         </div>
-        <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
-        <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-        <label for="radio-3" class="radio-custom-label">C. <span>';
+        <div class="btn" onclick="myFunction(this)" id="3">
+          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-3" class="radio-custom-label">C. <span>';
         $html4 = '</span></label>
         </div>
-        <div class="btn" onclick="myFunction(this)" id="4" value="selOpt4">
-        <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-        <label for="radio-4" class="radio-custom-label">D. <span>';
+        <div class="btn" onclick="myFunction(this)" id="4">
+          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-4" class="radio-custom-label">D. <span>';
         $html5 = '</span></label>
         </div>
-        </div> 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-        <script>
+      </div>
+      
+      <script>
+        var navicon = document.getElementById("navicon");
+        var navEl = document.getElementById("collapseOne");
+        function toggleMenu() {
+          navEl.classList.toggle("hidden");
+        };
+        navicon.addEventListener("click", toggleMenu, false);
         function myFunction(elem) {
-        console.log("selOpt" + elem.id)
-        JSInterface.select("selOpt" + elem.id); 
+          JSInterface.select("selOpt" + elem.id);
+    
         }
-        </script>
-        </body>
-        </html>';
+      </script>
+    
+    </body>
+    
+    </html>';
 
         
 
