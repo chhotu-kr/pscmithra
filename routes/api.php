@@ -66,7 +66,7 @@ Route::get('/study-metrial',[Apiv1Controller::class,'get_SMetrial'])->name('stud
 Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->name('studymetrial.show');
 //Route::post('/get-resuslt',[Apiv1Controller::class,'get_Result']);
 //Route::post('/get-solution',[Apiv1Controller::class,'getSolution']);
-Route::post('/getexam-resuslt',[Apiv1Controller::class,'getexam_Result']);
+Route::post('/getexam-resuslt',[Apiv1Controller::class,'getexamResult']);
 
 Route::post('/getquiz-resuslt',[Apiv1Controller::class,'get_Result']);
 

@@ -1816,7 +1816,7 @@ $data = quizAttemp::with(
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
-    public function getexam_Result(Request $request)
+    public function getexamResult(Request $request)
     {
         if (empty($request->userId)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
