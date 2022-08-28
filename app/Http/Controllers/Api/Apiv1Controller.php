@@ -1934,7 +1934,8 @@ button:focus {outline:0;}
             $type = "result";
         }
 
-        $rMarks  = $examination_id->rightmarks;
+        if(!emptyArray($request->array)){
+            $rMarks  = $examination_id->rightmarks;
         $wMarks = "-" . $examination_id->wrongmarks;
 
         $testId = quizAttemp::where("slugid", $request->testId)->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user->id)->first();
@@ -1944,7 +1945,7 @@ button:focus {outline:0;}
         })->select(
             'questions.*',
             'quiz_attempt_questions.*',
-            DB::raw('(CASE WHEN questions.rightans = quiz_attempt_questions.QuesSelect THEN ' . $rMarks . 'ELSE ' . $wMarks . ' END) AS total')
+            DB::raw('(CASE WHEN questions.rightans = quiz_attempt_questions.QuesSelect THEN ' . $rMarks . ' ELSE ' . $wMarks . ' END) AS total')
         )->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->get();
         $total = $total->sum('total');
         $testIds = $testId->update(
@@ -1975,8 +1976,10 @@ button:focus {outline:0;}
             // echo json_encode($value);
 
         }
-
         return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['quizType' => $testId->testtype]]);
+        }
+        return response()->json(['msg' => 'Test Submited', 'status' => false]);
+       
     }
 
 

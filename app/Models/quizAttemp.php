@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class quizAttemp extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "remain_time",
+        "lastQues",
+        "type",       
+        "totalmarks"
+    
+      ];
 
 
     
