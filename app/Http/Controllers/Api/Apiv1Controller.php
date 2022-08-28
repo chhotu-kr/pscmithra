@@ -1934,7 +1934,7 @@ button:focus {outline:0;}
             $type = "result";
         }
 
-        if(!emptyArray($request->array)){
+        
             $rMarks  = $examination_id->rightmarks;
         $wMarks = "-" . $examination_id->wrongmarks;
 
@@ -1977,8 +1977,8 @@ button:focus {outline:0;}
 
         }
         return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['quizType' => $testId->testtype]]);
-        }
-        return response()->json(['msg' => 'Test Submited', 'status' => false]);
+        // }
+        // return response()->json(['msg' => 'Test Submited', 'status' => false]);
        
     }
 
