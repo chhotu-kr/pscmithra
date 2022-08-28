@@ -1325,7 +1325,7 @@ class Apiv1Controller extends Controller
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            //"QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                            "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
                                         ]);
                                     })
 
@@ -1333,7 +1333,8 @@ class Apiv1Controller extends Controller
                         })
                     ]);
                 }
-            });
+            })
+            ;
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
 
@@ -1450,8 +1451,8 @@ class Apiv1Controller extends Controller
 
 
 
-        $data = quizAttemp::with(['quizexamination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
-            $q->where('quiz_exams_id', $testId->id)->where('users_id', $user_id->id);
+        $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
             ->get()
             ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
@@ -1470,7 +1471,7 @@ class Apiv1Controller extends Controller
                     return collect([
                         "testID" => $d->slugid,
                         "languageId" => $d->language->id,
-                        "languageName" => $d->language->langagename,
+                        "languageName" => $d->language->languagename,
                         "languages" => $d->examination->lang->map(function ($langg) {
 
                             return [
@@ -1899,6 +1900,88 @@ button:focus {outline:0;}
 
         return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['examtype' => $testId->mocktesttype]]);
     }
+
+
+    public function submitQuiz(Request $request)
+    {
+
+
+
+
+
+        if (empty($request->user)) {
+            return response()->json(['msg' => 'Enter User', 'status' => false]);
+        }
+
+        $user =  User::select('id')->where('slugid', $request->user)->first();
+
+        if (!$user) {
+            return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+        }
+
+        if (empty($request->examination)) {
+            return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+        }
+
+        $examination_id =  QuizExamination::where("slugid", $request->examination)->first();
+
+        if (!$examination_id) {
+            return response()->json(['msg' => 'Invalid Quiz', 'status' => false]);
+        }
+
+        $type = "resume";
+        if ($request->type == "submit") {
+            $type = "result";
+        }
+
+        $rMarks  = $examination_id->rightmarks;
+        $wMarks = "-" . $examination_id->wrongmarks;
+
+        $testId = quizAttemp::where("slugid", $request->testId)->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user->id)->first();
+
+        $total = Question::leftjoin('quiz_attempt_questions', function ($join) use ($rMarks, $wMarks) {
+            $join->on('questions.id', '=', 'quiz_attempt_questions.question_id');
+        })->select(
+            'questions.*',
+            'quiz_attempt_questions.*',
+            DB::raw('(CASE WHEN questions.rightans = quiz_attempt_questions.QuesSelect THEN ' . $rMarks . 'ELSE ' . $wMarks . ' END) AS total')
+        )->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->get();
+        $total = $total->sum('total');
+        $testIds = $testId->update(
+            [
+                "remain_time" => $request->time,
+                "lastQues" => $request->currentpostion,
+                "type" => $type,
+                "totalmarks" => $total,
+            ]
+        );
+
+        foreach ($request->array as $index => $value) {
+            if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
+
+                 $dd = QuizAttemptQuestion::where('id', $value['question_id'])->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->update(
+                    [
+                        "QuesSeen" => $value["seenType"],
+                        "QuesSelect" => $value['optSel'],
+                        "time" => $value['time']
+                    ]
+                );
+            }
+
+
+
+            // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
+
+            // echo json_encode($value);
+
+        }
+
+        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['quizType' => $testId->testtype]]);
+    }
+
+
+
+
 
 
     public function getexamResult(Request $request)
