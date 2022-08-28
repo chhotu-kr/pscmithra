@@ -17,13 +17,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained();
             $table->foreignId('question_id')->constrained();
-            $table->foreignId('quiz_exams_id')->constrained();
+            $table->foreignId('quiz_attemps_id')->constrained();
             $table->enum('QuesSeen',['true','false'])->default('false');
             $table->string('QuesSelect')->nullable();
             $table->integer('time')->default(0);
             $table->timestamps();
         });
     }
+
+
+    // $table->id();
+    // $table->foreignId('users_id')->constrained();
+    // $table->foreignId('questions_id')->constrained();
+    // $table->foreignId('attemped_exams_id')->constrained();
+    // $table->enum('QuesSeen',['true','false'])->default('false');
+    // $table->string('QuesSelect')->nullable();
+    // $table->integer('time')->default(0);
+    // $table->timestamps();
 
     /**
      * Reverse the migrations.
