@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+
     <footer class="education-footer footer-lighten bg-image bg-image--12">
         <div class="footer-top">
             <div class="container">
@@ -102,34 +94,32 @@
     <!-- JS
     ============================================ -->
     <!-- Modernizer JS -->
-    <script src="{{asset('newlms/assets/js/vendor/modernizr.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/modernizr.min.js')}}"></script>
     <!-- Jquery Js -->
-    <script src="{{asset('newlms/assets/js/vendor/jquery.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/bootstrap.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/sal.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/backtotop.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/magnifypopup.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/slick.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/jquery-appear.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/odometer.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/isotop.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/imageloaded.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/lightbox.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/wow.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/paralax.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/paralax-scroll.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/jquery-ui.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/svg-inject.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/vivus.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/tipped.min.js')}}"></script>
-    <script src="{{asset('newlms/assets/js/vendor/viewport.jquery.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/jquery.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/bootstrap.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/sal.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/backtotop.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/magnifypopup.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/slick.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/jquery-appear.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/odometer.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/isotop.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/imageloaded.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/lightbox.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/wow.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/paralax.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/paralax-scroll.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/jquery-ui.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/svg-inject.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/vivus.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/tipped.min.js')}}"></script>
+    <script src="{{asset('nassets/js/vendor/viewport.jquery.js')}}"></script>
     
     <!-- Site Scripts -->
-    <script src="{{asset('newlms/assets/js/app.js')}}"></script>
-    @section('psc')
-        
-    @show
+    <script src="{{asset('nassets/js/app.js')}}"></script>
+
 </body>
 </html>

@@ -19,11 +19,11 @@
         </div>
     </div>
     <ul class="shape-group">
-        <li class="shape-1"><img src="{{asset('newlms/assets/images/about/shape-22.png" alt="shape')}}"></li>
-        <li class="shape-2 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-13.png')}}" alt="shape"></li>
-        <li class="shape-3 scene"><img data-depth="-2" src="{{asset('newlms/assets/images/about/shape-15.png')}}" alt="shape"></li>
-        <li class="shape-4"><img src="{{asset('newlms/assets/images/about/shape-22.png')}}" alt="shape"></li>
-        <li class="shape-5 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-07.png')}}" alt="shape"></li>
+        <li class="shape-1"><img src="{{asset('nassets/images/about/shape-22.png" alt="shape')}}"></li>
+        <li class="shape-2 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-13.png')}}" alt="shape"></li>
+        <li class="shape-3 scene"><img data-depth="-2" src="{{asset('nassets/images/about/shape-15.png')}}" alt="shape"></li>
+        <li class="shape-4"><img src="{{asset('nassets/images/about/shape-22.png')}}" alt="shape"></li>
+        <li class="shape-5 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
 </div>
 
@@ -41,7 +41,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -66,7 +66,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -91,7 +91,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -116,7 +116,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -141,7 +141,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -166,7 +166,7 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.blogdetails')}}">
-                                <img src="{{asset('newlms/assets/img/blog-01.jpg')}}" alt="Blog Images">
+                                <img src="{{asset('nassets/img/blog-01.jpg')}}" alt="Blog Images">
                             </a>
                         </div>
                         <div class="content position-top">
@@ -190,13 +190,13 @@
     </div>
     <ul class="shape-group">
         <li class="shape-1 scene">
-            <img data-depth="-1.4" src="{{asset('newlms/assets/images/about/shape-02.png')}}" alt="Shape">
+            <img data-depth="-1.4" src="{{asset('nassets/images/about/shape-02.png')}}" alt="Shape">
         </li>
         <li class="shape-2 scene">
             <span data-depth="2.5"></span>
         </li>
         <li class="shape-3 scene">
-            <img data-depth="-2.3" src="{{asset('newlms/assets/images/counterup/shape-05.png')}}" alt="Shape">
+            <img data-depth="-2.3" src="{{asset('nassets/images/counterup/shape-05.png')}}" alt="Shape">
         </li>
     </ul>
 </div>

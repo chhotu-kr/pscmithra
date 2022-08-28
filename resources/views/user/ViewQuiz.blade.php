@@ -245,7 +245,7 @@
                     <div class="user-attempt-question">
                         <div class="user-profile">
                             <div class="left-user">
-                                <img src="{{asset('newlms/assets/img/man-avatar-profile1.png')}}">
+                                <img src="{{asset('nassets/img/man-avatar-profile1.png')}}">
                             </div>
                             <div class="left-right">
                                 <h4>Amit Kumar</h4>

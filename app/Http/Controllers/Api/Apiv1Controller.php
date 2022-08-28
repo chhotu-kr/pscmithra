@@ -428,7 +428,9 @@ public function get_Examination(Request $request)
         //$Quiz->language_id = $request->language;
         //$Quiz->save();
 
-        $get = quizAttemp::where('quiz_examinations_id', $quiz_examinations_id->id)->where('mocktesttype', $request->examtype)->where('users_id', $user_id->id)->first();
+        $get = quizAttemp::where('quiz_examinations_id', $quiz_examinations_id->id)->where('testtype', $request->examtype)->where('users_id', $user_id->id)->first();
+
+        
         if (empty($get)) {
             $Quiz = new quizAttemp();
             $Quiz->slugid = md5($request->user . time());
@@ -436,18 +438,10 @@ public function get_Examination(Request $request)
             $Quiz->users_id = $user_id->id;
             $Quiz->language_id = $request->language;
             $Quiz->remain_time = $quiz_examinations_id->time_duration * 60;
-            $Quiz->mocktesttype = $request->examtype;
+            $Quiz->testtype = $request->examtype;
             $Quiz->save();
 
-            $quizQuestion =  QuizQuestion::where('quiz_examinations_id', $quiz_examinations_id->id)->pluck('question_id');
-            foreach ($quizQuestion as $value) {
-
-                $mock = new QuizAttemptQuestion();
-                $mock->users_id =  $user_id->id;
-                $mock->question_id = $value;
-                $mock->quiz_attemps_id = $Quiz->id;
-                $mock->save();
-            }
+           
             return response()->json(['msg' => 'Quiz Created', 'status' => true, 'data' => ['testId' => $Quiz->slugid, "examinationId" => $request->quizexamination]]);
         } else {
 
@@ -1011,8 +1005,8 @@ public function get_Examination(Request $request)
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
@@ -1176,8 +1170,8 @@ public function get_Examination(Request $request)
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
@@ -1355,8 +1349,8 @@ public function get_Examination(Request $request)
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/newlms/assets/css/app.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
@@ -1802,10 +1796,18 @@ $data = AttempedExam::with(
         $data['right'] = count($data['questionslist']->where('final', 'right'));
         $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
         $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+$data['Attemped'] = 10;
+$data['Accuracy'] = 4.3;
+$data['Score'] = 2.5;
+$data['Percentile'] = 3.5;
+$data['Rank'] = 3.5;
 
 
         return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
+
+
+
 
 
 

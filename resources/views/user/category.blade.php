@@ -1,7 +1,3 @@
-@extends('user/footer')
-@section('psc')
-    
-@endsection
 
 @extends('user/dashboard')
 @section('pscmithra')
@@ -19,11 +15,11 @@
         </div>
     </div>
     <ul class="shape-group">
-        <li class="shape-1"><img src="{{asset('newlms/assets/images/about/shape-22.png" alt="shape')}}"></li>
-        <li class="shape-2 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-13.png')}}" alt="shape"></li>
-        <li class="shape-3 scene"><img data-depth="-2" src="{{asset('newlms/assets/images/about/shape-15.png')}}" alt="shape"></li>
-        <li class="shape-4"><img src="{{asset('newlms/assets/images/about/shape-22.png" alt="shape')}}"></li>
-        <li class="shape-5 scene"><img data-depth="2" src="{{asset('newlms/assets/images/about/shape-07.png')}}" alt="shape"></li>
+        <li class="shape-1"><img src="{{asset('nassets/images/about/shape-22.png" alt="shape')}}"></li>
+        <li class="shape-2 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-13.png')}}" alt="shape"></li>
+        <li class="shape-3 scene"><img data-depth="-2" src="{{asset('nassets/images/about/shape-15.png')}}" alt="shape"></li>
+        <li class="shape-4"><img src="{{asset('nassets/images/about/shape-22.png" alt="shape')}}"></li>
+        <li class="shape-5 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
 </div>
 
@@ -35,7 +31,7 @@
         <div class="features-grid-wrap">
             <div class="features-box features-style-3 color-primary-style edublink-svg-animate">
                 <div class="icon">
-                    <img class="svgInject" src="{{asset('newlms/assets/images/animated-svg-icons/scholarship-facility.svg')}}" alt="animated icon">
+                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/scholarship-facility.svg')}}" alt="animated icon">
                     <!-- <i class="icon-34"></i> -->
                 </div>
                 <div class="content">
@@ -45,7 +41,7 @@
             </div>
             <div class="features-box features-style-3 color-secondary-style edublink-svg-animate">
                 <div class="icon">
-                    <img class="svgInject" src="{{asset('newlms/assets/images/animated-svg-icons/skilled-lecturers.svg')}}" alt="animated icon">
+                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/skilled-lecturers.svg')}}" alt="animated icon">
                 </div>
                 <div class="content">
                     <h4 class="title">Skilled Lecturers</h4>
@@ -54,7 +50,7 @@
             </div>
             <div class="features-box features-style-3 color-extra02-style edublink-svg-animate">
                 <div class="icon">
-                    <img class="svgInject" src="{{asset('newlms/assets/images/animated-svg-icons/book-library.svg')}}" alt="animated icon">
+                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/book-library.svg')}}" alt="animated icon">
                     <!-- <i class="icon-36"></i> -->
                 </div>
                 <div class="content">
@@ -374,3 +370,5 @@
     </div>
 </div>
 @endsection
+
+
