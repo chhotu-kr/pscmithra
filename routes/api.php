@@ -46,6 +46,7 @@ Route::post('/getExamData',[Apiv1Controller::class,'getExamData']);
  
 
 Route::post('/submitExam',[Apiv1Controller::class,'submitExam']);
+Route::post('/submitQuiz',[Apiv1Controller::class,'submitQuiz']);
 
 Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);
 Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
