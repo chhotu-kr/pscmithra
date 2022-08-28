@@ -5,8 +5,8 @@
 @extends('user.dashboard')
 @section('pscmithra')
 
-
-@livewire('user.quiz',['id'=>$quizcat]);
+{{-- <livewire:user.quiz/> --}}
+@livewire('user.quiz');
 {{-- <style type="text/css">
     .quize-page {
         padding: 50px 0;
