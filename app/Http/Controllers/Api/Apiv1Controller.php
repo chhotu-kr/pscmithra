@@ -1369,93 +1369,256 @@ class Apiv1Controller extends Controller
         }
 
 
-        $htm1  = '<!DOCTYPE html><html class="no-js" lang="zxx">
+        $bodyStart  = '<!DOCTYPE html>
+        <html class="no-js" lang="zxx">
+        
         <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        
+          <style type="text/css">
+            .hidden {
+              display: none !important;
+            }
+        
+            .shown {
+              display: block;
+            }
+        
+            body {
+              padding: 20px;
+            }
+        
+            .span {
+              color: black;
+              font-size: 1.4rem;
+            }
+        
+            p {
+              margin: 0;
+            }
+        
+            h3 {
+              font-size: 20px;
+            }
+        
+            .box-shadows {
+              box-shadow: none;
+              padding: 10px;
+              margin-bottom: 30px;
+              border: 1px solid #e5dfdf;
+            }
+        
+            .accordion {
+              margin-bottom: 30px;
+            }
+        
+            .according_tab .card-header button {
+              border: 0;
+              font-size: 18px;
+              text-decoration: none;
+              color: #000;
+              padding: 0;
+            }
+        
+            .card-header {
+              padding: 0 10px;
+            }
+        
+            .solutions {}
+        
+            .solutions p {
+              font-size: 18px;
+              color: #000;
+            }
+        
+            .checkbox-custom,
+            .radio-custom {
+              opacity: 0;
+              position: absolute;
+              height: 40px;
+            }
+        
+            .checkbox-custom,
+            .checkbox-custom-label,
+            .radio-custom,
+            .radio-custom-label {
+              display: inline-block;
+              vertical-align: middle;
+              margin: 5px;
+              cursor: pointer;
+            }
+        
+            input[type="checkbox"]~label,
+            input[type="radio"]~label {
+              border: 1px solid #b0a7a7;
+              width: 98%;
+              padding: 8px;
+            }
+        
+            .checkbox-custom-label,
+            .radio-custom-label {
+              position: relative;
+            }
+        
+            .checkbox-custom+.checkbox-custom-label:before,
+            .radio-custom+.radio-custom-label:before {
+              content: "";
+              background: #fff;
+              border: 2px solid #ddd;
+              display: inline-block;
+              vertical-align: middle;
+              width: 20px;
+              height: 20px;
+              padding: 2px;
+              margin-right: 10px;
+              text-align: center;
+            }
+        
+            .checkbox-custom:checked+.checkbox-custom-label:before {
+              content: "\f00c";
+              font-family: "FontAwesome";
+              background: rebeccapurple;
+              color: #fff;
+            }
+        
+            .radio-custom+.radio-custom-label:before {
+              border-radius: 0 !important;
+              width: 100%;
+              height: 28px;
+              opacity: 0;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+        
+            .radio-custom:checked+.radio-custom-label:before {
+              content: "";
+              /*  content: "\f00c";
+           font-family: "FontAwesome";
+            color: #000;*/
+              position: absolute;
+              top: 0;
+              width: 99.5%;
+              height: 28px;
+              border-radius: 0 !important;
+              z-index: -1;
+              border-color: #03a9f4;
+              opacity: 1;
+            }
+        
+            .checkbox-custom:focus+.checkbox-custom-label,
+            .radio-custom:focus+.radio-custom-label {
+              outline: 1px solid #ddd;
+              /* focus style */
+            }
+        
+            input[type="radio"]~label::after {
+              opacity: 0 !important;
+            }
+        
+            .card-header {
+              background-color: transparent;
+              text-align: center;
+              border: none;
+            }
+        
+            button:focus {
+              outline: 0;
+            }
+        
+            .question-answer {
+              display: flex;
+              justify-content: end;
+              margin-top: 10px;
+            }
+        
+            .question-answer p {}
+        
+            .question-answer p svg {
+              width: 35px;
+              height: 35px;
+              cursor: pointer;
+              border-radius: 50px;
+              padding: 2px;
+              margin-right: 15px;
+            }
+            .bi-check2 {
+              color: #fff;
+              background: green;
+            }
+            .bi-check-all {
+              color: #fff;
+              background: red;
+            }
+            .bi-x {
+              color: #fff;
+              background: #3f51b5;
+            }
+            @media (max-width: 767px) {
+              body {
+                padding: 0;
+              }
+              input[type="checkbox"]~label,
+              input[type="radio"]~label {
+                width: 93%;
+              }
+              .radio-custom:checked+.radio-custom-label:before {
+                width: 97.5%;
+                height: 91%;
+              }
+            }
+          </style>
         </head>
-        
         <body>
-            <style type="text/css">
-                .btn {
-                    background-color: whitesmoke;
-                    border: 1.5px solid black;
-                    border-radius: 10px;
-                    padding: 5px;
-                    text-align: start;
-                }
-        
-                .span {
-                    color: black;
-                    font-size: 1.4rem;
-                }
-            </style>
-            <div class="m-4">
-                <div class="">';
+         
+          <div class="d-grid gap-2 mt-4 box-shadows">
+            <h4 class="question">';
 
-        $html1 =  '</div>
-                <div class="d-grid gap-2 mt-4">
-                    <div class="btn" onclick="myFunction(this)" id="1" value="selOpt1">
-                        <div class="row align-items-center">
-                            <span class="col-auto span">A.</span>
-                            <div type="text" class="col">';
-        $html2  = '</div>
-                            </div>
-                        </div>
-                        <div class="btn" onclick="myFunction(this)" id="2" value="selOpt2">
-                            <div class="row align-items-center">
-                                <span class="col-auto span">B.</span>
-                                <div type="text" class="col">';
-        $html3 = ' </div>
-                                </div>
-                            </div>
-                            <div class="btn" onclick="myFunction(this)" id="3" value="selOpt3">
-                                <div class="row align-items-center">
-                                    <span class="col-auto span">C.</span>
-                                    <div type="text" class="col">';
-        $html4 = '</div>
-                                    </div>
-                                </div>
-                                <div class="btn" onclick="myFunction(this)" id="4">
-                                    <div class="row align-items-center">
-                                        <span class="col-auto span">D.</span>
-                                        <div type="text" class="col">';
-        $html5 =  '</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                function myFunction(elem) {
-                                    for (let i = 0; i < 5; i++) {
-                                        if (elem.id == i) {
-                    
-                                            $("#" + i).css("border", "1.5px solid #90ee02");
-                                            JSInterface.select("selOpt" + elem.id);
-                                        } else {
-                                            
-                                            $("#" + i).css("border", "1.5px solid");
-                                        }
-                                    }
-                                }
-                            </script>
-                        </body>
-                        
-                        </html>';
+        $html1 = '</h4>
+        <div class="btn" onclick="myFunction(this)" id="1">
+          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-1" class="radio-custom-label">A. <span>';
+        $html2 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="2">
+          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-2" class="radio-custom-label">B. <span>';
 
+        $html3 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="3">
+          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-3" class="radio-custom-label">C. <span>';
+        $html4 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="4">
+          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-4" class="radio-custom-label">D. <span>';
+        $html5 = '</span></label>
+        </div>
+      </div>
+      
+      <script>
+        var navicon = document.getElementById("navicon");
+        var navEl = document.getElementById("collapseOne");
+        function toggleMenu() {
+          navEl.classList.toggle("hidden");
+        };
+        navicon.addEventListener("click", toggleMenu, false);
+        function myFunction(elem) {
+          JSInterface.select("selOpt" + elem.id);
+    
+        }</script></body></html>';
 
-
+       
         $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
         }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
             ->get()
-            ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+            ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
 
                 //  $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
                 //           $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
@@ -1487,7 +1650,7 @@ class Apiv1Controller extends Controller
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "questionslist" => $d->examination->quizexamQ->map(function ($fff) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                        "questionslist" => $d->examination->quizexamQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
                             // $aaa="";
                             // if($fff->question->rightans===$fff->question->mockAttemp->QuesSelect){
                             // $aaa =true;
@@ -1502,11 +1665,11 @@ class Apiv1Controller extends Controller
                                 "isRight" => false,
                                 "question" => $fff->question->secondquestion
 
-                                    ->map(function ($ques) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
+                                    ->map(function ($ques)use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
                                         return collect([
                                             "id" => $ques->language->id,
                                             "language" => $ques->language->languagename,
-                                            //"QuestioninHtml" => $htm1. $ques->question .$html1. $ques->option1  .$html2. $ques->option2 .$html3. $ques->option3 .$html4 . $ques->option4 .$html5
+                                            "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
                                         ]);
                                     })
 
@@ -2151,7 +2314,7 @@ button:focus {outline:0;}
         if (empty($request->quizexaminationid)) {
             return response()->json(['msg' => 'Enter Examination', 'status' => false]);
         }
-        $examination_id =  Examination::select('id')->where("slugid", $request->quizexaminationid)->first();
+        $examination_id =  QuizExamination::select('id')->where("slugid", $request->quizexaminationid)->first();
 
         if (!$examination_id) {
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
@@ -2180,20 +2343,31 @@ button:focus {outline:0;}
 
             ['examination' => function ($q) use ($testId, $user_id) {
 
-                $q->with(['examQ' => function ($q) use ($testId, $user_id) {
+                $q->with(['quizexamQ' => function ($q) use ($testId, $user_id) {
 
-                    $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
-                        $q->where('quiz_examinations_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
+                    $q->with(['question.quizAttemp' => function ($q) use ($testId, $user_id) {
+                        $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id)->orderBy('question_id', 'DESC');
                     }]);
                 }])->with(['quizattm' => function ($aa) {
-                    $aa->where('mocktesttype', 'reattemp');
+                    $aa->where('testtype', 'reattemp');
                 }]);
             }]
         )
-            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
+            ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $examination_id->id)
             ->get()
             ->map(
                 function ($d) {
+
+                    $reattempId = "";
+                    $reattempResult = false;
+if (!empty($d->examination->attm)) {
+                        $reattempId = $d->examination->attm->slugid;
+                        if ($d->examination->attm->type == "result") {
+                            $reattempResult = true;
+                        }
+                    }
+
+
                     return [
                         "testID" => $d->slugid,
                         "examId" => $d->examination->slugid,
@@ -2202,22 +2376,26 @@ button:focus {outline:0;}
                         "languages" => $d->examination->lang->map(function ($langg) {
                             return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
                         }),
+
+                        "reAttempId" => $reattempId,
+                        "reAttempResult" => $reattempResult,
+
                         "wMarks" => $d->examination->wrongmarks,
                         "rMarks" => $d->examination->rightmarks,
                         'noQues' => $d->examination->noQues,
-                        "reAttempId" => $d->examination->attm->slugid,
+                    
 
-                        "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
+                        "questionslist" => $d->examination->quizexamQ->map(function ($fff, $key) {
 
                             $res = "skip";
-                            if ($fff->question->mockAttemp->QuesSeen == "true") {
-                                if (empty($fff->question->mockAttemp->QuesSelect)) {
+                            if ($fff->question->quizAttemp->QuesSeen == "true") {
+                                if (empty($fff->question->quizAttemp->QuesSelect)) {
                                     $color = "#797980";
                                     $res = "visited";
-                                } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
+                                } else if ($fff->question->rightans != $fff->question->quizAttemp->QuesSelect) {
                                     $color = "#FF0000";
                                     $res = "wrong";
-                                } else if ($fff->question->rightans = $fff->question->mockAttemp->QuesSelect) {
+                                } else if ($fff->question->rightans = $fff->question->quizAttemp->QuesSelect) {
                                     $color = "#008000";
                                     $res = "right";
                                 }
@@ -2228,10 +2406,9 @@ button:focus {outline:0;}
 
 
                             return collect([
-                                "questionId" => $fff->question->id,
+                                "questionId" => $key + 1,
                                 "color" => $color,
                                 "final" => $res,
-                                "asdasd" => $key + 1
                             ]);
                         }),
 
