@@ -57,6 +57,6 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     } );
-  }); --}}
+  }); 
     </script>
 </div>

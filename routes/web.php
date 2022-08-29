@@ -511,10 +511,14 @@ Route::get('/Pdf-productshow',[ProductController::class,'get_Pdf'])->name('Pdf.P
  Route::get('/live/test',[LiveTestController::class,'index'])->name('live.test');
  Route::get('/live/testcreate',[LiveTestController::class,'create'])->name('livetest.create');
  Route::post('/live/teststore',[LiveTestController::class,'store'])->name('livetest.store');
+ Route::get('/manage/liveques/{id}',[LiveTestController::class,'ques'])->name('manage.livequestion');
  Route::get('/Live/testupdate/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
  Route::post('/Live/testupdate/{id}',[LiveTestController::class,'update'])->name('livetest.update');
  Route::get('/Livetestremove/{id}',[LiveTestController::class,'destroy'])->name('livetest.remove');
-
+ Route::get('/live/ques/create/{id}',[LiveTestController::class,'getliveQuestioncreate'])->name('liveAddQestion.create');
+ Route::post('/live/question/save',[LiveTestController::class,'liveQues'])->name('store.livequestion');
+ Route::get('/live/question',[LiveTestController::class,'getliveSubmit'])->name('store.liveQues');
+ 
  //............QuizQuestion...........//
 
  Route::get('/manage/quizques/{id}',[QuizQuestionController::class,'index'])->name('manage.quizquestion');
@@ -665,13 +669,13 @@ Route::prefix('user')->middleware('auth:web')->group(function(){
 //  Route::post('/quizExamupdate/{id}',[QuizExaminationController::class,'update'])->name('quizexamination.update');
 //  Route::get('/quizexaminationremove/{id}',[QuizExaminationController::class,'destroy'])->name('quizexamination.remove');
 
-//  //..........LiveTest............
-//  Route::get('/live/test',[LiveTestController::class,'index'])->name('live.test');
-//  Route::get('/live/testcreate',[LiveTestController::class,'create'])->name('livetest.create');
-//  Route::post('/live/teststore',[LiveTestController::class,'store'])->name('livetest.store');
-//  Route::get('/Live/testupdate/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
-//  Route::post('/Live/testupdate/{id}',[LiveTestController::class,'update'])->name('livetest.update');
-//  Route::get('/Livetestremove/{id}',[LiveTestController::class,'destroy'])->name('livetest.remove');
+ //..........LiveTest............
+ Route::get('/live/test',[LiveTestController::class,'index'])->name('live.test');
+ Route::get('/live/testcreate',[LiveTestController::class,'create'])->name('livetest.create');
+ Route::post('/live/teststore',[LiveTestController::class,'store'])->name('livetest.store');
+ Route::get('/Live/testupdate/{id}',[LiveTestController::class,'edit'])->name('livetest.edit');
+ Route::post('/Live/testupdate/{id}',[LiveTestController::class,'update'])->name('livetest.update');
+ Route::get('/Livetestremove/{id}',[LiveTestController::class,'destroy'])->name('livetest.remove');
 
 //  //............QuizQuestion.........
 

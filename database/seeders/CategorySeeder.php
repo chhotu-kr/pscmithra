@@ -34,8 +34,6 @@ class CategorySeeder extends Seeder
          ['id' => '6', 'category' => 'UPSC', 'slugid' => 'wesfr2erd3j', 'image' => 'laravel.jpg'],
          ['id' => '7', 'category' => 'UPSC NDA', 'slugid' => '435sfr2erd34', 'image' => 'python.jpg'],
          ['id' => '8', 'category' => 'IBPS', 'slugid' => '435sfr2erda4', 'image' => 'django.jpg'],
-
-
       ];
       Category::insert($category);
 

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\livetest;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductPlan extends Model
+class liveAttempQuestion extends Model
 {
     use HasFactory;
-
-    protected $table='Plan_Products';
 }

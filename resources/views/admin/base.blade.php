@@ -37,6 +37,9 @@
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   
+
+
+
   <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

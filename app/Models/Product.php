@@ -20,7 +20,6 @@ class Product extends Model
         'type',
         'price',
         'bannerimage',
-        
         'bycount',
     ];
 

@@ -49,6 +49,17 @@ Route::post('/submitExam',[Apiv1Controller::class,'submitExam']);
 Route::post('/submitQuiz',[Apiv1Controller::class,'submitQuiz']);
 
 Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);
+
+Route::post('/liveExam',[Apiv1Controller::class,'getLiveExam']);
+Route::post('/prepare-liveExam',[Apiv1Controller::class,'prepareLiveExam']);
+
+
+
+
+
+
+
+
 Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
 Route::post('/getsolution-exam',[Apiv1Controller::class,'getExamSolution']);
 
@@ -58,8 +69,6 @@ Route::post('/getsolution-exam',[Apiv1Controller::class,'getExamSolution']);
 // .....Examination........
 
 Route::post('/quizexamdata',[Apiv1Controller::class,'get_QuizExamination']);
-
-
 Route::get('/exam-cat',[Apiv1Controller::class,'get_Examination'])->name('examination.show');
 Route::post('/quiz-exam-cat',[Apiv1Controller::class,'get_QuizExamination']);
 Route::post('/prepare-quiz',[Apiv1Controller::class,'preareQuizExam'])->name('prepareQuizExam');

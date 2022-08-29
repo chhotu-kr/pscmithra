@@ -13,25 +13,21 @@ use App\Models\QuizExaminationLanguage;
 
 use Illuminate\Http\Request;
 
+use function Symfony\Component\VarDumper\Dumper\esc;
+
 class QuizExaminationController extends Controller
 {
     //
     public function index(){
 
-        $data['quiz_exami']=QuizExamination::with('lang.language')->get();
-       
-        
+        $data['quiz_exami']=QuizExamination::with('lang.language')->get(); 
         return view('quizExam.manageQuizExamination',$data);
 
     }
 
     public function create(){
-        $data['quiz_exami']=QuizExamination::all();
-        $data['quizcat']=QuizCategory::all();        
-        $data['quizsub']=QuizSubCategory::all();        
-        $data['quizchapt']=QuizChapter::all();        
-        $data['quiztopic']=QuizTopic::all();
-        $data['lang'] = Language::all();
+
+         $data['lang'] = Language::all();
         return view('quizExam.insertQuizExamination',$data);
  
     }
@@ -50,7 +46,12 @@ class QuizExaminationController extends Controller
         $data->rightmarks=$request->rightmarks;
         $data->wrongmarks=$request->wrongmarks;
         $data->marks=$request->marks;
-        $data->isFree=$request->isfree;
+
+if(!empty($request->isfree)){
+    $data->isFree=$request->isfree;
+}
+
+    
         $data->time_duration=$request->time_duration;
         $data->slugid=md5($request->quizexamination.time());
 
