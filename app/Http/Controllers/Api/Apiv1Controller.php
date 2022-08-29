@@ -1825,10 +1825,6 @@ button:focus {outline:0;}
     public function submitExam(Request $request)
     {
 
-
-
-
-
         if (empty($request->user)) {
             return response()->json(['msg' => 'Enter User', 'status' => false]);
         }
@@ -1849,34 +1845,10 @@ button:focus {outline:0;}
             return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
         }
 
-        $type = "resume";
-        if ($request->type == "submit") {
-            $type = "result";
-        }
-
-        $rMarks  = $examination_id->rightmarks;
-        $wMarks = "-" . $examination_id->wrongmarks;
-
         $testId = AttempedExam::where("slugid", $request->testId)->where("examinations_id", $examination_id->id)
-            ->where("users_id", $user->id)->first();
+        ->where("users_id", $user->id)->first();
 
-        $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
-            $join->on('questions.id', '=', 'mockattempquestions.questions_id');
-        })->select(
-            'questions.*',
-            'mockattempquestions.*',
-            DB::raw('(CASE WHEN questions.rightans = mockattempquestions.QuesSelect THEN ' . $rMarks . '
-               ELSE ' . $wMarks . ' END) AS total')
-        )->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)->get();
-        $total = $total->sum('total');
-        $testIds = $testId->update(
-            [
-                "remain_time" => $request->time,
-                "lastQues" => $request->currentpostion,
-                "type" => $type,
-                "totalmarks" => $total,
-            ]
-        );
+
 
         foreach ($request->array as $index => $value) {
             if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
@@ -1898,7 +1870,42 @@ button:focus {outline:0;}
 
         }
 
-        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['examtype' => $testId->mocktesttype]]);
+
+        $type = "resume";
+        if ($request->type == "submit") {
+            $type = "result";
+        
+
+       
+
+      
+            $rMarks  = $examination_id->rightmarks;
+            $wMarks = "-" . $examination_id->wrongmarks;
+        $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
+            $join->on('questions.id', '=', 'mockattempquestions.questions_id');
+        })->select(
+            'questions.*',
+            'mockattempquestions.*',
+            DB::raw('(CASE WHEN questions.rightans = mockattempquestions.QuesSelect THEN ' . $rMarks . '
+               ELSE ' . $wMarks . ' END) AS total')
+        )->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)->get();
+        $total = $total->sum('total');
+        $testIds = $testId->update(
+            [
+                "remain_time" => $request->time,
+                "lastQues" => $request->currentpostion,
+                "type" => $type,
+                "totalmarks" => $total,
+            ]
+        );
+
+        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+
+    }
+
+      
+        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
+        
     }
 
 
@@ -1930,15 +1937,33 @@ button:focus {outline:0;}
         }
 
         $type = "resume";
+
+
+        $testId = quizAttemp::where("slugid", $request->testId)->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user->id)->first();
+
+        foreach ($request->array as $index => $value) {
+            if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
+
+                 $dd = QuizAttemptQuestion::where('id', $value['question_id'])->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->update(
+                    [
+                        "QuesSeen" => $value["seenType"],
+                        "QuesSelect" => $value['optSel'],
+                        "time" => $value['time']
+                    ]
+                );
+            }
+
+        }
+
         if ($request->type == "submit") {
             $type = "result";
-        }
+       
 
         
             $rMarks  = $examination_id->rightmarks;
         $wMarks = "-" . $examination_id->wrongmarks;
 
-        $testId = quizAttemp::where("slugid", $request->testId)->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user->id)->first();
+       
 
         $total = Question::leftjoin('quiz_attempt_questions', function ($join) use ($rMarks, $wMarks) {
             $join->on('questions.id', '=', 'quiz_attempt_questions.question_id');
@@ -1957,17 +1982,10 @@ button:focus {outline:0;}
             ]
         );
 
-        foreach ($request->array as $index => $value) {
-            if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
+        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['quizType' => $testId->testtype]]);
+    }
 
-                 $dd = QuizAttemptQuestion::where('id', $value['question_id'])->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->update(
-                    [
-                        "QuesSeen" => $value["seenType"],
-                        "QuesSelect" => $value['optSel'],
-                        "time" => $value['time']
-                    ]
-                );
-            }
+        
 
 
 
@@ -1975,8 +1993,8 @@ button:focus {outline:0;}
 
             // echo json_encode($value);
 
-        }
-        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => ['quizType' => $testId->testtype]]);
+        
+        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->type]);
         // }
         // return response()->json(['msg' => 'Test Submited', 'status' => false]);
        
@@ -2083,10 +2101,10 @@ button:focus {outline:0;}
 
 
                             return collect([
-                                "questionId" => $fff->question->id,
+                                "questionId" => $key + 1,
                                 "color" => $color,
                                 "final" => $resaaa,
-                                "asdasd" => $key + 1
+                            
                             ]);
                         }),
 
