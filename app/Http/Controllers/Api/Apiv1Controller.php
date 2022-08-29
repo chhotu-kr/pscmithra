@@ -271,85 +271,138 @@ class Apiv1Controller extends Controller
     if (!$user_id) {
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
-    $category_id = $request->category_id;
-    if (empty($category_id)) {
-      return response()->json(['msg' => 'Enter Category Id', 'status' => false]);
-    }
-    $subcategory_id = $request->subcategory_id;
-    if (empty($subcategory_id)) {
-      return response()->json(['msg' => 'Enter SubCategory Id', 'status' => false]);
-    }
-
-    $data =
     
-    liveExam::with('lang.language')
-   
-    ->orDoesntHave( 'attm', function($query) use ($user_id) {
-       $query->where('users_id', $user_id->id)->where('testtype', 'normal');
-  }
-   ) 
-->orWhereHas(['attm' => function ($q) use ($user_id) {
-    $q->where('users_id', $user_id->id)->where('testtype', 'normal');
- }])
- 
+
+
+    $ids = liveAttemp::where('users_id', $user_id->id)->where('testtype', 'normal')->where('type', 'result')->pluck('live_exams_id')->all();
+
+    $data = liveExam::with('lang.language')->with(
+      'attm',
+      function ($query) use ($user_id) {
+        $query->where('users_id', $user_id->id)->where('testtype', 'normal');
+      }
+    )->whereNotIn('id', $ids)
 
       ->get()
-      // ->map(function ($item) {
-      //   $free = $item->isFree;
-      //   $type = "Buy";
-      //   $TestID = "";
+      ->map(function ($item) {
+        $free = $item->isFree;
+        $type = "Buy";
+        $TestID = "";
 
-      //   if (empty($item->attm)) {
+        if (empty($item->attm)) {
 
-      //     if ($free) {
-      //       $type = "Start";
-      //       $TestID = "";
-      //     } else {
-      //     }
-      //   } else {
-      //     $type = $item->attm->type;
-      //     $TestID =  $item->attm->slugid;
-      //   }
-
-
-      //   $start = $item->start;
-      //   $ss = strtotime("now");
-      //   $final_start = $start - $ss;
-      //   if ($final_start < 0) {
-      //     $final_start = 0;
-      //   }
-
-      //   $end = $item->end;
-
-      //   $final_end = $end - $ss;
-      //   if ($final_end < 0) {
-      //     $final_end = 0;
-      //   }
+          if ($free) {
+            $type = "Start";
+            $TestID = "";
+          } else {
+          }
+        } else {
+          $type = $item->attm->type;
+          $TestID =  $item->attm->slugid;
+        }
 
 
-      //   return collect([
-      //     "testId" => $TestID,
-      //     "id" => $item->slugid,
-      //     "final_start" => $final_start,
-      //     "final_end" => $final_end,
-      //     "name" => $item->exam_name,
+        $start = $item->start;
+        $ss = strtotime("now");
+        $final_start = $start - $ss;
+        if ($final_start < 0) {
+          $final_start = 0;
+        }
 
-      //     "totalTimeinMints" => $item->time_duration,
-      //     "totalQues" => $item->noQues,
-      //     "type" => $type,
-      //     "totalTimeinMints" => $item->time_duration,
-      //     "languages" => $item->lang->map(function ($lang) {
-      //       return collect([
-      //         "name" => $lang->language->languagename,
-      //         "id" => $lang->language->id
-      //       ]);
-      //     })
-      //   ]);
-      // })
-      ;
+        $end = $item->end;
+
+        $final_end = $end - $ss;
+        if ($final_end < 0) {
+          $final_end = 0;
+        }
+
+
+        return collect([
+          "testId" => $TestID,
+          "id" => $item->slugid,
+          "final_start" => $final_start,
+          "final_end" => $final_end,
+          "name" => $item->exam_name,
+
+          "totalTimeinMints" => $item->time_duration,
+          "totalQues" => $item->noQues,
+          "type" => $type,
+          "totalTimeinMints" => $item->time_duration,
+          "languages" => $item->lang->map(function ($lang) {
+            return collect([
+              "name" => $lang->language->languagename,
+              "id" => $lang->language->id
+            ]);
+          })
+        ]);
+      });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
+  public function getResultExam(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+  
+
+
+    $ids = liveAttemp::where('users_id', $user_id->id)->where('testtype', 'normal')->where('type', 'result')->pluck('live_exams_id')->all();
+
+    $data = liveExam::with('lang.language')->with(
+      'attm',
+      function ($query) use ($user_id) {
+        $query->where('users_id', $user_id->id)->where('testtype', 'normal');
+      }
+    )->whereIn('id', $ids)
+
+      ->get()
+      ->map(function ($item) {  
+          $type = $item->attm->type;
+          $TestID =  $item->attm->slugid;
+        
+
+
+        $start = $item->start;
+        $ss = strtotime("now");
+        $final_start = $start - $ss;
+        if ($final_start < 0) {
+          $final_start = 0;
+        }
+
+        $end = $item->end;
+
+        $final_end = $end - $ss;
+        if ($final_end < 0) {
+          $final_end = 0;
+        }
+
+
+        return collect([
+          "testId" => $TestID,
+          "id" => $item->slugid,
+          "final_start" => $final_start,
+          "final_end" => $final_end,
+          "name" => $item->exam_name,
+
+          "totalTimeinMints" => $item->time_duration,
+          "totalQues" => $item->noQues,
+          "type" => $type,
+          "totalTimeinMints" => $item->time_duration,
+          "languages" => $item->lang->map(function ($lang) {
+            return collect([
+              "name" => $lang->language->languagename,
+              "id" => $lang->language->id
+            ]);
+          })
+        ]);
+      });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
 
 
 
@@ -433,7 +486,7 @@ class Apiv1Controller extends Controller
     if (empty($request->examination)) {
       return response()->json(['msg' => 'Enter Examination', 'status' => false]);
     }
-    $examination_id =  liveExam::select('id','start')->where("slugid", $request->examination)->first();
+    $examination_id =  liveExam::select('id', 'start')->where("slugid", $request->examination)->first();
     if (!$examination_id) {
       return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
     }
@@ -447,32 +500,33 @@ class Apiv1Controller extends Controller
     $ss = strtotime("now");
     $final_start = $start - $ss;
     if ($final_start < 0) {
-       $get = liveAttemp::where('live_exams_id', $examination_id->id)->where('users_id', $user_id->id)->first();
-    if (empty($get)) {
+      $get = liveAttemp::where('live_exams_id', $examination_id->id)->where('users_id', $user_id->id)->first();
+      if (empty($get)) {
 
 
 
 
-      $Attemp = new liveAttemp();
-      $Attemp->slugid = md5($request->user . time());
-      $Attemp->live_exams_id = $examination_id->id;
-      $Attemp->users_id = $user_id->id;
-      $Attemp->language_id = $request->language;
-      $Attemp->save();
-      $examQuestion =  liveQuestion::where('live_exams_id', $examination_id->id)->pluck('question_id');
-      // $insertData = [];
-      foreach ($examQuestion as $value) {
+        $Attemp = new liveAttemp();
+        $Attemp->slugid = md5($request->user . time());
+        $Attemp->live_exams_id = $examination_id->id;
+        $Attemp->users_id = $user_id->id;
+        $Attemp->language_id = $request->language;
+        $Attemp->save();
+        $examQuestion =  liveQuestion::where('live_exams_id', $examination_id->id)->pluck('question_id');
+        // $insertData = [];
+        foreach ($examQuestion as $value) {
 
-        $mock = new liveAttempQuestion();
-        $mock->users_id =  $user_id->id;
-        $mock->questions_id = $value;
-        $mock->live_exams_id = $Attemp->id;
-        $mock->save();
+          $mock = new liveAttempQuestion();
+          $mock->users_id =  $user_id->id;
+          $mock->questions_id = $value;
+          $mock->live_exams_id = $Attemp->id;
+          $mock->save();
+        }
+        return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
+      } else {
+        return response()->json(['msg' => 'Exam already exist', 'status' => false]);
       }
-      return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
     } else {
-      return response()->json(['msg' => 'Exam already exist', 'status' => false]);
-    }}else{
       return response()->json(['msg' => 'Exam not Start', 'status' => false]);
     }
     //   mockattempquestion::insert($insertData);
@@ -660,7 +714,7 @@ class Apiv1Controller extends Controller
 
   public function getProductFilter(Request $request)
   {
-    $data = Product::where('type',$request->type);
+    $data = Product::where('type', $request->type);
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
