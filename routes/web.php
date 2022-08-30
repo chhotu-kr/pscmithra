@@ -66,7 +66,12 @@ Route::get('/view/blog',[HomeController::class,'get_ViewBlog'])->name('view.blog
 Route::get('/view/blog/details',[HomeController::class,'get_ViewBlogDetails'])->name('view.blogdetails');
 Route::get('/view/course',[HomeController::class,'get_ViewCourse'])->name('view.course');
 Route::get('/view/course/details',[HomeController::class,'get_ViewCourseDetails'])->name('view.coursedetails');
-Route::get('/quizes',[HomeController::class,'get_Quiz'])->name('view.quiz');
+Route::get('/quizes/category',[HomeController::class,'get_Quiz'])->name('view.quiz');
+Route::get('/quizes/category/details/{id}',[HomeController::class,'get_ViewQuizDetail'])->name('view.quizdetails');
+Route::get('/quizes/category/chapter/{id}',[HomeController::class,'get_Quiz_SubCategory'])->name('view.quizchapter');
+Route::get('/quizes/category/chapter/topic/{id}',[HomeController::class,'get_TopicPage'])->name('view.quiztopicpage');
+Route::get('/quizes/{id}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');
+
 Route::get('/mock-test/study/metrial',[HomeController::class,'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login',[HomeController::class,'get_Login'])->name('user.login');
 Route::get('/user/register',[HomeController::class,'get_Register'])->name('user.register');
@@ -734,3 +739,12 @@ Route::get('/examqw', function(){
     return view('manageExamination');
 });
  
+
+
+
+
+
+///
+// Route::get('/quizes/{sub_cat_id?}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');
+// Route::get('/quizes/{chapter_id?}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');
+// Route::get('/quizes/{topic_id?}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');

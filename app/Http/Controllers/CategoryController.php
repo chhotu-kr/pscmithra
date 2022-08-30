@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     
-    public function index($id)
+    public function index()
     {
         //
-        $data['category']=$id;
+        
         $data['category']=Category::all();
        
        return view('admin.insertCategory',$data);

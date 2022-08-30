@@ -7,7 +7,7 @@
                 <h1 class="title">Category</h1>
             </div>
             <ul class="education-breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('view.home',$catdetail)}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('view.home')}}">Home</a></li>
                 <li class="separator"><i class="icon-angle-right"></i></li>
                 <li class="breadcrumb-item active" aria-current="page">Category Details</li>
             </ul>
