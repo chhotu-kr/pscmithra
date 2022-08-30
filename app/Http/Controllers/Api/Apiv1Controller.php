@@ -1203,8 +1203,7 @@ class Apiv1Controller extends Controller
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
                 "question" => $fff->question->secondquestion
-
-                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
 
 
 
@@ -1219,7 +1218,8 @@ class Apiv1Controller extends Controller
             })
           ];
         }
-      });
+      })
+      ;
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
