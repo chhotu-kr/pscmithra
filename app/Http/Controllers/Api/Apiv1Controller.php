@@ -303,17 +303,18 @@ class Apiv1Controller extends Controller
 
 
         $start = date("Y-m-d h:i:sa",$item->start);
-        // $ss = strtotime("now");
-        // $final_start = $start - $ss;
-        // if ($final_start < 0) {
-        //   $final_start = 0;
-        // }
+        $ss = strtotime("now");
+        $final_start = $item->start - $ss;
+        $status = "start";
+        if ($final_start < 0) {
+          $status = "end";
+        }
 
          $end =date("Y-m-d h:i:sa",$item->end);
 
         // $final_end = $end - $ss;
         // if ($final_end < 0) {
-        //   $final_end = 0;
+        //   $status = "end";
         // }
 
 
@@ -322,11 +323,12 @@ class Apiv1Controller extends Controller
           "id" => $item->slugid,
           "final_start" => $start,
           "final_end" => $end,
+          "status"=>$status,
           "name" => $item->exam_name,
           "totalQues" => $item->noques,
           "marks" => $item->marks,
           "type" => $type,
-          
+          "totalTimeinMints"=>$item->time_duration,
           "languages" => $item->lang->map(function ($lang) {
             return collect([
               "name" => $lang->language->languagename,
