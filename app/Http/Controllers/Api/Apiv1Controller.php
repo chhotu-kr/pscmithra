@@ -271,7 +271,7 @@ class Apiv1Controller extends Controller
     if (!$user_id) {
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
-    
+
 
 
     $ids = liveAttemp::where('users_id', $user_id->id)->where('testtype', 'normal')->where('type', 'result')->pluck('live_exams_id')->all();
@@ -302,32 +302,31 @@ class Apiv1Controller extends Controller
         }
 
 
-        $start = $item->start;
-        $ss = strtotime("now");
-        $final_start = $start - $ss;
-        if ($final_start < 0) {
-          $final_start = 0;
-        }
+        $start = date("Y-m-d h:i:sa",$item->start);
+        // $ss = strtotime("now");
+        // $final_start = $start - $ss;
+        // if ($final_start < 0) {
+        //   $final_start = 0;
+        // }
 
-        $end = $item->end;
+         $end =date("Y-m-d h:i:sa",$item->end);
 
-        $final_end = $end - $ss;
-        if ($final_end < 0) {
-          $final_end = 0;
-        }
+        // $final_end = $end - $ss;
+        // if ($final_end < 0) {
+        //   $final_end = 0;
+        // }
 
 
         return collect([
           "testId" => $TestID,
           "id" => $item->slugid,
-          "final_start" => $final_start,
-          "final_end" => $final_end,
+          "final_start" => $start,
+          "final_end" => $end,
           "name" => $item->exam_name,
-
-          "totalTimeinMints" => $item->time_duration,
-          "totalQues" => $item->noQues,
+          "totalQues" => $item->noques,
+          "marks" => $item->marks,
           "type" => $type,
-          "totalTimeinMints" => $item->time_duration,
+          
           "languages" => $item->lang->map(function ($lang) {
             return collect([
               "name" => $lang->language->languagename,
@@ -348,7 +347,7 @@ class Apiv1Controller extends Controller
     if (!$user_id) {
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
-  
+
 
 
     $ids = liveAttemp::where('users_id', $user_id->id)->where('testtype', 'normal')->where('type', 'result')->pluck('live_exams_id')->all();
@@ -361,10 +360,10 @@ class Apiv1Controller extends Controller
     )->whereIn('id', $ids)
 
       ->get()
-      ->map(function ($item) {  
-          $type = $item->attm->type;
-          $TestID =  $item->attm->slugid;
-        
+      ->map(function ($item) {
+        $type = $item->attm->type;
+        $TestID =  $item->attm->slugid;
+
 
 
         $start = $item->start;
@@ -519,7 +518,7 @@ class Apiv1Controller extends Controller
           $mock = new liveAttempQuestion();
           $mock->users_id =  $user_id->id;
           $mock->questions_id = $value;
-          $mock->live_exams_id = $Attemp->id;
+          $mock->live_attemps_id = $Attemp->id;
           $mock->save();
         }
         return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
@@ -714,7 +713,7 @@ class Apiv1Controller extends Controller
 
   public function getProductFilter(Request $request)
   {
-    $data = Product::where('type', $request->type);
+    $data = Product::where('type', $request->type)->get();
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
@@ -886,6 +885,644 @@ class Apiv1Controller extends Controller
   }
 
 
+
+  public function getLiveData(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->examination)) {
+      return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+    }
+    $examination_id =  liveExam::select('id')->where("slugid", $request->examination)->first();
+
+    if (!$examination_id) {
+      return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    }
+
+    if (empty($request->testId)) {
+      return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    }
+    $testId =  liveAttemp::select('id')->where("slugid", $request->testId)->first();
+
+    if (!$testId) {
+      return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    }
+
+
+    $bodyStart  = '<!DOCTYPE html>
+        <html class="no-js" lang="zxx">
+        
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        
+          <style type="text/css">
+            .hidden {
+              display: none !important;
+            }
+        
+            .shown {
+              display: block;
+            }
+        
+            body {
+              padding: 20px;
+            }
+        
+            .span {
+              color: black;
+              font-size: 1.4rem;
+            }
+        
+            p {
+              margin: 0;
+            }
+        
+            h3 {
+              font-size: 20px;
+            }
+        
+            .box-shadows {
+              box-shadow: none;
+              padding: 10px;
+              margin-bottom: 30px;
+              border: 1px solid #e5dfdf;
+            }
+        
+            .accordion {
+              margin-bottom: 30px;
+            }
+        
+            .according_tab .card-header button {
+              border: 0;
+              font-size: 18px;
+              text-decoration: none;
+              color: #000;
+              padding: 0;
+            }
+        
+            .card-header {
+              padding: 0 10px;
+            }
+        
+            .solutions {}
+        
+            .solutions p {
+              font-size: 18px;
+              color: #000;
+            }
+        
+            .checkbox-custom,
+            .radio-custom {
+              opacity: 0;
+              position: absolute;
+              height: 40px;
+            }
+        
+            .checkbox-custom,
+            .checkbox-custom-label,
+            .radio-custom,
+            .radio-custom-label {
+              display: inline-block;
+              vertical-align: middle;
+              margin: 5px;
+              cursor: pointer;
+            }
+        
+            input[type="checkbox"]~label,
+            input[type="radio"]~label {
+              border: 1px solid #b0a7a7;
+              width: 98%;
+              padding: 8px;
+            }
+        
+            .checkbox-custom-label,
+            .radio-custom-label {
+              position: relative;
+            }
+        
+            .checkbox-custom+.checkbox-custom-label:before,
+            .radio-custom+.radio-custom-label:before {
+              content: "";
+              background: #fff;
+              border: 2px solid #ddd;
+              display: inline-block;
+              vertical-align: middle;
+              width: 20px;
+              height: 20px;
+              padding: 2px;
+              margin-right: 10px;
+              text-align: center;
+            }
+        
+            .checkbox-custom:checked+.checkbox-custom-label:before {
+              content: "\f00c";
+              font-family: "FontAwesome";
+              background: rebeccapurple;
+              color: #fff;
+            }
+        
+            .radio-custom+.radio-custom-label:before {
+              border-radius: 0 !important;
+              width: 100%;
+              height: 28px;
+              opacity: 0;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+        
+            .radio-custom:checked+.radio-custom-label:before {
+              content: "";
+              /*  content: "\f00c";
+           font-family: "FontAwesome";
+            color: #000;*/
+              position: absolute;
+              top: 0;
+              width: 99.5%;
+              height: 28px;
+              border-radius: 0 !important;
+              z-index: -1;
+              border-color: #03a9f4;
+              opacity: 1;
+            }
+        
+            .checkbox-custom:focus+.checkbox-custom-label,
+            .radio-custom:focus+.radio-custom-label {
+              outline: 1px solid #ddd;
+              /* focus style */
+            }
+        
+            input[type="radio"]~label::after {
+              opacity: 0 !important;
+            }
+        
+            .card-header {
+              background-color: transparent;
+              text-align: center;
+              border: none;
+            }
+        
+            button:focus {
+              outline: 0;
+            }
+        
+            .question-answer {
+              display: flex;
+              justify-content: end;
+              margin-top: 10px;
+            }
+        
+            .question-answer p {}
+        
+            .question-answer p svg {
+              width: 35px;
+              height: 35px;
+              cursor: pointer;
+              border-radius: 50px;
+              padding: 2px;
+              margin-right: 15px;
+            }
+            .bi-check2 {
+              color: #fff;
+              background: green;
+            }
+            .bi-check-all {
+              color: #fff;
+              background: red;
+            }
+            .bi-x {
+              color: #fff;
+              background: #3f51b5;
+            }
+            @media (max-width: 767px) {
+              body {
+                padding: 0;
+              }
+              input[type="checkbox"]~label,
+              input[type="radio"]~label {
+                width: 93%;
+              }
+              .radio-custom:checked+.radio-custom-label:before {
+                width: 97.5%;
+                height: 91%;
+              }
+            }
+          </style>
+        </head>
+        <body>
+         
+          <div class="d-grid gap-2 mt-4 box-shadows">
+            <h4 class="question">';
+
+    $html1 = '</h4>
+        <div class="btn" onclick="myFunction(this)" id="1">
+          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-1" class="radio-custom-label">A. <span>';
+    $html2 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="2">
+          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-2" class="radio-custom-label">B. <span>';
+
+    $html3 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="3">
+          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-3" class="radio-custom-label">C. <span>';
+    $html4 = '</span></label>
+        </div>
+        <div class="btn" onclick="myFunction(this)" id="4">
+          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+          <label for="radio-4" class="radio-custom-label">D. <span>';
+    $html5 = '</span></label>
+        </div>
+      </div>
+      
+      <script>
+        var navicon = document.getElementById("navicon");
+        var navEl = document.getElementById("collapseOne");
+        function toggleMenu() {
+          navEl.classList.toggle("hidden");
+        };
+        navicon.addEventListener("click", toggleMenu, false);
+        function myFunction(elem) {
+          JSInterface.select("selOpt" + elem.id);
+    
+        }
+      </script>
+    
+    </body>
+    
+    </html>';
+
+
+
+
+    $data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user_id) {
+      $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id->id);
+    }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('live_exams_id', $examination_id->id)
+      ->get()
+      ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+
+        if ($d['type'] != "resume") {
+          return "Test not resume";
+        } else if ($d['type'] = "resume") {
+
+          return [
+            "testID" => $d->slugid,
+            "languageId" => $d->language->id,
+            "languageName" => $d->language->languagename,
+            "examId" => $d->examination->slugid,
+            "lastQues" => $d->lastQues,
+            "type" => $d->mocktesttype,
+            "time" => $d->remain_time,
+            "languages" => $d->examination->lang->map(function ($langg) {
+              return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
+            }),
+            "wMarks" => $d->examination->wrongmarks,
+            "rMarks" => $d->examination->rightmarks,
+            'noQues' => $d->examination->noQues,
+            "questionslist" => $d->examination->examQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+
+
+
+
+              return collect([
+                "questionId" => $fff->question->liveAttemp->id,
+                "s" => $fff->question->liveAttemp->QuesSeen,
+                "optSel" => $fff->question->liveAttemp->QuesSelect,
+                "time" => $fff->question->liveAttemp->time,
+                "question" => $fff->question->secondquestion
+
+                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+
+
+
+
+                    return collect([
+                      "id" => $ques->language->id,
+                      "language" => $ques->language->languagename,
+                      "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                    ]);
+                  })
+              ]);
+            })
+          ];
+        }
+      });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+
+
+  public function getLiveSolution(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->examination)) {
+      return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+    }
+    $examination_id =  liveExam::select('id')->where("slugid", $request->examination)->first();
+
+    if (!$examination_id) {
+      return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    }
+
+    if (empty($request->testId)) {
+      return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    }
+    $testId =  liveAttemp::select('id')->where("slugid", $request->testId)->first();
+
+    if (!$testId) {
+      return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    }
+
+
+    $htm1  = '
+        <!DOCTYPE html><html class="no-js" lang="zxx">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
+            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+.span {
+    color: black;
+    font-size: 1.4rem;
+}
+
+p {
+  margin: 0;
+}
+h3 {
+      font-size: 20px;
+}
+.box-shadows {
+       box-shadow: none;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #e5dfdf;
+}
+.accordion {
+  margin-bottom: 30px;
+}
+.according_tab .card-header button {
+      border: 0;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+      padding: 0;
+}
+.card-header {
+    padding: 0 10px;
+}
+.solutions {
+
+}
+.solutions p {
+      font-size: 18px;
+    color: #000;
+}
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;  
+        height: 40px; 
+}
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+input[type="checkbox"]~label, input[type="radio"]~label {
+      border: 1px solid #b0a7a7;
+    width: 100%;
+    padding: 8px;
+}
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: "";
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f00c";
+    font-family: "FontAwesome";
+    background: rebeccapurple;
+    color: #fff;
+}
+
+.radio-custom + .radio-custom-label:before {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 42px;
+    opacity: 0;
+}
+@media (max-width: 767px) {
+	.radio-custom:checked + .radio-custom-label:before {
+		    height: 100% !important;
+	}
+}
+.radio-custom:checked + .radio-custom-label:before {
+  content: "";
+   /*  content: "\f00c";
+   font-family: "FontAwesome";
+    color: #000;*/
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 42px;
+    border-radius: 0 !important;
+    z-index: -1;
+    border-color: #03a9f4;
+    opacity: 1;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
+}
+input[type="radio"]~label::after {
+  opacity: 0 !important;
+}
+.card-header {
+  background-color: transparent;
+  text-align: center;
+      border: none;
+}
+button:focus {outline:0;}
+.question-answer {
+  display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+.question-answer p {
+
+}
+.question-answer p svg{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 2px;
+    margin-right: 15px;
+}
+.bi-check2 {
+      color: #fff;
+    background: green;
+}
+.bi-check-all {
+  color: #fff;
+    background: red;
+}
+.bi-x {
+  color: #fff;
+    background: #3f51b5;
+}
+</style>
+
+  </head>
+<body>
+
+
+<div class="according_tab">
+ 
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Direction</button>
+        </h2>
+      </div>
+
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+        ';
+    $htmlDirection = '</div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+  
+  
+  <div class="d-grid gap-2 mt-4 box-shadows">
+      <h4 class="question">';
+
+    $html1 =  '</h4>
+        <div onclick="myFunction(this)" id="1">
+            <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+            <label for="radio-1" class="radio-custom-label"><span> A.</span>
+            ';
+    $html2  = '</label>
+        </div>
+        <div onclick="myFunction(this)" id="2">
+            <input id="radio-2" class="radio-custom"name="radio-group" type="radio">
+            <label for="radio-2" class="radio-custom-label"><span>B.</span>';
+    $html3 = ' </label>
+        </div>
+        <div onclick="myFunction(this)" id="3">
+            <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+            <label for="radio-3" class="radio-custom-label"><span>C.</span>';
+    $html4 = '</label>
+        </div>
+        <div onclick="myFunction(this)" id="4">
+            <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+            <label for="radio-4" class="radio-custom-label"><span>D.</span>';
+    $htmlexplain = '</label>
+            </div>       
+        <div class="box-shadows explanation">';
+    $html5 =  '</div> 
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    
+        </body>
+        
+        </html>';
+
+
+    $data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user_id) {
+      $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id->id);
+    }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('live_exams_id', $examination_id->id)
+      ->get()
+      ->map(function ($d) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+
+        if ($d['type'] == "resume") {
+          return "Test not Complete";
+        } else if ($d['type'] == "result") {
+
+          return [
+            "testID" => $d->slugid,
+            "languageId" => $d->language->id,
+            "languageName" => $d->language->languagename,
+            "examId" => $d->examination->slugid,
+            "lastQues" => $d->lastQues,
+            "time" => $d->remain_time,
+            "languages" => $d->examination->lang->map(function ($langg) {
+              return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
+            }),
+            "wMarks" => $d->examination->wrongmarks,
+            "rMarks" => $d->examination->rightmarks,
+            'noQues' => $d->examination->noQues,
+            "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+              $aaa = false;
+              if ($fff->question->rightans == $fff->question->liveAttemp->QuesSelect) {
+                $aaa = true;
+              } else {
+                $aaa = false;
+              }
+              return collect([
+                "questionId" => $fff->question->liveAttemp->id,
+                "seen" => $fff->question->liveAttemp->QuesSeen,
+                "optSel" => $fff->question->liveAttemp->QuesSelect,
+                "time" => $fff->question->liveAttemp->time,
+                "isRight" => $aaa,
+                "question" => $fff->question->secondquestion
+
+                  ->map(function ($ques) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+                    return collect([
+                      "id" => $ques->language->id,
+                      "language" => $ques->language->languagename,
+                     "QuestioninHtml" => $htm1 . $ques->direction . $htmlDirection . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $htmlexplain . $ques->explanation . $html5
+                    ]);
+                  })
+              ]);
+            })
+          ];
+        }
+      });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+  
 
   public function getExamData(Request $request)
   {
@@ -2280,6 +2917,96 @@ button:focus {outline:0;}
   }
 
 
+  public function submitLive(Request $request)
+  {
+
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+
+    $user =  User::select('id')->where('slugid', $request->user)->first();
+
+    if (!$user) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+    if (empty($request->examination)) {
+      return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+    }
+
+    $examination_id =  Examination::where("slugid", $request->examination)->first();
+
+    if (!$examination_id) {
+      return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    }
+
+    $testId = liveAttemp::where("slugid", $request->testId)->where("live_exams_id", $examination_id->id)
+      ->where("users_id", $user->id)->first();
+
+
+      if ( sizeof($request->array)==0 ) { // If more than 0
+        return response()->json(['msg' => 'Array size 0', 'status' => false]);
+     } 
+
+
+
+    foreach ($request->array as $index => $value) {
+      if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
+
+        $dd = liveAttempQuestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->update(
+          [
+            "QuesSeen" => $value["seenType"],
+            "QuesSelect" => $value['optSel'],
+            "time" => $value['time']
+          ]
+        );
+      }
+
+
+
+      // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
+
+      // echo json_encode($value);
+
+    }
+
+
+    $type = "resume";
+    if ($request->type == "submit") {
+      $type = "result";
+
+
+
+
+
+      $rMarks  = $examination_id->rightmarks;
+      $wMarks = "-" . $examination_id->wrongmarks;
+      
+      $total = Question::leftjoin('live_attemp_questions', function ($join) use ($rMarks, $wMarks) {
+        $join->on('questions.id', '=', 'live_attemp_questions.questions_id');
+      })->select(
+        'questions.*',
+        'mockattempquestions.*',
+        DB::raw('(CASE WHEN questions.rightans = live_attemp_questions.QuesSelect THEN ' . $rMarks . '
+               ELSE ' . $wMarks . ' END) AS total')
+      )->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->get();
+      $total = $total->sum('total');
+      $testIds = $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+          "type" => $type,
+          "totalmarks" => $total,
+        ]
+      );
+
+      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+    }
+
+
+    return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
+  }
+
   public function submitQuiz(Request $request)
   {
 
@@ -2371,7 +3098,115 @@ button:focus {outline:0;}
   }
 
 
+  public function resultLive(Request $request)
+  {
+    if (empty($request->userId)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->userId)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->examinationId)) {
+      return response()->json(['msg' => 'Enter Examination', 'status' => false]);
+    }
+    $examination_id =  liveExam::select('id')->where("slugid", $request->examinationId)->first();
 
+    if (!$examination_id) {
+      return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
+    }
+
+    if (empty($request->testId)) {
+      return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
+    }
+    $testId =  liveAttemp::select('id', 'type')->where("slugid", $request->testId)->first();
+
+    if (!$testId) {
+      return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+    }
+
+    if ($testId->type == "resume") {
+
+      return response()->json(['msg' => 'Test not Complete', 'status' => false]);
+    }
+
+
+    $data = liveAttemp::with(
+      ['examination' => function ($q) use ($testId, $user_id) {
+
+        $q->with(['examQ' => function ($q) use ($testId, $user_id) {
+
+          $q->with(['question.liveAttemp' => function ($q) use ($testId, $user_id) {
+            $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id->id)->orderBy('questions_id', 'DESC');
+          }]);
+        }]);
+      }]
+    )
+      ->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('live_exams_id', $examination_id->id)
+      ->get()
+      ->map(
+        function ($d) {
+
+        
+          return [
+            "testID" => $d->slugid,
+            "examId" => $d->examination->slugid,
+            "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+            "languages" => $d->examination->lang->map(function ($langg) {
+              return [
+                "id" => $langg->language->id,
+                "language" => $langg->language->languagename,
+              ];
+            }),
+            "wMarks" => $d->examination->wrongmarks,
+            "rMarks" => $d->examination->rightmarks,
+            'noQues' => $d->examination->noQues,
+            "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
+
+              $resaaa = "skip";
+              if ($fff->question->liveAttemp->QuesSeen == "true") {
+                if (empty($fff->question->liveAttemp->QuesSelect)) {
+                  $color = "#797980";
+                  $resaaa = "visited";
+                } else if ($fff->question->rightans != $fff->question->liveAttemp->QuesSelect) {
+                  $color = "#FF0000";
+                  $resaaa = "wrong";
+                } else if ($fff->question->rightans = $fff->question->liveAttemp->QuesSelect) {
+                  $color = "#008000";
+                  $resaaa = "right";
+                }
+              } else {
+                $color = "#3e3a3a";
+                $resaaa = "skip";
+              }
+
+
+              return collect([
+                "questionId" => $key + 1,
+                "color" => $color,
+                "final" => $resaaa,
+
+              ]);
+            }),
+
+          ];
+        }
+      )[0];
+
+
+    $data['visted'] = count($data['questionslist']->where('final', 'visited'));
+    $data['right'] = count($data['questionslist']->where('final', 'right'));
+    $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
+    $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+    $data['Attemped'] = 10;
+    $data['Accuracy'] = 4.3;
+    $data['Score'] = 2.5;
+    $data['Percentile'] = 3.5;
+    $data['Rank'] = 3.5;
+
+
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
 
 
 

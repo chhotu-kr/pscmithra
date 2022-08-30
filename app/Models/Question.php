@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\livetest\liveAttempQuestion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,10 @@ class Question extends Model
       }
       public function mockAttemp(){
         return $this->hasOne(mockattempquestion::class,'questions_id','id');
+      }
+
+      public function liveAttemp(){
+        return $this->hasOne(liveAttempQuestion::class,'questions_id','id');
       }
      
       public function quizAttemp(){

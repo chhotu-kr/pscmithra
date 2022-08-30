@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id')->constrained();
             $table->foreignId('questions_id')->constrained();
-            $table->foreignId('live_exams_id')->constrained();
+            $table->foreignId('live_attemps_id')->constrained();
             $table->enum('QuesSeen',['true','false'])->default('false');
             $table->string('QuesSelect')->nullable();
             $table->integer('time')->default(0);

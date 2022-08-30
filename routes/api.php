@@ -50,12 +50,15 @@ Route::post('/submitQuiz',[Apiv1Controller::class,'submitQuiz']);
 
 Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);
 
+
+
 Route::post('/liveExam',[Apiv1Controller::class,'getLiveExam']);
 Route::post('/liveResultExam',[Apiv1Controller::class,'getResultExam']);
-
 Route::post('/prepare-liveExam',[Apiv1Controller::class,'prepareLiveExam']);
-
-
+Route::post('/getLiveData',[Apiv1Controller::class,'getLiveData']);
+Route::post('/getsolution-live',[Apiv1Controller::class,'getLiveSolution']);
+Route::post('/submitLive',[Apiv1Controller::class,'submitLive']);
+Route::post('/getresuslt-live',[Apiv1Controller::class,'resultLive']);
 
 
 
