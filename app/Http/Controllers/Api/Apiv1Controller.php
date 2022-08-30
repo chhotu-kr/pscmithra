@@ -2988,7 +2988,7 @@ button:focus {outline:0;}
         $join->on('questions.id', '=', 'live_attemp_questions.questions_id');
       })->select(
         'questions.*',
-        'mockattempquestions.*',
+        'live_attemp_questions.*',
         DB::raw('(CASE WHEN questions.rightans = live_attemp_questions.QuesSelect THEN ' . $rMarks . '
                ELSE ' . $wMarks . ' END) AS total')
       )->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->get();
