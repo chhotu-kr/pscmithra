@@ -10,6 +10,14 @@ class liveAttemp extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+      "remain_time",
+      "lastQues",
+      "type",       
+      "totalmarks"
+  
+    ];
+
     public function examination()
     {
       return  $this->belongsTo(liveExam::class, 'live_exams_id');
