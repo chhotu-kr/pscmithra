@@ -7,9 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class liveAttempQuestion extends Model
 {
-
-
-
-    
     use HasFactory;
 }
