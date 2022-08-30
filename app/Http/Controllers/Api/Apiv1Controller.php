@@ -2936,7 +2936,7 @@ button:focus {outline:0;}
       return response()->json(['msg' => 'Enter Examination', 'status' => false]);
     }
 
-    $examination_id =  Examination::where("slugid", $request->examination)->first();
+    $examination_id =  liveExam::where("slugid", $request->examination)->first();
 
     if (!$examination_id) {
       return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
