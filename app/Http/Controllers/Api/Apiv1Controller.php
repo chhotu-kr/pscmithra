@@ -3002,7 +3002,7 @@ button:focus {outline:0;}
         ]
       );
 
-      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
     }
 
 
