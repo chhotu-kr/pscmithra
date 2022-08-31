@@ -61,6 +61,11 @@ Route::post('/submitLive',[Apiv1Controller::class,'submitLive']);
 Route::post('/getresuslt-live',[Apiv1Controller::class,'resultLive']);
 
 
+Route::post('/getresuslt-live-re',[Apiv1Controller::class,'resultLive']);
+Route::post('/getexam-resuslt-re',[Apiv1Controller::class,'getexamResult']);
+
+Route::post('/getquiz-resuslt-re',[Apiv1Controller::class,'get_Result']);
+
 
 
 
@@ -84,6 +89,9 @@ Route::get('/study-metrial-data',[Apiv1Controller::class,'get_SMetrial_data'])->
 Route::post('/getexam-resuslt',[Apiv1Controller::class,'getexamResult']);
 
 Route::post('/getquiz-resuslt',[Apiv1Controller::class,'get_Result']);
+
+
+
 
 Route::post('/getsolution-quiz',[Apiv1Controller::class,'get_QuizSolutions']);
 
