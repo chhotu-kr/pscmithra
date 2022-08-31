@@ -4,12 +4,12 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <div class="page-title">
-                    <h1 class="title">Quiz Chapter</h1>
+                    <h1 class="title">Attempt</h1>
                 </div>
                 <ul class="education-breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('view.home') }}">Home</a></li>
                     <li class="separator"><i class="icon-angle-right"></i></li>
-                    <li class="breadcrumb-item active" aria-current="page">Quiz Chapter</li>
+                    <li class="breadcrumb-item active" aria-current="page">Attempt</li>
                 </ul>
             </div>
         </div>
@@ -26,44 +26,7 @@
     </div>
 
 
-    {{-- <div class="features-area-3">
-    <div class="container">
-        <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-            <h2 class="title">Online Test <span class="color-primary">Series</span></h2>
-        </div>
-        <div class="features-grid-wrap">
-            <div class="features-box features-style-3 color-primary-style edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/scholarship-facility.svg')}}" alt="animated icon">
-                    <!-- <i class="icon-34"></i> -->
-                </div>
-                <div class="content">
-                    <h4 class="title">Scholarship Facility</h4>
-                    <p>Lorem ipsum dolor sit amet cont adipiscing elit.</p>
-                </div>
-            </div>
-            <div class="features-box features-style-3 color-secondary-style edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/skilled-lecturers.svg')}}" alt="animated icon">
-                </div>
-                <div class="content">
-                    <h4 class="title">Skilled Lecturers</h4>
-                    <p>Lorem ipsum dolor sit amet cont adipiscing elit.</p>
-                </div>
-            </div>
-            <div class="features-box features-style-3 color-extra02-style edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets/images/animated-svg-icons/book-library.svg')}}" alt="animated icon">
-                    <!-- <i class="icon-36"></i> -->
-                </div>
-                <div class="content">
-                    <h4 class="title">Book Library &amp; Store</h4>
-                    <p>Lorem ipsum dolor sit amet cont adipiscing elit.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
+
     <div class="row">
 
     </div>
@@ -71,30 +34,10 @@
         <div class="container">
             <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up"
                 data-sal-duration="800">
-                <h2 class="title">Select Your <span class="color-primary">Quiz Chapter</span></h2>
+                <h2 class="title">Attempt Free <span class="color-primary">{{ $cat->subcategory }} Exam Mock Text</span></h2>
             </div>
             <div class="col-12 ms-3 ">
-
-                @livewire('user.quiz-chapter', ['chapter' => $chapter])
-
-                {{-- <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
-                    @foreach ($chapter as $item)
-                        <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                            <a href="{{ route('view.quiztopicpage',$item->id) }}">
-                                <div class="categorie-grid categorie-style-3 color-primary-style">
-                                    <div class="icon">
-                                        <i class="icon-9"></i>
-                                    </div>
-                                    <div class="content">
-                                        <h5 class="title">{{ $item->name }}</h5>
-                                    </div>
-                                </div>
-                            </a>
-
-                        </div>
-                    @endforeach
-
-                </div> --}}
+                @livewire('user.mocktest', ['cat_id' => $cat_id,'sub_cat_id' => $sub_cat_id])
             </div>
             <div class="education-categorie-area categorie-area-3 education-section-gap bg-image bg-image--4"
                 id="categories">
@@ -231,3 +174,20 @@
         </div>
     </div>
 @endsection
+            
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

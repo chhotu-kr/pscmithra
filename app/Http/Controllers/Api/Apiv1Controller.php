@@ -429,9 +429,7 @@ class Apiv1Controller extends Controller
     $data = Examination::where('category_id', $category_id)->where('subcategory_id', $subcategory_id)
       ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
         $q->where('users_id', $user_id->id)->where('mocktesttype', 'normal');
-      }])
-
-      ->get()
+      }])->get()
       ->map(function ($item) {
         $free = $item->isFree;
         $type = "Buy";

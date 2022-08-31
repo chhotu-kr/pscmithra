@@ -75,10 +75,11 @@
             </div>
             <div class="col-12 ms-3 ">
 
-                <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+                @livewire('user.quiz-topic', ['topic' => $topic])
+                {{-- <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
                     @foreach ($topic as $item)
                         <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                            <a href="{{ route('view.quizpage',$item->id) }}">
+                            <a href="{{ route('view.quizpage',["topic"=>$item->id]) }}">
                                 <div class="categorie-grid categorie-style-3 color-primary-style">
                                     <div class="icon">
                                         <i class="icon-9"></i>
@@ -92,7 +93,7 @@
                         </div>
                     @endforeach
 
-                </div>
+                </div> --}}
             </div>
             <div class="education-categorie-area categorie-area-3 education-section-gap bg-image bg-image--4"
                 id="categories">

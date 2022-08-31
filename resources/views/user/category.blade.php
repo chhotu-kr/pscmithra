@@ -74,7 +74,7 @@
                     <div class="categorie-grid categorie-style-3 color-primary-style">
                         <div class="icon">
                             <i class="icon-9"></i>
-                        </div>
+                         </div>
                         <div class="content">
                             <h5 class="title">{{$item->category}}</h5>
                         </div>

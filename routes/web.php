@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/view/home',[HomeController::class,'get_ViewHome'])->name('view.home');
 Route::get('/mock-test/category',[HomeController::class,'get_Category'])->name('view.category');
+Route::get('/mock-test-exam',[HomeController::class,'get_MockTest'])->name('view.mocktestexam');
 Route::get('/mock-test/category/details/{id}',[HomeController::class,'get_ViewCatDetails'])->name('view.categorydetails');
 Route::get('/view/blog',[HomeController::class,'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details',[HomeController::class,'get_ViewBlogDetails'])->name('view.blogdetails');
@@ -70,7 +71,7 @@ Route::get('/quizes/category',[HomeController::class,'get_Quiz'])->name('view.qu
 Route::get('/quizes/category/details/{id}',[HomeController::class,'get_ViewQuizDetail'])->name('view.quizdetails');
 Route::get('/quizes/category/chapter/{id}',[HomeController::class,'get_Quiz_SubCategory'])->name('view.quizchapter');
 Route::get('/quizes/category/chapter/topic/{id}',[HomeController::class,'get_TopicPage'])->name('view.quiztopicpage');
-Route::get('/quizes/{id}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');
+Route::get('/quizes/{cat?}{sub_cat?}{chapter?}{topic?}',[HomeController::class,'get_QuizPage'])->name('view.quizpage');
 
 Route::get('/mock-test/study/metrial',[HomeController::class,'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login',[HomeController::class,'get_Login'])->name('user.login');
