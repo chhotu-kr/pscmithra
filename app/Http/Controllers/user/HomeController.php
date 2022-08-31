@@ -10,7 +10,9 @@ use App\Models\QuizChapter;
 use App\Models\SecondQuestion;
 use App\Models\SubCategory;
 use App\Models\QuizSubCategory;
+use App\Models\QuizTopic;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
 
 class HomeController extends Controller
@@ -55,7 +57,7 @@ class HomeController extends Controller
    //................CategoryDetails................//
     public function get_ViewCatDetails($id){
         
-        $data['catdetail']=$id;
+        $data['catdetail'] = $id;
         return view('user.ViewCategorydetails',$data);
     }
    //...............Blog...................//
@@ -80,9 +82,53 @@ class HomeController extends Controller
 
     public function get_Quiz(){
         //   $data['quizcat']=$id;
- 
-        return view('user.ViewQuiz');
+        $data['quizcat'] = QuizCategory::all();
+        $data['quizsubcat'] = QuizSubCategory::all();
+        return view('user.ViewQuiz',$data);
     }
+    //..............Quiz Detail...........//
+    public function get_ViewQuizDetail($id){
+        $quizData = QuizCategory::where('id',$id)->first(); 
+        if($quizData->ifnested == "true"){
+            $data['quizdetail'] = $id;
+        }
+        else{
+            return redirect()->route('view.quizpage' ,$id);
+
+        }
+        return view('user.QuizCategory',$data);
+    }
+
+    //............... Quiz Chapter..............//
+   public function get_Quiz_SubCategory($id){
+    $sub = QuizSubCategory::where('id',$id)->first();
+
+    if($sub->ifnested == "true"){
+        $data['chapter']=QuizChapter::where('quiz_sub_categories',$id)->get();
+    }
+    else{
+        return redirect()->route('view.quizpage', $id);
+    }
+    return view("user.Quiz_QuizChapter",$data);
+   }
+   //..............Topic Page..................//
+
+   public function get_TopicPage($id){
+    $cha = QuizChapter::where('id',$id)->first();
+
+    if($cha->ifnested == "true"){
+        $data['topic']=QuizTopic::where('quiz_chapters',$id)->get();
+    }
+    else{
+        return redirect()->route('view.quizpage', $id);
+    }
+    return view("user.Quiz_TopicPage",$data);
+   
+   }
+   //...............Quiz Page..................//
+   public function get_QuizPage(Request $req,$id){
+    return view('user.QuizPage');
+   }
     //..............StudyMetrial.................//
 
     public function get_Study_Metrial(){
@@ -117,8 +163,8 @@ class HomeController extends Controller
    //..................QuizChapter...............//
 
    public function get_QuizChapt(){
-    $data['chapt']=QuizChapter::all();
-   
+    $data['chap']=QuizChapter::all();
+  
     return view('user.QuizChapter',$data);
    }
 

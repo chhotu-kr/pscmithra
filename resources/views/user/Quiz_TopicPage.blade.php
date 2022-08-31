@@ -4,12 +4,12 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <div class="page-title">
-                    <h1 class="title">QuizCategory</h1>
+                    <h1 class="title">Quiz Topic</h1>
                 </div>
                 <ul class="education-breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('view.home') }}">Home</a></li>
                     <li class="separator"><i class="icon-angle-right"></i></li>
-                    <li class="breadcrumb-item active" aria-current="page">QuizCategory</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quiz Topic</li>
                 </ul>
             </div>
         </div>
@@ -71,10 +71,28 @@
         <div class="container">
             <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up"
                 data-sal-duration="800">
-                <h2 class="title">Select Your <span class="color-primary">Quiz Category</span></h2>
+                <h2 class="title">Select Your <span class="color-primary">Quiz Topic</span></h2>
             </div>
             <div class="col-12 ms-3 ">
-                @livewire('user.quiz', ['id' => $quizdetail])
+
+                <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+                    @foreach ($topic as $item)
+                        <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                            <a href="{{ route('view.quizpage',$item->id) }}">
+                                <div class="categorie-grid categorie-style-3 color-primary-style">
+                                    <div class="icon">
+                                        <i class="icon-9"></i>
+                                    </div>
+                                    <div class="content">
+                                        <h5 class="title">{{ $item->name }}</h5>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    @endforeach
+
+                </div>
             </div>
             <div class="education-categorie-area categorie-area-3 education-section-gap bg-image bg-image--4"
                 id="categories">
@@ -211,129 +229,3 @@
         </div>
     </div>
 @endsection
-            {{-- <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
-            @foreach ($cate as $item)
-            <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <a href="{{route('view.categorydetails')}}">
-                    <div class="categorie-grid categorie-style-3 color-primary-style">
-                        <div class="icon">
-                            <i class="icon-9"></i>
-                        </div>
-                        <div class="content">
-                            <h5 class="title">{{$item->name}}</h5>
-                        </div>
-                    </div>
-                </a>
-                
-            </div>
-            @endforeach --}}
-            {{-- <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-secondary-style">
-                    <div class="icon">
-                        <i class="icon-10"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Regulatory Bodies</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="200" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra04-style">
-                    <div class="icon">
-                        <i class="icon-11"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">SSC & Railway</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="250" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-tertiary-style">
-                    <div class="icon">
-                        <i class="icon-12"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">GATE & PSU CS</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra02-style">
-                    <div class="icon">
-                        <i class="icon-13"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE EE</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra07-style">
-                    <div class="icon design-pencil-icon">
-                        <i class="icon-42"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE EC</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra06-style">
-                    <div class="icon">
-                        <i class="icon-14"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE ME</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="200" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra03-style">
-                    <div class="icon laptop-icon">
-                        <i class="icon-16"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE CE</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="250" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra01-style">
-                    <div class="icon">
-                        <i class="icon-17"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Photography</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra05-style">
-                    <div class="icon">
-                        <i class="icon-43"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Music Class</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </div> --}}
-   

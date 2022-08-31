@@ -1,50 +1,20 @@
-<div>
-    {{-- The Master doesn't talk, he acts. --}}
 
-    <div class="card-body">
-      {{-- <h5 class="card-title">Vertical Pills Tabs</h5> --}}
 
-    
-      <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          @foreach ($quizcategory as $item)
-                 <button  id="{{$item->slugid}}" data-bs-toggle="pill" data-bs-target="#tab-{{$item->slugid}}" type="button" role="tab" aria-controls="tab-{{$item->slugid}}"
-                                @if($item->id==$idasd)
-                                 class="nav-link active"
+<div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+    @foreach ($quizsubcategory as $item)
+        <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+            <a href="{{ route('view.quizchapter',$item->id) }}" >
+                <div class="categorie-grid categorie-style-3 color-primary-style">
+                    <div class="icon">
+                        <i class="icon-9"></i>
+                    </div>
+                    <div class="content">
+                        <h5 class="title">{{ $item->name }}</h5>
+                    </div>
+                </div>
+            </a>
 
-                                 @else
-                                 class="nav-link"
-                                    @endif
-                                   
-                                 >{{$item->name}}</button> 
-          @endforeach
-{{-- {{print_r($item)}} --}}
-         
         </div>
-        <div class="tab-content" id="v-pills-tabContent">
-       
-            @foreach ($quizcategory as $item)
-              <div 
-                @if($item->id==$idasd)
-                   class="tab-pane fade show active"
-                   @else
-                  class="tab-pane fade"
-                @endif
-                  id="tab-{{$item->slugid}}" role="tabpanel" aria-labelledby="{{$item->slugid}}">
-               @foreach ($item->subcategory as $sub)
-              
-               
-                  {{$sub->name}}
-              
-                @endforeach
-              </div>
-            @endforeach
-        </div>
-       
-      </div>
+    @endforeach
 
-
-  </div>   
-
-    
 </div>

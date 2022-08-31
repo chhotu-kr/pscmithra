@@ -3,19 +3,20 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\QuizCategory;
+use App\Models\QuizSubCategory;
 use Livewire\Component;
 
 class Quiz extends Component
 {
      public $quizcategory;
      public $quizcategoryId;
-// public $quizsubcategory;
-// public $quisubzcategoryId;
+
         public $idasd;
 
-     public function mount(){
-        // $this->idasd=$id;
-      $this->quizcategory=QuizCategory::with('subcategory')->get();;
+
+     public function mount($id){
+        $this->idasd=$id;
+        $this->quizsubcategory = QuizSubCategory::where('quiz_categories',$id)->get();
    
      }
 

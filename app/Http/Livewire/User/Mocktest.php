@@ -4,6 +4,8 @@ namespace App\Http\Livewire\User;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SubCategory;
+
 class Mocktest extends Component
 {
     public $category;
@@ -13,6 +15,7 @@ class Mocktest extends Component
     public function mount($id){
       $this->idd=$id;
       $this->category=Category::all();
+      $this->subcat = SubCategory::where('category_id',$id)->get();
     }
     public function render()
     {
