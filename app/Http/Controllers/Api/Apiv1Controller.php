@@ -3417,7 +3417,7 @@ button:focus {outline:0;}
           return [
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
-            "type" => $d->mocktesttype,
+            "type" => $d->testtype,
             "time" => ($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
