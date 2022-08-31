@@ -90,10 +90,7 @@ class LiveTestController extends Controller
       $data->wrongmarks=$request->wrongmarks;
 $data->start = $start;
 $data->end= $end;
-      
-
-
-
+      $data->time_duration= $request->time_duration;
       $data->marks=$request->marks;
       if(!empty($request->isFree)){
         $data->isFree=$request->isFree;
