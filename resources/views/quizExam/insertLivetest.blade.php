@@ -93,7 +93,12 @@
 
 
               <div class="row">
-
+              <div class="col">
+                          <div class="mb-3">
+                            <label for="">TimeDuration(In Minute)</label>
+                            <input type="number" name="time_duration" class="form-control" required>
+                          </div>
+                        </div>
 
                 <div class="col">
                   <div class="mb-3">

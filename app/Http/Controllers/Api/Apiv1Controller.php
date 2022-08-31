@@ -303,17 +303,18 @@ class Apiv1Controller extends Controller
 
 
         $start = date("Y-m-d h:i:sa",$item->start);
-        // $ss = strtotime("now");
-        // $final_start = $start - $ss;
-        // if ($final_start < 0) {
-        //   $final_start = 0;
-        // }
+        $ss = strtotime("now");
+        $final_start = $item->start - $ss;
+        $status = "start";
+        if ($final_start < 0) {
+          $status = "end";
+        }
 
          $end =date("Y-m-d h:i:sa",$item->end);
 
         // $final_end = $end - $ss;
         // if ($final_end < 0) {
-        //   $final_end = 0;
+        //   $status = "end";
         // }
 
 
@@ -322,11 +323,12 @@ class Apiv1Controller extends Controller
           "id" => $item->slugid,
           "final_start" => $start,
           "final_end" => $end,
+          "status"=>$status,
           "name" => $item->exam_name,
           "totalQues" => $item->noques,
           "marks" => $item->marks,
           "type" => $type,
-          
+          "totalTimeinMints"=>$item->time_duration,
           "languages" => $item->lang->map(function ($lang) {
             return collect([
               "name" => $lang->language->languagename,
@@ -1199,8 +1201,7 @@ class Apiv1Controller extends Controller
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
                 "question" => $fff->question->secondquestion
-
-                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
 
 
 
@@ -1215,7 +1216,8 @@ class Apiv1Controller extends Controller
             })
           ];
         }
-      });
+      })
+      ;
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
@@ -2932,7 +2934,7 @@ button:focus {outline:0;}
       return response()->json(['msg' => 'Enter Examination', 'status' => false]);
     }
 
-    $examination_id =  Examination::where("slugid", $request->examination)->first();
+    $examination_id =  liveExam::where("slugid", $request->examination)->first();
 
     if (!$examination_id) {
       return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
@@ -2984,7 +2986,7 @@ button:focus {outline:0;}
         $join->on('questions.id', '=', 'live_attemp_questions.questions_id');
       })->select(
         'questions.*',
-        'mockattempquestions.*',
+        'live_attemp_questions.*',
         DB::raw('(CASE WHEN questions.rightans = live_attemp_questions.QuesSelect THEN ' . $rMarks . '
                ELSE ' . $wMarks . ' END) AS total')
       )->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->get();
@@ -2998,7 +3000,7 @@ button:focus {outline:0;}
         ]
       );
 
-      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
     }
 
 
