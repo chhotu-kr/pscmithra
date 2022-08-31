@@ -2476,9 +2476,9 @@ button:focus {outline:0;}
         //    ->map(function ($d) use ($htm1, $html1, $html2, $html3, $html4, $html5) {
 
 
-        if ($d['type'] != "resume") {
-          return "Test not resume";
-        } else if ($d['type'] = "resume") {
+        if ($d['type'] == "resume") {
+          return "Test resume";
+        } else if ($d['type'] == "result") {
 
           return collect([
             "testID" => $d->slugid,
@@ -2500,18 +2500,18 @@ button:focus {outline:0;}
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
             "questionslist" => $d->examination->quizexamQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
-              // $aaa="";
-              // if($fff->question->rightans===$fff->question->mockAttemp->QuesSelect){
-              // $aaa =true;
-              // }else{
-              //     $aaa= false;
-              // }
+              $aaa="";
+              if($fff->question->rightans===$fff->question->quizAttemp->QuesSelect){
+              $aaa =true;
+              }else{
+                  $aaa= false;
+              }
               return collect([
                 "questionId" => $fff->question->id,
-                "s" => $fff->question->mockAttemp->QuesSeen,
-                "optSel" => $fff->question->mockAttemp->QuesSelect,
-                "time" => $fff->question->mockAttemp->time,
-                "isRight" => false,
+                "s" => $fff->question->quizAttemp->QuesSeen,
+                "optSel" => $fff->question->quizAttemp->QuesSelect,
+                "time" => $fff->question->quizAttemp->time,
+                "isRight" => $aaa,
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
