@@ -93,7 +93,7 @@ class HomeController extends Controller
             $data['quizdetail'] = $id;
         }
         else{
-            return redirect()->route('view.quizpage' ,$id);
+            return redirect()->route('view.quizpage' ,["cat" => $id]);
 
         }
         return view('user.QuizCategory',$data);
@@ -104,10 +104,10 @@ class HomeController extends Controller
     $sub = QuizSubCategory::where('id',$id)->first();
 
     if($sub->ifnested == "true"){
-        $data['chapter']=QuizChapter::where('quiz_sub_categories',$id)->get();
+        $data['chapter']= $id;
     }
     else{
-        return redirect()->route('view.quizpage', $id);
+        return redirect()->route('view.quizpage', ["sub_cat" => $id]);
     }
     return view("user.Quiz_QuizChapter",$data);
    }
@@ -117,25 +117,34 @@ class HomeController extends Controller
     $cha = QuizChapter::where('id',$id)->first();
 
     if($cha->ifnested == "true"){
-        $data['topic']=QuizTopic::where('quiz_chapters',$id)->get();
+        $data['topic']= $id;
     }
     else{
-        return redirect()->route('view.quizpage', $id);
+        return redirect()->route('view.quizpage', ['chapter' => $id]);
     }
     return view("user.Quiz_TopicPage",$data);
    
    }
    //...............Quiz Page..................//
-   public function get_QuizPage(Request $req,$id){
+   public function get_QuizPage(Request $req,$cat=null,$sub_cat = null,$chapter = null,$topic=null){
     return view('user.QuizPage');
+
    }
+   //.................Mock Test................//
+   public function get_MockTest(Request $request){
+
+    //return dd($request);
+       $data['cat_id'] = $request->cat_id;
+       $data['sub_cat_id'] = $request->sub_cat_id;
+       $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
+    return view('user.MockTest',$data);
+}
     //..............StudyMetrial.................//
 
     public function get_Study_Metrial(){
         return view('user.StudyMetrial');
     }
-
-    
+  
     //...............Login...............//
 
     public function get_Login(){

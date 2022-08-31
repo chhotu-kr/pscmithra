@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\QuizCategory;
+use App\Models\QuizChapter as ModelsQuizChapter;
 use App\Models\QuizSubCategory;
 use Livewire\Component;
 
-class Quiz extends Component
+class QuizChapter extends Component
 {
      public $quizcategory;
      public $quizcategoryId;
@@ -14,9 +15,9 @@ class Quiz extends Component
         public $idasd;
 
 
-     public function mount($cat_id){
-        $this->idasd=$cat_id;
-        $this->quizsubcategory = QuizSubCategory::where('quiz_categories',$cat_id)->get();
+     public function mount($chapter){
+        $this->idasd=$chapter;
+        $this->quizchapter = ModelsQuizChapter::where('quiz_sub_categories',$chapter)->get();
    
      }
 
@@ -24,6 +25,6 @@ class Quiz extends Component
     {
          //dd($this->quizcategory);
 
-        return view('livewire.user.quiz');
+        return view('livewire.user.quiz-chapter');
     }
 }

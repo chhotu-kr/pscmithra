@@ -25,11 +25,13 @@
 <br>
 <br>
 
-@livewire('user.mocktest', ["id"=>$catdetail])
-
 
 <div class="education-categorie-area categorie-area-3 education-section-gap bg-image bg-image--4" id="categories">
     <div class="container">
+        <div class="col-12 ms-3 mb-5">
+            @livewire('user.mocktest-category', ["id" => $catdetail])
+
+        </div>
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">Recommended Exams  <span class="color-primary"> Category</span></h2>
         </div>

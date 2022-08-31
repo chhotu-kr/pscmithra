@@ -74,7 +74,7 @@
                 <h2 class="title">Select Your <span class="color-primary">Quiz Category</span></h2>
             </div>
             <div class="col-12 ms-3 ">
-                @livewire('user.quiz', ['id' => $quizdetail])
+                @livewire('user.quiz', ['cat_id' => $quizdetail])
             </div>
             <div class="education-categorie-area categorie-area-3 education-section-gap bg-image bg-image--4"
                 id="categories">
