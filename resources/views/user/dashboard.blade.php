@@ -63,7 +63,8 @@
                 <div class="header-brand">
                     <div class="logo">
                         <a href="{{route('view.home')}}">
-                            <img class="logo-light" src="images/logo/logo-dark.png" alt="Logo">
+                            {{-- <img class="logo-light" src="images/logo/logo-dark.png" alt="Logo"> --}}
+                            <img src="http://localhost/lms/img/logo.png" alt="logo" class="logo-light">
                         </a>
                     </div>
                 </div>
@@ -114,67 +115,7 @@
             </div>
         </div>
     </div>
-    {{-- <div class="popup-mobile-menu">
-        <div class="inner">
-            <div class="header-top">
-                <div class="logo">
-                    <a href="{{route('view.home')}}">
-                        <img src="images/logo/logo-dark.png" alt="Logo">
-                    </a>
-                </div>
-                <div class="close-menu">
-                    <button class="close-button">
-                        <i class="icon-73"></i>
-                    </button>
-                </div>
-            </div>
-            <ul class="mainmenu">
-                <li><a href="{{route('view.home')}}">Home</a></li>
-                <li><a href="{{route('view.category')}}">Mock Text</a></li>
-                <li class="has-droupdown"><a href="#">Study Materials</a>
-                    <ul class="submenu">
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                    </ul>
-                </li>
-                <li class="has-droupdown"><a href="#">Study Materials</a>
-                    <ul class="submenu">
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                        <li><a href="#">Course 1</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{route('view.quiz')}}">Quizes</a></li>
-                <li><a href="#">Live Exam</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- Start Search Popup  -->
-    <div class="education-search-popup">
-        <div class="content-wrap">
-            <div class="site-logo">
-                <img src="{{asset('newlms\assets\images/logo/logo-dark.png')}}" alt="Logo">
-            </div>
-            <div class="close-button">
-                <button class="close-trigger"><i class="icon-73"></i></button>
-            </div>
-            <div class="inner">
-                <form class="search-form" action="#">
-                    <input type="text" class="educationblink-search-popup-field" placeholder="Search Here...">
-                    <button class="submit-button"><i class="icon-2"></i></button>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
+   
 </header>
 
 @section('pscmithra')

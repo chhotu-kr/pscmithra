@@ -104,6 +104,16 @@
       </a>
     </li>
     <li>
+      <a href="{{route('manage.image')}}">
+        <i class="bi bi-circle"></i><span>Manage Image</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{route('manage.page')}}">
+        <i class="bi bi-circle"></i><span>Manage Page</span>
+      </a>
+    </li>
+    <li>
       <a href="{{route('course.index')}}">
         <i class="bi bi-circle"></i><span>Manage Course</span>
       </a>

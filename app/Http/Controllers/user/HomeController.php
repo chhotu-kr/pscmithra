@@ -11,6 +11,7 @@ use App\Models\SecondQuestion;
 use App\Models\SubCategory;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
@@ -18,11 +19,12 @@ use phpDocumentor\Reflection\Types\Null_;
 class HomeController extends Controller
 {
     //...............Home...............//
-
+   
     public function get_ViewHome(){
         $data['category']=Category::all();
             $data['subcategory']=SubCategory::all();
             $data['pro']=Product::all();
+            $data['img']=Image::all();
             return view('user.Viewhome',$data);
        
     }

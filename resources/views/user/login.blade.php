@@ -1,7 +1,7 @@
-@extends('user.footer')
+{{-- @extends('user.footer')
 @section('psc')
     
-@endsection
+@endsection --}}
 @extends('user.dashboard')
 @section('pscmithra')
 <div class="education-breadcrumb-area">
@@ -36,12 +36,12 @@
                         <form action="{{route('user.login')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="current-log-email">Username or email*</label>
+                                <label for="current-log-email">UserContact</label>
                                 <input type="text" name="contact" id="current-log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
-                                <label for="current-log-password">Password*</label>
-                                <input type="password" name="password" id="current-log-password" placeholder="Password">
+                                <label for="current-log-password">Password</label>
+                                <input type="text" name="password" id="current-log-password" placeholder="Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">
