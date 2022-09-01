@@ -199,6 +199,7 @@
 
 
 
+
 <section class="shop-page-area shop-page-area-home">
     <div class="container">
         <div class="education-sorting-area">
@@ -214,34 +215,105 @@
             </div>
         </div>
         <div class="row g-5">
-            @foreach ($pro as $item)
-            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+          @foreach ($pro as $item)
+          <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+            <div class="education-product">
+                <div class="inner">
+                    <div class="thumbnail">
+                        <a href="course-details.php">
+                            @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
+                        </a>
+                        <div class="ebook-box">
+                            <p>E-Book</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
+                        <div class="price">Rs 70.00</div>
+                    </div>
+                    <div class="product-hover-info">
+                            <ul>
+                                <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+          @endforeach
+            {{-- <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                 <div class="education-product">
                     <div class="inner">
                         <div class="thumbnail">
-                           
-                            <a href="{{route('view.coursedetails')}}">
-                                {{-- <img src="{{asset('newlms\assets\img\desk-top-publishing.jpg')}}" alt="Shop Images"> --}}
-                                @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
-                                {{-- <img src="{{asset("images/".$item->bannerimage)}}"  alt=""> --}}
-                               
+                            <a href="course-details.php">
+                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
                             </a>
-                            <div class="product-hover-info">
+                            <div class="ebook-box">
+                                <p>Online Test</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
+                            <div class="price">Rs 70.00</div>
+                        </div>
+                        <div class="product-hover-info">
                                 <ul>
                                     <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
                                     <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="content">
-                            <h3 class="title"><a href="{{route('view.coursedetails')}}">{{$item->description}}</a></h3>
-                            <div class="price">Rs {{$item->price}}</div>
-                        </div>
                     </div>
                 </div>
             </div>
-            @endforeach
-           
+            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                <div class="education-product">
+                    <div class="inner">
+                        <div class="thumbnail">
+                            <a href="course-details.php">
+                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
+                            </a>
+                            <div class="ebook-box">
+                                <p>Question Bank</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
+                            <div class="price">Rs 70.00</div>
+                        </div>
+                        <div class="product-hover-info">
+                                <ul>
+                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6"> 
+                <div class="education-product">
+                    <div class="inner">
+                        <div class="thumbnail">
+                            <a href="course-details.php">
+                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
+                            </a>
+                            <div class="ebook-box">
+                                <p>E-Book</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
+                            <div class="price">Rs 70.00</div>
+                        </div>
+                        <div class="product-hover-info">
+                                <ul>
+                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+          --}}
         
      
         </div>
