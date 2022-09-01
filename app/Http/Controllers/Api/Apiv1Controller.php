@@ -3153,7 +3153,8 @@ button:focus {outline:0;}
             "percentage"=>$per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
-            "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+            "time" => $d->examination->time_duration * 60,
+            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return [
                 "id" => $langg->language->id,
@@ -3288,7 +3289,8 @@ $attemped = $right+$wrong;
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->mocktesttype,
-            "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+            "time" => $d->examination->time_duration * 60,
+            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return [
                 "id" => $langg->language->id,
@@ -3441,7 +3443,8 @@ $attemped = $right+$wrong;
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->testtype,
-            "time" => ($d->examination->time_duration * 60) - $d->remain_time,
+            "time" => $d->examination->time_duration * 60,
+            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
             }),
