@@ -3147,8 +3147,10 @@ button:focus {outline:0;}
       ->map(
         function ($d) {
 
-        
+          $per=($d->totalmarks/$d->examination->marks)*100;
           return [
+            "score"=>$d->totalmarks,
+            "percentage"=>$per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "time" => ($d->examination->time_duration * 60) - $d->remain_time,
@@ -3167,7 +3169,7 @@ button:focus {outline:0;}
               if ($fff->question->liveAttemp->QuesSeen == "true") {
                 if (empty($fff->question->liveAttemp->QuesSelect)) {
                   $color = "#797980";
-                  $resaaa = "visited";
+                  $resaaa = "skip";
                 } else if ($fff->question->rightans != $fff->question->liveAttemp->QuesSelect) {
                   $color = "#FF0000";
                   $resaaa = "wrong";
@@ -3177,7 +3179,7 @@ button:focus {outline:0;}
                 }
               } else {
                 $color = "#3e3a3a";
-                $resaaa = "skip";
+                $resaaa = "unseen";
               }
 
 
@@ -3194,15 +3196,23 @@ button:focus {outline:0;}
       )[0];
 
 
-    $data['visted'] = count($data['questionslist']->where('final', 'visited'));
-    $data['right'] = count($data['questionslist']->where('final', 'right'));
-    $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
+$right = count($data['questionslist']->where('final', 'right'));
+$wrong = count($data['questionslist']->where('final', 'wrong'));
+$attemped = $right+$wrong;
+
+    $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
+    $data['right'] = $right;
+    $data['wrong'] = $wrong;
     $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-    $data['Attemped'] = 10;
-    $data['Accuracy'] = 4.3;
-    $data['Score'] = 2.5;
-    $data['Percentile'] = 3.5;
-    $data['Rank'] = 3.5;
+    $data['attemped'] = $attemped;
+    if($attemped>0){
+      $data['accuracy'] = $right/$attemped;  
+    }else{
+      $data['accuracy'] = 0;
+    }
+    
+    $data['Percentile'] = 0;
+    $data['Rank'] = 50;
 
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -3270,7 +3280,11 @@ button:focus {outline:0;}
               $reattempResult = true;
             }
           }
+
+          $per=($d->totalmarks/$d->examination->marks)*100;
           return [
+            "score"=>$d->totalmarks,
+            "percentage"=>$per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->mocktesttype,
@@ -3293,7 +3307,7 @@ button:focus {outline:0;}
               if ($fff->question->mockAttemp->QuesSeen == "true") {
                 if (empty($fff->question->mockAttemp->QuesSelect)) {
                   $color = "#797980";
-                  $resaaa = "visited";
+                  $resaaa = "skip";
                 } else if ($fff->question->rightans != $fff->question->mockAttemp->QuesSelect) {
                   $color = "#FF0000";
                   $resaaa = "wrong";
@@ -3303,7 +3317,7 @@ button:focus {outline:0;}
                 }
               } else {
                 $color = "#3e3a3a";
-                $resaaa = "skip";
+                $resaaa = "unseen";
               }
 
 
@@ -3320,15 +3334,24 @@ button:focus {outline:0;}
       )[0];
 
 
-    $data['visted'] = count($data['questionslist']->where('final', 'visited'));
-    $data['right'] = count($data['questionslist']->where('final', 'right'));
-    $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
-    $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-    $data['Attemped'] = 10;
-    $data['Accuracy'] = 4.3;
-    $data['Score'] = 2.5;
-    $data['Percentile'] = 3.5;
-    $data['Rank'] = 3.5;
+      $right = count($data['questionslist']->where('final', 'right'));
+      $wrong = count($data['questionslist']->where('final', 'wrong'));
+      $attemped = $right+$wrong;
+      
+          $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
+          $data['right'] = $right;
+          $data['wrong'] = $wrong;
+          $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+          $data['attemped'] = $attemped;
+
+          if($attemped>0){
+            $data['accuracy'] = $right/$attemped;  
+          }else{
+            $data['accuracy'] = 0;
+          }
+          
+          $data['Percentile'] = 0;
+          $data['Rank'] = 50;
 
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -3411,8 +3434,10 @@ button:focus {outline:0;}
             }
           }
 
-
+          $per=($d->totalmarks/$d->examination->marks)*100;
           return [
+            "score"=>$d->totalmarks,
+            "percentage"=>$per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->testtype,
@@ -3435,7 +3460,7 @@ button:focus {outline:0;}
               if ($fff->question->quizAttemp->QuesSeen == "true") {
                 if (empty($fff->question->quizAttemp->QuesSelect)) {
                   $color = "#797980";
-                  $res = "visited";
+                  $res = "skip";
                 } else if ($fff->question->rightans != $fff->question->quizAttemp->QuesSelect) {
                   $color = "#FF0000";
                   $res = "wrong";
@@ -3445,7 +3470,7 @@ button:focus {outline:0;}
                 }
               } else {
                 $color = "#3e3a3a";
-                $res = "skip";
+                $res = "unseen";
               }
 
 
@@ -3461,11 +3486,23 @@ button:focus {outline:0;}
       )[0];
 
 
-    $data['visted'] = count($data['questionslist']->where('final', 'visited'));
-    $data['right'] = count($data['questionslist']->where('final', 'right'));
-    $data['wrong'] = count($data['questionslist']->where('final', 'wrong'));
-    $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-
+      $right = count($data['questionslist']->where('final', 'right'));
+      $wrong = count($data['questionslist']->where('final', 'wrong'));
+      $attemped = $right+$wrong;
+      
+          $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
+          $data['right'] = $right;
+          $data['wrong'] = $wrong;
+          $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+          $data['attemped'] = $attemped;
+          if($attemped>0){
+            $data['accuracy'] = $right/$attemped;  
+          }else{
+            $data['accuracy'] = 0;
+          }
+          
+          $data['Percentile'] = 0;
+          $data['Rank'] = 50;
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
