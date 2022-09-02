@@ -26,18 +26,7 @@
                             
                           @csrf
                           
-                          {{-- <div class=" position-relative">
-                            <label for="validationTooltip04" class="form-label">Exam_Id</label>
-                            <select class="form-select" name="exam_id" id="validationTooltip04" required>
-                              <option selected disabled value="0">Choose Your Category</option>
-                              @foreach ($exam as $item)
-                              <option value="{{$item->id}}">{{$item->examname}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-tooltip">
-                              Please select a valid id.
-                            </div>
-                          </div> --}}
+                       
                           <div class=" position-relative">
                             <label for="validationTooltip05" class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" id="validationTooltip05" required>

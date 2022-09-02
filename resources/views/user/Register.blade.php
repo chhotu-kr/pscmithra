@@ -1,7 +1,4 @@
-@extends('user.footer')
-@section('psc')
-    
-@endsection
+
 @extends('user.dashboard')
 @section('pscmithra')
 <div class="education-breadcrumb-area">
@@ -44,7 +41,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="log-email">UserEmail</label>
-                                <input type="email" name="email" id="log-email" placeholder="Email or username">
+                                <input type="text" name="email" id="log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
                                 <label for="log-email">UserContact</label>
@@ -52,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="log-password">Password</label>
-                                <input type="password" name="password" id="log-password" placeholder="Password">
+                                <input type="text" name="password" id="log-password" placeholder="Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">

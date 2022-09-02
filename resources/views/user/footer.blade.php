@@ -7,7 +7,7 @@
                         <div class="education-footer-widget">
                             <div class="logo">
                                 <a href="{{route('view.home')}}">
-                                    <img class="logo-dark" src="images/logo/logo-dark.png" alt="Corporate Logo">
+                                    <img class="logo-dark" src="{{asset('nassets/images/logo/logo-dark.png')}}" alt="Corporate Logo">
                                 </a>
                             </div>
                             <p class="description">Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.</p>

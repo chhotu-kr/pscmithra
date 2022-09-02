@@ -5,11 +5,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                 @role('admin')
+               
                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
                   Add Category
                  </button>
-                 @endrole
+              
                 </div>
                 
           
