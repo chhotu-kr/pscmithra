@@ -21,7 +21,7 @@ class Mocktest extends Component
     public $ifLoginData;
 
     public $singleData;
-
+    public $returndata;
     //index pass strat 
 
     //sinerio
@@ -61,6 +61,7 @@ class Mocktest extends Component
                 $mock->attemped_exams_id = $Attemp->id;
                 $mock->save();
             }
+            $this->returndata['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
             // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
         } else {
 
@@ -78,15 +79,17 @@ class Mocktest extends Component
                     "time" => 0,
                 ]);
 
+                $this->returndata['data'] = ['testId' => $get->slugid];
 
-                return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $get->slugid]]);
+                // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $get->slugid]]);
             } else {
+
                 return response()->json(['msg' => 'Exam already exist', 'status' => false]);
                 
             }
         }
         //   mockattempquestion::insert($insertData);
-
+        return redirect()->route('view.mockteststart',$this->returndata);
     }
 
 
