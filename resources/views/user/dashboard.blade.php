@@ -84,7 +84,7 @@
                                 </ul>
                             </li>
                             <li><a href="{{route('view.quiz')}}">Quizes</a></li>
-                            <li><a href="#">Live Exam</a></li>
+                            <li><a href="{{ route('quiz.result') }}">Live Exam</a></li>
                             <li><a href="contact.php">Contact Us</a></li>
                         </ul>
                     </nav>

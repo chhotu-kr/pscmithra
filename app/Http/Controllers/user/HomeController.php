@@ -119,7 +119,7 @@ class HomeController extends Controller
     $cha = QuizChapter::where('id',$id)->first();
 
     if($cha->ifnested == "true"){
-        $data['topic']= $id;
+        $data['topic'] = $id;
     }
     else{
         return redirect()->route('view.quizpage', ['chapter' => $id]);
@@ -128,8 +128,13 @@ class HomeController extends Controller
    
    }
    //...............Quiz Page..................//
-   public function get_QuizPage(Request $req,$cat=null,$sub_cat = null,$chapter = null,$topic=null){
-    return view('user.QuizPage');
+   public function get_QuizPage(Request $req){
+    $data['cat'] = $req->cat;
+    $data['sub_cat'] = $req->sub_cat;
+    $data['chapter'] = $req->chapter;
+    $data['topic'] = $req->topic;
+    // return $data;
+    return view('user.QuizPage',$data);
 
    }
    //.................Mock Test................//

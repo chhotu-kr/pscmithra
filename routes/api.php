@@ -52,7 +52,7 @@ Route::post('/rankshow',[Apiv1Controller::class,'get_Result']);
 
 
 
-Route::post('/liveExam',[Apiv1Controller::class,'getLiveExam']);
+Route::post('/liveExam',[Apiv1Controller::class,'getLiveExam']);//here
 Route::post('/liveResultExam',[Apiv1Controller::class,'getResultExam']);
 Route::post('/prepare-liveExam',[Apiv1Controller::class,'prepareLiveExam']);
 Route::post('/getLiveData',[Apiv1Controller::class,'getLiveData']);
@@ -127,5 +127,5 @@ Route::post('/category',[Apiv1Controller::class,'quizCategory']);
 Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);
 Route::post('/chapter',[Apiv1Controller::class,'quizChapter']);
 Route::post('/topic',[Apiv1Controller::class,'quizTopic']);
-Route::post('/getQuiz',[Apiv1Controller::class,'get_Quiz']);
+Route::post('/getQuiz',[Apiv1Controller::class,'get_Quiz']); 
 });
