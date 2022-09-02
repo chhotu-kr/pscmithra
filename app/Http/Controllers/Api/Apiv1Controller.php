@@ -3098,7 +3098,7 @@ button:focus {outline:0;}
   }
 
 
-  public function resultLive(Request $request)
+  public function resultLive(Request $request)//live
   {
     if (empty($request->userId)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
@@ -3367,12 +3367,6 @@ $attemped = $right+$wrong;
   public function get_Result(Request $request)
   {
 
-
-
-
-
-
-
     if (empty($request->userId)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
     }
@@ -3403,9 +3397,6 @@ $attemped = $right+$wrong;
 
       return response()->json(['msg' => 'Test not Complete', 'status' => false]);
     }
-
-
-
 
 
     $data = quizAttemp::with(
