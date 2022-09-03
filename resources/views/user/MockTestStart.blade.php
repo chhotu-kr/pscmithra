@@ -221,7 +221,7 @@
                             <div class="left-right">
                                 <h4>Amit Kumar</h4>
                                 <div class="time-section">
-                                    <span>Time Left : <b>10: 59</b></span>
+                                    <span>Time Left : <b id="countdown">10:20</b></span>
                                 </div>
                             </div>
                         </div>
@@ -278,6 +278,22 @@
         </div>
     </div>
 
+    {{-- <script>
+        const startingMin = 1;
+        let time = startingMin * 60;
+
+        const countdownelement = document.getElementById('countdown')
+        // console.log(countdownelement)
+        setInterval(updatecountdown,1000)
+
+        function updatecountdown(){
+            const minutes = Math.floor(time/60);
+            let second = time % 60 
+            second = second < 10 ? '0' + second : second
+            time--;
+            countdownelement.innerHTML = `${minutes}: ${second}`
+        }
+    </script> --}}
 
 
     {{-- <script>

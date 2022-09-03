@@ -14,24 +14,23 @@
                     {{ json_encode($data['questionslist'][$question_no]['question'][0]['Questionin']) }}</p>
             </div>
         </div>
-        {{-- wire:click.prevent="onSelect()" --}}
-        <div class="form-group" >
+        <div class="form-group"  wire:click.prevent="onSelect({{ 1 }})" >
             <input type="radio" id="1" class="vh" name="options">
             <label
                 for="1">{{ json_encode($data['questionslist'][$question_no]['question'][0]['option1']) }}</label>
 
         </div>
-        <div class="form-group">
+        <div class="form-group" wire:click.prevent="onSelect({{ 2 }})"  >
             <input type="radio" id="2" class="vh" name="options">
             <label
                 for="2">{{ json_encode($data['questionslist'][$question_no]['question'][0]['option2']) }}</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" wire:click.prevent="onSelect({{ 3 }})"  >
             <input type="radio" id="3" class="vh" name="options">
             <label
                 for="3">{{ json_encode($data['questionslist'][$question_no]['question'][0]['option3']) }}</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" wire:click.prevent="onSelect({{ 4 }})"  >
             <input type="radio" id="4" class="vh" name="options">
             <label
                 for="4">{{ json_encode($data['questionslist'][$question_no]['question'][0]['option4']) }}</label>
