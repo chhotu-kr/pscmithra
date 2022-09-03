@@ -146,6 +146,13 @@ class HomeController extends Controller
        $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
     return view('user.MockTest',$data);
 }
+    //..............Mock Test Start..............//
+    public function get_MockTestStart(Request $req){
+        $data['data'] = $req->data;
+        // return dd($data['testId']);
+
+        return view('user.MockTestStart',$data);
+    }  
     //..............StudyMetrial.................//
 
     public function get_Study_Metrial(){
