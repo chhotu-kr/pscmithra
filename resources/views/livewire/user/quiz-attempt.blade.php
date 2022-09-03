@@ -4,11 +4,11 @@
             {{-- {{ $data }} --}}
           @foreach ($data as $item)
           <div class="col-lg-3 col-md-6">
+
             <div class="card p-3">
                 <div class="card-body">
                     <div class="content">
                         <h5 class="title ">{{ $item["name"] }}</h5>
-                        <p>{{ $item['categoryName'] }} | {{ $item['subCategoryName'] }}</p>
                         <ul class="Attempt-sec">
                             <li class="flex ttc mv-0-67 mv-0-50-l "><span>Questions: </span><span
                                     class="ml-auto">{{ $item['totalQues'] }}</span></li>

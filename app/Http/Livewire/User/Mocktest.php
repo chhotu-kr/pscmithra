@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\AttempedExam;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Examination;
+use App\Models\ExamQuestion;
+use App\Models\mockattempquestion;
 use App\Models\SubCategory;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Session\Session;
@@ -14,17 +17,96 @@ class Mocktest extends Component
 {
     public $category;
     public $subcat;
-    public $map;
     public $data;
     public $ifLoginData;
+
+    public $singleData;
+    public $returndata;
+    //index pass strat 
+
+    //sinerio
+    //start prepare 
+    //resume test_id examination_id
+    //result  test_id examination_id
+
+    public function prepareExam($singleData)
+    {
+        $lang = 1;
+
+        $user = 1;
+        $examination_id = Examination::select('id', 'time_duration')->where("slugid", $singleData['id'])->first();
+        // dd($examination_id->id);
+        // dd($singleData);
+
+        $get = AttempedExam::where('examinations_id', $singleData['id'])->where('mocktesttype', $singleData['type'])->where('users_id', $user)->first();
+        if (empty($get)) {
+
+
+            $Attemp = new AttempedExam();
+            $Attemp->slugid = md5($examination_id->id . time());
+            $Attemp->examinations_id = $examination_id->id;
+            $Attemp->users_id = $user;
+            $Attemp->language_id = $lang;
+            $Attemp->remain_time = $examination_id->time_duration * 60;
+            $Attemp->mocktesttype = "normal";//here
+            $Attemp->save();
+
+            $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
+            // $insertData = [];
+            foreach ($examQuestion as $value) {
+
+                $mock = new mockattempquestion();
+                $mock->users_id =  $user;
+                $mock->questions_id = $value;
+                $mock->attemped_exams_id = $Attemp->id;
+                $mock->save();
+            }
+            $this->returndata['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
+            // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
+        } else {
+
+            if ($singleData['type'] == "reattemp") {
+                $get->lastQues = 0;
+                $get->type = "resume";
+                $get->language_id = $lang;
+                $get->remain_time = $examination_id->time_duration * 60;
+                $get->save();
+
+                $testId = $get->id;
+                $data =   mockattempquestion::where('attemped_exams_id', $testId)->where('users_id', $user)->update([
+                    "QuesSeen" => "false",
+                    "QuesSelect" => "",
+                    "time" => 0,
+                ]);
+
+                $this->returndata['data'] = ['testId' => $get->slugid];
+
+                // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $get->slugid]]);
+            } else {
+
+                return response()->json(['msg' => 'Exam already exist', 'status' => false]);
+                
+            }
+        }
+        //   mockattempquestion::insert($insertData);
+        return redirect()->route('view.mockteststart',$this->returndata);
+    }
+
 
     public function checkLogin($id)
     {
         if (Auth::user()) {
-            $this->ifLoginData = Examination::where('slugid',$id)->get();
-
-        } else {
             return redirect()->route('user.login');
+        } else {
+            $this->singleData =  $this->data->where('id', $id)->first();
+
+            if ($this->singleData['type'] == "Start") {
+                $this->prepareExam($this->singleData);
+                // return dd($this->singleData['id']);
+
+            } else if ($this->singleData['type'] == "Prepare") {
+                return dd($this->singleData['name']);
+            }
         }
     }
 
@@ -81,9 +163,6 @@ class Mocktest extends Component
                     })
                 ]);
             });
-
-            $this->newData = json_encode($this->data);
-            
     }
     public function render()
     {

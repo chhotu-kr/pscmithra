@@ -9,7 +9,7 @@
                         <div class="d-flex">
                             <img src="{{ asset('upload/'.$item->image) }}" class="ms-5" height="40px" width="40px" style="border-radius: 100px">
                         <div class="content ">
-                            <h4 class="title ms-5 mt-3">{{ $item->name }}</h4>
+                            <h4 class="title ms-5 mt-3">{{ $item->name }} </h4>
                         </div>
                         </div>
                     </div>

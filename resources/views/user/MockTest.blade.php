@@ -35,7 +35,7 @@
             <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up"
                 data-sal-duration="800">
                 <h2 class="title">Attempt Free <span class="color-primary">{{ $cat->subcategory }} Exam Mock Text</span></h2>
-            </div>
+            </div> 
             <div class="col-12 ms-3 ">
                 @livewire('user.mocktest', ['cat_id' => $cat_id,'sub_cat_id' => $sub_cat_id])
             </div>
