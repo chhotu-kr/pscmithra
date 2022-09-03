@@ -39,10 +39,12 @@
                 </div>
                   <div class="position-relative">
                     <label for="validationTooltip04" class="ps-2">Image</label>
-                    <input type="file" name="image" class="form-control" id="validationTooltip04" value="{{ $category->image}}" required>
+                    <input type="file" name="image" class="form-control mb-3" id="validationTooltip04" value="{{ $category->image}}" required>
                 </div>
                 
-              
+                
+                  @livewire('imageview', ['image' => ['image' => $category->image,'w'=>'100','h'=>'100']], key($new->id))
+        
                <div class="mb-3">
                  <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
                </div>

@@ -51,6 +51,8 @@ Route::get('/view/home',[HomeController::class,'get_ViewHome'])->name('view.home
 Route::get('/mock-test/category',[HomeController::class,'get_Category'])->name('view.category');
 Route::get('/mock-test-exam',[HomeController::class,'get_MockTest'])->name('view.mocktestexam');
 Route::get('/mock-test/category/details/{id}',[HomeController::class,'get_ViewCatDetails'])->name('view.categorydetails');
+Route::get('/mock-test/start',[HomeController::class,'get_MockTestStart'])->name('view.mockteststart');
+
 Route::get('/view/blog',[HomeController::class,'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details',[HomeController::class,'get_ViewBlogDetails'])->name('view.blogdetails');
 Route::get('/view/course',[HomeController::class,'get_ViewCourse'])->name('view.course');

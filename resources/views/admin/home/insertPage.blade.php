@@ -93,7 +93,7 @@
                             <tr>
                                 <td>{{$item->id}}</td>
                              <td>{{$item->name}}</td>
-                             <td>  @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'200','h'=>'200']], key($item->id))</td>
+                             <td>  @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'100','h'=>'100']], key($item->id))</td>
                           {{-- <td> <img src="{{asset("upload/".$item->image)}}" width="200" height="200" alt=""></td> --}}
                              <td>{{$item->altname}}</td>
                                

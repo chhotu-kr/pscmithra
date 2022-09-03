@@ -49,13 +49,7 @@ class HomeController extends Controller
         return view('user.category',$data);
     }
 
-    //...............subcategory..............
-
-    // public function get_SubCat($category_id){
-    //  $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
-
-    //  return view('user.category',$data);
-    // }
+   
    //................CategoryDetails................//
     public function get_ViewCatDetails($id){
         
@@ -73,7 +67,9 @@ class HomeController extends Controller
     }
     //...............Course...............//
     public function get_ViewCourse(){
-        return view('user.ViewCourse');
+          $data['product']=Product::all();
+        // $data['prod']=$id;
+        return view('user.ViewCourse',$data);
     }
     //................CourseDetails..............//
    
@@ -146,6 +142,13 @@ class HomeController extends Controller
        $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
     return view('user.MockTest',$data);
 }
+    //..............Mock Test Start..............//
+    public function get_MockTestStart(Request $req){
+        $data['data'] = $req->data;
+        // return dd($data['testId']);
+
+        return view('user.MockTestStart',$data);
+    }  
     //..............StudyMetrial.................//
 
     public function get_Study_Metrial(){
