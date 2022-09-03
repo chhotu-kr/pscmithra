@@ -27,15 +27,10 @@
                         Please select a valid language.
                       </div>
                     </div>
-                    {{-- <div class="col-md-6 position-relative">
-                      <label for="validationTooltip04" class="form-label">Question_id</label> --}}
+                    
                       <input class="form-select" name="question_id" value="{{$secondquestion}}" type="hidden" required>
                        
-                      {{-- </select>
-                      <div class="invalid-tooltip"> --}}
-                        {{-- Please select a valid language.
-                      </div>
-                    </div> --}}
+                   
                     <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Question</label>
                         <input type="text" class="form-control" name="question" id="validationTooltip01"  required>
@@ -72,21 +67,6 @@
                           Looks good!
                         </div>
                     </div>
-                    {{-- <div class="col-md-12 position-relative">
-                        <label for="validationTooltip04" class="form-label">RightAns</label>
-                        <select class="form-select" name="rightans" id="validationTooltip04" required>
-                          <option selected  value="0">Choose your correct ans</option>
-                               <option value="1">option1</option>
-                               <option value="2">option2</option>
-                               <option value="3">option3</option>
-                               <option value="4">option4</option>
-                          
-                          
-                        </select>
-                        <div class="invalid-tooltip">
-                          Please select a valid answer.
-                        </div>
-                      </div> --}}
                     
                     
                     <div class="col-md-12">
@@ -94,48 +74,7 @@
                     </div>
                   </form>
 
-                  {{-- <form id="questionForm">
-                    <div class="col-md-6 position-relative">
-                      <label for="validationTooltip04" class="form-label">Language_id</label>
-                      <select class="form-select" name="language_id" id="language" required>
-                        <option selected disabled value="0">Choose your correct ans</option>
-                         @foreach ($language as $item)
-                             <option value="{{$item->id}}">{{$item->languagename}}</option>
-                         @endforeach
-                        
-                      </select>
-                      <div class="invalid-tooltip">
-                        Please select a valid language.
-                      </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="question" class="form-control" placeholder="Enter Email" id="question">
-                        <span class="text-danger" id="email-error"></span>
-                    </div>
-            
-                    <div class="form-group">
-                        <input type="text" name="option1" class="form-control" placeholder="Enter Mobile Number" id="option1">
-                        <span class="text-danger" id="mobile-number-error"></span>
-                    </div>
-            
-                    <div class="form-group">
-                        <input type="text" name="option2" class="form-control" placeholder="Enter subject" id="option2">
-                        <span class="text-danger" id="subject-error"></span>
-                    </div>
-            
-                    <div class="form-group"> 
-                      <textarea class="form-control" name="option3" placeholder="Message" id="option3"></textarea>
-                      <span class="text-danger" id="message-error"></span>
-                    </div>
-                    <div class="form-group"> 
-                      <textarea class="form-control" name="option4" placeholder="Message" id="option4"></textarea>
-                      <span class="text-danger" id="message-error"></span>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" id="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
+           
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
             
                <script type="text/javascript">
@@ -183,7 +122,7 @@
                        }
                      });
                     });
-                  </script> --}}
+                  </script>
             </div>
            </div>
         </div>

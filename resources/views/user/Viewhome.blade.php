@@ -50,7 +50,8 @@
         <div class="col-lg-3 col-md-6">
             <div class="categorie-grid categorie-style-2">
                 <div class="icon">
-                    <img src="img/grpimg-1.png">
+                    {{-- <img src="img/grpimg-1.png"> --}}
+                    @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'50','h'=>'50']], key($item->id))
                 </div>
                 <div class="content">
                     <h5 class="title">{{$item->subcategory}}</h5>
@@ -140,67 +141,71 @@
     </div>
 </div>
 
-{{-- <div class="edu-gallery-area education-section-gap" style="background: transparent;">
-    <div class="container">
-        <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-            <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
-        </div>
 
-<div class="tabigationLink">
 
-<ul class="tabs tabSliderCat">
-    @foreach ($category as $item)
-    <li class="tab-link current" data-tab="tab-1">
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+      <div class="card mt-5">
+        <div class="card-body">
+          {{-- <h5 class="card-title">Default Tabs</h5> --}}
+          <h6 class="showing-text">We found <span>71</span> courses available for you</h6>
+      
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            {{-- {{print($product)}} --}}
         
-        {{$item->category}}
-    </li>
-    @endforeach
-   
-</ul>
 
-<div class="features-area-2">
-    <div class="container">
-        <div class="features-grid-wrap">
-            <div class="features-box features-style-2 edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets\images\animated-svg-icons\online-class.svg')}}" alt="animated icon">
-                </div>
-                <div class="content">
-                    <h5 class="title"><span>2K</span> Important Question</h5>
-                </div>
+          
+           <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pdf-tab" data-bs-toggle="tab" data-bs-target="#pdf" type="button" role="tab" aria-controls="pdf" aria-selected="true"> PDF </button>
+          </li>
+
+           
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="course-tab" data-bs-toggle="tab" data-bs-target="#course" type="button" role="tab" aria-controls="course" aria-selected="false">Course</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab" aria-controls="book" aria-selected="false">Book</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ebook-tab" data-bs-toggle="tab" data-bs-target="#ebook" type="button" role="tab" aria-controls="book" aria-selected="false">Ebook</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">Plan</button>
+            </li>
+          </ul>
+          <div class="tab-content pt-2" id="myTabContent">
+            <div class="tab-pane fade show active" id="pdf" role="tabpanel" aria-labelledby="home-tab">
+                @livewire('user.book.bookproduct',["item"=>'pdf'])
             </div>
-            <div class="features-box features-style-2 edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets\images\animated-svg-icons\instructor.svg')}}" alt="animated icon">
-                </div>
-                <div class="content">
-                    <h5 class="title"><span>150 M+</span>Mock Test Attempted</h5>
-                </div>
+            <div class="tab-pane fade" id="course" role="tabpanel" aria-labelledby="profile-tab">
+                @livewire('user.book.bookproduct',["item"=>'course'])
             </div>
-            <div class="features-box features-style-2 edublink-svg-animate">
-                <div class="icon certificate">
-                    <img class="svgInject" src="{{asset('nassets\images\animated-svg-icons\certificate.svg')}}" alt="animated icon">
-                </div>
-                <div class="content">
-                    <h5 class="title"><span>500+</span>E-Books</h5>
-                </div>
+            <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="contact-tab">
+                @livewire('user.book.bookproduct',["item"=>'book'])
             </div>
-            <div class="features-box features-style-2 edublink-svg-animate">
-                <div class="icon">
-                    <img class="svgInject" src="{{asset('nassets\images\animated-svg-icons\user.svg')}}" alt="animated icon">
-                </div>
-                <div class="content">
-                    <h5 class="title"><span>6M+</span>Happy Students</h5>
-                </div>
+            <div class="tab-pane fade" id="ebook" role="tabpanel" aria-labelledby="book-tab">
+                @livewire('user.book.bookproduct',["item"=>'ebook'])
             </div>
+            <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="book-tab">
+                @livewire('user.book.bookproduct',["item"=>'plan'])
+            </div>
+          </div><!-- End Default Tabs -->
         </div>
-    </div>
-</div> --}}
+      </div>
+      
+    
+        
+    
 
+     
+</div>
 
-
-
-<section class="shop-page-area shop-page-area-home">
+{{-- <section class="shop-page-area shop-page-area-home">
     <div class="container">
         <div class="education-sorting-area">
             <div class="sorting-left">
@@ -241,85 +246,12 @@
             </div>
         </div>
           @endforeach
-            {{-- <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <div class="education-product">
-                    <div class="inner">
-                        <div class="thumbnail">
-                            <a href="course-details.php">
-                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
-                            </a>
-                            <div class="ebook-box">
-                                <p>Online Test</p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                            <div class="price">Rs 70.00</div>
-                        </div>
-                        <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <div class="education-product">
-                    <div class="inner">
-                        <div class="thumbnail">
-                            <a href="course-details.php">
-                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
-                            </a>
-                            <div class="ebook-box">
-                                <p>Question Bank</p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                            <div class="price">Rs 70.00</div>
-                        </div>
-                        <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6"> 
-                <div class="education-product">
-                    <div class="inner">
-                        <div class="thumbnail">
-                            <a href="course-details.php">
-                                <img src="img/desk-top-publishing.jpg" alt="Shop Images">
-                            </a>
-                            <div class="ebook-box">
-                                <p>E-Book</p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                            <div class="price">Rs 70.00</div>
-                        </div>
-                        <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-                    </div>
-                </div>
-            </div>
-          --}}
-        
+            
      
         </div>
 
     </div>
-</section>
+</section> --}}
 
 <div class="testimonial-area-1 section-gap-equal">
     <div class="container">

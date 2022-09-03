@@ -25,9 +25,9 @@
                     </div>
                     <div class="position-relative">
                         <label for="validationTooltip04" class="ps-2">AltName</label>
-                        <input type="text" name="altname" class="form-control" id="validationTooltip04" value="{{ $page->altname}}" required>
+                        <input type="text" name="altname" class="form-control mb-3" id="validationTooltip04" value="{{ $page->altname}}" required>
                     </div>
-                    
+                    @livewire('imageview', ['image' => ['image' => $page->image,'w'=>'100','h'=>'100']], key($item->id))
                   
                    <div class="mb-3">
                      <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>

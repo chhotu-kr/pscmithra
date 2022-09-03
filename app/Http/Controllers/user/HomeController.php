@@ -12,6 +12,7 @@ use App\Models\SubCategory;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\Image;
+use App\Models\BookProduct;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
@@ -49,13 +50,7 @@ class HomeController extends Controller
         return view('user.category',$data);
     }
 
-    //...............subcategory..............
-
-    // public function get_SubCat($category_id){
-    //  $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
-
-    //  return view('user.category',$data);
-    // }
+   
    //................CategoryDetails................//
     public function get_ViewCatDetails($id){
         
@@ -73,7 +68,9 @@ class HomeController extends Controller
     }
     //...............Course...............//
     public function get_ViewCourse(){
-        return view('user.ViewCourse');
+          $data['product']=Product::all();
+        // $data['prod']=$id;
+        return view('user.ViewCourse',$data);
     }
     //................CourseDetails..............//
    

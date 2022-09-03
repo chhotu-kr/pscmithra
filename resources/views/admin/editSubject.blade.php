@@ -21,7 +21,9 @@
                           <label for="">Image</label>
                           <input type="file" name="image" class="form-control"  required>
                       </div>
-                     
+                     <div class="mb-3">
+                      @livewire('imageview', ['image' => ['image' => $subject->image,'w'=>'100','h'=>'100']], key($new->id))
+                     </div>
                       <div class="mb-3">
                        <button type="submit" class="btn btn-primary w-100">Update</button>
                      

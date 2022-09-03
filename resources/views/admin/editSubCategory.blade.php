@@ -44,7 +44,9 @@
                             Please provide a valid category.
                           </div>
                           </div>
-                          
+                          <div class="mb-3">
+                            @livewire('imageview', ['image' => ['image' => $subcategory->image,'w'=>'100','h'=>'100']], key($new->id))
+                           </div>
                           <div class="col-12">
                           <button class="btn btn-primary mt-3 w-100" type="submit">Update</button>
                           </div>
