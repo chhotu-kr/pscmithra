@@ -66,21 +66,86 @@
         tinymce.remove();
     </script>
     @endif
+
+
     <script>
-        tinymce.init({
-            selector: 'textarea.question', // change this value according to your HTML
-            min_height: 200,
+  var editor_config = {
+    path_absolute : "/",
+    selector: 'textarea.question',
+    relative_urls: false,
+    min_height: 600,
+    importcss_append: true,
 
+    
+    external_plugins: { tiny_mce_wiris: 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' },
+    
+    plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+    menubar: 'file edit view insert format tools table help',
+    toolbar: 'undo redo | bold italic underline strikethrough |tiny_mce_wiris_formulaEditor | tiny_mce_wiris_formulaEditorChemistry| fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
 
-        });
+    file_picker_callback : function(callback, value, meta) {
+      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+      var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-        tinymce.init({
-            selector: 'textarea.opt', // change this value according to your HTML
-            min_height: 200,
+      var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+      if (meta.filetype == 'image') {
+        cmsURL = cmsURL + "&type=Images";
+      } else {
+        cmsURL = cmsURL + "&type=Files";
+      }
 
+      tinyMCE.activeEditor.windowManager.openUrl({
+        url : cmsURL,
+        title : 'Filemanager',
+        width : x * 0.8,
+        height : y * 0.8,
+        resizable : "yes",
+        close_previous : "no",
+        onMessage: (api, message) => {
+          callback(message.content);
+        }
+      });
+    }
+  };
+  var editor_config_opt = {
+    path_absolute : "/",
+    selector: 'textarea.opt',
+    relative_urls: false,
+    min_height: 400,
+    plugins: [
+      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+      "searchreplace wordcount visualblocks visualchars code fullscreen",
+      "insertdatetime media nonbreaking save table directionality",
+      "emoticons template paste textpattern"
+    ],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+    file_picker_callback : function(callback, value, meta) {
+      var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+      var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-        });
-    </script>
+      var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+      if (meta.filetype == 'image') {
+        cmsURL = cmsURL + "&type=Images";
+      } else {
+        cmsURL = cmsURL + "&type=Files";
+      }
+
+      tinyMCE.activeEditor.windowManager.openUrl({
+        url : cmsURL,
+        title : 'Filemanager',
+        width : x * 0.8,
+        height : y * 0.8,
+        resizable : "yes",
+        close_previous : "no",
+        onMessage: (api, message) => {
+          callback(message.content);
+        }
+      });
+    }
+  };
+  tinymce.init(editor_config);
+  tinymce.init(editor_config_opt);
+</script>
     @endforeach
     <a wire:click="add" class=" btn btn-primary">Add Question</a>
 </div>

@@ -97,8 +97,14 @@ Route::match(["get","post"],"/admin/signup",[AuthController::class,"adminSignup"
 Route::match(["get","post"],"/admin/login",[AuthController::class,"adminLogin"])->name('admin.login');
 
 // Admin middleware
-Route::prefix('xyz@123')->middleware('auth:admin')->group(function(){
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth:admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+Route::prefix('xyz@123')->middleware('auth:admin')->group(function(){
+    
+   
     Route::get('/dashboard',[PublicController::class,'adminIndex'])->name('admin.dashboard');
     //get method
 Route::get('/Exam',[ExamController::class,'index'])->name('manage.exam');
