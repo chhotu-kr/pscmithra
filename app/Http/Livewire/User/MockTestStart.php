@@ -20,10 +20,11 @@ class MocktestStart extends Component
         $this->question_no--;
     }
 
-    public function onSelect(){
+    public function onSelect($id){
         // dd($id);
         $user = 1;
-        $this->data['questionslist'][$this->question_no]['questionId'];
+        $this->data['questionslist'][$this->question_no]['optSel'] = $id;
+
        
     }
     public function mount($testId,$examinationId)
