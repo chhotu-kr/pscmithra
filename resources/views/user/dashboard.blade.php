@@ -30,8 +30,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
 
-@livewireStyles
 </head>
+@livewireStyles
 
 <body class="sticky-header">
 
