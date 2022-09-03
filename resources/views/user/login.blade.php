@@ -37,11 +37,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="current-log-email">UserContact</label>
-                                <input type="text" name="contact" id="current-log-email" placeholder="Email or username">
+                                <input type="text" name="contact" id="current-log-email" placeholder="Enter User Contact">
                             </div>
                             <div class="form-group">
                                 <label for="current-log-password">Password</label>
-                                <input type="text" name="password" id="current-log-password" placeholder="Password">
+                                <input type="text" name="password" id="current-log-password" placeholder="Enter User Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">

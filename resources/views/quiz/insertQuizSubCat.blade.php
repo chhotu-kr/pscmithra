@@ -122,7 +122,7 @@
                                   <td>{{$item->quizcat->name}}</td>
                                   <td>{{$item->name}}</td>
                                   <td>
-                                    <img src="{{asset("images/".$item->image)}}" width="40" height="40" alt="">
+                                    @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'100','h'=>'100']], key($item->id))
                                 </td>
                                 <td>{{$item->ifnested}}</td>
                                   <td>

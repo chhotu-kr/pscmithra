@@ -88,7 +88,7 @@
                                
                                   <td><a href="{{route('insert.subcategory',['id'=>$item->id])}}">{{$item->category}}</a></td>
                                   <td>
-                                    <img src="{{asset("upload/".$item->image)}}" width="40" height="40" alt="">
+                                    <img src="{{asset("upload/".$item->image)}}" width="100" height="100" alt="">
                                 </td>
                                   <td>
                                   

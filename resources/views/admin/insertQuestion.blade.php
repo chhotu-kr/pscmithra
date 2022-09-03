@@ -9,9 +9,7 @@
            
            <div class="col-12">
                     <div class="card">
-                      {{-- <div class="card-header">
-                       <span class="text-theme ps-2 fw-bold textsecondary"> Insert Question</span>
-                      </div> --}}
+                    
                       <div class="card-body">
                         <form action="{{ route('insertquestion.store') }}" id="button" class="row g-3 needs-validation" method="POST" novalidate>
                       
@@ -38,12 +36,10 @@
                             </div>
                             <div id="viewww" class="row g-3 needs-validation"></div>
                      <div class="row">
-                      <div class="col-6" id="addbutton">
-                        <a  id="addbutton" class="btn btn-primary mt-5">Add question</a>
-                       </div>
+                      
                        
-                       <div class="col-6">
-                        <button class="btn btn-primary float-end mt-5"  type="submit">Create</button>
+                       <div class="col-12">
+                        <button class="btn btn-primary w-100 mt-5"  type="submit">Create</button>
                       </div>   
                     </div>     
                     </div>
