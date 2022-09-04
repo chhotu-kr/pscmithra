@@ -11,7 +11,7 @@ use App\Models\SecondQuestion;
 use App\Models\SubCategory;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
-use App\Models\Image;
+use App\Models\image;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
