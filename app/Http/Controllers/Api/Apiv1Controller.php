@@ -914,263 +914,13 @@ class Apiv1Controller extends Controller
     }
 
 
-    $bodyStart  = '<!DOCTYPE html>
-        <html class="no-js" lang="zxx">
-        
-        <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        
-          <style type="text/css">
-            .hidden {
-              display: none !important;
-            }
-        
-            .shown {
-              display: block;
-            }
-        
-            body {
-              padding: 20px;
-            }
-        
-            .span {
-              color: black;
-              font-size: 1.4rem;
-            }
-        
-            p {
-              margin: 0;
-            }
-        
-            h3 {
-              font-size: 20px;
-            }
-        
-            .box-shadows {
-              box-shadow: none;
-              padding: 10px;
-              margin-bottom: 30px;
-              border: 1px solid #e5dfdf;
-            }
-        
-            .accordion {
-              margin-bottom: 30px;
-            }
-        
-            .according_tab .card-header button {
-              border: 0;
-              font-size: 18px;
-              text-decoration: none;
-              color: #000;
-              padding: 0;
-            }
-        
-            .card-header {
-              padding: 0 10px;
-            }
-        
-            .solutions {}
-        
-            .solutions p {
-              font-size: 18px;
-              color: #000;
-            }
-        
-            .checkbox-custom,
-            .radio-custom {
-              opacity: 0;
-              position: absolute;
-              height: 40px;
-            }
-        
-            .checkbox-custom,
-            .checkbox-custom-label,
-            .radio-custom,
-            .radio-custom-label {
-              display: inline-block;
-              vertical-align: middle;
-              margin: 5px;
-              cursor: pointer;
-            }
-        
-            input[type="checkbox"]~label,
-            input[type="radio"]~label {
-              border: 1px solid #b0a7a7;
-              width: 98%;
-              padding: 8px;
-            }
-        
-            .checkbox-custom-label,
-            .radio-custom-label {
-              position: relative;
-            }
-        
-            .checkbox-custom+.checkbox-custom-label:before,
-            .radio-custom+.radio-custom-label:before {
-              content: "";
-              background: #fff;
-              border: 2px solid #ddd;
-              display: inline-block;
-              vertical-align: middle;
-              width: 20px;
-              height: 20px;
-              padding: 2px;
-              margin-right: 10px;
-              text-align: center;
-            }
-        
-            .checkbox-custom:checked+.checkbox-custom-label:before {
-              content: "\f00c";
-              font-family: "FontAwesome";
-              background: rebeccapurple;
-              color: #fff;
-            }
-        
-            .radio-custom+.radio-custom-label:before {
-              border-radius: 0 !important;
-              width: 100%;
-              height: 28px;
-              opacity: 0;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-        
-            .radio-custom:checked+.radio-custom-label:before {
-              content: "";
-              /*  content: "\f00c";
-           font-family: "FontAwesome";
-            color: #000;*/
-              position: absolute;
-              top: 0;
-              width: 99.5%;
-              height: 28px;
-              border-radius: 0 !important;
-              z-index: -1;
-              border-color: #03a9f4;
-              opacity: 1;
-            }
-        
-            .checkbox-custom:focus+.checkbox-custom-label,
-            .radio-custom:focus+.radio-custom-label {
-              outline: 1px solid #ddd;
-              /* focus style */
-            }
-        
-            input[type="radio"]~label::after {
-              opacity: 0 !important;
-            }
-        
-            .card-header {
-              background-color: transparent;
-              text-align: center;
-              border: none;
-            }
-        
-            button:focus {
-              outline: 0;
-            }
-        
-            .question-answer {
-              display: flex;
-              justify-content: end;
-              margin-top: 10px;
-            }
-        
-            .question-answer p {}
-        
-            .question-answer p svg {
-              width: 35px;
-              height: 35px;
-              cursor: pointer;
-              border-radius: 50px;
-              padding: 2px;
-              margin-right: 15px;
-            }
-            .bi-check2 {
-              color: #fff;
-              background: green;
-            }
-            .bi-check-all {
-              color: #fff;
-              background: red;
-            }
-            .bi-x {
-              color: #fff;
-              background: #3f51b5;
-            }
-            @media (max-width: 767px) {
-              body {
-                padding: 0;
-              }
-              input[type="checkbox"]~label,
-              input[type="radio"]~label {
-                width: 93%;
-              }
-              .radio-custom:checked+.radio-custom-label:before {
-                width: 97.5%;
-                height: 91%;
-              }
-            }
-          </style>
-        </head>
-        <body>
-         
-          <div class="d-grid gap-2 mt-4 box-shadows">
-            <h4 class="question">';
-
-    $html1 = '</h4>
-        <div class="btn" onclick="myFunction(this)" id="1">
-          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-1" class="radio-custom-label">A. <span>';
-    $html2 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="2">
-          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-2" class="radio-custom-label">B. <span>';
-
-    $html3 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="3">
-          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-3" class="radio-custom-label">C. <span>';
-    $html4 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="4">
-          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-4" class="radio-custom-label">D. <span>';
-    $html5 = '</span></label>
-        </div>
-      </div>
-      
-      <script>
-        var navicon = document.getElementById("navicon");
-        var navEl = document.getElementById("collapseOne");
-        function toggleMenu() {
-          navEl.classList.toggle("hidden");
-        };
-        navicon.addEventListener("click", toggleMenu, false);
-        function myFunction(elem) {
-          JSInterface.select("selOpt" + elem.id);
-    
-        }
-      </script>
-    
-    </body>
-    
-    </html>';
-
-
 
 
     $data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('live_exams_id', $examination_id->id)
       ->get()
-      ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+      ->map(function ($d) {
 
         if ($d['type'] != "resume") {
           return "Test not resume";
@@ -1190,7 +940,7 @@ class Apiv1Controller extends Controller
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->examQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+            "questionslist" => $d->examination->examQ->map(function ($fff) {
 
 
 
@@ -1201,7 +951,7 @@ class Apiv1Controller extends Controller
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
                 "question" => $fff->question->secondquestion
-                ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                ->map(function ($ques) {
 
 
 
@@ -1209,7 +959,12 @@ class Apiv1Controller extends Controller
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                      "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                      "question" => $ques->question,
+                      "option1"=> $ques->option1,
+                      "option2"=> $ques->option2,
+                      "option3"=> $ques->option3,
+                      "option4"=> $ques->option4,
+                      "direction"=>$ques->direction,
                     ]);
                   })
               ]);
@@ -1250,231 +1005,14 @@ class Apiv1Controller extends Controller
     }
 
 
-    $htm1  = '
-        <!DOCTYPE html><html class="no-js" lang="zxx">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css">
-.span {
-    color: black;
-    font-size: 1.4rem;
-}
-
-p {
-  margin: 0;
-}
-h3 {
-      font-size: 20px;
-}
-.box-shadows {
-       box-shadow: none;
-    padding: 10px;
-    margin-bottom: 30px;
-    border: 1px solid #e5dfdf;
-}
-.accordion {
-  margin-bottom: 30px;
-}
-.according_tab .card-header button {
-      border: 0;
-      font-size: 18px;
-      text-decoration: none;
-      color: #000;
-      padding: 0;
-}
-.card-header {
-    padding: 0 10px;
-}
-.solutions {
-
-}
-.solutions p {
-      font-size: 18px;
-    color: #000;
-}
-.checkbox-custom, .radio-custom {
-    opacity: 0;
-    position: absolute;  
-        height: 40px; 
-}
-
-.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
-    cursor: pointer;
-}
-input[type="checkbox"]~label, input[type="radio"]~label {
-      border: 1px solid #b0a7a7;
-    width: 100%;
-    padding: 8px;
-}
-.checkbox-custom-label, .radio-custom-label {
-    position: relative;
-}
-
-.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-    content: "";
-    background: #fff;
-    border: 2px solid #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    padding: 2px;
-    margin-right: 10px;
-    text-align: center;
-}
-
-.checkbox-custom:checked + .checkbox-custom-label:before {
-    content: "\f00c";
-    font-family: "FontAwesome";
-    background: rebeccapurple;
-    color: #fff;
-}
-
-.radio-custom + .radio-custom-label:before {
-    border-radius: 0 !important;
-    width: 100%;
-    height: 42px;
-    opacity: 0;
-}
-@media (max-width: 767px) {
-	.radio-custom:checked + .radio-custom-label:before {
-		    height: 100% !important;
-	}
-}
-.radio-custom:checked + .radio-custom-label:before {
-  content: "";
-   /*  content: "\f00c";
-   font-family: "FontAwesome";
-    color: #000;*/
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 42px;
-    border-radius: 0 !important;
-    z-index: -1;
-    border-color: #03a9f4;
-    opacity: 1;
-}
-
-.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-  outline: 1px solid #ddd; /* focus style */
-}
-input[type="radio"]~label::after {
-  opacity: 0 !important;
-}
-.card-header {
-  background-color: transparent;
-  text-align: center;
-      border: none;
-}
-button:focus {outline:0;}
-.question-answer {
-  display: flex;
-    justify-content: end;
-    margin-top: 10px;
-}
-.question-answer p {
-
-}
-.question-answer p svg{
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    border-radius: 50px;
-    padding: 2px;
-    margin-right: 15px;
-}
-.bi-check2 {
-      color: #fff;
-    background: green;
-}
-.bi-check-all {
-  color: #fff;
-    background: red;
-}
-.bi-x {
-  color: #fff;
-    background: #3f51b5;
-}
-</style>
-
-  </head>
-<body>
-
-
-<div class="according_tab">
- 
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Direction</button>
-        </h2>
-      </div>
-
-      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-        ';
-    $htmlDirection = '</div>
-        </div>
-      </div>
-    
-    </div>
-  </div>
-  
-  
-  <div class="d-grid gap-2 mt-4 box-shadows">
-      <h4 class="question">';
-
-    $html1 =  '</h4>
-        <div onclick="myFunction(this)" id="1">
-            <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-1" class="radio-custom-label"><span> A.</span>
-            ';
-    $html2  = '</label>
-        </div>
-        <div onclick="myFunction(this)" id="2">
-            <input id="radio-2" class="radio-custom"name="radio-group" type="radio">
-            <label for="radio-2" class="radio-custom-label"><span>B.</span>';
-    $html3 = ' </label>
-        </div>
-        <div onclick="myFunction(this)" id="3">
-            <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-3" class="radio-custom-label"><span>C.</span>';
-    $html4 = '</label>
-        </div>
-        <div onclick="myFunction(this)" id="4">
-            <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-4" class="radio-custom-label"><span>D.</span>';
-    $htmlexplain = '</label>
-            </div>       
-        <div class="box-shadows explanation">';
-    $html5 =  '</div> 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-    
-        </body>
-        
-        </html>';
+   
 
 
     $data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('live_exams_id', $examination_id->id)
       ->get()
-      ->map(function ($d) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+      ->map(function ($d) {
 
         if ($d['type'] == "resume") {
           return "Test not Complete";
@@ -1493,7 +1031,7 @@ button:focus {outline:0;}
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+            "questionslist" => $d->examination->examQ->map(function ($fff) {
               $aaa = false;
               if ($fff->question->rightans == $fff->question->liveAttemp->QuesSelect) {
                 $aaa = true;
@@ -1508,11 +1046,17 @@ button:focus {outline:0;}
                 "isRight" => $aaa,
                 "question" => $fff->question->secondquestion
 
-                  ->map(function ($ques) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+                  ->map(function ($ques) {
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                     "QuestioninHtml" => $htm1 . $ques->direction . $htmlDirection . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $htmlexplain . $ques->explanation . $html5
+                     "question" => $ques->question,
+                     "option1"=> $ques->option1,
+                     "option2"=> $ques->option2,
+                     "option3"=> $ques->option3,
+                     "option4"=> $ques->option4,
+                     "direction"=>$ques->direction,
+                     "explain"=>$ques->explanation,
                     ]);
                   })
               ]);
@@ -1548,267 +1092,14 @@ button:focus {outline:0;}
     $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
 
     if (!$testId) {
-      return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
+      return response()->json(['msg' => 'Invalid Test Id', 'status' => false , "asdasd"=>$testId]);
     }
-
-
-    $bodyStart  = '<!DOCTYPE html>
-        <html class="no-js" lang="zxx">
-        
-        <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        
-          <style type="text/css">
-            .hidden {
-              display: none !important;
-            }
-        
-            .shown {
-              display: block;
-            }
-        
-            body {
-              padding: 20px;
-            }
-        
-            .span {
-              color: black;
-              font-size: 1.4rem;
-            }
-        
-            p {
-              margin: 0;
-            }
-        
-            h3 {
-              font-size: 20px;
-            }
-        
-            .box-shadows {
-              box-shadow: none;
-              padding: 10px;
-              margin-bottom: 30px;
-              border: 1px solid #e5dfdf;
-            }
-        
-            .accordion {
-              margin-bottom: 30px;
-            }
-        
-            .according_tab .card-header button {
-              border: 0;
-              font-size: 18px;
-              text-decoration: none;
-              color: #000;
-              padding: 0;
-            }
-        
-            .card-header {
-              padding: 0 10px;
-            }
-        
-            .solutions {}
-        
-            .solutions p {
-              font-size: 18px;
-              color: #000;
-            }
-        
-            .checkbox-custom,
-            .radio-custom {
-              opacity: 0;
-              position: absolute;
-              height: 40px;
-            }
-        
-            .checkbox-custom,
-            .checkbox-custom-label,
-            .radio-custom,
-            .radio-custom-label {
-              display: inline-block;
-              vertical-align: middle;
-              margin: 5px;
-              cursor: pointer;
-            }
-        
-            input[type="checkbox"]~label,
-            input[type="radio"]~label {
-              border: 1px solid #b0a7a7;
-              width: 98%;
-              padding: 8px;
-            }
-        
-            .checkbox-custom-label,
-            .radio-custom-label {
-              position: relative;
-            }
-        
-            .checkbox-custom+.checkbox-custom-label:before,
-            .radio-custom+.radio-custom-label:before {
-              content: "";
-              background: #fff;
-              border: 2px solid #ddd;
-              display: inline-block;
-              vertical-align: middle;
-              width: 20px;
-              height: 20px;
-              padding: 2px;
-              margin-right: 10px;
-              text-align: center;
-            }
-        
-            .checkbox-custom:checked+.checkbox-custom-label:before {
-              content: "\f00c";
-              font-family: "FontAwesome";
-              background: rebeccapurple;
-              color: #fff;
-            }
-        
-            .radio-custom+.radio-custom-label:before {
-              border-radius: 0 !important;
-              width: 100%;
-              height: 28px;
-              opacity: 0;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-        
-            .radio-custom:checked+.radio-custom-label:before {
-              content: "";
-              /*  content: "\f00c";
-           font-family: "FontAwesome";
-            color: #000;*/
-              position: absolute;
-              top: 0;
-              width: 99.5%;
-              height: 28px;
-              border-radius: 0 !important;
-              z-index: -1;
-              border-color: #03a9f4;
-              opacity: 1;
-            }
-        
-            .checkbox-custom:focus+.checkbox-custom-label,
-            .radio-custom:focus+.radio-custom-label {
-              outline: 1px solid #ddd;
-              /* focus style */
-            }
-        
-            input[type="radio"]~label::after {
-              opacity: 0 !important;
-            }
-        
-            .card-header {
-              background-color: transparent;
-              text-align: center;
-              border: none;
-            }
-        
-            button:focus {
-              outline: 0;
-            }
-        
-            .question-answer {
-              display: flex;
-              justify-content: end;
-              margin-top: 10px;
-            }
-        
-            .question-answer p {}
-        
-            .question-answer p svg {
-              width: 35px;
-              height: 35px;
-              cursor: pointer;
-              border-radius: 50px;
-              padding: 2px;
-              margin-right: 15px;
-            }
-            .bi-check2 {
-              color: #fff;
-              background: green;
-            }
-            .bi-check-all {
-              color: #fff;
-              background: red;
-            }
-            .bi-x {
-              color: #fff;
-              background: #3f51b5;
-            }
-            @media (max-width: 767px) {
-              body {
-                padding: 0;
-              }
-              input[type="checkbox"]~label,
-              input[type="radio"]~label {
-                width: 93%;
-              }
-              .radio-custom:checked+.radio-custom-label:before {
-                width: 97.5%;
-                height: 91%;
-              }
-            }
-          </style>
-        </head>
-        <body>
-         
-          <div class="d-grid gap-2 mt-4 box-shadows">
-            <h4 class="question">';
-
-    $html1 = '</h4>
-        <div class="btn" onclick="myFunction(this)" id="1">
-          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-1" class="radio-custom-label">A. <span>';
-    $html2 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="2">
-          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-2" class="radio-custom-label">B. <span>';
-
-    $html3 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="3">
-          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-3" class="radio-custom-label">C. <span>';
-    $html4 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="4">
-          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-4" class="radio-custom-label">D. <span>';
-    $html5 = '</span></label>
-        </div>
-      </div>
-      
-      <script>
-        var navicon = document.getElementById("navicon");
-        var navEl = document.getElementById("collapseOne");
-        function toggleMenu() {
-          navEl.classList.toggle("hidden");
-        };
-        navicon.addEventListener("click", toggleMenu, false);
-        function myFunction(elem) {
-          JSInterface.select("selOpt" + elem.id);
-    
-        }
-      </script>
-    
-    </body>
-    
-    </html>';
-
-
-
 
     $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
       ->get()
-      ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+      ->map(function ($d) {
 
         if ($d['type'] != "resume") {
           return "Test not resume";
@@ -1828,7 +1119,7 @@ button:focus {outline:0;}
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->examQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+            "questionslist" => $d->examination->examQ->map(function ($fff){
 
 
 
@@ -1840,7 +1131,7 @@ button:focus {outline:0;}
                 "time" => $fff->question->mockAttemp->time,
                 "question" => $fff->question->secondquestion
 
-                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                  ->map(function ($ques) {
 
 
 
@@ -1848,7 +1139,12 @@ button:focus {outline:0;}
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                      "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                      "question" => $ques->question,
+                      "option1"=> $ques->option1,
+                      "option2"=> $ques->option2,
+                      "option3"=> $ques->option3,
+                      "option4"=> $ques->option4,
+                      "direction"=>$ques->direction,
                     ]);
                   })
               ]);
@@ -1887,256 +1183,12 @@ button:focus {outline:0;}
     }
 
 
-    $bodyStart  = '<!DOCTYPE html>
-        <html class="no-js" lang="zxx">
-        
-        <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        
-          <style type="text/css">
-            .hidden {
-              display: none !important;
-            }
-        
-            .shown {
-              display: block;
-            }
-        
-            body {
-              padding: 20px;
-            }
-        
-            .span {
-              color: black;
-              font-size: 1.4rem;
-            }
-        
-            p {
-              margin: 0;
-            }
-        
-            h3 {
-              font-size: 20px;
-            }
-        
-            .box-shadows {
-              box-shadow: none;
-              padding: 10px;
-              margin-bottom: 30px;
-              border: 1px solid #e5dfdf;
-            }
-        
-            .accordion {
-              margin-bottom: 30px;
-            }
-        
-            .according_tab .card-header button {
-              border: 0;
-              font-size: 18px;
-              text-decoration: none;
-              color: #000;
-              padding: 0;
-            }
-        
-            .card-header {
-              padding: 0 10px;
-            }
-        
-            .solutions {}
-        
-            .solutions p {
-              font-size: 18px;
-              color: #000;
-            }
-        
-            .checkbox-custom,
-            .radio-custom {
-              opacity: 0;
-              position: absolute;
-              height: 40px;
-            }
-        
-            .checkbox-custom,
-            .checkbox-custom-label,
-            .radio-custom,
-            .radio-custom-label {
-              display: inline-block;
-              vertical-align: middle;
-              margin: 5px;
-              cursor: pointer;
-            }
-        
-            input[type="checkbox"]~label,
-            input[type="radio"]~label {
-              border: 1px solid #b0a7a7;
-              width: 98%;
-              padding: 8px;
-            }
-        
-            .checkbox-custom-label,
-            .radio-custom-label {
-              position: relative;
-            }
-        
-            .checkbox-custom+.checkbox-custom-label:before,
-            .radio-custom+.radio-custom-label:before {
-              content: "";
-              background: #fff;
-              border: 2px solid #ddd;
-              display: inline-block;
-              vertical-align: middle;
-              width: 20px;
-              height: 20px;
-              padding: 2px;
-              margin-right: 10px;
-              text-align: center;
-            }
-        
-            .checkbox-custom:checked+.checkbox-custom-label:before {
-              content: "\f00c";
-              font-family: "FontAwesome";
-              background: rebeccapurple;
-              color: #fff;
-            }
-        
-            .radio-custom+.radio-custom-label:before {
-              border-radius: 0 !important;
-              width: 100%;
-              height: 28px;
-              opacity: 0;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-        
-            .radio-custom:checked+.radio-custom-label:before {
-              content: "";
-              /*  content: "\f00c";
-           font-family: "FontAwesome";
-            color: #000;*/
-              position: absolute;
-              top: 0;
-              width: 99.5%;
-              height: 28px;
-              border-radius: 0 !important;
-              z-index: -1;
-              border-color: #03a9f4;
-              opacity: 1;
-            }
-        
-            .checkbox-custom:focus+.checkbox-custom-label,
-            .radio-custom:focus+.radio-custom-label {
-              outline: 1px solid #ddd;
-              /* focus style */
-            }
-        
-            input[type="radio"]~label::after {
-              opacity: 0 !important;
-            }
-        
-            .card-header {
-              background-color: transparent;
-              text-align: center;
-              border: none;
-            }
-        
-            button:focus {
-              outline: 0;
-            }
-        
-            .question-answer {
-              display: flex;
-              justify-content: end;
-              margin-top: 10px;
-            }
-        
-            .question-answer p {}
-        
-            .question-answer p svg {
-              width: 35px;
-              height: 35px;
-              cursor: pointer;
-              border-radius: 50px;
-              padding: 2px;
-              margin-right: 15px;
-            }
-            .bi-check2 {
-              color: #fff;
-              background: green;
-            }
-            .bi-check-all {
-              color: #fff;
-              background: red;
-            }
-            .bi-x {
-              color: #fff;
-              background: #3f51b5;
-            }
-            @media (max-width: 767px) {
-              body {
-                padding: 0;
-              }
-              input[type="checkbox"]~label,
-              input[type="radio"]~label {
-                width: 93%;
-              }
-              .radio-custom:checked+.radio-custom-label:before {
-                width: 97.5%;
-                height: 91%;
-              }
-            }
-          </style>
-        </head>
-        <body>
-         
-          <div class="d-grid gap-2 mt-4 box-shadows">
-            <h4 class="question">';
-
-    $html1 = '</h4>
-        <div class="btn" onclick="myFunction(this)" id="1">
-          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-1" class="radio-custom-label">A. <span>';
-    $html2 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="2">
-          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-2" class="radio-custom-label">B. <span>';
-
-    $html3 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="3">
-          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-3" class="radio-custom-label">C. <span>';
-    $html4 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="4">
-          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-4" class="radio-custom-label">D. <span>';
-    $html5 = '</span></label>
-        </div>
-      </div>
-      
-      <script>
-        var navicon = document.getElementById("navicon");
-        var navEl = document.getElementById("collapseOne");
-        function toggleMenu() {
-          navEl.classList.toggle("hidden");
-        };
-        navicon.addEventListener("click", toggleMenu, false);
-        function myFunction(elem) {
-          JSInterface.select("selOpt" + elem.id);
-    
-        }</script></body></html>';
-
 
     $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
       ->get()
-      ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+      ->map(function ($d) {
 
         if ($d['type'] != "resume") {
           return "Test not resume";
@@ -2161,7 +1213,7 @@ button:focus {outline:0;}
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->quizexamQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+            "questionslist" => $d->examination->quizexamQ->map(function ($fff) {
               return collect([
                 "questionId" => $fff->question->id,
                 "s" => $fff->question->quizAttemp->QuesSeen,
@@ -2169,11 +1221,17 @@ button:focus {outline:0;}
                 "time" => $fff->question->quizAttemp->time,
                 "question" => $fff->question->secondquestion
 
-                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                  ->map(function ($ques) {
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                      "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                      "question" => $ques->question,
+                      "option1"=> $ques->option1,
+                      "option2"=> $ques->option2,
+                      "option3"=> $ques->option3,
+                      "option4"=> $ques->option4,
+                      "direction"=>$ques->direction,
+                      
                     ]);
                   })
 
@@ -2216,256 +1274,11 @@ button:focus {outline:0;}
     }
 
 
-    $bodyStart  = '<!DOCTYPE html>
-        <html class="no-js" lang="zxx">
-        
-        <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        
-          <style type="text/css">
-            .hidden {
-              display: none !important;
-            }
-        
-            .shown {
-              display: block;
-            }
-        
-            body {
-              padding: 20px;
-            }
-        
-            .span {
-              color: black;
-              font-size: 1.4rem;
-            }
-        
-            p {
-              margin: 0;
-            }
-        
-            h3 {
-              font-size: 20px;
-            }
-        
-            .box-shadows {
-              box-shadow: none;
-              padding: 10px;
-              margin-bottom: 30px;
-              border: 1px solid #e5dfdf;
-            }
-        
-            .accordion {
-              margin-bottom: 30px;
-            }
-        
-            .according_tab .card-header button {
-              border: 0;
-              font-size: 18px;
-              text-decoration: none;
-              color: #000;
-              padding: 0;
-            }
-        
-            .card-header {
-              padding: 0 10px;
-            }
-        
-            .solutions {}
-        
-            .solutions p {
-              font-size: 18px;
-              color: #000;
-            }
-        
-            .checkbox-custom,
-            .radio-custom {
-              opacity: 0;
-              position: absolute;
-              height: 40px;
-            }
-        
-            .checkbox-custom,
-            .checkbox-custom-label,
-            .radio-custom,
-            .radio-custom-label {
-              display: inline-block;
-              vertical-align: middle;
-              margin: 5px;
-              cursor: pointer;
-            }
-        
-            input[type="checkbox"]~label,
-            input[type="radio"]~label {
-              border: 1px solid #b0a7a7;
-              width: 98%;
-              padding: 8px;
-            }
-        
-            .checkbox-custom-label,
-            .radio-custom-label {
-              position: relative;
-            }
-        
-            .checkbox-custom+.checkbox-custom-label:before,
-            .radio-custom+.radio-custom-label:before {
-              content: "";
-              background: #fff;
-              border: 2px solid #ddd;
-              display: inline-block;
-              vertical-align: middle;
-              width: 20px;
-              height: 20px;
-              padding: 2px;
-              margin-right: 10px;
-              text-align: center;
-            }
-        
-            .checkbox-custom:checked+.checkbox-custom-label:before {
-              content: "\f00c";
-              font-family: "FontAwesome";
-              background: rebeccapurple;
-              color: #fff;
-            }
-        
-            .radio-custom+.radio-custom-label:before {
-              border-radius: 0 !important;
-              width: 100%;
-              height: 28px;
-              opacity: 0;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-        
-            .radio-custom:checked+.radio-custom-label:before {
-              content: "";
-              /*  content: "\f00c";
-           font-family: "FontAwesome";
-            color: #000;*/
-              position: absolute;
-              top: 0;
-              width: 99.5%;
-              height: 28px;
-              border-radius: 0 !important;
-              z-index: -1;
-              border-color: #03a9f4;
-              opacity: 1;
-            }
-        
-            .checkbox-custom:focus+.checkbox-custom-label,
-            .radio-custom:focus+.radio-custom-label {
-              outline: 1px solid #ddd;
-              /* focus style */
-            }
-        
-            input[type="radio"]~label::after {
-              opacity: 0 !important;
-            }
-        
-            .card-header {
-              background-color: transparent;
-              text-align: center;
-              border: none;
-            }
-        
-            button:focus {
-              outline: 0;
-            }
-        
-            .question-answer {
-              display: flex;
-              justify-content: end;
-              margin-top: 10px;
-            }
-        
-            .question-answer p {}
-        
-            .question-answer p svg {
-              width: 35px;
-              height: 35px;
-              cursor: pointer;
-              border-radius: 50px;
-              padding: 2px;
-              margin-right: 15px;
-            }
-            .bi-check2 {
-              color: #fff;
-              background: green;
-            }
-            .bi-check-all {
-              color: #fff;
-              background: red;
-            }
-            .bi-x {
-              color: #fff;
-              background: #3f51b5;
-            }
-            @media (max-width: 767px) {
-              body {
-                padding: 0;
-              }
-              input[type="checkbox"]~label,
-              input[type="radio"]~label {
-                width: 93%;
-              }
-              .radio-custom:checked+.radio-custom-label:before {
-                width: 97.5%;
-                height: 91%;
-              }
-            }
-          </style>
-        </head>
-        <body>
-         
-          <div class="d-grid gap-2 mt-4 box-shadows">
-            <h4 class="question">';
-
-    $html1 = '</h4>
-        <div class="btn" onclick="myFunction(this)" id="1">
-          <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-1" class="radio-custom-label">A. <span>';
-    $html2 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="2">
-          <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-2" class="radio-custom-label">B. <span>';
-
-    $html3 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="3">
-          <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-3" class="radio-custom-label">C. <span>';
-    $html4 = '</span></label>
-        </div>
-        <div class="btn" onclick="myFunction(this)" id="4">
-          <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-          <label for="radio-4" class="radio-custom-label">D. <span>';
-    $html5 = '</span></label>
-        </div>
-      </div>
-      
-      <script>
-        var navicon = document.getElementById("navicon");
-        var navEl = document.getElementById("collapseOne");
-        function toggleMenu() {
-          navEl.classList.toggle("hidden");
-        };
-        navicon.addEventListener("click", toggleMenu, false);
-        function myFunction(elem) {
-          JSInterface.select("selOpt" + elem.id);
-    
-        }</script></body></html>';
-
-
     $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('quiz_examinations_id', $quiz_examinations_id->id)
       ->get()
-      ->map(function ($d) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+      ->map(function ($d) {
 
         //  $data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($testId, $user_id) {
         //           $q->where('quiz_attemps_id', $testId->id)->where('users_id', $user_id->id);
@@ -2497,7 +1310,7 @@ button:focus {outline:0;}
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->quizexamQ->map(function ($fff) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+            "questionslist" => $d->examination->quizexamQ->map(function ($fff) {
               $aaa="";
               if($fff->question->rightans===$fff->question->quizAttemp->QuesSelect){
               $aaa =true;
@@ -2512,11 +1325,19 @@ button:focus {outline:0;}
                 "isRight" => $aaa,
                 "question" => $fff->question->secondquestion
 
-                  ->map(function ($ques) use ($bodyStart, $html1, $html2, $html3, $html4, $html5) {
+                  ->map(function ($ques) {
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                      "QuestioninHtml" => $bodyStart . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $html5
+                      "question" => $ques->question,
+"option1"=> $ques->option1,
+"option2"=> $ques->option2,
+"option3"=> $ques->option3,
+"option4"=> $ques->option4,
+"direction"=>$ques->direction,
+
+
+"explain"=>$ques->explanation,
                     ]);
                   })
 
@@ -2556,232 +1377,11 @@ button:focus {outline:0;}
       return response()->json(['msg' => 'Invalid Test Id', 'status' => false]);
     }
 
-
-    $htm1  = '
-        <!DOCTYPE html><html class="no-js" lang="zxx">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/vendor/bootstrap.min.css">
-            <link rel="stylesheet" href="http://3.111.120.100/nassets/css/app.css">
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style type="text/css">
-.span {
-    color: black;
-    font-size: 1.4rem;
-}
-
-p {
-  margin: 0;
-}
-h3 {
-      font-size: 20px;
-}
-.box-shadows {
-       box-shadow: none;
-    padding: 10px;
-    margin-bottom: 30px;
-    border: 1px solid #e5dfdf;
-}
-.accordion {
-  margin-bottom: 30px;
-}
-.according_tab .card-header button {
-      border: 0;
-      font-size: 18px;
-      text-decoration: none;
-      color: #000;
-      padding: 0;
-}
-.card-header {
-    padding: 0 10px;
-}
-.solutions {
-
-}
-.solutions p {
-      font-size: 18px;
-    color: #000;
-}
-.checkbox-custom, .radio-custom {
-    opacity: 0;
-    position: absolute;  
-        height: 40px; 
-}
-
-.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
-    cursor: pointer;
-}
-input[type="checkbox"]~label, input[type="radio"]~label {
-      border: 1px solid #b0a7a7;
-    width: 100%;
-    padding: 8px;
-}
-.checkbox-custom-label, .radio-custom-label {
-    position: relative;
-}
-
-.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-    content: "";
-    background: #fff;
-    border: 2px solid #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    padding: 2px;
-    margin-right: 10px;
-    text-align: center;
-}
-
-.checkbox-custom:checked + .checkbox-custom-label:before {
-    content: "\f00c";
-    font-family: "FontAwesome";
-    background: rebeccapurple;
-    color: #fff;
-}
-
-.radio-custom + .radio-custom-label:before {
-    border-radius: 0 !important;
-    width: 100%;
-    height: 42px;
-    opacity: 0;
-}
-@media (max-width: 767px) {
-	.radio-custom:checked + .radio-custom-label:before {
-		    height: 100% !important;
-	}
-}
-.radio-custom:checked + .radio-custom-label:before {
-  content: "";
-   /*  content: "\f00c";
-   font-family: "FontAwesome";
-    color: #000;*/
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 42px;
-    border-radius: 0 !important;
-    z-index: -1;
-    border-color: #03a9f4;
-    opacity: 1;
-}
-
-.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-  outline: 1px solid #ddd; /* focus style */
-}
-input[type="radio"]~label::after {
-  opacity: 0 !important;
-}
-.card-header {
-  background-color: transparent;
-  text-align: center;
-      border: none;
-}
-button:focus {outline:0;}
-.question-answer {
-  display: flex;
-    justify-content: end;
-    margin-top: 10px;
-}
-.question-answer p {
-
-}
-.question-answer p svg{
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    border-radius: 50px;
-    padding: 2px;
-    margin-right: 15px;
-}
-.bi-check2 {
-      color: #fff;
-    background: green;
-}
-.bi-check-all {
-  color: #fff;
-    background: red;
-}
-.bi-x {
-  color: #fff;
-    background: #3f51b5;
-}
-</style>
-
-  </head>
-<body>
-
-
-<div class="according_tab">
- 
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Direction</button>
-        </h2>
-      </div>
-
-      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-        ';
-    $htmlDirection = '</div>
-        </div>
-      </div>
-    
-    </div>
-  </div>
-  
-  
-  <div class="d-grid gap-2 mt-4 box-shadows">
-      <h4 class="question">';
-
-    $html1 =  '</h4>
-        <div onclick="myFunction(this)" id="1">
-            <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-1" class="radio-custom-label"><span> A.</span>
-            ';
-    $html2  = '</label>
-        </div>
-        <div onclick="myFunction(this)" id="2">
-            <input id="radio-2" class="radio-custom"name="radio-group" type="radio">
-            <label for="radio-2" class="radio-custom-label"><span>B.</span>';
-    $html3 = ' </label>
-        </div>
-        <div onclick="myFunction(this)" id="3">
-            <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-3" class="radio-custom-label"><span>C.</span>';
-    $html4 = '</label>
-        </div>
-        <div onclick="myFunction(this)" id="4">
-            <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
-            <label for="radio-4" class="radio-custom-label"><span>D.</span>';
-    $htmlexplain = '</label>
-            </div>       
-        <div class="box-shadows explanation">';
-    $html5 =  '</div> 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-    
-        </body>
-        
-        </html>';
-
-
     $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
       $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id->id);
     }])->where('slugid', $request->testId)->where('users_id', $user_id->id)->where('examinations_id', $examination_id->id)
       ->get()
-      ->map(function ($d) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+      ->map(function ($d) {
 
         if ($d['type'] == "resume") {
           return "Test not Complete";
@@ -2801,7 +1401,7 @@ button:focus {outline:0;}
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->examQ->map(function ($fff) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+            "questionslist" => $d->examination->examQ->map(function ($fff) {
               $aaa = false;
               if ($fff->question->rightans == $fff->question->mockAttemp->QuesSelect) {
                 $aaa = true;
@@ -2816,11 +1416,17 @@ button:focus {outline:0;}
                 "isRight" => $aaa,
                 "question" => $fff->question->secondquestion
 
-                  ->map(function ($ques) use ($htm1, $htmlDirection, $html1, $html2, $html3, $html4, $htmlexplain, $html5) {
+                  ->map(function ($ques) {
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                      "QuestioninHtml" => $htm1 . $ques->direction . $htmlDirection . $ques->question . $html1 . $ques->option1  . $html2 . $ques->option2 . $html3 . $ques->option3 . $html4 . $ques->option4 . $htmlexplain . $ques->explanation . $html5
+                      "question" => $ques->question,
+                      "option1"=> $ques->option1,
+                      "option2"=> $ques->option2,
+                      "option3"=> $ques->option3,
+                      "option4"=> $ques->option4,
+                      "direction"=>$ques->direction,
+                      "explain"=>$ques->explanation,
                     ]);
                   })
               ]);
