@@ -8,7 +8,7 @@
         </div>
         <div class="col-12">
            <div class="card">
-            <div class="card-header ps-2 h4">Insert Product</div>
+            <div class="card-header ps-2 h4">Insert Blog</div>
             <div class="card-body">
                 <form action="{{route('blog.store')}}" class="row g-3 needs-validation" method="POST" enctype="multipart/form-data" novalidate>
                       
@@ -42,7 +42,7 @@
                   
                     <div class="col-md-12 position-relative">
                       <label for="validationTooltip01" class="form-label">Description</label>
-                     <textarea name="description" id="validationTooltip01" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
+                      <textarea class="editor" id="validationTooltip05" name="description" class="form-control" required></textarea>
                       <div class="valid-tooltip">
                         Looks good!
                       </div>
