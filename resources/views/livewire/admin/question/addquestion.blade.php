@@ -146,6 +146,49 @@
   tinymce.init(editor_config);
   tinymce.init(editor_config_opt);
 </script>
+
+
+<script type="text/javascript">
+
+    var e1 = $("#editor1").mathEditor({ width: 1000, height: 400 }),
+        mathml = null;
+
+    e1.mathEditor("setSaveCallback", clientSaveMethod);
+
+    function clientSaveMethod(){
+        // get info from editor ex: get image
+        console.dir(e1.mathEditor("getMathML", "UNICODE", "true"));
+    }
+
+    function getMathML(){
+        return e1.mathEditor("getMathML", "UNICODE", "true");
+    }
+
+    function getBlobOrUrl(returnFunc){
+        return e1.mathEditor("getBlobOrUrl", returnFunc, "UNICODE", "true");
+    }
+
+    function setMathML(mathml){
+        e1.mathEditor("setMathML", mathml);
+    }
+
+    function getImage(){
+        return e1.mathEditor("getImage","png");
+    }
+
+    function getMathMLToLoad(){
+        return null;
+    }
+
+    // autoload used in tinyMCE editor - do not delete
+    if (window.parent !== null && window.parent.getMathMLToLoad !== null) {
+        mathml = window.parent.getMathMLToLoad();
+
+        if (mathml !== null) {
+            e1.mathEditor("setMathML", mathml);
+        }
+    }
+</script>
     @endforeach
     <a wire:click="add" class=" btn btn-primary">Add Question</a>
 </div>

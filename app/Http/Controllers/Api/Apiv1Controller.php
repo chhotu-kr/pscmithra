@@ -1043,7 +1043,7 @@ class Apiv1Controller extends Controller
                 "seen" => $fff->question->liveAttemp->QuesSeen,
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
-                "isRight" => $aaa,
+                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
@@ -1322,7 +1322,7 @@ class Apiv1Controller extends Controller
                 "s" => $fff->question->quizAttemp->QuesSeen,
                 "optSel" => $fff->question->quizAttemp->QuesSelect,
                 "time" => $fff->question->quizAttemp->time,
-                "isRight" => $aaa,
+                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
@@ -1413,7 +1413,8 @@ class Apiv1Controller extends Controller
                 "seen" => $fff->question->mockAttemp->QuesSeen,
                 "optSel" => $fff->question->mockAttemp->QuesSelect,
                 "time" => $fff->question->mockAttemp->time,
-                "isRight" => $aaa,
+                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
+                
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
