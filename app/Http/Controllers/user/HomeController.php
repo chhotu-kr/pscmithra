@@ -144,7 +144,7 @@ class HomeController extends Controller
        $data['cat_id'] = $request->cat_id;
        $data['sub_cat_id'] = $request->sub_cat_id;
        $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
-    return view('user.MockTest',$data);
+      return view('user.MockTest',$data);
 }
     //..............Mock Test Start..............//
     public function get_MockTestStart(Request $req){
@@ -194,6 +194,15 @@ class HomeController extends Controller
 
    public function Quiz_Result(){
     return view('user.liveQuiz');
+   }
+   public function Live_Quiz_Start(Request $req){
+    // dd($req['data']);
+    $data['data'] = $req->data;
+    return view('user.LiveQuizStart',$data);
+   }
+   //..............Quiz Result........../
+   public function get_QuizResult(){
+    return view('user.Quiz_Result');
    }
 }
 

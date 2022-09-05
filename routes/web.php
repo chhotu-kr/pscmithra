@@ -62,6 +62,7 @@ Route::get('/quizes/category/details/{id}', [HomeController::class, 'get_ViewQui
 Route::get('/quizes/category/chapter/{id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
 Route::get('/quizes/category/chapter/topic/{id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
 Route::get('/quizes/{cat?}{sub_cat?}{chapter?}{topic?}', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
+Route::get('/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
 
 Route::get('/mock-test/study/metrial', [HomeController::class, 'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login', [HomeController::class, 'get_Login'])->name('user.login');
@@ -70,6 +71,7 @@ Route::get('/mock-test/quiz/category', [HomeController::class, 'get_QuizCate'])-
 Route::get('/mock-test/quiz/subcategory', [HomeController::class, 'get_QuizSubCate'])->name('quiz.subcategory');
 Route::get('/mock-test/quiz/chapter', [HomeController::class, 'get_QuizChapt'])->name('quiz.chapter');
 Route::get('/getexam-result', [HomeController::class, 'Quiz_Result'])->name('quiz.result');
+Route::get('/live-quiz/start', [HomeController::class, 'Live_Quiz_Start'])->name('quiz.livequizstart');
 
 //................calling Data ..........
 
