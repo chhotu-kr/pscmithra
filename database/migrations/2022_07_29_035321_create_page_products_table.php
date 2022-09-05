@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('page_products', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('pagename');
             $table->foreignId('products_id')->constrained();
             $table->string('slugid')->nullable();

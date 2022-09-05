@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('attemped_exams', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('users_id')->constrained();
             $table->foreignId('examinations_id')->constrained();
             $table->enum('type', ['resume', 'result'])->default('resume');

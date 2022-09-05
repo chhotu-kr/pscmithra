@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('examinations', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('subcategory_id')->constrained('sub_categories');
             $table->string('exam_name');

@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pdf_subscriptions', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('name');
             $table->string('slugid');
             $table->enum('type',['weekly','monthly'])->default('monthly');

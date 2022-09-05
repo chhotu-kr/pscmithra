@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_attempt_questions', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('users_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->foreignId('quiz_attemps_id')->constrained();
@@ -26,7 +27,8 @@ return new class extends Migration
     }
 
 
-    // $table->id();
+    //$table->id();
+            // $table->boolean('isVisble')->default('1');
     // $table->foreignId('users_id')->constrained();
     // $table->foreignId('questions_id')->constrained();
     // $table->foreignId('attemped_exams_id')->constrained();

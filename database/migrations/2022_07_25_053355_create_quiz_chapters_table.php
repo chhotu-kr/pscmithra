@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_chapters', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('quiz_sub_categories')->constrained();
             $table->string('name');
             $table->string('image')->nullable();

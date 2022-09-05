@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('course_id')->constrained();
             $table->string('slugid');
             $table->enum('type',['voice','quiz','video','text'])->default('text');

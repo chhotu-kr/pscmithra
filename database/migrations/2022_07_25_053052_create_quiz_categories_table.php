@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_categories', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('name');
             $table->string('image')->nullable();
             $table->enum('ifnested',['true','false'])->default('false');

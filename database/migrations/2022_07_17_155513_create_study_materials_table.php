@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('study_materials', function (Blueprint $table) {
         
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('slugid')->nullable();
             $table->foreignId('sm_categories_id')->constrained();
             $table->foreignId('sm_chapters_id')->constrained();

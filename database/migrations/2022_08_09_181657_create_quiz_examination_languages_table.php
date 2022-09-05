@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_examination_languages', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('quiz_examination_id')->constrained();
             $table->foreignId('language_id')->constrained();
             $table->timestamps();

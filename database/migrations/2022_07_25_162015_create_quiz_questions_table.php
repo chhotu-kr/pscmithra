@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_questions', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('quiz_examinations_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->string('slugid');

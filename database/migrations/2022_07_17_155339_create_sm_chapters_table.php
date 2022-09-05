@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sm_chapters', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('name');
              $table->foreignId('sm_categories_id')->constrained();
             $table->string('slugid');

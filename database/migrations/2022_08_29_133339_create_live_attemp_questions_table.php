@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('live_attemp_questions', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('users_id')->constrained();
             $table->foreignId('questions_id')->constrained();
             $table->foreignId('live_attemps_id')->constrained();
