@@ -20,29 +20,31 @@ class Categories extends Component
 
 
 
-public function removecall($id){
-   //
-    $this->emit('remove_mocktest',$id);
-}
+    public function removecall($id)
+    {
+        $this->emit('remove_mocktest', $id);
+    }
 
 
-    public function mount($iass){
+    public function mount($iass)
+    {
 
-         $this->iddd = $iass;
+        $this->iddd = $iass;
 
-        $this->category= Category::all();
+        $this->category = Category::all();
 
         $this->get_subcategories();
     }
 
-    public function updatedcategoryId(){
+    public function updatedcategoryId()
+    {
         $this->get_subcategories();
-
     }
 
-    public function get_subcategories(){
-        if($this->categoryId != ''){
-            $this->subcategories= SubCategory::where("category_id",$this->categoryId)->get();
+    public function get_subcategories()
+    {
+        if ($this->categoryId != '') {
+            $this->subcategories = SubCategory::where("category_id", $this->categoryId)->get();
         }
     }
     public function render()
