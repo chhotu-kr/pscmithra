@@ -17,10 +17,10 @@ class ModuleController extends Controller
     }
 
 
-    public function index(){
-       
-        $data['module']=Module::all();
-        $data['course']=Course::all();
+    public function index($id){
+       $data['id'] = $id;
+        $data['module']=Module::where("course_id",$id);
+        
         return view('ecommerce.manageModules',$data);
     }
 
@@ -28,11 +28,11 @@ class ModuleController extends Controller
      $data['module']=Module::where('course_id',$course_id)->get();
      return view('ecommerce.manageModules',$data);
     }
-    public function create()
+    public function create($id)
     {
         //
-        $data['module']=Module::all();
-        $data['course']=Course::all();
+        $data['id']=$id;
+    
         return view('ecommerce.insertModule',$data);
     }
 
