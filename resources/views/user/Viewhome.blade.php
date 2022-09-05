@@ -169,7 +169,7 @@
             <div class="education-product">
                 <div class="inner">
                     <div class="thumbnail">
-                        <a href="course-details.php">
+                        <a href="{{route('view.coursedetails')}}">
                             @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                         </a>
                         <div class="ebook-box">
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h6 class="title"><a href="course-details.php">{{$item->title}}</a></h6>
+                        <h6 class="title"><a href="{{route('view.coursedetails')}}">{{$item->title}}</a></h6>
                         <div class="price">Rs/-{{$item->price}}</div>
                     </div>
                     <div class="product-hover-info">
