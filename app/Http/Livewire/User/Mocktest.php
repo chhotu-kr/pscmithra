@@ -35,7 +35,6 @@ class Mocktest extends Component
 
         $user = 1;
         $examination_id = Examination::select('id', 'time_duration')->where("slugid", $singleData['id'])->first();
-        // dd($examination_id->id);
         // dd($singleData);
 
         $get = AttempedExam::where('examinations_id', $singleData['id'])->where('mocktesttype', $singleData['type'])->where('users_id', $user)->first();

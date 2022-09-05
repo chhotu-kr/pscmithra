@@ -9,68 +9,67 @@ class MockTestStart extends Component
 {
 
   public $data;
-  public $question_no ;
+  public $question_no;
 
-  public $w = 0 ;
-  public $a = 0 ; 
-  public $u= 0;
-
-
-  
-
-
-function filterledgers(){
-$w = 0;
-$a = 0;
-$u = 0;
+  public $w = 0;
+  public $a = 0;
+  public $u = 0;
 
 
 
-  foreach($this->data['questionslist'] as $value){
-if($value['s']=="false"){
-$u++;
-}else{
-  if( empty($value['optSel'])){
-$w++;
-  }else{
-    $a++;
+  function filterledgers()
+  {
+    $w = 0;
+    $a = 0;
+    $u = 0;
+
+
+
+    foreach ($this->data['questionslist'] as $value) {
+      if ($value['s'] == "false") {
+        $u++;
+      } else {
+        if (empty($value['optSel'])) {
+          $w++;
+        } else {
+          $a++;
+        }
+      }
+    }
+
+
+    $this->a = $a;
+    $this->w = $w;
+    $this->u = $u;
   }
 
-}
- }
-
-
- $this->a = $a;
- $this->w = $w;
- $this->u = $u;
-                      
-}
-
-
-  // public function test_data(){
-  //   $this->emit('test_data',23);
-  // }
 
   public function next()
   {
     $this->question_no++;
-    $this-> ishow();
+    $this->ishow();
+  }
+  public function jump($index)
+  {
+
+    $this->question_no = $index;
+    $this->ishow();
+    $this->countTime($this->question_no);
 
   }
-public function jump($index){
+  public function ishow()
+  {
+    $this->data['questionslist'][$this->question_no]['s'] = "true";
+    $this->filterledgers();
 
-  $this->question_no = $index;
-  $this->ishow();
-}
-public function ishow(){
-  $this->data['questionslist'][$this->question_no]['s'] = "true";
-  $this->filterledgers();
-}
+  }
 
   public function prev()
   {
     $this->question_no--;
     $this->ishow();
+    $this->countTime($this->question_no);
+
   }
 
   public function onSelect($id)
@@ -78,10 +77,16 @@ public function ishow(){
     $this->data['questionslist'][$this->question_no]['optSel'] = $id;
     $this->filterledgers();
   }
+  public function countTime($id){
+
+   
+     $this->data['questionslist'][$id]['time'] = $this->data['questionslist'][$id]['time'] + 1;
+     
+    // dd($id);
+  }
   public function mount($testId, $examinationId)
   {
-  
-    $this->emit('test_data', $this->question_no);
+
 
     $user = 1;
 
@@ -138,9 +143,10 @@ public function ishow(){
           ];
         }
       })[0];
-$this->question_no = 0;
-$this->jump($this->question_no);
-
+    $this->question_no = 0;
+    $this->jump($this->question_no);
+    $this->countTime($this->question_no);
+  //  dd($this->question_no);
     // dd($this->data);
   }
   public function render()
