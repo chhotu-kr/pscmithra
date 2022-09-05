@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function get_ViewHome(){
         $data['category']=Category::all();
             $data['subcategory']=SubCategory::all();
-            $data['pro']=Product::all();
+            $data['product']=Product::all();
             $data['img']=Image::all();
             return view('user.Viewhome',$data);
        

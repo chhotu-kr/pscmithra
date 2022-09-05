@@ -70,7 +70,7 @@
                   
                     <div class="col-md-12 position-relative">
                       <label for="validationTooltip01" class="form-label">Description</label>
-                     <textarea name="description" id="validationTooltip01" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
+                      <textarea class="editor" id="validationTooltip05" name="description"  class="form-control" required></textarea>
                       <div class="valid-tooltip">
                         Looks good!
                       </div>

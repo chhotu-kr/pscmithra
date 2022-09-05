@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('Plan_Products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('category_id')->nullable()->constrained();
-            $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories');
+            $table->bigInteger('product');
+            $table->bigInteger('category')->nullable();
+            $table->bigInteger('subcategory')->nullable();
             $table->string('freemocktest')->nullable();
             $table->string('livetest')->nullable();
+            $table->enum('type',['quiz','studymetrial','mocktest','liveexam']);
+            $table->bigInteger('subject');
+            $table->bigInteger('topic');
             $table->bigInteger('examduration');
            
             $table->timestamps();

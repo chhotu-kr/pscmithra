@@ -34,6 +34,7 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        'c105c793f70c31f459f62f951b51010a' => __DIR__ . '/../..' . '/app/Helpers/cart.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -563,10 +564,9 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Controllers\\SubjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubjectController.php',
         'App\\Http\\Controllers\\TopicController' => __DIR__ . '/../..' . '/app/Http/Controllers/TopicController.php',
         'App\\Http\\Controllers\\UserPlanController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserPlanController.php',
-        'App\\Http\\Controllers\\admin\\home\\imageController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/home/imageController.php',
-        'App\\Http\\Controllers\\admin\\home\\pageController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/home/pageController.php',
         'App\\Http\\Controllers\\user\\ExamCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/ExamCategoryController.php',
         'App\\Http\\Controllers\\user\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/HomeController.php',
+        'App\\Http\\Controllers\\user\\addToCartController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/addToCartController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Livewire\\Admin\\LiveExam\\SelectQuestion' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/LiveExam/SelectQuestion.php',
         'App\\Http\\Livewire\\Admin\\Question\\Addquestion' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Question/Addquestion.php',
@@ -666,6 +666,8 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Models\\livetest\\livelanguage' => __DIR__ . '/../..' . '/app/Models/livetest/livelanguage.php',
         'App\\Models\\mockattempquestion' => __DIR__ . '/../..' . '/app/Models/mockattempquestion.php',
         'App\\Models\\mocktestExaminationLanguage' => __DIR__ . '/../..' . '/app/Models/mocktestExaminationLanguage.php',
+        'App\\Models\\order' => __DIR__ . '/../..' . '/app/Models/order.php',
+        'App\\Models\\orderItem' => __DIR__ . '/../..' . '/app/Models/orderItem.php',
         'App\\Models\\page' => __DIR__ . '/../..' . '/app/Models/page.php',
         'App\\Models\\quizAttemp' => __DIR__ . '/../..' . '/app/Models/quizAttemp.php',
         'App\\Models\\smCategory' => __DIR__ . '/../..' . '/app/Models/smCategory.php',

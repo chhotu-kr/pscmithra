@@ -57,13 +57,13 @@
                           Please provide a valid content.
                         </div>
                       </div>
-                      <div class=" position-relative">
+                      {{-- <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Title</label>
                         <input type="text" class="form-control" name="title" id="validationTooltip05" required>
                         <div class="invalid-tooltip">
                           Please provide a valid title.
                         </div>
-                      </div>
+                      </div> --}}
                       {{-- <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Description</label>
 
@@ -76,7 +76,7 @@
                       <div class="col-12">
                         <button class="btn btn-primary w-100" type="submit">Create</button>
                       </div>
-                    </form><!-
+                    </form>
                   </div>
                 </div>
                        
@@ -87,58 +87,6 @@
               </div>
         </div>
     </div>
-    {{-- <section class="section">
-      <div class="row">
-        <div class="col-lg-12 py-3">
-  
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title text-theme">Manage Study</h5>
-              
-
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">CategoryName</th>
-                    <th scope="col">SubCategoryName</th>
-                    <th scope="col">Content</th>
-                    <th scope="col">Action</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                   @foreach ($study as $item)
-                          <tr>
-                              <td>{{$item->id}}</td>
-                              <td>{{$item->category->category}}</td>
-                              <td>{{$item->subcategory->subcategory}}</td>
-                              <td>{{$item->content}}</td>
-                              <td>
-
-                                <form action="{{route('study.destroy',[$item])}}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <input type="submit" value="X" class="btn btn-outline-danger">
-                                <a href="{{route('study.edit',[$item])}}" class="btn btn-outline-success">Edit</a>
-                                </form>
-                                 
-                                
-                                
-                                  
-                              </td>
-                          </tr>
-                      @endforeach
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-  
-            </div>
-          </div>
-  
-        </div>
-      </div>
-    </section> --}}
+   
 </main>
 @endsection
