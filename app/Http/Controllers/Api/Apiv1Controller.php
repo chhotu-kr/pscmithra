@@ -501,10 +501,6 @@ class Apiv1Controller extends Controller
     if ($final_start < 0) {
       $get = liveAttemp::where('live_exams_id', $examination_id->id)->where('users_id', $user_id->id)->first();
       if (empty($get)) {
-
-
-
-
         $Attemp = new liveAttemp();
         $Attemp->slugid = md5($request->user . time());
         $Attemp->live_exams_id = $examination_id->id;
@@ -894,7 +890,7 @@ class Apiv1Controller extends Controller
 
 
 
-  public function getLiveData(Request $request)
+  public function  getLiveData(Request $request)
   {
     if (empty($request->user)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
@@ -979,8 +975,7 @@ class Apiv1Controller extends Controller
             })
           ];
         }
-      })
-      ;
+      });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
