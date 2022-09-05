@@ -11,37 +11,65 @@
                 <div class="card">
                     <div class="card-header">Insert Modules</div>
                     <div class="card-body">
-                        <input  id="idd" value="{{$id}}"  type ="text" readonly hidden> 
+                        <input  id="idd" value="{{$id}}" name="course_id"  type ="text" readonly hidden> 
                         <form action="{{route('module.store')}}" method="POST">
                             @csrf
+                           
+
+                       <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label>Index</label>
+                                <input type="number" name="index" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-4">
                             <div class="mb-3">
                                 <label>Name</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <div class="form-check form-switch col-sm-auto">
+                                <input class="form-check-input" type="checkbox" id="isFree" value="false" name="isfree" >
+                                <label class="form-check-label" for="checkbox1">Is Free</label>
+                              </div>
+          
+          
+                              
+                            </div>
+                        </div>
+                         <script>
 
-                       <div class="row">
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label>Course_id</label>
-                                <select name="course_id" id="" class="form-select" required>
-                                    <option value="0">Select Course</option>
-                                 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label>Is_Free</label>
-                                <select name="isfree" class="form-select" required>
-                                    <option>Select</option>
-                                    <option value="true">True</option>
-                                    <option value="false">False</option>
-                                  
-                                </select>
-                            </div>
-                        </div>
+
+
+                            $("#isFree").on('change', function() {
+                              if ($(this).is(':checked')) {
+                                $(this).attr('value', 'true');
+                              } else {
+                                $(this).attr('value', 'false');
+                              }
+                            
+                            });
+                            
+                                              VirtualSelect.init({
+                                                ele: '.ss',
+                                                search: false,
+                                                required: true
+                                              });
+                                              document.querySelector('#assaa').validate();
+                                            </script>
                        </div>
-                       <div class="row">
+                       <div class="col-md-12 position-relative">
+                        <label for="validationTooltip01" class="form-label">Description</label>
+                        <textarea class="editor" id="validationTooltip05" name="description"  class="form-control" required></textarea>
+                        <div class="valid-tooltip">
+                          Looks good!
+                        </div>
+                    </div>
+
+                  <livewire:course-module.module/>
+                       {{-- <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
                                 <label>Type</label>
@@ -54,34 +82,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label>Index</label>
-                                <input type="number" name="index" class="form-control" required>
-                            </div>
-                        </div>
-                       </div>
-                       <div id ="extend"></div>
-                      
-                        {{-- <div class="col-6">
-                            <div class="mb-3" id="bc">
-                                <label>QuizId</label>
-                                <input type="text" name="quiz_id" class="form-control">
-                            </div>
-                        </div>
+                        
                        </div> --}}
-                        {{-- <div class="row">
-                            <div class="col-6">
-                                <button type="button" class="btn btn-success mb-3" id="divv">Hide</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="button" class="btn btn-dark text-white mb-3" id="sonu">Show</button>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="mb-3" id="ac">
-                            <label>Text</label>
-                            <textarea name="text" id="validationTooltip01" cols="30" rows="5" class="tinymce-editor form-control"></textarea>
-                        </div> --}}
+                       {{-- <div id ="extend"></div> --}}
+                      
                        
                         
                         
@@ -104,7 +108,7 @@
           <input type="submit" class="btn btn-primary" id="btn">
     </form> --}}
 </main>
-<script>
+{{-- <script>
     $('#selected').change(function(){
         var responseID = $(this).val();
         console.log(responseID);
@@ -172,6 +176,6 @@
  });                                                        
        
     
-</script>  
+</script>   --}}
 @endsection
 
