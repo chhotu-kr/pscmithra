@@ -9,7 +9,43 @@ class MockTestStart extends Component
 {
 
   public $data;
-  public $question_no = 0;
+  public $question_no ;
+
+  public $w = 0 ;
+  public $a = 0 ; 
+  public $u= 0;
+
+
+  
+
+
+function filterledgers(){
+$w = 0;
+$a = 0;
+$u = 0;
+
+
+
+  foreach($this->data['questionslist'] as $value){
+if($value['s']=="false"){
+$u++;
+}else{
+  if( empty($value['optSel'])){
+$w++;
+  }else{
+    $a++;
+  }
+
+}
+ }
+
+
+ $this->a = $a;
+ $this->w = $w;
+ $this->u = $u;
+                      
+}
+
 
   // public function test_data(){
   //   $this->emit('test_data',23);
@@ -18,15 +54,29 @@ class MockTestStart extends Component
   public function next()
   {
     $this->question_no++;
+    $this-> ishow();
+
   }
+public function jump($index){
+
+  $this->question_no = $index;
+  $this->ishow();
+}
+public function ishow(){
+  $this->data['questionslist'][$this->question_no]['s'] = "true";
+  $this->filterledgers();
+}
+
   public function prev()
   {
     $this->question_no--;
+    $this->ishow();
   }
 
   public function onSelect($id)
   {
     $this->data['questionslist'][$this->question_no]['optSel'] = $id;
+    $this->filterledgers();
   }
   public function mount($testId, $examinationId)
   {
@@ -88,7 +138,8 @@ class MockTestStart extends Component
           ];
         }
       })[0];
-
+$this->question_no = 0;
+$this->jump($this->question_no);
 
     // dd($this->data);
   }
