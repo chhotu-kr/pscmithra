@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Question</label>
-                        <textarea class="question" id="validationTooltip05" name="question" class="form-control" value="{{$secondquestion->question}}" required></textarea>
+                        <textarea class="question" id="validationTooltip05" name="question" class="form-control"  required>{!!$secondquestion->question!!}</textarea>
                        
                         <div class="valid-tooltip">
                           Looks good!
@@ -56,28 +56,28 @@
                     
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option1</label>
-                        <textarea class="opt" id="validationTooltip01" name="option1" class="form-control" value="{{$secondquestion->option1}}" required></textarea>
+                        <textarea class="opt" id="validationTooltip01" name="option1" class="form-control"  required>{!!$secondquestion->option1!!}</textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option2</label>
-                        <textarea class="opt" id="validationTooltip01" name="option2" class="form-control" value="{{$secondquestion->option2}}" required></textarea>
+                        <textarea class="opt" id="validationTooltip01" name="option2" class="form-control"  required>{!!$secondquestion->option2!!}</textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option3</label>
-                        <textarea class="opt" id="validationTooltip01" name="option3" class="form-control" value="{{$secondquestion->option3}}" required></textarea>
+                        <textarea class="opt" id="validationTooltip01" name="option3" class="form-control"  required>{!!$secondquestion->option3!!}</textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option4</label>
-                        <textarea class="opt" id="validationTooltip01" name="option4" class="form-control" value="{{$secondquestion->option4}}" required></textarea>                        <div class="valid-tooltip">
+                        <textarea class="opt" id="validationTooltip01" name="option4" class="form-control"  required>{!!$secondquestion->option4!!}</textarea>                        <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>

@@ -51,6 +51,39 @@
                     </div>
                    </div> --}}
 
+<<<<<<< HEAD
+                  
+                   <div class="row">
+                    <div class="col-md-6 position-relative">
+                        <label for="validationTooltip01" class="form-label">Price</label>
+                        <input type="text" class="form-control" name="price" id="validationTooltip01"  required>
+                        <div class="valid-tooltip">
+                          Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-6 position-relative">
+                        <label for="validationTooltip01" class="form-label">Bycount</label>
+                        <input type="text" class="form-control" name="bycount" id="validationTooltip01"  required>
+                        <div class="valid-tooltip">
+                          Looks good!
+                        </div>
+                    </div>
+                   </div>
+                  
+                    <div class="col-md-12 position-relative">
+                      <label for="validationTooltip01" class="form-label">Description</label>
+                      <textarea class="editor" id="validationTooltip05" name="description"  class="form-control" required></textarea>
+                      <div class="valid-tooltip">
+                        Looks good!
+                      </div>
+                  </div>
+                  {{-- <livewire:categories/> --}}
+                  <div class="col-md-12 position-relative">
+                    <label for="validationTooltip01" class="form-label">Image</label>
+                    <input type="file" class="form-control" name="bannerimage" id="validationTooltip01"  required>
+                    <div class="valid-tooltip">
+                      Looks good!
+=======
 
                                 <div class="row">
                                     <div class="col-md-6 position-relative">
@@ -114,6 +147,7 @@
                                         type="submit">Create</button>
                                 </div>
                         </form>
+>>>>>>> fbb4a1e8d2f21aedd41522f20ee8048432e87b91
                     </div>
                 </div>
             </div>

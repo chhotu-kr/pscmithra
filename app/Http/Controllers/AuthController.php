@@ -26,7 +26,10 @@ class AuthController extends Controller
             $user->email = $req->email;
             $user->contact = $req->contact;
             
-            $user->password = Hash::make($req->password); 
+            $user->password = Hash::make($req->password);
+            $user->amount = $req->amount;
+            $user->gender = $req->gender;
+            $user->image = $req->image; 
             $user->save();
 
             return redirect()->route("user.login");

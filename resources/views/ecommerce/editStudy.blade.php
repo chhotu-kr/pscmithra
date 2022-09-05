@@ -14,7 +14,7 @@
                           
                                 @csrf
                                 @method('put')
-                                <div class=" position-relative">
+                                {{-- <div class=" position-relative">
                                   <label for="validationTooltip04" class="form-label">StudyMetrial</label>
                                   <select class="form-select" name="study_material_id" id="validationTooltip04" required>
                                     <option selected disabled value="0">Select StydyMetrial</option>
@@ -24,6 +24,13 @@
                                   </select>
                                   <div class="invalid-tooltip">
                                     Please select a valid id.
+                                  </div>
+                                </div> --}}
+                                <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Name</label>
+                                  <input type="text" class="form-control" name="name" id="validationTooltip05" value="{{$study->name}}" required>
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid title.
                                   </div>
                                 </div>
                                 <div class=" position-relative">
@@ -50,30 +57,12 @@
                                     Please select a valid smchapter.
                                   </div>
                                 </div>
+                                
+                               
+                               
                                 <div class=" position-relative">
                                   <label for="validationTooltip05" class="form-label">Content</label>
-                                  <input type="text" class="form-control" name="content" id="validationTooltip05" value="{{$study->content}}" required>
-                                  <div class="invalid-tooltip">
-                                    Please provide a valid content.
-                                  </div>
-                                </div>
-                                <div class=" position-relative">
-                                  <label for="validationTooltip05" class="form-label">Title</label>
-                                  <input type="text" class="form-control" name="title" id="validationTooltip05" value="{{$study->study->title}}" required>
-                                  <div class="invalid-tooltip">
-                                    Please provide a valid title.
-                                  </div>
-                                </div>
-                                <div class=" position-relative">
-                                  <label for="validationTooltip05" class="form-label">Name</label>
-                                  <input type="text" class="form-control" name="name" id="validationTooltip05" value="{{$study->name}}" required>
-                                  <div class="invalid-tooltip">
-                                    Please provide a valid title.
-                                  </div>
-                                </div>
-                                <div class=" position-relative">
-                                  <label for="validationTooltip05" class="form-label">Description</label>
-                                  <input type="text" class="form-control" name="description" id="validationTooltip05" value="{{$study->study->description}}" required>
+                                  <textarea class="editor" id="validationTooltip05" name="content" class="form-control" required>{!!$study->content!!}</textarea>
                                   <div class="invalid-tooltip">
                                     Please provide a valid description.
                                   </div>

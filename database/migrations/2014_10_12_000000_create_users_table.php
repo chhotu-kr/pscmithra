@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('contact')->unique()->nullable();
             $table->string('password');
             $table->string('slugid');
+           $table->integer('amount');
+           $table->string('image');
+           $table->string('gender');
             $table->rememberToken();
             $table->timestamps();
         });

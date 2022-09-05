@@ -21,6 +21,9 @@ class AdminSeeder extends Seeder
             'email' => 'user@gmail.com',
             'contact' => '6209460649',
             'password' => bcrypt('12345678'),
+            'amount' => '500',
+            'gender' => 'male',
+            'image' => 'modi',
             'slugid' =>'21eraxyade79z'
         ];
 

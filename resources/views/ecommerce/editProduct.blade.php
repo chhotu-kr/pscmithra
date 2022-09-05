@@ -74,7 +74,7 @@
                   
                     <div class="col-md-12 position-relative">
                       <label for="validationTooltip01" class="form-label">Description</label>
-                     <textarea name="description" id="validationTooltip01" cols="30" rows="5" class="form-control" value="{{$product->description}}"></textarea>
+                      <textarea class="editor" id="validationTooltip05" name="description"  class="form-control" required>{!!$product->description!!}</textarea>
                       <div class="valid-tooltip">
                         Looks good!
                       </div>
@@ -86,6 +86,8 @@
                       Looks good!
                     </div>
                 </div>
+
+                @livewire('imageview', ['image' => ['image' => $product->image,'w'=>'100','h'=>'100']], key($new->id))
                  
                     
                     <div class="col-md-12">

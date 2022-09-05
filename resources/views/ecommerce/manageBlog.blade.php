@@ -43,7 +43,7 @@
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->title}}</td>
                                           <td>{{$req->categ->category}}</td>
-                                          <td>{{$req->description}}</td>
+                                          <td>{!!$req->description!!}</td>
                                           <td>{{$req->rightby}}</td>
                                          
                                           <td>
@@ -58,7 +58,7 @@
                                 
                               </tbody>
                             </table>
-                            <!-- End Table with stripped rows -->
+                          
                 
                           </div>
                         </div>

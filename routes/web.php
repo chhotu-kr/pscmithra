@@ -42,8 +42,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
-
+Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addTCart"])->name("addtocart");
+Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
+Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeItemFromCart"])->name("removeitemfromCart");
+Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");
+Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
+Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
 // Route::get('/cartproduct',function(){
+//     echo message();
 //     return view('user/cart/viewproduct');
 // });
 

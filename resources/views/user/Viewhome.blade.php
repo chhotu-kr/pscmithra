@@ -164,7 +164,7 @@
             </div>
         </div>
         <div class="row g-5">
-          @foreach ($pro as $item)
+          @foreach ($product as $item)
           <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
             <div class="education-product">
                 <div class="inner">
@@ -183,7 +183,7 @@
                     <div class="product-hover-info">
                             <ul>
                                 <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                <li><a href="{{route('usercart.index')}}"><i class="icon-3"></i> Add to Cart</a></li>
+                                <li><a href="{{ route('addtocart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
                             </ul>
                         </div>
                 </div>
