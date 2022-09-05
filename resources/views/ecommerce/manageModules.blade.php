@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-8 mb-3">
-                      <a href="{{route('module.create')}}" class="btn btn-outline-success">Add Modules</a> 
+                      <a href="{{route('module.create',$id)}}" class="btn btn-outline-success">Add Modules</a> 
                     </div>
                    
                 </div>
@@ -24,16 +24,16 @@
                             
                 
                             <!-- Table with stripped rows -->
-                            <table class="table ">
+                            <table class="table">
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
                                   <th scope="col">Title</th>
                                   <th scope="col">Name</th>
-                                  {{-- <th scope="col">Url</th> --}}
+                                   <th scope="col">Url</th> 
                                   <th scope="col"> Type</th>
-                                  {{-- <th scope="col">Text</th>
-                                  <th scope="col">QuizId</th> --}}
+                                  <th scope="col">Text</th>
+                                  <th scope="col">QuizId</th> 
                                   <th scope="col">IsFree</th>
                                   <th scope="col">Index</th>
                                   
@@ -46,10 +46,10 @@
                                           <td>{{$cour->id}}</td>
                                           <td>{{$cour->course->name}}</td>
                                           <td>{{$cour->name}}</td>
-                                          {{-- <td>{{$cour->url}}</td> --}}
+                                          <td>{{$cour->url}}</td>
                                           <td>{{$cour->type}}</td>
-                                          {{-- <td>{{$cour->text}}</td>
-                                          <td>{{$cour->quiz_id}}</td> --}}
+                                           <td>{{$cour->text}}</td>
+                                          <td>{{$cour->quiz_id}}</td>
                                           <td>{{$cour->isfree}}</td>
                                           <td>{{$cour->index}}</td>
                                           

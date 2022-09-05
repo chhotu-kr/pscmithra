@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">Insert Modules</div>
                     <div class="card-body">
-                        {{-- <input  id="idd" value=""> --}}
+                        <input  id="idd" value="{{$id}}"  type ="text" readonly hidden> 
                         <form action="{{route('module.store')}}" method="POST">
                             @csrf
                             <div class="mb-3">
@@ -25,19 +25,17 @@
                                 <label>Course_id</label>
                                 <select name="course_id" id="" class="form-select" required>
                                     <option value="0">Select Course</option>
-                                    @foreach ($course as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
+                                 
                                 </select>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <label>Is_Free</label>
-                                <select name="isfree" id="" class="form-select">
-                                    <option value="0">IsFree</option>
-                                    <option value="true">true</option>
-                                    <option value="false">false</option>
+                                <select name="isfree" class="form-select" required>
+                                    <option>Select</option>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
                                   
                                 </select>
                             </div>

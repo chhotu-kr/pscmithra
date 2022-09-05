@@ -240,8 +240,8 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
 
     //................Modules table route..................//
 
-    Route::get('/modules', [ModuleController::class, 'index'])->name('manage.module');
-    Route::get('/modulecreate', [ModuleController::class, 'create'])->name('module.create');
+    Route::get('/modules/{id}', [ModuleController::class, 'index'])->name('manage.module');
+    Route::get('/modulescreate/{id}', [ModuleController::class, 'create'])->name('module.create');
     Route::post('/modulestore', [ModuleController::class, 'store'])->name('module.store');
     Route::get('/modulesupdate/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::post('/modulesupdate/{id}', [ModuleController::class, 'update'])->name('update.module');

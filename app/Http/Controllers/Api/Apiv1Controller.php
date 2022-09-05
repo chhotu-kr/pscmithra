@@ -713,7 +713,15 @@ class Apiv1Controller extends Controller
 
   public function getProductFilter(Request $request)
   {
-    $data = Product::where('type', $request->type)->get();
+    $data = Product::where('type', $request->type);
+    if ($request->type == "plan"){
+      $data = $data->with("plans.cat","plans.subcat");
+    }
+    $data = $data->get();
+
+    
+    
+    
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
