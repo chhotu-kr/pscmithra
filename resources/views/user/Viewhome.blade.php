@@ -147,65 +147,9 @@
 
 
 
-<div class="row">
-    <div class="col-lg-12">
 
-      <div class="card mt-5">
-        <div class="card-body">
-          {{-- <h5 class="card-title">Default Tabs</h5> --}}
-          <h6 class="showing-text">We found <span>71</span> courses available for you</h6>
-      
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            {{-- {{print($product)}} --}}
-        
 
-          
-           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pdf-tab" data-bs-toggle="tab" data-bs-target="#pdf" type="button" role="tab" aria-controls="pdf" aria-selected="true"> PDF </button>
-          </li>
-
-           
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="course-tab" data-bs-toggle="tab" data-bs-target="#course" type="button" role="tab" aria-controls="course" aria-selected="false">Course</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab" aria-controls="book" aria-selected="false">Book</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="ebook-tab" data-bs-toggle="tab" data-bs-target="#ebook" type="button" role="tab" aria-controls="book" aria-selected="false">Ebook</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">Plan</button>
-            </li>
-          </ul>
-          <div class="tab-content pt-2" id="myTabContent">
-            <div class="tab-pane fade show active" id="pdf" role="tabpanel" aria-labelledby="home-tab">
-                @livewire('user.book.bookproduct',["item"=>'pdf'])
-            </div>
-            <div class="tab-pane fade" id="course" role="tabpanel" aria-labelledby="profile-tab">
-                @livewire('user.book.bookproduct',["item"=>'course'])
-            </div>
-            <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="contact-tab">
-                @livewire('user.book.bookproduct',["item"=>'book'])
-            </div>
-            <div class="tab-pane fade" id="ebook" role="tabpanel" aria-labelledby="book-tab">
-                @livewire('user.book.bookproduct',["item"=>'ebook'])
-            </div>
-            <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="book-tab">
-                @livewire('user.book.bookproduct',["item"=>'plan'])
-            </div>
-          </div><!-- End Default Tabs -->
-        </div>
-      </div>
-      
-    
-        
-    
-
-     
-</div>
-
-{{-- <section class="shop-page-area shop-page-area-home">
+<section class="shop-page-area shop-page-area-home">
     <div class="container">
         <div class="education-sorting-area">
             <div class="sorting-left">
@@ -229,17 +173,17 @@
                             @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                         </a>
                         <div class="ebook-box">
-                            <p>E-Book</p>
+                            <p>{{$item->type}}</p>
                         </div>
                     </div>
                     <div class="content">
-                        <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                        <div class="price">Rs 70.00</div>
+                        <h6 class="title"><a href="course-details.php">{{$item->title}}</a></h6>
+                        <div class="price">Rs/-{{$item->price}}</div>
                     </div>
                     <div class="product-hover-info">
                             <ul>
                                 <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                                <li><a href="{{route('usercart.index')}}"><i class="icon-3"></i> Add to Cart</a></li>
                             </ul>
                         </div>
                 </div>
@@ -251,7 +195,7 @@
         </div>
 
     </div>
-</section> --}}
+</section>
 
 <div class="testimonial-area-1 section-gap-equal">
     <div class="container">
