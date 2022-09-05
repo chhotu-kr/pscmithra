@@ -264,7 +264,7 @@
                             Directions
                         </a>
 
-                      </h5>
+                    </h5>
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
                             Some placeholder content for the collapse component. This panel is hidden by default but
