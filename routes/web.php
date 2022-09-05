@@ -24,6 +24,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
 
@@ -40,10 +41,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
+
+// Route::get('/cartproduct',function(){
+//     return view('user/cart/viewproduct');
+// });
 
 
+//..............User Dashboard Route................//
 
-
+Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
 
 //............//..............//...........User Page.............//................//...............//
 

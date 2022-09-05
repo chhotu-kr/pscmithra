@@ -12,6 +12,7 @@ use App\Models\SubCategory;
 use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
@@ -195,6 +196,7 @@ class HomeController extends Controller
    public function Quiz_Result(){
     return view('user.liveQuiz');
    }
+
    public function Live_Quiz_Start(Request $req){
     // dd($req['data']);
     $data['data'] = $req->data;
@@ -203,6 +205,14 @@ class HomeController extends Controller
    //..............Quiz Result........../
    public function get_QuizResult(){
     return view('user.Quiz_Result');
+
+}
+   //..........................User Dashboard  Controller..........................//
+
+   public function get_profile(){
+       $data['user']=User::all();
+    return view('user.profile.userprofile',$data);
+
    }
 }
 

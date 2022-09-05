@@ -13,12 +13,12 @@
                       @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                   </a>
                   <div class="ebook-box">
-                      <p>E-Book</p>
+                      <p>{{$item->type}}</p>
                   </div>
               </div>
               <div class="content">
-                  <h6 class="title"><a href="course-details.php">Desk Top Publishing Video</a></h6>
-                  <div class="price">Rs 70.00</div>
+                  <h6 class="title"><a href="course-details.php">{{$item->title}}</a></h6>
+                  <div class="price">Rs {{$item->price}}</div>
               </div>
               <div class="product-hover-info">
                       <ul>

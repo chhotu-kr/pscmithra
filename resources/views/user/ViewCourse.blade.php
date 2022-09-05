@@ -54,6 +54,9 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="ebook-tab" data-bs-toggle="tab" data-bs-target="#ebook" type="button" role="tab" aria-controls="book" aria-selected="false">Ebook</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">Plan</button>
+            </li>
           </ul>
           <div class="tab-content pt-2" id="myTabContent">
             <div class="tab-pane fade show active" id="pdf" role="tabpanel" aria-labelledby="home-tab">
@@ -67,6 +70,9 @@
             </div>
             <div class="tab-pane fade" id="ebook" role="tabpanel" aria-labelledby="book-tab">
                 @livewire('user.book.bookproduct',["item"=>'ebook'])
+            </div>
+            <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="book-tab">
+                @livewire('user.book.bookproduct',["item"=>'plan'])
             </div>
           </div><!-- End Default Tabs -->
         </div>

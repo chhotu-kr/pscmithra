@@ -47,55 +47,43 @@
                     </div>
                     <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Question</label>
-                        <input type="text" class="form-control" name="question" id="validationTooltip01" value="{{$secondquestion->question}}"  required>
+                        <textarea class="question" id="validationTooltip05" name="question" class="form-control" value="{{$secondquestion->question}}" required></textarea>
+                       
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
                     
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option1</label>
-                        <input type="text" class="form-control" name="option1" id="validationTooltip01" value="{{$secondquestion->option1}}"  required>
+                        <textarea class="opt" id="validationTooltip01" name="option1" class="form-control" value="{{$secondquestion->option1}}" required></textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option2</label>
-                        <input type="text" class="form-control" name="option2" id="validationTooltip01" value="{{$secondquestion->option2}}"  required>
+                        <textarea class="opt" id="validationTooltip01" name="option2" class="form-control" value="{{$secondquestion->option2}}" required></textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option3</label>
-                        <input type="text" class="form-control" name="option3" id="validationTooltip01" value="{{$secondquestion->option3}}"  required>
+                        <textarea class="opt" id="validationTooltip01" name="option3" class="form-control" value="{{$secondquestion->option3}}" required></textarea>
                         <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-6 position-relative">
                         <label for="validationTooltip01" class="form-label">Option4</label>
-                        <input type="text" class="form-control" name="option4" id="validationTooltip01" value="{{$secondquestion->option4}}" required>
-                        <div class="valid-tooltip">
+                        <textarea class="opt" id="validationTooltip01" name="option4" class="form-control" value="{{$secondquestion->option4}}" required></textarea>                        <div class="valid-tooltip">
                           Looks good!
                         </div>
                     </div>
-                    {{-- <div class="col-md-12 position-relative">
-                        <label for="validationTooltip04" class="form-label">RightAns</label>
-                        <select class="form-select" name="rightans" id="validationTooltip04" value="{{$secondquestion->rightans}}" required>
-                          <option selected  value="0">Choose your correct ans</option>
-                               <option value="1">option1</option>
-                               <option value="2">option2</option>
-                               <option value="3">option3</option>
-                               <option value="4">option4</option>
-                          
-                          
-                        </select>
-                        <div class="invalid-tooltip">
-                          Please select a valid answer.
-                        </div>
-                      </div> --}}
+
+            
+                    
                     
                     
                     <div class="col-md-12">

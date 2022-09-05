@@ -76,4 +76,7 @@ class CartController extends Controller
         $cart->delete();
         return redirect()->route('cart.index');
     }
+
+
+
 }

@@ -49,7 +49,10 @@
                       </div>
                       <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Content</label>
-                        <input type="text" class="form-control" name="content" id="validationTooltip05" required>
+                       
+                        <textarea class="editor" id="validationTooltip05" name="content" class="form-control" required></textarea>
+                       
+                        
                         <div class="invalid-tooltip">
                           Please provide a valid content.
                         </div>
@@ -61,13 +64,15 @@
                           Please provide a valid title.
                         </div>
                       </div>
-                      <div class=" position-relative">
+                      {{-- <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Description</label>
-                        <input type="text" class="form-control" name="description" id="validationTooltip05" required>
+
+                        <textarea class="editor" id="validationTooltip05" name="description" class="form-control" required></textarea>
+  
                         <div class="invalid-tooltip">
                           Please provide a valid description.
                         </div>
-                      </div>
+                      </div> --}}
                       <div class="col-12">
                         <button class="btn btn-primary w-100" type="submit">Create</button>
                       </div>
