@@ -1,6 +1,6 @@
 <div>
-    {{-- {{ json_encode($data['questionslist'][$question_no]) }} --}}
 
+    {{-- {{ json_encode($data['questionslist'][$this->question_no]) }} --}}
     <style type="text/css">
         .flex {
             display: flex;
@@ -11,7 +11,7 @@
             position: relative;
         }
 
-        .quize-page:before {
+        /* .quize-page:before {
             content: '';
             position: absolute;
             width: 37%;
@@ -20,7 +20,7 @@
             z-index: -1;
             top: 0;
             right: 0;
-        }
+        } */
 
         #regForm {
             background-color: #ffffff;
@@ -171,7 +171,7 @@
             background: #0595d6;
         }
 
-        .option p {
+        .option label {
             font-size: var(--font-size-b1);
             line-height: var(--line-height-b1);
             font-weight: 400;
@@ -228,6 +228,7 @@
             vertical-align: middle;
             margin: 5px;
             cursor: pointer;
+            font-size: var(--font-size-b1);
         }
 
         .accordion {
@@ -254,131 +255,138 @@
         }
     </style>
 
-    <div class="quize-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8" style="margin-top:-50px">
-                    <h5 class="text-center">
-                        <a class="link" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                            aria-expanded="false" aria-controls="collapseExample">
-                            Directions
-                        </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h5 class="text-center">
+                    <a class="link text-decoration-underline" wire:click.prevent="statusChange()" data-bs-toggle="collapse" href="#collapseExample"
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Directions
+                    </a>
 
-                      </h5>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            Some placeholder content for the collapse component. This panel is hidden by default but
-                            revealed when the user activates the relevant trigger.
+                </h5>
+              @if ($status == true)
+                <div class="card card-body border-0" style="margin-top:-20px">
+                 <div class="col-8 mx-auto" style="font-size: 14.5px">
+                    Some placeholder content for the collapse component. This panel is hidden by default but
+                    revealed when the user activates the relevant trigger.
+                 </div>
+                </div>
+              @endif
+
+                <form id="regForm" style="margin-top:-30px">
+                    <div class="tab curent">
+                        <div class="d-grid gap-2 mt-4 box-shadows">
+                            <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['Questionin'] !!}</h4>
+
+                            <div class="btn">
+                                <button type="button" class="mt-1 active"
+                                    wire:click.prevent="onSelect({{ 1 }})">
+                                    <label class="radio-custom-label">
+                                        {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
+                                    </label>
+                                </button>
+                            </div>
+                            <div class="btn">
+                                <button type="button" class="mt-1 active"
+                                    wire:click.prevent="onSelect({{ 2 }})">
+                                    <label class="radio-custom-label">
+                                        {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
+                                    </label>
+                                </button>
+                            </div>
+                            <div class="btn">
+                                <button type="button" class="mt-1 active"
+                                    wire:click.prevent="onSelect({{ 3 }})">
+                                    <label class="radio-custom-label">
+                                        {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
+                                    </label>
+                                </button>
+                            </div>
+                            <div class="btn">
+                                <button type="button" class="mt-1 active"
+                                    wire:click.prevent="onSelect({{ 4 }})">
+                                    <label class="radio-custom-label">
+                                        {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
+                                    </label>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <form id="regForm">
-                        <div class="tab curent">
-                            <div class="d-grid gap-2 mt-4 box-shadows">
-                                <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['Questionin'] !!}</h4>
 
-                                <div class="btn">
-                                    <button type="button" class="mt-1 active"
-                                        wire:click.prevent="onSelect({{ 1 }})">
-                                        <p class="radio-custom-label">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
-                                        </p>
-                                    </button>
-                                </div>
-                                <div class="btn">
-                                    <button type="button" class="mt-1 active"
-                                        wire:click.prevent="onSelect({{ 2 }})">
-                                        <p class="radio-custom-label">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
-                                        </p>
-                                    </button>
-                                </div>
-                                <div class="btn">
-                                    <button type="button" class="mt-1 active"
-                                        wire:click.prevent="onSelect({{ 3 }})">
-                                        <p class="radio-custom-label">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
-                                        </p>
-                                    </button>
-                                </div>
-                                <div class="btn">
-                                    <button type="button" class="mt-1 active"
-                                        wire:click.prevent="onSelect({{ 4 }})">
-                                        <p class="radio-custom-label">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
+
+                    <div style="overflow:auto;">
+                        <div style="float:right;">
+                            @if ($question_no != 0)
+                                <button type="button" class="me-2" id="prevBtn" type="button"
+                                    wire:click.prevent="prev()">Previous</button>
+                            @endif
+
+                            {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
+
+                            @if ($question_no == count($data['questionslist']) - 1)
+                                <button class="education-btn btn-medium" wire:click.prevent="" type="button"
+                                    id="nextBtn">
+                                    Submit</button>
+                            @else
+                                <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
+                                    id="nextBtn">Save &
+                                    Next</button>
+                            @endif
                         </div>
+                    </div>
+                    <!-- Circles which indicates the steps of the form: -->
+
+                </form>
+            </div>
+
+            <div class="col-lg-4 p-5" style="background-color: #f0f0f0">
+                <div class="user-attempt-question">
+                    <div class="user-profile mb-3">
+
+                        <div class="left-right " style="flex-grow: 1">
+                            <div class="time-section">
+                                <span>Time Left : <b id="countdown">{{ $min }}: {{ $sec }}</b></span>
+                            </div>
+
+                        </div>
+                        <div class="text-light btn btn-secondary">
+                            <span style="font-size: 14px">
+                            Language
+                            </span>
+                        </div>
+                    </div>
 
 
-
-                        <div style="overflow:auto;">
-                            <div style="float:right;">
-                                @if ($question_no != 0)
-                                    <button type="button" class="me-2" id="prevBtn" type="button"
-                                        wire:click.prevent="prev()">Previous</button>
-                                @endif
-
-                                {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
-
-                                @if ($question_no == count($data['questionslist']) - 1)
-                                    <button class="education-btn btn-medium" wire:click.prevent="" type="button"
-                                        id="nextBtn">
-                                        Submit</button>
+                    <div class="quition-number-plate">
+                        <h4>Your are Viewing LR Section Question Palltte:</h4>
+                        <div class="quition-no-box-section">
+                            @foreach ($data['questionslist'] as $item)
+                                @if ($item['s'] == 'false')
+                                    <a wire:click.prevent="jump({{ $loop->index }})"><span
+                                            style="background: #9e9e9e;">{{ $loop->index + 1 }}</span></a>
                                 @else
-                                    <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
-                                        id="nextBtn">Save &
-                                        Next</button>
-                                @endif
-                            </div>
-                        </div>
-                        <!-- Circles which indicates the steps of the form: -->
-
-                    </form>
-                </div>
-                <div class="col-lg-4">
-                    <div class="user-attempt-question">
-                        <div class="user-profile">
-
-                            <div class="left-right">
-                                <div class="time-section">
-                                    <span>Time Left : <b id="countdown">10: 59</b></span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="quition-number-plate">
-                            <h4>Your are Viewing LR Section Question Palltte:</h4>
-                            <div class="quition-no-box-section">
-                                @foreach ($data['questionslist'] as $item)
-                                    @if ($item['s'] == 'false')
+                                    @if (empty($item['optSel']))
                                         <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                style="background: #9e9e9e;">{{ $loop->index + 1 }}</span></a>
+                                                style="background: #d70b0b;">{{ $loop->index + 1 }}</span></a>
                                     @else
-                                        @if (empty($item['optSel']))
-                                            <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                    style="background: #d70b0b;">{{ $loop->index + 1 }}</span></a>
-                                        @else
-                                            <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                    style="background: #3ca440;">{{ $loop->index + 1 }}</span></a>
-                                        @endif
+                                        <a wire:click.prevent="jump({{ $loop->index }})"><span
+                                                style="background: #3ca440;">{{ $loop->index + 1 }}</span></a>
                                     @endif
-                                @endforeach
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
-                        <div class="legent-section">
-                            <h4>Legend</h4>
-                            <div class="answerd">
-                                <div class="answer-box">
-                                    <p><span style="background: #3ca440;"> {{ $a }}</span>Answered</p>
-                                    <p><span style="background: #d70b0b;">{{ $w }}</span> Not Answered</p>
-                                </div>
-                                <div class="answer-box">
-                                    <p><span style="background: #9e9e9e;">{{ $u }}</span> Not Visited</p>
-                                </div>
+                    </div>
+                    <div class="legent-section">
+                        <h4>Legend</h4>
+                        <div class="answerd">
+                            <div class="answer-box">
+                                <p><span style="background: #3ca440;"> {{ $a }}</span>Answered</p>
+                                <p><span style="background: #d70b0b;">{{ $w }}</span> Not Answered</p>
+                            </div>
+                            <div class="answer-box">
+                                <p><span style="background: #9e9e9e;">{{ $u }}</span> Not Visited</p>
                             </div>
                         </div>
                     </div>
@@ -386,42 +394,42 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        setInterval(updateCountDown, 1000)
+
+        function updateCountDown() {
+            Livewire.emit('totaltime');
+        }
+    </script>
+    {{-- <script>
+        // Livewire.emit('')
+        const min = 10;
+        let time = min * 60;
+        let initialTime = time;
+        const countdownDel = document.getElementById('countdown')
+
+        setInterval(updateCountDown, 1000)
+        // setInterval(calculateTime, 1000)
+        
+        function updateCountDown() {
+            // Livewire.emit('totaltime')
+            let minutes = Math.floor(time / 60);
+            let sec = time % 60;
+            sec = sec >= 10 ? sec : "0" + sec;
+
+            countdownDel.innerHTML = `${minutes} : ${sec}`
+            
+            // console.log(time +" " +sec)
+        }
+
+        // function calculateTime() {
+        //     let timeTaken = initialTime - time;
+        //     console.log(timeTaken);
+        //     initialTime = time;
+        //     Livewire.emit('timetaken',$timeTaken)
+        // }
+    </script> --}}
+
 </div>
-
-<script>
-    var navicon = document.getElementById('navicon');
-    var navEl = document.getElementById('collapseOne');
-
-    function toggleMenu() {
-        navEl.classList.toggle('hidden');
-    };
-    navicon.addEventListener("click", toggleMenu, false);
-
-    function myFunction(elem) {
-        JSInterface.select("selOpt" + elem.id);
-
-    }
-</script>
-
-<script>
-    const min = 10;
-    let time = min * 60;
-
-    const countdownDel = document.getElementById('countdown')
-
-    setInterval(updateCountDown, 1000)
-
-    function updateCountDown() {
-        const minutes = Math.floor(time / 60);
-        let sec = time % 60;
-        sec = sec >= 10 ? sec : "0" + sec;
-
-        countdownDel.innerHTML = `${minutes} : ${sec}`
-        time--;
-        // console.log(time +" " +sec)
-    }
-
-    function calculateTime() {
-
-    }
-</script>
