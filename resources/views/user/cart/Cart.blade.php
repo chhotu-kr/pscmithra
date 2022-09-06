@@ -20,15 +20,7 @@
                             <div class="col-3">
                                 <img src="{{asset('images/'.$item->product->bannerimage)}}" class="w-100" alt="">
                             </div>
-                            {{-- <div class="col-9 card-body">
-                                <h5>title</h5>
-                                <p>cat title</p>
-                                <h6>price<del>dis price</del></h6>
-                                <a href="" class="btn btn-danger">-</a>
-                                <span class="lead fw-bolder"></span>
-                                <a href="" class="btn btn-success">+</a>
-                                <a href="" class="btn btn-dark float-end">Delete</a>
-                            </div> --}}
+                           
                             <div class="col-9 card-body">
                                 <h5>{{$item->product->title}}</h5>
                                 <p>{{$item->product->subject->sub_name}}</p>
@@ -49,11 +41,11 @@
                 <div class="list-group-item list-group-item-action">Total Amount <span  class="float-end">Rs. {{total_amount()}}/-</span></div>
                 <div class="list-group-item list-group-item-action bg-success text-white">Total  Discount Amount<span  class="float-end">Rs.{{total_saving_amount()}}/-</span></div>
                 <div class="list-group-item list-group-item-action ">Tax (18%) <span  class="float-end">Rs. {{get_tax()}}</span></div>
-                @if ($order->coupon_id != null)
+                {{-- @if ($order->coupon_id != null)
                 
                 <div class="list-group-item list-group-item-action  bg-warning text-dark">Coupon discount <span  class="float-end">Rs. {{$order->coupon->amount}}/- <a href="{{route('removecoupon')}}" class="text-danger fw-bold text-decoration-none" title="Remove Coupon Code">X</a></span></div>
 
-                @endif
+                @endif --}}
 
                 <div class="list-group-item list-group-item-action">Payable Amount <span class="float-end">Rs. {{get_payable_amount()}}/-</span> </div>
             </div>

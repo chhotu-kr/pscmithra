@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_plans', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained()->nullable();
             $table->foreignId('subcategory_id')->constrained('sub_categories')->nullable();

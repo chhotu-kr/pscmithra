@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->foreignId("user_id")->constrained();
             $table->foreignId("address_id")->constrained();
             $table->foreignId("coupon_id")->constrained();

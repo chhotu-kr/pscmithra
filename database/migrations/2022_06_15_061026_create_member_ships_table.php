@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('member_ships', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->string('slugid');
             $table->float('price');
             $table->string('validity');

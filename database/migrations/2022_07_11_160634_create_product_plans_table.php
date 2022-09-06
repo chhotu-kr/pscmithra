@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('Plan_Products', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->boolean('isVisble')->default('1');
             $table->bigInteger('product');
             $table->bigInteger('category')->nullable();
             $table->bigInteger('subcategory')->nullable();
