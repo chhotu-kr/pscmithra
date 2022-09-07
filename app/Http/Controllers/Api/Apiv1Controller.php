@@ -1492,13 +1492,9 @@ class Apiv1Controller extends Controller
 
 
     $type = "resume";
+    
     if ($request->type == "submit") {
       $type = "result";
-
-
-
-
-
       $rMarks  = $examination_id->rightmarks;
       $wMarks = "-" . $examination_id->wrongmarks;
       $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
