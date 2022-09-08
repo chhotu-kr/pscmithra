@@ -13,7 +13,7 @@
             Looks good!
         </div>
     </div>
-    {{$type}}
+    
     <div>
         @if(!empty($planType))
         @if($planType == 'plan')

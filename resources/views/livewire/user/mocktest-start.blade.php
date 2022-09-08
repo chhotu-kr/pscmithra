@@ -106,7 +106,7 @@
             margin-top: 20px;
         }
 
-        .legent-section .answerd {}
+        
 
         .legent-section .answerd .answer-box {
             display: flex;
@@ -135,7 +135,7 @@
             line-height: 38px;
         }
 
-        .quition-number-plate {}
+     
 
         .quition-no-box-section {
             height: 185px;
@@ -247,7 +247,7 @@
             padding: 0 10px;
         }
 
-        .solutions {}
+      
 
         .solutions p {
             font-size: 18px;

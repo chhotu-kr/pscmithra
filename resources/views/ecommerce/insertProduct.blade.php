@@ -43,13 +43,13 @@
 
                             <div id="extend"></div>
                             <div class="row">
-                                {{-- <div class="col-6">
+                                <!-- {{-- <div class="col-6">
                       <a href="" class="btn btn-outline-dark mt-3">AddMock Test</a>
                     </div>
                     <div class="col-6">
                       <a href="" onclick="myFunction()" class="btn btn-outline-dark mt-3 float-end">Add LiveExam</a>
                     </div>
-                   </div> --}}
+                   </div> --}} -->
 
 
                   
