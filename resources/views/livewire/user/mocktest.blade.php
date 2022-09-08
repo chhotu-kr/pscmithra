@@ -39,7 +39,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    @foreach ($item['languages'] as $o)
+                                                @foreach ($item['languages'] as $o)
                                                         <div class="form-check languagelabel">
 
                                                             <label class="form-check-label languagelabel"

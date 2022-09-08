@@ -46,7 +46,7 @@ class QuestionController extends Controller
         
         $data['topic']= Topic::all();
         $data['subject']= Subject::all();
-
+        
 
        return view('admin/insertQuestion',$data);
     }

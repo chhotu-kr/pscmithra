@@ -161,7 +161,7 @@
                 </div>
             </div>
             <div class="row">
-                <h6 style="margin-top: -20px">Ranking</h6>
+                <h6 style="margin-top: -0px">Ranking</h6>
                 <div class="col-6 mx-auto">
                     <h3 class=" text-center  text-danger">
                         Don't Give Up
