@@ -254,6 +254,7 @@
             color: #000;
         }
     </style>
+    {{ json_encode($data['questionslist'][$question_no]) }}
 
     <div class="container">
         <div class="row">
@@ -326,7 +327,7 @@
                             {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
 
                             @if ($question_no == count($data['questionslist']) - 1)
-                                <button class="education-btn btn-medium" wire:click.prevent="" type="button"
+                                <button class="education-btn btn-medium" wire:click.prevent="onSubmit()" type="button"
                                     id="nextBtn">
                                     Submit</button>
                             @else
@@ -351,11 +352,28 @@
                             </div>
 
                         </div>
-                        <div class="text-light btn btn-secondary">
+                        <div class="text-light btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <span style="font-size: 14px">
                             Language
                             </span>
                         </div>
+                        {{-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div> --}}
                     </div>
 
 
