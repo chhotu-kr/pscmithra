@@ -57,10 +57,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        //
-        $data['product'] = Product::all();
         $data['subject'] = Subject::all();
-        $data['topic'] = Topic::all();
         return view('ecommerce.insertProduct', $data);
     }
 
