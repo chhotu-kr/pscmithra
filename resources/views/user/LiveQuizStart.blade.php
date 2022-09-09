@@ -5,7 +5,7 @@
         <div class="container">
             {{-- {{ dd($data['examinationId']) }} --}}
             @livewire('user.live-quiz-start', ['testId' => $data['testId'], 'examinationId' => $data['examinationId']])
-          
+        
         </div>
     </div>
 

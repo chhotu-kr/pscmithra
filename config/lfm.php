@@ -74,7 +74,7 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg',
+                'image/svg+xml',
             ],
         ],
     ],

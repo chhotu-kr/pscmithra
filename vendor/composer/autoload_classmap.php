@@ -86,7 +86,10 @@ return array(
     'App\\Http\\Livewire\\SubCategories' => $baseDir . '/app/Http/Livewire/SubCategories.php',
     'App\\Http\\Livewire\\Subjects' => $baseDir . '/app/Http/Livewire/Subjects.php',
     'App\\Http\\Livewire\\User\\Book\\Bookproduct' => $baseDir . '/app/Http/Livewire/User/Book/Bookproduct.php',
+<<<<<<< HEAD
     'App\\Http\\Livewire\\User\\CategorywithSubcategory\\Category' => $baseDir . '/app/Http/Livewire/User/CategorywithSubcategory/Category.php',
+=======
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
     'App\\Http\\Livewire\\User\\LiveQuizStart' => $baseDir . '/app/Http/Livewire/User/LiveQuizStart.php',
     'App\\Http\\Livewire\\User\\MockTestStart' => $baseDir . '/app/Http/Livewire/User/MockTestStart.php',
     'App\\Http\\Livewire\\User\\MockTestStartSide' => $baseDir . '/app/Http/Livewire/User/MockTestStartSide.php',

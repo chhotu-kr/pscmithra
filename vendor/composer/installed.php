@@ -7,6 +7,11 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
+<<<<<<< HEAD
+=======
+        'reference' => '66bf9335b0bdb8afc27c865376b38afb3e53ee38',
+        'name' => 'laravel/laravel',
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
         'dev' => true,
     ),
     'versions' => array(
@@ -380,6 +385,10 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+<<<<<<< HEAD
+=======
+            'reference' => '66bf9335b0bdb8afc27c865376b38afb3e53ee38',
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -526,10 +535,17 @@
         'nikic/php-parser' => array(
             'pretty_version' => 'v4.15.1',
             'version' => '4.15.1.0',
+<<<<<<< HEAD
             'reference' => '0ef6c55a3f47f89d7a374e6f835197a0b5fcf900',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
+=======
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nikic/php-parser',
+            'aliases' => array(),
+            'reference' => '0ef6c55a3f47f89d7a374e6f835197a0b5fcf900',
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
             'dev_requirement' => false,
         ),
         'nunomaduro/collision' => array(

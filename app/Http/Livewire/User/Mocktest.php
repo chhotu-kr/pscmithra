@@ -22,6 +22,8 @@ class Mocktest extends Component
 
     public $singleData;
     public $returndata;
+    public $lang = null;
+    public $itemId = null;
     //index pass strat 
 
     //sinerio
@@ -29,9 +31,18 @@ class Mocktest extends Component
     //resume test_id examination_id
     //result  test_id examination_id
 
+    public function itemId($id)
+    {
+        $this->itemId = $id;
+    }
+    public function selectLang($id)
+    {
+        $this->lang = $id;
+        // dd($id);
+    }
     public function prepareExam($singleData)
     {
-        $lang = 1;
+
 
         $user = 1;
         $examination_id = Examination::select('id', 'time_duration')->where("slugid", $singleData['id'])->first();
@@ -45,9 +56,9 @@ class Mocktest extends Component
             $Attemp->slugid = md5($examination_id->id . time());
             $Attemp->examinations_id = $examination_id->id;
             $Attemp->users_id = $user;
-            $Attemp->language_id = $lang;
+            $Attemp->language_id = $this->lang;
             $Attemp->remain_time = $examination_id->time_duration * 60;
-            $Attemp->mocktesttype = "normal";//here
+            $Attemp->mocktesttype = "normal"; //here
             $Attemp->save();
 
             $examQuestion =  ExamQuestion::where('examination_id', $examination_id->id)->pluck('question_id');
@@ -67,7 +78,7 @@ class Mocktest extends Component
             if ($singleData['type'] == "reattemp") {
                 $get->lastQues = 0;
                 $get->type = "resume";
-                $get->language_id = $lang;
+                $get->language_id = $this->lang;
                 $get->remain_time = $examination_id->time_duration * 60;
                 $get->save();
 
@@ -84,27 +95,32 @@ class Mocktest extends Component
             } else {
 
                 return response()->json(['msg' => 'Exam already exist', 'status' => false]);
-                
             }
         }
         //   mockattempquestion::insert($insertData);
-        return redirect()->route('view.mockteststart',$this->returndata);
+        return redirect()->route('view.mockteststart', $this->returndata);
     }
 
 
-    public function checkLogin($id)
+    public function checkLogin()
     {
-        if (Auth::user()) {
-            return redirect()->route('user.login');
-        } else {
-            $this->singleData =  $this->data->where('id', $id)->first();
 
-            if ($this->singleData['type'] == "Start") {
-                $this->prepareExam($this->singleData);
-                // return dd($this->singleData['id']);
+        if ($this->itemId != null) {
+            if (Auth::user()) {
+                return redirect()->route('user.login');
+            } else {
+                $this->singleData =  $this->data->where('id', $this->itemId)->first();
 
-            } else if ($this->singleData['type'] == "Prepare") {
-                return dd($this->singleData['name']);
+                if ($this->singleData['type'] == "Start") {
+                    if ($this->lang != null) {
+
+                        $this->prepareExam($this->singleData);
+                    } else {
+                        return session()->flash('select', 'Select a language');
+                    }
+                } else if ($this->singleData['type'] == "Prepare") {
+                    return dd($this->singleData['name']);
+                }
             }
         }
     }

@@ -78,9 +78,10 @@
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">Select Your  <span class="color-primary">Exam Category</span></h2>
         </div>
-        <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
+        <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 p-5" style="margin-top: -50px">
             @foreach ($cate as $item)
-            <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+            <div class="col-md-2 col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800" >
+                
                 <a href="{{route('view.categorydetails',$item->id)}}">
                     <div class="categorie-grid categorie-style-3 color-primary-style">
                         <div class="icon">

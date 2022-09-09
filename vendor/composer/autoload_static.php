@@ -591,7 +591,10 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Livewire\\SubCategories' => __DIR__ . '/../..' . '/app/Http/Livewire/SubCategories.php',
         'App\\Http\\Livewire\\Subjects' => __DIR__ . '/../..' . '/app/Http/Livewire/Subjects.php',
         'App\\Http\\Livewire\\User\\Book\\Bookproduct' => __DIR__ . '/../..' . '/app/Http/Livewire/User/Book/Bookproduct.php',
+<<<<<<< HEAD
         'App\\Http\\Livewire\\User\\CategorywithSubcategory\\Category' => __DIR__ . '/../..' . '/app/Http/Livewire/User/CategorywithSubcategory/Category.php',
+=======
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
         'App\\Http\\Livewire\\User\\LiveQuizStart' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizStart.php',
         'App\\Http\\Livewire\\User\\MockTestStart' => __DIR__ . '/../..' . '/app/Http/Livewire/User/MockTestStart.php',
         'App\\Http\\Livewire\\User\\MockTestStartSide' => __DIR__ . '/../..' . '/app/Http/Livewire/User/MockTestStartSide.php',
