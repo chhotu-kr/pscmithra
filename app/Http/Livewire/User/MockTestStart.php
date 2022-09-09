@@ -19,7 +19,6 @@ class MocktestStart extends Component
   public $u = 0;
   public $required_timing = 0;
   public $min;
-  public $hr;
   public $sec;
   public $status;
   public $l;
@@ -31,14 +30,15 @@ class MocktestStart extends Component
 
     $user = 1;
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-    dd($this->data);
+    // dd($this->data);
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
       // dd($this->data['questionslist'][$index]['optSel']);
-    dd($testId);
+    // dd($testId);
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
+        
         $dd = mockattempquestion::where('id', $value[$index]['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
           [
             "QuesSeen" => $value[$index]["s"],
@@ -46,6 +46,7 @@ class MocktestStart extends Component
             "time" => $value[$index]['time']
           ]
         );
+        return  dd($dd);
       }
 
 
@@ -166,10 +167,10 @@ class MocktestStart extends Component
   public function mount($testId, $examinationId)
   { 
     $user = 1;
+    // dd($testId);
 
     $testId =  AttempedExam::select('id', 'slugid')->where("slugid", $testId)->first();
 
-    dd($testId);
     //  here attemped_exams_id not correct
     $this->data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user) {
       $q->where('attemped_exams_id', $testId->id)->where('users_id', $user);
