@@ -56,7 +56,7 @@ Route::post('/liveExam',[Apiv1Controller::class,'getLiveExam']);//here
 Route::post('/liveResultExam',[Apiv1Controller::class,'getResultExam']);
 Route::post('/prepare-liveExam',[Apiv1Controller::class,'prepareLiveExam']);
 Route::post('/getLiveData',[Apiv1Controller::class,'getLiveData']);
-Route::post('/getsolution-live',[Apiv1Controller::class,'getLiveSolution']);
+Route::post('/getsolution-live',[Apiv1Controller::class,'getLiveSolution']);//live solution
 Route::post('/submitLive',[Apiv1Controller::class,'submitLive']);
 Route::post('/getresuslt-live',[Apiv1Controller::class,'resultLive']);
 
@@ -71,7 +71,7 @@ Route::post('/getquiz-resuslt-re',[Apiv1Controller::class,'get_Result']);
 
 
 Route::post('/prepare-exam',[Apiv1Controller::class,'preareExam'])->name('prepareExam');
-Route::post('/getsolution-exam',[Apiv1Controller::class,'getExamSolution']);
+Route::post('/getsolution-exam',[Apiv1Controller::class,'getExamSolution']);//mocktest solution
 
 // .... User.......
 // Route::get('/show/{id}',[Apiv1Controller::class,'get_Details'])->name('user.detail');
@@ -93,7 +93,7 @@ Route::post('/getquiz-resuslt',[Apiv1Controller::class,'get_Result']);
 
 
 
-Route::post('/getsolution-quiz',[Apiv1Controller::class,'get_QuizSolutions']);
+Route::post('/getsolution-quiz',[Apiv1Controller::class,'get_QuizSolutions']);//quiz solution
 
 
 

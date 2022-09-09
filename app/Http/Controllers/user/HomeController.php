@@ -251,11 +251,27 @@ class HomeController extends Controller
 
     //................ LiveQuiz Result ...........//
     public function get_LiveQuizResult(Request $req){
-
+        $data['testid'] = '1c7fbe15ce1e9e273d3c0b87228c3e27';
+        $data['examinationId'] = 'b21fe25aeca7503589c1440ec84161c4';
+        return view('user.LiveQuizResult',$data);
     }
     //...............Quiz Soltuion..............//
-    public function get_QuizSolution(){
-        return view('user.Quiz_Solution');
+    public function get_QuizSolution(Request $req){
+        $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
+        $data['examinationId'] = 'slugid';
+        return view('user.Quiz_Solution',$data);
+    }
+    //................Mocktest Solution...........//
+    public function get_MocktestSolution(Request $req){
+        $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
+        $data['examinationId'] = 'slugid';
+        return view('user.Mocktest_Solution',$data);
+    }
+    //................Live Quiz Solution...............//
+    public function get_LiveQuizSolution(Request $req){
+        $data['testid'] = '1c7fbe15ce1e9e273d3c0b87228c3e27';
+        $data['examinationId'] = 'b21fe25aeca7503589c1440ec84161c4';
+        return view('user.LiveQuiz_Solution',$data);
     }
     //..........................User Dashboard  Controller..........................//
 
