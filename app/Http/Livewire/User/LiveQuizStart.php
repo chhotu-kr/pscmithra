@@ -8,30 +8,14 @@ use Livewire\Component;
 
 class LiveQuizStart extends Component
 {
+
   public $data;
   public $question_no;
 
   public $w = 0;
   public $a = 0;
   public $u = 0;
-  public $required_timing = 0;
-  public $min;
-  public $sec;
-  public $status;
-  public $l;
-  protected $listeners = ['totaltime' => 'timetaken'];
 
-  public function statusChange()
-  {
-    $this->status = !$this->status;
-  }
-  function timetaken()
-  {
-    $this->min = floor($this->required_timing / 60);
-    $this->sec = $this->required_timing % 60;
-    $this->required_timing--;
-    $this->data['questionslist'][$this->question_no]['time']++;
-  }
   function filterledgers()
   {
     $w = 0;
@@ -101,15 +85,16 @@ class LiveQuizStart extends Component
   }
   public function mount($testId, $examinationId)
   {
-    // dd($testId);
+
 
     $user = 1;
 
     $testId =  liveAttemp::select('id','slugid')->where("slugid", $testId)->first();
-    // dd($testId);
+
+
     $this->data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user) {
         $q->where('live_attemps_id', $testId->id)->where('users_id', $user);
-      }])->where('slugid', $testId->slugid)->where('users_id', $user)->where('live_exams_id', $examinationId)
+      }])->where('slugid', $testId)->where('users_id', $user)->where('live_exams_id', $examinationId)
         ->get()
         ->map(function ($d) {
   
@@ -133,7 +118,6 @@ class LiveQuizStart extends Component
               'noQues' => $d->examination->noQues,
               "questionslist" => $d->examination->examQ->map(function ($fff) {
                 return collect([
-                  "showdir" => false,
                   "questionId" => $fff->question->liveAttemp->id,
                   "s" => $fff->question->liveAttemp->QuesSeen,
                   "optSel" => $fff->question->liveAttemp->QuesSelect,
@@ -155,14 +139,11 @@ class LiveQuizStart extends Component
               })
             ];
           }
-        })[0];
-
+        });
         // dd($this->data);
     $this->question_no = 0;
     $this->jump($this->question_no);
     $this->countTime($this->question_no);
-    $this->required_timing = $this->data['time'];
-    $this->status = $this->data['questionslist'][$this->question_no]['showdir'];
 //    dd($this->question_no);
 //     dd($this->data);
   }

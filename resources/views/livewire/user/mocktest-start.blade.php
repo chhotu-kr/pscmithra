@@ -106,7 +106,7 @@
             margin-top: 20px;
         }
 
-
+        
 
         .legent-section .answerd .answer-box {
             display: flex;
@@ -135,7 +135,7 @@
             line-height: 38px;
         }
 
-
+     
 
         .quition-no-box-section {
             height: 185px;
@@ -247,19 +247,11 @@
             padding: 0 10px;
         }
 
-
+      
 
         .solutions p {
             font-size: 18px;
             color: #000;
-        }
-
-        .option-label {
-            background-color: #000;
-            color: white;
-            border-radius: 100%;
-            width: 26px;
-
         }
     </style>
     {{ json_encode($data['questionslist'][$question_no]) }}
@@ -268,20 +260,20 @@
         <div class="row">
             <div class="col-md-8">
                 <h5 class="text-center">
-                    <a class="link text-decoration-underline" wire:click.prevent="statusChange()" data-bs-toggle="collapse"
-                        href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="link text-decoration-underline" wire:click.prevent="statusChange()" data-bs-toggle="collapse" href="#collapseExample"
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
                         Directions
                     </a>
 
                 </h5>
-                @if ($status == true)
-                    <div class="card card-body border-0" style="margin-top:-20px">
-                        <div class="col-8 mx-auto" style="font-size: 14.5px">
-                            Some placeholder content for the collapse component. This panel is hidden by default but
-                            revealed when the user activates the relevant trigger.
-                        </div>
-                    </div>
-                @endif
+              @if ($status == true)
+                <div class="card card-body border-0" style="margin-top:-20px">
+                 <div class="col-8 mx-auto" style="font-size: 14.5px">
+                    Some placeholder content for the collapse component. This panel is hidden by default but
+                    revealed when the user activates the relevant trigger.
+                 </div>
+                </div>
+              @endif
 
                 <form id="regForm" style="margin-top:-30px">
                     <div class="tab curent">
@@ -291,12 +283,7 @@
                             <div class="btn">
                                 <button type="button" class="mt-1 active"
                                     wire:click.prevent="onSelect({{ 1 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            A
-                                        </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
+                                    <label class="radio-custom-label">
                                         {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
                                     </label>
                                 </button>
@@ -304,12 +291,7 @@
                             <div class="btn">
                                 <button type="button" class="mt-1 active"
                                     wire:click.prevent="onSelect({{ 2 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            B
-                                        </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
+                                    <label class="radio-custom-label">
                                         {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
                                     </label>
                                 </button>
@@ -317,12 +299,7 @@
                             <div class="btn">
                                 <button type="button" class="mt-1 active"
                                     wire:click.prevent="onSelect({{ 3 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            C
-                                        </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
+                                    <label class="radio-custom-label">
                                         {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
                                     </label>
                                 </button>
@@ -330,12 +307,7 @@
                             <div class="btn">
                                 <button type="button" class="mt-1 active"
                                     wire:click.prevent="onSelect({{ 4 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            D
-                                        </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
+                                    <label class="radio-custom-label">
                                         {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
                                     </label>
                                 </button>
@@ -376,22 +348,37 @@
 
                         <div class="left-right " style="flex-grow: 1">
                             <div class="time-section">
-                                <h6>Time Left : <b id="countdown">{{ $min }}: {{ $sec }}</b></h6>
+                                <span>Time Left : <b id="countdown">{{ $min }}: {{ $sec }}</b></span>
                             </div>
 
                         </div>
-                        <div class="text-light btn btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop" style="height: 33px">
+                        <div class="text-light btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <span style="font-size: 14px">
-                                Language
+                            Language
                             </span>
                         </div>
-
+                        {{-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div> --}}
                     </div>
 
 
                     <div class="quition-number-plate">
-                        <h5 class="text-secondary">Your are Viewing LR Section Question Palltte:</h5>
+                        <h4>Your are Viewing LR Section Question Palltte:</h4>
                         <div class="quition-no-box-section">
                             @foreach ($data['questionslist'] as $item)
                                 @if ($item['s'] == 'false')

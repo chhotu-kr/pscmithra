@@ -12,8 +12,8 @@
   </li><!-- End Dashboard Nav -->
 
 
- {{-- @permission('add-post') --}}
- <li class="nav-item">
+ @permission('add-post')
+ {{-- <li class="nav-item">
  
   <a class="nav-link collapsed "  href="{{route('manage.exam')}}">
    <i class="bi bi-journal-text"></i><span>Exam</span>
@@ -21,7 +21,7 @@
    
    </a>
   
- </li>
+ </li> --}}
 
  <li class="nav-item">
   <a class="nav-link collapsed" data-bs-target="#tables" data-bs-toggle="collapse" href="#">
@@ -86,7 +86,7 @@
 
 
  
- {{-- @endpermission --}}
+ @endpermission
  
 
  @permission('delete-post')
@@ -285,7 +285,7 @@
  @endpermission
  @permission('edit-question')
  <li class="nav-item">
-  <a class="nav-link collapsed"  href="{{route('insert.language')}}"> 
+  <a class="nav-link collapsed"  href="{{route('insert.language')}}">
     <i class="bi bi-bar-chart"></i><span>Language</span>
   </a>
  </li> 
