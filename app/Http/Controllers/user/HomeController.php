@@ -13,25 +13,26 @@ use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
+use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\RequestStack;
-
+use Auth;
 class HomeController extends Controller
 {
     //...............Home...............//
 
-    public $new_cat_id ;
-    public $new_sub_cat_id ;
-    public $new_chapter_id ;
+   
 
     public function get_ViewHome()
     {
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
         $data['product'] = Product::all();
-        $data['img'] = Image::all();
+        $data['img']=Image::all();
+        $data['user']=User::all();
+        $data['testimonials']=TestiMonials::all();
         return view('user.Viewhome', $data);
     }
 
@@ -67,7 +68,7 @@ class HomeController extends Controller
     //................CategoryDetails................//
     public function get_ViewCatDetails($id)
     {
-
+        $data['img']=Image::all();
         $data['catdetail'] = $id;
         return view('user.ViewCategorydetails', $data);
     }
@@ -98,6 +99,7 @@ class HomeController extends Controller
     public function get_Quiz()
     {
         //   $data['quizcat']=$id;
+        $data['img']=Image::all();
         $data['quizcat'] = QuizCategory::all();
         $data['quizsubcat'] = QuizSubCategory::all();
         return view('user.ViewQuiz', $data);
@@ -261,7 +263,14 @@ class HomeController extends Controller
 
     public function get_profile()
     {
-        $data['user'] = User::all();
+        $data['user']=Auth::user();
+        $data['current_user'] = Auth::user();
+        // dd($data);
         return view('user.profile.userprofile', $data);
+    }
+
+    public function user_Dashboard(){
+        // $data['user']=User::all();
+     return view('user.profile.userDashboard');
     }
 }
