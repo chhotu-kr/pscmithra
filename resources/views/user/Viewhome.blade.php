@@ -1,5 +1,6 @@
-@extends('user.dashboard')
+@extends('user/dashboard')
 @section('pscmithra')
+
 
 <div class="main-home-slider">
     @foreach ($img as $item)
@@ -8,45 +9,63 @@
         @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
     </div>
     @endforeach
-    
+
 </div>
+
+
+
 <div class="edu-gallery-area education-section-gap" style="background: transparent;">
     <div class="container">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
         </div>
 
-<div class="tabigationLink">
+        <div class="tabigationLink mx-5">
 
-<ul class="tabs tabSliderCat">
-   @foreach ($category as $item)
-   <li class="tab-link current" data-tab="tab-1">
+            <ul class="tabs tabSliderCat">
 
-    {{$item->category}}
-    
-    </li>
-   @endforeach
-   
-</ul>
-<div id="tab-1" class="tab-content current">
-    <div class="row">
-       @foreach ($subcategory as $item)
-       <div class="col-lg-3 col-md-6">
-        <div class="categorie-grid categorie-style-2">
-            <div class="icon">
-                @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'50','h'=>'50']], key($item->id))
-            </div>
-            <div class="content">
-                <h5 class="title">{{$item->subcategory}}</h5>
-            </div>
-        </div>
-    </div>
-       @endforeach
-       
+            <li class="tab-link current" data-tab="tab-All">
+                    All
+                </li>
 
-    </div>
+
+                @foreach ($category as $item)
+                
+                <li class="tab-link " data-tab="tab-{{$item->id}}">
+                    {{$item->category}}
+                </li>
+        @endforeach
+
+        </ul>
+
+
+        
+                @foreach ($subcategory as $item)
+                <div id="tab-{{$item->id}}" class="tab-content current">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="categorie-grid categorie-style-2">
+                        <div class="icon"> 
+                            @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'50','h'=>'50']], key($item->id))
+                        </div>
+                        <div class="content">
+                            <h5 class="title">{{$item->subcategory}}</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
 
 </div>
+
+                @endforeach
+
+            
+    </div>
+</div>
+</div>
+
 <div class="features-area-2">
     <div class="container">
         <div class="features-grid-wrap">
@@ -57,12 +76,6 @@
                 <div class="content">
                     <h5 class="title"><span>2K</span> Important Question</h5>
                 </div>
-
-    <div class="main-home-slider">
-        @foreach ($img as $item)
-            <div class="item">
-                {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
-                @livewire('imageview', ['image' => ['image' => $item->image, 'w' => '1732', 'h' => '500px']], key($item->id))
             </div>
             <div class="features-box features-style-2 edublink-svg-animate">
                 <div class="icon">
@@ -97,10 +110,9 @@
             <div class="col-lg-5">
                 <div class="about-image-gallery">
                     <img data-sal-delay="150" data-sal="slide-right" data-sal-duration="800" class="main-img-1" src="{{asset('nassets/img/app-img.png')}}" alt="About Image">
-                    
+
                 </div>
             </div>
-
             <div class="col-lg-7" data-sal-delay="150" data-sal="slide-left" data-sal-duration="800">
                 <div class="about-content">
                     <div class="section-title section-left">
@@ -115,10 +127,6 @@
                         <li>Lifetime Access</li>
                     </ul>
                 </div>
-
-            <div class="tabigationLink">
-                @livewire('home-category')
-
             </div>
         </div>
         <ul class="shape-group">
@@ -127,8 +135,15 @@
             </li>
         </ul>
     </div>
-
 </div>
+
+
+
+
+
+
+
+
 <section class="shop-page-area shop-page-area-home">
     <div class="container">
         <div class="education-sorting-area">
@@ -150,7 +165,6 @@
                     <div class="inner">
                         <div class="thumbnail">
                             <a href="{{route('view.coursedetails')}}">
-                                {{-- <img src="img/desk-top-publishing.jpg" alt="Shop Images"> --}}
                                 @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                             </a>
                             <div class="ebook-box">
@@ -158,66 +172,26 @@
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title"><a href="{{route('view.coursedetails')}}">{{$item->content}}</a></h6>
-                            <div class="price">Rs {{$item->price}}</div>
+                            <h6 class="title"><a href="{{route('view.coursedetails')}}">{{$item->title}}</a></h6>
+                            <div class="price">Rs/-{{$item->price}}</div>
                         </div>
                         <div class="product-hover-info">
-                                <ul>
-                                    <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                    <li><a href="{{ route('addtocart', ['p_id' => $item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
-                                </ul>
-                            </div>
-
-
-    <div class="features-area-2">
-        <div class="container">
-            <div class="features-grid-wrap">
-                <div class="features-box features-style-2 edublink-svg-animate">
-                    <div class="icon">
-                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/online-class.svg') }}"
-                            alt="animated icon">
-                    </div>
-                    <div class="content">
-                        <h5 class="title"><span>2K</span> Important Question</h5>
+                            <ul>
+                                <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
+                                <li><a href="{{ route('addtocart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="features-box features-style-2 edublink-svg-animate">
-                    <div class="icon">
-                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/instructor.svg') }}"
-                            alt="animated icon">
-                    </div>
-                    <div class="content">
-                        <h5 class="title"><span>150 M+</span>Mock Test Attempted</h5>
-                    </div>
-                </div>
-                <div class="features-box features-style-2 edublink-svg-animate">
-                    <div class="icon certificate">
-                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/certificate.svg') }}"
-                            alt="animated icon">
-                    </div>
-                    <div class="content">
-                        <h5 class="title"><span>500+</span>E-Books</h5>
-                    </div>
-                </div>
-                <div class="features-box features-style-2 edublink-svg-animate">
-                    <div class="icon">
-                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/user.svg') }}"
-                            alt="animated icon">
-                    </div>
-                    <div class="content">
-                        <h5 class="title"><span>6M+</span>Happy Students</h5>
-
-                    </div>
-                </div>
-            </div> 
+            </div>
             @endforeach
-          
-        
-     
+
+
         </div>
 
     </div>
 </section>
+
 <div class="testimonial-area-1 section-gap-equal">
     <div class="container">
         <div class="row g-lg-5">
@@ -230,17 +204,18 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-7">
                 <div class="home-one-testimonial-activator slide-with-shadow">
+                    @foreach ($testimonials as $item)
                     <div class="testimonial-grid">
                         <div class="thumbnail">
-                            <img src="{{asset('nassets/img/testimonial-03.png')}}" alt="Testimonial">
+                            {{-- <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial"> --}}
+                            {{-- @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'100','h'=>'100']], key($new->id)) --}}
                             <span class="qoute-icon"><i class="icon-26"></i></span>
 
                         </div>
                         <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <p>{{$item->message}}</p>
                             <div class="rating-icon">
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
@@ -248,172 +223,147 @@
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
                             </div>
-                            <h5 class="title">Ray Sanchez</h5>
+                            {{-- <h5 class="title">{{$item->subuser->name}}</h5> --}}
                             <span class="subtitle">Student</span>
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="testimonial-grid">
+                    {{-- <div class="testimonial-grid">
                         <div class="thumbnail">
-                            <img src="img/testimonial-03.png" alt="Testimonial">
-                            <span class="qoute-icon"><i class="icon-26"></i></span>
-
-            <ul class="shape-group">
-                <li class="shape-1 scene" data-sal-delay="500" data-sal="fade" data-sal-duration="200">
-                    <span data-depth="-2.3"></span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-
-
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                            <div class="rating-icon">
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                            </div>
-                            <h5 class="title">Amber Page</h5>
-                            <span class="subtitle">Designer</span>
-                        </div>
+                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                    <span class="qoute-icon"><i class="icon-26"></i></span>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                    <div class="rating-icon">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-        @endforeach
-
-
+                    <h5 class="title">Amber Page</h5>
+                    <span class="subtitle">Designer</span>
+                </div>
             </div>
-
-                    <div class="testimonial-grid">
-                        <div class="thumbnail">
-                            <img src="img/testimonial-03.png" alt="Testimonial">
-                            <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                            <div class="rating-icon">
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                            </div>
-                            <h5 class="title">Linda Garcia</h5>
-                            <span class="subtitle">Developer</span>
-                        </div>
+            <div class="testimonial-grid">
+                <div class="thumbnail">
+                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                    <span class="qoute-icon"><i class="icon-26"></i></span>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                    <div class="rating-icon">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-
-                    <div class="testimonial-grid">
-                        <div class="thumbnail">
-                            <img src="img/testimonial-03.png" alt="Testimonial">
-                            <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                            <div class="rating-icon">
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                            </div>
-                            <h5 class="title">Carlos Kelly</h5>
-                            <span class="subtitle">Marketer</span>
-                        </div>
-
+                    <h5 class="title">Linda Garcia</h5>
+                    <span class="subtitle">Developer</span>
+                </div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="thumbnail">
+                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                    <span class="qoute-icon"><i class="icon-26"></i></span>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                    <div class="rating-icon">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-
-
-                    <div class="testimonial-grid">
-                        <div class="thumbnail">
-                            <img src="img/testimonial-03.png" alt="Testimonial">
-                            <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                            <div class="rating-icon">
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                            </div>
-                            <h5 class="title">Cherise Harris</h5>
-                            <span class="subtitle">Designer</span>
-                        </div>
+                    <h5 class="title">Carlos Kelly</h5>
+                    <span class="subtitle">Marketer</span>
+                </div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="thumbnail">
+                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                    <span class="qoute-icon"><i class="icon-26"></i></span>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                    <div class="rating-icon">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-
-                    <div class="testimonial-grid">
-                        <div class="thumbnail">
-                            <img src="img/testimonial-03.png" alt="Testimonial">
-                            <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                            <div class="rating-icon">
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                                <i class="icon-23"></i>
-                            </div>
-                            <h5 class="title">Joe Niven</h5>
-                            <span class="subtitle">Developer</span>
-                        </div>
+                    <h5 class="title">Cherise Harris</h5>
+                    <span class="subtitle">Designer</span>
+                </div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="thumbnail">
+                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                    <span class="qoute-icon"><i class="icon-26"></i></span>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                    <div class="rating-icon">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-                    <div class="col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                        <div class="testimonial-grid">
-                            <div class="thumbnail">
-                                <img src="img/testimonial-03.png" alt="Testimonial">
-                                <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                            </div>
-                            <div class="content">
-                                <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                                <div class="rating-icon">
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                </div>
-                                <h5 class="title">Ray Sanchez</h5>
-                                <span class="subtitle">Student</span>
-                            </div>
-                        </div>
+                    <h5 class="title">Joe Niven</h5>
+                    <span class="subtitle">Developer</span>
+                </div>
+            </div>
+            <div class="col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                <div class="testimonial-grid">
+                    <div class="thumbnail">
+                        <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                        <span class="qoute-icon"><i class="icon-26"></i></span>
                     </div>
-                    <div class="col-md-6" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                        <div class="testimonial-grid">
-                            <div class="thumbnail">
-                                <img src="img/testimonial-03.png" alt="Testimonial">
-                                <span class="qoute-icon"><i class="icon-26"></i></span>
-
-                            </div>
-                            <div class="content">
-                                <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                                <div class="rating-icon">
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                    <i class="icon-23"></i>
-                                </div>
-                                <h5 class="title">Amber Page</h5>
-                                <span class="subtitle">Designer</span>
-                            </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                        <div class="rating-icon">
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
                         </div>
+                        <h5 class="title">Ray Sanchez</h5>
+                        <span class="subtitle">Student</span>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                <div class="testimonial-grid">
+                    <div class="thumbnail">
+                        <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                        <span class="qoute-icon"><i class="icon-26"></i></span>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                        <div class="rating-icon">
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                        </div>
+                        <h5 class="title">Amber Page</h5>
+                        <span class="subtitle">Designer</span>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
 </div>
+</div>
+</div>
+
+
 @endsection

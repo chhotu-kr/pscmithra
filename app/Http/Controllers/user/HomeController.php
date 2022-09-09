@@ -17,7 +17,6 @@ use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
-
 use Symfony\Component\HttpFoundation\RequestStack;
 use Auth;
 class HomeController extends Controller
@@ -220,19 +219,19 @@ class HomeController extends Controller
 }
    //..........................User Dashboard  Controller..........................//
 
-   public function get_profile(){
-       $data['user']=User::all();
-    return view('user.profile.userprofile',$data);
+//    public function get_profile(){
+//        $data['user']=User::all();
+//     return view('user.profile.userprofile',$data);
 
-   }
-}
+//    }
+
 
 
 
     public function get_profile()
     {
-        $data['user']=Auth::user();
-        $data['current_user'] = Auth::user();
+        $data['user']=auth()->user();
+        $data['current_user'] = auth()->user();
         // dd($data);
         return view('user.profile.userprofile', $data);
     }

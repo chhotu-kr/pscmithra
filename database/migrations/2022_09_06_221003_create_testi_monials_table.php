@@ -13,19 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('testi_monials', function (Blueprint $table) {
            $table->id();
             $table->boolean('isVisble')->default('1');
-            
-            $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('contact')->unique()->nullable();
-            $table->string('password');
-            $table->string('slugid');
-           $table->integer('amount');
-           $table->string('image');
-           $table->string('gender');
-            $table->rememberToken();
+            $table->foreignId('user_id')->constrained();
+            $table->longtext('message');
             $table->timestamps();
         });
     }
@@ -37,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('testi_monials');
     }
 };
