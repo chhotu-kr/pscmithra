@@ -46,7 +46,7 @@
                           <div class="col-12">
                             <button class="btn btn-primary w-100" type="submit">Create</button>
                           </div>
-                        </form>
+                        </form><!-- End Custom Styled Validation with Tooltips -->
                         </div>
                        
                       </div>
@@ -99,9 +99,7 @@
                                     
                                    
 
-                                   
-                                      <a href="{{route('removecategory',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
-                                   
+                                    <a href="{{route('removecategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
                           
                                
                                 
@@ -114,7 +112,7 @@
                           @endforeach
                     </tbody>
                   </table>
-          
+                  <!-- End Table with stripped rows -->
       
                 </div>
               </div>

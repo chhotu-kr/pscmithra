@@ -20,7 +20,6 @@ class QuestionController extends Controller
     {
        $data['secondquestion']= SecondQuestion::where('question_id',$question_id)->get();
         $data['question_id']= $question_id;
-     
        $data['language']= Language::all();
         $data['topic']= Topic::all();
         $data['subject']= Subject::all();
@@ -140,11 +139,6 @@ class QuestionController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
-        return redirect()->route('manage.quiz');
-
-        // $data=Question::find($id);
-        // $data->isVisble=0;
-        // $data->save();
-        // return redirect()->route('manage.quiz');
+        return redirect('/manageQuiz');
     }
 }

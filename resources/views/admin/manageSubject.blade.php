@@ -75,7 +75,7 @@
                           <td>@livewire('imageview', ['image' => ['image' => $new->image,'w'=>'100','h'=>'100']], key($new->id))</td>
                           <td>
                               <a href="{{route('subject.Update',['id'=>$new->id])}}" class="btn btn-outline-success">Edit</a>
-                              <a href="{{route('subjectdelete',['id'=>$new->id])}}" class="btn btn-outline-danger">Delete</a>
+                              <a href="{{route('subjectdelete',['id'=>$new->slugid])}}" class="btn btn-outline-danger">Delete</a>
                           </td>
                       </tr>
                   @endforeach
