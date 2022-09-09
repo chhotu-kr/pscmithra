@@ -61,7 +61,7 @@ Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('us
  Route::post('/update/user',[userController::class,'update'])->name('update.user');
 //............//..............//...........User Page.............//................//...............//
 
-Route::get("/", [HomeController::class, 'get_ViewHome'])->name('view.home');
+Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
 Route::get('/mock-test/category', [HomeController::class, 'get_Category'])->name('view.category');
 Route::get('/mock-test-exam', [HomeController::class, 'get_MockTest'])->name('view.mocktestexam');
 Route::get('/mock-test/category/details/{id}', [HomeController::class, 'get_ViewCatDetails'])->name('view.categorydetails');
@@ -106,7 +106,7 @@ Route::get('update/role/{id}', [RoleController::class, 'editRole'])->name('edit.
 Route::post('update/role/{id}', [RoleController::class, 'updateRole'])->name('update.role');
 
 // User Register And Login
-Route::match(["get", "post"], "/", [AuthController::class, "signup"])->name('user.signup');
+Route::match(["get", "post"], "/register", [AuthController::class, "signup"])->name('user.signup');
 Route::match(["get", "post"], "/loginuser", [AuthController::class, "login"])->name('user.login');
 Route::get("/logout", [AuthController::class, "logout"])->name("logout");
 Route::get("admin/logout", [AuthController::class, "Adminlogout"])->name("admin.logout");
