@@ -75,7 +75,9 @@ Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get
 Route::get('/quizes/category/chapter/topic/{chapter_id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
 Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
 Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');
-Route::get('/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/quiz/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/mocktest/getresult', [HomeController::class, 'get_MockTestResult'])->name('view.mocktest result');
+Route::get('/quiz/solution', [HomeController::class, 'get_QuizSolution'])->name('view.quizsolution');
 
 Route::get('/mock-test/study/metrial', [HomeController::class, 'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login', [HomeController::class, 'get_Login'])->name('user.login');

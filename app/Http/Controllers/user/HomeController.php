@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class HomeController extends Controller
 {
@@ -235,9 +236,26 @@ class HomeController extends Controller
         return view('user.LiveQuizStart', $data);
     }
     //..............Quiz Result........../
-    public function get_QuizResult()
-    {
-        return view('user.Quiz_Result');
+    public function get_QuizResult(Request $req)
+    {   $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
+        $data['quizexaminationid'] = 'slugid';
+        return view('user.Quiz_Result',$data);
+    }
+    //............... MOcktest Result..........//
+    public function get_MockTestResult(Request $req){
+        $data['testid'] = 'id';
+        $data['examinationId'] = 'id';
+
+        return view('user.MocktestResult',$data);
+    }
+
+    //................ LiveQuiz Result ...........//
+    public function get_LiveQuizResult(Request $req){
+
+    }
+    //...............Quiz Soltuion..............//
+    public function get_QuizSolution(){
+        return view('user.Quiz_Solution');
     }
     //..........................User Dashboard  Controller..........................//
 

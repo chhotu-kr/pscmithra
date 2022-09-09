@@ -30,7 +30,7 @@ class MocktestStart extends Component
 
     $user = 1;
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-    dd($this->data);
+    // dd($this->data);
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
@@ -38,6 +38,7 @@ class MocktestStart extends Component
     // dd($testId);
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
+        
         $dd = mockattempquestion::where('id', $value[$index]['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
           [
             "QuesSeen" => $value[$index]["s"],
@@ -45,6 +46,7 @@ class MocktestStart extends Component
             "time" => $value[$index]['time']
           ]
         );
+        return  dd($dd);
       }
 
 
