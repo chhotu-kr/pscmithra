@@ -3,7 +3,7 @@
 
     <div class="quize-page">
         <div class="container">
-               @livewire('user.quiz-solution',['testid' => $testid ,'examinationId' => $examinationId])
+               @livewire('user.mocktest-solution',['testid' => $testid ,'examinationId' => $examinationId])
         </div>
     </div>
 
