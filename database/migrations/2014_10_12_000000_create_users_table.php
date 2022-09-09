@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
            $table->id();
             $table->boolean('isVisble')->default('1');
+<<<<<<< HEAD
+           
+=======
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('contact')->unique()->nullable();

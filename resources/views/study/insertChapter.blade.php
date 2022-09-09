@@ -82,7 +82,7 @@
                           {{-- <td>{{$new->image}}</td> --}}
                           <td>
                               <a href="{{route('studychapter.Update',['id'=>$study->id])}}" class="btn btn-outline-success">Edit</a>
-                              <a href="{{route('studychapter.delete',['id'=>$study->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                              <a href="{{route('studychapter.delete',['id'=>$study->id])}}" class="btn btn-outline-danger">Delete</a>
                           </td>
                       </tr>
                   @endforeach

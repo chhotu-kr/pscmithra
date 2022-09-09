@@ -70,7 +70,11 @@
   </ul>
 </li>
 
-
+<li class="nav-item">
+  <a class="nav-link collapsed"  href="{{route('manage.Testmonials')}}">
+    <i class="bi bi-bar-chart"></i><span>TestiMonials</span>
+  </a>
+</li>
  
 <li class="nav-item">
   <a class="nav-link collapsed"  href="{{route('manage.examination')}}">

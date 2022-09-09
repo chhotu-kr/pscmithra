@@ -18,7 +18,7 @@ class ExaminationController extends Controller
     public function index()
     {
         // $data['exam']=Exam::all();
-        $data['examination'] = Examination::with('lang.language')->get();
+        $data['examination'] = Examination::with('lang.language')->where('isVisble',1)->get();
 
         // $data['category']=Category::all();
         // $data['subcategory']=SubCategory::all();
@@ -83,11 +83,31 @@ mocktestExaminationLanguage::insert($insertD);
         $examination->subcategory_id = $request->subcategory_id;
         $examination->exam_name = $request->exam_name;
         // $data->question=$request->question;
-        $examination->type = $request->type;
+        // $examination->type = $request->type;
         $examination->marks = $request->marks;
         $examination->time_duration = $request->time_duration;
         $examination->slugid = md5($request->exam_name . time());
         $examination->save();
-        return redirect('/examination');
+        return redirect()->back();
+    }
+
+    public function destroy($id){
+        // $sub=Examination::where('slugid',$slug)->first();
+        // if(!empty($sub)){
+        //     $sub->delete();
+        //     session()->flash('success', 'Service has been deleted !!!');
+
+        // }    else{
+        //         session()->flash('error', 'Please try again !!!');
+        //     } 
+    
+        //     return redirect()->back();
+
+        $data=Examination::find($id);
+        $data->isVisble=0;
+        $data->save();
+        return redirect()->back();
+        
+
     }
 }

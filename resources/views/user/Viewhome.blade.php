@@ -1,10 +1,63 @@
 @extends('user/dashboard')
 @section('pscmithra')
+<<<<<<< HEAD
+    
+
+<div class="main-home-slider">
+    @foreach ($img as $item)
+    <div class="item">
+        {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
+        @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
+    </div>
+    @endforeach
+    
+</div>
+
+
+
+<div class="edu-gallery-area education-section-gap" style="background: transparent;">
+    <div class="container">
+        <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+            <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
+        </div>
+
+<div class="tabigationLink">
+
+<ul class="tabs tabSliderCat">
+   @foreach ($category as $item)
+   <li class="tab-link current" data-tab="tab-1">
+
+    {{$item->category}}
+    {{-- <div class="inmg-box">
+        <img src="{{asset('nassets/img/grpimg-1.png')}}">
+    </div> --}}
+    {{-- ESE & GATE EC --}}
+    </li>
+   @endforeach
+   
+</ul>
+
+
+<div id="tab-1" class="tab-content current">
+   
+    <div class="row">
+        @foreach ($subcategory as $item)
+        <div class="col-lg-3 col-md-6">
+            <div class="categorie-grid categorie-style-2">
+                <div class="icon">
+                    {{-- <img src="img/grpimg-1.png"> --}}
+                    @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'50','h'=>'50']], key($item->id))
+                </div>
+                <div class="content">
+                    <h5 class="title">{{$item->subcategory}}</h5>
+                </div>
+=======
     <div class="main-home-slider">
         @foreach ($img as $item)
             <div class="item">
                 {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
                 @livewire('imageview', ['image' => ['image' => $item->image, 'w' => '1732', 'h' => '500px']], key($item->id))
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
             </div>
         @endforeach
         {{-- <div class="item">
@@ -28,6 +81,41 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+<section class="shop-page-area shop-page-area-home">
+    <div class="container">
+        <div class="education-sorting-area">
+            <div class="sorting-left">
+                <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                    <h2 class="title">Courses Available <span class="color-primary">for You</span></h2>
+                </div>
+            </div>
+            <div class="sorting-right">
+                <div class="education-sorting">
+                    <a href="">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5">
+          @foreach ($product as $item)
+          <div class="col-lg-3 col-md-4 col-sm-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+            <div class="education-product">
+                <div class="inner">
+                    <div class="thumbnail">
+                        <a href="{{route('view.coursedetails')}}">
+                            @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
+                        </a>
+                        <div class="ebook-box">
+                            <p>{{$item->type}}</p>
+                        </div>
+=======
     <div class="features-area-2">
         <div class="container">
             <div class="features-grid-wrap">
@@ -35,6 +123,7 @@
                     <div class="icon">
                         <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/online-class.svg') }}"
                             alt="animated icon">
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
                     </div>
                     <div class="content">
                         <h5 class="title"><span>2K</span> Important Question</h5>
@@ -98,6 +187,37 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+            <div class="col-lg-7">
+                <div class="home-one-testimonial-activator slide-with-shadow">
+                    @foreach ($testimonials as $item)
+                    <div class="testimonial-grid">
+                        <div class="thumbnail">
+                            {{-- <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial"> --}}
+                            {{-- @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'100','h'=>'100']], key($new->id)) --}}
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                        </div>
+                        <div class="content">
+                            <p>{{$item->message}}</p>
+                            <div class="rating-icon">
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                            </div>
+                            {{-- <h5 class="title">{{$item->subuser->name}}</h5> --}}
+                            <span class="subtitle">Student</span>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    {{-- <div class="testimonial-grid">
+                        <div class="thumbnail">
+                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+=======
             <ul class="shape-group">
                 <li class="shape-1 scene" data-sal-delay="500" data-sal="fade" data-sal-duration="200">
                     <span data-depth="-2.3"></span>
@@ -161,6 +281,7 @@
                     </div>
                 @endforeach
 
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
 
             </div>
 
@@ -224,6 +345,9 @@
                                 <span class="subtitle">Designer</span>
                             </div>
                         </div>
+<<<<<<< HEAD
+                    </div> --}}
+=======
 
                         <div class="testimonial-grid">
                             <div class="thumbnail">
@@ -353,6 +477,7 @@
                             </div>
                         </div>
                     </div>
+>>>>>>> 616bc6e2639ebe5d3d690478dcbef8fd1236b58f
                 </div>
             </div>
         </div>

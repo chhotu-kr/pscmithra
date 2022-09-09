@@ -88,7 +88,7 @@ class StudyController extends Controller
     //     $meta->title=$request->title;
     //     $meta->description=$request->description;
     //     $meta->save();
-    return dd($study);
+       return dd($study);
     //     return redirect()->route('study.index');
     }
 

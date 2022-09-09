@@ -66,7 +66,7 @@
                      
                     </div>
                   </div>
-                </div><!-- End Large Modal-->
+                </div>
               </div>
           </div>
       </div>
@@ -104,7 +104,7 @@
                                    <a href="{{route('subcategory.Update',['id'=>$item->id])}}" class="btn btn-outline-success">Edit</a>
                                   
                                   
-                                    <a href="{{route('removesubcategory',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
+                                    <a href="{{route('removesubcategory',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -18,14 +18,14 @@ return new class extends Migration
             $table->boolean('isVisble')->default('1');
             $table->foreignId('language_id')->constrained();
             $table->foreignId('question_id')->constrained();
-            $table->string('question');
+            $table->longtext('question');
             $table->longText('direction');
             $table->longText('explanation');
-            $table->string('option1');
-            $table->string('option2');
-            $table->string('option3');
-            $table->string('option4');
-            $table->string('slugid');
+            $table->longtext('option1');
+            $table->longtext('option2');
+            $table->longtext('option3');
+            $table->longtext('option4');
+            $table->longtext('slugid');
             
             $table->timestamps();
         });

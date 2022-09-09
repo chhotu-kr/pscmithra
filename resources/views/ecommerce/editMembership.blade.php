@@ -32,7 +32,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Details</label>
-                                <textarea name="details" id="" cols="30" rows="5" class="form-control" value="{{$membership->details}}" required></textarea>
+                                <textarea name="details" id=""  class="editor form-control">{!!$membership->destails!!}</textarea>
                             </div>
                             <div class="mb-3">
                                <input type="submit" value="Update" class="btn btn-primary w-100">

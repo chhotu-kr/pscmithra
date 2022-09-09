@@ -22,7 +22,11 @@
                         <select name="sm_categories_id" id="" class="form-select" required>
                         <option value="0">Main Subject</option>
                         @foreach ($studymetrialcategory as $new)
-                            <option value="{{$new->id}}">{{$new->name}}</option>
+                        <option value="{{ $new->id }}"
+                          @if ($new->id==$studymetrialchapter->sm_categories_id)
+                              selected="selected"
+                          @endif
+                        >{{ $new->name}}</option>
                         @endforeach
                         </select>
                       </div>

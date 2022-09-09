@@ -12,7 +12,7 @@ class StudymetrialCategoryController extends Controller
     public function index()
     {
         //
-        $data['studymetrialcategory']=StudymetrialCategory::all();
+        $data['studymetrialcategory']=StudymetrialCategory::where('isVisble',1)->get();
         return view('study/insertMetrial',$data);
     }
 
@@ -37,7 +37,7 @@ class StudymetrialCategoryController extends Controller
        $data->image = $filename;
        $data-> slugid = md5($request->name . time());
          $data->save();
-         return redirect('/insertMetrial');
+         return redirect()->route('insertmetrial.create');
     }
 
     public function show(StudymetrialCategory $studymetrialCategory)
@@ -66,21 +66,23 @@ class StudymetrialCategoryController extends Controller
        $studymetrialcategory->image = $filename;
        $studymetrialcategory-> slugid = md5($request->name . time());
          $studymetrialcategory->save();
-         return redirect('/insertMetrial');
+         return redirect()->route('insertmetrial.create');
     }
 
-    public function destroy(StudymetrialCategory $studymetrialCategory,$slug)
+    public function destroy(StudymetrialCategory $studymetrialCategory,$id)
     {
         //
-        $item= StudymetrialCategory::where('slugid', $slug)->first();
+        // $item= StudymetrialCategory::where('slugid', $slug)->first();
         
-        if (!empty($item)) {
-            $item->delete();
-            session()->flash('success', 'Service has been deleted !!!');
-        } else {
-            session()->flash('error', 'Please try again !!!');
-        }
-      
-        return redirect('/insertMetrial');
+        // if (!empty($item)) {
+        //     $item->delete();
+        //     session()->flash('success', 'Service has been deleted !!!');
+        // } else {
+        //     session()->flash('error', 'Please try again !!!');
+        // }
+      $data=StudymetrialCategory::find($id);
+      $data->isVisble=0;
+      $data->save();
+        return redirect()->route('insertmetrial.create');
     }
 }

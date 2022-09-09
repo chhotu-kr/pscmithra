@@ -60,13 +60,26 @@
                                 
                                 
                                <div class="row">
-                                 <div class="col-6">
+                                 <div class="col-12">
                                   <div class="mb-3">
                                     <label for="">Exam_name</label>
                                     <input type="text" name="exam_name" class="form-control" value="{{$examination->exam_name}}" required>
                                  </div>
+                                 <div class="row">
+                                  <div class="col-6">
+                                    <div class="mb-3">
+                                      <label for="">Marks</label>
+                                      <input type="text" name="marks" class="form-control" value="{{$examination->marks}}" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="mb-3">
+                                      <label for="">TimeDuration</label>
+                                      <input type="number" name="time_duration" class="form-control" value="{{$examination->time_duration}}" required>
+                                  </div>
                                  </div>
-                                 <div class="col-6">
+                                </div>
+                                 {{-- <div class="col-6">
                                   <div class="mb-3">
                                     <label for="">Type</label>
                                     <select  name="type" id="" class="form-select">
@@ -78,12 +91,12 @@
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
-                                  </div>
+                                  </div> --}}
                                 </div>
                                 </div>
                                </div>
                                 
-                               <div class="row">
+                               {{-- <div class="row">
                                 <div class="col-6">
                                   <div class="mb-3">
                                     <label for="">Marks</label>
@@ -96,7 +109,7 @@
                                     <input type="number" name="time_duration" class="form-control" value="{{$examination->time_duration}}" required>
                                 </div>
                                 </div>
-                               </div>
+                               </div> --}}
                                
                                 <div class="mb-3">
                                     <button class="btn btn-outline-primary w-100">Update</button>

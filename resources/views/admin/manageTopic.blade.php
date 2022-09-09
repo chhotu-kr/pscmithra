@@ -80,7 +80,7 @@
                           <td>{{$req->subject->sub_name}}</td>
                           <td>
                               <a href="{{route('topicedit',['id'=>$req->id])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                              <a href="{{route('topicdelete',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a>
+                              <a href="{{route('delete.topic',['id'=>$req->id])}}" class="btn btn-outline-danger">Delete</a>
                           </td>
                       </tr>
                   @endforeach

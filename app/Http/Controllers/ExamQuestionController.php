@@ -120,6 +120,6 @@ class ExamQuestionController extends Controller
 
       
        
-        return redirect()->route('examquestion.index');
+        return redirect()->route('check.index');
     }
 }

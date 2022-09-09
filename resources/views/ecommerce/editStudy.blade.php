@@ -67,6 +67,14 @@
                                     Please provide a valid description.
                                   </div>
                                 </div>
+
+                                <div class=" position-relative">
+                                  <label for="validationTooltip05" class="form-label">Title</label>
+                                 <input type="text" name="title" value="" class="form-control">
+                                  <div class="invalid-tooltip">
+                                    Please provide a valid description.
+                                  </div>
+                                </div>
                                 <div class="col-12">
                                   <button class="btn btn-primary w-100" type="submit">Create</button>
                                 </div>
