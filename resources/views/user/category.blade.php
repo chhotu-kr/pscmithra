@@ -1,7 +1,7 @@
 
 @extends('user/dashboard')
 @section('pscmithra')
-<div class="education-breadcrumb-area">
+{{-- <div class="education-breadcrumb-area">
     <div class="container">
         <div class="breadcrumb-inner">
             <div class="page-title">
@@ -21,8 +21,8 @@
         <li class="shape-4"><img src="{{asset('nassets/images/about/shape-22.png" alt="shape')}}"></li>
         <li class="shape-5 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
-</div>
-
+</div> --}}
+<img src="{{asset("upload/".$category->image)}}" width="1349px" height="3899px" alt="">
 <div class="features-area-3">
     <div class="container">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">

@@ -2,9 +2,9 @@
 @section('pscmithra')
     {{-- <livewire:user.quiz/> --}}
     {{-- @livewire('user.quiz'); --}}
+    @livewire('imageview', ['image' => ['image' => $quiz_cat->image,'w'=>'1732','h'=>'500px']], key($quiz_cat->id))
 
-
-    <div class="education-breadcrumb-area">
+    {{-- <div class="education-breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-inner">
                 <div class="page-title">
@@ -27,7 +27,8 @@
             <li class="shape-5 scene"><img data-depth="2" src="{{ asset('nassets/images/about/shape-07.png') }}"
                     alt="shape"></li>
         </ul>
-    </div>
+        @livewire('imageview', ['image' => ['image' => $quiz_cat->image,'w'=>'1732','h'=>'500px']], key($quiz_cat->id))
+    </div> --}}
 
     <div class="features-area-3">
         <div class="container">
