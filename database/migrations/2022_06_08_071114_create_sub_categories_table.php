@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('subcategory');
             $table->string('image')->nullable();
-          
             $table->timestamps();
         });
     }

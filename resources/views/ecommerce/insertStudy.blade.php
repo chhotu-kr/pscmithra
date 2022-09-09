@@ -57,13 +57,13 @@
                           Please provide a valid content.
                         </div>
                       </div>
-                      <div class=" position-relative">
+                      {{-- <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Title</label>
                         <input type="text" class="form-control" name="title" id="validationTooltip05" required>
                         <div class="invalid-tooltip">
                           Please provide a valid title.
                         </div>
-                      </div>
+                      </div> --}}
                       {{-- <div class=" position-relative">
                         <label for="validationTooltip05" class="form-label">Description</label>
 

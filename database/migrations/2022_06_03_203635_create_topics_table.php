@@ -18,7 +18,6 @@ return new class extends Migration
             $table->boolean('isVisble')->default('1');
             $table->string('topic_name');
             $table->foreignId('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-          
             $table->timestamps();
         });
     }

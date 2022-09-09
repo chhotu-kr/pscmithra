@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('slugid')->nullable();
             $table->string('image')->nullable();
             $table->string('category');
-            
             $table->timestamps();
         });
     }

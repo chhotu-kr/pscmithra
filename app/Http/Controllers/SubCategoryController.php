@@ -13,7 +13,7 @@ class SubCategoryController extends Controller
     public function index($category_id)
     {
         //
-        $data['subcategory']= SubCategory::where([['category_id',$category_id],['isVisble',1]])->get();
+        $data['subcategory']= SubCategory::where('category_id',$category_id)->get();
         $data['id']=$category_id;
         return view('admin/insertsubCategory',$data);
     }
@@ -79,24 +79,19 @@ class SubCategoryController extends Controller
     }
 
     
-    public function destroy(SubCategory $subCategory,$id)
+    public function destroy(SubCategory $subCategory,$slug)
     {
         //
-        // $item = SubCategory::where('slugid',$slug)->first();
+        $item = SubCategory::where('slugid',$slug)->first();
         
-        // if(!empty($item)){
-        //     $item->delete();
-        //     session()->flash('success', 'Service has been deleted !!!'); 
-        // }
+        if(!empty($item)){
+            $item->delete();
+            session()->flash('success', 'Service has been deleted !!!'); 
+        }
 
-        // else{
-        //     session()->flash('error', 'Please try again !!!');
-        // } 
-        // return redirect()->back();
-
-        $data=SubCategory::find($id);
-        $data->isVisble=0;
-        $data->save();
+        else{
+            session()->flash('error', 'Please try again !!!');
+        } 
         return redirect()->back();
     }
 }
