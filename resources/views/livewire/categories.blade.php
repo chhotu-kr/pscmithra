@@ -1,13 +1,13 @@
 <div>
+<h6>Mock Test</h6>
     <div class="row">
-        <div class="col-2 mt-3">
+        <div class="col-2 mt-1">
                 <label for="" style="font-size: 12px">Category</label>
                 <select wire:model="categoryId" id="category_id" name="category_id[]" class=" form-select">
                  <option value='-1'  >select</option>
                  @foreach ($category as $client)
                   <option value="{{$client->id}}">{{$client->category}}</option>
                  @endforeach
-            
                 </select>
             </div>
             <div class="col-2 mt-3">

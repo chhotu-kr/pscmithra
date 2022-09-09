@@ -17,7 +17,7 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
 
-            $table->foreignId('live_exams_id')->constrained();
+            $table->foreignId('live_attemps_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->string('slugid');
             $table->timestamps();
