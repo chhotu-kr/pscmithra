@@ -13,14 +13,14 @@ class TopicController extends Controller
 
     public function show($subject_id){
 
-        $data['topic']= Topic::where("subject_id",$subject_id)->get();
+        $data['topic']= Topic::where([["subject_id",$subject_id],['isVisble',1]])->get();
         $data['subject']= Subject::all();
 
         return view('admin.manageTopic',$data);
     }
 
    public function insert(Request $request){
-    // $data['topic']= Topic::where("sub_name","0")->get();
+    
         $data= new Topic();
         $data->topic_name= $request->topic_name;
         $data->subject_id= $request->subject_id;
@@ -40,12 +40,21 @@ class TopicController extends Controller
       
         
         $topic->save();
-        return redirect('/admin/manage');
+        return redirect()->back();
       }
 
     public function destroy($id){
         $req = Topic::find($id);
         $req->delete();
-        return redirect('/admin/manage');
+        return redirect()->back();
+    }
+
+    public function deletestatus($id){
+
+        $data= Topic::find($id);
+        $data->isVisble=0;
+        
+         $data->save();
+        return redirect()->back();
     }
 }

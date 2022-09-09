@@ -24,7 +24,9 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\addToCartController;
+use App\Http\Controllers\TestiMonils\TestimonilsController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +42,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//.........................cart route.................................///
+Route::get('/delete/topic/{id}',[TopicController::class,'deletestatus'])->name('delete.topic');
 
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
 Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addTCart"])->name("addtocart");
@@ -52,15 +56,19 @@ Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name(
 //     echo message();
 //     return view('user/cart/viewproduct');
 // });
+// Route::view('home', 'home')->name('home');
 
+    Route::view('profile','category')->name('category');
 
 //..............User Dashboard Route................//
 
 Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
-
+Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
+  Route::post('/update/user/password',[userController::class,'ChangePassword'])->name('update.password');
+ Route::post('/update/user',[userController::class,'update'])->name('update.user');
 //............//..............//...........User Page.............//................//...............//
 
-Route::get('/view/home', [HomeController::class, 'get_ViewHome'])->name('view.home');
+Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
 Route::get('/mock-test/category', [HomeController::class, 'get_Category'])->name('view.category');
 Route::get('/mock-test-exam', [HomeController::class, 'get_MockTest'])->name('view.mocktestexam');
 Route::get('/mock-test/category/details/{id}', [HomeController::class, 'get_ViewCatDetails'])->name('view.categorydetails');
@@ -78,8 +86,8 @@ Route::get('/quizes/{cat?}{sub_cat?}{chapter?}{topic?}', [HomeController::class,
 Route::get('/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
 
 Route::get('/mock-test/study/metrial', [HomeController::class, 'get_Study_Metrial'])->name('view.studymetrial');
-Route::get('/user/login', [HomeController::class, 'get_Login'])->name('user.login');
-Route::get('/user/register', [HomeController::class, 'get_Register'])->name('user.register');
+Route::get('/login', [HomeController::class, 'get_Login'])->name('user.login');
+Route::get('/register', [HomeController::class, 'get_Register'])->name('user.register');
 Route::get('/mock-test/quiz/category', [HomeController::class, 'get_QuizCate'])->name('quiz.category');
 Route::get('/mock-test/quiz/subcategory', [HomeController::class, 'get_QuizSubCate'])->name('quiz.subcategory');
 Route::get('/mock-test/quiz/chapter', [HomeController::class, 'get_QuizChapt'])->name('quiz.chapter');
@@ -99,8 +107,8 @@ Route::get('update/role/{id}', [RoleController::class, 'editRole'])->name('edit.
 Route::post('update/role/{id}', [RoleController::class, 'updateRole'])->name('update.role');
 
 // User Register And Login
-Route::match(["get", "post"], "/", [AuthController::class, "signup"])->name('user.signup');
-Route::match(["get", "post"], "/loginuser", [AuthController::class, "login"])->name('user.login');
+Route::match(["get", "post"], "/Register", [AuthController::class, "signup"])->name('user.signup');
+Route::match(["get", "post"], "/login", [AuthController::class, "login"])->name('user.login');
 Route::get("/logout", [AuthController::class, "logout"])->name("logout");
 Route::get("admin/logout", [AuthController::class, "Adminlogout"])->name("admin.logout");
 
@@ -113,9 +121,9 @@ Route::match(["get", "post"], "/admin/login", [AuthController::class, "adminLogi
 
 // Admin middleware
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth:admin']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth:admin']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
 
@@ -183,8 +191,8 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/categoryUpdate/{id}', [CategoryController::class, 'edit'])->name('categoryedit');
     Route::get('/subcategoryUpdate/{id}', [SubCategoryController::class, 'edit'])->name('subcategoryedit');
     Route::get('/languageUpdate/{id}', [LanguageController::class, 'edit'])->name('languageedit');
-    Route::get('/examquestionUpdate/{id}', [ExamQuestionController::class, 'edit'])->name('examquestion.edit');
-    Route::get('examinationUpdate/{id}', [ExaminationController::class, 'edit'])->name('examination->edit');
+    Route::get('/exam/questionUpdate/{id}', [ExamQuestionController::class, 'edit'])->name('examquestion.edit');
+    Route::get('/examination/Update/{id}', [ExaminationController::class, 'edit'])->name('examination.edit');
 
     //..........................Update Method.......................//
 
@@ -199,22 +207,23 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::post('/subcategoryUpdate/{id}', [SubCategoryController::class, 'update'])->name('subcategory.Update');
     Route::post('/languageUpdate/{id}', [LanguageController::class, 'update'])->name('language.Update');
     Route::post('/examquestionUpdate/{id}', [ExamQuestionController::class, 'update'])->name('examquestion.Update');
-    Route::post('examinationUpdate/{id}', [ExaminationController::class, 'update'])->name('examination.update');
+    Route::post('/examination/Update/{id}', [ExaminationController::class, 'update'])->name('examination.update');
 
     //..............................Delete Method...........................//
 
     Route::get('/examremove/{id}', [ExamController::class, 'destroy'])->name('examremove');
+    Route::get('/examination/remove/{id}', [ExaminationController::class, 'destroy'])->name('examination.remove');
     Route::get('/subjectdelete/{id}', [SubjectController::class, 'remove'])->name('subjectdelete');
     Route::get('/studymetrialdelete/{id}', [StudymetrialCategoryController::class, 'destroy'])->name('studymetrial.delete');
     Route::get('/studychapterdelete/{id}', [StudymetrialChapterController::class, 'destroy'])->name('studychapter.delete');
     Route::get('/topicdelete/{id}', [TopicController::class, 'destroy'])->name('topicdelete');
-    Route::get('/removequestion/{id}', [QuestionController::class, 'destroy'])->name('removequestion');
+    Route::get('/remove/question/{id}', [QuestionController::class, 'destroy'])->name('removequestion');
     Route::get('/removesecondquestion/{id}', [SecondQuestionController::class, 'delete'])->name('remove.secondquestion');
     Route::get('/removecategory/{id}', [CategoryController::class, 'destroy'])->name('removecategory');
     Route::get('/removesubcategory/{id}', [SubCategoryController::class, 'destroy'])->name('removesubcategory');
     Route::get('/deletelanguage/{id}', [LanguageController::class, 'slugDelete'])->name('removelanguage');
-    Route::get('/removeexamquestion/{id}', [ExamQuestionController::class, 'destroy'])->name('remove.examquestion');
-
+    Route::get('/remove/examquestion/{id}', [ExamQuestionController::class, 'destroy'])->name('remove.examquestion');
+    // Route::get('/remove/livequestion/{id}', [LiveTestController::class, 'destroy'])->name('remove.livequestion');
     //...........................Resource Route..........................//
 
     Route::resources([
@@ -350,7 +359,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::post('/quizExamstore', [QuizExaminationController::class, 'store'])->name('quizexamination.store');
     Route::get('/quizExamupdate/{id}', [QuizExaminationController::class, 'edit'])->name('quizexamination.edit');
     Route::post('/quizExamupdate/{id}', [QuizExaminationController::class, 'update'])->name('quizexamination.update');
-    Route::get('/quizexaminationremove/{id}', [QuizExaminationController::class, 'destroy'])->name('quizexamination.remove');
+    Route::get('/quizexamination/remove/{id}', [QuizExaminationController::class, 'destroy'])->name('quizexamination.remove');
 
     //..........LiveTest..............//
     Route::get('/live/test', [LiveTestController::class, 'index'])->name('live.test');
@@ -359,7 +368,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/manage/liveques/{id}', [LiveTestController::class, 'ques'])->name('manage.livequestion');
     Route::get('/Live/testupdate/{id}', [LiveTestController::class, 'edit'])->name('livetest.edit');
     Route::post('/Live/testupdate/{id}', [LiveTestController::class, 'update'])->name('livetest.update');
-    Route::get('/Livetestremove/{id}', [LiveTestController::class, 'destroy'])->name('livetest.remove');
+    Route::get('/Livetest/remove/{id}', [LiveTestController::class, 'destroy'])->name('livetest.remove');
     Route::get('/live/ques/create/{id}', [LiveTestController::class, 'getliveQuestioncreate'])->name('liveAddQestion.create');
     Route::post('/live/question/save', [LiveTestController::class, 'liveQues'])->name('store.livequestion');
     Route::get('/live/question', [LiveTestController::class, 'getliveSubmit'])->name('store.liveQues');
@@ -371,7 +380,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::post('/quizques/store', [QuizQuestionController::class, 'store'])->name('quizquestion.store');
     Route::get('/quizques/update/{id}', [QuizQuestionController::class, 'edit'])->name('quizquestion.edit');
     Route::post('/quizques/update/{id}', [QuizQuestionController::class, 'update'])->name('quizquestion.update');
-    Route::get('/quizques/remove/{id}', [QuizQuestionController::class, 'destroy'])->name('quizquestion.destroy');
+    Route::get('/quizques/remove/{id}', [QuizQuestionController::class, 'destroy'])->name('quizquestion.delete');
     Route::get('/quiz/question', [QuizQuestionController::class, 'get_QuizSubmit'])->name('store.quiz');
     Route::post('/quiz/question/save', [QuizQuestionController::class, 'QuizQues'])->name('store.quizquestion');
 
@@ -434,6 +443,13 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/page/{id}', [pageController::class, 'edit'])->name('page.edit');
     Route::post('/update/page/{id}', [pageController::class, 'update'])->name('page.update');
     Route::get('/remove/page/{id}', [pageController::class, 'destroy'])->name('page.delete');
+
+    //............................TestMonials..................................//
+    Route::get('/testi-Monials',[TestimonilsController::class,'index'])->name('manage.Testmonials');
+    Route::post('/testi-Monials/store',[TestimonilsController::class,'store'])->name('Testmonials.store');
+    Route::get('/testi-Monials/update/{id}',[TestimonilsController::class,'edit'])->name('Testmonials.edit');
+    Route::post('/testi-Monials/update/{id}',[TestimonilsController::class,'update'])->name('Testmonials.update');
+    Route::get('/testi-Monials/remove/{id}',[TestimonilsController::class,'destroy'])->name('Testmonials.remove');
 });
 
 // User middleware
@@ -455,4 +471,4 @@ Route::get('/Livetestremove/{id}', [LiveTestController::class, 'destroy'])->name
 
 // Route::get('/examqw', function(){
 //     return view('manageExamination');
-// });
+// })

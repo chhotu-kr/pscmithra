@@ -9,7 +9,7 @@ class SubjectController extends Controller
 {
     //
     public function index(){
-        $data['subject']=Subject::all();
+        $data['subject']=Subject::where('isVisble',1)->get();
         return view('admin/manageSubject',$data);
     }
 
@@ -48,16 +48,21 @@ class SubjectController extends Controller
          return redirect()->route('manage.subject');  
     }
 
-    public function remove($slug){
-        $item= Subject::where('slugid', $slug)->first();
+    public function remove($id){
+        // $item= Subject::where('slugid', $slug)->first();
         
-        if (!empty($item)) {
-            $item->delete();
-            session()->flash('success', 'Service has been deleted !!!');
-        } else {
-            session()->flash('error', 'Please try again !!!');
-        }
+    //     if (!empty($item)) {
+    //         $item->delete();
+    //         session()->flash('success', 'Service has been deleted !!!');
+    //     } else {
+    //         session()->flash('error', 'Please try again !!!');
+    //     }
       
-        return redirect()->route('manage.subject');
+    //     return redirect()->route('manage.subject');
+
+    $data=Subject::find($id);
+    $data->isVisble=0;
+    $data->save();
+    return redirect()->route('manage.subject');
     }
 }

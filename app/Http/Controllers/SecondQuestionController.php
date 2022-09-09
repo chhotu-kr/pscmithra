@@ -32,8 +32,9 @@ class SecondQuestionController extends Controller
     public function create($id)
     {
         //
-
+          
         $data['secondquestion']=$id;
+      
         $data['language']=Language::all();
         $data['question']=Question::all();
 
@@ -137,6 +138,8 @@ class SecondQuestionController extends Controller
         } else {
             session()->flash('error', 'Please try again !!!');
         }
+
+       
         return redirect()->back();
     }
 }

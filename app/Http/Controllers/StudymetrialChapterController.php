@@ -14,7 +14,7 @@ class StudymetrialChapterController extends Controller
     {
         //
         $data['studymetrialcategory']=StudymetrialCategory::all();
-        $data['studymetrialchapter']=StudymetrialChapter::all();
+        $data['studymetrialchapter']=StudymetrialChapter::where('isVisble',1)->get();
         return view('study/insertChapter',$data);
     }
 
@@ -35,7 +35,7 @@ class StudymetrialChapterController extends Controller
         
        $data-> slugid = md5($request->name . time());
          $data->save();
-         return redirect('/insertchapter');
+         return redirect()->route('insertchapter.create');
     }
 
     
@@ -64,23 +64,25 @@ class StudymetrialChapterController extends Controller
         
         $studymetrialchapter-> slugid = md5($request->name . time());
         $studymetrialchapter->save();
-         return redirect('/insertchapter');
+         return redirect()->route('insertchapter.create');
     }
 
     
-    public function destroy(StudymetrialChapter $studymetrialChapter,$slug)
+    public function destroy(StudymetrialChapter $studymetrialChapter,$id)
     {
         //
-        $item= StudymetrialChapter::where('slugid', $slug)->first();
+        // $item= StudymetrialChapter::where('slugid', $slug)->first();
         
-        if (!empty($item)) {
-            $item->delete();
-            session()->flash('success', 'Service has been deleted !!!');
-        } else {
-            session()->flash('error', 'Please try again !!!');
-        }
-      
-        return redirect('/insertMetrial');
+        // if (!empty($item)) {
+        //     $item->delete();
+        //     session()->flash('success', 'Service has been deleted !!!');
+        // } else {
+        //     session()->flash('error', 'Please try again !!!');
+        // }
+        $data=StudymetrialChapter::find($id);
+        $data->isVisble=0;
+        $data->save();
+        return redirect()->route('insertchapter.create');
     }
     
 }

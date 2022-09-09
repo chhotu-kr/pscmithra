@@ -1,10 +1,18 @@
 @extends('user/dashboard')
 @section('pscmithra')
-    {{-- <livewire:user.quiz/> --}}
-    {{-- @livewire('user.quiz'); --}}
+    {{-- <livewire:user.quiz/>  --}}
+ {{-- @livewire('user.quiz'); --}}
 
-
-    <div class="education-breadcrumb-area">
+ <div class="main-home-slider">
+  @foreach ($img as $item)
+  <div class="item">
+      {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
+      @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
+  </div>
+  @endforeach
+  
+</div>
+    {{-- <div class="education-breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-inner">
                 <div class="page-title">
@@ -27,7 +35,7 @@
             <li class="shape-5 scene"><img data-depth="2" src="{{ asset('nassets/images/about/shape-07.png') }}"
                     alt="shape"></li>
         </ul>
-    </div>
+    </div> --}}
 
     <div class="features-area-3">
         <div class="container">

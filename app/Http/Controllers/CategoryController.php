@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         //
         
-        $data['category']=Category::all();
+        $data['category']=Category::where('isVisble',1)->get();
        
        return view('admin.insertCategory',$data);
     }
@@ -75,19 +75,25 @@ class CategoryController extends Controller
     }
 
     
-    public function destroy(Category $category,$slug)
+    public function destroy(Category $category,$id)
     {
         //
-        $item = Category::where('slugid',$slug)->first();
+        // $item = Category::where('slugid',$slug)->first();
         
-        if(!empty($item)){
-            $item->delete();
-            session()->flash('success', 'Service has been deleted !!!'); 
-        }
+        // if(!empty($item)){
+        //     $item->delete();
+        //     session()->flash('success', 'Service has been deleted !!!'); 
+        // }
 
-        else{
-            session()->flash('error', 'Please try again !!!');
-        } 
+        // else{
+        //     session()->flash('error', 'Please try again !!!');
+        // } 
+
+        // return redirect()->route('insert.category');
+
+        $data=Category::find($id);
+        $data->isVisble=0;
+        $data->save();
 
         return redirect()->route('insert.category');
        

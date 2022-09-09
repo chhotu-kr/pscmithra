@@ -14,8 +14,7 @@ class Bookproduct extends Component
         
         
         
-        //    $this->$type=type;
-        // $ia['type']=$type;
+        
         $this->product=Product::where('type',$item)->get();
     }
     public function render()

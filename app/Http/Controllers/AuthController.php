@@ -17,6 +17,7 @@ class AuthController extends Controller
             $req->validate([
                 'name' => 'required',
                 'contact' => 'required|unique:users',
+                'email' => 'required|unique:users',
                 'password' => 'required|min:6'
             ]);
 
@@ -52,7 +53,7 @@ class AuthController extends Controller
             $auth = $req->only("contact","password");
 
             if(Auth::guard("web")->attempt($auth)){
-                return redirect()->route('user.index');
+                return redirect()->route('user.dashboard');
             }
             else{
                 // $req->session()->flash("error","login with incorrect details try again");
@@ -122,6 +123,28 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+    // public function edit($id){
+    //     $data['user']=User::find($id);
     
+    //     return view('user.profile.userProfile',$data);
+    
+    //    }
+
+    // public function update(Request $request,$id){
+
+    //     $user=User::find($id);
+    //     $user->name=$request->name;
+    //     $user->contact=$request->contact;
+    //     $user->emial=$request->emial;
+    //     $user->password=$request->password;
+    //     $user->amount=$request->amount;
+    //     $user->image=$request->image;
+    //     $user->gender=$request->gender;
+    
+    //     $user->save();
+    
+    //     return redirect()->route('user.profile');
+    
+    //    }  
 
 }

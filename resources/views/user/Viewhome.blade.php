@@ -10,12 +10,7 @@
         @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
     </div>
     @endforeach
-    {{-- <div class="item">
-        <img src="{{asset('nassets\img/banner-images-1.jpg')}}">
-    </div>
-    <div class="item">
-        <img src="{{asset('nassets\img/banner-images-1.jpg')}}">
-    </div> --}}
+    
 </div>
 
 
@@ -148,7 +143,6 @@
 
 
 
-
 <section class="shop-page-area shop-page-area-home">
     <div class="container">
         <div class="education-sorting-area">
@@ -211,14 +205,16 @@
             </div>
             <div class="col-lg-7">
                 <div class="home-one-testimonial-activator slide-with-shadow">
+                    @foreach ($testimonials as $item)
                     <div class="testimonial-grid">
                         <div class="thumbnail">
-                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
+                            {{-- <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial"> --}}
+                            {{-- @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'100','h'=>'100']], key($new->id)) --}}
                             <span class="qoute-icon"><i class="icon-26"></i></span>
 
                         </div>
                         <div class="content">
-                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <p>{{$item->message}}</p>
                             <div class="rating-icon">
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
@@ -226,12 +222,13 @@
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
                             </div>
-                            <h5 class="title">Ray Sanchez</h5>
+                            {{-- <h5 class="title">{{$item->subuser->name}}</h5> --}}
                             <span class="subtitle">Student</span>
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="testimonial-grid">
+                    {{-- <div class="testimonial-grid">
                         <div class="thumbnail">
                             <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
                             <span class="qoute-icon"><i class="icon-26"></i></span>
@@ -371,7 +368,7 @@
                                 <span class="subtitle">Designer</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

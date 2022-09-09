@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('type',['voice','quiz','video','text'])->default('text');
             $table->string('name');
             $table->string('url')->nullable();
-            $table->text('text')->nullable();
+            $table->longtext('text')->nullable();
             $table->integer('quiz_id')->nullable();
             $table->enum('isfree',['true','false'])->default('false');
             $table->integer('index');

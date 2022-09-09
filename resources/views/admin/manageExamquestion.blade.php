@@ -46,7 +46,7 @@
                                             
                                            
                                             <td>
-                                              <a href="{{route('remove.examquestion',['id'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
+                                              <a href="{{route('remove.examquestion',['id'=>$item->slugid])}}" class="btn btn-outline-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

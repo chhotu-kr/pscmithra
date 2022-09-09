@@ -43,9 +43,9 @@
    });
 </script>
 
-
-</head>
 @livewireStyles
+</head>
+
 
 <body class="sticky-header">
 

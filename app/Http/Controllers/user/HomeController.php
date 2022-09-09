@@ -13,19 +13,24 @@ use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
+use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
+use Auth;
 
 class HomeController extends Controller
 {
     //...............Home...............//
    
     public function get_ViewHome(){
+       
         $data['category']=Category::all();
             $data['subcategory']=SubCategory::all();
             $data['product']=Product::all();
             $data['img']=Image::all();
+            $data['user']=User::all();
+            $data['testimonials']=TestiMonials::all();
             return view('user.Viewhome',$data);
        
     }
@@ -46,7 +51,7 @@ class HomeController extends Controller
     public function get_Category(){
         $data['subcategory']=SubCategory::all();
         $data['cate']=Category::all();
-       
+        // $data['img']=Image::all();
         return view('user.category',$data);
     }
 
@@ -59,7 +64,7 @@ class HomeController extends Controller
     // }
    //................CategoryDetails................//
     public function get_ViewCatDetails($id){
-        
+        $data['img']=Image::all();
         $data['catdetail'] = $id;
         return view('user.ViewCategorydetails',$data);
     }
@@ -84,7 +89,8 @@ class HomeController extends Controller
     //..............Quiz.............//
 
     public function get_Quiz(){
-        //   $data['quizcat']=$id;
+        
+        $data['img']=Image::all();
         $data['quizcat'] = QuizCategory::all();
         $data['quizsubcat'] = QuizSubCategory::all();
         return view('user.ViewQuiz',$data);
@@ -210,10 +216,22 @@ class HomeController extends Controller
    //..........................User Dashboard  Controller..........................//
 
    public function get_profile(){
-       $data['user']=User::all();
+    
+       $data['user']=Auth::user();
+       $data['current_user'] = Auth::user();
+    //    dd($data);
     return view('user.profile.userprofile',$data);
 
    }
+
+   public function user_Dashboard(){
+    // $data['user']=User::all();
+ return view('user.profile.userDashboard');
+
+}
+  
+
+   
 }
 
 
