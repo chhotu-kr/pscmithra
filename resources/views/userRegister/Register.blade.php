@@ -46,22 +46,6 @@
                         <div class="invalid-feedback">Please choose a username.</div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <label for="your" class="form-label">Gender</label>
-                      <div class="input-group has-validation">
-              
-                        <input type="text" name="gender" class="form-control" id="your" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <label for="Userimage" class="form-label">Image</label>
-                      <div class="input-group has-validation">
-                  
-                        <input type="text" name="image" class="form-control" id="Userimage" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
-                      </div>
-                    </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>

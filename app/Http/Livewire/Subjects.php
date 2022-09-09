@@ -18,7 +18,9 @@ class Subjects extends Component
    
 
     public function mount(){
-        $this->subject= Subject::all();  
+        $this->subject= Subject::all();
+       
+       
        
     }
 

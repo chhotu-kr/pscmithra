@@ -12,7 +12,7 @@ class StudymetrialCategoryController extends Controller
     public function index()
     {
         //
-        $data['studymetrialcategory']=StudymetrialCategory::where('isVisble',1)->get();
+        $data['studymetrialcategory']=StudymetrialCategory::all();
         return view('study/insertMetrial',$data);
     }
 
@@ -37,7 +37,7 @@ class StudymetrialCategoryController extends Controller
        $data->image = $filename;
        $data-> slugid = md5($request->name . time());
          $data->save();
-         return redirect()->route('insertmetrial.create');
+         return redirect('/insertMetrial');
     }
 
     public function show(StudymetrialCategory $studymetrialCategory)
@@ -66,23 +66,21 @@ class StudymetrialCategoryController extends Controller
        $studymetrialcategory->image = $filename;
        $studymetrialcategory-> slugid = md5($request->name . time());
          $studymetrialcategory->save();
-         return redirect()->route('insertmetrial.create');
+         return redirect('/insertMetrial');
     }
 
-    public function destroy(StudymetrialCategory $studymetrialCategory,$id)
+    public function destroy(StudymetrialCategory $studymetrialCategory,$slug)
     {
         //
-        // $item= StudymetrialCategory::where('slugid', $slug)->first();
+        $item= StudymetrialCategory::where('slugid', $slug)->first();
         
-        // if (!empty($item)) {
-        //     $item->delete();
-        //     session()->flash('success', 'Service has been deleted !!!');
-        // } else {
-        //     session()->flash('error', 'Please try again !!!');
-        // }
-      $data=StudymetrialCategory::find($id);
-      $data->isVisble=0;
-      $data->save();
-        return redirect()->route('insertmetrial.create');
+        if (!empty($item)) {
+            $item->delete();
+            session()->flash('success', 'Service has been deleted !!!');
+        } else {
+            session()->flash('error', 'Please try again !!!');
+        }
+      
+        return redirect('/insertMetrial');
     }
 }

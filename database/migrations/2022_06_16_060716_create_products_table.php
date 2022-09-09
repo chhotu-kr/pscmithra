@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('topic_id')->nullable()->constrained();
             $table->string('slugid');
             $table->string('title');
-            $table->longtext('description');
+            $table->text('description');
           
            $table->enum('type', ['pdf', 'course','book','plan','ebook'])->default('pdf');
             $table->float('price');

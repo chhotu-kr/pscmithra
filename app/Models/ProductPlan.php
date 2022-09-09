@@ -9,7 +9,7 @@ class ProductPlan extends Model
 {
     use HasFactory;
 
-    protected $table='Plan_Products';
+    
 
 
     public function product(){

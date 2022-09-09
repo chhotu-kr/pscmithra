@@ -13,25 +13,26 @@ use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
+use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\RequestStack;
-
+use Auth;
 class HomeController extends Controller
 {
     //...............Home...............//
 
-    public $new_cat_id ;
-    public $new_sub_cat_id ;
-    public $new_chapter_id ;
+   
 
     public function get_ViewHome()
     {
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
         $data['product'] = Product::all();
-        $data['img'] = Image::all();
+        $data['img']=Image::all();
+        $data['user']=User::all();
+        $data['testimonials']=TestiMonials::all();
         return view('user.Viewhome', $data);
     }
 
@@ -48,15 +49,15 @@ class HomeController extends Controller
         }
     }
     //..............Category...............//
-    public function get_Category()
-    {
-        $data['subcategory'] = SubCategory::all();
-        $data['cate'] = Category::all();
-
-        return view('user.category', $data);
+    public function get_Category(){
+        $data['subcategory']=SubCategory::all();
+        $data['cate']=Category::all();
+       
+        return view('user.category',$data);
     }
 
     //...............subcategory..............
+
 
     public function get_SubCat($category_id)
     {
@@ -69,185 +70,160 @@ class HomeController extends Controller
     {
 
         $data['catdetail'] = $id;
-        return view('user.ViewCategorydetails', $data);
+        return view('user.ViewCategorydetails',$data);
     }
-    //...............Blog...................//
-    public function get_ViewBlog()
-    {
+   //...............Blog...................//
+    public function get_ViewBlog(){
         return view('user.Blog');
     }
     //...............BlogDetails..............//
 
-    public function get_ViewBlogDetails()
-    {
+    public function get_ViewBlogDetails(){
         return view('user.BlogDetails');
     }
     //...............Course...............//
-    public function get_ViewCourse()
-    {
+    public function get_ViewCourse(){
         return view('user.ViewCourse');
     }
     //................CourseDetails..............//
-
-    public function get_ViewCourseDetails()
-    {
+   
+    public function get_ViewCourseDetails(){
         return view('user.ViewCoursedetails');
     }
     //..............Quiz.............//
 
-    public function get_Quiz()
-    {
+    public function get_Quiz(){
         //   $data['quizcat']=$id;
+        $data['img']=Image::all();
         $data['quizcat'] = QuizCategory::all();
         $data['quizsubcat'] = QuizSubCategory::all();
-        return view('user.ViewQuiz', $data);
+        return view('user.ViewQuiz',$data);
     }
     //..............Quiz Detail...........//
-    public function get_ViewQuizDetail($cat_id)
-    {
-        $quizData = QuizCategory::where('id', $cat_id)->first();
-        if ($quizData->ifnested == "true") {
-            $data['quizdetail'] = $cat_id;
-            $this->new_cat_id = $cat_id;
-        } else {
-            return redirect()->route('view.quizpage', ["cat_id" => $cat_id]);
+    public function get_ViewQuizDetail($id){
+        $quizData = QuizCategory::where('id',$id)->first(); 
+        if($quizData->ifnested == "true"){
+            $data['quizdetail'] = $id;
         }
-        return view('user.QuizCategory', $data);
+        else{
+            return redirect()->route('view.quizpage' ,["cat" => $id]);
+
+        }
+        return view('user.QuizCategory',$data);
     }
 
     //............... Quiz Chapter..............//
-    public function get_Quiz_SubCategory($sub_cat_id)
-    {
-        $sub = QuizSubCategory::where('id', $sub_cat_id)->first();
+   public function get_Quiz_SubCategory($id){
+    $sub = QuizSubCategory::where('id',$id)->first();
 
-        if ($sub->ifnested == "true") {
-            $data['chapter'] = $sub_cat_id;
-            $this->new_sub_cat_id = $sub_cat_id;
-        } else {
-            return redirect()->route('view.quizpage', ["sub_cat_id" => $sub_cat_id]);
-        }
-        return view("user.Quiz_QuizChapter", $data);
+    if($sub->ifnested == "true"){
+        $data['chapter']= $id;
     }
-    //..............Topic Page..................//
-
-    public function get_TopicPage($chapter_id)
-    {
-        $cha = QuizChapter::where('id', $chapter_id)->first();
-
-        if ($cha->ifnested == "true") {
-            $data['topic'] = $chapter_id;
-            $this->new_chapter_id = $chapter_id;
-
-        } else {
-            return redirect()->route('view.quizpage', ['chapter_id' => $chapter_id]);
-        }
-        return view("user.Quiz_TopicPage", $data);
+    else{
+        return redirect()->route('view.quizpage', ["sub_cat" => $id]);
     }
-    //...............Quiz Page..................//
-    public function get_QuizPage(Request $req)
-    {
+    return view("user.Quiz_QuizChapter",$data);
+   }
+   //..............Topic Page..................//
 
-        $data['cat'] = $req->cat_id;
-        $data['sub_cat'] = $req->sub_cat_id;
-        $data['chapter'] = $req->chapter_id;
-        $data['topic'] = $req->topic_id;
-        // dd($this->new_cat_id);
-        return view('user.QuizPage', $data);
-    }
-    //..............Quiz pAge Start.............//
-    
-    public function get_QuizPageStart(Request $req){
-        $data['data'] = $req->data;
-        return view('user.QuizAttemptStart',$data);
-    }
-    
-    //.................Mock Test................//
-    public function get_MockTest(Request $request)
-    {
+   public function get_TopicPage($id){
+    $cha = QuizChapter::where('id',$id)->first();
 
-        //return dd($request);
-        $data['cat_id'] = $request->cat_id;
-        $data['sub_cat_id'] = $request->sub_cat_id;
-        $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
-        return view('user.MockTest', $data);
+    if($cha->ifnested == "true"){
+        $data['topic'] = $id;
     }
+    else{
+        return redirect()->route('view.quizpage', ['chapter' => $id]);
+    }
+    return view("user.Quiz_TopicPage",$data);
+   
+   }
+   //...............Quiz Page..................//
+   public function get_QuizPage(Request $req){
+    $data['cat'] = $req->cat;
+    $data['sub_cat'] = $req->sub_cat;
+    $data['chapter'] = $req->chapter;
+    $data['topic'] = $req->topic;
+    // return $data;
+    return view('user.QuizPage',$data);
+
+   }
+   //.................Mock Test................//
+   public function get_MockTest(Request $request){
+
+    //return dd($request);
+       $data['cat_id'] = $request->cat_id;
+       $data['sub_cat_id'] = $request->sub_cat_id;
+       $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
+      return view('user.MockTest',$data);
+}
     //..............Mock Test Start..............//
-    public function get_MockTestStart(Request $req)
-    {
+    public function get_MockTestStart(Request $req){
         $data['data'] = $req->data;
-
-        return view('user.MockTestStart', $data);
-    }
+        
+        return view('user.MockTestStart',$data);
+    }  
     //..............StudyMetrial.................//
 
-    public function get_Study_Metrial()
-    {
+    public function get_Study_Metrial(){
         return view('user.StudyMetrial');
     }
-
+  
     //...............Login...............//
 
-    public function get_Login()
-    {
+    public function get_Login(){
         return view('user.Login');
     }
     //................Register.................//
 
-    public function get_Register()
-    {
+    public function get_Register(){
         return view('user.Register');
     }
-    //..................QuizCategory...............//
+   //..................QuizCategory...............//
 
-    public function get_QuizCate()
-    {
-        $data['cate'] = QuizCategory::all();
+   public function get_QuizCate(){
+    $data['cate']=QuizCategory::all();
+   
+    return view('user.QuizCategory',$data);
+   }
+   //..................QuizSubCategory...............//
 
-        return view('user.QuizCategory', $data);
-    }
-    //..................QuizSubCategory...............//
+   public function get_QuizSubCate(){
+    $data['sub']=QuizSubCategory::all();
+   
+    return view('user.QuizSubcategory',$data);
+   }
+   //..................QuizChapter...............//
 
-    public function get_QuizSubCate()
-    {
-        $data['sub'] = QuizSubCategory::all();
+   public function get_QuizChapt(){
+    $data['chap']=QuizChapter::all();
+  
+    return view('user.QuizChapter',$data);
+   }
 
-        return view('user.QuizSubcategory', $data);
-    }
-    //..................QuizChapter...............//
+   //..............liveQuiz................//
 
-    public function get_QuizChapt()
-    {
-        $data['chap'] = QuizChapter::all();
+   public function Quiz_Result(){
+    return view('user.liveQuiz');
+   }
 
-        return view('user.QuizChapter', $data);
-    }
+   public function Live_Quiz_Start(Request $req){
+    // dd($req['data']);
+    $data['data'] = $req->data;
+    return view('user.LiveQuizStart',$data);
+   }
+   //..............Quiz Result........../
+   public function get_QuizResult(){
+    return view('user.Quiz_Result');
 
-    //..............liveQuiz................//
+}
+   //..........................User Dashboard  Controller..........................//
 
-    public function Quiz_Result()
-    {
-        return view('user.liveQuiz');
-    }
+//    public function get_profile(){
+//        $data['user']=User::all();
+//     return view('user.profile.userprofile',$data);
 
-    public function Live_Quiz_Start(Request $req)
-    {
-        // dd($req['data']);
-        $data['data'] = $req->data;
-        return view('user.LiveQuizStart', $data);
-    }
-    //..............Quiz Result........../
-    public function get_QuizResult(Request $req)
-    {   $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
-        $data['quizexaminationid'] = 'slugid';
-        return view('user.Quiz_Result',$data);
-    }
-    //............... MOcktest Result..........//
-    public function get_MockTestResult(Request $req){
-        $data['testid'] = 'id';
-        $data['examinationId'] = 'id';
-
-        return view('user.MocktestResult',$data);
-    }
+//    }
 
     //................ LiveQuiz Result ...........//
     public function get_LiveQuizResult(Request $req){
@@ -277,7 +253,14 @@ class HomeController extends Controller
 
     public function get_profile()
     {
-        $data['user'] = User::all();
+        $data['user']=auth()->user();
+        $data['current_user'] = auth()->user();
+        // dd($data);
         return view('user.profile.userprofile', $data);
+    }
+
+    public function user_Dashboard(){
+        // $data['user']=User::all();
+     return view('user.profile.userDashboard');
     }
 }

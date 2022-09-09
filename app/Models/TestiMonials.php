@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TestiMonials extends Model
 {
     use HasFactory;
-
     public function subuser(){
         return $this->hasOne(User::class,'id','user_id');
     }

@@ -22,20 +22,10 @@ class LiveQuiz extends Component
   public $ifLoginData;
   public $singleData;
   public $returnData;
-  public $lang = null;
-  public $itemId = null;
 
-  public function itemId($id)
-  {
-    $this->itemId = $id;
-  }
-  public function selectLang($id)
-  {
-    $this->lang = $id;
-    // dd($id);
-  }
   public function prepareExam($ifLoginData)
   {
+    // dd($ifLoginData);
 
     $user_id = 1;
     $examination_id =  liveExam::select('id', 'start')->where("slugid", $ifLoginData['id'])->first();
@@ -43,20 +33,18 @@ class LiveQuiz extends Component
     $start = $examination_id->start;
     $ss = strtotime("now");
     $final_start = $start - $ss;
-    // dd($examination_id);
-    if ($final_start > 0) {
+    if ($final_start < 0) {
       $get = liveAttemp::where('live_exams_id', $examination_id->id)->where('users_id', $user_id)->first();
-      // dd($get);
 
       if (empty($get)) {
         $Attemp = new liveAttemp();
         $Attemp->slugid = md5($user_id . time());
         $Attemp->live_exams_id = $examination_id->id;
         $Attemp->users_id = $user_id;
-        $Attemp->language_id = $this->lang;
+        $Attemp->language_id = $ifLoginData['languages'][0]['id'];
         $Attemp->save();
         $examQuestion =  liveQuestion::where('live_exams_id', $examination_id->id)->pluck('question_id');
-       
+        // $insertData = [];
         foreach ($examQuestion as $value) {
 
           $mock = new liveAttempQuestion();
@@ -65,39 +53,30 @@ class LiveQuiz extends Component
           $mock->live_attemps_id = $Attemp->id;
           $mock->save();
         }
-        $this->returnData['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
+        $this->returnData['data'] = ['testId' => $ifLoginData['id'], "examinationId" => $examination_id->id];
         // dd($this->returnData);
-        return redirect()->route('quiz.livequizstart', $this->returnData);
+       return redirect()->route('quiz.livequizstart',$this->returnData);
         // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
       } else {
-        return dd(['msg' => 'Exam already exist', 'status' => false]);
+        return response()->json(['msg' => 'Exam already exist', 'status' => false]);
       }
     } else {
-      return dd(['msg' => 'Exam not Start', 'status' => false]);
+      return response()->json(['msg' => 'Exam not Start', 'status' => false]);
     }
     //   mockattempquestion::insert($insertData);
   }
 
-  public function checkLogin()
+  public function checkLogin($id)
   {
-    if($this->itemId != null){
-      if (Auth::user()) {
-        // return redirect()->route('user.login');
-      } else {
-        $this->ifLoginData =  $this->data->where('id', $this->itemId)->first();
-
-        if ($this->ifLoginData['type'] == "Start") {
-         if($this->lang == null){
-          return session()->flash('select', 'Select a language');
-         }
-         else{
-
-          $this->prepareExam($this->ifLoginData);
-         }
-
-        } else if ($this->ifLoginData['type'] == "Prepare") {
-          return dd($this->ifLoginData['name']);
-        }
+    if (Auth::user()) {
+      // return redirect()->route('user.login');
+    } else {
+      $this->ifLoginData =  $this->data->where('id', $id)->first();
+      // dd($this->ifLoginData);
+      if ($this->ifLoginData['type'] == "Start") {
+        $this->prepareExam($this->ifLoginData);
+      } else if ($this->ifLoginData['type'] == "Prepare") {
+        return dd($this->ifLoginData['name']);
       }
     }
   }
@@ -178,7 +157,6 @@ class LiveQuiz extends Component
           })
         ]);
       });
-    // dd($this->data);
   }
   public function render()
   {

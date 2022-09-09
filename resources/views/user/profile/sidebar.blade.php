@@ -459,7 +459,7 @@ select.form-control:not([size]):not([multiple]) {
 		<a class="nav-link" href="history.php"><i class="fa fa-eye"></i> History</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{{route('user.profile')}}"><i class="fa fa-eye"></i> Profile</a>
+		<a class="nav-link" href="profile.php"><i class="fa fa-eye"></i> Profile</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="plan.php"><i class="fa fa-eye"></i> Plan</a>
@@ -468,7 +468,7 @@ select.form-control:not([size]):not([multiple]) {
 		<a class="nav-link" href="sessional.php"><i class="fa fa-eye"></i> Sessional PDF</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{{route('view.course')}}"><i class="fa fa-eye"></i> Course</a>
+		<a class="nav-link" href="course.php"><i class="fa fa-eye"></i> Course</a>
 	</li>
     
 
