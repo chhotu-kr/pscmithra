@@ -56,14 +56,14 @@ Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name(
 //..............User Dashboard Route................//
 
 Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
-<<<<<<< HEAD
+
 Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('user.dashboard');
 
-=======
+
 Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
   Route::post('/update/user/password',[userController::class,'ChangePassword'])->name('update.password');
  Route::post('/update/user',[userController::class,'update'])->name('update.user');
->>>>>>> b44e3b646ee71ee848bc281e7568ec0d8ea9efe5
+
 //............//..............//...........User Page.............//................//...............//
 
 Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
