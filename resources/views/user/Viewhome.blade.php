@@ -23,7 +23,7 @@
                 <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
             </div>
             <div class="tabigationLink">
-                @livewire('home-category')
+                @livewire('home-category',['cat' => $category,'sub_cat' => $subcategory])
             </div>
         </div>
     </div>

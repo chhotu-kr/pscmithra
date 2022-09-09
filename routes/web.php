@@ -70,11 +70,14 @@ Route::get('/view/blog/details', [HomeController::class, 'get_ViewBlogDetails'])
 Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('view.course');
 Route::get('/view/course/details', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
-Route::get('/quizes/category/details/{id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
-Route::get('/quizes/category/chapter/{id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
-Route::get('/quizes/category/chapter/topic/{id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
-Route::get('/quizes/{cat?}{sub_cat?}{chapter?}{topic?}', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
-Route::get('/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
+Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
+Route::get('/quizes/category/chapter/topic/{chapter_id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
+Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
+Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');
+Route::get('/quiz/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/mocktest/getresult', [HomeController::class, 'get_MockTestResult'])->name('view.mocktest result');
+Route::get('/quiz/solution', [HomeController::class, 'get_QuizSolution'])->name('view.quizsolution');
 
 Route::get('/mock-test/study/metrial', [HomeController::class, 'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login', [HomeController::class, 'get_Login'])->name('user.login');
