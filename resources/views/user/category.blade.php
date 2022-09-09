@@ -22,7 +22,7 @@
         <li class="shape-5 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
 </div> --}}
-<img src="{{asset("upload/".$category->image)}}" width="1349px" height="3899px" alt="">
+<img src="{{asset("upload/".$category->image)}}" width="1700" height="168px" auto>
 <div class="features-area-3">
     <div class="container">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">

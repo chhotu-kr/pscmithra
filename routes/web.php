@@ -23,6 +23,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
+ use App\Http\Controllers\user\dashboard\profileController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
@@ -61,8 +62,8 @@ Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('us
 
 
 Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
-  Route::post('/update/user/password',[userController::class,'ChangePassword'])->name('update.password');
- Route::post('/update/user',[userController::class,'update'])->name('update.user');
+  Route::post('/update/user/password',[profileController::class,'ChangePassword'])->name('update.password');
+ Route::post('/update/user',[profileController::class,'update'])->name('update.user');
 
 //............//..............//...........User Page.............//................//...............//
 

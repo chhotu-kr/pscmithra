@@ -52,7 +52,7 @@ class AuthController extends Controller
             $auth = $req->only("contact","password");
 
             if(Auth::guard("web")->attempt($auth)){
-                return redirect()->route('user.index');
+                return redirect()->route('user.dashboard');
             }
             else{
                 // $req->session()->flash("error","login with incorrect details try again");
@@ -122,6 +122,8 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+
+   
     
 
 }
