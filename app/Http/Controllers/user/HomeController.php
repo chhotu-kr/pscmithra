@@ -13,34 +13,41 @@ use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
+use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use phpDocumentor\Reflection\Types\Null_;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+use Auth;
 class HomeController extends Controller
 {
     //...............Home...............//
+
    
-    public function get_ViewHome(){
-        $data['category']=Category::all();
-            $data['subcategory']=SubCategory::all();
-            $data['product']=Product::all();
-            $data['img']=Image::all();
-            return view('user.Viewhome',$data);
-       
+
+    public function get_ViewHome()
+    {
+        $data['category'] = Category::all();
+        $data['subcategory'] = SubCategory::all();
+        $data['product'] = Product::all();
+        $data['img']=Image::all();
+        $data['user']=User::all();
+        $data['testimonials']=TestiMonials::all();
+        return view('user.Viewhome', $data);
     }
 
-    public function filter($category_id){
-        if($category_id==Null){
-                $data['category']=Category::all();
-              
-                return view('user.Viewhome',$data);
-            }
-              else{
-                 $data['category']=Category::all();
-              $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
-            return view('user.Viewhome',$data);
-              }  
+    public function filter($category_id)
+    {
+        if ($category_id == NUll) {
+            $data['category'] = Category::all();
+
+            return view('user.Viewhome', $data);
+        } else {
+            $data['category'] = Category::all();
+            $data['subcategory'] = SubCategory::where('category_id', $category_id)->get();
+            return view('user.Viewhome', $data);
+        }
     }
     //..............Category...............//
     public function get_Category(){
@@ -52,14 +59,17 @@ class HomeController extends Controller
 
     //...............subcategory..............
 
-    // public function get_SubCat($category_id){
-    //  $data['subcategory']=SubCategory::where('category_id',$category_id)->get();
 
-    //  return view('user.category',$data);
-    // }
-   //................CategoryDetails................//
-    public function get_ViewCatDetails($id){
-        
+    public function get_SubCat($category_id)
+    {
+        $data['subcategory'] = SubCategory::where('category_id', $category_id)->get();
+
+        return view('user.category', $data);
+    }
+    //................CategoryDetails................//
+    public function get_ViewCatDetails($id)
+    {
+
         $data['catdetail'] = $id;
         return view('user.ViewCategorydetails',$data);
     }
@@ -85,6 +95,7 @@ class HomeController extends Controller
 
     public function get_Quiz(){
         //   $data['quizcat']=$id;
+        $data['img']=Image::all();
         $data['quizcat'] = QuizCategory::all();
         $data['quizsubcat'] = QuizSubCategory::all();
         return view('user.ViewQuiz',$data);
@@ -217,3 +228,17 @@ class HomeController extends Controller
 }
 
 
+
+    public function get_profile()
+    {
+        $data['user']=Auth::user();
+        $data['current_user'] = Auth::user();
+        // dd($data);
+        return view('user.profile.userprofile', $data);
+    }
+
+    public function user_Dashboard(){
+        // $data['user']=User::all();
+     return view('user.profile.userDashboard');
+    }
+}

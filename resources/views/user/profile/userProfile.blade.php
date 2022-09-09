@@ -82,6 +82,79 @@
                     </div>
           
                   </div>
+
+
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="name" type="text" class="form-control" id="fullName" value="{{$current_user->name}}" >
+                    </div>
+                  </div>
+
+                  
+
+                  <div class="row mb-3">
+                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="email" type="text" class="form-control" id="company" value="{{$current_user->email}}">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Job" class="col-md-4 col-lg-3 col-form-label">Image</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="image" type="file" class="form-control" id="Job" value="{{$current_user->image}}">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="Country" class="col-md-4 col-lg-3 col-form-label">Gender</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="gender" type="text" class="form-control" id="Country" value="{{$current_user->gender}}">
+                    </div>
+                  </div>
+
+                 
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form><!-- End Profile Edit Form -->
+
+              </div>
+
+              <div class="tab-pane fade pt-3" id="profile-settings">
+
+                <!-- Settings Form -->
+                <form>
+
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+                    <div class="col-md-8 col-lg-9">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="changesMade" checked>
+                        <label class="form-check-label" for="changesMade">
+                          Changes made to your account
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="newProducts" checked>
+                        <label class="form-check-label" for="newProducts">
+                          Information on new products and services
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="proOffers">
+                        <label class="form-check-label" for="proOffers">
+                          Marketing and promo offers
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
+                        <label class="form-check-label" for="securityNotify">
+                          Security alerts
+                        </label>
+
           
                   <div class="col-xl-8">
           
@@ -336,6 +409,7 @@
           
                         </div><!-- End Bordered Tabs -->
           
+
                       </div>
                     </div>
           
