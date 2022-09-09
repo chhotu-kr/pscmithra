@@ -56,8 +56,14 @@ Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name(
 //..............User Dashboard Route................//
 
 Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
+<<<<<<< HEAD
 Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('user.dashboard');
 
+=======
+Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
+  Route::post('/update/user/password',[userController::class,'ChangePassword'])->name('update.password');
+ Route::post('/update/user',[userController::class,'update'])->name('update.user');
+>>>>>>> b44e3b646ee71ee848bc281e7568ec0d8ea9efe5
 //............//..............//...........User Page.............//................//...............//
 
 Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
@@ -71,11 +77,17 @@ Route::get('/view/blog/details', [HomeController::class, 'get_ViewBlogDetails'])
 Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('view.course');
 Route::get('/view/course/details', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
-Route::get('/quizes/category/details/{id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
-Route::get('/quizes/category/chapter/{id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
-Route::get('/quizes/category/chapter/topic/{id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
-Route::get('/quizes/{cat?}{sub_cat?}{chapter?}{topic?}', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
-Route::get('/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
+Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
+Route::get('/quizes/category/chapter/topic/{chapter_id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
+Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
+Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');
+Route::get('/quiz/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
+Route::get('/mocktest/getresult', [HomeController::class, 'get_MockTestResult'])->name('view.mocktestresult');
+Route::get('/live/getresult', [HomeController::class, 'get_LiveQuizResult'])->name('view.liveresult ');
+Route::get('/quiz/solution', [HomeController::class, 'get_QuizSolution'])->name('view.quizsolution');
+Route::get('/mocktest/solution', [HomeController::class, 'get_MocktestSolution'])->name('view.mocktestsolution');
+Route::get('/live/solution', [HomeController::class, 'get_LiveQuizSolution'])->name('view.livesolution');
 
 Route::get('/mock-test/study/metrial', [HomeController::class, 'get_Study_Metrial'])->name('view.studymetrial');
 Route::get('/user/login', [HomeController::class, 'get_Login'])->name('user.login');
