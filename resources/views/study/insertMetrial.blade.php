@@ -76,7 +76,7 @@
                           <td>{{$new->image}}</td>
                           <td>
                               <a href="{{route('studymetrial.Update',['id'=>$new->id])}}" class="btn btn-outline-success">Edit</a>
-                              <a href="{{route('studymetrial.delete',['id'=>$new->id])}}" class="btn btn-outline-danger">Delete</a>
+                              <a href="{{route('studymetrial.delete',['id'=>$new->slugid])}}" class="btn btn-outline-danger">Delete</a>
                           </td>
                       </tr>
                   @endforeach

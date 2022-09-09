@@ -22,6 +22,7 @@ class Categories extends Component
 
     public function removecall($id)
     {
+        
         $this->emit('remove_mocktest', $id);
     }
 

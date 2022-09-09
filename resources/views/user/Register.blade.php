@@ -37,27 +37,19 @@
                             @csrf
                             <div class="form-group">
                                 <label for="reg-name">Name</label>
-                                <input type="text" name="name" id="reg-name" placeholder="User Name" required>
+                                <input type="text" name="name" id="reg-name" placeholder="Full name">
                             </div>
                             <div class="form-group">
-                                <label for="log-email">Email</label>
-                                <input type="text" name="email" id="log-email" placeholder="Email or Username" required>
+                                <label for="log-email">UserEmail</label>
+                                <input type="text" name="email" id="log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
-                                <label for="log-email">Contact</label>
-                                <input type="text" name="contact" id="log-email" placeholder="User Contact" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="log-email">Image</label>
-                                <input type="text" name="image" id="log-email" placeholder="User Image" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="log-email">Gender</label>
-                                <input type="text" name="gender" id="log-email" placeholder="Gender" required>
+                                <label for="log-email">UserContact</label>
+                                <input type="text" name="contact" id="log-email" placeholder="Email or username">
                             </div>
                             <div class="form-group">
                                 <label for="log-password">Password</label>
-                                <input type="text" name="password" id="log-password" placeholder="Password" required>
+                                <input type="text" name="password" id="log-password" placeholder="Password">
                                 <span class="password-show"><i class="icon-76"></i></span>
                             </div>
                             <div class="form-group chekbox-area">

@@ -1,18 +1,10 @@
 @extends('user/dashboard')
 @section('pscmithra')
-    {{-- <livewire:user.quiz/>  --}}
- {{-- @livewire('user.quiz'); --}}
+    {{-- <livewire:user.quiz/> --}}
+    {{-- @livewire('user.quiz'); --}}
 
- <div class="main-home-slider">
-  @foreach ($img as $item)
-  <div class="item">
-      {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
-      @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
-  </div>
-  @endforeach
-  
-</div>
-    {{-- <div class="education-breadcrumb-area">
+
+    <div class="education-breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-inner">
                 <div class="page-title">
@@ -35,7 +27,7 @@
             <li class="shape-5 scene"><img data-depth="2" src="{{ asset('nassets/images/about/shape-07.png') }}"
                     alt="shape"></li>
         </ul>
-    </div> --}}
+    </div>
 
     <div class="features-area-3">
         <div class="container">
@@ -90,7 +82,7 @@
             <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 p-5" style="margin-top: -50px">
                 @foreach ($quizcat as $item)
                     <div class="col-md-2 col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                        <a href="{{ route('view.quizdetails', ['cat_id' => $item->id]) }}">
+                        <a href="{{ route('view.quizdetails', $item->id) }}">
                             <div class="categorie-grid categorie-style-3 color-primary-style">
                                 <div class="icon">
                                     <i class="icon-9"></i>

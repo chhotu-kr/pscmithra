@@ -9,6 +9,7 @@ use App\Models\QuizTopic;
 use App\Models\QuizSubCategory;
 class QuizCategories extends Component
 {
+    
     public $quizcategory;
     public $quizcategoryId;
 

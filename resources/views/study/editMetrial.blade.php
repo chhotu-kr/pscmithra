@@ -19,11 +19,11 @@
                       </div>
                       <div class="mb-3">
                           <label for="">Image</label>
-                          <input type="file" name="image" class="form-control mb-3"  required>
+                          <input type="file" name="image" class="form-control"  required>
                       </div>
-                      @livewire('imageview', ['image' => ['image' => $studymetrialcategory->image,'w'=>'100','h'=>'100']], key($new->id))
+                     
                       <div class="mb-3">
-                       <button type="submit" class="btn btn-primary w-100">Update</button>
+                       <button type="submit" class="btn btn-primary w-100">submit</button>
                      
                       </div>
                     </form>

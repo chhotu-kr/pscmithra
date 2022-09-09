@@ -1,7 +1,7 @@
 <div>
     <div class="row mt-2">
         <div class="col-auto">
-            <button type="button" class="btn text-white btn-info btn-sm mt-2" wire:click.prevent="add('asdasd')">Add MockTest</button>
+            <button type="button" class="btn text-white btn-info btn-sm mt-2" wire:click.prevent="add('mock')">Add MockTest</button>
         </div>
         <div class="col-auto">
             <button type="button" class="btn text-white btn-info btn-sm mt-2" wire:click.prevent="add('Live')">Add LiveTest</button>
@@ -40,9 +40,12 @@
 @endif
 @endforeach
 @foreach($inputs as $value)
-@if($value['type']!="Live")
-<h6>Mock Test</h6>
+@if($value['type']=="mock")
 @livewire('categories', ["iass"=>$value['id']] ,key($value['id']))
+@elseif($value['type']=="Quiz")
+@livewire('admin.product.quiz', ["iass"=>$value['id']] ,key($value['id']))
+@elseif($value['type']=="StudyMaterial")
+@livewire('StudyMaterial', ["iass"=>$value['id']] ,key($value['id']))
 @endif
 @endforeach
 @endif

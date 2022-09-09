@@ -43,9 +43,9 @@
    });
 </script>
 
-@livewireStyles
-</head>
 
+</head>
+@livewireStyles
 
 <body class="sticky-header">
 
@@ -150,9 +150,8 @@
                                 incidid unt labore dolore.</p>
                             <div class="widget-information">
                                 <ul class="information-list">
-                                    <li><span>Add:</span>3rd, V 196, BLDG No 60/49E, J C Chambers, Panampilly Nagar Road, Panampilly
-                                        Nagar, Kochi, Ernakulam, Kerala, 682036</li>
-                                    <li><span>Call:</span><a href="tel:+011235641231">+01 0484 4632 514</a></li>
+                                    <li><span>Add:</span>70-80 Upper St Norwich NR2</li>
+                                    <li><span>Call:</span><a href="tel:+011235641231">+01 123 5641 231</a></li>
                                     <li><span>Email:</span><a
                                             href="mailto:info@educationblink.com">info@educationblink.com</a></li>
                                 </ul>

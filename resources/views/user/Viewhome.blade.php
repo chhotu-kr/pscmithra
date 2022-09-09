@@ -1,5 +1,6 @@
 @extends('user.dashboard')
 @section('pscmithra')
+
 <div class="main-home-slider">
     @foreach ($img as $item)
     <div class="item">
@@ -56,6 +57,12 @@
                 <div class="content">
                     <h5 class="title"><span>2K</span> Important Question</h5>
                 </div>
+
+    <div class="main-home-slider">
+        @foreach ($img as $item)
+            <div class="item">
+                {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
+                @livewire('imageview', ['image' => ['image' => $item->image, 'w' => '1732', 'h' => '500px']], key($item->id))
             </div>
             <div class="features-box features-style-2 edublink-svg-animate">
                 <div class="icon">
@@ -93,6 +100,7 @@
                     
                 </div>
             </div>
+
             <div class="col-lg-7" data-sal-delay="150" data-sal="slide-left" data-sal-duration="800">
                 <div class="about-content">
                     <div class="section-title section-left">
@@ -107,6 +115,10 @@
                         <li>Lifetime Access</li>
                     </ul>
                 </div>
+
+            <div class="tabigationLink">
+                @livewire('home-category')
+
             </div>
         </div>
         <ul class="shape-group">
@@ -115,6 +127,7 @@
             </li>
         </ul>
     </div>
+
 </div>
 <section class="shop-page-area shop-page-area-home">
     <div class="container">
@@ -154,6 +167,46 @@
                                     <li><a href="{{ route('addtocart', ['p_id' => $item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
                                 </ul>
                             </div>
+
+
+    <div class="features-area-2">
+        <div class="container">
+            <div class="features-grid-wrap">
+                <div class="features-box features-style-2 edublink-svg-animate">
+                    <div class="icon">
+                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/online-class.svg') }}"
+                            alt="animated icon">
+                    </div>
+                    <div class="content">
+                        <h5 class="title"><span>2K</span> Important Question</h5>
+                    </div>
+                </div>
+                <div class="features-box features-style-2 edublink-svg-animate">
+                    <div class="icon">
+                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/instructor.svg') }}"
+                            alt="animated icon">
+                    </div>
+                    <div class="content">
+                        <h5 class="title"><span>150 M+</span>Mock Test Attempted</h5>
+                    </div>
+                </div>
+                <div class="features-box features-style-2 edublink-svg-animate">
+                    <div class="icon certificate">
+                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/certificate.svg') }}"
+                            alt="animated icon">
+                    </div>
+                    <div class="content">
+                        <h5 class="title"><span>500+</span>E-Books</h5>
+                    </div>
+                </div>
+                <div class="features-box features-style-2 edublink-svg-animate">
+                    <div class="icon">
+                        <img class="svgInject" src="{{ asset('nassets/images/animated-svg-icons/user.svg') }}"
+                            alt="animated icon">
+                    </div>
+                    <div class="content">
+                        <h5 class="title"><span>6M+</span>Happy Students</h5>
+
                     </div>
                 </div>
             </div> 
@@ -177,6 +230,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-7">
                 <div class="home-one-testimonial-activator slide-with-shadow">
                     <div class="testimonial-grid">
@@ -204,6 +258,17 @@
                             <img src="img/testimonial-03.png" alt="Testimonial">
                             <span class="qoute-icon"><i class="icon-26"></i></span>
 
+            <ul class="shape-group">
+                <li class="shape-1 scene" data-sal-delay="500" data-sal="fade" data-sal-duration="200">
+                    <span data-depth="-2.3"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
                         </div>
                         <div class="content">
                             <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
@@ -218,6 +283,10 @@
                             <span class="subtitle">Designer</span>
                         </div>
                     </div>
+        @endforeach
+
+
+            </div>
 
                     <div class="testimonial-grid">
                         <div class="thumbnail">
@@ -257,7 +326,9 @@
                             <h5 class="title">Carlos Kelly</h5>
                             <span class="subtitle">Marketer</span>
                         </div>
+
                     </div>
+
 
                     <div class="testimonial-grid">
                         <div class="thumbnail">
