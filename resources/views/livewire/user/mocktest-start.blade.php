@@ -38,6 +38,7 @@
             background-color: #ffdddd;
         }
 
+        
         /* Hide all steps by default: */
         .tab {
             display: contents;

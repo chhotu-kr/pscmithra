@@ -11,7 +11,7 @@
     @endforeach
 
 </div>
-@livewire('user.categoryslider')
+@livewire("user.categoryslider")
 <div class="features-area-2">
     <div class="container">
         <div class="features-grid-wrap">

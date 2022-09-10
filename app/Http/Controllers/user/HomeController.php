@@ -163,6 +163,7 @@ class HomeController extends Controller
         $data['data'] = $req->data;
         
         return view('user.MockTestStart',$data);
+        
     }  
     //..............StudyMetrial.................//
 

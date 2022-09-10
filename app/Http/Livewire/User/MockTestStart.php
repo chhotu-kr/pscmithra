@@ -31,22 +31,25 @@ class MocktestStart extends Component
 
     $user = 1;
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-    dd($this->data);
+   // dd($this->data['questionslist'] );
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
-      // dd($this->data['questionslist'][$index]['optSel']);
-    dd($testId);
+       //dd($this->data['questionslist'][$index]['optSel']);
+    
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
-        $dd = mockattempquestion::where('id', $value[$index]['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
+        $dd = mockattempquestion::where('questions_id', $value['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
           [
-            "QuesSeen" => $value[$index]["s"],
-            "QuesSelect" => $value[$index]['optSel'],
-            "time" => $value[$index]['time']
+            "QuesSeen" => $value["s"],
+            "QuesSelect" => $value['optSel'],
+            "time" => $value['time']
           ]
         );
+      
       }
+
+
 
 
       //   // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
@@ -118,6 +121,7 @@ class MocktestStart extends Component
     }
 
 
+    
     $this->a = $a;
     $this->w = $w;
     $this->u = $u;
@@ -168,8 +172,6 @@ class MocktestStart extends Component
     $user = 1;
 
     $testId =  AttempedExam::select('id', 'slugid')->where("slugid", $testId)->first();
-
-    dd($testId);
     //  here attemped_exams_id not correct
     $this->data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user) {
       $q->where('attemped_exams_id', $testId->id)->where('users_id', $user);
