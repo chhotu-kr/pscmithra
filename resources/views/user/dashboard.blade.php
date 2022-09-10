@@ -29,9 +29,11 @@
     <!-- CSS only -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap"
+        rel="stylesheet">
 
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
       tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
@@ -41,13 +43,13 @@
    });
 </script>
 
-
 </head>
 @livewireStyles
 
 <body class="sticky-header">
 
-
+  
+    
 
     <header class="education-header header-style-1 header-fullwidth">
         <div class="header-top-bar">
@@ -76,9 +78,10 @@
                         <div class="logo">
                             <a href="{{ route('view.home') }}">
 
-                                <img src='{{asset("nassets/images/logo.png")}}' style="
+                                <img src='{{ asset('nassets/images/logo.png') }}' style="
     width: 125px;
-" width="150" alt="logo" class="">
+"
+                                    width="150" alt="logo" class="">
                             </a>
                         </div>
                     </div>
@@ -143,9 +146,8 @@
                         <div class="education-footer-widget">
                             <div class="logo">
                                 <a href="{{ route('view.home') }}">
-                                    <img src='{{asset("nassets/images/logo.png")}}' style="
-    width: 215px;
-" width="215px" alt="" class="">
+                                    <img src='{{ asset('nassets/images/logo.png') }}' style="width: 215px;"
+                                        width="215px" alt="" class="">
 
                                 </a>
                             </div>
@@ -155,7 +157,8 @@
                                     <li><span>Add:</span>3rd, V 196,BLDG No 60/49E, J C Chambers, Panampilly Nagar
                                         Road, Panampilly Nagar, Kochi, Ernakulam, Kerala, 682036</li>
                                     <li><span>Call:</span><a href="tel:+04844632514">+04844632514</a></li>
-                                    <li><span>Email:</span><a href="mailto:pscmithrallp@gmail.com">pscmithrallp@gmail.com</a></li>
+                                    <li><span>Email:</span><a
+                                            href="mailto:pscmithrallp@gmail.com">pscmithrallp@gmail.com</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -197,7 +200,8 @@
                                     subscription</p>
                                 <div class="input-group footer-subscription-form">
                                     <input type="email" class="form-control" placeholder="Your email">
-                                    <button class="education-btn btn-medium" type="button">Subscribe <i class="icon-4"></i></button>
+                                    <button class="education-btn btn-medium" type="button">Subscribe <i
+                                            class="icon-4"></i></button>
                                 </div>
                                 <ul class="social-share icon-transparent">
                                     <li><a href="#" class="color-fb"><i class="icon-facebook"></i></a></li>
@@ -216,8 +220,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="inner text-center">
-                            <p>Copyright 2022 <a href="#">PscMithra</a> All Rights Reserved</p>
+                        <div class="inner text-center" >
+                            <p>Copyright 2022 <a href="{{ route('view.home') }}">PscMithra</a> All Rights Reserved | <a href="{{ route('view.privacy') }}"> Privacy Policy </a> | <a href="{{ route('view.term') }}"> Terms & Condition </a> | <a href="{{ route('view.refund') }}">Refund Policy</a></p> 
                         </div>
                     </div>
                 </div>
