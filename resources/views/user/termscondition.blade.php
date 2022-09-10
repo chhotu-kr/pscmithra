@@ -15,11 +15,10 @@
                 <div class="field-item even" property="content:encoded"
                     style="line-height: 1.38000000000000001;margin-top: 0pt;margin-bottom: 10pt;text-align: justify;">These Terms
                     &amp; Conditions (“<strong>Terms</strong>”) of (a) use of our website <a
-                        href="http://www.byjus.com">www.byjus.com</a> (“<strong>Website</strong>”), our applications
+                        href="http://www.pscmithra.com">www.pscmithra.com</a> (“<strong>Website</strong>”), our applications
                     (“<strong>Application</strong>”) or any products or services in connection with the Application/,&nbsp;
                     Website/products (“<strong>Services</strong>”) &nbsp;or (b) any modes of registrations or usage of products,
-                    including through SD cards, tablets or other storage/transmitting device &nbsp;are between Think &amp; Learn
-                    Private Limited (“<strong>Company/We/Us/Our</strong>”) and its users (“<strong>User/You/Your</strong>”).<p>
+                    including through SD cards, tablets or other storage/transmitting device &nbsp;are between PSCMITHRA (“<strong>Company/We/Us/Our</strong>”) and its users (“<strong>User/You/Your</strong>”).<p>
                     </p>These Terms constitute an electronic record in accordance with the provisions of the Information
                     Technology Act, 2000 and the Information Technology (Intermediaries guidelines) Rules, 2011 thereunder, as
                     amended from time to time.<p>Please read the Terms and the privacy policy of the Company (“<strong>Privacy
@@ -271,8 +270,8 @@
                             speed, resulting from Your use of our products and Services.</li>
                     </ol>
                     <ol start="16">
-                        <li>In order to encourage Customer Retention and Loyalty, Byjus encourages its Customers, Fintech
-                            Partners and other stakeholders to refer customers to buy Byjus Products &amp; Services. Company at
+                        <li>In order to encourage Customer Retention and Loyalty, pscmithra encourages its Customers, Fintech
+                            Partners and other stakeholders to refer customers to buy pscmithra Products &amp; Services. Company at
                             its option can pay referral bonus subject to applicable laws. Since this is an optional selective
                             policy of the Company, the decision of the Company is final and the same cannot be either disputed
                             or challenged. It should be noted with abundant caution that no Customer, Fintech Partner or other
@@ -420,7 +419,7 @@
                     <ul>
                         <li>Notice: All notices served by the Company shall be provided via email to Your account or as a
                             general notification on the Application. Any notice to be provided to the Company should be sent to
-                            <em>support@byjus.com</em>.</li>
+                            <em>support@pscmithra.com</em>.</li>
                     </ul>
                     <ul>
                         <li>Entire Agreement: The Terms, along with the Privacy Policy, and any other guidelines made applicable
@@ -473,7 +472,7 @@
                         <li><strong>Customer Care:</strong></li>
                     </ol>
                     <p>We make all best endeavors to provide You with a pleasant experience. In the unlikely event that You face
-                        any issues, please contact us at <em>support@byjus.com</em>.</p>
+                        any issues, please contact us at <em>support@pscmithra.com</em>.</p>
                 </div>
             </span>
         </div>

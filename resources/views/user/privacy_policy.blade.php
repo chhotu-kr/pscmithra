@@ -27,15 +27,15 @@
                             </style>
 
                             <h2><b>Privacy Policy</b></h2>
-                            <p>Think and Learn Private Limited (along with its subsidiaries and affiliates, collectively
-                                referred to as “<strong>BYJU’S</strong>”, “<strong>Company</strong>”, “<strong>us</strong>”,
+                            <p>PSCMITHRA (along with its subsidiaries and affiliates, collectively
+                                referred to as “<strong>PSCMITHRA</strong>”, “<strong>Company</strong>”, “<strong>us</strong>”,
                                 “<strong>we</strong>”, or “<strong>our</strong>”) is a leading ed-tech company, incorporated
-                                in India, for imparting learning. We value your trust. In order to honour that trust, BYJU’S
+                                in India, for imparting learning. We value your trust. In order to honour that trust, PSCMITHRA
                                 adheres to ethical standards in gathering, using, and safeguarding any information you
                                 provide to us.</p>
-                            <p>This Privacy Policy governs your use of: (a) the application – ‘BYJU’S – The Learning App’
-                                (“<strong>Application</strong>”), (b) the website – https://byjus.com/’, including
-                                https://byjus.com/btc/ (“<strong>Website</strong>”), and (c) the other associated
+                            <p>This Privacy Policy governs your use of: (a) the application – ‘PSCMITHRA – The Learning App’
+                                (“<strong>Application</strong>”), (b) the website – https://pscmithra.com/’, including
+                                https://PSCMITHRA.com/btc/ (“<strong>Website</strong>”), and (c) the other associated
                                 applications, products, websites, and services managed or offered by the Company – both
                                 online, as well as offline. Please read this Privacy Policy carefully before using the
                                 Application, Website, or availing any of our services and products, along with the Terms of
@@ -121,7 +121,7 @@
                                 aggregate statistics about our customers, traffic patterns, and related site information to
                                 reputable third parties, however this information when disclosed will be in an aggregate
                                 form and does not contain any of your or a Child User’s Personal Information.</p>
-                            <p>BYJU’S will occasionally send email notices, messages or contact you or the Child User to
+                            <p>PSCMITHRA will occasionally send email notices, messages or contact you or the Child User to
                                 communicate about our Website/Application/Services, as they are considered an essential part
                                 of the Services you have chosen.</p>
                             <p>Please note that we may disclose Information:</p>
@@ -266,10 +266,10 @@
                                 the earliest possible opportunity.</p>
                             <p>You may contact us at: Grievance Officer: Mr. Pravin Prakash Address: 4/1, Tower D, 2nd
                                 Floor, IBC Knowledge Park, Bannerghatta Main Road, Bangalore – 560029, Karnataka, India.</p>
-                            <p>Reach out to us on support@byjus.com, in case of any queries.</p>
+                            <p>Reach out to us on pscmithrallp@gmail.com, in case of any queries.</p>
                             <h2><b>Terms &amp; Conditions</b></h2>
                             <p>These Terms &amp; Conditions (“<strong>Terms</strong>” or “<strong>ToU</strong>”) are between
-                                Think &amp; Learn Private Limited (referred to as “<strong>BYJU’S</strong>”,
+                            PSCMITHRA (referred to as “<strong>PSCMITHRA</strong>”,
                                 “<strong>Company”, “we”, “us”, or “our</strong>”) and its users (referred to as
                                 <strong>”you”, “your</strong>”, or “<strong>yourself</strong>”). These Terms govern your use
                                 of our Website, Application and Services, or any registrations made with us through any mode
@@ -718,7 +718,7 @@
                                         <li><strong>Notice:</strong> All notices served by the Company shall be provided
                                             <em>via</em> email to your account or as a general notification on the
                                             Application/Website. Any notice to be provided to the Company should be sent
-                                            to&nbsp;<em>support@byjus.com</em>.</li>
+                                            to&nbsp;<em>pscmithrallp@gmail.com</em>.</li>
                                         <li><strong>Entire Agreement:</strong> The Terms, along with the Privacy Policy, and
                                             any other guidelines made applicable to the Application/Website/Services from
                                             time to time, constitute the entire agreement between the Company and you with
@@ -771,7 +771,7 @@
                             </ol>
                             <p>We make all best endeavours to provide you and Child Users with a pleasant experience. In the
                                 unlikely event that you or a Child User faces any issues, please contact our Grievance
-                                Officer (details provided in the Privacy Policy) or us at&nbsp;<em>support@byjus.com</em>.
+                                Officer (details provided in the Privacy Policy) or us at&nbsp;<em>pscmithrallp@gmail.com</em>.
                             </p>
                             <p>***</p>
                             <div class="clearfix"></div>
