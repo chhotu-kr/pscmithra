@@ -23,6 +23,8 @@ class MocktestStart extends Component
   public $sec;
   public $status;
   public $l;
+  public $selected;
+
   protected $listeners = ['totaltime' => 'timetaken'];
 
 
@@ -31,11 +33,10 @@ class MocktestStart extends Component
 
     $user = 1;
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-   // dd($this->data['questionslist'] );
+  //  dd($examination_id );
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
-       //dd($this->data['questionslist'][$index]['optSel']);
     
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
@@ -45,49 +46,40 @@ class MocktestStart extends Component
             "QuesSelect" => $value['optSel'],
             "time" => $value['time']
           ]
-        );
-      
+
+        );  
       }
-
-
-
-
-      //   // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
-
-      // echo json_encode($value);
-
     }
 
-
+    // dd($this->data);
     // $type = "resume";
 
-    // if ($request->type == "submit") {
-    //   $type = "result";
-    //   $rMarks  = $examination_id->rightmarks;
-    //   $wMarks = "-" . $examination_id->wrongmarks;
-    //   $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
-    //     $join->on('questions.id', '=', 'mockattempquestions.questions_id');
-    //   })->select(
-    //     'questions.*',
-    //     'mockattempquestions.*',
-    //     DB::raw('(CASE WHEN questions.rightans = mockattempquestions.QuesSelect THEN ' . $rMarks . '
-    //            ELSE ' . $wMarks . ' END) AS total')
-    //   )->where('users_id', $user)->where('attemped_exams_id', $testId->id)->get();
-    //   $total = $total->sum('total');
-    //   $testIds = $testId->update(
-    //     [
-    //       "remain_time" => $this->data['time'],
-    //       "lastQues" => $this->question_no + 1,
-    //       "type" => $type,
-    //       "totalmarks" => $total,
-    //     ]
-    //   );
+    if ($this->data['type'] == "normal") {
+      $type = "result";
+      $rMarks  = $examination_id->rightmarks;
+      $wMarks = "-" . $examination_id->wrongmarks;
+      $total = Question::leftjoin('mockattempquestions', function ($join) use ($rMarks, $wMarks) {
+        $join->on('questions.id', '=', 'mockattempquestions.questions_id');
+      })->select(
+        'questions.*',
+        'mockattempquestions.*',
+        DB::raw('(CASE WHEN questions.rightans = mockattempquestions.QuesSelect THEN ' . $rMarks . '
+               ELSE ' . $wMarks . ' END) AS total')
+      )->where('users_id', $user)->where('attemped_exams_id', $testId->id)->get();
+      $total = $total->sum('total');
+      $testIds = $testId->update(
+        [
+          "remain_time" => $this->data['time'],
+          "lastQues" => $this->question_no + 1,
+          "type" => $type,
+          "totalmarks" => $total,
+        ]
+      );
+     
+      //   return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+    }
+    return redirect()->route('view.mocktestresult',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
 
-    //   //   return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
-    // }
-
-
-    // return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
   }
   public function statusChange()
   {
@@ -156,7 +148,20 @@ class MocktestStart extends Component
 
   public function onSelect($id)
   {
-    $this->data['questionslist'][$this->question_no]['optSel'] = $id;
+    $this->selected;
+    if($id == 1){
+      $selected = 'selOpt1';
+    }
+    elseif($id == 2){
+      $selected = 'selOpt2';
+    }
+    elseif($id == 3){
+      $selected = 'selOpt3';
+    }
+    else{
+      $selected = 'selOpt4';
+    }
+    $this->data['questionslist'][$this->question_no]['optSel'] = $selected;
     $this->filterledgers();
   }
   public function countTime($id)
@@ -202,6 +207,7 @@ class MocktestStart extends Component
 
               return collect([
                 "showdir" => false,
+                
                 "questionId" => $fff->question->id,
                 "s" => $fff->question->mockAttemp->QuesSeen,
                 "optSel" => $fff->question->mockAttemp->QuesSelect,
@@ -230,7 +236,6 @@ class MocktestStart extends Component
     $this->required_timing = $this->data['time'];
     $this->status = $this->data['questionslist'][$this->question_no]['showdir'];
     //  dd($this->question_no);
-    // dd($this->data);
   }
   public function render()
   {

@@ -98,6 +98,9 @@ Route::get('/mock-test/quiz/subcategory', [HomeController::class, 'get_QuizSubCa
 Route::get('/mock-test/quiz/chapter', [HomeController::class, 'get_QuizChapt'])->name('quiz.chapter');
 Route::get('/getexam-result', [HomeController::class, 'Quiz_Result'])->name('quiz.result');
 Route::get('/live-quiz/start', [HomeController::class, 'Live_Quiz_Start'])->name('quiz.livequizstart');
+Route::get('/privacy/policy', [HomeController::class, 'privacy_policy'])->name('view.privacy');
+Route::get('/term/condition', [HomeController::class, 'term'])->name('view.term');
+Route::get('/refund/cancel', [HomeController::class, 'refund'])->name('view.refund');
 
 //................calling Data ..........
 
