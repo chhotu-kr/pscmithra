@@ -1516,6 +1516,13 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+    }else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
     }
 
 
@@ -1608,6 +1615,14 @@ class Apiv1Controller extends Controller
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
     }
+    else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
+    }
 
 
     return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
@@ -1686,6 +1701,13 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
+    }else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
     }
 
 
