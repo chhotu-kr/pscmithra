@@ -26,7 +26,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="categorie-grid categorie-style-2">
                                 <div class="icon">
-                                    @livewire('imageview', ['image' => ['image' => $value->image,'w'=>'50','h'=>'50']], key($item->id))
+                                <img src='{{asset("upload/".$value->image)}}'  width="50px" height="50px"alt="" class="">
                                 </div>
                                 <div class="content">
                                     <h5 class="title">{{$value->subcategory}}</h5>
@@ -46,7 +46,9 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="categorie-grid categorie-style-2">
                                 <div class="icon">
-                                    @livewire('imageview', ['image' => ['image' => $value->image,'w'=>'50','h'=>'50']], key($item->id))
+                                <img src='{{asset("upload/".$value->image)}}'  width="50px" height="50px"alt="" class="">
+
+                               
                                 </div>
                                 <div class="content">
                                     <h5 class="title">{{$value->subcategory}}</h5>
