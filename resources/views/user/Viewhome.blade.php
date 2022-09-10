@@ -11,61 +11,7 @@
     @endforeach
 
 </div>
-
-
-
-<div class="edu-gallery-area education-section-gap" style="background: transparent;">
-    <div class="container">
-        <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-            <h2 class="title">All Test Series & <span class="color-primary">Mock Tests</span></h2>
-        </div>
-
-        <div class="tabigationLink mx-5">
-
-            <ul class="tabs tabSliderCat">
-
-            <li class="tab-link current" data-tab="tab-All">
-                    All
-                </li>
-
-
-                @foreach ($category as $item)
-                
-                <li class="tab-link " data-tab="tab-{{$item->id}}">
-                    {{$item->category}}
-                </li>
-        @endforeach
-
-        </ul>
-
-
-        
-                @foreach ($subcategory as $item)
-                <div id="tab-{{$item->id}}" class="tab-content current">
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="categorie-grid categorie-style-2">
-                        <div class="icon"> 
-                            @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'50','h'=>'50']], key($item->id))
-                        </div>
-                        <div class="content">
-                            <h5 class="title">{{$item->subcategory}}</h5>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-
-</div>
-
-                @endforeach
-
-            
-    </div>
-</div>
-</div>
-
+@livewire('user.categoryslider')
 <div class="features-area-2">
     <div class="container">
         <div class="features-grid-wrap">

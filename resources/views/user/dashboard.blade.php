@@ -29,13 +29,11 @@
     <!-- CSS only -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
 
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">
-   MathJax.Hub.Config({
+        MathJax.Hub.Config({
       tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
       "HTML-CSS": {
         linebreaks: { automatic: true, width: "container" }          
@@ -64,7 +62,7 @@
                         <ul class="header-info">
                             <li><a href="{{ route('user.login') }}">Login</a></li>
                             <li><a href="{{ route('user.register') }}">Register</a></li>
-                            <li><a href="tel:+011235641231"><i class="icon-phone"></i>Call: 123 4561 5523</a></li>
+                            <li><span>Call:</span><a href="tel:+04844632514">+04844632514</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,8 +75,10 @@
                     <div class="header-brand">
                         <div class="logo">
                             <a href="{{ route('view.home') }}">
-                                {{-- <img class="logo-light" src="images/logo/logo-dark.png" alt="Logo"> --}}
-                                <img src="http://localhost/lms/img/logo.png" alt="logo" class="logo-light">
+
+                                <img src='{{asset("nassets/images/logo.png")}}' style="
+    width: 125px;
+" width="150" alt="logo" class="">
                             </a>
                         </div>
                     </div>
@@ -143,17 +143,19 @@
                         <div class="education-footer-widget">
                             <div class="logo">
                                 <a href="{{ route('view.home') }}">
-                                    <img class="logo-dark" src="images/logo/logo-dark.png" alt="Corporate Logo">
+                                    <img src='{{asset("nassets/images/logo.png")}}' style="
+    width: 215px;
+" width="215px" alt="" class="">
+
                                 </a>
                             </div>
-                            <p class="description">Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor
-                                incidid unt labore dolore.</p>
+                            <br>
                             <div class="widget-information">
                                 <ul class="information-list">
-                                    <li><span>Add:</span>70-80 Upper St Norwich NR2</li>
-                                    <li><span>Call:</span><a href="tel:+011235641231">+01 123 5641 231</a></li>
-                                    <li><span>Email:</span><a
-                                            href="mailto:info@educationblink.com">info@educationblink.com</a></li>
+                                    <li><span>Add:</span>3rd, V 196,BLDG No 60/49E, J C Chambers, Panampilly Nagar
+                                        Road, Panampilly Nagar, Kochi, Ernakulam, Kerala, 682036</li>
+                                    <li><span>Call:</span><a href="tel:+04844632514">+04844632514</a></li>
+                                    <li><span>Email:</span><a href="mailto:pscmithrallp@gmail.com">pscmithrallp@gmail.com</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -195,8 +197,7 @@
                                     subscription</p>
                                 <div class="input-group footer-subscription-form">
                                     <input type="email" class="form-control" placeholder="Your email">
-                                    <button class="education-btn btn-medium" type="button">Subscribe <i
-                                            class="icon-4"></i></button>
+                                    <button class="education-btn btn-medium" type="button">Subscribe <i class="icon-4"></i></button>
                                 </div>
                                 <ul class="social-share icon-transparent">
                                     <li><a href="#" class="color-fb"><i class="icon-facebook"></i></a></li>
