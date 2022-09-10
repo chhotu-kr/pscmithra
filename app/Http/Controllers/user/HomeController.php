@@ -52,7 +52,7 @@ class HomeController extends Controller
     public function get_Category(){
         $data['subcategory']=SubCategory::all();
         $data['cate']=Category::all();
-       
+        $data['category']=Category::where('id',1)->first();
         return view('user.category',$data);
     }
 
@@ -97,6 +97,7 @@ class HomeController extends Controller
         $data['img']=Image::all();
         $data['quizcat'] = QuizCategory::all();
         $data['quizsubcat'] = QuizSubCategory::all();
+        $data['quiz_cat']=QuizCategory::where('id',1)->first();
         return view('user.ViewQuiz',$data);
     }
     //..............Quiz Detail...........//
@@ -219,11 +220,7 @@ class HomeController extends Controller
 }
    //..........................User Dashboard  Controller..........................//
 
-//    public function get_profile(){
-//        $data['user']=User::all();
-//     return view('user.profile.userprofile',$data);
 
-//    }
 
     //................ LiveQuiz Result ...........//
     public function get_LiveQuizResult(Request $req){

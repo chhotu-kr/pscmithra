@@ -23,6 +23,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
+ use App\Http\Controllers\user\dashboard\profileController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
@@ -56,9 +57,14 @@ Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name(
 //..............User Dashboard Route................//
 
 Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
+
+Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('user.dashboard');
+
+
 Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
-  Route::post('/update/user/password',[userController::class,'ChangePassword'])->name('update.password');
- Route::post('/update/user',[userController::class,'update'])->name('update.user');
+  Route::post('/update/user/password',[profileController::class,'ChangePassword'])->name('update.password');
+ Route::post('/update/user',[profileController::class,'update'])->name('update.user');
+
 //............//..............//...........User Page.............//................//...............//
 
 Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
