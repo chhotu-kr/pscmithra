@@ -41,7 +41,6 @@
                                                 <div class="modal-body">
                                                     @foreach ($item['languages'] as $o)
                                                         <div class="form-check languagelabel">
-
                                                             <label class="form-check-label languagelabel"
                                                                 for="flexRadioDefault1"
                                                                 wire:click.prevent="selectLang({{ $o['id'] }})">

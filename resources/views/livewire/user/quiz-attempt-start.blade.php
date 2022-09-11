@@ -5,12 +5,10 @@
         .flex {
             display: flex;
         }
-
         .quize-page {
             padding: 50px 0;
             position: relative;
         }
-
         /* .quize-page:before {
             content: '';
             position: absolute;
@@ -21,24 +19,18 @@
             top: 0;
             right: 0;
         } */
-
         #regForm {
             background-color: #ffffff;
             padding: 20px;
         }
-
         #regForm h1 {
             text-align: left;
             font-size: 22px;
         }
-
-
         /* Mark input boxes that gets an error on validation: */
         input.invalid {
             background-color: #ffdddd;
         }
-
-        
         /* Hide all steps by default: */
         .tab {
             display: contents;
@@ -46,7 +38,6 @@
             padding: 10px;
             margin-bottom: 15px;
         }
-
         #prevBtn {
             background-color: #4c7bcd;
             border: 0;
@@ -55,7 +46,6 @@
             color: #fff;
             padding: 0 20px;
         }
-
         /* Make circles that indicate the steps of the form: */
         .step {
             height: 15px;
@@ -67,53 +57,40 @@
             display: inline-block;
             opacity: 0.5;
         }
-
         .step.active {
             opacity: 1;
         }
-
         /* Mark the steps that are finished and valid: */
         .step.finish {
             background-color: #04AA6D;
         }
-
-
         p.quition-para {
             color: #000;
             font-size: 18px;
             margin-bottom: 10px;
         }
-
-
         .user-profile {
             display: flex;
         }
-
         .user-profile .left-user img {
             width: 90px;
             margin-right: 20px;
         }
-
         .user-attempt-question {
             padding-left: 20px;
         }
-
         .user-attempt-question .left-right h4 {
             margin: 0;
             margin-top: 18px;
         }
-
         .legent-section {
             margin-top: 20px;
         }
-
-        
-
+        .legent-section .answerd {}
         .legent-section .answerd .answer-box {
             display: flex;
             justify-content: space-between;
         }
-
         .legent-section .answerd .answer-box p {
             width: 49%;
             margin: 0;
@@ -125,7 +102,6 @@
             text-align: center;
             position: relative;
         }
-
         .legent-section .answerd .answer-box p span {
             width: 30px;
             display: inline-block;
@@ -135,14 +111,11 @@
             height: 38px;
             line-height: 38px;
         }
-
-     
-
+        .quition-number-plate {}
         .quition-no-box-section {
             height: 185px;
             overflow: auto;
         }
-
         .quition-no-box-section span {
             background: #2196f3;
             width: 40px;
@@ -153,13 +126,11 @@
             text-align: center;
             color: #fff;
         }
-
         .four-btn {
             margin-top: 20px;
             border-top: 1px solid #dcd1d1;
             padding-top: 10px;
         }
-
         .four-btn a {
             width: 49%;
             border: 2px solid #00b0ff;
@@ -171,7 +142,6 @@
             font-weight: 600;
             background: #0595d6;
         }
-
         .option label {
             font-size: var(--font-size-b1);
             line-height: var(--line-height-b1);
@@ -179,29 +149,20 @@
             color: white;
             margin: 0 0 0px !important;
         }
-
         .btn-group-vertical.special {
             display: flex;
         }
-
         .special .btn {
             /* background-color: #787575; */
             flex: 1
         }
-
         button:active::before {
             background-color: #dd4814;
         }
-
-
-
         .active:focus {
             background-color: #E3F2FD;
-
         }
-
         .active {
-
             width: 100%;
             border: 1px solid grey;
             border-radius: 10px;
@@ -209,20 +170,16 @@
             color: black;
             display: flex
         }
-
         .active p {
             color: black;
             align-items: flex-start
         }
-
         .box-shadows {
             box-shadow: none;
             padding: 10px;
             margin-bottom: 30px;
             border: 1px solid #e5dfdf;
         }
-
-
         .radio-custom,
         .radio-custom-label {
             display: inline-block;
@@ -231,11 +188,9 @@
             cursor: pointer;
             font-size: var(--font-size-b1);
         }
-
         .accordion {
             margin-bottom: 30px;
         }
-
         .according_tab .card-header button {
             border: 0;
             font-size: 18px;
@@ -243,13 +198,10 @@
             color: #000;
             padding: 0;
         }
-
         .card-header {
             padding: 0 10px;
         }
-
-      
-
+        .solutions {}
         .solutions p {
             font-size: 18px;
             color: #000;
@@ -417,7 +369,6 @@
 
     <script>
         setInterval(updateCountDown, 1000)
-
         function updateCountDown() {
             Livewire.emit('totaltime');
         }
@@ -428,7 +379,6 @@
         let time = min * 60;
         let initialTime = time;
         const countdownDel = document.getElementById('countdown')
-
         setInterval(updateCountDown, 1000)
         // setInterval(calculateTime, 1000)
         
@@ -437,12 +387,10 @@
             let minutes = Math.floor(time / 60);
             let sec = time % 60;
             sec = sec >= 10 ? sec : "0" + sec;
-
             countdownDel.innerHTML = `${minutes} : ${sec}`
             
             // console.log(time +" " +sec)
         }
-
         // function calculateTime() {
         //     let timeTaken = initialTime - time;
         //     console.log(timeTaken);

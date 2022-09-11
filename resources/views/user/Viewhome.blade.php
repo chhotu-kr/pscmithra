@@ -5,13 +5,13 @@
 <div class="main-home-slider">
     @foreach ($img as $item)
     <div class="item">
-        {{-- <img src="{{asset('nassets\img\banner-images-1.jpg')}}"> --}}
-        @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1732','h'=>'500px']], key($item->id))
+        <img src="{{asset("upload/".$item->image)}}">
+        
     </div>
     @endforeach
 
 </div>
-@livewire("user.categoryslider")
+@livewire('user.categoryslider')
 <div class="features-area-2">
     <div class="container">
         <div class="features-grid-wrap">

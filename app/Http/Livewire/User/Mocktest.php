@@ -49,6 +49,7 @@ class Mocktest extends Component
         // dd($singleData);
 
         $get = AttempedExam::where('examinations_id', $singleData['id'])->where('mocktesttype', $singleData['type'])->where('users_id', $user)->first();
+        
         if (empty($get)) {
 
 
@@ -69,7 +70,9 @@ class Mocktest extends Component
                 $mock->users_id =  $user;
                 $mock->questions_id = $value;
                 $mock->attemped_exams_id = $Attemp->id;
-                $mock->save();
+                $mock->save();//here problem
+            // dd($examQuestion);
+
             }
             $this->returndata['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
             // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
@@ -86,7 +89,7 @@ class Mocktest extends Component
                 $data =   mockattempquestion::where('attemped_exams_id', $testId)->where('users_id', $user)->update([
                     "QuesSeen" => "false",
                     "QuesSelect" => "",
-                    "time" => 0,
+                      "time" => 0,
                 ]);
 
                 $this->returndata['data'] = ['testId' => $get->slugid];

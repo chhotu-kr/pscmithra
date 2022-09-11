@@ -1473,7 +1473,7 @@ class Apiv1Controller extends Controller
     foreach ($request->array as $index => $value) {
       if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
 
-        $dd = mockattempquestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)->update(
+        $dd = mockattempquestion::where('questions_id', $value['questionId'])->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)->update(
           [
             "QuesSeen" => $value["seenType"],
             "QuesSelect" => $value['optSel'],
@@ -1516,6 +1516,13 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+    }else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
     }
 
 
@@ -1559,7 +1566,7 @@ class Apiv1Controller extends Controller
     foreach ($request->array as $index => $value) {
       if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
 
-        $dd = liveAttempQuestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->update(
+        $dd = liveAttempQuestion::where('questions_id', $value['questionId'])->where('users_id', $user->id)->where('live_attemps_id', $testId->id)->update(
           [
             "QuesSeen" => $value["seenType"],
             "QuesSelect" => $value['optSel'],
@@ -1608,6 +1615,14 @@ class Apiv1Controller extends Controller
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
     }
+    else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
+    }
 
 
     return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
@@ -1648,7 +1663,7 @@ class Apiv1Controller extends Controller
     foreach ($request->array as $index => $value) {
       if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
 
-        $dd = QuizAttemptQuestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->update(
+        $dd = QuizAttemptQuestion::where('question_id', $value['questionId'])->where('users_id', $user->id)->where('quiz_attemps_id', $testId->id)->update(
           [
             "QuesSeen" => $value["seenType"],
             "QuesSelect" => $value['optSel'],
@@ -1686,6 +1701,13 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
+    }else{
+      $testId->update(
+        [
+          "remain_time" => $request->time,
+          "lastQues" => $request->currentpostion,
+        ]
+      );
     }
 
 
