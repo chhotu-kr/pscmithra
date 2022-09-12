@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\BookSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,9 +36,12 @@ class Product extends Model
     ];
 
     public function plans(){
-        return $this->hasMany(ProductPlan::class);
+        return $this->hasMany(ProductPlan::class, 'product','id');
     }
 
+    public function book(){
+        return $this->hasone(BookProduct::class, 'product_id','id');
+    }
    
 
 

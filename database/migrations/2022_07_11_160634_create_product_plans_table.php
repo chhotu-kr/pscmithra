@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('freemocktest')->nullable();
             $table->string('livetest')->nullable();
             $table->enum('type',['quiz','studymetrial','mocktest','liveexam']);
-            $table->bigInteger('subject');
-            $table->bigInteger('topic');
-            $table->bigInteger('examduration');
+            $table->bigInteger('subject')->nullable();
+            $table->bigInteger('topic')->nullable();
+            $table->bigInteger('examduration')->nullable();
            
             $table->timestamps();
         });

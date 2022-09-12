@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\Admin\Product\StudyMaterial;
 use App\Models\Product;
 use App\Models\Subject;
 use App\Models\Topic;
@@ -64,8 +65,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        //
 
+
+        //
+        //return dd($request);
+        
         $data = new Product();
         $data->subject_id = $request->subject_id;
         $data->topic_id = $request->topic_id;
@@ -76,7 +80,7 @@ class ProductController extends Controller
         $data->price = $request->price;
         //image work
         $filename = $request->bannerimage->getClientOriginalName();
-        $request->bannerimage->move(('images'), $filename);
+        $request->bannerimage->move(('upload'), $filename);
         $data->bannerimage = $filename;
 
 
@@ -113,33 +117,103 @@ class ProductController extends Controller
         } else if ($request->type = 'plan') {
             if (!empty($request->liveD) || !empty($request->liveN)) {
                 $planproduct = new ProductPlan();
-                $planproduct->product_id = $data->id;
+                $planproduct->product = $data->id;
+                $planproduct->type = "liveexam";
                 $planproduct->freemocktest = $request->liveN;
                 $planproduct->examduration = $request->liveD;
                 $planproduct->save();
             }
-            $co = count($request->category_id);
+           
 
-            for ($i = 0; $i < $co; $i++) {
+            if (!empty($request->mock)) {
 
-                $planproduct = new ProductPlan();
-                $planproduct->product_id = $data->id;
-                if ($request->category_id[$i] != -1) {
-                    $planproduct->category_id = $request->category_id[$i];
+                foreach ($request->mock as $i) {
+                    $planproduct = new ProductPlan();
+                    $planproduct->product = $data->id;
+                    if (!empty($i['cate'])) {
+                        $planproduct->category = $i['cate'];
+                    }
+                    if (!empty($i['sub'])) {
+                        $planproduct->subcategory = $i['sub'];
+                    }
+                    $planproduct->type = "mocktest";
+                
+                   $planproduct->freemocktest = $i['N'];
+                    $planproduct->examduration = $i['time'];
+                    $planproduct->save();
+                    
                 }
-                if ($request->subcategory_id[$i] != -1) {
-                    $planproduct->subcategory_id = $request->subcategory_id[$i];
-                }
-
-                $planproduct->freemocktest = $request->mocktestN[$i];
-                $planproduct->examduration = $request->mocktestD[$i];
-                $planproduct->save();
             }
+
+
+            if (!empty($request->quiz)) {
+                foreach ($request->quiz as $i) {
+                    $planproduct = new ProductPlan();
+                    $planproduct->product = $data->id;
+                    if (!empty($i['cate'])) {
+                        $planproduct->category = $i['cate'];
+                    }
+                    if (!empty($i['sub'])) {
+                        $planproduct->subcategory = $i['sub'];
+                    }
+                    if (!empty($i['chap'])) {
+                        $planproduct->subject = $i['chap'];
+                    }
+                    if (!empty($i['topic'])) {
+                        $planproduct->topic = $i['topic'];
+                    }
+                    $planproduct->type = "quiz";
+                   
+                   
+                    $planproduct->freemocktest = $i['N'];
+                    $planproduct->examduration = $i['time'];
+                    $planproduct->save();
+                }
+            }
+
+
+
+            if (!empty($request->sm)) {
+                foreach ($request->sm as $i) {
+                    $planproduct = new ProductPlan();
+                    $planproduct->product = $data->id;
+                    if (!empty($i['cate'])) {
+                        $planproduct->category = $i['cate'];
+                    }
+                    if (!empty($i['chap'])) {
+                        $planproduct->subject = $i['chap'];
+                    }
+                    $planproduct->type = "studymetrial";
+                    $planproduct->examduration = $i['time'];
+                    $planproduct->save();
+                }
+            }
+
+
+
+
+            // $co = count($request->category_id);
+
+            // for ($i = 0; $i < $co; $i++) {
+
+            //     $planproduct = new ProductPlan();
+            //     $planproduct->product = $data->id;
+            //     if ($request->category_id[$i] != -1) {
+            //         $planproduct->category_id = $request->category_id[$i];
+            //     }
+            //     if ($request->subcategory_id[$i] != -1) {
+            //         $planproduct->subcategory_id = $request->subcategory_id[$i];
+            //     }
+
+            //     $planproduct->freemocktest = $request->mocktestN[$i];
+            //     $planproduct->examduration = $request->mocktestD[$i];
+            //     $planproduct->save();
+            // }
         }
 
 
 
-        return redirect()->route('product.index');
+        return redirect()->back();
     }
 
 
@@ -220,7 +294,7 @@ class ProductController extends Controller
             for ($i = 0; $i < $co; $i++) {
 
                 $planproduct = new ProductPlan();
-                $planproduct->product_id = $product->id;
+                $planproduct->product = $product->id;
                 if ($request->category_id[$i] != -1) {
                     $planproduct->category_id = $request->category_id[$i];
                 }
@@ -236,7 +310,7 @@ class ProductController extends Controller
 
         // if($request->type=='book'){
         //      $book_product=BookProduct::find($id);
-        //     $book_product->product_id=$product->id;
+        //     $book_product->product=$product->id;
         //     $book_product->book_id=$request->data;
         //     $book_product->slugid=md5("ghjfh" .time()."hjfhjfjhfghf");
         //     $book_product->save();
