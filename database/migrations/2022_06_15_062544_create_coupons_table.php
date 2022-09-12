@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('isVisble')->default('1');
             $table->string('code');
             $table->string('percent');
-            $table->string('isused')->default('false');
+            $table->boolean('status')->default('0');
             $table->string('slugid');
             $table->timestamps();
         });

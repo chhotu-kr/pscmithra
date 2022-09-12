@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Coupon;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 class addToCartController extends Controller
 {
@@ -28,10 +30,10 @@ class addToCartController extends Controller
          $data['order']=get_order();
         return view("user/cart/Cart",$data);
     }
-    // public function checkOut(){
-    //     $data['addresses'] = Address::where("user_id",Auth::id())->get();
-    //     return view("public/checkout",$data);
-    // }
+    public function checkOut(){
+        $data['addresses'] = Address::where("user_id",Auth::id())->get();
+        return view("user/cart/checkout",$data);
+    }
 
     public function addTCart(Request $request,$p_id){
         $product=Product::find($p_id);
@@ -51,6 +53,7 @@ class addToCartController extends Controller
                    $oi->product_id=$product->id;
                    $oi->order_id=$order->id;
                    $oi->save();
+                   
                 }
            }
            else{
@@ -59,7 +62,7 @@ class addToCartController extends Controller
             $ord->ordered=false;
             $ord->user_id=$user->id;
             $ord->save();
-
+          
             $oi=new OrderItem();
             $oi->ordered=false;
             $oi->product_id=$product->id;
@@ -139,13 +142,13 @@ class addToCartController extends Controller
         return redirect()->route('usercart.index');
     }
 
-    // static public function assignAddress($id){
-    //     $address=Address::findOrFail($id);
-    //     $order=get_order();
-    //     $order->address_id=$address->id;
-    //     $order->save();
-    //     return redirect()->route('checkout');
-    // }
+    static public function assignAddress($id){
+        $address=Address::findOrFail($id);
+        $order=get_order();
+        $order->address_id=$address->id;
+        $order->save();
+        return redirect()->route('checkout');
+    }
 
    
 }
