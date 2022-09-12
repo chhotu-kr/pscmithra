@@ -1,7 +1,7 @@
 
 @extends('user/dashboard')
 @section('pscmithra')
-{{-- <div class="education-breadcrumb-area">
+<div class="education-breadcrumb-area">
     <div class="container">
         <div class="breadcrumb-inner">
             <div class="page-title">
@@ -21,7 +21,7 @@
         <li class="shape-4"><img src="{{asset('nassets/images/about/shape-22.png" alt="shape')}}"></li>
         <li class="shape-5 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="shape"></li>
     </ul>
-</div> --}}
+</div>
 
 <div class="features-area-3">
     <div class="container">
@@ -84,115 +84,7 @@
                 
             </div>
             @endforeach
-            {{-- <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-secondary-style">
-                    <div class="icon">
-                        <i class="icon-10"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Regulatory Bodies</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="200" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra04-style">
-                    <div class="icon">
-                        <i class="icon-11"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">SSC & Railway</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="250" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-tertiary-style">
-                    <div class="icon">
-                        <i class="icon-12"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">GATE & PSU CS</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra02-style">
-                    <div class="icon">
-                        <i class="icon-13"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE EE</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra07-style">
-                    <div class="icon design-pencil-icon">
-                        <i class="icon-42"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE EC</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra06-style">
-                    <div class="icon">
-                        <i class="icon-14"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE ME</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="200" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra03-style">
-                    <div class="icon laptop-icon">
-                        <i class="icon-16"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">ESE & GATE CE</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="250" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra01-style">
-                    <div class="icon">
-                        <i class="icon-17"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Photography</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="col sal-animate" data-sal-delay="300" data-sal="slide-up" data-sal-duration="800">
-                <a href="category-details.php">
-                <div class="categorie-grid categorie-style-3 color-extra05-style">
-                    <div class="icon">
-                        <i class="icon-43"></i>
-                    </div>
-                    <div class="content">
-                        <h5 class="title">Music Class</h5>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </div> --}}
+            
     </div>
 </div>
 @livewire('user.categoryslider')

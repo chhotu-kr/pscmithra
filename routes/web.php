@@ -17,7 +17,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController,ExtraController};
+use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController,ExtraController, TestiMonialsController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
@@ -458,6 +458,14 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/extra/{id}',[ExtraController::class,'edit'])->name('edit.extra');
     Route::post('/update/extra/{id}',[ExtraController::class,'update'])->name('update.extra');
     Route::get('/remove/extra/{id}',[ExtraController::class,'destroy'])->name('remove.extra');
+
+    //...................TestiMonials Table....................//
+
+    Route::get('/testi-monials',[TestiMonialsController::class,'index'])->name('insert.testimonials');
+    Route::post('/testi-monials/store',[TestiMonialsController::class,'store'])->name('testimonials.store');
+    Route::get('/update/testi-monials/{id}',[TestiMonialsController::class,'edit'])->name('edit.testimonials');
+    Route::post('/update/testi-monials/{id}',[TestiMonialsController::class,'update'])->name('update.testimonials');
+    Route::get('/remove/testi-monials/{id}',[TestiMonialsController::class,'destroy'])->name('remove.testimonials');
     
 });
 
@@ -478,6 +486,4 @@ Route::post('/Live/testupdate/{id}', [LiveTestController::class, 'update'])->nam
 Route::get('/Livetestremove/{id}', [LiveTestController::class, 'destroy'])->name('livetest.remove');
 
 
-// Route::get('/examqw', function(){
-//     return view('manageExamination');
-// });
+

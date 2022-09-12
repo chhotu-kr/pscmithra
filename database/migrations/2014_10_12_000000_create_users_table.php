@@ -18,13 +18,13 @@ return new class extends Migration
             $table->boolean('isVisble')->default('1');
             
             $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('contact')->unique()->nullable();
+            $table->string('email')->unique();
+            $table->string('contact')->unique();
             $table->string('password');
-            $table->string('slugid');
-           $table->integer('amount');
-           $table->string('image');
-           $table->string('gender');
+            $table->string('slugid')->nullable();
+           $table->integer('amount')->nullable();
+           $table->string('image')->nullable();
+           $table->string('gender')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
