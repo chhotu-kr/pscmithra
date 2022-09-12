@@ -40,7 +40,7 @@ class MocktestResult extends Component
       
                 $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
                   $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id)->orderBy('questions_id', 'DESC');
-                }]);
+                 }]);
               }])->with(['attm' => function ($aa) {
                 $aa->where('mocktesttype', 'reattemp');
               }]);

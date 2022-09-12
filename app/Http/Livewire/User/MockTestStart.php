@@ -33,11 +33,11 @@ class MocktestStart extends Component
 
     $user = 1;
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-  //  dd($examination_id );
+    //  dd($examination_id );
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
-    
+
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
         $dd = mockattempquestion::where('questions_id', $value['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
@@ -47,7 +47,7 @@ class MocktestStart extends Component
             "time" => $value['time']
           ]
 
-        );  
+        );
       }
     }
 
@@ -75,11 +75,10 @@ class MocktestStart extends Component
           "totalmarks" => $total,
         ]
       );
-     
+
       //   return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
     }
-    return redirect()->route('view.mocktestresult',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
-
+    return redirect()->route('view.mocktestresult', ['testID' => $this->data['testID'], 'examId' => $this->data['examId']]);
   }
   public function statusChange()
   {
@@ -113,7 +112,7 @@ class MocktestStart extends Component
     }
 
 
-    
+
     $this->a = $a;
     $this->w = $w;
     $this->u = $u;
@@ -149,16 +148,13 @@ class MocktestStart extends Component
   public function onSelect($id)
   {
     $this->selected;
-    if($id == 1){
+    if ($id == 1) {
       $selected = 'selOpt1';
-    }
-    elseif($id == 2){
+    } elseif ($id == 2) {
       $selected = 'selOpt2';
-    }
-    elseif($id == 3){
+    } elseif ($id == 3) {
       $selected = 'selOpt3';
-    }
-    else{
+    } else {
       $selected = 'selOpt4';
     }
     $this->data['questionslist'][$this->question_no]['optSel'] = $selected;
@@ -173,7 +169,7 @@ class MocktestStart extends Component
     // dd($id);
   }
   public function mount($testId, $examinationId)
-  { 
+  {
     $user = 1;
 
     $testId =  AttempedExam::select('id', 'slugid')->where("slugid", $testId)->first();
@@ -207,7 +203,7 @@ class MocktestStart extends Component
 
               return collect([
                 "showdir" => false,
-                
+
                 "questionId" => $fff->question->id,
                 "s" => $fff->question->mockAttemp->QuesSeen,
                 "optSel" => $fff->question->mockAttemp->QuesSelect,

@@ -116,7 +116,7 @@ class Mocktest extends Component
 
                 if ($this->singleData['type'] == "Start") {
                     if ($this->lang != null) {
-
+                        
                         $this->prepareExam($this->singleData);
                     } else {
                         return session()->flash('select', 'Select a language');
@@ -133,13 +133,7 @@ class Mocktest extends Component
     {
         $this->category = $cat_id;
         $this->subcat = $sub_cat_id;
-
-        $user_id = 0;
-        if (Auth::user()) {
-            $user_id = Auth::user()->id;
-        } else {
-            $user_id = 0;
-        }
+        $user_id = Auth::id();
 
         $this->data = Examination::where('category_id', $cat_id)->where('subcategory_id', $sub_cat_id)
             ->with('category', 'subcategory', 'lang.language')->with(['attm' => function ($q) use ($user_id) {
