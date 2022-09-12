@@ -26,7 +26,9 @@
                                 </ul>
                                 @if ($item['type'] == 'Start')
                                     <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop"  wire:click.prevent="itemId('{{ $item['id'] }}')">{{ $item['type'] }}<i class="icon-4"></i></a>
+                                        data-bs-target="#staticBackdrop"
+                                        wire:click.prevent="itemId('{{ $item['id'] }}')">{{ $item['type'] }}<i
+                                            class="icon-4"></i></a>
                                     <div wire:ignore.self class="modal fade" id="staticBackdrop"
                                         data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -41,9 +43,13 @@
                                                 <div class="modal-body">
                                                     @foreach ($item['languages'] as $o)
                                                         <div class="form-check languagelabel">
-                                                            <label class="form-check-label languagelabel"
-                                                                for="flexRadioDefault1"
-                                                                wire:click.prevent="selectLang({{ $o['id'] }})">
+                                                            <input class="form-check-input" type="checkbox"
+                                                            @if ($lang == $o['id'])
+                                                            @checked($checked)
+                                                            @endif
+                                                                id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault"
+                                                                wire:click.prevent="selectLang('{{ $o['id'] }}')">
                                                                 {{ $o['name'] }}
                                                             </label>
                                                         </div>
@@ -52,8 +58,7 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button"
-                                                        wire:click.prevent="checkLogin()"
+                                                    <button type="button" wire:click.prevent="checkLogin()"
                                                         class="education-btn btn-small btn-primary">Continue</button>
                                                 </div>
                                             </div>
@@ -62,8 +67,13 @@
                                 @elseif($item['type'] == 'Buy')
                                     <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
+                                @elseif($item['type'] == 'resume')
+                                    <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="resume('{{ $item['testId'] }}')">Resume<i
+                                            class="icon-4"></i></a>
                                 @else
-                                    <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
+                                      <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="result('{{ $item['testId'] }}')">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @endif
                             </div>

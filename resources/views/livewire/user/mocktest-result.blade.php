@@ -8,7 +8,7 @@
                 background-color: #00a884;
             }
     
-            .badgediv {
+               .badgediv {
                 width: 40px;
                 background-color: green;
                 padding: 5px
