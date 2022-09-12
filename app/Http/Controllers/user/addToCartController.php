@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Coupon;
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class addToCartController extends Controller
 {
@@ -31,6 +32,8 @@ class addToCartController extends Controller
         return view("user/cart/Cart",$data);
     }
     public function checkOut(){
+        $data['product']=Product::all();
+        $data['subuser']=User::all();
         $data['addresses'] = Address::where("user_id",Auth::id())->get();
         return view("user/cart/checkout",$data);
     }

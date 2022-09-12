@@ -80,6 +80,24 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <label for="">ProductName</label>
+                                <select name="product_id" id="" class="form-select" required>
+                                <option value="0">select productName</option>
+                                @foreach ($product as $pro)
+                                    <option value="{{$pro->id}}">{{$pro->title}}</option>
+                                @endforeach
+                                </select>
+                               </div>
+                               <div class="mb-3">
+                                <label for="">UserName</label>
+                                <select name="user_id" id="" class="form-select" required>
+                                <option value="0">select UserName</option>
+                                @foreach ($subuser as $sub)
+                                    <option value="{{$sub->id}}">{{$sub->name}}</option>
+                                @endforeach
+                                </select>
+                               </div>
+                            <div class="mb-3">
                                 <input type="submit" value="Add to " class="btn btn-success w-100">
                             </div>
                         </form>

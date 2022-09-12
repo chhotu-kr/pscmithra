@@ -25,6 +25,7 @@ return new class extends Migration
            $table->integer('amount')->nullable();
            $table->string('image')->nullable();
            $table->string('gender')->nullable();
+           $table->enum('type',['user','bot'])->default('bot');
             $table->rememberToken();
             $table->timestamps();
         });

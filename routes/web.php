@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
  use App\Http\Controllers\user\dashboard\profileController;
+ use App\Http\Controllers\user\userController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
@@ -469,6 +470,14 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/testi-monials/{id}',[TestiMonialsController::class,'edit'])->name('edit.testimonials');
     Route::post('/update/testi-monials/{id}',[TestiMonialsController::class,'update'])->name('update.testimonials');
     Route::get('/remove/testi-monials/{id}',[TestiMonialsController::class,'destroy'])->name('remove.testimonials');
+
+    //..............user Table...................//
+    Route::get('/manage-user',[userController::class,'index'])->name('manage.user');
+    Route::get('/user/create',[userController::class,'create'])->name('insert.create');
+    Route::post('/user/store',[userController::class,'store'])->name('user.store');
+    Route::get('/update/user/{id}',[userController::class,'edit'])->name('user.edit');
+    Route::post('/update/user/{id}',[userController::class,'update'])->name('user.update');
+    Route::get('/remove/user',[userController::class,'destroy'])->name('remove.user');
     
 });
 

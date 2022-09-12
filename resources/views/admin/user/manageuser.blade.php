@@ -10,10 +10,10 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-8 mb-3">
-                        <h4 class="text-theme ps-2">Manage Address</h4>
+                        <h4 class="text-theme ps-2">Manage User</h4>
                     </div>
                     <div class="col-4">
-                        <a href="{{route('address.create')}}" class="btn btn-outline-primary">Add New Address</a>
+                        <a href="{{route('insert.create')}}" class="btn btn-outline-primary">Add User</a>
                     </div>
                 </div>
                 <section class="section">
@@ -29,32 +29,28 @@
                               <thead>
                                 <tr>
                                   <th scope="col">id</th>
-                                  <th scope="col">ProductName</th>
                                   <th scope="col">Name</th>
-                                  <th scope="col">State</th>
-                                  <th scope="col">City</th>
-                                  <th scope="col">Pincode</th>
+                                  <th scope="col">Contact</th>
+                                  <th scope="col">image</th>
+                                  <th scope="col">Gender</th>
+                                  <th scope="col">Type</th>
                                   <th scope="col">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                  @foreach ($address as $req)
+                                  @foreach ($subuser as $req)
                                       <tr>
                                           <td>{{$req->id}}</td>
-                                          <td>{{$req->product->title}}</td>
-                                          <td>{{$req->user->title}}</td>
                                           <td>{{$req->name}}</td>
-                                          <td>{{$req->state}}</td>
-                                          <td>{{$req->city}}</td>
-                                          <td>{{$req->pincode}}</td>
+                                          <td>{{$req->contact}}</td>
+                                          <td>{{$req->image}}</td>
+                                          <td>{{$req->gender}}</td>
+                                          <td>{{$req->type}}</td>
+                                          {{-- <td>{{$req->pincode}}</td> --}}
                                           <td>
                                               
-                                              <form action="{{route('address.destroy',[$req])}}" method="POST">
-                                              @method('delete')
-                                              @csrf
-                                              <input type="submit" value="X" class="btn btn-outline-danger">
-                                              <a href="{{route('address.edit',[$req])}}" class="btn btn-outline-primary" disabled>Edit</a>
-                                              </form>
+                                            <a href="{{route('user.update')}}" class="btn btn-outline-primary">Edit</a>
+                                            <a href="{{route('remove.user',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>
                                               
                                           </td>
                                       </tr>
@@ -67,7 +63,7 @@
                           </div>
                         </div>
                 
-                  </section>  
+                </section>  
       
             </div>
         </div>
