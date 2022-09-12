@@ -105,6 +105,9 @@ Route::post('/getData-quiz',[Apiv1Controller::class,'get_QuizExamData']);
 //........product......
 Route::get('/product',[Apiv1Controller::class,'get_Product'])->name('product.show');
 Route::get('/product/filter',[Apiv1Controller::class,'getProductFilter']);
+Route::post('/getUserDetails',[Apiv1Controller::class,'getUserDetails']);
+Route::post('/updateUserDetails',[Apiv1Controller::class,'updateUserDetails']);
+Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
 
 //........cart.........
 Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');
