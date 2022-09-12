@@ -25,6 +25,7 @@ use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
  use App\Http\Controllers\user\dashboard\profileController;
  use App\Http\Controllers\user\userController;
+ use App\Http\Controllers\order\orderController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
@@ -478,6 +479,14 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/user/{id}',[userController::class,'edit'])->name('user.edit');
     Route::post('/update/user/{id}',[userController::class,'update'])->name('user.update');
     Route::get('/remove/user',[userController::class,'destroy'])->name('remove.user');
+
+    //......................Order Table..................//
+
+    Route::get('/manage/order',[orderController::class,'index'])->name('manage.order');
+    Route::get('/create/order',[orderController::class,'create'])->name('create.order');
+    Route::post('/store/order',[orderController::class,'store'])->name('order.store');
+    Route::get('/update/order/{id}',[orderController::class,'edit'])->name('order.edit');
+    Route::post('/update/order/{id}',[orderController::class,'update'])->name('order.update');
     
 });
 
