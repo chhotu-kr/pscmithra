@@ -45,7 +45,7 @@
 @elseif($value['type']=="Quiz")
 @livewire('admin.product.quiz', ["iass"=>$value['id']] ,key($value['id']))
 @elseif($value['type']=="StudyMaterial")
-@livewire('StudyMaterial', ["iass"=>$value['id']] ,key($value['id']))
+@livewire('admin.product.sm', ["iass"=>$value['id']] ,key($value['id']))
 @endif
 @endforeach
 @endif

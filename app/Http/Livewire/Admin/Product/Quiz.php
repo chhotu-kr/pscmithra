@@ -29,6 +29,12 @@ class Quiz extends Component
         $this->get_quizsubcategories();
     }
 
+    public function removecall($id)
+    {
+        
+        $this->emit('remove_mocktest', $id);
+    }
+
 public function updatedquizcategoryId(){
     $this->quizsubcategories = QuizSubCategory::where("quiz_categories",$this->quizcategoryId)->get();
 }

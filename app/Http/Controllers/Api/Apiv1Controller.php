@@ -302,7 +302,7 @@ class Apiv1Controller extends Controller
         }
 
 
-        $start = date("Y-m-d h:i:sa",$item->start);
+        $start = date("Y-m-d h:i:sa", $item->start);
         $ss = strtotime("now");
         $final_start = $item->start - $ss;
         $status = "start";
@@ -310,7 +310,7 @@ class Apiv1Controller extends Controller
           $status = "end";
         }
 
-         $end =date("Y-m-d h:i:sa",$item->end);
+        $end = date("Y-m-d h:i:sa", $item->end);
 
         // $final_end = $end - $ss;
         // if ($final_end < 0) {
@@ -323,12 +323,12 @@ class Apiv1Controller extends Controller
           "id" => $item->slugid,
           "final_start" => $start,
           "final_end" => $end,
-          "status"=>$status,
+          "status" => $status,
           "name" => $item->exam_name,
           "totalQues" => $item->noques,
           "marks" => $item->marks,
           "type" => $type,
-          "totalTimeinMints"=>$item->time_duration,
+          "totalTimeinMints" => $item->time_duration,
           "languages" => $item->lang->map(function ($lang) {
             return collect([
               "name" => $lang->language->languagename,
@@ -710,14 +710,83 @@ class Apiv1Controller extends Controller
   public function getProductFilter(Request $request)
   {
     $data = Product::where('type', $request->type);
-    if ($request->type == "plan"){
-      $data = $data->with("plans.cat","plans.subcat");
-    }
     $data = $data->get();
+    if ($request->type == "plan") {
 
-    
-    
-    
+      if (!empty($data)) {
+        $data = $data->map(function ($item) {
+          return collect([
+            "id" => $item->id,
+            "subject" => $item->subject->sub_name,
+            "slugid" => $item->slugid,
+            "description" => $item->description,
+            "type" => $item->type,
+            "price" => $item->price,
+            "bannerimage" => $item->bannerimage,
+            "title" => $item->title,
+            "plans" => $item->plans->map(function ($singlePlan) {
+              $final = [];
+              if ($singlePlan->type == "liveexam") {
+                $final = ["title" => "LiveExam", "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
+              } else if ($singlePlan->type == "mocktest") {
+
+                $tittle = "MockTest - " . $singlePlan->cat->category;
+                if (!empty($singlePlan->subcat)) {
+                  $tittle = $tittle . " - " . $singlePlan->subcat->subcategor;
+                }
+
+                $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
+              } else if ($singlePlan->type == "studymetrial") {
+
+                $tittle = "Study Material - " . $singlePlan->smc->name;
+                if (!empty($singlePlan->smt)) {
+                  $tittle = $tittle . " - " . $singlePlan->smt->name;
+                }
+
+                $final = ["title" => $tittle, "duration" => $singlePlan->examduration];
+              } else if ($singlePlan->type == "quiz") {
+                $tittle = "Quiz - " . $singlePlan->qcat->name;
+                if (!empty($singlePlan->qsubcat)) {
+                  $tittle = $tittle . " - " . $singlePlan->qsubcat->name;
+                }
+                if (!empty($singlePlan->qchapter)) {
+                  $tittle = $tittle . " - " . $singlePlan->qchapter->name;
+                }
+                if (!empty($singlePlan->qtopics)) {
+                  $tittle = $tittle . " - " . $singlePlan->qtopics->name;
+                }
+
+
+
+                $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
+              }
+
+              return $final;
+            }),
+          ]);
+        });
+      }
+    } else if ($request->type == "book") {
+      $data = $data->map(function ($item) {
+        return collect([
+          "id" => $item->id,
+          "subject" => $item->subject->sub_name,
+          "slugid" => $item->slugid,
+          "description" => $item->description,
+          "type" => $item->type,
+          "price" => $item->price,
+          "bannerimage" => $item->bannerimage,
+          "title" => $item->title,
+         "Author"=> $item->book->book->authors->name,
+         "Author"=> $item->book->book->name,
+        ]);
+      });
+    }
+
+
+
+
+
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
@@ -955,7 +1024,7 @@ class Apiv1Controller extends Controller
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
                 "question" => $fff->question->secondquestion
-                ->map(function ($ques) {
+                  ->map(function ($ques) {
 
 
 
@@ -964,11 +1033,11 @@ class Apiv1Controller extends Controller
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
                       "question" => $ques->question,
-                      "option1"=> $ques->option1,
-                      "option2"=> $ques->option2,
-                      "option3"=> $ques->option3,
-                      "option4"=> $ques->option4,
-                      "direction"=>$ques->direction,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
                     ]);
                   })
               ]);
@@ -1008,7 +1077,7 @@ class Apiv1Controller extends Controller
     }
 
 
-   
+
 
 
     $data = liveAttemp::with(['examination.examQ.question.liveAttemp' => function ($q) use ($testId, $user_id) {
@@ -1046,20 +1115,20 @@ class Apiv1Controller extends Controller
                 "seen" => $fff->question->liveAttemp->QuesSeen,
                 "optSel" => $fff->question->liveAttemp->QuesSelect,
                 "time" => $fff->question->liveAttemp->time,
-                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
+                "isRight" => $aaa, "isRightAns" => $fff->question->rightans,
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
                     return collect([
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
-                     "question" => $ques->question,
-                     "option1"=> $ques->option1,
-                     "option2"=> $ques->option2,
-                     "option3"=> $ques->option3,
-                     "option4"=> $ques->option4,
-                     "direction"=>$ques->direction,
-                     "explain"=>$ques->explanation,
+                      "question" => $ques->question,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
+                      "explain" => $ques->explanation,
                     ]);
                   })
               ]);
@@ -1069,7 +1138,7 @@ class Apiv1Controller extends Controller
       });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
-  
+
 
   public function getExamData(Request $request)
   {
@@ -1095,7 +1164,7 @@ class Apiv1Controller extends Controller
     $testId =  AttempedExam::select('id')->where("slugid", $request->testId)->first();
 
     if (!$testId) {
-      return response()->json(['msg' => 'Invalid Test Id', 'status' => false , "asdasd"=>$testId]);
+      return response()->json(['msg' => 'Invalid Test Id', 'status' => false, "asdasd" => $testId]);
     }
 
     $data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user_id) {
@@ -1122,7 +1191,7 @@ class Apiv1Controller extends Controller
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
-            "questionslist" => $d->examination->examQ->map(function ($fff){
+            "questionslist" => $d->examination->examQ->map(function ($fff) {
 
 
 
@@ -1143,11 +1212,11 @@ class Apiv1Controller extends Controller
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
                       "question" => $ques->question,
-                      "option1"=> $ques->option1,
-                      "option2"=> $ques->option2,
-                      "option3"=> $ques->option3,
-                      "option4"=> $ques->option4,
-                      "direction"=>$ques->direction,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
                     ]);
                   })
               ]);
@@ -1229,12 +1298,12 @@ class Apiv1Controller extends Controller
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
                       "question" => $ques->question,
-                      "option1"=> $ques->option1,
-                      "option2"=> $ques->option2,
-                      "option3"=> $ques->option3,
-                      "option4"=> $ques->option4,
-                      "direction"=>$ques->direction,
-                      
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
+
                     ]);
                   })
 
@@ -1314,18 +1383,18 @@ class Apiv1Controller extends Controller
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
             "questionslist" => $d->examination->quizexamQ->map(function ($fff) {
-              $aaa="";
-              if($fff->question->rightans===$fff->question->quizAttemp->QuesSelect){
-              $aaa =true;
-              }else{
-                  $aaa= false;
+              $aaa = "";
+              if ($fff->question->rightans === $fff->question->quizAttemp->QuesSelect) {
+                $aaa = true;
+              } else {
+                $aaa = false;
               }
               return collect([
                 "questionId" => $fff->question->id,
                 "s" => $fff->question->quizAttemp->QuesSeen,
                 "optSel" => $fff->question->quizAttemp->QuesSelect,
                 "time" => $fff->question->quizAttemp->time,
-                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
+                "isRight" => $aaa, "isRightAns" => $fff->question->rightans,
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
@@ -1333,14 +1402,14 @@ class Apiv1Controller extends Controller
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
                       "question" => $ques->question,
-"option1"=> $ques->option1,
-"option2"=> $ques->option2,
-"option3"=> $ques->option3,
-"option4"=> $ques->option4,
-"direction"=>$ques->direction,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
 
 
-"explain"=>$ques->explanation,
+                      "explain" => $ques->explanation,
                     ]);
                   })
 
@@ -1416,8 +1485,8 @@ class Apiv1Controller extends Controller
                 "seen" => $fff->question->mockAttemp->QuesSeen,
                 "optSel" => $fff->question->mockAttemp->QuesSelect,
                 "time" => $fff->question->mockAttemp->time,
-                "isRight" => $aaa,"isRightAns" =>$fff->question->rightans,
-                
+                "isRight" => $aaa, "isRightAns" => $fff->question->rightans,
+
                 "question" => $fff->question->secondquestion
 
                   ->map(function ($ques) {
@@ -1425,12 +1494,12 @@ class Apiv1Controller extends Controller
                       "id" => $ques->language->id,
                       "language" => $ques->language->languagename,
                       "question" => $ques->question,
-                      "option1"=> $ques->option1,
-                      "option2"=> $ques->option2,
-                      "option3"=> $ques->option3,
-                      "option4"=> $ques->option4,
-                      "direction"=>$ques->direction,
-                      "explain"=>$ques->explanation,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
+                      "explain" => $ques->explanation,
                     ]);
                   })
               ]);
@@ -1492,7 +1561,7 @@ class Apiv1Controller extends Controller
 
 
     $type = "resume";
-    
+
     if ($request->type == "submit") {
       $type = "result";
       $rMarks  = $examination_id->rightmarks;
@@ -1516,7 +1585,7 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
-    }else{
+    } else {
       $testId->update(
         [
           "remain_time" => $request->time,
@@ -1557,9 +1626,9 @@ class Apiv1Controller extends Controller
       ->where("users_id", $user->id)->first();
 
 
-      if ( sizeof($request->array)==0 ) { // If more than 0
-        return response()->json(['msg' => 'Array size 0', 'status' => false]);
-     } 
+    if (sizeof($request->array) == 0) { // If more than 0
+      return response()->json(['msg' => 'Array size 0', 'status' => false]);
+    }
 
 
 
@@ -1594,7 +1663,7 @@ class Apiv1Controller extends Controller
 
       $rMarks  = $examination_id->rightmarks;
       $wMarks = "-" . $examination_id->wrongmarks;
-      
+
       $total = Question::leftjoin('live_attemp_questions', function ($join) use ($rMarks, $wMarks) {
         $join->on('questions.id', '=', 'live_attemp_questions.questions_id');
       })->select(
@@ -1614,8 +1683,7 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
-    }
-    else{
+    } else {
       $testId->update(
         [
           "remain_time" => $request->time,
@@ -1701,7 +1769,7 @@ class Apiv1Controller extends Controller
       );
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
-    }else{
+    } else {
       $testId->update(
         [
           "remain_time" => $request->time,
@@ -1726,7 +1794,7 @@ class Apiv1Controller extends Controller
   }
 
 
-  public function resultLive(Request $request)//live
+  public function resultLive(Request $request) //live
   {
     if (empty($request->userId)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
@@ -1775,14 +1843,14 @@ class Apiv1Controller extends Controller
       ->map(
         function ($d) {
 
-          $per=($d->totalmarks/$d->examination->marks)*100;
+          $per = ($d->totalmarks / $d->examination->marks) * 100;
           return [
-            "score"=>$d->totalmarks,
-            "percentage"=>$per,
+            "score" => $d->totalmarks,
+            "percentage" => $per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "time" => $d->examination->time_duration * 60,
-            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
+            "timeTaken" => ($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return [
                 "id" => $langg->language->id,
@@ -1825,21 +1893,21 @@ class Apiv1Controller extends Controller
       )[0];
 
 
-$right = count($data['questionslist']->where('final', 'right'));
-$wrong = count($data['questionslist']->where('final', 'wrong'));
-$attemped = $right+$wrong;
+    $right = count($data['questionslist']->where('final', 'right'));
+    $wrong = count($data['questionslist']->where('final', 'wrong'));
+    $attemped = $right + $wrong;
 
     $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
     $data['right'] = $right;
     $data['wrong'] = $wrong;
     $data['skip'] = count($data['questionslist']->where('final', 'skip'));
     $data['attemped'] = $attemped;
-    if($attemped>0){
-      $data['accuracy'] = $right/$attemped;  
-    }else{
+    if ($attemped > 0) {
+      $data['accuracy'] = $right / $attemped;
+    } else {
       $data['accuracy'] = 0;
     }
-    
+
     $data['Percentile'] = 0;
     $data['Rank'] = 50;
 
@@ -1910,15 +1978,15 @@ $attemped = $right+$wrong;
             }
           }
 
-          $per=($d->totalmarks/$d->examination->marks)*100;
+          $per = ($d->totalmarks / $d->examination->marks) * 100;
           return [
-            "score"=>$d->totalmarks,
-            "percentage"=>$per,
+            "score" => $d->totalmarks,
+            "percentage" => $per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->mocktesttype,
             "time" => $d->examination->time_duration * 60,
-            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
+            "timeTaken" => ($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return [
                 "id" => $langg->language->id,
@@ -1964,24 +2032,24 @@ $attemped = $right+$wrong;
       )[0];
 
 
-      $right = count($data['questionslist']->where('final', 'right'));
-      $wrong = count($data['questionslist']->where('final', 'wrong'));
-      $attemped = $right+$wrong;
-      
-          $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
-          $data['right'] = $right;
-          $data['wrong'] = $wrong;
-          $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-          $data['attemped'] = $attemped;
+    $right = count($data['questionslist']->where('final', 'right'));
+    $wrong = count($data['questionslist']->where('final', 'wrong'));
+    $attemped = $right + $wrong;
 
-          if($attemped>0){
-            $data['accuracy'] = $right/$attemped;  
-          }else{
-            $data['accuracy'] = 0;
-          }
-          
-          $data['Percentile'] = 0;
-          $data['Rank'] = 50;
+    $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
+    $data['right'] = $right;
+    $data['wrong'] = $wrong;
+    $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+    $data['attemped'] = $attemped;
+
+    if ($attemped > 0) {
+      $data['accuracy'] = $right / $attemped;
+    } else {
+      $data['accuracy'] = 0;
+    }
+
+    $data['Percentile'] = 0;
+    $data['Rank'] = 50;
 
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
@@ -2055,15 +2123,15 @@ $attemped = $right+$wrong;
             }
           }
 
-          $per=($d->totalmarks/$d->examination->marks)*100;
+          $per = ($d->totalmarks / $d->examination->marks) * 100;
           return [
-            "score"=>$d->totalmarks,
-            "percentage"=>$per,
+            "score" => $d->totalmarks,
+            "percentage" => $per,
             "testID" => $d->slugid,
             "examId" => $d->examination->slugid,
             "type" => $d->testtype,
             "time" => $d->examination->time_duration * 60,
-            "timeTaken"=>($d->examination->time_duration * 60) - $d->remain_time,
+            "timeTaken" => ($d->examination->time_duration * 60) - $d->remain_time,
             "languages" => $d->examination->lang->map(function ($langg) {
               return ["id" => $langg->language->id, "language" => $langg->language->languagename,];
             }),
@@ -2108,23 +2176,23 @@ $attemped = $right+$wrong;
       )[0];
 
 
-      $right = count($data['questionslist']->where('final', 'right'));
-      $wrong = count($data['questionslist']->where('final', 'wrong'));
-      $attemped = $right+$wrong;
-      
-          $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
-          $data['right'] = $right;
-          $data['wrong'] = $wrong;
-          $data['skip'] = count($data['questionslist']->where('final', 'skip'));
-          $data['attemped'] = $attemped;
-          if($attemped>0){
-            $data['accuracy'] = $right/$attemped;  
-          }else{
-            $data['accuracy'] = 0;
-          }
-          
-          $data['Percentile'] = 0;
-          $data['Rank'] = 50;
+    $right = count($data['questionslist']->where('final', 'right'));
+    $wrong = count($data['questionslist']->where('final', 'wrong'));
+    $attemped = $right + $wrong;
+
+    $data['unseen'] = count($data['questionslist']->where('final', 'unseen'));
+    $data['right'] = $right;
+    $data['wrong'] = $wrong;
+    $data['skip'] = count($data['questionslist']->where('final', 'skip'));
+    $data['attemped'] = $attemped;
+    if ($attemped > 0) {
+      $data['accuracy'] = $right / $attemped;
+    } else {
+      $data['accuracy'] = 0;
+    }
+
+    $data['Percentile'] = 0;
+    $data['Rank'] = 50;
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
