@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Livewire\Admin\LiveExam\SelectQuestion;
 use App\Models\LiveTest;
 use App\Models\Examination;
 use App\Models\Language;
@@ -36,6 +37,7 @@ class LiveTestController extends Controller
    }
 
     public function getliveQuestioncreate($id){
+      
       return view('quizExam.insertLiveQues',compact('id'));
    }
 
