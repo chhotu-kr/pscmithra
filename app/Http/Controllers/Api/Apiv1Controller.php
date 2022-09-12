@@ -777,8 +777,8 @@ class Apiv1Controller extends Controller
           "price" => $item->price,
           "bannerimage" => $item->bannerimage,
           "title" => $item->title,
-         "Author"=> $item->book->book->authors->name,
-         "Author"=> $item->book->book->name,
+          "Author" => $item->book->book->authors->name,
+          "Author" => $item->book->book->name,
         ]);
       });
     }
@@ -2195,5 +2195,43 @@ class Apiv1Controller extends Controller
     $data['Rank'] = 50;
 
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+
+
+function getCourse(){
+  return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+}
+
+
+  function updateUserDetails(Request $request)
+  {
+    if (!empty($request->userid)) {
+      $data = User::where("slugid", $request->userid)->first();
+      if($request->name){
+        $data->name = $request->name;
+      }
+      if($request->gender){
+        $data->gender = $request->gender;
+      }
+      $data->save();
+      return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+    } else {
+      return response()->json(['msg' => 'Enter User Id', 'status' => false]);
+    }
+  }
+
+
+  function getUserDetails(Request $request)
+  {
+    if (!empty($request->userid)) {
+      $data = User::where("slugid", $request->userid)->first();
+      if (empty($data)) {
+        return response()->json(['msg' => 'User Not Found', 'status' => false]);
+      } else {
+        return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+      }
+    } else {
+      return response()->json(['msg' => 'Enter User Id', 'status' => false]);
+    }
   }
 }
