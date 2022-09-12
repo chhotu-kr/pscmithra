@@ -121,46 +121,53 @@ class HomeController extends Controller
     }
 
     //............... Quiz Chapter..............//
-    public function get_Quiz_SubCategory($sub_cat_id)
+    public function get_Quiz_SubCategory(Request $req)
     {
-        $sub = QuizSubCategory::where('id', $sub_cat_id)->first();
+        $sub = QuizSubCategory::where('id',$req->sub_cat_id)->first();
 
         if ($sub->ifnested == "true") {
-            $data['chapter'] = $sub_cat_id;
+            $data['sub_cat_id'] = $req->sub_cat_id;
+            $data['cat_id'] = $req->cat_id;
         } else {
-            return redirect()->route('view.quizpage', ["sub_cat_id" => $sub_cat_id]);
+            return redirect()->route('view.quizpage', ['cat_id'=>$req->cat_id,"sub_cat_id" => $req->sub_cat_id]);
         }
         return view("user.Quiz_QuizChapter", $data);
     }
     //..............Topic Page..................//
 
-    public function get_TopicPage($chapter_id)
-    {
-        $cha = QuizChapter::where('id', $chapter_id)->first();
+    public function get_TopicPage(Request $req)
+    {   
+        $cha = QuizChapter::where('id', $req->chapter_id)->first();
 
         if ($cha->ifnested == "true") {
-            $data['topic'] = $chapter_id;
+            $data['chapter_id'] = $req->chapter_id;
+            $data['cat_id'] = $req->cat_id;
+            $data['sub_cat_id'] = $req->sub_cat_id;
         } else {
-            return redirect()->route('view.quizpage', ['chapter_id' => $chapter_id]);
+            return redirect()->route('view.quizpage', ['cat_id'=>$req->cat_id,"sub_cat_id" => $req->sub_cat_id,"chapter_id" => $req->chapter_id]);
         }
         return view("user.Quiz_TopicPage", $data);
     }
     //...............Quiz Page..................//
     public function get_QuizPage(Request $req)
     {
+      if(FacadesAuth::user()){
         $data['cat'] = $req->cat_id;
         $data['sub_cat'] = $req->sub_cat_id;
         $data['chapter'] = $req->chapter_id;
         $data['topic'] = $req->topic_id;
         // return $data;
         return view('user.QuizPage', $data);
+      }
     }
     //..............Quiz pAge Start.............//
 
     public function get_QuizPageStart(Request $req)
     {
+      if(FacadesAuth::user()){
         $data['data'] = $req->data;
         return view('user.QuizAttemptStart', $data);
+      }
     }
 
     //.................Mock Test................//
@@ -168,14 +175,13 @@ class HomeController extends Controller
     {
 
         //return dd($request);
-        if (FacadesAuth::id()) {
-          
-        } else {
+        if (FacadesAuth::user()) {
             $data['cat_id'] = $request->cat_id;
             $data['sub_cat_id'] = $request->sub_cat_id;
             $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
             return view('user.MockTest', $data);
-            // return redirect()->route('user.login');
+        } else {
+            return redirect()->route('user.login');
         }
     }
     //..............Mock Test Start..............//
@@ -271,10 +277,9 @@ class HomeController extends Controller
     //..................Mocktest Result..........//
     public function get_MockTestResult(Request $req)
     {
-
+        // dd($req->data);
         $data['testid'] = $req->testID;
         $data['examinationId'] = $req->examId;
-        // dd($data);
 
         return view('user.MockTest_Result', $data);
     }

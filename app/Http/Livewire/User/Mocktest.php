@@ -24,12 +24,7 @@ class Mocktest extends Component
     public $returndata;
     public $lang = null;
     public $itemId = null;
-    //index pass strat 
-
-    //sinerio
-    //start prepare 
-    //resume test_id examination_id
-    //result  test_id examination_id
+    public $checked = false;
 
     public function itemId($id)
     {
@@ -39,17 +34,34 @@ class Mocktest extends Component
     {
         $this->lang = $id;
         // dd($id);
+        $this->checked = true;
+    }
+    public function resume($testId){
+        // dd($this->data);
+        $resumedata = $this->data->where('testId',$testId)->first();
+        $examination_id = Examination::select('id', 'time_duration')->where("slugid", $resumedata['id'])->first();
+        // dd($examination_id);
+        $returndata['data'] = ['testId' => $testId, "examinationId" => $examination_id->id];
+        return redirect()->route('view.mockteststart',$returndata);
+
+    }
+    public function result($testId){
+      
+        $resumedata = $this->data->where('testId',$testId)->first();
+       
+        return redirect()->route('view.mocktestresult', ['testID' => $testId, "examId" => $resumedata['id']]);
+
     }
     public function prepareExam($singleData)
     {
 
 
-        $user = 1;
+        $user = Auth::id();
         $examination_id = Examination::select('id', 'time_duration')->where("slugid", $singleData['id'])->first();
         // dd($singleData);
 
         $get = AttempedExam::where('examinations_id', $singleData['id'])->where('mocktesttype', $singleData['type'])->where('users_id', $user)->first();
-        
+
         if (empty($get)) {
 
 
@@ -70,12 +82,11 @@ class Mocktest extends Component
                 $mock->users_id =  $user;
                 $mock->questions_id = $value;
                 $mock->attemped_exams_id = $Attemp->id;
-                $mock->save();//here problem
-            // dd($examQuestion);
+                $mock->save(); 
 
             }
             $this->returndata['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
-            // return response()->json(['msg' => 'Exam Created', 'status' => true, 'data' => ['testId' => $Attemp->slugid, "examinationId" => $request->examination]]);
+            
         } else {
 
             if ($singleData['type'] == "reattemp") {
@@ -89,7 +100,7 @@ class Mocktest extends Component
                 $data =   mockattempquestion::where('attemped_exams_id', $testId)->where('users_id', $user)->update([
                     "QuesSeen" => "false",
                     "QuesSelect" => "",
-                      "time" => 0,
+                    "time" => 0,
                 ]);
 
                 $this->returndata['data'] = ['testId' => $get->slugid];
@@ -110,13 +121,10 @@ class Mocktest extends Component
 
         if ($this->itemId != null) {
             if (Auth::user()) {
-                return redirect()->route('user.login');
-            } else {
                 $this->singleData =  $this->data->where('id', $this->itemId)->first();
 
                 if ($this->singleData['type'] == "Start") {
                     if ($this->lang != null) {
-                        
                         $this->prepareExam($this->singleData);
                     } else {
                         return session()->flash('select', 'Select a language');
@@ -124,6 +132,8 @@ class Mocktest extends Component
                 } else if ($this->singleData['type'] == "Prepare") {
                     return dd($this->singleData['name']);
                 }
+            } else {
+                return redirect()->route('user.login');
             }
         }
     }

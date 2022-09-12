@@ -11,21 +11,13 @@ class MocktestResult extends Component
 {
     public $data;
     public function mount($testid,$examinationId){
-        $user_id =1;
-        if(Auth::user()){
-            $user_id = Auth::id();
-        }
+      $user_id = Auth::id();
       
-        //   if (empty($request->examinationId)) {
-        //     return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-        //   }
           $examination_id =  Examination::select('id')->where("slugid", $examinationId)->first();
       
-        //   if (empty($request->testId)) {
-        //     return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        //   }
+      
           $testId =  AttempedExam::select('id', 'type')->where("slugid", $testid)->first();
-        //  dd($testId);
+        //  dd($examinationId);
       
           if ($testId->type == "resume") {
       
@@ -115,7 +107,7 @@ class MocktestResult extends Component
               }
             )[0];
       
-      
+     
           $right = count($this->data['questionslist']->where('final', 'right'));
           $wrong = count($this->data['questionslist']->where('final', 'wrong'));
           $attemped = $right + $wrong;

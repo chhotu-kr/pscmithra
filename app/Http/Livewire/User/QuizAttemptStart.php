@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\quizAttemp;
 use App\Models\QuizAttemptQuestion;
 use App\Models\QuizExamination;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -26,87 +27,82 @@ class QuizAttemptStart extends Component
   public $sec;
   public $status;
   public $l;
-  protected $listeners = ['totaltime' => 'timetaken'];
+  public $selected;
+  protected $listeners = ['totaltimel' => 'timetaken'];
 
   public function onSubmit()
-  { {
+  {
 
 
-     $user = 1;
-      $examination_id =  QuizExamination::where("slugid",  $this->data['quizid'])->first();
 
-      
-      $type = "resume";
+    $user = Auth::id();
+    $examination_id =  QuizExamination::where("slugid",  $this->data['quizid'])->first();
 
 
-      $testId = quizAttemp::where("slugid",  $this->data['testID'])->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user)->first();
+    $type = "resume";
 
-      foreach ($this->data['questionslist'] as $index => $value) {
-        if ((!empty($value['optSel'])) && $value["s"] != "false") {
 
-          $dd = QuizAttemptQuestion::where('question_id', $value['questionId'])->where('users_id', $user)->where('quiz_attemps_id', $testId->id)->update(
-            [
-              "QuesSeen" => $value["s"],
-              "QuesSelect" => $value['optSel'],
-              "time" => $value['time']
-            ]
-          );
-        }
-      }
+    $testId = quizAttemp::where("slugid",  $this->data['testID'])->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user)->first();
 
-      if ($this->data['type'] == "normal") {
-        $type = "result";
+    foreach ($this->data['questionslist'] as $index => $value) {
+      if ((!empty($value['optSel'])) && $value["s"] != "false") {
 
-        $rMarks  = $examination_id->rightmarks;
-        $wMarks = "-" . $examination_id->wrongmarks;
-
-        $total = Question::leftjoin('quiz_attempt_questions', function ($join) use ($rMarks, $wMarks) {
-          $join->on('questions.id', '=', 'quiz_attempt_questions.question_id');
-        })->select(
-          'questions.*',
-          'quiz_attempt_questions.*',
-          DB::raw('(CASE WHEN questions.rightans = quiz_attempt_questions.QuesSelect THEN ' . $rMarks . ' ELSE ' . $wMarks . ' END) AS total')
-        )->where('users_id', $user)->where('quiz_attemps_id', $testId->id)->get();
-        $total = $total->sum('total');
-        $testIds = $testId->update(
+        $dd = QuizAttemptQuestion::where('question_id', $value['questionId'])->where('users_id', $user)->where('quiz_attemps_id', $testId->id)->update(
           [
-            "remain_time" =>$this->data['time'],
-            "lastQues" => $this->question_no + 1,
-            "type" => $type,
-            "totalmarks" => $total,
-          ]
-        );
-
-        return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
-      } else {
-        $testId->update(
-          [
-            "remain_time" => $this->data['time'],
-            "lastQues" => $this->question_no + 1,
+            "QuesSeen" => $value["s"],
+            "QuesSelect" => $value['optSel'],
+            "time" => $value['time']
           ]
         );
       }
-      return redirect()->route('view.quizresult', ['testID' => $this->data['testID'], 'examId' => $this->data['quizid']]);
-
-
-      // SELECT * FROM `questions`as u LEFT JOIN mockattempquestions as d  ON u.id = d.questions_id WHERE users_Id = 1 AND  attemped_exams_id = 5;
-
-      // echo json_encode($value);
-
-
-      // return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->type]);
     }
+
+    if ($this->data['type'] == "normal") {
+      $type = "result";
+
+      $rMarks  = $examination_id->rightmarks;
+      $wMarks = "-" . $examination_id->wrongmarks;
+
+      $total = Question::leftjoin('quiz_attempt_questions', function ($join) use ($rMarks, $wMarks) {
+        $join->on('questions.id', '=', 'quiz_attempt_questions.question_id');
+      })->select(
+        'questions.*',
+        'quiz_attempt_questions.*',
+        DB::raw('(CASE WHEN questions.rightans = quiz_attempt_questions.QuesSelect THEN ' . $rMarks . ' ELSE ' . $wMarks . ' END) AS total')
+      )->where('users_id', $user)->where('quiz_attemps_id', $testId->id)->get();
+      $total = $total->sum('total');
+      $testIds = $testId->update(
+        [
+          "remain_time" => $this->data['time'],
+          "lastQues" => $this->question_no + 1,
+          "type" => $type,
+          "totalmarks" => $total,
+        ]
+      );
+
+      return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
+    } else {
+      $testId->update(
+        [
+          "remain_time" => $this->data['time'],
+          "lastQues" => $this->question_no + 1,
+        ]
+      );
+    }
+    return redirect()->route('view.quizresult', ['testID' => $this->data['testID'], 'examId' => $this->data['quizid']]);
   }
   public function statusChange()
   {
     $this->status = !$this->status;
   }
-  function timetaken()
+  public function timetaken()
   {
     $this->min = floor($this->required_timing / 60);
     $this->sec = $this->required_timing % 60;
     $this->required_timing--;
     $this->data['questionslist'][$this->question_no]['time']++;
+
+    
   }
   function filterledgers()
   {
@@ -162,7 +158,16 @@ class QuizAttemptStart extends Component
 
   public function onSelect($id)
   {
-    $this->data['questionslist'][$this->question_no]['optSel'] = $id;
+    if ($id == 1) {
+      $this->selected = 'selOpt1';
+    } elseif ($id == 2) {
+      $this->selected = 'selOpt2';
+    } elseif ($id == 3) {
+      $this->selected = 'selOpt3';
+    } else {
+      $this->selected = 'selOpt4';
+    }
+    $this->data['questionslist'][$this->question_no]['optSel'] = $this->selected;
     $this->filterledgers();
   }
   public function countTime($id)
@@ -175,6 +180,7 @@ class QuizAttemptStart extends Component
   }
   public function mount($testId, $examinationId)
   {
+    
     $quiz_examinations_id =  QuizExamination::select('id')->where("id", $examinationId)->first();
     $test =  quizAttemp::select('id')->where("slugid", $testId)->first();
     // dd($quiz_examinations_id);
@@ -213,6 +219,7 @@ class QuizAttemptStart extends Component
               return collect([
                 'showdir' => false,
                 "questionId" => $fff->question->id,
+                // dd($fff->question->quizAttemp),
                 "s" => $fff->question->quizAttemp->QuesSeen,
                 "optSel" => $fff->question->quizAttemp->QuesSelect,
                 "time" => $fff->question->quizAttemp->time,
@@ -237,13 +244,11 @@ class QuizAttemptStart extends Component
           ]);
         }
       })[0];
-    // dd($this->data);
     $this->question_no = 0;
     $this->jump($this->question_no);
     $this->countTime($this->question_no);
     $this->required_timing = $this->data['time'];
     $this->status = $this->data['questionslist'][$this->question_no]['showdir'];
-    //    dd($this->question_no);
     //     dd($this->data);
   }
   public function render()
