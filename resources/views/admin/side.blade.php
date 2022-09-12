@@ -171,6 +171,12 @@
         <i class="bi bi-circle"></i><span>Manage Blog</span>
       </a>
     </li> 
+
+    <li class="nav-item">
+      <a class="nav-link collapsed"  href="{{route('insert.extra')}}">
+        <i class="bi bi-circle"></i><span>Manage Extra</span>
+      </a>
+    </li> 
   </ul>
 </li>
 <li class="nav-item">

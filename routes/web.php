@@ -17,7 +17,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController};
+use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController,ExtraController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
@@ -450,6 +450,15 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/page/{id}', [pageController::class, 'edit'])->name('page.edit');
     Route::post('/update/page/{id}', [pageController::class, 'update'])->name('page.update');
     Route::get('/remove/page/{id}', [pageController::class, 'destroy'])->name('page.delete');
+
+    //.....................Extra Table....................//
+
+    Route::get('/extra',[ExtraController::class,'index'])->name('insert.extra');
+    Route::post('/extra/store',[ExtraController::class,'store'])->name('extra.store');
+    Route::get('/update/extra/{id}',[ExtraController::class,'edit'])->name('edit.extra');
+    Route::post('/update/extra/{id}',[ExtraController::class,'update'])->name('update.extra');
+    Route::get('/remove/extra/{id}',[ExtraController::class,'destroy'])->name('remove.extra');
+    
 });
 
 // User middleware
