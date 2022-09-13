@@ -42,6 +42,7 @@
                                       <tr>
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->product->title}}</td>
+                                          <td>{{$req->user->title}}</td>
                                           <td>{{$req->name}}</td>
                                           <td>{{$req->state}}</td>
                                           <td>{{$req->city}}</td>

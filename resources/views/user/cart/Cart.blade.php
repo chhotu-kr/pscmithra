@@ -51,7 +51,7 @@
             </div>
             <div class="row mt-3 px-2">
                 <a href="" class="btn btn-success col">Continue Shopping</a>
-                <a href="" class="btn btn-danger col ms-2">checkout</a>
+                <a href="{{ route('checkout') }}" class="btn btn-danger col ms-2">checkout</a>
             </div>
 
             @if ($order->coupon_id == null)

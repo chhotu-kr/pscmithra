@@ -25,6 +25,19 @@
               @endforeach
               </select>
              </div>
+             <div class="mb-3">
+              <label for="">UserName</label>
+              <select name="user_id" id="" class="form-select"  required>
+              <option value="">select UserName</option>
+              @foreach ($subuser as $pro)
+              <option value="{{ $pro->id }}"
+                @if ($pro->id==$address->user_id)
+                    selected="selected"
+                @endif
+              >{{ $pro->name}}</option>
+              @endforeach
+              </select>
+             </div>
             <div class="mb-3">
               <label for="">Name</label>
               <input type="text" name="name" class="form-control" value="{{$address->name}}" required>

@@ -5,8 +5,8 @@
 <div class="main-home-slider">
     @foreach ($img as $item)
     <div class="item">
-        <img src="{{asset("upload/".$item->image)}}">
-        
+        {{-- <img src="{{asset("upload/".$item->image)}}"> --}}
+        @livewire('imageview', ['image' => ['image' => $item->image,'w'=>'1779','h'=>'500']], key($item->id))
     </div>
     @endforeach
 
@@ -131,10 +131,10 @@
                 </div>
             </div>
             @endforeach
-
+           
 
         </div>
-
+       
     </div>
 </section>
 
@@ -155,7 +155,7 @@
                     @foreach ($testimonials as $item)
                     <div class="testimonial-grid">
                         <div class="thumbnail">
-                            {{-- <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial"> --}}
+                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
                             {{-- @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'100','h'=>'100']], key($new->id)) --}}
                             <span class="qoute-icon"><i class="icon-26"></i></span>
 
@@ -175,7 +175,7 @@
                     </div>
                     @endforeach
 
-                    {{-- <div class="testimonial-grid">
+                    <div class="testimonial-grid">
                         <div class="thumbnail">
                             <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
                     <span class="qoute-icon"><i class="icon-26"></i></span>
@@ -304,7 +304,7 @@
                         <span class="subtitle">Designer</span>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>

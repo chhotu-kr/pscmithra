@@ -324,7 +324,7 @@
                                 {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
 
                                 @if ($question_no == count($data['questionslist']) - 1)
-                                    <button class="education-btn btn-medium" wire:click.prevent="" type="button"
+                                    <button class="education-btn btn-medium" wire:click.prevent="onSubmit()" type="button"
                                         id="nextBtn">
                                         Submit</button>
                                 @else

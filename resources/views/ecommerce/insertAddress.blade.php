@@ -20,6 +20,15 @@
               @endforeach
               </select>
              </div>
+             <div class="mb-3">
+              <label for="">UserName</label>
+              <select name="user_id" id="" class="form-select" required>
+              <option value="0">select UserName</option>
+              @foreach ($subuser as $sub)
+                  <option value="{{$sub->id}}">{{$sub->name}}</option>
+              @endforeach
+              </select>
+             </div>
             <div class="mb-3">
               <label for="">Name</label>
               <input type="text" name="name" class="form-control" required>

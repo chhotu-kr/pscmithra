@@ -75,7 +75,7 @@
             </div>
             <div class="col-12 ms-3 ">
 
-                @livewire('user.quiz-topic', ['topic' => $topic])
+                @livewire('user.quiz-topic', ['sub_cat_id' => $sub_cat_id,'cat_id' => $cat_id,'chapter_id' => $chapter_id])
                 {{-- <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
                     @foreach ($topic as $item)
                         <div class="col sal-animate" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">

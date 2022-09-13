@@ -16,11 +16,15 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
            $table->id();
             $table->boolean('isVisble')->default('1');
+            $table->foreignId("user_id")->constrained();
             $table->foreignId('product_id')->constrained();
             $table->string('name');
             $table->string('slugid');
             $table->string('state');
             $table->string('city');
+            $table->string("street")->nullable();
+            $table->string("landmark")->nullable();
+            $table->enum("type",["office","home"])->default("home");
             $table->string('pincode');
             
            

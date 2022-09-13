@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('{{ table }}', function (Blueprint $table) {
-           $table->id();
-            $table->boolean('isVisble')->default('1');
+            $table->id();
             $table->timestamps();
         });
     }
