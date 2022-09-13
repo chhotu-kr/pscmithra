@@ -41,6 +41,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get("/test", function(){
+    return View("test.test");
+ });
+
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
 Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addTCart"])->name("addtocart");
 Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
