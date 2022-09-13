@@ -11,7 +11,7 @@ class Quiz extends Component
      public $quizcategory;
      public $quizcategoryId;
 
-        public $idasd;
+       public $idasd;
 
 
      public function mount($cat_id){

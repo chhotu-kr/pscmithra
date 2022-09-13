@@ -13,12 +13,14 @@ class QuizTopic extends Component
      public $quizcategory;
      public $quizcategoryId;
 
-        public $idasd;
+        public $chapter_id;
 
 
-     public function mount($topic){
-        $this->idasd=$topic;
-        $this->quiztopic = ModelsQuizTopic::where('quiz_chapters',$topic)->get();
+     public function mount($sub_cat_id,$cat_id,$chapter_id){
+      $this->sub_cat_id=$sub_cat_id;
+      $this->cat_id=$cat_id;
+        $this->chapter_id=$chapter_id;
+        $this->quiztopic = ModelsQuizTopic::where('quiz_chapters',$chapter_id)->get();
    
      }
 

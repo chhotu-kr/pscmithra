@@ -84,7 +84,7 @@ Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('vie
 Route::get('/view/course/details', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
 Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
-Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
+Route::get('/quizes/category/chapter', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
 Route::get('/quizes/category/chapter/topic/{chapter_id}', [HomeController::class, 'get_TopicPage'])->name('view.quiztopicpage');
 Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizpage');
 Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');

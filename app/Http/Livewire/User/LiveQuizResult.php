@@ -38,7 +38,7 @@ class LiveQuizResult extends Component
       
           $this->data = liveAttemp::with(
             ['examination' => function ($q) use ($testId, $user_id) {
-      
+              
               $q->with(['examQ' => function ($q) use ($testId, $user_id) {
       
                 $q->with(['question.liveAttemp' => function ($q) use ($testId, $user_id) {
