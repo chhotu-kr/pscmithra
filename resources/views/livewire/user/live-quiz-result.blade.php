@@ -46,7 +46,7 @@
                 margin-left: 14px;
                 color: #1e51dc;
                 position: absolute;
-                z-index: 100;
+                z-index: 0;
                 font-weight: 700;
                 font-size: 2em;
             }
@@ -102,7 +102,7 @@
                             <span class="text-danger ms-3">Wrong</span>
                         </div>
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #f1ebeb">
-                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] }}</span>
+                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] + $data['unseen'] }}</span>
                             <span class="text-secondary ms-3">Unanswered</span>
                         </div>
                     </div>
@@ -443,100 +443,7 @@
     
                         <div class="container">
                             <div class="row">
-                                {{-- <div class="col-md-8">
-                                    <h5 class="text-center">
-                                        <a class="link text-decoration-underline" data-bs-toggle="collapse"
-                                            href="#collapseExample" role="button" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            Directions
-                                        </a>
-    
-                                    </h5> --}}
-                                    {{-- @if ($status == true)
-                                        <div class="card card-body border-0" style="margin-top:-20px">
-                                            <div class="col-8 mx-auto" style="font-size: 14.5px">
-                                                Some placeholder content for the collapse component. This panel is hidden by default but
-                                                revealed when the user activates the relevant trigger.
-                                            </div>
-                                        </div>
-                                    @endif --}}
-    
-                                    {{-- <form id="regForm" style="margin-top:-30px"> --}}
-                                        {{-- <div class="tab curent">
-                                            <div class="d-grid gap-2 mt-4 box-shadows">
-                                                <h4 class="question">Q-1.nsdkjdwkjhk,js,dw</h4>
-    
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                A
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            anbsn sd
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                B
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            adbnads
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                C
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            bsk
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                D
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                             jhskhbd
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-    
-    
-                                        <div style="overflow:auto;">
-                                            <div style="float:right;">
-    
-                                                <button type="button" class="me-2" id="prevBtn"
-                                                    type="button">Previous</button>
-    
-    
-    
-    
-                                                <button class="education-btn btn-medium" type="button" id="nextBtn">
-                                                    Next</button>
-                                            </div>
-                                        </div>
-                                        <!-- Circles which indicates the steps of the form: -->
-    
-                                    </form>
-                                </div> --}}
-    
+                               
                                 <div class="col-lg-12 p-5" style="background-color: #f0f0f0">
                                     <div class="user-attempt-question">
                                         <div class="user-profile mb-3">
@@ -547,10 +454,10 @@
                                                 </div>
     
                                             </div>
-                                            <div class="text-light btn btn-secondary" data-bs-toggle="modal"
+                                            <div class="text-light btn btn-danger" data-bs-toggle="modal" wire:click.prevent="solution()"
                                                 data-bs-target="#staticBackdrop" style="height: 33px">
                                                 <span style="font-size: 14px">
-                                                    Language
+                                                    Click for Solution
                                                 </span>
                                             </div>
     

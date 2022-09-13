@@ -74,8 +74,19 @@ class MocktestStart extends Component
           "totalmarks" => $total,
         ]
       );
-
+      
       //   return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
+    }
+    else {
+      // dd('rwmnads');
+
+      $testId->update(
+        [
+          "type" => 'result',
+          "remain_time" => $this->data['time'],
+          "lastQues" => $this->question_no + 1,
+        ]
+      );
     }
     return redirect()->route('view.mocktestresult', ['testID' => $this->data['testID'], 'examId' => $this->data['examId']]);
   }

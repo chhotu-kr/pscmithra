@@ -253,29 +253,29 @@
             color: #000;
         }
     </style>
-
+{{-- {{    json_encode($this->data['questionslist'][$question_no]); }} --}}
     <div class="quize-page">
         <div class="container">
             <div class="row">
                 <div class="col-md-8" style="margin-top:-50px">
                     <h5 class="text-center">
                         <a class="link" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                            aria-expanded="false" aria-controls="collapseExample">
+                            aria-expanded="false" aria-controls="collapseExample" wire:click.prevent="statusChange()">
                             Directions
                         </a>
-
                     </h5>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            Some placeholder content for the collapse component. This panel is hidden by default but
-                            revealed when the user activates the relevant trigger.
+                    @if ($status == true)
+                        <div class="card card-body border-0" style="margin-top:-20px">
+                            <div class="col-8 mx-auto" style="font-size: 14.5px">
+                                {!! $data['questionslist'][$question_no]['question'][0]['direction'] !!}
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <form id="regForm">
                         <div class="tab curent">
                             <div class="d-grid gap-2 mt-4 box-shadows">
-                                <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['Questionin'] !!}</h4>
+                                <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['question'] !!}</h4>
 
                                 <div class="btn">
                                     <button type="button" class="mt-1 active"
@@ -324,8 +324,8 @@
                                 {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
 
                                 @if ($question_no == count($data['questionslist']) - 1)
-                                    <button class="education-btn btn-medium" wire:click.prevent="onSubmit()" type="button"
-                                        id="nextBtn">
+                                    <button class="education-btn btn-medium" wire:click.prevent="onSubmit()"
+                                        type="button" id="nextBtn">
                                         Submit</button>
                                 @else
                                     <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
@@ -344,8 +344,15 @@
 
                             <div class="left-right">
                                 <div class="time-section">
-                                    <span>Time Left : <b id="countdown">10: 59</b></span>
+                                    <span>Time Left : <b id="countdown">{{ $min }}:
+                                            {{ $sec }}</b></span>
                                 </div>
+                            </div>
+                            <div class="text-light btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                <span style="font-size: 14px">
+                                    Language
+                                </span>
                             </div>
                         </div>
 
@@ -386,42 +393,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        setInterval(updateCountDown, 1000)
+
+        function updateCountDown() {
+            Livewire.emit('totaltime');
+        }
+    </script>
 </div>
-
-<script>
-    var navicon = document.getElementById('navicon');
-    var navEl = document.getElementById('collapseOne');
-
-    function toggleMenu() {
-        navEl.classList.toggle('hidden');
-    };
-    navicon.addEventListener("click", toggleMenu, false);
-
-    function myFunction(elem) {
-        JSInterface.select("selOpt" + elem.id);
-
-    }
-</script>
-
-<script>
-    const min = 10;
-    let time = min * 60;
-
-    const countdownDel = document.getElementById('countdown')
-
-    setInterval(updateCountDown, 1000)
-
-    function updateCountDown() {
-        const minutes = Math.floor(time / 60);
-        let sec = time % 60;
-        sec = sec >= 10 ? sec : "0" + sec;
-
-        countdownDel.innerHTML = `${minutes} : ${sec}`
-        time--;
-        // console.log(time +" " +sec)
-    }
-
-    function calculateTime() {
-
-    }
-</script>

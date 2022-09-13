@@ -47,7 +47,10 @@
                                                     @foreach ($item['languages'] as $o)
                                                     <div class="form-check languagelabel">
                                                         <input class="form-check-input" type="checkbox"
-                                                            @checked($checked) id="flexCheckDefault">
+                                                        @if ($lang == $o['id'])
+                                                        @checked($checked)
+                                                        @endif
+                                                            id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault"
                                                             wire:click.prevent="selectLang('{{ $o['id'] }}')">
                                                             {{ $o['name'] }}
@@ -64,16 +67,17 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 @elseif($item['type'] == 'Buy')
                                     <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @elseif($item['type'] == 'resume')
                                     <a class="education-btn btn-medium w-100"
-                                        wire:click.prevent="resume('{{ $item['id'] }}')">Resume<i
+                                        wire:click.prevent="resume('{{ $item['testId'] }}')">Resume<i
                                             class="icon-4"></i></a>
                                 @else
                                     <a class="education-btn btn-medium w-100"
-                                        wire:click.prevent="result('{{ $item['id'] }}')">{{ $item['type'] }}<i
+                                        wire:click.prevent="result('{{ $item['testId'] }}')">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @endif
 
@@ -83,5 +87,6 @@
                 </div>
             @endforeach
         </div>
+         
     </div>
 </div>

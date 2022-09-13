@@ -92,7 +92,7 @@ Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizp
 Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');
 Route::get('/quiz/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
 Route::get('/mocktest/getresult', [HomeController::class, 'get_MockTestResult'])->name('view.mocktestresult');
-Route::get('/live/getresult', [HomeController::class, 'get_LiveQuizResult'])->name('view.liveresult ');
+Route::get('/live/getresult', [HomeController::class, 'get_LiveQuizResult'])->name('view.liveresult');
 Route::get('/quiz/solution', [HomeController::class, 'get_QuizSolution'])->name('view.quizsolution');
 Route::get('/mocktest/solution', [HomeController::class, 'get_MocktestSolution'])->name('view.mocktestsolution');
 Route::get('/live/solution', [HomeController::class, 'get_LiveQuizSolution'])->name('view.livesolution');

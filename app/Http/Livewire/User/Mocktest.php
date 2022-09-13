@@ -28,7 +28,13 @@ class Mocktest extends Component
 
     public function itemId($id)
     {
-        $this->itemId = $id;
+        if(Auth::user()){
+            $this->itemId = $id;
+
+        }
+        else{
+            return redirect()->route('user.login');
+        }
     }
     public function selectLang($id)
     {
@@ -63,7 +69,6 @@ class Mocktest extends Component
         $get = AttempedExam::where('examinations_id', $singleData['id'])->where('mocktesttype', $singleData['type'])->where('users_id', $user)->first();
 
         if (empty($get)) {
-
 
             $Attemp = new AttempedExam();
             $Attemp->slugid = md5($examination_id->id . time());

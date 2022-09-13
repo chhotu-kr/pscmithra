@@ -7,6 +7,7 @@ use App\Models\livetest\liveAttemp;
 use App\Models\livetest\liveAttempQuestion;
 use App\Models\livetest\liveExam;
 use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -23,33 +24,25 @@ class LiveQuizStart extends Component
   public $sec;
   public $status;
   public $l;
+  public $selected;
+
   protected $listeners = ['totaltime' => 'timetaken'];
 
   public function onSubmit()
   {
 
-    $user = 1;
+    $user = Auth::id();
     
    
     $examination_id =  liveExam::where("slugid", $this->data['examId'])->first();
 
-    // if (!$examination_id) {
-    //   return response()->json(['msg' => 'Invalid Exam', 'status' => false]);
-    // }
 
     $testId = liveAttemp::where("slugid",  $this->data['testID'])->where("live_exams_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
-
-    // if (sizeof($request->array) == 0) { // If more than 0
-    //   return response()->json(['msg' => 'Array size 0', 'status' => false]);
-    // }
-
-
-
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
-
+      //  dd( $this->data['questionslist']);
         $dd = liveAttempQuestion::where('questions_id', $value['questionId'])->where('users_id', $user)->where('live_attemps_id', $testId->id)->update(
           [
             "QuesSeen" => $value["s"],
@@ -57,12 +50,12 @@ class LiveQuizStart extends Component
             "time" => $value['time']
           ]
         );
+   
+
       }
 
-    // $type = "resume";
     if ($this->data['type'] == "normal") {
       $type = "result";
-
       $rMarks  = $examination_id->rightmarks;
       $wMarks = "-" . $examination_id->wrongmarks;
 
@@ -86,8 +79,11 @@ class LiveQuizStart extends Component
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->testtype]);
     } else {
+      // dd('hsssshs');
+
       $testId->update(
         [
+          "type" => 'result',
           "remain_time" =>$this->data['time'],
           "lastQues" => $this->question_no + 1,
         ]
@@ -164,7 +160,17 @@ class LiveQuizStart extends Component
 
   public function onSelect($id)
   {
-    $this->data['questionslist'][$this->question_no]['optSel'] = $id;
+    // dd($id);
+    if ($id == 1) {
+      $this->selected = 'selOpt1';
+    } elseif ($id == 2) {
+      $this->selected = 'selOpt2';
+    } elseif ($id == 3) {
+      $this->selected = 'selOpt3';
+    } else {
+      $this->selected = 'selOpt4';
+    }
+    $this->data['questionslist'][$this->question_no]['optSel'] = $this->selected;
     $this->filterledgers();
   }
   public function countTime($id)
@@ -179,7 +185,8 @@ class LiveQuizStart extends Component
   {
     // dd($examinationId);  
 
-    $user = 1;
+    $user = Auth::id();
+
 
     $testid =  liveAttemp::select('id', 'slugid')->where("slugid", $testId)->first();
     // dd($testId);
@@ -194,6 +201,7 @@ class LiveQuizStart extends Component
         } else if ($d['type'] = "resume") {
 
           return [
+            // dd($d),
             "testID" => $d->slugid,
             "languageId" => $d->language->id,
             "languageName" => $d->language->languagename,

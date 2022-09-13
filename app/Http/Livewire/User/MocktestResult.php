@@ -10,6 +10,12 @@ use Livewire\Component;
 class MocktestResult extends Component
 {
     public $data;
+    
+    public function solution(){
+
+      return redirect()->route('view.mocktestsolution',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
+      
+    } 
     public function mount($testid,$examinationId){
       $user_id = Auth::id();
       

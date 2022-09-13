@@ -33,18 +33,15 @@ class QuizAttemptStart extends Component
   public function onSubmit()
   {
 
-
-
     $user = Auth::id();
     $examination_id =  QuizExamination::where("slugid",  $this->data['quizid'])->first();
 
 
-    $type = "resume";
 
 
     $testId = quizAttemp::where("slugid",  $this->data['testID'])->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user)->first();
 
-    foreach ($this->data['questionslist'] as $index => $value) {
+    foreach($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
 
         $dd = QuizAttemptQuestion::where('question_id', $value['questionId'])->where('users_id', $user)->where('quiz_attemps_id', $testId->id)->update(
@@ -56,7 +53,7 @@ class QuizAttemptStart extends Component
         );
       }
     }
-
+    // dd($this->data['type']);
     if ($this->data['type'] == "normal") {
       $type = "result";
 
@@ -82,13 +79,17 @@ class QuizAttemptStart extends Component
 
       return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' => $testId->testtype]);
     } else {
+      // dd('rwmnads');
+
       $testId->update(
         [
+          "type" => 'result',
           "remain_time" => $this->data['time'],
           "lastQues" => $this->question_no + 1,
         ]
       );
     }
+    // dd(['testID' => $this->data['testID'], 'examId' => $this->data['quizid']]);
     return redirect()->route('view.quizresult', ['testID' => $this->data['testID'], 'examId' => $this->data['quizid']]);
   }
   public function statusChange()
@@ -102,7 +103,7 @@ class QuizAttemptStart extends Component
     $this->required_timing--;
     $this->data['questionslist'][$this->question_no]['time']++;
 
-    
+  
   }
   function filterledgers()
   {
@@ -185,7 +186,7 @@ class QuizAttemptStart extends Component
     $test =  quizAttemp::select('id')->where("slugid", $testId)->first();
     // dd($quiz_examinations_id);
 
-    $user = 1;
+    $user = Auth::id();
     $this->data = quizAttemp::with(['examination.quizexamQ.question.quizAttemp' => function ($q) use ($test, $user) {
       $q->where('quiz_attemps_id', $test->id)->where('users_id', $user);
     }])->where('slugid', $testId)->where('users_id', $user)->where('quiz_examinations_id', $quiz_examinations_id->id)
@@ -207,9 +208,10 @@ class QuizAttemptStart extends Component
                 "language" => $langg->language->languagename,
               ];
             }),
+            // dd($d),
             "quizid" => $d->examination->slugid,
             "lastQues" => $d->lastQues,
-            "type" => $d->mocktesttype,
+            "type" => $d->type,
             "lastQues" => $d->lastQues,
             "time" => $d->remain_time,
             "wMarks" => $d->examination->wrongmarks,
