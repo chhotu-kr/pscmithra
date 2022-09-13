@@ -14,10 +14,6 @@
                                 <label>Name</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
-                            <div class="mb-3">
-                                <label>CreatedBy</label>
-                                <input type="text" name="createdby" class="form-control" required>
-                            </div>
                             <input type="submit" value="Create" class="btn btn-primary w-100">
                            </form>
                     </div>

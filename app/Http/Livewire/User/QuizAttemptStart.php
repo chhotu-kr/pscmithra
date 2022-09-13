@@ -196,7 +196,7 @@ class QuizAttemptStart extends Component
           return "Test not resume";
         } else if ($d['type'] = "resume") {
 
-          return collect([
+          return [
             "testID" => $d->slugid,
             "languageId" => $d->language->id,
             "languageName" => $d->language->languagename,
@@ -241,7 +241,7 @@ class QuizAttemptStart extends Component
 
               ]);
             })
-          ]);
+          ];
         }
       })[0];
     $this->question_no = 0;

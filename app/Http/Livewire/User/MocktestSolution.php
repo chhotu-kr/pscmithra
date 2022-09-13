@@ -10,7 +10,7 @@ use Livewire\Component;
 class MocktestSolution extends Component
 {
     public function mount($testid,$examinationId){
-        $user_id = 1;
+        $user_id = 0;
         if(Auth::user()){
             $user_id = Auth::id();
         }

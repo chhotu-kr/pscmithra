@@ -282,7 +282,7 @@ class HomeController extends Controller
         $data['testid'] = $req->testID;
         $data['examinationId'] = $req->examId;
 
-        return view('user.MockTest_Result', $data);
+        return view('user.Mocktest_Result', $data);
     }
     //................ LiveQuiz Result ...........//
     public function get_LiveQuizResult(Request $req)
