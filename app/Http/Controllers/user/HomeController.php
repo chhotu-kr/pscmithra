@@ -31,10 +31,11 @@ class HomeController extends Controller
     {
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
-        $data['product'] = Product::all();
-        $data['img'] = Image::all();
-        $data['user'] = User::all();
-        $data['testimonials'] = TestiMonials::all();
+
+        $data['product'] = Product::paginate(2);
+        $data['img']=Image::all();
+        $data['user']=User::all();
+        $data['testimonials']=TestiMonials::all();
         return view('user.Viewhome', $data);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -12,6 +13,7 @@ class AddressController extends Controller
     public function index()
     {
         //
+        $data['subuser']=User::all();
         $data['product']=Product::all();
         $data['address']=Address::all();
         return view('ecommerce.manageAddress',$data);
@@ -21,6 +23,7 @@ class AddressController extends Controller
     public function create()
     {
         //
+        $data['subuser']=User::all();
         $data['address'] = Address::all();
         $data['product'] = Product::all();
         return view('ecommerce.insertAddress',$data);
@@ -32,6 +35,7 @@ class AddressController extends Controller
         //
         $data= new Address();
         $data->product_id=$request->product_id;
+        $data->user_id=$request->user_id;
         $data->slugid=md5($request->address .time());
         $data->name=$request->name;
         $data->state=$request->state;
@@ -51,6 +55,7 @@ class AddressController extends Controller
     {
         //
         $data['address']=$address;
+        $data['subuser']=User::all();
         $data['product']=Product::all();
         return view('ecommerce.editAddress',$data);
         
@@ -62,6 +67,7 @@ class AddressController extends Controller
         //
         
         $address->product_id=$request->product_id;
+        $address->user_id=$request->user_id;
         $address->slugid=md5($request->address .time());
         $address->name=$request->name;
         $address->state=$request->state;
