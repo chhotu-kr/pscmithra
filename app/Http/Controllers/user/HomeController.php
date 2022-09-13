@@ -176,14 +176,12 @@ class HomeController extends Controller
     {
 
         //return dd($request);
-        if (FacadesAuth::user()) {
+       
             $data['cat_id'] = $request->cat_id;
             $data['sub_cat_id'] = $request->sub_cat_id;
             $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
             return view('user.MockTest', $data);
-        } else {
-            return redirect()->route('user.login');
-        }
+       
     }
     //..............Mock Test Start..............//
     public function get_MockTestStart(Request $req)
@@ -295,22 +293,24 @@ class HomeController extends Controller
     //...............Quiz Soltuion..............//
     public function get_QuizSolution(Request $req)
     {
-        $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
-        $data['examinationId'] = 'slugid';
+        // dd($req);
+        $data['testid'] = $req->testID;
+        $data['examinationId'] =  $req->examId;
         return view('user.Quiz_Solution', $data);
     }
     //................Mocktest Solution...........//
     public function get_MocktestSolution(Request $req)
     {
-        $data['testid'] = '764997571f7f069be9f8bd2379d5119a';
-        $data['examinationId'] = 'slugid';
+        // dd($req->examId);
+        $data['testid'] = $req->testID;
+        $data['examinationId'] = $req->examId;
         return view('user.Mocktest_Solution', $data);
     }
     //................Live Quiz Solution...............//
     public function get_LiveQuizSolution(Request $req)
     {
-        $data['testid'] = '1c7fbe15ce1e9e273d3c0b87228c3e27';
-        $data['examinationId'] = 'b21fe25aeca7503589c1440ec84161c4';
+        $data['testid'] = $req->testID;
+        $data['examinationId'] = $req->examId;
         return view('user.LiveQuiz_Solution', $data);
     }
     //..........................User Dashboard  Controller..........................//

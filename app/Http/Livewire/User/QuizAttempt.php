@@ -22,7 +22,12 @@ class QuizAttempt extends Component
 
   public function itemId($id)
   {
+   if(Auth::user()){
     $this->itemId = $id;
+   }
+   else{
+   return redirect()->route('user.login');
+   }
   }
   public function selectLang($id)
   {
@@ -58,7 +63,7 @@ class QuizAttempt extends Component
       $Quiz->slugid = md5($quiz_examinations_id->id . time());
       $Quiz->quiz_examinations_id = $quiz_examinations_id->id;
       $Quiz->users_id = $user;
-      $Quiz->language_id = 1;
+      $Quiz->language_id = $this->lang;
       $Quiz->remain_time = $quiz_examinations_id->time_duration * 60;
       $Quiz->testtype = 'normal';
       $Quiz->save();

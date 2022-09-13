@@ -1,6 +1,6 @@
 <div>
 
-    {{ json_encode($data['questionslist'][$this->question_no]['time']) }}
+    {{-- {{ json_encode($data['questionslist'][$this->question_no]['time']) }} --}}
     <style type="text/css">
         .flex {
             display: flex;
@@ -375,7 +375,7 @@
     </script>
     {{-- <script>
         // Livewire.emit('')
-        const min = 10;
+           const min = 10;
         let time = min * 60;
         let initialTime = time;
         const countdownDel = document.getElementById('countdown')

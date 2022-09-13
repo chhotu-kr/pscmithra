@@ -1,6 +1,6 @@
 <div>
 
-    {{-- {{ dd($data) }} --}}
+    {{-- {{ json_encode($data['questionslist'][$this->question_no]) }} --}}
     <style type="text/css">
         .flex {
             display: flex;
@@ -37,6 +37,7 @@
         input.invalid {
             background-color: #ffdddd;
         }
+
 
         /* Hide all steps by default: */
         .tab {
@@ -210,7 +211,7 @@
         }
 
         .active p {
-            color: black;
+            y0 color: black;
             align-items: flex-start
         }
 
@@ -253,16 +254,8 @@
             font-size: 18px;
             color: #000;
         }
-
-        .option-label {
-            background-color: #000;
-            color: white;
-            border-radius: 100%;
-            width: 26px;
-
-        }
     </style>
-    {{-- {{ dd($data['questionslist'][$question_no]['question'][0]) }} --}}
+    {{-- {{ json_encode($data) }} --}}
 
     <div class="container">
         <div class="row">
@@ -277,8 +270,7 @@
                 @if ($status == true)
                     <div class="card card-body border-0" style="margin-top:-20px">
                         <div class="col-8 mx-auto" style="font-size: 14.5px">
-                            Some placeholder content for the collapse component. This panel is hidden by default but
-                            revealed when the user activates the relevant trigger.
+                            {{ $data['questionslist'][$question_no]['question'][0]['direction'] }}
                         </div>
                     </div>
                 @endif
@@ -287,71 +279,156 @@
                     <div class="tab curent">
                         <div class="d-grid gap-2 mt-4 box-shadows">
                             <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['question'] !!}</h4>
-                            {{ json_encode($data['questionslist'][$question_no]['isRightAns']) }}
-                            <div class="btn">
-                                @if ($data['questionslist'][$question_no]['isRightAns'] == 'selOpt1')
-                                    <button type="button" class="mt-1 active" style="background-color: #3ca440;cursor:'pointer">
-                                        <div class="option-label">
-                                            <label for="" class="radio-custom-label ">
-                                                A
-                                            </label>
-                                        </div>
-                                        <label class="radio-custom-label ms-4">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
-                                        </label>
-                                    </button>
-                                @else
-                                    <button type="button" class="mt-1 active" style="cursor:pointer">
-                                        <div class="option-label">
-                                            <label for="" class="radio-custom-label ">
-                                                A
-                                            </label>
-                                        </div>
-                                        <label class="radio-custom-label ms-4">
-                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
-                                        </label>
-                                    </button>
-                                @endif
 
-                            </div>
-                            <div class="btn">
-                                <button type="button" class="mt-1 active"
-                                    wire:click.prevent="onSelect({{ 2 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            B
+                            @if ($data['questionslist'][$question_no]['optSel'] == 'selOpt1' &&
+                                $data['questionslist'][$question_no]['isRightAns'] == 'selOpt1')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
                                         </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
-                                        {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
-                                    </label>
-                                </button>
-                            </div>
-                            <div class="btn">
-                                <button type="button" class="mt-1 active"
-                                    wire:click.prevent="onSelect({{ 3 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            C
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['optSel'] == 'selOpt1')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: red">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
                                         </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
-                                        {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
-                                    </label>
-                                </button>
-                            </div>
-                            <div class="btn">
-                                <button type="button" class="mt-1 active"
-                                    wire:click.prevent="onSelect({{ 4 }})">
-                                    <div class="option-label">
-                                        <label for="" class="radio-custom-label ">
-                                            D
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['isRightAns'] == 'selOpt1')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
                                         </label>
-                                    </div>
-                                    <label class="radio-custom-label ms-4">
-                                        {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
-                                    </label>
-                                </button>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option1'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @endif
+
+
+                            @if ($data['questionslist'][$question_no]['optSel'] == 'selOpt2' &&
+                                $data['questionslist'][$question_no]['isRightAns'] == 'selOpt2')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['optSel'] == 'selOpt2')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: red">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['isRightAns'] == 'selOpt2')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option2'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @endif
+
+
+                            @if ($data['questionslist'][$question_no]['optSel'] == 'selOpt3' &&
+                                $data['questionslist'][$question_no]['isRightAns'] == 'selOpt3')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['optSel'] == 'selOpt3')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: red">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['isRightAns'] == 'selOpt3')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option3'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @endif
+
+
+                            @if ($data['questionslist'][$question_no]['optSel'] == 'selOpt4' &&
+                                $data['questionslist'][$question_no]['isRightAns'] == 'selOpt4')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['optSel'] == 'selOpt4')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: red">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @elseif($data['questionslist'][$question_no]['isRightAns'] == 'selOpt4')
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active" style="background: green">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @else
+                                <div class="btn">
+                                    <button type="button" class="mt-1 active">
+                                        <label class="radio-custom-label">
+                                            {!! $data['questionslist'][$question_no]['question'][0]['option4'] !!}
+                                        </label>
+                                    </button>
+                                </div>
+                            @endif
+
+
+                            <h6 class="mt-3 ms-4">Time Taken: {{ $data['questionslist'][$question_no]['time'] }} sec
+                            </h6>
+                            <div class="ms-4">
+                                <h6 class="text-decoration-underline">Explaination</h6>
+                                <p> {{ $data['questionslist'][$question_no]['question'][0]['explain'] }}</p>
                             </div>
                         </div>
                     </div>
@@ -364,18 +441,12 @@
                                 <button type="button" class="me-2" id="prevBtn" type="button"
                                     wire:click.prevent="prev()">Previous</button>
                             @endif
-
-                            {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
-
-                            @if ($question_no == count($data['questionslist']) - 1)
-                                <button class="education-btn btn-medium" wire:click.prevent="onSubmit()" type="button"
-                                    id="nextBtn">
-                                    Submit</button>
-                            @else
+                            @if ($question_no != count($data['questionslist']) - 1)
                                 <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
-                                    id="nextBtn">Save &
-                                    Next</button>
+                                    id="nextBtn">Next</button>
                             @endif
+
+
                         </div>
                     </div>
                     <!-- Circles which indicates the steps of the form: -->
@@ -389,29 +460,30 @@
 
                         <div class="left-right " style="flex-grow: 1">
                             <div class="time-section">
-                                {{-- <h6>Time Left : <b id="countdown">{{ $min }}: {{ $sec }}</b></h6> --}}
+                                <span>Total Time : <b id="countdown">{{ $data['time'] / 60 }} min:
+                                        {{ $data['time'] % 60 }} sec</b></span>
                             </div>
 
                         </div>
                         <div class="text-light btn btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop" style="height: 33px">
+                            data-bs-target="#staticBackdrop">
                             <span style="font-size: 14px">
-                                Language
+                                {{ $data['languageName'] }}
                             </span>
                         </div>
-
+                   
                     </div>
 
 
                     <div class="quition-number-plate">
-                        <h5 class="text-secondary">Your are Viewing LR Section Question Palltte:</h5>
+                        <h4>Your are Viewing LR Section Question Palltte:</h4>
                         <div class="quition-no-box-section">
-                            {{-- @foreach ($data['questionslist'] as $item)
-                                @if ($item['s'] == 'false')
+                            @foreach ($data['questionslist'] as $item)
+                                @if ($item['seen'] == 'false')
                                     <a wire:click.prevent="jump({{ $loop->index }})"><span
                                             style="background: #9e9e9e;">{{ $loop->index + 1 }}</span></a>
                                 @else
-                                    @if (empty($item['optSel']))
+                                    @if ($item['optSel'] != $item['isRightAns'])
                                         <a wire:click.prevent="jump({{ $loop->index }})"><span
                                                 style="background: #d70b0b;">{{ $loop->index + 1 }}</span></a>
                                     @else
@@ -419,15 +491,15 @@
                                                 style="background: #3ca440;">{{ $loop->index + 1 }}</span></a>
                                     @endif
                                 @endif
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                     <div class="legent-section">
                         <h4>Legend</h4>
                         <div class="answerd">
                             <div class="answer-box">
-                                <p><span style="background: #3ca440;"> {{ $a }}</span>Answered</p>
-                                <p><span style="background: #d70b0b;">{{ $w }}</span> Not Answered</p>
+                                <p><span style="background: #3ca440;"> {{ $a }}</span>Correct </p>
+                                <p><span style="background: #d70b0b;">{{ $w }}</span> Incorrect </p>
                             </div>
                             <div class="answer-box">
                                 <p><span style="background: #9e9e9e;">{{ $u }}</span> Not Visited</p>
@@ -440,40 +512,7 @@
     </div>
 
 
-    <script>
-        setInterval(updateCountDown, 1000)
 
-        function updateCountDown() {
-            Livewire.emit('totaltime');
-        }
-    </script>
-    {{-- <script>
-        // Livewire.emit('')
-        const min = 10;
-        let time = min * 60;
-        let initialTime = time;
-        const countdownDel = document.getElementById('countdown')
 
-        setInterval(updateCountDown, 1000)
-        // setInterval(calculateTime, 1000)
-        
-        function updateCountDown() {
-            // Livewire.emit('totaltime')
-            let minutes = Math.floor(time / 60);
-            let sec = time % 60;
-            sec = sec >= 10 ? sec : "0" + sec;
-
-            countdownDel.innerHTML = `${minutes} : ${sec}`
-            
-            // console.log(time +" " +sec)
-        }
-
-        // function calculateTime() {
-        //     let timeTaken = initialTime - time;
-        //     console.log(timeTaken);
-        //     initialTime = time;
-        //     Livewire.emit('timetaken',$timeTaken)
-        // }
-    </script> --}}
 
 </div>
