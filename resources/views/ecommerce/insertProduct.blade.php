@@ -130,7 +130,7 @@
                                         </div>
                                     </div> -->
                                     <div id="extend"></div>
-                                     -->
+                                     
                     </form>
 
                 </div>
@@ -190,7 +190,7 @@
                               <tbody>`;
                     $.each(data, function(index, value) {
                         Html += `<tr>
-                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td><input type='checkbox' value='${value.id}' name='data'></td>
                                     <td>${value.id}</td>
                                     <td>${value.name}</td>
 
@@ -206,7 +206,8 @@
 
                 }
             });
-        } else if (responseID == "course") {
+        } 
+        else if (responseID == "course") {
             $.ajax({
                 type: 'get',
                 dataType: 'json',
@@ -244,7 +245,10 @@
 
                 }
             });
-        } else if (responseID == "pdf") {
+        } 
+       
+      }
+        else if (responseID == "pdf") {
             $.ajax({
                 type: 'get',
                 dataType: 'json',

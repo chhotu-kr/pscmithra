@@ -12,9 +12,19 @@
                   <a href="course-details.php">
                       @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                   </a>
+
                   <div class="ebook-box">
-                      <p>{{$item->type}}</p>
-                  </div>
+                    <p>{{$item->type}}</p>
+                </div>
+                 {{-- @if (!empty($item))
+                 <div class="ebook-box">
+                    <p>{{$item->type}}</p>
+                </div>  
+
+                    
+                 @else
+                
+                 @endif --}}
               </div>
               <div class="content">
                   <h6 class="title"><a href="course-details.php">{{$item->title}}</a></h6>

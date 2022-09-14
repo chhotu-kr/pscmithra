@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -42,6 +43,7 @@ class AddressController extends Controller
         $data->city=$request->city;
         $data->pincode=$request->pincode;
         $data->save();
+        
         return redirect()->route('address.index');
     }
 

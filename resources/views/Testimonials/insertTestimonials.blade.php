@@ -86,7 +86,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                     @foreach ($testmonials as $item)
+                     @foreach ($testimonials as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
                                 {{-- <td>  <img src="{{asset("upload/".$item->subuser->image)}}" width="100" height="100" alt=""></td> --}}

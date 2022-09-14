@@ -49,7 +49,7 @@
                                           {{-- <td>{{$req->pincode}}</td> --}}
                                           <td>
                                               
-                                            <a href="{{route('user.update')}}" class="btn btn-outline-primary">Edit</a>
+                                            <a href="{{route('user.update',['id'=>$req->id])}}" class="btn btn-outline-primary">Edit</a>
                                             <a href="{{route('remove.user',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>
                                               
                                           </td>

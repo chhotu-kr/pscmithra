@@ -43,6 +43,7 @@ class Product extends Model
         return $this->hasone(BookProduct::class, 'product_id','id');
     }
    
+   
 
 
 }

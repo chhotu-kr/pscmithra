@@ -81,7 +81,7 @@ Route::get('/mock-test/start', [HomeController::class, 'get_MockTestStart'])->na
 Route::get('/view/blog', [HomeController::class, 'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details', [HomeController::class, 'get_ViewBlogDetails'])->name('view.blogdetails');
 Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('view.course');
-Route::get('/view/course/details', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
+Route::get('/view/course/details/{id}', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
 Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
 Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
@@ -331,7 +331,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/Course-productshow', [ProductController::class, 'get_Course'])->name('CourseProduct.show');
     Route::get('/Pdf-productshow', [ProductController::class, 'get_Pdf'])->name('Pdf.Product.show');
 
-    // .............pdf subscription..............//..//
+    // .............pdf subscription................//
 
     Route::get('/ebook', [ProductController::class, 'get_PdfSubscription'])->name('pdf.subscription');
 
@@ -482,7 +482,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
 
     //......................Order Table..................//
 
-    Route::get('/manage/order',[orderController::class,'index'])->name('manage.order');
+    Route::get('/manage-order',[orderController::class,'index'])->name('manage.order');
     Route::get('/create/order',[orderController::class,'create'])->name('create.order');
     Route::post('/store/order',[orderController::class,'store'])->name('order.store');
     Route::get('/update/order/{id}',[orderController::class,'edit'])->name('order.edit');

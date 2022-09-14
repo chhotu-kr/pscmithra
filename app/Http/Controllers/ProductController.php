@@ -110,7 +110,7 @@ class ProductController extends Controller
         } else if ($request->type == 'ebook') {
             $pdfsubs = new PdfSubscriptionProduct();
             $pdfsubs->product_id = $data->id;
-            // $pdfsubs->slugid=md5("ghjfyfdt" .time()."hjfwhfgfffhf");
+             $pdfsubs->slugid=md5("ghjfyfdt" .time()."hjfwhfgfffhf");
             $pdfsubs->pdf_subscriptions_id = $request->data;
 
             $pdfsubs->save();
@@ -254,7 +254,7 @@ class ProductController extends Controller
 
         if ($request->type == 'book') {
             $book_product = new BookProduct();
-            $book_product->product_id = $book_product->id;
+            $book_product->product_id = $product->id;
             $book_product->book_id = $request->data;
             $book_product->slugid = md5("ghjfh" . time() . "hjfhjfjhfghf");
             $book_product->save();

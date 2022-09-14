@@ -14,7 +14,7 @@ class orderController extends Controller
     public function index()
 
     {   $data['order'] = Order::all();
-        return view("admin.manageOrder",$data);
+        return view("ecommerce.Order.manageOrder",$data);
     }
 
     

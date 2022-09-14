@@ -13,6 +13,7 @@ use App\Models\QuizSubCategory;
 use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
+use App\Models\Language;
 use App\Models\TestiMonials;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -87,8 +88,11 @@ class HomeController extends Controller
     }
     //................CourseDetails..............//
    
-    public function get_ViewCourseDetails(){
-        return view('user.ViewCoursedetails');
+    public function get_ViewCourseDetails($id){
+        $data['product']=Product::where('id',$id)->first();
+        $data['language']=Language::where('id',$id)->first();
+       
+        return view('user.ViewCoursedetails',$data);
     }
     //..............Quiz.............//
 
