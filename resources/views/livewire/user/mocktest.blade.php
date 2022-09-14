@@ -8,7 +8,7 @@
 
     <div id="tab-1" class="tab-content current">
         <div class="row">
-            -- {{ $data }} 
+            {{-- -- {{ $data }} --}}
             @foreach ($data as $item)
                 <div class="col-lg-3 col-md-6">
                     <div class="card p-3">
@@ -25,16 +25,26 @@
                                             class="ml-auto">{{ $item['totalTimeinMints'] }}</span></li>
                                 </ul>
                                 @if ($item['type'] == 'Start')
-                                    <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop"
-                                        wire:click.prevent="itemId('{{ $item['id'] }}')">{{ $item['type'] }}<i
-                                            class="icon-4"></i></a>
+                                    @if (Auth::user())
+                                        <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
+                                            data-bs-target="#loginmodal">{{ $item['type'] }}<i class="icon-4"></i></a>
+                                    @else
+                                        <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop"
+                                            wire:click.prevent="itemId('{{ $item['id'] }}')">{{ $item['type'] }}<i
+                                                class="icon-4"></i></a>
+                                    @endif
+                                    {{-- loginmodal --}}
+                                    <div class="modal fade" wire:ignore.self id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        @livewire('user.view-modal')
+                                    </div>
+                                    {{-- language modal --}}
                                     <div wire:ignore.self class="modal fade" id="staticBackdrop"
                                         data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
+                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
-                                                  <div class="modal-header">
+                                                <div class="modal-header">
                                                     <h5 class="modal-title" id="staticBackdropLabel">Select Language
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -44,9 +54,7 @@
                                                     @foreach ($item['languages'] as $o)
                                                         <div class="form-check languagelabel">
                                                             <input class="form-check-input" type="checkbox"
-                                                            @if ($lang == $o['id'])
-                                                            @checked($checked)
-                                                            @endif
+                                                                @if ($lang == $o['id']) @checked($checked) @endif
                                                                 id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault"
                                                                 wire:click.prevent="selectLang('{{ $o['id'] }}')">
@@ -72,7 +80,7 @@
                                         wire:click.prevent="resume('{{ $item['testId'] }}')">Resume<i
                                             class="icon-4"></i></a>
                                 @else
-                                      <a class="education-btn btn-medium w-100"
+                                    <a class="education-btn btn-medium w-100"
                                         wire:click.prevent="result('{{ $item['testId'] }}')">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @endif
@@ -85,4 +93,13 @@
     </div>
 </div>
 
+
+<script>
+    window.addEventListener('close-modal', event => {
+
+        $('#loginmodal').modal('hide');
+        $('#updateStudentModal').modal('hide');
+        $('#deleteStudentModal').modal('hide');
+    })
+</script>
 {{-- wire:click.prevent="checkLogin('{{ $item['id'] }}')" --}}
