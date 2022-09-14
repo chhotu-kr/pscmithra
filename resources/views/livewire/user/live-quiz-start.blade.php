@@ -1,5 +1,5 @@
 <div>
-    {{-- {{ json_encode($data['questionslist'][$question_no]) }} --}}
+     {{ json_encode($data['questionslist'][$question_no]) }} 
 
     <style type="text/css">
         .flex {
@@ -323,15 +323,12 @@
 
                                 {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
 
-                                @if ($question_no == count($data['questionslist']) - 1)
+                                
                                     <button class="education-btn btn-medium" wire:click.prevent="onSubmit()"
                                         type="button" id="nextBtn">
                                         Submit</button>
-                                @else
-                                    <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
-                                        id="nextBtn">Save &
-                                        Next</button>
-                                @endif
+                              
+                                
                             </div>
                         </div>
                         <!-- Circles which indicates the steps of the form: -->

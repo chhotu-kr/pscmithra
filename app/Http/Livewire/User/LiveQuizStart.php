@@ -39,11 +39,20 @@ class LiveQuizStart extends Component
 
     $testId = liveAttemp::where("slugid",  $this->data['testID'])->where("live_exams_id", $examination_id->id)
       ->where("users_id", $user)->first();
+ 
+
+
 
     foreach ($this->data['questionslist'] as $index => $value) {
+
+
+
+      
+
+      
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
-      //  dd( $this->data['questionslist']);
-        $dd = liveAttempQuestion::where('questions_id', $value['questionId'])->where('users_id', $user)->where('live_attemps_id', $testId->id)->update(
+      
+        $dd = liveAttempQuestion::where('id', $value['questionId'])->where('users_id', $user)->where('live_attemps_id', $testId->id)->update(
           [
             "QuesSeen" => $value["s"],
             "QuesSelect" => $value['optSel'],
@@ -51,7 +60,7 @@ class LiveQuizStart extends Component
           ]
         );
    
-
+      }
       }
 
     if ($this->data['type'] == "normal") {
@@ -93,7 +102,7 @@ class LiveQuizStart extends Component
     return redirect()->route('view.liveresult',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
     // return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->type]);
 
-  }
+  
 }
   public function statusChange()
   {
