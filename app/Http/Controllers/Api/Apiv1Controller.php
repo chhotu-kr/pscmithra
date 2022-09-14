@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Blog;
 use App\Models\AttempedExam;
@@ -800,16 +801,57 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
 
-    
+    $product =  Product::where("slugid", $request->productId)->first();
 
-    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => ""]);
+    if (empty($product)) {
+      return response()->json(['msg' => 'Invalid Product', 'status' => false]);
+    }
+    if (!$product->isVisble) {
+      return response()->json(['msg' => 'Invalid Product', 'status' => false]);
+    }
+    $cart = new Cart();
+    $cart->prdoucts_id = $product->id;
+    $cart->user_id = $user_id->id;
+    $cart->qty = 1;
+    $cart->slugid = md5($request->productId . time());
+    $cart->save();
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => "Product Added to Cart"]);
+  }
+  public function getCart(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+    $cart = Cart::with('product')->where("user_id", $user_id->id)->get();
+    if (!empty($cart)) {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $cart]);
+    } else {
+      return response()->json(['msg' => 'Data Not Exist', 'status' => true]);
+    }
   }
 
-  public function DeleteCart(Cart $cart)
+  public function DeleteCart(Request $request)
   {
-    $cart->delete();
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
 
-    return response()->json(['msg' => 'Data deleted', 'status' => true, 'data' => $cart]);
+    $data = Cart::where("user_id", $user_id->id)->where("slugid", $request->cartId);
+    if (!empty($data)) {
+      $data->delete();
+      return response()->json(['msg' => 'Data deleted', 'status' => true]);
+    } else {
+      return response()->json(['msg' => 'Invalid Cart Id', 'status' => false]);
+    }
   }
 
   public function get_Verification($code)
@@ -822,6 +864,81 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Coupon allready used', 'status' => false]);
     }
   }
+
+public function addAddress(Request $request){
+  if (empty($request->user)) {
+    return response()->json(['msg' => 'Enter User', 'status' => false]);
+  }
+  $user_id =  User::select('id')->where("slugid", $request->user)->first();
+  if (!$user_id) {
+    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  }
+  if (empty($request->name)) {
+    return response()->json(['msg' => 'Enter Name', 'status' => false]);
+  }
+  if (empty($request->state)) {
+    return response()->json(['msg' => 'Enter State', 'status' => false]);
+  }
+  if (empty($request->city)) {
+    return response()->json(['msg' => 'Enter City', 'status' => false]);
+  }
+  if (empty($request->pincode)) {
+    return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+  }
+  if (empty($request->street)) {
+    return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+  }
+  $addres = new Address();
+  $addres->name = $request->name;
+  $addres->state = $request->state;
+  $addres->city = $request->city;
+  $addres->pincode = $request->pincode;
+  $addres->street = $request->street;
+  $addres->user_id = $user_id->id;
+  if (empty($request->landmark)) {
+    $addres->landmark = $request->landmark;
+  }
+  $addres->slugid = md5($request->productId . time());
+$addres->save();
+
+return response()->json(['msg' => 'Data Added', 'status' => true]);
+}
+
+public function getAddressList(Request $request){
+  if (empty($request->user)) {
+    return response()->json(['msg' => 'Enter User', 'status' => false]);
+  }
+  $user_id =  User::select('id')->where("slugid", $request->user)->first();
+  if (!$user_id) {
+    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  }
+  
+  $addres = Address::where("user_id",$user_id->id)->get();
+  if(empty($addres)){
+    return response()->json(['msg' => 'Data Not Exist', 'status' => false]);
+  }else{
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, "data"=>$addres]);
+  }
+
+
+}
+
+public function deleteAddress(Request $request){
+  if (empty($request->user)) {
+    return response()->json(['msg' => 'Enter User', 'status' => false]);
+  }
+  $user_id =  User::select('id')->where("slugid", $request->user)->first();
+  if (!$user_id) {
+    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  }
+  $data = Address::where("user_id", $user_id->id)->where("slugid", $request->addressId);
+    if (!empty($data)) {
+      $data->delete();
+      return response()->json(['msg' => 'Data deleted', 'status' => true]);
+    } else {
+      return response()->json(['msg' => 'Invalid Cart Id', 'status' => false]);
+    }
+}
 
   ///////////////////////////Quiz////////////////////////////////////////////////////
 
@@ -1551,14 +1668,14 @@ class Apiv1Controller extends Controller
       if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
 
         $dd = mockattempquestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)
-        
-        ->update(
-          [
-            "QuesSeen" => $value["seenType"],
-            "QuesSelect" => $value['optSel'],
-            "time" => $value['time']
-          ]
-        );
+
+          ->update(
+            [
+              "QuesSeen" => $value["seenType"],
+              "QuesSelect" => $value['optSel'],
+              "time" => $value['time']
+            ]
+          );
       }
 
 
@@ -2208,23 +2325,24 @@ class Apiv1Controller extends Controller
   }
 
 
-function getCourse(){
-  return response()->json(['msg' => 'Data Fetched', 'status' => true]);
-}
+  function getCourse()
+  {
+    return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+  }
 
 
   function updateUserDetails(Request $request)
   {
     if (!empty($request->userid)) {
       $data = User::where("slugid", $request->userid)->first();
-      if($request->name){
+      if ($request->name) {
         $data->name = $request->name;
       }
-      if($request->gender){
+      if ($request->gender) {
         $data->gender = $request->gender;
       }
       $data->save();
-      return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     } else {
       return response()->json(['msg' => 'Enter User Id', 'status' => false]);
     }
@@ -2238,7 +2356,7 @@ function getCourse(){
       if (empty($data)) {
         return response()->json(['msg' => 'User Not Found', 'status' => false]);
       } else {
-        return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
       }
     } else {
       return response()->json(['msg' => 'Enter User Id', 'status' => false]);

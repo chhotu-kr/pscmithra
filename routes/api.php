@@ -111,8 +111,13 @@ Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
 
 //........cart.........
 
-Route::post('/cart',[Apiv1Controller::class,'Add_To_Cart']);
-Route::post('/removecart/{id}',[Apiv1Controller::class,'DeleteCart']);
+Route::post('/addToCart',[Apiv1Controller::class,'Add_To_Cart']);
+Route::post('/getCart',[Apiv1Controller::class,'getCart']);
+Route::post('/removecart',[Apiv1Controller::class,'DeleteCart']);
+Route::post('/addAddress',[Apiv1Controller::class,'addAddress']);
+Route::post('/getAddressList',[Apiv1Controller::class,'getAddressList']);
+Route::post('/deleteAddress',[Apiv1Controller::class,'deleteAddress']);
+
 
 
 //........Coupon..........
