@@ -25,6 +25,7 @@ class addToCartController extends Controller
         $user_id = Auth::id();
         // dd($user_id);
         $data['order'] = Cart::where('user_id', $user_id)->get();
+        // dd($data);
         return view('user/cart/Cart', $data);
     }
 
