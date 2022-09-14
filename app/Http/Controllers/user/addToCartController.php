@@ -32,12 +32,23 @@ class addToCartController extends Controller
         return view("user/cart/Cart",$data);
     }
     public function checkOut(){
-        $data['product']=Product::all();
-        $data['subuser']=User::all();
+      
+        // $data['subuser']=User::all();
+        // $data['order'] = Order::where([['user_id',Auth::id()],['ordered',false]])->first();
+        // $data['orderitem'] = OrderItem::where([['product_id',Auth::id()],['ordered',false]])->first();
         $data['addresses'] = Address::where("user_id",Auth::id())->get();
         return view("user/cart/checkout",$data);
     }
-
+    public function insertUserPdf($array){
+        $up = new UserPdf();
+        $up->order_id = $array['order_id'];
+        $up->product_id=$array['product_id'];
+        $up->user_id=$array['user_id'];
+        $up->pdf_id=$array['pdf_id'];
+        $up->date=new Date("D-m-Y");
+        $up->save();
+        // return redirect()->route('checkout');
+    }
     public function addTCart(Request $request,$p_id){
         $product=Product::find($p_id);
         $user=Auth::user();
@@ -59,6 +70,8 @@ class addToCartController extends Controller
                    
                 }
            }
+
+          
            else{
                //New Order Create
             $ord=new Order();
@@ -150,8 +163,12 @@ class addToCartController extends Controller
         $order=get_order();
         $order->address_id=$address->id;
         $order->save();
+
+        // $this->insertUserPdf(['order_id'=>$order->id,'user_id'=>Auth::id(),'product_id'=>1,'pdf_id'=>1]);
         return redirect()->route('checkout');
     }
+
+   
 
    
 }

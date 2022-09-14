@@ -46,7 +46,9 @@
                                           <td>{{$req->type}}</td>
                                           <td>{{$req->price}}</td>
                                           <td>{{$req->bycount}}</td>
-                                          <td>{{$req->bannerimage}}</td>
+                                         <td>
+                                          @livewire('imageview', ['image' => ['image' => $req->bannerimage,'w'=>'50','h'=>'50']], key($item->id))
+                                         </td>
                                           <td>
                                               
                                               <form action="{{route('product.destroy',[$req])}}" method="POST">

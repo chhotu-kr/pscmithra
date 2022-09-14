@@ -110,7 +110,7 @@
                 <div class="education-product">
                     <div class="inner">
                         <div class="thumbnail">
-                            <a href="{{route('view.coursedetails')}}">
+                            <a href="{{route('view.coursedetails',$item->id)}}">
                                 @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                             </a>
                             <div class="ebook-box">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title"><a href="{{route('view.coursedetails')}}">{{$item->title}}</a></h6>
+                            <h6 class="title"><a href="{{route('view.coursedetails',$item->id)}}">{{$item->title}}</a></h6>
                             <div class="price">Rs/-{{$item->price}}</div>
                         </div>
                         <div class="product-hover-info">
@@ -152,16 +152,36 @@
             </div>
             <div class="col-lg-7">
                 <div class="home-one-testimonial-activator slide-with-shadow">
-                    @foreach ($testimonials as $item)
-                    <div class="testimonial-grid">
+                   @foreach ($testimonials as $item)
+                   <div class="testimonial-grid">
+                    <div class="thumbnail">
+                        @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'50','h'=>'50']], key($item->id))
+                        <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                    </div>
+                    <div class="content">
+                        <p>{{$item->message}}</p>
+                        <div class="rating-icon">
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                            <i class="icon-23"></i>
+                        </div>
+                        <h5 class="title">{{$item->subuser->name}}</h5>
+                        <span class="subtitle">Student</span>
+                    </div>
+                </div>
+                   @endforeach
+
+                    {{-- <div class="testimonial-grid">
                         <div class="thumbnail">
-                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                            {{-- @livewire('imageview', ['image' => ['image' => $item->subuser->image,'w'=>'100','h'=>'100']], key($new->id)) --}}
+                            <img src="img/testimonial-03.png" alt="Testimonial">
                             <span class="qoute-icon"><i class="icon-26"></i></span>
 
                         </div>
                         <div class="content">
-                            <p>{{$item->message}}</p>
+                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
                             <div class="rating-icon">
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
@@ -169,146 +189,136 @@
                                 <i class="icon-23"></i>
                                 <i class="icon-23"></i>
                             </div>
-                            {{-- <h5 class="title">{{$item->subuser->name}}</h5> --}}
-                            <span class="subtitle">Student</span>
+                            <h5 class="title">Amber Page</h5>
+                            <span class="subtitle">Designer</span>
                         </div>
                     </div>
-                    @endforeach
 
                     <div class="testimonial-grid">
                         <div class="thumbnail">
-                            <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                    <span class="qoute-icon"><i class="icon-26"></i></span>
-                </div>
-                <div class="content">
-                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                    <div class="rating-icon">
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                    </div>
-                    <h5 class="title">Amber Page</h5>
-                    <span class="subtitle">Designer</span>
-                </div>
-            </div>
-            <div class="testimonial-grid">
-                <div class="thumbnail">
-                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                    <span class="qoute-icon"><i class="icon-26"></i></span>
-                </div>
-                <div class="content">
-                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                    <div class="rating-icon">
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                    </div>
-                    <h5 class="title">Linda Garcia</h5>
-                    <span class="subtitle">Developer</span>
-                </div>
-            </div>
-            <div class="testimonial-grid">
-                <div class="thumbnail">
-                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                    <span class="qoute-icon"><i class="icon-26"></i></span>
-                </div>
-                <div class="content">
-                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                    <div class="rating-icon">
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                    </div>
-                    <h5 class="title">Carlos Kelly</h5>
-                    <span class="subtitle">Marketer</span>
-                </div>
-            </div>
-            <div class="testimonial-grid">
-                <div class="thumbnail">
-                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                    <span class="qoute-icon"><i class="icon-26"></i></span>
-                </div>
-                <div class="content">
-                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                    <div class="rating-icon">
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                    </div>
-                    <h5 class="title">Cherise Harris</h5>
-                    <span class="subtitle">Designer</span>
-                </div>
-            </div>
-            <div class="testimonial-grid">
-                <div class="thumbnail">
-                    <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                    <span class="qoute-icon"><i class="icon-26"></i></span>
-                </div>
-                <div class="content">
-                    <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                    <div class="rating-icon">
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                        <i class="icon-23"></i>
-                    </div>
-                    <h5 class="title">Joe Niven</h5>
-                    <span class="subtitle">Developer</span>
-                </div>
-            </div>
-            <div class="col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
-                <div class="testimonial-grid">
-                    <div class="thumbnail">
-                        <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                        <span class="qoute-icon"><i class="icon-26"></i></span>
-                    </div>
-                    <div class="content">
-                        <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                        <div class="rating-icon">
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
+                            <img src="img/testimonial-03.png" alt="Testimonial">
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+
                         </div>
-                        <h5 class="title">Ray Sanchez</h5>
-                        <span class="subtitle">Student</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                <div class="testimonial-grid">
-                    <div class="thumbnail">
-                        <img src="{{asset('nassets\img\testimonial-03.png')}}" alt="Testimonial">
-                        <span class="qoute-icon"><i class="icon-26"></i></span>
-                    </div>
-                    <div class="content">
-                        <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
-                        <div class="rating-icon">
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
+                        <div class="content">
+                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <div class="rating-icon">
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                            </div>
+                            <h5 class="title">Linda Garcia</h5>
+                            <span class="subtitle">Developer</span>
                         </div>
-                        <h5 class="title">Amber Page</h5>
-                        <span class="subtitle">Designer</span>
                     </div>
+
+                    <div class="testimonial-grid">
+                        <div class="thumbnail">
+                            <img src="img/testimonial-03.png" alt="Testimonial">
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                        </div>
+                        <div class="content">
+                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <div class="rating-icon">
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                            </div>
+                            <h5 class="title">Carlos Kelly</h5>
+                            <span class="subtitle">Marketer</span>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-grid">
+                        <div class="thumbnail">
+                            <img src="img/testimonial-03.png" alt="Testimonial">
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                        </div>
+                        <div class="content">
+                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <div class="rating-icon">
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                            </div>
+                            <h5 class="title">Cherise Harris</h5>
+                            <span class="subtitle">Designer</span>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-grid">
+                        <div class="thumbnail">
+                            <img src="img/testimonial-03.png" alt="Testimonial">
+                            <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                        </div>
+                        <div class="content">
+                            <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                            <div class="rating-icon">
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                                <i class="icon-23"></i>
+                            </div>
+                            <h5 class="title">Joe Niven</h5>
+                            <span class="subtitle">Developer</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                        <div class="testimonial-grid">
+                            <div class="thumbnail">
+                                <img src="img/testimonial-03.png" alt="Testimonial">
+                                <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                            </div>
+                            <div class="content">
+                                <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                                <div class="rating-icon">
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                </div>
+                                <h5 class="title">Ray Sanchez</h5>
+                                <span class="subtitle">Student</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                        <div class="testimonial-grid">
+                            <div class="thumbnail">
+                                <img src="img/testimonial-03.png" alt="Testimonial">
+                                <span class="qoute-icon"><i class="icon-26"></i></span>
+
+                            </div>
+                            <div class="content">
+                                <p>Lorem ipsum dolor amet consec tur elit adicing sed do usmod zx tempor enim minim veniam quis nostrud exer citation.</p>
+                                <div class="rating-icon">
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                    <i class="icon-23"></i>
+                                </div>
+                                <h5 class="title">Amber Page</h5>
+                                <span class="subtitle">Designer</span>
+                            </div>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 

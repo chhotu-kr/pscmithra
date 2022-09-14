@@ -83,6 +83,11 @@
     <i class="bi bi-circle"></i><span>Manage Livetest</span>
   </a>
 </li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="{{route('insert.testimonials')}}">
+    <i class="bi bi-circle"></i><span>Manage Testimonials</span>
+  </a>
+</li>
 
 
  

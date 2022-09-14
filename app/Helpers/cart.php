@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 
 function get_order(){
     return $order=Order::where([['ordered',false],["user_id",Auth::id()]])->first();
+    // $order=Order::where([['ordered',false],["user_id",Auth::id()]])->get();
+    // return redirect()->route("user.login");
  }
  function get_cart_count(){
      return get_order()->orderItem->count();

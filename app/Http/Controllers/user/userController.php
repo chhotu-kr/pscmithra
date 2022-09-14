@@ -37,20 +37,22 @@ class userController extends Controller
     }
 
     public function edit($id){
-        $data['subuser']=User::find('$id');
+         $data['subuser']=User::find($id);
         // dd($data);
         return view('admin.user.editUser',$data);
     }
 
     public function update(Request $request,$id){
-        $subuser=User::find('$id');
+        // $id=Auth()->user();
+        // $user_id=Auth::user($id);
+        $subuser=User::find($id);
         $subuser->name=$request->name;
         $subuser->email=$request->email;
         $subuser->contact=$request->contact;
         $subuser->password=$request->password;
        
         $subuser->image=$request->image;
-        $subuser->payment=$request->payment;
+        $subuser->amount=$request->amount;
         $subuser->gender=$request->gender;
         $subuser->type=$request->type;
         $subuser->save();

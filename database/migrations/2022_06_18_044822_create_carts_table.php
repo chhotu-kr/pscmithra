@@ -17,8 +17,8 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
             $table->string('slugid');
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('address_id')->constrained();
+            $table->integer('prdoucts_id');
+            $table->integer('qty');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

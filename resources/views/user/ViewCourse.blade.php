@@ -58,13 +58,15 @@
                 <button class="nav-link" id="plan-tab" data-bs-toggle="tab" data-bs-target="#plan" type="button" role="tab" aria-controls="plan" aria-selected="false">Plan</button>
             </li>
           </ul>
-          <div class="tab-content pt-2" id="myTabContent">
+          <div class="tab-content current pt-2" id="myTabContent">
             <div class="tab-pane fade show active" id="pdf" role="tabpanel" aria-labelledby="home-tab">
                 @livewire('user.book.bookproduct',["item"=>'pdf'])
             </div>
             <div class="tab-pane fade" id="course" role="tabpanel" aria-labelledby="profile-tab">
                 @livewire('user.book.bookproduct',["item"=>'course'])
             </div>
+
+            
             <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="contact-tab">
                 @livewire('user.book.bookproduct',["item"=>'book'])
             </div>

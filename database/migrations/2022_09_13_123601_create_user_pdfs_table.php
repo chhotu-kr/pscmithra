@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('course_quiz_questions', function (Blueprint $table) {
-           $table->id();
+        Schema::create('user_pdfs', function (Blueprint $table) {
+            $table->id();
             $table->boolean('isVisble')->default('1');
-            $table->foreignId('course_quizzes_id')->constrained();
-            $table->foreignId('question_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+            $table->foreignId('pdf_id')->constrained();
+            $table->string('slugid');
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_quiz_questions');
+        Schema::dropIfExists('user_pdfs');
     }
 };

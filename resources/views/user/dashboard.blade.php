@@ -123,7 +123,7 @@
                                 </a>
                             </li>
                             <li class="header-btn">
-                                <a href="#" class="education-btn btn-medium">Buy Now<i class="icon-4"></i></a>
+                                <a href="{{ route('view.course') }}" class="education-btn btn-medium">Buy Now<i class="icon-4"></i></a>
                             </li>
                             <li class="mobile-menu-bar d-block d-xl-none">
                                 <button class="hamberger-button">

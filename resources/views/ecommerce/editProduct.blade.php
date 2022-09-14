@@ -48,6 +48,8 @@
                         <option value="book">Book</option>
                         <option value="course">Course</option>
                         <option value="pdf">Pdf</option>
+                        <option value="plan">Plan</option>
+                        <option value="ebook">ebook</option>
                     </select>
                         <div class="valid-tooltip">
                           Looks good!
@@ -187,6 +189,46 @@
          dataType:'json',
          contentType:'application/json',
         url:"{{ route('Pdf.Product.show') }}",
+         data:{},
+         success:function(data){
+        //  console.log(data);
+         Html=`<table class="table datatable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                              
+                                <th scope="col">Name</th>
+                                
+                                
+                                </tr>
+                              </thead>
+                              <tbody>`;
+                                $.each(data, function(index, value){
+                                   //console.log(data);
+                                  Html+=`<tr>
+                                    <td><input type='checkbox' value='${value.id}'name='data'></td>
+                                    <td>${value.id}</td>
+                                    <td>${value.name}</td>
+
+
+                                    </tr>`;
+                                });Html+=`</tbody>
+                                
+                                       </table>`;
+
+                                       $("#append").html(Html);
+
+
+         }
+        });
+      }
+
+      else if(responseID=="ebook"){
+        $.ajax({
+          type:'get',
+         dataType:'json',
+         contentType:'application/json',
+        url:"{{ route('pdf.subscription') }}",
          data:{},
          success:function(data){
         //  console.log(data);

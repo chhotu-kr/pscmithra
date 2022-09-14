@@ -12,7 +12,7 @@ class TestiMonialsController extends Controller
 
     public function index(){
 
-        $data['testmonials']=TestiMonials::all();
+        $data['testimonials']=TestiMonials::all();
         $data['user']=User::all();
 
         return view('Testimonials.insertTestimonials',$data);
@@ -23,14 +23,14 @@ class TestiMonialsController extends Controller
         $data= new TestiMonials();
         $data->user_id=$request->user_id;
         $data->message=$request->message;
-
+        $data->slugid= md5($request->message .time());
         $data->save();
 
         return redirect()->route('insert.testimonials');
 
     }
     public function edit($id){
-        $data['testmonials']=TestiMonials::find($id);
+        $data['testimonials']=TestiMonials::find($id);
         $data['user']=User::all();
    
         return view('Testimonials.editTestimonials',$data);
@@ -40,7 +40,7 @@ class TestiMonialsController extends Controller
         $test_monials= $data=TestiMonials::find($id);
         $test_monials->user_id=$reuqest->user_id;
         $test_monials->message=$request->message;
-
+        $data->slugid= md5($request->message .time());
         $test_monials->save();
 
         return redirect()->route('insert.testimonials');  

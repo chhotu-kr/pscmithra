@@ -96,44 +96,49 @@
                   </div>
                 </div>
 
-            <div class="col-lg-4">
-                <div class="thumbnail">
-                    <img src="{{asset('nassets\img\the-magic-book-cover-img.png')}}" alt="Product Images">
-                </div>
+           {{-- @foreach ($product as $item)
+         
+           @endforeach --}}
+           <div class="col-lg-4">
+            <div class="thumbnail">
+                {{-- <img src="{{asset('nassets\img\the-magic-book-cover-img.png')}}" alt="Product Images"> --}}
+                @livewire('imageview', ['image' => ['image' => $product->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
             </div>
-            <div class="col-lg-5">
-                <div class="content">
-                    <h3 class="title">Desk Top Publishing Video </h3>
-                    <div class="product-rating">
-                        <div class="rating">
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                            <i class="icon-23"></i>
-                        </div>
-                        <span class="rating-count">(3)</span>
+        </div>
+        <div class="col-lg-5">
+            <div class="content">
+                <h3 class="title">{{$product->title}}</h3>
+                <div class="product-rating">
+                    <div class="rating">
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
+                        <i class="icon-23"></i>
                     </div>
-                    <div style="margin-top:10px;"><strong>Category: </strong><a style="font-weight:bold">&nbsp;&nbsp;Elearning Courses</a></div>
-                    <div style="margin-top:10px;"><strong>Language:</strong>Hindi</div>
-                    <div style="margin-top:10px;"><strong>Publisher:</strong>Ram Kumer</div>
-                    <div class="price">$70.30</div>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. sed ut perspic atis unde omnis iste natus.</p>
-                    <div class="product-action">
-                        <div class="education-quantity-btn">
-                            <div class="pro-qty"><input type="text" value="1"></div>
-                        </div>
-                        <div class="add-to-cart-btn">
-                            <a class="education-btn btn-medium" href="cart.php">Add To Cart</a>
-                        </div>
+                    <span class="rating-count">(3)</span>
+                </div>
+                <div style="margin-top:10px;"><strong>Subject: </strong><a style="font-weight:bold">&nbsp;&nbsp;{{$product->subject->sub_name}}</a></div>
+                <div style="margin-top:10px;"><strong>Language:</strong>{{$language->languagename}}</div>
+                <div style="margin-top:10px;"><strong>Publisher:</strong>Ram Kumer</div>
+                <div class="price">Rs/-{{$product->price}}</div>
+                <p>{{$product->content}}</p>
+                <div class="product-action">
+                    <div class="education-quantity-btn">
+                        <div class="pro-qty"><input type="text" value="1"></div>
+                    </div>
+                    <div class="add-to-cart-btn">
+                        <a class="education-btn btn-medium" href="{{ route('addtocart',['p_id'=>$product->id]) }}">Add To Cart</a>
                     </div>
                 </div>
+              
             </div>
+        </div>
         </div>
     </div>
 </div>
 
-<section class="shop-page-area section-gap-equal" style="padding-top: 0;">
+{{-- <section class="shop-page-area section-gap-equal" style="padding-top: 0;">
     <div class="container">
         <div class="section-title section-center sal-animate" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <h2 class="title">RELATED STUDY <span class="color-primary">MATERIAL</span></h2>
@@ -143,7 +148,7 @@
                 <div class="education-product">
                     <div class="inner">
                         <div class="thumbnail">
-                            <a href="{{route('view.coursedetails')}}">
+                            <a href="{{route('view.coursedetails',$product)}}">
                                 <img src="{{asset('nassets\img\desk-top-publishing.jpg')}}" alt="Shop Images">
                             </a>
                             <div class="product-hover-info">
@@ -154,7 +159,7 @@
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title"><a href="{{route('view.coursedetails')}}">Desk Top Publishing Video</a></h6>
+                            <h6 class="title"><a href="{{route('view.coursedetails',$product)}}">Desk Top Publishing Video</a></h6>
                             <div class="price">Rs 70.00</div>
                         </div>
                     </div>
@@ -228,5 +233,5 @@
         </div>
 
     </div>
-</section>
+</section> --}}
 @endsection

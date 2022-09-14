@@ -55,6 +55,7 @@ Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeIt
 Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");
 Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
 Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
+Route::get("/checkout",[addToCartController::class,"checkOut"])->name("checkout");
 // Route::get('/cartproduct',function(){
 //     echo message();
 //     return view('user/cart/viewproduct');
@@ -83,7 +84,7 @@ Route::get('/mock-test/start', [HomeController::class, 'get_MockTestStart'])->na
 Route::get('/view/blog', [HomeController::class, 'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details', [HomeController::class, 'get_ViewBlogDetails'])->name('view.blogdetails');
 Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('view.course');
-Route::get('/view/course/details', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
+Route::get('/view/course/details/{id}', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
 Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
 Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
@@ -333,7 +334,7 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/Course-productshow', [ProductController::class, 'get_Course'])->name('CourseProduct.show');
     Route::get('/Pdf-productshow', [ProductController::class, 'get_Pdf'])->name('Pdf.Product.show');
 
-    // .............pdf subscription..............//..//
+    // .............pdf subscription................//
 
     Route::get('/ebook', [ProductController::class, 'get_PdfSubscription'])->name('pdf.subscription');
 
@@ -465,6 +466,30 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::get('/update/extra/{id}',[ExtraController::class,'edit'])->name('edit.extra');
     Route::post('/update/extra/{id}',[ExtraController::class,'update'])->name('update.extra');
     Route::get('/remove/extra/{id}',[ExtraController::class,'destroy'])->name('remove.extra');
+
+    //...................TestiMonials Table....................//
+
+    Route::get('/testi-monials',[TestiMonialsController::class,'index'])->name('insert.testimonials');
+    Route::post('/testi-monials/store',[TestiMonialsController::class,'store'])->name('testimonials.store');
+    Route::get('/update/testi-monials/{id}',[TestiMonialsController::class,'edit'])->name('edit.testimonials');
+    Route::post('/update/testi-monials/{id}',[TestiMonialsController::class,'update'])->name('update.testimonials');
+    Route::get('/remove/testi-monials/{id}',[TestiMonialsController::class,'destroy'])->name('remove.testimonials');
+
+    //..............user Table...................//
+    Route::get('/manage-user',[userController::class,'index'])->name('manage.user');
+    Route::get('/user/create',[userController::class,'create'])->name('insert.create');
+    Route::post('/user/store',[userController::class,'store'])->name('user.store');
+    Route::get('/update/user/{id}',[userController::class,'edit'])->name('user.edit');
+    Route::post('/update/user/{id}',[userController::class,'update'])->name('user.update');
+    Route::get('/remove/user',[userController::class,'destroy'])->name('remove.user');
+
+    //......................Order Table..................//
+
+    Route::get('/manage-order',[orderController::class,'index'])->name('manage.order');
+    Route::get('/create/order',[orderController::class,'create'])->name('create.order');
+    Route::post('/store/order',[orderController::class,'store'])->name('order.store');
+    Route::get('/update/order/{id}',[orderController::class,'edit'])->name('order.edit');
+    Route::post('/update/order/{id}',[orderController::class,'update'])->name('order.update');
     
 });
 
