@@ -27,15 +27,16 @@
                                 @if ($item['type'] == 'Start')
                                     @if (Auth::user())
                                         <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
-                                            data-bs-target="#loginmodal">{{ $item['type'] }}<i class="icon-4"></i></a>
-                                    @else
-                                        <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop"
                                             wire:click.prevent="itemId('{{ $item['id'] }}')">{{ $item['type'] }}<i
                                                 class="icon-4"></i></a>
+                                    @else
+                                        <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
+                                            data-bs-target="#loginmodal">{{ $item['type'] }}<i class="icon-4"></i></a>
                                     @endif
                                     {{-- loginmodal --}}
-                                    <div class="modal fade" wire:ignore.self id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" wire:ignore.self id="loginmodal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         @livewire('user.view-modal')
                                     </div>
                                     {{-- language modal --}}
