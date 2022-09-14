@@ -17,7 +17,7 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
             $table->foreignId("user_id")->constrained();
-            $table->foreignId('product_id')->constrained();
+            
             $table->string('name');
             $table->string('slugid');
             $table->string('state');
