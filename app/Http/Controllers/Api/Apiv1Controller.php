@@ -790,11 +790,19 @@ class Apiv1Controller extends Controller
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
-  public function Add_To_Cart()
+  public function Add_To_Cart(Request $request)
   {
-    $data = Cart::all();
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
 
-    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    
+
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => ""]);
   }
 
   public function DeleteCart(Cart $cart)

@@ -110,8 +110,11 @@ Route::post('/updateUserDetails',[Apiv1Controller::class,'updateUserDetails']);
 Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
 
 //........cart.........
-Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');
-Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart.delete');
+
+Route::post('/cart',[Apiv1Controller::class,'Add_To_Cart']);
+Route::post('/removecart/{id}',[Apiv1Controller::class,'DeleteCart']);
+
+
 //........Coupon..........
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 //............blog............
