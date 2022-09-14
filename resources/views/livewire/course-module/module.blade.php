@@ -1,37 +1,21 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
-    
-    <div class="row">
-        <div class="col-12">
-            <div class="mb-3">
-                <label>Type</label>
-                <select wire:modal="module" name="type" id="selected" class="form-select">
-                    <option value="0">Select Type</option>
-                    <option value="voice">voice</option>
-                    <option value="text">text</option>
-                    <option value="quiz">quiz</option>
-                    <option value="video">video</option>
-                </select>
-            </div>
-        </div>
-        
-    </div>
-
-    @if(type=="video"|| type=="voice"){
-      
-    
-        <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label>Url</label>
-                                    <input type="text" name="url" class="form-control">
-                                </div>
+    {{$type}}
+    <div class="col">
+                            <label for="validationTooltip02">Select Module Type</label>
+                            <select wire:modal="type" name="type" class="form-select">
+                                <option >Select Type</option>
+                                <option value="voice">Voice</option>
+                                <option value="text">Text</option>
+                                <option value="quiz">Quiz</option>
+                                <option value="video">Video</option>
+                            </select>
+                            <div class="valid-tooltip">
+                                Looks good!
                             </div>
-                       
-    
-    }
+                        </div>
+            
 
-  
-        
-    @endif
+                   
+
 </div>
+

@@ -50,13 +50,18 @@ class CourseQuizQuestionController extends Controller
     }
 
     public function store(Request $request){
-        $data = new CourseQuizQuestion();
+      
+
+foreach($request->data as $value){
+    $data = new CourseQuizQuestion();
         $data-> quiz_examinations_id = $request->quiz_examinations_id;
-        $data-> question_id = $request->question_id;
+        $data-> question_id = $value;
        
-        //  $data-> slugid = md5('dfegfe'. time().'ff454tgw');
+       //  $data-> slugid = md5('dfegfe'. time().'ff454tgw');
          $data->save();
-          return redirect()->route('manage.Cquizquestion');
+
+}
+        return redirect()->back();
     }
 
     public function edit($id){

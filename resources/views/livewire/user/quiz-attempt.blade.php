@@ -7,7 +7,7 @@
 
                     <div class="card p-3">
                         <div class="card-body">
-                             <div class="content">
+                            <div class="content">
                                 <h5 class="title ">{{ $item['name'] }}</h5>
                                 <ul class="Attempt-sec">
                                     <li class="flex ttc mv-0-67 mv-0-50-l "><span>Questions: </span><span
@@ -37,10 +37,12 @@
                                                 <div class="modal-body">
                                                     @foreach ($item['languages'] as $o)
                                                         <div class="form-check languagelabel">
-
-                                                            <label class="form-check-label languagelabel"
-                                                                for="flexRadioDefault1"
-                                                                wire:click.prevent="selectLang({{ $o['id'] }})">
+                                                           <input class="form-check-input" type="checkbox"
+                                                                name="flexRadioDefault"
+                                                                @if ($lang == $o['id']) @checked($checked) @endif
+                                                                id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault"
+                                                                wire:click.prevent="selectLang('{{ $o['id'] }}')">
                                                                 {{ $o['name'] }}
                                                             </label>
                                                         </div>
@@ -51,15 +53,21 @@
                                                 <div class="modal-footer">
                                                     <button type="button" wire:click.prevent="checkLogin()"
                                                         class="education-btn btn-small btn-primary">Continue</button>
-                                                </div>
+                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 @elseif($item['type'] == 'Buy')
                                     <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
+                                @elseif($item['type'] == 'resume')
+                                    <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="resume('{{ $item['testId'] }}')">Resume<i
+                                            class="icon-4"></i></a>
                                 @else
-                                    <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
+                                    <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="result('{{ $item['testId'] }}')">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @endif
                             </div>
@@ -68,5 +76,6 @@
                 </div>
             @endforeach
         </div>
+        {{-- {{ dd($data) }} --}}
     </div>
 </div>

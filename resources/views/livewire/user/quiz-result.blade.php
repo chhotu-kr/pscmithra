@@ -103,7 +103,7 @@
                             <span class="text-danger ms-3">Wrong</span>
                         </div>
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #f1ebeb">
-                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] + $data['unseen'] }}</span>
+                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['unseen'] + $data['skip'] }}</span>
                             <span class="text-secondary ms-3">Unanswered</span>
                         </div>
                     </div>
@@ -457,10 +457,10 @@
                                                 </div>
     
                                             </div>
-                                            <div class="text-light btn btn-danger" wire:click.prevent="solution()" data-bs-toggle="modal"
+                                            <div class="text-light btn btn-danger" data-bs-toggle="modal" wire:click.prevent="solution()"
                                                 data-bs-target="#staticBackdrop" style="height: 33px">
                                                 <span style="font-size: 14px">
-                                                  Click for  Solution
+                                                    Click for Solution
                                                 </span>
                                             </div>
     

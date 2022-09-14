@@ -27,7 +27,6 @@
                                     <li class="flex mv-0-67 mv-0-50-l "><span>Time: </span><span
                                             class="ml-auto">{{ $item['totalTimeinMints'] }}</span></li>
                                 </ul>
-
                                 @if ($item['type'] == 'Start')
                                     <a class="education-btn btn-medium w-100" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop"
@@ -46,14 +45,17 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     @foreach ($item['languages'] as $o)
-                                                        <div class="form-check languagelabel">
-
-                                                            <label class="form-check-label languagelabel"
-                                                                for="flexRadioDefault1"
-                                                                wire:click.prevent="selectLang({{ $o['id'] }})">
-                                                                {{ $o['name'] }}
-                                                            </label>
-                                                        </div>
+                                                    <div class="form-check languagelabel">
+                                                        <input class="form-check-input" type="checkbox"
+                                                        @if ($lang == $o['id'])
+                                                        @checked($checked)
+                                                        @endif
+                                                            id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault"
+                                                            wire:click.prevent="selectLang('{{ $o['id'] }}')">
+                                                            {{ $o['name'] }}
+                                                        </label>
+                                                    </div>
                                                     @endforeach
                                                     <span class="text-danger ms-4"> {!! Session::get('select') !!}</span>
 
@@ -65,19 +67,26 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 @elseif($item['type'] == 'Buy')
                                     <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
+                                @elseif($item['type'] == 'resume')
+                                    <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="resume('{{ $item['testId'] }}')">Resume<i
+                                            class="icon-4"></i></a>
                                 @else
-                                    <a class="education-btn btn-medium w-100">{{ $item['type'] }}<i
+                                    <a class="education-btn btn-medium w-100"
+                                        wire:click.prevent="result('{{ $item['testId'] }}')">{{ $item['type'] }}<i
                                             class="icon-4"></i></a>
                                 @endif
-                              
+
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+         
     </div>
 </div>

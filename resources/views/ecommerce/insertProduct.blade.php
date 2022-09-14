@@ -1,10 +1,8 @@
 @extends('admin/base')
 @section('content')
+@include('admin.side')
 <main class="main" id="main">
     <div class="container">
-        <div class="col-3">
-            @include('admin.side')
-        </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-header ps-2 h4">Insert Product</div>

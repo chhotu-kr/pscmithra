@@ -39,18 +39,18 @@ class ModuleController extends Controller
     public function store(Request $request){
         $data= new Module();
         $data->course_id=$request->course_id;
-        $data->slugid=md5($request->course .time());
-        $data->type=$request->type;
+        $data->slugid=md5($request->course_id .time());
+        $data->type=$request->typp;
         $data->name=$request->name;
-        $data->url=$request->url;
-        $data->text=$request->text;
-        $data->quiz_id=$request->quiz_id;
+        // $data->url=$request->url;
+        $data->text=$request->description;
+        //$data->quiz_id=$request->quiz_id;
         $data->isfree=$request->isfree;
         $data->index=$request->index;
        
         $data->save();
        
-        return redirect()->route('manage.module');
+        return redirect()->back();
     }
 
     public function edit($id){

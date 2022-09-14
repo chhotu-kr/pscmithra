@@ -24,7 +24,6 @@ class Quiz extends Component
     public $quiztopics=[];
     public function mount($iass){
         $this->iddd = $iass;
-
         $this->quizcategory= QuizCategory::all();
         $this->get_quizsubcategories();
     }

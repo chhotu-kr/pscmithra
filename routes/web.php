@@ -17,15 +17,13 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\FilterController;
 
 // use App\Http\Controllers\CourseController;
-use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController,ExtraController, TestiMonialsController};
+use App\Http\Controllers\{AddressController, CartController, ExamQuestionController, AuthController, AuthorController, BackgroundImageController, BlogCategoryController, BlogController, BookController, CourseQuizController, CourseQuizQuestionController, ItemPdfSubscriptionController, LiveTestController, ModuleController, PageProductController, PdfSubscriptionController, PermissionController, PublicController, QuizCategoryController, QuizChapterController, QuizExaminationController, QuizQuestionController, QuizSubCategoryController, QuizTopicController, RoleController, StudyController, StudymetrialCategoryController, StudymetrialChapterController,ExtraController};
 use App\Http\Controllers\user\ExamCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
  use App\Http\Controllers\user\dashboard\profileController;
- use App\Http\Controllers\user\userController;
- use App\Http\Controllers\order\orderController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +43,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/about', function(){
     return view('user/About/aboutus');
 });
+
+Route::get("/test", function(){
+    return View("test.test");
+ });
+
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
 Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addTCart"])->name("addtocart");
 Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
@@ -52,7 +55,6 @@ Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeIt
 Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");
 Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
 Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
-Route::get("/checkout",[addToCartController::class,"checkOut"])->name("checkout");
 // Route::get('/cartproduct',function(){
 //     echo message();
 //     return view('user/cart/viewproduct');
@@ -67,7 +69,7 @@ Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('us
 
 
 Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');
-  Route::post('/update/user/password',[profileController::class,'ResetPassword'])->name('update.password');
+  Route::post('/update/user/password',[profileController::class,'ChangePassword'])->name('update.password');
  Route::post('/update/user',[profileController::class,'update'])->name('update.user');
 
 //............//..............//...........User Page.............//................//...............//
@@ -90,7 +92,7 @@ Route::get('/quizes', [HomeController::class, 'get_QuizPage'])->name('view.quizp
 Route::get('/quizes/start', [HomeController::class, 'get_QuizPageStart'])->name('view.quizpagestart');
 Route::get('/quiz/getresult', [HomeController::class, 'get_QuizResult'])->name('view.quizresult');
 Route::get('/mocktest/getresult', [HomeController::class, 'get_MockTestResult'])->name('view.mocktestresult');
-Route::get('/live/getresult', [HomeController::class, 'get_LiveQuizResult'])->name('view.liveresult ');
+Route::get('/live/getresult', [HomeController::class, 'get_LiveQuizResult'])->name('view.liveresult');
 Route::get('/quiz/solution', [HomeController::class, 'get_QuizSolution'])->name('view.quizsolution');
 Route::get('/mocktest/solution', [HomeController::class, 'get_MocktestSolution'])->name('view.mocktestsolution');
 Route::get('/live/solution', [HomeController::class, 'get_LiveQuizSolution'])->name('view.livesolution');
@@ -507,4 +509,6 @@ Route::post('/Live/testupdate/{id}', [LiveTestController::class, 'update'])->nam
 Route::get('/Livetestremove/{id}', [LiveTestController::class, 'destroy'])->name('livetest.remove');
 
 
-
+// Route::get('/examqw', function(){
+//     return view('manageExamination');
+// });

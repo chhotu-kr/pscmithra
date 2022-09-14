@@ -1,6 +1,6 @@
 <div>
 
-    {{-- {{ json_encode($data['questionslist'][$this->question_no]) }} --}}
+    {{-- {{ json_encode($data['questionslist'][$this->question_no]['time']) }} --}}
     <style type="text/css">
         .flex {
             display: flex;
@@ -231,7 +231,7 @@
                 <form id="regForm" style="margin-top:-30px">
                     <div class="tab curent">
                         <div class="d-grid gap-2 mt-4 box-shadows">
-                            <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['Questionin'] !!}</h4>
+                            <h4 class="question">Q-{{ $question_no + 1 }}. {!! $data['questionslist'][$question_no]['question'][0]['question'] !!}</h4>
 
                             <div class="btn">
                                 <button type="button" class="mt-1 active"
@@ -370,12 +370,12 @@
     <script>
         setInterval(updateCountDown, 1000)
         function updateCountDown() {
-            Livewire.emit('totaltime');
+            Livewire.emit('totaltimel');
         }
     </script>
     {{-- <script>
         // Livewire.emit('')
-        const min = 10;
+           const min = 10;
         let time = min * 60;
         let initialTime = time;
         const countdownDel = document.getElementById('countdown')

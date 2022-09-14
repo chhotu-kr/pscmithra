@@ -75,7 +75,7 @@
             </div>
             <div class="col-12 ms-3 ">
 
-                @livewire('user.quiz-chapter', ['chapter' => $chapter])
+                @livewire('user.quiz-chapter', ['sub_cat_id' => $sub_cat_id,'cat_id' => $cat_id])
 
                 {{-- <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4">
                     @foreach ($chapter as $item)

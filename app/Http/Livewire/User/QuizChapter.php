@@ -12,12 +12,14 @@ class QuizChapter extends Component
      public $quizcategory;
      public $quizcategoryId;
 
-        public $idasd;
+        public $sub_cat_id;
+        public $cat_id;
 
 
-     public function mount($chapter){
-        $this->idasd=$chapter;
-        $this->quizchapter = ModelsQuizChapter::where('quiz_sub_categories',$chapter)->get();
+     public function mount($sub_cat_id,$cat_id){
+        $this->sub_cat_id=$sub_cat_id;
+        $this->cat_id=$cat_id;
+        $this->quizchapter = ModelsQuizChapter::where('quiz_sub_categories',$sub_cat_id)->get();
    
      }
 

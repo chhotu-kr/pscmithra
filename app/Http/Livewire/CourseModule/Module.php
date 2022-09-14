@@ -6,14 +6,7 @@ use Livewire\Component;
 
 class Module extends Component
 {
-    public $module;
-
-    public $moduleId;
-public $type;
-    public function mount(){
-        $this->module=Module::all();
-        
-    }
+    public $type;
 
     
 

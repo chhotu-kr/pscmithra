@@ -6,6 +6,7 @@ use App\Models\AttempedExam;
 use App\Models\Examination;
 use App\Models\mockattempquestion;
 use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -31,13 +32,13 @@ class MocktestStart extends Component
   public function onSubmit()
   {
 
-    $user = 1;
+    $user = Auth::id();
     $examination_id =  Examination::where("slugid", $this->data['examId'])->first();
-  //  dd($examination_id );
+    //  dd($examination_id );
     $testId = AttempedExam::where("slugid", $this->data['testID'])->where("examinations_id", $examination_id->id)
       ->where("users_id", $user)->first();
 
-    
+
     foreach ($this->data['questionslist'] as $index => $value) {
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
         $dd = mockattempquestion::where('questions_id', $value['questionId'])->where('users_id', $user)->where('attemped_exams_id', $testId->id)->update(
@@ -47,12 +48,10 @@ class MocktestStart extends Component
             "time" => $value['time']
           ]
 
-        );  
+        );
       }
     }
 
-    // dd($this->data);
-    // $type = "resume";
 
     if ($this->data['type'] == "normal") {
       $type = "result";
@@ -75,11 +74,21 @@ class MocktestStart extends Component
           "totalmarks" => $total,
         ]
       );
-     
+      
       //   return response()->json(['msg' => 'Test Submited', 'status' => true, 'data' =>  $testId->mocktesttype]);
     }
-    return redirect()->route('view.mocktestresult',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
+    else {
+      // dd('rwmnads');
 
+      $testId->update(
+        [
+          "type" => 'result',
+          "remain_time" => $this->data['time'],
+          "lastQues" => $this->question_no + 1,
+        ]
+      );
+    }
+    return redirect()->route('view.mocktestresult', ['testID' => $this->data['testID'], 'examId' => $this->data['examId']]);
   }
   public function statusChange()
   {
@@ -113,7 +122,7 @@ class MocktestStart extends Component
     }
 
 
-    
+
     $this->a = $a;
     $this->w = $w;
     $this->u = $u;
@@ -148,20 +157,17 @@ class MocktestStart extends Component
 
   public function onSelect($id)
   {
-    $this->selected;
-    if($id == 1){
-      $selected = 'selOpt1';
+   
+    if ($id == 1) {
+      $this->selected = 'selOpt1';
+    } elseif ($id == 2) {
+      $this->selected = 'selOpt2';
+    } elseif ($id == 3) {
+      $this->selected = 'selOpt3';
+    } else {
+      $this->selected = 'selOpt4';
     }
-    elseif($id == 2){
-      $selected = 'selOpt2';
-    }
-    elseif($id == 3){
-      $selected = 'selOpt3';
-    }
-    else{
-      $selected = 'selOpt4';
-    }
-    $this->data['questionslist'][$this->question_no]['optSel'] = $selected;
+    $this->data['questionslist'][$this->question_no]['optSel'] = $this->selected;
     $this->filterledgers();
   }
   public function countTime($id)
@@ -173,11 +179,11 @@ class MocktestStart extends Component
     // dd($id);
   }
   public function mount($testId, $examinationId)
-  { 
-    $user = 1;
+  {
+    $user = Auth::id();
 
     $testId =  AttempedExam::select('id', 'slugid')->where("slugid", $testId)->first();
-    //  here attemped_exams_id not correct
+
     $this->data = AttempedExam::with(['examination.examQ.question.mockAttemp' => function ($q) use ($testId, $user) {
       $q->where('attemped_exams_id', $testId->id)->where('users_id', $user);
     }])->where('slugid', $testId->slugid)->where('users_id', $user)->where('examinations_id', $examinationId)
@@ -207,8 +213,8 @@ class MocktestStart extends Component
 
               return collect([
                 "showdir" => false,
-                
                 "questionId" => $fff->question->id,
+                // dd($fff->question->mockAttemp),
                 "s" => $fff->question->mockAttemp->QuesSeen,
                 "optSel" => $fff->question->mockAttemp->QuesSelect,
                 "time" => $fff->question->mockAttemp->time,

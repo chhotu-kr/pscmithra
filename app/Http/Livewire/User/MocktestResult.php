@@ -10,22 +10,20 @@ use Livewire\Component;
 class MocktestResult extends Component
 {
     public $data;
-    public function mount($testid,$examinationId){
-        $user_id =1;
-        if(Auth::user()){
-            $user_id = Auth::id();
-        }
+    
+    public function solution(){
+
+      return redirect()->route('view.mocktestsolution',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
       
-        //   if (empty($request->examinationId)) {
-        //     return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-        //   }
+    } 
+    public function mount($testid,$examinationId){
+      $user_id = Auth::id();
+      
           $examination_id =  Examination::select('id')->where("slugid", $examinationId)->first();
       
-        //   if (empty($request->testId)) {
-        //     return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        //   }
+      
           $testId =  AttempedExam::select('id', 'type')->where("slugid", $testid)->first();
-        //  dd($testId);
+        //  dd($examinationId);
       
           if ($testId->type == "resume") {
       
@@ -40,7 +38,7 @@ class MocktestResult extends Component
       
                 $q->with(['question.mockAttemp' => function ($q) use ($testId, $user_id) {
                   $q->where('attemped_exams_id', $testId->id)->where('users_id', $user_id)->orderBy('questions_id', 'DESC');
-                }]);
+                 }]);
               }])->with(['attm' => function ($aa) {
                 $aa->where('mocktesttype', 'reattemp');
               }]);
@@ -115,7 +113,7 @@ class MocktestResult extends Component
               }
             )[0];
       
-      
+     
           $right = count($this->data['questionslist']->where('final', 'right'));
           $wrong = count($this->data['questionslist']->where('final', 'wrong'));
           $attemped = $right + $wrong;

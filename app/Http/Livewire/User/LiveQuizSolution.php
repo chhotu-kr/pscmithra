@@ -9,80 +9,59 @@ use Livewire\Component;
 
 class LiveQuizSolution extends Component
 {
-    public $question_no;
     public $data;
-
+    public $status = false;
+    public $question_no;
     public $w = 0;
     public $a = 0;
     public $u = 0;
-    public $status = true;
-    // function filterledgers()
-    // {
-    //     $w = 0;
-    //     $a = 0;
-    //     $u = 0;
-
-
-
-    //     foreach ($this->data['questionslist'] as $value) {
-    //         if ($value['s'] == "false") {
-    //             $u++;
-    //         } else {
-    //             if (empty($value['optSel'])) {
-    //                 $w++;
-    //             } else {
-    //                 $a++;
-    //             }
-    //         }
-    //     }
-
-
-    //     $this->a = $a;
-    //     $this->w = $w;
-    //     $this->u = $u;
-    // }
-
-    // public function next()
-    // {
-
-    //     $this->question_no++;
-    // }
-    // public function jump($index)
-    // {
-
-    //     $this->question_no = $index;
-    //     $this->countTime($this->question_no);
-    // }
-   
-
-    // public function prev()
-    // {
-    //     $this->question_no--;
-    // }
-
-    // public function onSelect($id)
-    // {
-    //     $this->data['questionslist'][$this->question_no]['optSel'] = $id;
-    //     $this->filterledgers();
-    // }
+  
+    public function statusChange(){
+      $this->status = !$this->status;
+    }
+    function filterledgers()
+    {
+      $w = 0;
+      $a = 0;
+      $u = 0;
+  
+      foreach ($this->data['questionslist'] as $value) {
+        if ($value['seen'] == "false") {
+          $u++;
+        } else {
+          if ($value['optSel'] != $value['isRightAns']) {
+            $w++;
+          } else {
+            $a++;
+          }
+        }
+      }
+  
+      $this->a = $a;
+      $this->w = $w;
+      $this->u = $u;
+    }
+    public function next()
+    {
+      $this->question_no++;
+    }
+    public function prev()
+    {
+      $this->question_no--;
+    }
+    public function jump($index)
+    {
+  
+      $this->question_no = $index;
+     
+    }
     public function mount($testid, $examinationId)
     {
-        $user_id = 1;
-        if (Auth::user()) {
+       
             $user_id = Auth::id();
-        }
-
-
-        //   if (empty($request->examination)) {
-        //     return response()->json(['msg' => 'Enter Examination', 'status' => false]);
-        //   }
+      
         $examination_id =  liveExam::select('id')->where("slugid", $examinationId)->first();
 
-        //  dd($examinationId);
-
-        //   if (empty($request->testId)) {
-        //     return response()->json(['msg' => 'Enter Test Id', 'status' => false]);
-        //   }
         $testId =  liveAttemp::select('id')->where("slugid", $testid)->first();
 
 
@@ -95,7 +74,6 @@ class LiveQuizSolution extends Component
                 if ($d['type'] == "resume") {
                     return "Test not Complete";
                 } else if ($d['type'] == "result") {
-
                     return [
                         "testID" => $d->slugid,
                         "languageId" => $d->language->id,

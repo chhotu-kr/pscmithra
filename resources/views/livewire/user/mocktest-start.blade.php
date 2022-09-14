@@ -211,7 +211,7 @@
         }
 
         .active p {
-            color: black;
+        y0      color: black;
             align-items: flex-start
         }
 
@@ -315,7 +315,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
                     <div style="overflow:auto;">

@@ -46,7 +46,7 @@
                 margin-left: 14px;
                 color: #1e51dc;
                 position: absolute;
-                z-index: 100;
+                z-index: 0;
                 font-weight: 700;
                 font-size: 2em;
             }
@@ -62,7 +62,7 @@
             .mask.full,
             .circle .fill {
                 animation: fill ease-in-out 3s;
-                transform: rotate(135deg);
+                transform: rotate(<?php echo $data['percentage'] * 1.8 ?>deg);
             }
     
             @keyframes fill {
@@ -71,7 +71,7 @@
                 }
     
                 100% {
-                    transform: rotate(135deg);
+                    transform: rotate(<?php echo $data['percentage'] * 1.8 ?>deg);
                 }
             }
         </style>
@@ -88,21 +88,21 @@
                                 <div class="mask half">
                                     <div class="fill"></div>
                                 </div>
-                                <div class="inside-circle"> 75% </div>
+                                <div class="inside-circle"> {{ $data['percentage'] }}% </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #42e7c3">
-                            <span class="badge p-3 rounded-pill bg-success mt-1 ms-3">2</span>
+                            <span class="badge p-3 rounded-pill bg-success mt-1 ms-3">{{ $data['right'] }}</span>
                             <span class="text-white ms-3">Correct</span>
                         </div>
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #ffe2e4">
-                            <span class="badge p-3 rounded-pill bg-danger mt-1 ms-3">2</span>
+                            <span class="badge p-3 rounded-pill bg-danger mt-1 ms-3">{{ $data['wrong'] }}</span>
                             <span class="text-danger ms-3">Wrong</span>
                         </div>
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #f1ebeb">
-                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">4</span>
+                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] + $data['unseen'] }}</span>
                             <span class="text-secondary ms-3">Unanswered</span>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>-82.22</h6>
+                            <h6>{{$data['score']}}</h6>
                             <p style="margin-top: -20px">Score</p>
                         </div>
     
@@ -132,7 +132,7 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>-82.22</h6>
+                            <h6>{{$data['noQues']}}</h6>
                             <p style="margin-top: -20px">per Qusetiopn</p>
                         </div>
     
@@ -143,7 +143,7 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>-82.22</h6>
+                            <h6>{{$data['time'] / 60}}</h6>
                             <p style="margin-top: -20px">total time</p>
                         </div>
     
@@ -154,7 +154,7 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>-82.22</h6>
+                            <h6>{{$data['timeTaken']}}</h6>
                             <p style="margin-top: -20px"> time taken</p>
                         </div>
     
@@ -443,115 +443,21 @@
     
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-8">
-                                    <h5 class="text-center">
-                                        <a class="link text-decoration-underline" data-bs-toggle="collapse"
-                                            href="#collapseExample" role="button" aria-expanded="false"
-                                            aria-controls="collapseExample">
-                                            Directions
-                                        </a>
-    
-                                    </h5>
-                                    {{-- @if ($status == true)
-                                        <div class="card card-body border-0" style="margin-top:-20px">
-                                            <div class="col-8 mx-auto" style="font-size: 14.5px">
-                                                Some placeholder content for the collapse component. This panel is hidden by default but
-                                                revealed when the user activates the relevant trigger.
-                                            </div>
-                                        </div>
-                                    @endif --}}
-    
-                                    <form id="regForm" style="margin-top:-30px">
-                                        <div class="tab curent">
-                                            <div class="d-grid gap-2 mt-4 box-shadows">
-                                                <h4 class="question">Q-1.nsdkjdwkjhk,js,dw</h4>
-    
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                A
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            anbsn sd
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                B
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            adbnads
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                C
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                            bsk
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                                <div class="btn">
-                                                    <button type="button" class="mt-1 active">
-                                                        <div class="option-label">
-                                                            <label for="" class="radio-custom-label ">
-                                                                D
-                                                            </label>
-                                                        </div>
-                                                        <label class="radio-custom-label ms-4">
-                                                             jhskhbd
-                                                        </label>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-    
-    
-                                        <div style="overflow:auto;">
-                                            <div style="float:right;">
-    
-                                                <button type="button" class="me-2" id="prevBtn"
-                                                    type="button">Previous</button>
-    
-    
-                                                {{-- {{ $question_no }}{{  count($data['questionslist']) }} --}}
-    
-    
-                                                <button class="education-btn btn-medium" type="button" id="nextBtn">
-                                                    Next</button>
-                                            </div>
-                                        </div>
-                                        <!-- Circles which indicates the steps of the form: -->
-    
-                                    </form>
-                                </div>
-    
-                                <div class="col-lg-4 p-5" style="background-color: #f0f0f0">
+                               
+                                <div class="col-lg-12 p-5" style="background-color: #f0f0f0">
                                     <div class="user-attempt-question">
                                         <div class="user-profile mb-3">
     
                                             <div class="left-right " style="flex-grow: 1">
                                                 <div class="time-section">
-                                                    <h6>Time Taken : <b id="countdown">23: 33</b></h6>
+                                                    <h6>Time Taken : <b id="countdown">{{floor( $data['timeTaken'] / 60) }} min : {{ $data['timeTaken'] % 60 }}sec</b></h6>
                                                 </div>
     
                                             </div>
-                                            <div class="text-light btn btn-secondary" data-bs-toggle="modal"
+                                            <div class="text-light btn btn-danger" data-bs-toggle="modal" wire:click.prevent="solution()"
                                                 data-bs-target="#staticBackdrop" style="height: 33px">
                                                 <span style="font-size: 14px">
-                                                    Language
+                                                    Click for Solution
                                                 </span>
                                             </div>
     
@@ -561,31 +467,31 @@
                                         <div class="quition-number-plate">
                                             <h5 class="text-secondary">Your are Viewing LR Section Question Palltte:</h5>
                                             <div class="quition-no-box-section">
-                                                {{-- @foreach ($data['questionslist'] as $item)
-                                                    @if ($item['s'] == 'false')
-                                                        <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                                style="background: #9e9e9e;">{{ $loop->index + 1 }}</span></a>
+                                                @foreach ($data['questionslist'] as $item)
+                                                @if ($item['final'] == 'unseen')
+                                                    <a ><span
+                                                            style="background:  {{ $item['color'] }}">{{ $loop->index + 1 }}</span></a>
+                                                @else
+                                                    @if ($item['final'] == 'wrong')
+                                                        <a ><span
+                                                                style="background: {{ $item['color'] }};">{{ $loop->index + 1 }}</span></a>
                                                     @else
-                                                        @if (empty($item['optSel']))
-                                                            <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                                    style="background: #d70b0b;">{{ $loop->index + 1 }}</span></a>
-                                                        @else
-                                                            <a wire:click.prevent="jump({{ $loop->index }})"><span
-                                                                    style="background: #3ca440;">{{ $loop->index + 1 }}</span></a>
-                                                        @endif
+                                                        <a ><span
+                                                                style="background: {{ $item['color'] }};">{{ $loop->index + 1 }}</span></a>
                                                     @endif
-                                                @endforeach --}}
+                                                @endif
+                                            @endforeach
                                             </div>
                                         </div>
                                         <div class="legent-section">
                                             <h4>Legend</h4>
                                             <div class="answerd">
                                                 <div class="answer-box">
-                                                    <p><span style="background: #3ca440;"> 1</span>Answered</p>
-                                                    <p><span style="background: #d70b0b;">2</span> Not Answered</p>
+                                                    <p><span style="background: #3ca440;"> {{ $data['right'] }}</span>Rigth Answered</p>
+                                                    <p><span style="background: #d70b0b;">{{ $data['wrong'] }}</span> Wrong Answered</p>
                                                 </div>
                                                 <div class="answer-box">
-                                                    <p><span style="background: #9e9e9e;">3</span> Not Visited</p>
+                                                    <p><span style="background: #9e9e9e;">{{ $data['unseen'] }}</span> Not Visited</p>
                                                 </div>
                                             </div>
                                         </div>

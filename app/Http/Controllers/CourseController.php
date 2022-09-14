@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Livewire\Component;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Product;
@@ -120,7 +120,7 @@ class CourseController extends Controller
       $data= new Course();
       $data->name=$request->name;
       $data->slugid=md5($request->name .time());
-      $data->createdby=$request->createdby;
+      $data->createdby=0;
       $data->save();
       return redirect()->route('course.index');
 

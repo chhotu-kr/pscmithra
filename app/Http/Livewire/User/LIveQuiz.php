@@ -24,21 +24,45 @@ class LiveQuiz extends Component
   public $returnData;
   public $lang = null;
   public $itemId = null;
+  public $checked = false;
 
   public function itemId($id)
   {
-    $this->itemId = $id;
+    if(Auth::user()){
+      $this->itemId = $id;
+
+  }
+  else{
+      return redirect()->route('user.login');
+  }
   }
   public function selectLang($id)
   {
     $this->lang = $id;
+    $this->checked = true;
     // dd($id);
   }
+  public function resume($testId){
+    // dd($this->data);
+    $resumedata = $this->data->where('testId',$testId)->first();
+    $examination_id = liveExam::select('id', 'time_duration')->where("slugid", $resumedata['id'])->first();
+    // dd($examination_id);
+    $returndata['data'] = ['testId' => $testId, "examinationId" => $examination_id->id];
+    return redirect()->route('quiz.livequizstart',$returndata);
+
+}
+public function result($testId){
+  
+    $resumedata = $this->data->where('testId',$testId)->first();
+   
+    return redirect()->route('view.liveresult', ['testID' => $testId, "examId" => $resumedata['id']]);
+
+}
   public function prepareExam($ifLoginData)
   {
-
-    $user_id = 1;
-    $examination_id =  liveExam::select('id', 'start')->where("slugid", $ifLoginData['id'])->first();
+    // dd($ifLoginData);
+    $user_id = Auth::id();
+    $examination_id = liveExam::select('id', 'start','time_duration')->where("slugid", $ifLoginData['id'])->first();
 
     $start = $examination_id->start;
     $ss = strtotime("now");
@@ -54,8 +78,10 @@ class LiveQuiz extends Component
         $Attemp->live_exams_id = $examination_id->id;
         $Attemp->users_id = $user_id;
         $Attemp->language_id = $this->lang;
+        // dd($examination_id);
+        $Attemp->remain_time = $examination_id->time_duration * 60;
         $Attemp->save();
-        $examQuestion =  liveQuestion::where('live_attemps_id', $examination_id->id)->pluck('question_id');
+        $examQuestion =  liveQuestion::where('live_exams_id', $examination_id->id)->pluck('question_id');
        
         foreach ($examQuestion as $value) {
 
@@ -63,7 +89,7 @@ class LiveQuiz extends Component
           $mock->users_id =  $user_id;
           $mock->questions_id = $value;
           $mock->live_attemps_id = $Attemp->id;
-          $mock->save();
+           $mock->save();
         }
         $this->returnData['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
         // dd($this->returnData);
@@ -82,8 +108,6 @@ class LiveQuiz extends Component
   {
     if($this->itemId != null){
       if (Auth::user()) {
-        // return redirect()->route('user.login');
-      } else {
         $this->ifLoginData =  $this->data->where('id', $this->itemId)->first();
 
         if ($this->ifLoginData['type'] == "Start") {
@@ -98,6 +122,9 @@ class LiveQuiz extends Component
         } else if ($this->ifLoginData['type'] == "Prepare") {
           return dd($this->ifLoginData['name']);
         }
+      } else {
+        return redirect()->route('user.login');
+      
       }
     }
   }
@@ -106,23 +133,16 @@ class LiveQuiz extends Component
   public function mount()
   {
 
-    $user_id = 0;
-    if (Auth::user()) {
-      $user_id = Auth::user()->id;
-    } else {
-      $user_id = 0;
-    }
-
-
+   $user_id = Auth::id();
 
     $ids = liveAttemp::where('users_id', $user_id)->where('testtype', 'normal')->where('type', 'result')->pluck('live_exams_id')->all();
-
+    // dd($ids);
     $this->data = liveExam::with('lang.language')->with(
       'attm',
       function ($query) use ($user_id) {
         $query->where('users_id', $user_id)->where('testtype', 'normal');
       }
-    )->whereNotIn('id', $ids)
+    )
 
       ->get()
       ->map(function ($item) {
@@ -177,7 +197,7 @@ class LiveQuiz extends Component
           })
         ]);
       });
-    // dd($this->data);
+      // dd($this->data);
   }
   public function render()
   {
