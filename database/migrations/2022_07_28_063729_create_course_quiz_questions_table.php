@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('course_quiz_questions', function (Blueprint $table) {
            $table->id();
             $table->boolean('isVisble')->default('1');
-            $table->foreignId('quiz_examinations_id')->constrained();
+            $table->foreignId('course_quizzes_id')->constrained();
             $table->foreignId('question_id')->constrained();
             $table->timestamps();
         });

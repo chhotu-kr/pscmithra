@@ -55,6 +55,7 @@ Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeIt
 Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");
 Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
 Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
+Route::get("/checkout",[addToCartController::class,"checkOut"])->name("checkout");
 // Route::get('/cartproduct',function(){
 //     echo message();
 //     return view('user/cart/viewproduct');

@@ -54,7 +54,7 @@ class CourseQuizQuestionController extends Controller
 
 foreach($request->data as $value){
     $data = new CourseQuizQuestion();
-        $data-> quiz_examinations_id = $request->quiz_examinations_id;
+        $data-> course_quizzes_id = $request->quiz_examinations_id;
         $data-> question_id = $value;
        
        //  $data-> slugid = md5('dfegfe'. time().'ff454tgw');

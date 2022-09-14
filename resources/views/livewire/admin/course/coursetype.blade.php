@@ -18,6 +18,7 @@
   <div class="col">
     <label>Url</label>
     <input type="file" accept=".mp3,audio/*" name = "url" class="form-control" >
+    
   </div>
   @elseif ($typp=="video")
   <div class="col">
