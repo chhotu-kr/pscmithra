@@ -9,7 +9,7 @@
       <div class="education-product">
           <div class="inner">
               <div class="thumbnail">
-                  <a href="course-details.php">
+                  <a href="{{route('view.coursedetails',$item->id)}}">
                       @livewire('imageview', ['image' => ['image' => $item->bannerimage,'w'=>'210','h'=>'210']], key($item->id))
                   </a>
 
@@ -27,13 +27,13 @@
                  @endif --}}
               </div>
               <div class="content">
-                  <h6 class="title"><a href="course-details.php">{{$item->title}}</a></h6>
+                  <h6 class="title"><a href="{{route('view.coursedetails',$item->id)}}">{{$item->title}}</a></h6>
                   <div class="price">Rs {{$item->price}}</div>
               </div>
               <div class="product-hover-info">
                       <ul>
                           <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                          <li><a href="cart.php"><i class="icon-3"></i> Add to Cart</a></li>
+                          <li><a href="{{ route('addtocart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
                       </ul>
                   </div>
           </div>
