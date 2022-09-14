@@ -4,7 +4,7 @@
         
         @include('admin.side')
       <div class="container">
-        <a href="{{route('Cquizquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add CourseQuizQuestion</a>   
+        <a href="{{route('coursequizquestion.create',['id'=>$data['id']])}}" class="btn btn-outline-primary mb-3">Add CourseQuizQuestion</a>   
         <div class="row">
           {{-- <p>{{$data}}</p> --}}
         

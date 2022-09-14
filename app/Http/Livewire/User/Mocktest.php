@@ -30,7 +30,6 @@ class Mocktest extends Component
     {
         if(Auth::user()){
             $this->itemId = $id;
-
         }
         else{
             return redirect()->route('user.login');

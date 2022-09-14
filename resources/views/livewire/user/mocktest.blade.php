@@ -8,7 +8,7 @@
 
     <div id="tab-1" class="tab-content current">
         <div class="row">
-            {{-- {{ $data }} --}}
+            -- {{ $data }} 
             @foreach ($data as $item)
                 <div class="col-lg-3 col-md-6">
                     <div class="card p-3">
