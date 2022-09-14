@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Coupon;
 use App\Models\Address;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 class addToCartController extends Controller
 {
@@ -69,23 +70,43 @@ class addToCartController extends Controller
                    $oi->save();
                    
                 }
+               
            }
 
           
            else{
                //New Order Create
-            $ord=new Order();
-            $ord->ordered=false;
-            $ord->user_id=$user->id;
-            $ord->save();
+            // $ord=new Order();
+            // $ord->ordered=false;
+            // $ord->user_id=$user->id;
+            // $ord->save();
+
+            
           
-            $oi=new OrderItem();
-            $oi->ordered=false;
-            $oi->product_id=$product->id;
-            $oi->order_id=$ord->id;
-            $oi->save();
+            // $oi=new OrderItem();
+            // $oi->ordered=false;
+            // $oi->product_id=$product->id;
+            // $oi->order_id=$ord->id;
+            // $oi->save();
+
+            return redirect()->route('user.login');
 
            }
+
+           $ord=new Order();
+           $ord->ordered=false;
+           $ord->user_id=$user->id;
+           $ord->save();
+
+           
+         
+           $oi=new OrderItem();
+           $oi->ordered=false;
+           $oi->product_id=$product->id;
+           $oi->order_id=$ord->id;
+           $oi->save();
+
+           
 
         }   
         return redirect()->route("usercart.index");
@@ -168,6 +189,30 @@ class addToCartController extends Controller
         return redirect()->route('checkout');
     }
 
+    public function addcart(Request $request){
+        // dd($request->p_id);
+       if(Auth::user()){
+       
+        $user_id = Auth::id();
+
+        $slugid = md5( $user_id + time());
+
+        $prd = new Cart();
+        $prd->prdoucts_id = $request->p_id;
+        $prd->slugid = $slugid;
+        $prd->user_id = $user_id;
+        $prd->qty = 1;
+        $prd->save();
+        return redirect()->back();
+         
+       }
+       else{
+        return redirect()->route('user.login');
+       }
+        
+
+
+    }
    
 
    
