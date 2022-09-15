@@ -61,6 +61,7 @@ Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("
 Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
 Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
 Route::get("/checkout",[addToCartController::class,"checkOut"])->name("checkout");
+
 // Route::get('/cartproduct',function(){
 //     echo message();
 //     return view('user/cart/viewproduct');
@@ -114,6 +115,11 @@ Route::get('/live-quiz/start', [HomeController::class, 'Live_Quiz_Start'])->name
 Route::get('/privacy/policy', [HomeController::class, 'privacy_policy'])->name('view.privacy');
 Route::get('/term/condition', [HomeController::class, 'term'])->name('view.term');
 Route::get('/refund/cancel', [HomeController::class, 'refund'])->name('view.refund');
+
+
+// Route::post('/payment/status', [HomeController::class,'paymentCallback'])->name('status');
+Route::get('/makepayment',[HomeController::class,'order'])->name('makePayment');
+Route::post('/payment/call-back',[HomeController::class,'paymentcallBack'])->name('callback');
 
 //................calling Data ..........
 

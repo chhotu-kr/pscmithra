@@ -1087,12 +1087,11 @@ class Apiv1Controller extends Controller
 
     $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
     if (count($oder)==0) {
-      return response()->json(['msg' => 'Inv
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
     if (empty($request->oderid)) {
-      return response()->json(['msg' => 'Enter User', 'status' => false]);
-    }alid Order ID', 'status' => false]);
+      return response()->json(['msg' => 'Enter order id', 'status' => false]);
+    }
     }
     $oder = $oder[0];
 

@@ -171,6 +171,7 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'A' => 
         array (
             'App\\' => 4,
+            'Anand\\LaravelPaytmWallet\\' => 25,
         ),
     );
 
@@ -498,6 +499,10 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Anand\\LaravelPaytmWallet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -511,6 +516,19 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
     );
 
     public static $classMap = array (
+        'Anand\\LaravelPaytmWallet\\Contracts\\Factory' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Contracts/Factory.php',
+        'Anand\\LaravelPaytmWallet\\Contracts\\Provider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Contracts/Provider.php',
+        'Anand\\LaravelPaytmWallet\\Facades\\PaytmWallet' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Facades/PaytmWallet.php',
+        'Anand\\LaravelPaytmWallet\\PaytmWalletManager' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/PaytmWalletManager.php',
+        'Anand\\LaravelPaytmWallet\\PaytmWalletServiceProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/PaytmWalletServiceProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\BalanceCheckProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/BalanceCheckProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\PaytmAppProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/PaytmAppProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\PaytmWalletProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/PaytmWalletProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\ReceivePaymentProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/ReceivePaymentProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\RefundPaymentProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/RefundPaymentProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\RefundStatusCheckProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/RefundStatusCheckProvider.php',
+        'Anand\\LaravelPaytmWallet\\Providers\\StatusCheckProvider' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Providers/StatusCheckProvider.php',
+        'Anand\\LaravelPaytmWallet\\Traits\\HasTransactionStatus' => __DIR__ . '/..' . '/anandsiddharth/laravel-paytm-wallet/src/Traits/HasTransactionStatus.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/AddressController.php',
@@ -579,7 +597,6 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Livewire\\Admin\\Course\\Coursetype' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Course/Coursetype.php',
         'App\\Http\\Livewire\\Admin\\LiveExam\\SelectQuestion' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/LiveExam/SelectQuestion.php',
-        'App\\Http\\Livewire\\Admin\\Liveexam\\Selecques' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Liveexam/Selecques.php',
         'App\\Http\\Livewire\\Admin\\Product\\Quiz' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/Quiz.php',
         'App\\Http\\Livewire\\Admin\\Product\\Sm' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/Sm.php',
         'App\\Http\\Livewire\\Admin\\Product\\StudyMaterial' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/StudyMaterial.php',
@@ -607,6 +624,7 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Livewire\\User\\CartCard' => __DIR__ . '/../..' . '/app/Http/Livewire/User/CartCard.php',
         'App\\Http\\Livewire\\User\\Categoryslider' => __DIR__ . '/../..' . '/app/Http/Livewire/User/Categoryslider.php',
         'App\\Http\\Livewire\\User\\Dashboard\\Profile' => __DIR__ . '/../..' . '/app/Http/Livewire/User/Dashboard/Profile.php',
+        'App\\Http\\Livewire\\User\\LiveQuiz' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuiz.php',
         'App\\Http\\Livewire\\User\\LiveQuizResult' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizResult.php',
         'App\\Http\\Livewire\\User\\LiveQuizSolution' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizSolution.php',
         'App\\Http\\Livewire\\User\\LiveQuizStart' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizStart.php',
@@ -708,7 +726,6 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Models\\userBook' => __DIR__ . '/../..' . '/app/Models/userBook.php',
         'App\\Models\\userCourse' => __DIR__ . '/../..' . '/app/Models/userCourse.php',
         'App\\Models\\userCourseModule' => __DIR__ . '/../..' . '/app/Models/userCourseModule.php',
-        'App\\Models\\userPdf' => __DIR__ . '/../..' . '/app/Models/userPdf.php',
         'App\\Models\\userPdfSubscriptions' => __DIR__ . '/../..' . '/app/Models/userPdfSubscriptions.php',
         'App\\Models\\userPlans' => __DIR__ . '/../..' . '/app/Models/userPlans.php',
         'App\\Models\\users_roles' => __DIR__ . '/../..' . '/app/Models/users_roles.php',

@@ -7,13 +7,13 @@
                 width: auto;
                 background-color: #00a884;
             }
-    
-               .badgediv {
+
+            .badgediv {
                 width: 40px;
                 background-color: green;
                 padding: 5px
             }
-    
+
             .circle-wrap {
                 margin: 150px auto;
                 width: 150px;
@@ -23,7 +23,7 @@
                 border: 1px solid #cdcbd0;
                 margin-top: 0px;
             }
-    
+
             .circle-wrap .circle .mask,
             .circle-wrap .circle .fill {
                 width: 150px;
@@ -31,11 +31,11 @@
                 position: absolute;
                 border-radius: 50%;
             }
-    
+
             .circle-wrap .circle .mask {
                 clip: rect(0px, 150px, 150px, 75px);
             }
-    
+
             .circle-wrap .inside-circle {
                 width: 122px;
                 height: 122px;
@@ -51,28 +51,28 @@
                 font-weight: 700;
                 font-size: 2em;
             }
-    
+
             /* color animation */
-    
+
             /* 3rd progress bar */
             .mask .fill {
                 clip: rect(0px, 75px, 150px, 0px);
                 background-color: #227ded;
             }
-    
+
             .mask.full,
             .circle .fill {
                 animation: fill ease-in-out 3s;
-                transform: rotate(<?php echo $data['percentage'] * 1.8 ?>deg);
+                transform: rotate(<?php echo $data['percentage'] * 1.8; ?>deg);
             }
-    
+
             @keyframes fill {
                 0% {
                     transform: rotate(0deg);
                 }
-    
+
                 100% {
-                    transform: rotate(<?php echo $data['percentage'] * 1.8 ?>deg);
+                    transform: rotate(<?php echo $data['percentage'] * 1.8; ?>deg);
                 }
             }
         </style>
@@ -103,16 +103,17 @@
                             <span class="text-danger ms-3">Wrong</span>
                         </div>
                         <div class="boxdiv rounded-pill mt-2" style="background-color: #f1ebeb">
-                            <span class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] + $data['unseen'] }}</span>
+                            <span
+                                class="badge p-3 rounded-pill bg-secondary mt-1 ms-3">{{ $data['skip'] + $data['unseen'] }}</span>
                             <span class="text-secondary ms-3">Unanswered</span>
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="row" style="margin-top: -50px">
                     <div class="col-12 text-center">
-                        <a >
-                        <h3 class="text-primary">Answer Key & Solution</h3>
+                        <a>
+                            <h3 class="text-primary">Answer Key & Solution</h3>
                         </a>
                     </div>
                 </div>
@@ -124,10 +125,10 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>{{$data['score']}}</h6>
+                            <h6>{{ $data['score'] }}</h6>
                             <p style="margin-top: -20px">Score</p>
                         </div>
-    
+
                     </div>
                     <div class="col-3 col-md-1 align-items-center text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="black"
@@ -135,10 +136,10 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>{{$data['noQues']}}</h6>
+                            <h6>{{ $data['noQues'] }}</h6>
                             <p style="margin-top: -20px">No of Question</p>
                         </div>
-    
+
                     </div>
                     <div class="col-3 col-md-1 align-items-center text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="black"
@@ -146,10 +147,10 @@
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                         <div>
-                            <h6>{{$data['time'] / 60  }}min</h6>
+                            <h6>{{ $data['time'] / 60 }}min</h6>
                             <p style="margin-top: -20px">total time</p>
                         </div>
-    
+
                     </div>
                     <div class="col-3 col-md-1 align-items-center text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="black"
@@ -160,7 +161,7 @@
                             <h6>{{ $data['timeTaken'] }}</h6>
                             <p style="margin-top: -20px"> time taken</p>
                         </div>
-    
+
                     </div>
                 </div>
                 <div class="row">
@@ -171,26 +172,28 @@
                         </h3>
                     </div>
                     <div class="col-12">
-                        Lorem,<span class="text-dark"> ipsum dolor sit amet consectetur adipisicing elit. Similique cum iusto
-                            nam quisquam ipsa pariatur natus. Est sit sint a labore fugit odit rem voluptatum quis architecto
+                        Lorem,<span class="text-dark"> ipsum dolor sit amet consectetur adipisicing elit. Similique cum
+                            iusto
+                            nam quisquam ipsa pariatur natus. Est sit sint a labore fugit odit rem voluptatum quis
+                            architecto
                             pariatur. Nihil, odio!</span>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <h6 class="mt-4">Question Analytics</h6>
                     <div>
-    
+
                         {{-- {{ json_encode($data['questionslist'][$this->question_no]) }} --}}
                         <style type="text/css">
                             .flex {
                                 display: flex;
                             }
-    
+
                             .quize-page {
                                 padding: 50px 0;
                                 position: relative;
                             }
-    
+
                             /* .quize-page:before {
                                     content: '';
                                     position: absolute;
@@ -201,23 +204,23 @@
                                     top: 0;
                                     right: 0;
                                 } */
-    
+
                             #regForm {
                                 background-color: #ffffff;
                                 padding: 20px;
                             }
-    
+
                             #regForm h1 {
                                 text-align: left;
                                 font-size: 22px;
                             }
-    
-    
+
+
                             /* Mark input boxes that gets an error on validation: */
                             input.invalid {
                                 background-color: #ffdddd;
                             }
-    
+
                             /* Hide all steps by default: */
                             .tab {
                                 display: contents;
@@ -225,7 +228,7 @@
                                 padding: 10px;
                                 margin-bottom: 15px;
                             }
-    
+
                             #prevBtn {
                                 background-color: #4c7bcd;
                                 border: 0;
@@ -234,7 +237,7 @@
                                 color: #fff;
                                 padding: 0 20px;
                             }
-    
+
                             /* Make circles that indicate the steps of the form: */
                             .step {
                                 height: 15px;
@@ -246,53 +249,53 @@
                                 display: inline-block;
                                 opacity: 0.5;
                             }
-    
+
                             .step.active {
                                 opacity: 1;
                             }
-    
+
                             /* Mark the steps that are finished and valid: */
                             .step.finish {
                                 background-color: #04AA6D;
                             }
-    
-    
+
+
                             p.quition-para {
                                 color: #000;
                                 font-size: 18px;
                                 margin-bottom: 10px;
                             }
-    
-    
+
+
                             .user-profile {
                                 display: flex;
                             }
-    
+
                             .user-profile .left-user img {
                                 width: 90px;
                                 margin-right: 20px;
                             }
-    
+
                             .user-attempt-question {
                                 padding-left: 20px;
                             }
-    
+
                             .user-attempt-question .left-right h4 {
                                 margin: 0;
                                 margin-top: 18px;
                             }
-    
+
                             .legent-section {
                                 margin-top: 20px;
                             }
-    
-    
-    
+
+
+
                             .legent-section .answerd .answer-box {
                                 display: flex;
                                 justify-content: space-between;
                             }
-    
+
                             .legent-section .answerd .answer-box p {
                                 width: 49%;
                                 margin: 0;
@@ -304,7 +307,7 @@
                                 text-align: center;
                                 position: relative;
                             }
-    
+
                             .legent-section .answerd .answer-box p span {
                                 width: 30px;
                                 display: inline-block;
@@ -314,31 +317,31 @@
                                 height: 38px;
                                 line-height: 38px;
                             }
-    
-    
-    
+
+
+
                             .quition-no-box-section {
                                 height: 185px;
                                 overflow: auto;
                             }
-    
+
                             .quition-no-box-section span {
                                 background: #2196f3;
                                 width: 40px;
                                 display: inline-block;
-                               margin: 10px 20px;
+                                margin: 10px 20px;
                                 height: 40px;
                                 line-height: 40px;
                                 text-align: center;
                                 color: #fff;
                             }
-    
+
                             .four-btn {
                                 margin-top: 20px;
                                 border-top: 1px solid #dcd1d1;
                                 padding-top: 10px;
                             }
-    
+
                             .four-btn a {
                                 width: 49%;
                                 border: 2px solid #00b0ff;
@@ -350,7 +353,7 @@
                                 font-weight: 600;
                                 background: #0595d6;
                             }
-    
+
                             .option label {
                                 font-size: var(--font-size-b1);
                                 line-height: var(--line-height-b1);
@@ -358,29 +361,29 @@
                                 color: white;
                                 margin: 0 0 0px !important;
                             }
-    
+
                             .btn-group-vertical.special {
                                 display: flex;
                             }
-    
+
                             .special .btn {
                                 /* background-color: #787575; */
                                 flex: 1
                             }
-    
+
                             button:active::before {
                                 background-color: #dd4814;
                             }
-    
-    
-    
+
+
+
                             .active:focus {
                                 background-color: #E3F2FD;
-    
+
                             }
-    
+
                             .active {
-    
+
                                 width: 100%;
                                 border: 1px solid grey;
                                 border-radius: 10px;
@@ -388,20 +391,20 @@
                                 color: black;
                                 display: flex
                             }
-    
+
                             .active p {
                                 color: black;
                                 align-items: flex-start
                             }
-    
+
                             .box-shadows {
                                 box-shadow: none;
                                 padding: 10px;
                                 margin-bottom: 30px;
                                 border: 1px solid #e5dfdf;
                             }
-    
-    
+
+
                             .radio-custom,
                             .radio-custom-label {
                                 display: inline-block;
@@ -410,11 +413,11 @@
                                 cursor: pointer;
                                 font-size: var(--font-size-b1);
                             }
-    
+
                             .accordion {
                                 margin-bottom: 30px;
                             }
-    
+
                             .according_tab .card-header button {
                                 border: 0;
                                 font-size: 18px;
@@ -422,64 +425,114 @@
                                 color: #000;
                                 padding: 0;
                             }
-    
+
                             .card-header {
                                 padding: 0 10px;
                             }
-    
-    
-    
+
+
+
                             .solutions p {
                                 font-size: 18px;
                                 color: #000;
                             }
-    
+
                             .option-label {
                                 background-color: #000;
                                 color: white;
                                 border-radius: 100%;
                                 width: 26px;
-    
+
                             }
                         </style>
-    
-    
+
+
                         <div class="container">
                             <div class="row">
-                                
+
                                 <div class="col-lg-12 p-5" style="background-color: #f0f0f0">
                                     <div class="user-attempt-question">
                                         <div class="user-profile mb-3">
-    
+
                                             <div class="left-right " style="flex-grow: 1">
                                                 <div class="time-section">
-                                                    <h6>Time Taken : <b id="countdown">{{floor( $data['timeTaken'] / 60) }} min : {{ $data['timeTaken'] % 60 }}sec</b></h6>
+                                                    <h6>Time Taken : <b
+                                                            id="countdown">{{ floor($data['timeTaken'] / 60) }} min :
+                                                            {{ $data['timeTaken'] % 60 }}sec</b></h6>
                                                 </div>
-    
+
                                             </div>
-                                            <div class="text-light btn btn-danger" wire:click.prevent="solution()" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop" style="height: 33px">
+                                         
+                                            <div class="text-light btn btn-success"
+                                                data-bs-toggle="modal" data-bs-target="#languagereattempt"
+                                                style="height: 31px">
                                                 <span style="font-size: 14px">
-                                                  Click for  Solution
+                                                    Reattempt
                                                 </span>
                                             </div>
-    
+                                            {{-- language modal --}}
+                                            <div wire:ignore.self class="modal fade" id="languagereattempt"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Select
+                                                                Language
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @foreach ($data['languages'] as $o)
+                                                                <div class="form-check languagelabel">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        @if ($lang == $o['id']) @checked($checked) @endif
+                                                                        id="flexCheckDefault">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckDefault"
+                                                                        wire:click.prevent="selectLang('{{ $o['id'] }}')">
+                                                                        {{ $o['language'] }}
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
+                                                            <span class="text-danger ms-4">
+                                                                {!! Session::get('select') !!}</span>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" wire:click.prevent="reattempt()"
+                                                                class="education-btn btn-small btn-primary">Continue</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-light btn btn-danger ms-4"
+                                                wire:click.prevent="solution()" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop" style="height: 31px">
+                                                <span style="font-size: 14px">
+                                                    Click for Solution
+                                                </span>
+                                            </div>
+
                                         </div>
-    
-    
+
+
                                         <div class="quition-number-plate">
-                                            <h5 class="text-secondary">Your are Viewing LR Section Question Palltte:</h5>
+                                            <h5 class="text-secondary">Your are Viewing LR Section Question Palltte:
+                                            </h5>
                                             <div class="quition-no-box-section">
                                                 @foreach ($data['questionslist'] as $item)
                                                     @if ($item['final'] == 'unseen')
-                                                        <a ><span
+                                                        <a><span
                                                                 style="background:  {{ $item['color'] }}">{{ $loop->index + 1 }}</span></a>
                                                     @else
                                                         @if ($item['final'] == 'wrong')
-                                                            <a ><span
+                                                            <a><span
                                                                     style="background: {{ $item['color'] }};">{{ $loop->index + 1 }}</span></a>
                                                         @else
-                                                            <a ><span
+                                                            <a><span
                                                                     style="background: {{ $item['color'] }};">{{ $loop->index + 1 }}</span></a>
                                                         @endif
                                                     @endif
@@ -490,11 +543,14 @@
                                             <h4>Legend</h4>
                                             <div class="answerd">
                                                 <div class="answer-box">
-                                                    <p><span style="background: #3ca440;"> {{ $data['right'] }}</span>Rigth Answered</p>
-                                                    <p><span style="background: #d70b0b;">{{ $data['wrong'] }}</span> Wrong Answered</p>
+                                                    <p><span style="background: #3ca440;">
+                                                            {{ $data['right'] }}</span>Rigth Answered</p>
+                                                    <p><span style="background: #d70b0b;">{{ $data['wrong'] }}</span>
+                                                        Wrong Answered</p>
                                                 </div>
                                                 <div class="answer-box">
-                                                    <p><span style="background: #9e9e9e;">{{ $data['unseen'] }}</span> Not Visited</p>
+                                                    <p><span style="background: #9e9e9e;">{{ $data['unseen'] }}</span>
+                                                        Not Visited</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -502,15 +558,15 @@
                                 </div>
                             </div>
                         </div>
-    
-    
-    
+
+
+
                     </div>
-    
+
                 </div>
-    
+
             </div>
         </div>
     </div>
-    
+
 </div>
