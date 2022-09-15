@@ -31,7 +31,7 @@
         <div class="col-4">
             <div class="list-group">
                 <div class="list-group-item list-group-item-action">Total Amount <span class="float-end">Rs.
-                        {{ $total['totalAmount'] }}/-</span></div>
+                        {{ $total['total'] }}/-</span></div>
                 <div class="list-group-item list-group-item-action bg-success text-white">Total Discount Amount<span
                         class="float-end">Rs. {{ $total['discount'] }}/-</span></div>
                 <div class="list-group-item list-group-item-action ">Tax (18%) <span class="float-end">Rs.
@@ -46,7 +46,7 @@
                         @endif --}}
 
                 <div class="list-group-item list-group-item-action">Payable Amount <span class="float-end">Rs.
-                    {{ $total['payableAmount'] }}/-</span> </div>
+                    {{ $total['total'] }}/-</span> </div>
             </div>
             <div class="row mt-3 px-2">
                 <a href="" class="btn btn-success col">Continue Shopping</a>

@@ -17,14 +17,15 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
             $table->foreignId("user_id")->constrained();
-            $table->foreignId("address_id")->constrained()->nullable();
-            $table->foreignId("coupon_id")->constrained()->nullable();
-            $table->enum('payment',['Done','Pending',])->default('Pending');
-            
+            $table->foreignId("address_id")->nullable()->constrained();
+            $table->foreignId("coupon_id")->nullable()->constrained();
+            $table->enum('payment',['Done','Pending',])->default('Pending'); 
             $table->double('gst', 10, 5);
             $table->double('discount', 10, 5);
             $table->double('total', 10, 5);
             $table->string("dateofordered")->nullable();
+            $table->string("dateofpayement")->nullable();
+            $table->string("txn_id")->nullable();
             $table->string("slugid");
             $table->boolean("ordered")->default(0);
             $table->timestamps();

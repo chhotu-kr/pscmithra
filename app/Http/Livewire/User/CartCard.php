@@ -5,6 +5,8 @@ namespace App\Http\Livewire\User;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\coupon;
+use App\Models\order;
+use App\Models\orderItem;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -97,7 +99,42 @@ public function updatedcode(){
         if ($this->addressSelected == null) {
             session()->flash('add', 'Please select a address to checkout');
         } else {
-            dd("checkout");
+            $user_id = Auth::user();
+              $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+          
+              if (count($data) == 0) {
+                session()->flash('add', 'Add Item to checkout');
+              } else {
+                $array = [];
+          
+                $order = new order();
+                if ($this->total['cstatus'] == true) {
+                  $order->coupon_id = $this->total['coupon_id'];
+                }
+                $order->address_id = $this->addressSelected;
+                $order->dateofordered = strtotime("now");
+                $order->user_id = $user_id->id;
+                $order->gst = $this->total['gst'];
+                $order->discount = $this->total['discount'];
+                $order->total =$this->total['total'];
+                $order->slugid = md5($user_id->id . time());
+                $order->save();
+          
+          
+                foreach ($data as $value) {
+                  $orderItem = new orderItem();
+                  $orderItem->orders_id = $order->id;
+                  $orderItem->products_id = $value->product->id;
+                  $orderItem->save();
+                  $value->delete();
+                }
+                $array['total'] = $this->total['total'];
+                $array['checksum'] = "asdsadasdasdas";
+                $array['orderid'] = $order->slugid;
+                
+                $this->mount();
+                // return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
+              }
         }
     }
     public function carttotal()
@@ -120,6 +157,7 @@ public function updatedcode(){
                 } else {
                     $array['cmsg'] = "Valid Coupon";
                     $array['cstatus'] = true;
+                    $array['coupon_id'] = $coupon->id;
                     session()->flash('coupon','<p class="text-success">Valid Coupon!</p>');
 
                 }
@@ -130,6 +168,7 @@ public function updatedcode(){
             }
 
             $total = $data->sum(function ($product) {
+                // dd($product);
                 return $product->product->price;
             });
             $dicount =  0;
@@ -141,9 +180,8 @@ public function updatedcode(){
            
             $gst = ($total / 100) * 18;
             $array['gst'] = $gst;
-            $array['totalAmount'] = $total;
             $array['discount'] = $dicount;
-            $array['payableAmount'] = ( $total + $gst) - $dicount;
+            $array['total'] = ( $total + $gst) - $dicount;
             $array['cart'] = $data;
 
             $this->total = $array;
