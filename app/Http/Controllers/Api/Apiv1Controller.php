@@ -51,6 +51,7 @@ use App\Models\userCourseModule;
 use App\Models\userPdf;
 use App\Models\UserPdf as ModelsUserPdf;
 use App\Models\userPdfSubscriptions;
+use App\Models\UserPlan;
 use App\Models\userPlans;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -744,7 +745,7 @@ class Apiv1Controller extends Controller
 
                 $tittle = "MockTest - " . $singlePlan->cat->category;
                 if (!empty($singlePlan->subcat)) {
-                  $tittle = $tittle . " - " . $singlePlan->subcat->subcategor;
+                  $tittle = $tittle . " - " . $singlePlan->subcat->subcategory;
                 }
 
                 $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
@@ -1081,7 +1082,7 @@ class Apiv1Controller extends Controller
 
   public function orderSucces(Request $request)
   {
-     if (empty($request->user)) {
+    if (empty($request->user)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
     }
     $user_id =  User::where("slugid", $request->user)->first();
@@ -1097,8 +1098,8 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
     }
     $oder = $oder[0];
-    
-    
+
+
     $oder->payment = "Done";
     $oder->save();
     foreach ($oder->orderItem as $value) {
@@ -2668,21 +2669,92 @@ class Apiv1Controller extends Controller
     if (count($data) == 0) {
       return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-//     $data = $data->map(function ($item) {
-
-// //      $d = strtotime($item->created_at);
-
-
-//       return [
-//         'id' => $item->slugid,
-//         "pdf" => $item->url,
-//         "On" => date("d-m-Y", $d),
-//         "type" => $item->name,
-//       ];
-//     });
-
-
+    $data = $data->map(function ($item) {
+      return [
+        "pdf" => $item->pdf->pdf_url,
+        "name" => $item->pdf->name,
+      ];
+    });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
+  function getPlans(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+
+    $data  =  UserPlan::where("user_id", $user_id->id)->with('plans')->get();
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    $data = $data->map(function ($item) {
+      $singlePlan = $item->plans;
+      $exp = 0;
+      if (!$item->isExpired) {
+        $time = strtotime("+" . $singlePlan->examduration . " days", $item->time);
+        $datediff = $time - strtotime('now');
+        $exp = round($datediff / (60 * 60 * 24));
+      }
+
+      
+
+      $final = [];
+      if ($singlePlan->type == "liveexam") {
+        $final = ["title" => "LiveExam", "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      } else if ($singlePlan->type == "mocktest") {
+
+        $tittle = "MockTest - " . $singlePlan->cat->category;
+        if (!empty($singlePlan->subcat)) {
+          $tittle = $tittle . " - " . $singlePlan->subcat->subcategory;
+        }
+
+        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      } else if ($singlePlan->type == "studymetrial") {
+
+        $tittle = "Study Material - " . $singlePlan->smc->name;
+        if (!empty($singlePlan->smt)) {
+          $tittle = $tittle . " - " . $singlePlan->smt->name;
+        }
+
+        $final = ["title" => $tittle, "isExpired"=>$item->isExpired,"duration" => $exp];
+      } else if ($singlePlan->type == "quiz") {
+        $tittle = "Quiz - " . $singlePlan->qcat->name;
+        if (!empty($singlePlan->qsubcat)) {
+          $tittle = $tittle . " - " . $singlePlan->qsubcat->name;
+        }
+        if (!empty($singlePlan->qchapter)) {
+          $tittle = $tittle . " - " . $singlePlan->qchapter->name;
+        }
+        if (!empty($singlePlan->qtopics)) {
+          $tittle = $tittle . " - " . $singlePlan->qtopics->name;
+        }
+        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      }
+
+
+
+
+
+
+
+
+      //     $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
+      //   }
+
+      //   return $final;
+      // });
+
+
+      return 
+        $final
+      ;
+    });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
 }

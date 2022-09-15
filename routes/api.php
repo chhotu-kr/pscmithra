@@ -124,6 +124,7 @@ Route::post('/getSesionalPdf',[Apiv1Controller::class,'getSesionalPdf']);
 Route::post('/getSesionalPdfItems',[Apiv1Controller::class,'getSesionalPdfItems']);
 
 Route::post('/getPdf',[Apiv1Controller::class,'getPdf']);
+Route::post('/getPlans',[Apiv1Controller::class,'getPlans']);
 
 
 
