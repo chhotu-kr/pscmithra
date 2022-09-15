@@ -52,9 +52,9 @@ Route::get('/login',function(){
 Route::get("/test", function(){
     return View("test.test");
  });
-Route::get('/addcart/{p_id}',[addToCartController::class,'addcart'])->name('add.cart');
+// Route::get('/addcart/{p_id}',[addToCartController::class,'addcart'])->name('add.cart');
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
-Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addTCart"])->name("addtocart");
+Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addToCart"])->name("addToCart");
 Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
 Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeItemFromCart"])->name("removeitemfromCart");
 Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");

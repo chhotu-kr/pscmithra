@@ -294,7 +294,6 @@
 
                 </form>
             </div>
-
             <div class="col-lg-4 p-5" style="background-color: #f0f0f0">
                 <div class="user-attempt-question">
                     <div class="user-profile mb-3">

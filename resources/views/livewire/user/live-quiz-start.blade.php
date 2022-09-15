@@ -1,5 +1,5 @@
 <div>
-     {{ json_encode($data['questionslist'][$question_no]) }} 
+     {{-- {{ json_encode($data['questionslist'][$question_no]) }}  --}}
 
     <style type="text/css">
         .flex {
@@ -320,15 +320,18 @@
                                     <button type="button" class="me-2" id="prevBtn" type="button"
                                         wire:click.prevent="prev()">Previous</button>
                                 @endif
-
+    
                                 {{-- {{ $question_no }}{{ count($data['questionslist']) }} --}}
-
-                                
-                                    <button class="education-btn btn-medium" wire:click.prevent="onSubmit()"
-                                        type="button" id="nextBtn">
+    
+                                @if ($question_no == count($data['questionslist']) - 1)
+                                    <button class="education-btn btn-medium" wire:click.prevent="onSubmit()" type="button"
+                                        id="nextBtn">
                                         Submit</button>
-                              
-                                
+                                @else
+                                    <button class="education-btn btn-medium" wire:click.prevent="next()" type="button"
+                                        id="nextBtn">Save &
+                                        Next</button>
+                                @endif
                             </div>
                         </div>
                         <!-- Circles which indicates the steps of the form: -->
@@ -345,9 +348,9 @@
                                             {{ $sec }}</b></span>
                                 </div>
                             </div>
-                            <div class="text-light btn btn-secondary" data-bs-toggle="modal"
+                            <div class="text-light btn btn-secondary " style="position: absolute;right:0px" data-bs-toggle="modal" 
                                 data-bs-target="#staticBackdrop">
-                                <span style="font-size: 14px">
+                                <span style="font-size: 14px" >
                                     Language
                                 </span>
                             </div>

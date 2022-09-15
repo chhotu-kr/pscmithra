@@ -135,8 +135,7 @@
                   @endforeach
                     
                 </div>
-{{-- 
-                {{$orderitem}} --}}
+
             </div>
         </div>
     </div>

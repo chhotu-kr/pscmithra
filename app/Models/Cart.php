@@ -17,14 +17,14 @@ class Cart extends Model
     ];
 
     public function product(){
-        return $this->hasOne(Product::class,'id','prdoucts_id');
+        return $this->hasOne(Product::class,'id','products_id');
     }
 
     public function address(){
         return $this->hasOne(Address::class,'id','address_id');
     }
     public function user(){
-        return $this->hasOne(User::class,'id','address_id');
+        return $this->hasOne(User::class,'id','user_id');
     }
 
     protected $hidden = [
