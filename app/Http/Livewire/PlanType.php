@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Pdf;
 // use App\Models\PlanProduct;
 use App\Models\BookProduct;
+use App\Models\PdfSubscription;
 use Livewire\Component;
 
 
@@ -30,7 +31,7 @@ public function updatedplanType(){
     //     $this->list=PlanProduct::all();
     // }
     else if ($this->planType=='ebook'){
-        $this->list=BookProduct::all();
+        $this->list=PdfSubscription::all();
     }
 }
 

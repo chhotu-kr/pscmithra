@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_plans', function (Blueprint $table) {
-           $table->id();
+        Schema::create('user_course_modules', function (Blueprint $table) {
+            $table->id();
+            
             $table->boolean('isVisble')->default('1');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained()->nullable();
-            $table->foreignId('subcategory_id')->constrained('sub_categories')->nullable();
-            $table->string('isfree')->nullable();
-            $table->string('isused')->nullable();
-            $table->string('time');
+            $table->foreignId('user_courses_id')->constrained();
+            $table->foreignId('modules_id')->constrained();
+            $table->boolean('isCompleted')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_plans');
+        Schema::dropIfExists('user_course_modules');
     }
 };

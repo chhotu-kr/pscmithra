@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sessional_pdfs', function (Blueprint $table) {
+        Schema::create('user_plans', function (Blueprint $table) {
             $table->id();
             $table->boolean('isVisble')->default('1');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_plans_id')->constrained();
             $table->foreignId('order_id')->constrained();
-            $table->foreignId('pdf_id')->constrained();
-            $table->string('slugid');
-            $table->date('date');
+            $table->integer('isused')->default(0);
+            $table->boolean('isExpired')->default(0);
+            $table->string('time');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessional_pdfs');
+        Schema::dropIfExists('user_plans');
     }
 };

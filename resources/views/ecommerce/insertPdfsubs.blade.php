@@ -15,7 +15,7 @@
                     @csrf
                     
                     
-                   <div class="row">
+                   
                     <div class="col-md-12 position-relative">
                         <label for="validationTooltip01" class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" id="validationTooltip01"  required>
@@ -24,9 +24,9 @@
                         </div>
                     </div>
                     <div class="col-md-12 position-relative">
-                        <label for="" class="form-label">Type</label>
-                        <select name="type" id="choosed" class="form-select">
-                          <option value="0">Select Type</option>
+                        <label for="validationTooltipsa" class="form-label">Type</label>
+                        <select name="type" id="choosed" class="form-select"  id="validationTooltipsa" required>
+                          <option >Select Type</option>
                           <option value="weekly">Weekly</option>
                           <option value="monthly">Monthly</option>
                          
@@ -35,10 +35,21 @@
                             Looks good!
                           </div>
                       </div>
-                     </div>
                      
+                     
+                <div class="col-md-12 position-relative">
+                  <div class="mb-3">
+                    <label for="validationTooltipss" class="form-label">Select Date</label>
+                    
+                    <input type="number" class="form-control" min="1" max="31" step="1" name="date" id="validationTooltipss"  required>
+                    <div class="valid-tooltip">
+                          Looks good!
+                        </div>
+                  </div>
+                </div>
+
                    
-                  {{-- <div id="append"></div> --}}
+                 
                    
                  
                     

@@ -14,4 +14,10 @@ class PdfSubscription extends Model
         'slugid',
         'type',
     ];
+
+    public function pdfa(){
+        return $this->hasMany(ItemPdfSubscription::class,'pdf_subscriptions_id','id');
+    }
+
+
 }

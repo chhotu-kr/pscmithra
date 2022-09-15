@@ -110,8 +110,25 @@ Route::post('/updateUserDetails',[Apiv1Controller::class,'updateUserDetails']);
 Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
 
 //........cart.........
-Route::get('/cart',[Apiv1Controller::class,'Add_To_Cart'])->name('cart.show');
-Route::get('/removecart/{id}',[Apiv1Controller::class,'DeleteCart'])->name('cart.delete');
+
+Route::post('/addToCart',[Apiv1Controller::class,'Add_To_Cart']);
+Route::post('/getCart',[Apiv1Controller::class,'getCart']);
+Route::post('/removecart',[Apiv1Controller::class,'DeleteCart']);
+Route::post('/addAddress',[Apiv1Controller::class,'addAddress']);
+Route::post('/getAddressList',[Apiv1Controller::class,'getAddressList']);
+Route::post('/deleteAddress',[Apiv1Controller::class,'deleteAddress']);
+Route::post('/startOrder',[Apiv1Controller::class,'startOrder']);
+Route::post('/orderSucces',[Apiv1Controller::class,'orderSucces']);
+
+Route::post('/getSesionalPdf',[Apiv1Controller::class,'getSesionalPdf']);
+Route::post('/getSesionalPdfItems',[Apiv1Controller::class,'getSesionalPdfItems']);
+
+Route::post('/getPdf',[Apiv1Controller::class,'getPdf']);
+Route::post('/getPlans',[Apiv1Controller::class,'getPlans']);
+
+
+
+
 //........Coupon..........
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 //............blog............

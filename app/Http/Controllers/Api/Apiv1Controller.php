@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Blog;
 use App\Models\AttempedExam;
@@ -15,11 +16,12 @@ use App\Models\User;
 use App\Models\Study;
 use App\Models\QuizAttemptQuestion;
 use App\Models\Exam;
-use App\Models\Coupon;
+use App\Models\coupon;
 use App\Models\Product;
 use App\Models\Examination;
 use App\Models\Category;
 use App\Models\ExamQuestion;
+use App\Models\ItemPdfSubscription;
 use App\Models\Language;
 use App\Models\LiveTest;
 use App\Models\livetest\liveAttemp;
@@ -27,6 +29,9 @@ use App\Models\livetest\liveAttempQuestion;
 use App\Models\livetest\liveExam;
 use App\Models\livetest\liveQuestion;
 use App\Models\mockattempquestion;
+use App\Models\order;
+use App\Models\orderItem;
+use App\Models\orderProducts;
 use App\Models\Question;
 use App\Models\quizAttemp;
 
@@ -40,6 +45,14 @@ use App\Models\QuizQuestion;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
+use App\Models\userBook;
+use App\Models\userCourse;
+use App\Models\userCourseModule;
+use App\Models\userPdf;
+use App\Models\UserPdf as ModelsUserPdf;
+use App\Models\userPdfSubscriptions;
+use App\Models\UserPlan;
+use App\Models\userPlans;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -732,7 +745,7 @@ class Apiv1Controller extends Controller
 
                 $tittle = "MockTest - " . $singlePlan->cat->category;
                 if (!empty($singlePlan->subcat)) {
-                  $tittle = $tittle . " - " . $singlePlan->subcat->subcategor;
+                  $tittle = $tittle . " - " . $singlePlan->subcat->subcategory;
                 }
 
                 $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
@@ -790,18 +803,67 @@ class Apiv1Controller extends Controller
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
-  public function Add_To_Cart()
+  public function Add_To_Cart(Request $request)
   {
-    $data = Cart::all();
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
 
-    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    $product =  Product::where("slugid", $request->productId)->first();
+
+    if (empty($product)) {
+      return response()->json(['msg' => 'Invalid Product', 'status' => false]);
+    }
+    if (!$product->isVisble) {
+      return response()->json(['msg' => 'Invalid Product', 'status' => false]);
+    }
+    $cart = new Cart();
+    $cart->prdoucts_id = $product->id;
+    $cart->user_id = $user_id->id;
+    $cart->qty = 1;
+    $cart->slugid = md5($request->productId . time());
+    $cart->save();
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => "Product Added to Cart"]);
   }
+  // public function getCart(Request $request)
+  // {
+  //   if (empty($request->user)) {
+  //     return response()->json(['msg' => 'Enter User', 'status' => false]);
+  //   }
+  //   $user_id =  User::select('id')->where("slugid", $request->user)->first();
+  //   if (!$user_id) {
+  //     return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  //   }
 
-  public function DeleteCart(Cart $cart)
+  //   $cart = Cart::with('product')->where("user_id", $user_id->id)->get();
+  //   if (!empty($cart)) {
+  //     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $cart]);
+  //   } else {
+  //     return response()->json(['msg' => 'Data Not Exist', 'status' => true]);
+  //   }
+  // }
+
+  public function DeleteCart(Request $request)
   {
-    $cart->delete();
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
 
-    return response()->json(['msg' => 'Data deleted', 'status' => true, 'data' => $cart]);
+    $data = Cart::where("user_id", $user_id->id)->where("slugid", $request->cartId);
+    if (!empty($data)) {
+      $data->delete();
+      return response()->json(['msg' => 'Data deleted', 'status' => true]);
+    } else {
+      return response()->json(['msg' => 'Invalid Cart Id', 'status' => false]);
+    }
   }
 
   public function get_Verification($code)
@@ -815,6 +877,299 @@ class Apiv1Controller extends Controller
     }
   }
 
+  public function addAddress(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->name)) {
+      return response()->json(['msg' => 'Enter Name', 'status' => false]);
+    }
+    if (empty($request->state)) {
+      return response()->json(['msg' => 'Enter State', 'status' => false]);
+    }
+    if (empty($request->city)) {
+      return response()->json(['msg' => 'Enter City', 'status' => false]);
+    }
+    if (empty($request->pincode)) {
+      return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+    }
+    if (empty($request->street)) {
+      return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+    }
+    $addres = new Address();
+    $addres->name = $request->name;
+    $addres->state = $request->state;
+    $addres->city = $request->city;
+    $addres->pincode = $request->pincode;
+    $addres->street = $request->street;
+    $addres->user_id = $user_id->id;
+    if (empty($request->landmark)) {
+      $addres->landmark = $request->landmark;
+    }
+    $addres->slugid = md5($request->productId . time());
+    $addres->save();
+
+    return response()->json(['msg' => 'Data Added', 'status' => true]);
+  }
+
+  public function getAddressList(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+    $addres = Address::where("user_id", $user_id->id)->get();
+    if (empty($addres)) {
+      return response()->json(['msg' => 'Data Not Exist', 'status' => false]);
+    } else {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, "data" => $addres]);
+    }
+  }
+
+  public function deleteAddress(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Address::where("user_id", $user_id->id)->where("slugid", $request->addressId)->get();
+    if (!empty($data)) {
+      $data->delete();
+      return response()->json(['msg' => 'Data deleted', 'status' => true]);
+    } else {
+      return response()->json(['msg' => 'Invalid Cart Id', 'status' => false]);
+    }
+  }
+
+  public function getCart(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Empty Cart', 'status' => false]);
+    } else {
+      $array = [];
+      if (!empty($request->code)) {
+        $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+        if (empty($coupon)) {
+          $array['cmsg'] = "Invalid Coupon";
+          $array['cstatus'] = false;
+        } else {
+          $array['cmsg'] = "Valid Coupon";
+          $array['cstatus'] = true;
+        }
+      } else {
+        $array['cmsg'] = "Coupon Not Found";
+        $array['cstatus'] = false;
+      }
+
+      $total = $data->sum(function ($product) {
+        return $product->product->price;
+      });
+      $dicount =  0;
+      if (!empty($coupon)) {
+        $dicount = ($total / 100) * $coupon->percent;
+        $total = $total - $dicount;
+      }
+
+      $gst = ($total / 100) * 18;
+      $array['gst'] = $gst;
+      $array['total'] = $total + $gst;
+      $array['discount'] = $dicount;
+      $array['data'] = $data;
+
+      return response()->json(['msg' => 'Empty Cart', 'status' => $array]);
+    }
+  }
+
+
+
+  public function startOrder(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Empty Cart', 'status' => true]);
+    } else {
+      $array = [];
+
+      if (!empty($request->code)) {
+        $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+        if (empty($coupon)) {
+          $array['cmsg'] = "Invalid Coupon";
+          $array['cstatus'] = false;
+        } else {
+          $array['cmsg'] = "Valid Coupon";
+          $array['cstatus'] = true;
+          $couponID = $coupon->id;
+          $coupon->status = true;
+          $coupon->save();
+        }
+      }
+
+      $total = $data->sum(function ($product) {
+        return $product->product->price;
+      });
+      $dicount =  0;
+      if (!empty($coupon)) {
+        $dicount = ($total / 100) * $coupon->percent;
+        $total = $total - $dicount;
+      }
+
+      $gst = ($total / 100) * 18;
+      $total = $total + $gst;
+      // $array['gst'] = $gst;
+
+      // $array['discount'] = $dicount;
+      // $array['data'] = $data;
+
+      $order = new order();
+      if (!empty($coupon)) {
+        $order->coupon_id = $coupon->id;
+      }
+      $order->address_id = $request->addressID;
+      $order->dateofordered = strtotime("now");
+      $order->user_id = $user_id->id;
+      $order->gst = $gst;
+      $order->discount = $dicount;
+      $order->total = $total;
+      $order->slugid = md5($user_id->id . time());
+      $order->save();
+
+
+      foreach ($data as $value) {
+        $orderItem = new orderItem();
+        $orderItem->orders_id = $order->id;
+        $orderItem->products_id = $value->product->id;
+        $orderItem->save();
+        $value->delete();
+      }
+      $array['total'] = $total;
+      $array['checksum'] = "asdsadasdasdas";
+      $array['orderid'] = $order->slugid;
+
+      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
+    }
+  }
+
+
+
+  public function orderSucces(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->oderid)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+
+    $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
+    if (count($oder) == 0) {
+      return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
+    }
+    $oder = $oder[0];
+
+
+    $oder->payment = "Done";
+    $oder->save();
+    foreach ($oder->orderItem as $value) {
+      $product = $value->product;
+      if ($product->type == "pdf") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new userPdf();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->pdfs_id = $product->pdfs->pdf_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "plan") {
+        $value->status = "isDeliverd";
+        $value->save();
+        foreach ($product->plans as $value) {
+          $userpdf = new  userPlans();
+          $userpdf->user_id = $user_id->id;
+          $userpdf->product_id = $product->id;
+          $userpdf->product_plans_id = $value->id;
+          $userpdf->order_id = $oder->id;
+          $userpdf->time = strtotime("now");
+          $userpdf->save();
+        }
+      } else if ($product->type == "ebook") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new  userPdfSubscriptions();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->pdf_subscriptions_id = $product->ebook->pdf_subscriptions_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "book") {
+        $value->save();
+        $userpdf = new userBook();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->books_id = $product->book->book_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "course") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new userCourse();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->courses_id = $product->course->course_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->time = strtotime("now");
+        $userpdf->save();
+        foreach ($product->course->modules as $value) {
+          $userModule =  new userCourseModule();
+          $userModule->modules_id = $value->id;
+          $userModule->user_courses_id = $userpdf->id;
+          $userModule->save();
+        }
+      }
+    }
+
+
+
+    //return response()->json(['msg' => 'Invalid User ID', 'status' => $oder]);
+
+
+  }
   ///////////////////////////Quiz////////////////////////////////////////////////////
 
   public function quizCategory(Request $request)
@@ -1543,14 +1898,14 @@ class Apiv1Controller extends Controller
       if ((!empty($value['optSel'])) && $value["seenType"] != "false") {
 
         $dd = mockattempquestion::where('id', $value['questionId'])->where('users_id', $user->id)->where('attemped_exams_id', $testId->id)
-        
-        ->update(
-          [
-            "QuesSeen" => $value["seenType"],
-            "QuesSelect" => $value['optSel'],
-            "time" => $value['time']
-          ]
-        );
+
+          ->update(
+            [
+              "QuesSeen" => $value["seenType"],
+              "QuesSelect" => $value['optSel'],
+              "time" => $value['time']
+            ]
+          );
       }
 
 
@@ -2200,23 +2555,24 @@ class Apiv1Controller extends Controller
   }
 
 
-function getCourse(){
-  return response()->json(['msg' => 'Data Fetched', 'status' => true]);
-}
+  function getCourse()
+  {
+    return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+  }
 
 
   function updateUserDetails(Request $request)
   {
     if (!empty($request->userid)) {
       $data = User::where("slugid", $request->userid)->first();
-      if($request->name){
+      if ($request->name) {
         $data->name = $request->name;
       }
-      if($request->gender){
+      if ($request->gender) {
         $data->gender = $request->gender;
       }
       $data->save();
-      return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     } else {
       return response()->json(['msg' => 'Enter User Id', 'status' => false]);
     }
@@ -2230,10 +2586,175 @@ function getCourse(){
       if (empty($data)) {
         return response()->json(['msg' => 'User Not Found', 'status' => false]);
       } else {
-        return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' => $data]);
+        return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
       }
     } else {
       return response()->json(['msg' => 'Enter User Id', 'status' => false]);
     }
+  }
+
+
+  function getSesionalPdf(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data  =  userPdfSubscriptions::where("user_id", $user_id->id)->with('pdf')->get();
+    $data = $data->map(function ($item) {
+
+      return [
+        'id' => $item->slugid,
+        "name" => $item->pdf->name,
+        "On" => $item->pdf->Date,
+        "type" => $item->pdf->type,
+      ];
+    });
+
+
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+  function getSesionalPdfItems(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+
+    $data  =  userPdfSubscriptions::where("user_id", $user_id->id)->where("slugid", $request->pdfid)->get();
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    $date = $data[0]->created_at;
+    $pdfSubscriptionsId = $data[0]->pdf_subscriptions_id;
+    $ss = ItemPdfSubscription::where('pdf_subscriptions_id', $pdfSubscriptionsId)->get();
+
+
+    $ss = $ss->map(function ($item) {
+
+      $d = strtotime($item->created_at);
+
+
+      return [
+        'id' => $item->slugid,
+        "pdf" => $item->url,
+        "On" => date("d-m-Y", $d),
+        "type" => $item->name,
+      ];
+    });
+
+
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $ss]);
+  }
+
+  function getPdf(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+
+    $data  =  userPdf::where("user_id", $user_id->id)->with('pdf')->get();
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    $data = $data->map(function ($item) {
+      return [
+        "pdf" => $item->pdf->pdf_url,
+        "name" => $item->pdf->name,
+      ];
+    });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+
+  function getPlans(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+
+    $data  =  UserPlan::where("user_id", $user_id->id)->with('plans')->get();
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+    }
+    $data = $data->map(function ($item) {
+      $singlePlan = $item->plans;
+      $exp = 0;
+      if (!$item->isExpired) {
+        $time = strtotime("+" . $singlePlan->examduration . " days", $item->time);
+        $datediff = $time - strtotime('now');
+        $exp = round($datediff / (60 * 60 * 24));
+      }
+
+      
+
+      $final = [];
+      if ($singlePlan->type == "liveexam") {
+        $final = ["title" => "LiveExam", "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      } else if ($singlePlan->type == "mocktest") {
+
+        $tittle = "MockTest - " . $singlePlan->cat->category;
+        if (!empty($singlePlan->subcat)) {
+          $tittle = $tittle . " - " . $singlePlan->subcat->subcategory;
+        }
+
+        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      } else if ($singlePlan->type == "studymetrial") {
+
+        $tittle = "Study Material - " . $singlePlan->smc->name;
+        if (!empty($singlePlan->smt)) {
+          $tittle = $tittle . " - " . $singlePlan->smt->name;
+        }
+
+        $final = ["title" => $tittle, "isExpired"=>$item->isExpired,"duration" => $exp];
+      } else if ($singlePlan->type == "quiz") {
+        $tittle = "Quiz - " . $singlePlan->qcat->name;
+        if (!empty($singlePlan->qsubcat)) {
+          $tittle = $tittle . " - " . $singlePlan->qsubcat->name;
+        }
+        if (!empty($singlePlan->qchapter)) {
+          $tittle = $tittle . " - " . $singlePlan->qchapter->name;
+        }
+        if (!empty($singlePlan->qtopics)) {
+          $tittle = $tittle . " - " . $singlePlan->qtopics->name;
+        }
+        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+      }
+
+
+
+
+
+
+
+
+      //     $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
+      //   }
+
+      //   return $final;
+      // });
+
+
+      return 
+        $final
+      ;
+    });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 }

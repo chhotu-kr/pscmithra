@@ -23,7 +23,7 @@
   @elseif ($typp=="video")
   <div class="col">
     <label>Url</label>
-    <input type="text" name="url" class="form-control">
+    <input type="file" accept="video/*" name = "url" class="form-control" >
   </div>
   @elseif ($typp=="quiz")
   <table id="with" class="table datatable">

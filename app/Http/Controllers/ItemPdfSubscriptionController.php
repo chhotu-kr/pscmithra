@@ -15,29 +15,32 @@ class ItemPdfSubscriptionController extends Controller
     //     $data=Product::all();
     //     return response()->json($data);
     // }
-    public function index(){
+    public function index($id){
         // $data['itempdfsubs']=ItemPdfSubscription::where('pdf_subscriptions_id',$pdf_subscriptions_id)->get();
-        $data['itempdfsubs']=ItemPdfSubscription::all();
-
-        return view('ecommerce.manageItempdfsubs',$data);
+        $data['itempdfsubs']=ItemPdfSubscription::where('pdf_subscriptions_id',$id)->get();
+        $data['id']=$id;
+        return view('ecommerce.manageitempdfsubs',$data);
     }
 
-    public function create(){
-        $data['item_pdfsubs']=ItemPdfSubscription::all();
-        $data['pdf_subs']=PdfSubscription::all();
+    public function create($id){
+        $data['id']=$id;
         
         return view('ecommerce.insertItempdfsub',$data);
     }
 
     public function store(Request $request){
+
+
+
         $item_pdfsubs= new ItemPdfSubscription();
         $item_pdfsubs->name=$request->name;
-        $item_pdfsubs->url=$request->url;
-        $item_pdfsubs->pdf_subscriptions_id=$request->pdf_subscriptions_id;
+        $filename = $request->url->getClientOriginalName();
+        $request->url->move(('files'),$filename);
+        $item_pdfsubs->url = $filename;
+        $item_pdfsubs->pdf_subscriptions_id=$request->id;
         $item_pdfsubs->slugid=md5($request->name .time());
         $item_pdfsubs->save();
-
-        return redirect()->route('manage.item');
+        return redirect()->back();
 
 
 

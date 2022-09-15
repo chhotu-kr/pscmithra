@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pdf_subscriptions', function (Blueprint $table) {
-           $table->id();
+        Schema::create('user_courses', function (Blueprint $table) {
+            $table->id();
             $table->boolean('isVisble')->default('1');
-            $table->string('name');
-            $table->string('slugid');
-            $table->enum('type',['weekly','monthly'])->default('monthly');
-            $table->bigInteger('Date');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('courses_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+            $table->boolean('isExpired')->default(0);
+            $table->bigInteger('time');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pdf_subscriptions');
+        Schema::dropIfExists('user_courses');
     }
 };

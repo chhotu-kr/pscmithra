@@ -17,11 +17,9 @@
                     </div>
                 </div>
                 <section class="section">
-                    
-                
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Manage Blog</h5>
+                            <h5 class="card-title">Manage PFS</h5>
                             
                 
                             <!-- Table with stripped rows -->
@@ -30,7 +28,7 @@
                                 <tr>
                                   <th scope="col">id</th>
                                   <th scope="col">Name</th>
-                                  {{-- <th scope="col">Type</th> --}}
+                                  <th scope="col">Day of Month</th> 
                                   
                                  
                                   <th scope="col">Action</th>
@@ -41,15 +39,12 @@
                                       <tr>
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->name}}</td>
-                                          {{-- <td>{{$req->type}}</td> --}}
-                                         
-                                          {{-- <td>{{$req->description}}</td>
-                                          <td>{{$req->rightby}}</td>
-                                          --}}
+                                          
+                                          <td>{{$req->Date}}</td>
                                           <td>
                                              <a href="{{route('pdfsubs.update',['id'=>$req->id])}}" class="btn btn-outline-primary">Edit</a>
                                              <a href="{{route('pdfsubs.destroy',['id'=>$req->slugid])}}" class="btn btn-outline-danger">Delete</a>
-                                             <a href="{{route('manage.item',['id'=>$req->id])}}" class="btn btn-outline-secondary">Manage PdSubProduct</a>
+                                             <a href="{{route('manage.item',$req->id)}}" class="btn btn-outline-secondary">Manage PdSubProduct</a>
 
                                                
                                           </td>

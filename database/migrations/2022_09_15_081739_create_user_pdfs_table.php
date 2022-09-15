@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('user_pdfs', function (Blueprint $table) {
             $table->id();
-            $table->boolean('isVisble')->default('1');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('pdfs_id')->constrained();
             $table->foreignId('order_id')->constrained();
-            $table->foreignId('pdf_id')->constrained();
-            $table->string('slugid');
-            $table->date('date');
+            $table->text('slugid');
             $table->timestamps();
         });
     }
