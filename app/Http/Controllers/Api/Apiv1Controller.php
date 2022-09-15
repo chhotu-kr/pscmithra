@@ -30,6 +30,7 @@ use App\Models\livetest\liveQuestion;
 use App\Models\mockattempquestion;
 use App\Models\order;
 use App\Models\orderItem;
+use App\Models\orderProducts;
 use App\Models\Question;
 use App\Models\quizAttemp;
 
@@ -43,6 +44,12 @@ use App\Models\QuizQuestion;
 use App\Models\SubCategory;
 use App\Models\StudymetrialCategory;
 use App\Models\StudymetrialChapter;
+use App\Models\userBook;
+use App\Models\userCourse;
+use App\Models\userCourseModule;
+use App\Models\userPdf;
+use App\Models\userPdfSubscriptions;
+use App\Models\userPlans;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -954,23 +961,23 @@ class Apiv1Controller extends Controller
     }
     $data = Cart::where("user_id", $user_id->id)->with('product')->get();
 
-    if (empty($data)) {
+    if (count($data) == 0) {
       return response()->json(['msg' => 'Empty Cart', 'status' => false]);
     } else {
       $array = [];
-      if(!empty($request->code)){
-      $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
-      if (empty($coupon)) {
-        $array['cmsg'] = "Invalid Coupon";
-        $array['cstatus'] = false;
+      if (!empty($request->code)) {
+        $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+        if (empty($coupon)) {
+          $array['cmsg'] = "Invalid Coupon";
+          $array['cstatus'] = false;
+        } else {
+          $array['cmsg'] = "Valid Coupon";
+          $array['cstatus'] = true;
+        }
       } else {
-        $array['cmsg'] = "Valid Coupon";
-        $array['cstatus'] = true;
-      }
-    }else{
-      $array['cmsg'] = "Coupon Not Found";
+        $array['cmsg'] = "Coupon Not Found";
         $array['cstatus'] = false;
-    }
+      }
 
       $total = $data->sum(function ($product) {
         return $product->product->price;
@@ -983,7 +990,7 @@ class Apiv1Controller extends Controller
 
       $gst = ($total / 100) * 18;
       $array['gst'] = $gst;
-      $array['total'] = $total;
+      $array['total'] = $total + $gst;
       $array['discount'] = $dicount;
       $array['data'] = $data;
 
@@ -1004,25 +1011,24 @@ class Apiv1Controller extends Controller
     }
     $data = Cart::where("user_id", $user_id->id)->with('product')->get();
 
-    if (empty($data)) {
+    if (count($data) == 0) {
       return response()->json(['msg' => 'Empty Cart', 'status' => true]);
     } else {
       $array = [];
 
-      if(!empty($request->code)){
-      $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
-      if (empty($coupon)) {
-        $array['cmsg'] = "Invalid Coupon";
-        $array['cstatus'] = false;
-      } else {
-        $array['cmsg'] = "Valid Coupon";
-        $array['cstatus'] = true;
-        $couponID = $coupon->id;
-        $coupon->status = true;
-        $coupon->save();
-  
+      if (!empty($request->code)) {
+        $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+        if (empty($coupon)) {
+          $array['cmsg'] = "Invalid Coupon";
+          $array['cstatus'] = false;
+        } else {
+          $array['cmsg'] = "Valid Coupon";
+          $array['cstatus'] = true;
+          $couponID = $coupon->id;
+          $coupon->status = true;
+          $coupon->save();
+        }
       }
-    }
 
       $total = $data->sum(function ($product) {
         return $product->product->price;
@@ -1034,45 +1040,131 @@ class Apiv1Controller extends Controller
       }
 
       $gst = ($total / 100) * 18;
+      $total = $total + $gst;
       // $array['gst'] = $gst;
-      // $array['total'] = $total;
+
       // $array['discount'] = $dicount;
       // $array['data'] = $data;
 
       $order = new order();
-      if(!empty($coupon)){
-        $order->coupon_id= $coupon->id;
+      if (!empty($coupon)) {
+        $order->coupon_id = $coupon->id;
       }
-      $order->address_id=$request->addressID;
-      $order->dateofordered =strtotime("now");
-      $order->user_id=$user_id->id;
-      $order->gst=$gst;
-      $order->discount=$dicount;
-      $order->total=$total;
-      $order->slugid= md5($user_id->id . time());
+      $order->address_id = $request->addressID;
+      $order->dateofordered = strtotime("now");
+      $order->user_id = $user_id->id;
+      $order->gst = $gst;
+      $order->discount = $dicount;
+      $order->total = $total;
+      $order->slugid = md5($user_id->id . time());
       $order->save();
 
 
-      foreach($data as $value){
+      foreach ($data as $value) {
         $orderItem = new orderItem();
-        $orderItem->order_id= $order->id;
-        $orderItem->products_id= $value->product->id;
+        $orderItem->orders_id = $order->id;
+        $orderItem->products_id = $value->product->id;
         $orderItem->save();
+        $value->delete();
       }
-     
+      $array['total'] = $total;
+      $array['checksum'] = "asdsadasdasdas";
+      $array['orderid'] = $order->slugid;
 
-
-
-
-
-
-      return response()->json(['msg' => 'Empty Cart', 'status' => $array]);
+      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
     }
   }
 
 
 
-  public function orderSucces(Request $request){
+  public function orderSucces(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->oderid)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+
+    $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
+    if (count($oder)==0) {
+      return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
+    }
+    $oder = $oder[0];
+
+
+    $oder->payment = "Done";
+    $oder->save();
+    foreach ($oder->orderItem as $value) {
+      $product = $value->product;
+      if ($product->type == "pdf") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new userPdf();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->pdfs_id = $product->pdfs->pdf_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "plan") {
+        $value->status = "isDeliverd";
+        $value->save();
+        foreach ($product->plans as $value) {
+          $userpdf = new  userPlans();
+          $userpdf->user_id = $user_id->id;
+          $userpdf->product_id = $product->id;
+          $userpdf->product_plans_id = $value->id;
+          $userpdf->order_id = $oder->id;
+          $userpdf->time = strtotime("now");
+          $userpdf->save();
+        }
+      } else if ($product->type == "ebook") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new  userPdfSubscriptions();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->pdf_subscriptions_id = $product->ebook->pdf_subscriptions_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "book") {
+        $value->save();
+        $userpdf = new userBook();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->books_id = $product->book->book_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->slugid = md5($oder->id . time());
+        $userpdf->save();
+      } else if ($product->type == "course") {
+        $value->status = "isDeliverd";
+        $value->save();
+        $userpdf = new userCourse();
+        $userpdf->user_id = $user_id->id;
+        $userpdf->product_id = $product->id;
+        $userpdf->courses_id = $product->course->course_id;
+        $userpdf->order_id = $oder->id;
+        $userpdf->time = strtotime("now");
+        $userpdf->save();
+        foreach ($product->course->modules as $value) {
+          $userModule =  new userCourseModule();
+          $userModule->modules_id = $value->id;
+          $userModule->user_courses_id = $userpdf->id;
+          $userModule->save();
+        }
+      }
+    }
+
+
+
+    //return response()->json(['msg' => 'Invalid User ID', 'status' => $oder]);
+
 
   }
   ///////////////////////////Quiz////////////////////////////////////////////////////

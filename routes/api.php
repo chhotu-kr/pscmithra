@@ -118,6 +118,7 @@ Route::post('/addAddress',[Apiv1Controller::class,'addAddress']);
 Route::post('/getAddressList',[Apiv1Controller::class,'getAddressList']);
 Route::post('/deleteAddress',[Apiv1Controller::class,'deleteAddress']);
 Route::post('/startOrder',[Apiv1Controller::class,'startOrder']);
+Route::post('/orderSucces',[Apiv1Controller::class,'orderSucces']);
 
 
 
