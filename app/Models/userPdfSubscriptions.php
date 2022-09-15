@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class userPdfSubscriptions extends Model
 {
     use HasFactory;
+
+public function pdf(){
+    return $this->belongsTo(PdfSubscription::class,'pdf_subscriptions_id');
+}
+
 }
