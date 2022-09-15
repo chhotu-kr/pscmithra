@@ -25,7 +25,7 @@ class QuizChapterController extends Controller
 
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $data->image = $filename;
         $data->save();
 
@@ -46,7 +46,7 @@ class QuizChapterController extends Controller
         $quizchapter->slugid=md5($request->quiz_Chapter .time());
         //image
         $filename = $request->image->getClientOriginalName();
-        $request->image->move(('images'),$filename);
+        $request->image->move(('upload'),$filename);
         $quizchapter->image = $filename;
         
         $quizchapter->save();

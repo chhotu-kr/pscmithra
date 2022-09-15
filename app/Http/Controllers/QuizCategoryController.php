@@ -21,7 +21,7 @@ class QuizCategoryController extends Controller
         $data->slugid=md5($request->quiz_Category .time());
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $data->image = $filename;
          $data->ifnested=$request->ifnested;
         $data->save();
@@ -39,7 +39,7 @@ class QuizCategoryController extends Controller
          $quizcategory->slugid=md5($request->quiz_Category .time());
           //image
           $filename = $request->image->getClientOriginalName();
-          $request->image->move(('images'),$filename);
+          $request->image->move(('upload'),$filename);
           $quizcategory->image = $filename;
         
         $quizcategory->save();

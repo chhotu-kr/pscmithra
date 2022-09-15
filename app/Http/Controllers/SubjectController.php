@@ -23,7 +23,7 @@ class SubjectController extends Controller
        
        //image work
       $filename = $re->image->getClientOriginalName();
-      $re->image->move(('images'),$filename);
+      $re->image->move(('upload'),$filename);
       $data->image = $filename;
       $data-> slugid = md5($re->examname . time());
         $data->save();
@@ -41,7 +41,7 @@ class SubjectController extends Controller
         
         //image work
        $filename = $re->image->getClientOriginalName();
-       $re->image->move(('images'),$filename);
+       $re->image->move(('upload'),$filename);
        $subject->image = $filename;
        $subject-> slugid = md5($re->examname . time());
          $subject->save();
