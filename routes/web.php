@@ -88,8 +88,8 @@ Route::get('/mock-test/start', [HomeController::class, 'get_MockTestStart'])->na
 
 Route::get('/view/blog', [HomeController::class, 'get_ViewBlog'])->name('view.blog');
 Route::get('/view/blog/details', [HomeController::class, 'get_ViewBlogDetails'])->name('view.blogdetails');
-Route::get('/view/course', [HomeController::class, 'get_ViewCourse'])->name('view.course');
-Route::get('/view/course/details/{id}', [HomeController::class, 'get_ViewCourseDetails'])->name('view.coursedetails');
+Route::get('/product', [HomeController::class, 'get_Product'])->name('view.course');
+Route::get('/product/details/{id}', [HomeController::class, 'get_ProductDetails'])->name('view.coursedetails');
 Route::get('/quizes/category', [HomeController::class, 'get_Quiz'])->name('view.quiz');
 Route::get('/quizes/category/details/{cat_id}', [HomeController::class, 'get_ViewQuizDetail'])->name('view.quizdetails');
 Route::get('/quizes/category/chapter/{sub_cat_id}', [HomeController::class, 'get_Quiz_SubCategory'])->name('view.quizchapter');
@@ -114,7 +114,8 @@ Route::get('/live-quiz/start', [HomeController::class, 'Live_Quiz_Start'])->name
 Route::get('/privacy/policy', [HomeController::class, 'privacy_policy'])->name('view.privacy');
 Route::get('/term/condition', [HomeController::class, 'term'])->name('view.term');
 Route::get('/refund/cancel', [HomeController::class, 'refund'])->name('view.refund');
-
+Route::get('/test/view',[HomeController::class,'get_Test'])->name('view.test');
+Route::get('/order/details',[HomeController::class,'get_orderdetails'])->name('order.details');
 //................calling Data ..........
 
 Route::get('/view/home/{id}', [HomeController::class, 'filter'])->name('filter.cate');
