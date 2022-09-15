@@ -44,11 +44,6 @@ class LiveQuizStart extends Component
 
 
     foreach ($this->data['questionslist'] as $index => $value) {
-
-
-
-      
-
       
       if ((!empty($value['optSel'])) && $value["s"] != "false") {
       

@@ -11,209 +11,197 @@ use App\Models\Coupon;
 use App\Models\Address;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Category;
+use App\Models\UserPdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
+
 class addToCartController extends Controller
 {
     //
 
-    public function index(){
-        $data['product'] = Product::all();
-        $data['order']=get_order();
-        return view('user/cart/Cart',$data);
+    public function index()
+    {
+        $user_id = Auth::id();
+        // dd($user_id);
+        $data['order'] = Cart::where('user_id', $user_id)->get();
+        // dd($data);
+        return view('user/cart/Cart', $data);
     }
 
-    
-    public function viewProduct($p_id){
-        $data['category']=Category::all();
-        $data['product']=Product::find($p_id);
-        return view("user/cart/viewproduct",$data);
+
+    public function viewProduct($p_id)
+    {
+        $data['category'] = Category::all();
+        $data['product'] = Product::find($p_id);
+        return view("user/cart/viewproduct", $data);
     }
-    public function cart(Request $request){
-         $data['order']=get_order();
-        return view("user/cart/Cart",$data);
-    }
-    public function checkOut(){
-      
+  
+    public function checkOut()
+    {
+
         // $data['subuser']=User::all();
         // $data['order'] = Order::where([['user_id',Auth::id()],['ordered',false]])->first();
         // $data['orderitem'] = OrderItem::where([['product_id',Auth::id()],['ordered',false]])->first();
-        $data['addresses'] = Address::where("user_id",Auth::id())->get();
-        return view("user/cart/checkout",$data);
+        $data['addresses'] = Address::where("user_id", Auth::id())->get();
+        return view("user/cart/checkout", $data);
     }
-    public function insertUserPdf($array){
+    public function insertUserPdf($array)
+    {
         $up = new UserPdf();
         $up->order_id = $array['order_id'];
-        $up->product_id=$array['product_id'];
-        $up->user_id=$array['user_id'];
-        $up->pdf_id=$array['pdf_id'];
-        $up->date=new Date("D-m-Y");
+        $up->product_id = $array['product_id'];
+        $up->user_id = $array['user_id'];
+        $up->pdf_id = $array['pdf_id'];
+        $up->date = new Date("D-m-Y");
         $up->save();
         // return redirect()->route('checkout');
     }
-    public function addTCart(Request $request,$p_id){
-        $product=Product::find($p_id);
-        $user=Auth::user();
-        if($product){
-           $order=get_order();
-           if($order){
-                $orderItem=OrderItem::where([['ordered',false],["order_id",$order->id],['product_id',$product->id]])->first();
-                
-                if($orderItem){
-                 $orderItem->qty +=1;
-                 $orderItem->save();
-                }
-                else{
-                   $oi=new OrderItem();
-                   $oi->ordered=false;
-                   $oi->product_id=$product->id;
-                   $oi->order_id=$order->id;
-                   $oi->save();
-                   
-                }
-               
-           }
+    public function addTCart(Request $request, $p_id)
+    {
+        // dd($p_id);
+        // $product=Product::find($p_id);
+        // $user=Auth::user();
+        // if($product){
+        //    $order=get_order();
+        //    if($order){
+        //         $orderItem=OrderItem::where([['ordered',false],["order_id",$order->id],['product_id',$product->id]])->first();
 
-          
-           else{
-               //New Order Create
-            // $ord=new Order();
-            // $ord->ordered=false;
-            // $ord->user_id=$user->id;
-            // $ord->save();
+        //         if($orderItem){
+        //          $orderItem->qty +=1;
+        //          $orderItem->save();
+        //         }
+        //         else{
+        //            $oi=new OrderItem();
+        //            $oi->ordered=false;
+        //            $oi->product_id=$product->id;
+        //            $oi->order_id=$order->id;
+        //            $oi->save();
 
-            
-          
-            // $oi=new OrderItem();
-            // $oi->ordered=false;
-            // $oi->product_id=$product->id;
-            // $oi->order_id=$ord->id;
-            // $oi->save();
+        //         }
 
-            return redirect()->route('user.login');
+        //    }
 
-           }
 
-           $ord=new Order();
-           $ord->ordered=false;
-           $ord->user_id=$user->id;
-           $ord->save();
+        //    else{
+        //        //New Order Create
+        //     // $ord=new Order();
+        //     // $ord->ordered=false;
+        //     // $ord->user_id=$user->id;
+        //     // $ord->save();
 
-           
-         
-           $oi=new OrderItem();
-           $oi->ordered=false;
-           $oi->product_id=$product->id;
-           $oi->order_id=$ord->id;
-           $oi->save();
 
-           
 
-        }   
-        return redirect()->route("usercart.index");
-    }
-    public function removeFromCart(Request $request,$p_id){
-        $product=Product::find($p_id);
-        $user=Auth::user();
-        if($product){
-           $order=Order::where([['ordered',false],['user_id',$user->id]])->first();
-           if($order){
-                $orderItem=OrderItem::where([['ordered',false],["order_id",$order->id],['product_id',$product->id]])->first();
-                
-                if($orderItem){
-                    if($orderItem->qty > 1){
-                        $orderItem->qty -=1;
-                        $orderItem->save();
-                    }
-                    else{
-                        $orderItem->delete();
-                    }
-                
-                }
-           }
-           
-        }   
-        return redirect()->route("usercart.index");
+        //     // $oi=new OrderItem();
+        //     // $oi->ordered=false;
+        //     // $oi->product_id=$product->id;
+        //     // $oi->order_id=$ord->id;
+        //     // $oi->save();
+
+        //     return redirect()->route('user.login');
+
+        //    }
+
+        //    $ord=new Order();
+        //    $ord->ordered=false;
+        //    $ord->user_id=$user->id;
+        //    $ord->save();
+
+
+
+        //    $oi=new OrderItem();
+        //    $oi->ordered=false;
+        //    $oi->product_id=$product->id;
+        //    $oi->order_id=$ord->id;
+        //    $oi->save();
+
+
+
+        // }   
+        // return redirect()->route("usercart.index");
     }
    
 
-    public function removeItemFromCart(Request $request,$p_id){
-        $product=Product::find($p_id);
-        $user=Auth::user();
-        if($product){
-           $order=Order::where([['ordered',false],['user_id',$user->id]])->first();
-           if($order){
-                $orderItem=OrderItem::where([['ordered',false],["order_id",$order->id],['product_id',$product->id]])->first();
-                if($orderItem){
+    public function removeItemFromCart(Request $request, $p_id)
+    {
+        $product = Product::find($p_id);
+        $user = Auth::user();
+        if ($product) {
+            $order = Order::where([['ordered', false], ['user_id', $user->id]])->first();
+            if ($order) {
+                $orderItem = OrderItem::where([['ordered', false], ["order_id", $order->id], ['product_id', $product->id]])->first();
+                if ($orderItem) {
                     $orderItem->delete();
                 }
-           }
-        }   
+            }
+        }
         return redirect()->route("usercart.index");
     }
-    private function checkCode($code){
-        $coupon=Coupon::where([['code',$code],['status',0]])->first();
+    private function checkCode($code)
+    {
+        $coupon = Coupon::where([['code', $code], ['status', 0]])->first();
         return $coupon;
     }
 
-    public function applyCoupon(Request $request){
+    public function applyCoupon(Request $request)
+    {
         $request->validate([
-            'code'=>'required'
+            'code' => 'required'
         ]);
 
-        if($coupon=$this->checkCode($request->code)){
-            $order=get_order();
-            $order->coupon_id=$coupon->id;
+        if ($coupon = $this->checkCode($request->code)) {
+            $order = get_order();
+            $order->coupon_id = $coupon->id;
             $order->save();
             return redirect()->route('usercart.index');
+        } else {
+            return redirect()->route('usercart.index')->with("msg", "Invalid Coupon");
         }
-        else{
-            return redirect()->route('usercart.index')->with("msg","Invalid Coupon");
-        }
-
     }
 
-    public function removeCoupon(){
-        $order=get_order();
+    public function removeCoupon()
+    {
+        $order = get_order();
         $order->coupon_id = null;
         $order->save();
         return redirect()->route('usercart.index');
     }
 
-    static public function assignAddress($id){
-        $address=Address::findOrFail($id);
-        $order=get_order();
-        $order->address_id=$address->id;
+    static public function assignAddress($id)
+    {
+        $address = Address::findOrFail($id);
+        $order = get_order();
+        $order->address_id = $address->id;
         $order->save();
 
         // $this->insertUserPdf(['order_id'=>$order->id,'user_id'=>Auth::id(),'product_id'=>1,'pdf_id'=>1]);
         return redirect()->route('checkout');
     }
 
-    public function addcart(Request $request){
-        // dd($request->p_id);
-       if(Auth::user()){
-       
-        $user_id = Auth::id();
+    public function addToCart(Request $request)
+    {
+      
+        if (Auth::user()) {
+            $user_id = Auth::id();
+            $product = Cart::where([['products_id', $request->p_id], ['user_id', $user_id]])->first();
+            if ($product) {
+                $product->qty  = $product->qty + 1;
+                $product->save();
+                return redirect()->route('usercart.index');
 
-        $slugid = md5( $user_id + time());
+            } else {
+                $slugid = md5($user_id + time());
 
-        $prd = new Cart();
-        $prd->prdoucts_id = $request->p_id;
-        $prd->slugid = $slugid;
-        $prd->user_id = $user_id;
-        $prd->qty = 1;
-        $prd->save();
-        return redirect()->back();
-         
-       }
-       else{
-        return redirect()->route('user.login');
-       }
-        
-
-
+                $prd = new Cart();
+                $prd->products_id = $request->p_id;
+                $prd->slugid = $slugid;
+                $prd->user_id = $user_id;
+                $prd->qty = 1;
+                $prd->save();
+                return redirect()->route('usercart.index');
+            }
+        } else {
+            return redirect()->route('user.login');
+        }
     }
-   
-
-   
 }

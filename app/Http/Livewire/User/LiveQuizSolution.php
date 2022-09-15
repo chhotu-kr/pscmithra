@@ -122,7 +122,8 @@ class LiveQuizSolution extends Component
             })[0];
         // dd($this->data);
         $this->question_no = 0;
-        // $this->jump($this->question_no);
+        $this->filterledgers();
+        $this->jump($this->question_no);
         // return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $this->data]);
     }
     public function render()
