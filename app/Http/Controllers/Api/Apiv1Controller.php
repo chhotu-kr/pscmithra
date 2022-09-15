@@ -16,7 +16,7 @@ use App\Models\User;
 use App\Models\Study;
 use App\Models\QuizAttemptQuestion;
 use App\Models\Exam;
-use App\Models\Coupon;
+use App\Models\coupon;
 use App\Models\Product;
 use App\Models\Examination;
 use App\Models\Category;
@@ -28,6 +28,8 @@ use App\Models\livetest\liveAttempQuestion;
 use App\Models\livetest\liveExam;
 use App\Models\livetest\liveQuestion;
 use App\Models\mockattempquestion;
+use App\Models\order;
+use App\Models\orderItem;
 use App\Models\Question;
 use App\Models\quizAttemp;
 
@@ -817,23 +819,23 @@ class Apiv1Controller extends Controller
     $cart->save();
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => "Product Added to Cart"]);
   }
-  public function getCart(Request $request)
-  {
-    if (empty($request->user)) {
-      return response()->json(['msg' => 'Enter User', 'status' => false]);
-    }
-    $user_id =  User::select('id')->where("slugid", $request->user)->first();
-    if (!$user_id) {
-      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-    }
+  // public function getCart(Request $request)
+  // {
+  //   if (empty($request->user)) {
+  //     return response()->json(['msg' => 'Enter User', 'status' => false]);
+  //   }
+  //   $user_id =  User::select('id')->where("slugid", $request->user)->first();
+  //   if (!$user_id) {
+  //     return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  //   }
 
-    $cart = Cart::with('product')->where("user_id", $user_id->id)->get();
-    if (!empty($cart)) {
-      return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $cart]);
-    } else {
-      return response()->json(['msg' => 'Data Not Exist', 'status' => true]);
-    }
-  }
+  //   $cart = Cart::with('product')->where("user_id", $user_id->id)->get();
+  //   if (!empty($cart)) {
+  //     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $cart]);
+  //   } else {
+  //     return response()->json(['msg' => 'Data Not Exist', 'status' => true]);
+  //   }
+  // }
 
   public function DeleteCart(Request $request)
   {
@@ -865,81 +867,214 @@ class Apiv1Controller extends Controller
     }
   }
 
-public function addAddress(Request $request){
-  if (empty($request->user)) {
-    return response()->json(['msg' => 'Enter User', 'status' => false]);
-  }
-  $user_id =  User::select('id')->where("slugid", $request->user)->first();
-  if (!$user_id) {
-    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-  }
-  if (empty($request->name)) {
-    return response()->json(['msg' => 'Enter Name', 'status' => false]);
-  }
-  if (empty($request->state)) {
-    return response()->json(['msg' => 'Enter State', 'status' => false]);
-  }
-  if (empty($request->city)) {
-    return response()->json(['msg' => 'Enter City', 'status' => false]);
-  }
-  if (empty($request->pincode)) {
-    return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
-  }
-  if (empty($request->street)) {
-    return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
-  }
-  $addres = new Address();
-  $addres->name = $request->name;
-  $addres->state = $request->state;
-  $addres->city = $request->city;
-  $addres->pincode = $request->pincode;
-  $addres->street = $request->street;
-  $addres->user_id = $user_id->id;
-  if (empty($request->landmark)) {
-    $addres->landmark = $request->landmark;
-  }
-  $addres->slugid = md5($request->productId . time());
-$addres->save();
+  public function addAddress(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->name)) {
+      return response()->json(['msg' => 'Enter Name', 'status' => false]);
+    }
+    if (empty($request->state)) {
+      return response()->json(['msg' => 'Enter State', 'status' => false]);
+    }
+    if (empty($request->city)) {
+      return response()->json(['msg' => 'Enter City', 'status' => false]);
+    }
+    if (empty($request->pincode)) {
+      return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+    }
+    if (empty($request->street)) {
+      return response()->json(['msg' => 'Enter Pincode', 'status' => false]);
+    }
+    $addres = new Address();
+    $addres->name = $request->name;
+    $addres->state = $request->state;
+    $addres->city = $request->city;
+    $addres->pincode = $request->pincode;
+    $addres->street = $request->street;
+    $addres->user_id = $user_id->id;
+    if (empty($request->landmark)) {
+      $addres->landmark = $request->landmark;
+    }
+    $addres->slugid = md5($request->productId . time());
+    $addres->save();
 
-return response()->json(['msg' => 'Data Added', 'status' => true]);
-}
-
-public function getAddressList(Request $request){
-  if (empty($request->user)) {
-    return response()->json(['msg' => 'Enter User', 'status' => false]);
-  }
-  $user_id =  User::select('id')->where("slugid", $request->user)->first();
-  if (!$user_id) {
-    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-  }
-  
-  $addres = Address::where("user_id",$user_id->id)->get();
-  if(empty($addres)){
-    return response()->json(['msg' => 'Data Not Exist', 'status' => false]);
-  }else{
-    return response()->json(['msg' => 'Data Fetched', 'status' => true, "data"=>$addres]);
+    return response()->json(['msg' => 'Data Added', 'status' => true]);
   }
 
+  public function getAddressList(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
 
-}
+    $addres = Address::where("user_id", $user_id->id)->get();
+    if (empty($addres)) {
+      return response()->json(['msg' => 'Data Not Exist', 'status' => false]);
+    } else {
+      return response()->json(['msg' => 'Data Fetched', 'status' => true, "data" => $addres]);
+    }
+  }
 
-public function deleteAddress(Request $request){
-  if (empty($request->user)) {
-    return response()->json(['msg' => 'Enter User', 'status' => false]);
-  }
-  $user_id =  User::select('id')->where("slugid", $request->user)->first();
-  if (!$user_id) {
-    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-  }
-  $data = Address::where("user_id", $user_id->id)->where("slugid", $request->addressId);
+  public function deleteAddress(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Address::where("user_id", $user_id->id)->where("slugid", $request->addressId)->get();
     if (!empty($data)) {
       $data->delete();
       return response()->json(['msg' => 'Data deleted', 'status' => true]);
     } else {
       return response()->json(['msg' => 'Invalid Cart Id', 'status' => false]);
     }
-}
+  }
 
+  public function getCart(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+
+    if (empty($data)) {
+      return response()->json(['msg' => 'Empty Cart', 'status' => false]);
+    } else {
+      $array = [];
+      if(!empty($request->code)){
+      $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+      if (empty($coupon)) {
+        $array['cmsg'] = "Invalid Coupon";
+        $array['cstatus'] = false;
+      } else {
+        $array['cmsg'] = "Valid Coupon";
+        $array['cstatus'] = true;
+      }
+    }else{
+      $array['cmsg'] = "Coupon Not Found";
+        $array['cstatus'] = false;
+    }
+
+      $total = $data->sum(function ($product) {
+        return $product->product->price;
+      });
+      $dicount =  0;
+      if (!empty($coupon)) {
+        $dicount = ($total / 100) * $coupon->percent;
+        $total = $total - $dicount;
+      }
+
+      $gst = ($total / 100) * 18;
+      $array['gst'] = $gst;
+      $array['total'] = $total;
+      $array['discount'] = $dicount;
+      $array['data'] = $data;
+
+      return response()->json(['msg' => 'Empty Cart', 'status' => $array]);
+    }
+  }
+
+
+
+  public function startOrder(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+
+    if (empty($data)) {
+      return response()->json(['msg' => 'Empty Cart', 'status' => true]);
+    } else {
+      $array = [];
+
+      if(!empty($request->code)){
+      $coupon = Coupon::where('code', $request->code)->where('status', false)->first();
+      if (empty($coupon)) {
+        $array['cmsg'] = "Invalid Coupon";
+        $array['cstatus'] = false;
+      } else {
+        $array['cmsg'] = "Valid Coupon";
+        $array['cstatus'] = true;
+        $couponID = $coupon->id;
+        $coupon->status = true;
+        $coupon->save();
+  
+      }
+    }
+
+      $total = $data->sum(function ($product) {
+        return $product->product->price;
+      });
+      $dicount =  0;
+      if (!empty($coupon)) {
+        $dicount = ($total / 100) * $coupon->percent;
+        $total = $total - $dicount;
+      }
+
+      $gst = ($total / 100) * 18;
+      // $array['gst'] = $gst;
+      // $array['total'] = $total;
+      // $array['discount'] = $dicount;
+      // $array['data'] = $data;
+
+      $order = new order();
+      if(!empty($coupon)){
+        $order->coupon_id= $coupon->id;
+      }
+      $order->address_id=$request->addressID;
+      $order->dateofordered =strtotime("now");
+      $order->user_id=$user_id->id;
+      $order->gst=$gst;
+      $order->discount=$dicount;
+      $order->total=$total;
+      $order->slugid= md5($user_id->id . time());
+      $order->save();
+
+
+      foreach($data as $value){
+        $orderItem = new orderItem();
+        $orderItem->order_id= $order->id;
+        $orderItem->products_id= $value->product->id;
+        $orderItem->save();
+      }
+     
+
+
+
+
+
+
+      return response()->json(['msg' => 'Empty Cart', 'status' => $array]);
+    }
+  }
+
+
+
+  public function orderSucces(Request $request){
+
+  }
   ///////////////////////////Quiz////////////////////////////////////////////////////
 
   public function quizCategory(Request $request)

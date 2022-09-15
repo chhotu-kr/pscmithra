@@ -19,7 +19,7 @@ class ModuleController extends Controller
 
     public function index($id){
        $data['id'] = $id;
-        $data['module']=Module::where("course_id",$id);
+        $data['module']=Module::where("course_id",$id)->get();
         
         return view('ecommerce.manageModules',$data);
     }
@@ -42,7 +42,7 @@ class ModuleController extends Controller
         $data->slugid=md5($request->course_id .time());
         $data->type=$request->typp;
         $data->name=$request->name;
-if(($request->typp== "voice") || ($request->typp== "voice")){
+if(($request->typp== "voice") || ($request->typp== "video")){
     //......url.......//
     $filename = $request->url->getClientOriginalName();
     $request->url->move(('files'),$filename);
@@ -58,7 +58,10 @@ if(($request->typp== "voice") || ($request->typp== "voice")){
         
         $data->text=$request->description;
         //
-        $data->isfree=$request->isfree;
+        if(!empty($request->isfree)){
+            $data->isfree=$request->isfree;
+        }
+        
         $data->index=$request->index;
        
         $data->save();

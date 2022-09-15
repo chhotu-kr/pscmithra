@@ -20,20 +20,21 @@ class PdfController extends Controller
     
     public function create()
     {
-        //
-        // $data['product']=Product::all();
-        $data['pdf']=Pdf::all();
-        return view('ecommerce.insertPdf',$data);
+        
+        return view('ecommerce.insertPdf');
     }
 
     
     public function store(Request $request)
     {
         //
+        
         $data = new Pdf();
         $data->name=$request->name;
         $data->slugid=md5($request->pdf .time());
-        $data->pdf_url=$request->pdf_url;
+        $filename = $request->url->getClientOriginalName();
+        $request->url->move(('files'),$filename);
+        $data->pdf_url = $filename;
         $data->save();
         return redirect()->route('pdf.index');
     }

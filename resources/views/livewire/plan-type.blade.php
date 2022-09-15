@@ -19,7 +19,6 @@
         @if($planType == 'plan')
         <livewire:exam/>
         @else
-        
                 <h5 class="card-title">Select {{$planType}}</h5>
                 <div class="table-responsive" style="white-space: nowrap;">
 
@@ -34,13 +33,12 @@
                         </thead>
                         <tbody>
 
+                        
                             @foreach($list as $value)
                             <tr>
                                 <td><input type='checkbox' value='{{$value->id}}' name='data'></td>
                                 <td>{{$value->id}}</td>
-                                <td>{{$value->bookname}}</td>
-
-
+                                <td>{{$value->name}}</td>
                             </tr>
                             @endforeach
 
@@ -52,17 +50,14 @@
         </div>
 
 
-        
         <script>
     $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+       
     } );
 } );
 </script>
+       
 
         @endif
       

@@ -13,7 +13,7 @@
                         <h4 class="text-theme ps-2">Manage Address</h4>
                     </div> --}}
                     <div class="col-4">
-                        <a href="{{route('item.pdfsubs')}}" class="btn btn-primary mb-3">Add ItemPdfsubscription</a>
+                        <a href="{{route('item.pdfsubs',$id)}}" class="btn btn-primary mb-3">Add ItemPdfsubscription</a>
                     </div>
                 </div>
                 <section class="section">

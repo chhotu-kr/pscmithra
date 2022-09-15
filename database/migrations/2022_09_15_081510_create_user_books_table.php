@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_plans', function (Blueprint $table) {
-           $table->id();
-            $table->boolean('isVisble')->default('1');
+        Schema::create('user_books', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained()->nullable();
-            $table->foreignId('subcategory_id')->constrained('sub_categories')->nullable();
-            $table->string('isfree')->nullable();
-            $table->string('isused')->nullable();
-            $table->string('time');
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('books_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+            $table->text('slugid');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_plans');
+        Schema::dropIfExists('user_books');
     }
 };

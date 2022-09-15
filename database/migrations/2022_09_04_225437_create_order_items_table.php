@@ -17,7 +17,7 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
             $table->foreignId("order_id")->constrained();
-            $table->foreignId("product_id")->constrained();
+            $table->foreignId("products_id")->constrained();
             $table->integer("qty")->default(1);
             $table->boolean("ordered")->default(0);
             $table->timestamps();

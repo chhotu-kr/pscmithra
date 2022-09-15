@@ -309,8 +309,8 @@ Route::prefix('xyz@123')->middleware('auth:admin')->group(function () {
     Route::post('/pdfsubsupdate/{id}', [PdfSubscriptionController::class, 'update'])->name('pdfsubs.update');
     Route::get('/pdfsubsremove/{id}', [PdfSubscriptionController::class, 'destroy'])->name('pdfsubs.destroy');
     // .........itempdfsubscription.............//
-    Route::get('/itempdf', [ItemPdfSubscriptionController::class, 'index'])->name('manage.item');
-    Route::get('/item-Pdf', [ItemPdfSubscriptionController::class, 'create'])->name('item.pdfsubs');
+    Route::get('/itempdf/{id}', [ItemPdfSubscriptionController::class, 'index'])->name('manage.item');
+    Route::get('/item-Pdf/{id}', [ItemPdfSubscriptionController::class, 'create'])->name('item.pdfsubs');
     Route::post('/item-Pdfsave', [ItemPdfSubscriptionController::class, 'store'])->name('itempdf.store');
     Route::get('/item-Pdfupdate/{id}', [ItemPdfSubscriptionController::class, 'edit'])->name('itempdf.edit');
     Route::post('/item-Pdfupdate/{id}', [ItemPdfSubscriptionController::class, 'update'])->name('itempdf.update');

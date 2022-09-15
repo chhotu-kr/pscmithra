@@ -42,8 +42,7 @@ class ProductController extends Controller
 
     public function get_PdfSubscription()
     {
-        $data = PdfSubscription::all();
-        return response()->json($data);
+       
     }
     public function index()
     {
