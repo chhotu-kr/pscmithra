@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_items', function (Blueprint $table) {
-           $table->id();
+            $table->id();
             $table->boolean('isVisble')->default('1');
-            $table->foreignId("order_id")->constrained();
+            $table->foreignId("orders_id")->constrained();
             $table->foreignId("products_id")->constrained();
             $table->integer("qty")->default(1);
             $table->boolean("ordered")->default(0);
+            $table->enum('status',['isDeliverd','isProcessing','isShipped'])->default('isProcessing');
+            
             $table->timestamps();
         });
     }

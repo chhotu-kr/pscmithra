@@ -10,7 +10,7 @@ class order extends Model
     use HasFactory;
 
     public function orderItem(){
-        return $this->hasMany(OrderItem::class,"order_id","id");
+        return $this->hasMany(orderItem::class,"orders_id","id");
     }
     public function coupon(){
         return $this->hasOne(Coupon::class,"id","coupon_id");

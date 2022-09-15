@@ -18,8 +18,8 @@ return new class extends Migration
             
             $table->boolean('isVisble')->default('1');
             $table->foreignId('user_courses_id')->constrained();
+            $table->foreignId('modules_id')->constrained();
             $table->boolean('isCompleted')->default(0);
-            
             $table->timestamps();
         });
     }

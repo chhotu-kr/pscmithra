@@ -20,12 +20,12 @@ return new class extends Migration
             $table->foreignId("address_id")->constrained()->nullable();
             $table->foreignId("coupon_id")->constrained()->nullable();
             $table->enum('payment',['Done','Pending',])->default('Pending');
-            $table->enum('status',['isDeliverd','isProcessing','isShipped'])->default('isProcessing');
+            
             $table->double('gst', 10, 5);
             $table->double('discount', 10, 5);
             $table->double('total', 10, 5);
-            $table->text("dateofordered")->nullable();
-            $table->text("slugid");
+            $table->string("dateofordered")->nullable();
+            $table->string("slugid");
             $table->boolean("ordered")->default(0);
             $table->timestamps();
         });

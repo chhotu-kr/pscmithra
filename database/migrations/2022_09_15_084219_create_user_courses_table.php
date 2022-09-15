@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('courses_id')->constrained();
             $table->foreignId('order_id')->constrained();
             $table->boolean('isExpired')->default(0);
-            $table->string('time');
+            $table->bigInteger('time');
             $table->timestamps();
         });
     }

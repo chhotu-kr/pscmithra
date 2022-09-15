@@ -42,6 +42,16 @@ class Product extends Model
     public function book(){
         return $this->hasone(BookProduct::class, 'product_id','id');
     }
+    public function course(){
+        return $this->hasone(CourseProduct::class, 'product_id','id');
+    }
+
+    public function pdfs(){
+        return $this->hasone(PdfProduct::class, 'product_id','id');
+    }
+    public function ebook(){
+        return $this->hasone(PdfSubscriptionProduct::class, 'product_id','id');
+    }
    
    
 
