@@ -120,6 +120,13 @@ Route::post('/deleteAddress',[Apiv1Controller::class,'deleteAddress']);
 Route::post('/startOrder',[Apiv1Controller::class,'startOrder']);
 Route::post('/orderSucces',[Apiv1Controller::class,'orderSucces']);
 
+Route::post('/getSesionalPdf',[Apiv1Controller::class,'getSesionalPdf']);
+Route::post('/getSesionalPdfItems',[Apiv1Controller::class,'getSesionalPdfItems']);
+
+Route::post('/getPdf',[Apiv1Controller::class,'getPdf']);
+Route::post('/getPlans',[Apiv1Controller::class,'getPlans']);
+
+
 
 
 //........Coupon..........
