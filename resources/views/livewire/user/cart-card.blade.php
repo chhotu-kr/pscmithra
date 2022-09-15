@@ -31,11 +31,11 @@
         <div class="col-4">
             <div class="list-group">
                 <div class="list-group-item list-group-item-action">Total Amount <span class="float-end">Rs.
-                        87687/-</span></div>
+                        {{ $total['totalAmount'] }}/-</span></div>
                 <div class="list-group-item list-group-item-action bg-success text-white">Total Discount Amount<span
-                        class="float-end">Rs.786976/-</span></div>
+                        class="float-end">Rs. {{ $total['discount'] }}/-</span></div>
                 <div class="list-group-item list-group-item-action ">Tax (18%) <span class="float-end">Rs.
-                        7869786</span></div>
+                    {{ $total['gst'] }}</span></div>
                 {{-- @if ($order->coupon_id != null)
 
                             <div class="list-group-item list-group-item-action  bg-warning text-dark">Coupon discount <span
@@ -46,30 +46,29 @@
                         @endif --}}
 
                 <div class="list-group-item list-group-item-action">Payable Amount <span class="float-end">Rs.
-                        76587587/-</span> </div>
+                    {{ $total['payableAmount'] }}/-</span> </div>
             </div>
             <div class="row mt-3 px-2">
                 <a href="" class="btn btn-success col">Continue Shopping</a>
-                <a href="" class="btn btn-danger col ms-2">checkout</a>
+                <a href="" wire:click.prevent="checkout()" class="btn btn-danger col ms-2">checkout</a>
+                <p class="text-danger mt-2"> {!! Session::get('add') !!}</p>
             </div>
 
 
-            <div class="card mt-4">
+            <div class="card mt-3">
                 <div class="card-body">
+    {{-- {{ json_encode($total) }} --}}
                     <h6 class="lead">Have any Coupon?</h6>
-                    <form action="" method="post" class="d-flex">
-                        @csrf
-                        <input type="text" placeholder="Enter Code" name="code" value=""
+                    <form  class="d-flex">
+                       
+                        <input type="text" placeholder="Enter Code" wire:model="code" name="code" 
                             class="form-control">
-                        {{-- @error('code')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror --}}
-                        <input type="submit" class="btn btn-dark" value="Apply">
+                    
                     </form>
-
-
                 </div>
+
             </div>
+            {!! Session::get('coupon') !!}
 
         </div>
     </div>
@@ -170,7 +169,7 @@
                                 @endif
                                 @else border border-danger
                                  @if ($addressSelected == $item->id)
-                                    border-3
+                                    border-2
                                 @endif
                                 @endif bg-light"
                         >

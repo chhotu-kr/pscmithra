@@ -17,8 +17,8 @@ return new class extends Migration
            $table->id();
             $table->boolean('isVisble')->default('1');
             $table->foreignId("user_id")->constrained();
-            $table->foreignId("address_id")->nullable()->constrained();
-            $table->foreignId("coupon_id")->nullable()->constrained();
+            $table->foreignId("address_id")->constrained()->nullable();
+            $table->foreignId("coupon_id")->constrained()->nullable();
             $table->enum('payment',['Done','Pending',])->default('Pending');
             $table->enum('status',['isDeliverd','isProcessing','isShipped'])->default('isProcessing');
             $table->double('gst', 10, 5);
