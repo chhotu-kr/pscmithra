@@ -23,6 +23,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\admin\home\imageController;
 use App\Http\Controllers\admin\home\PageController;
 use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\TestiMonialsController;
+use App\Http\Controllers\user\UserController;
  use App\Http\Controllers\user\dashboard\profileController;
 use App\Http\Controllers\user\addToCartController;
 use App\Models\QuizExamination;
@@ -40,27 +42,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/about', function(){
-    return view('user/About/aboutus');
-});
+Route::get('/about',[HomeController::class,'AboutPage'])->name('about.page');
 
-Route::get('/login',function(){
-   
-    return view('userRegister.login');
-});
 
-Route::get("/test", function(){
-    return View("test.test");
- });
+
+
 // Route::get('/addcart/{p_id}',[addToCartController::class,'addcart'])->name('add.cart');
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
-Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addToCart"])->name("addToCart");
+Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addToCart"])->name("addtocart");
 Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
 Route::get("/remove-item-from-cart/{p_id}",[addToCartController::class,"removeItemFromCart"])->name("removeitemfromCart");
 Route::get("/coupon/remove",[addToCartController::class,"removeCoupon"])->name("removecoupon");
 Route::post("/coupon/apply",[addToCartController::class,"applyCoupon"])->name("applycoupon");
 Route::get("/products/{p_id}",[addToCartController::class,"viewProduct"])->name("viewproduct");
 Route::get("/checkout",[addToCartController::class,"checkOut"])->name("checkout");
+Route::get('add/cart/{p_id}',[addToCartController::class,'addToCart'])->name('add.cart');
 // Route::get('/cartproduct',function(){
 //     echo message();
 //     return view('user/cart/viewproduct');
@@ -116,6 +112,7 @@ Route::get('/term/condition', [HomeController::class, 'term'])->name('view.term'
 Route::get('/refund/cancel', [HomeController::class, 'refund'])->name('view.refund');
 Route::get('/test/view',[HomeController::class,'get_Test'])->name('view.test');
 Route::get('/order/details',[HomeController::class,'get_orderdetails'])->name('order.details');
+Route::get('/view/test',[HomeController::class,'getTest'])->name('view.test');
 //................calling Data ..........
 
 Route::get('/view/home/{id}', [HomeController::class, 'filter'])->name('filter.cate');

@@ -40,23 +40,10 @@ class addToCartController extends Controller
     public function checkOut()
     {
 
-        // $data['subuser']=User::all();
-        // $data['order'] = Order::where([['user_id',Auth::id()],['ordered',false]])->first();
-        // $data['orderitem'] = OrderItem::where([['product_id',Auth::id()],['ordered',false]])->first();
         $data['addresses'] = Address::where("user_id", Auth::id())->get();
         return view("user/cart/checkout", $data);
     }
-    public function insertUserPdf($array)
-    {
-        $up = new UserPdf();
-        $up->order_id = $array['order_id'];
-        $up->product_id = $array['product_id'];
-        $up->user_id = $array['user_id'];
-        $up->pdf_id = $array['pdf_id'];
-        $up->date = new Date("D-m-Y");
-        $up->save();
-        // return redirect()->route('checkout');
-    }
+   
     public function addTCart(Request $request, $p_id)
     {
         // dd($p_id);

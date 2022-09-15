@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-header">Insert User</div>
           <div class="card-body">
-            <form action="{{route('user.store')}}" method="POST">
+            <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
               @csrf
              {{-- <div class="mb-3">
               <label for="">ProductName</label>

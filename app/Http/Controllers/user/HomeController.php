@@ -341,4 +341,12 @@ class HomeController extends Controller
     public function get_orderdetails(){
         return view('user.cart.Orderdetails');
     }
+
+    public function AboutPage(){
+        return view('user.About.aboutus');
+    }
+
+    public function getTest(){
+        return view('test.test');
+    }
 }
