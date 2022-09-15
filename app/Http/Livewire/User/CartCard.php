@@ -4,17 +4,26 @@ namespace App\Http\Livewire\User;
 
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\coupon;
+use App\Models\order;
+use App\Models\orderItem;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CartCard extends Component
 {
-    public $name,$state,$city,$pincode,$street,$type,$landmark;
+    public $name, $state, $city, $pincode, $street, $type, $landmark,$code;
     public $order;
     public $address;
     public $status;
     public $addressSelected = null;
+    public $total;
+
+public function updatedcode(){
+    $this->carttotal();
+}
+
     public function changeStatus()
     {
         $this->status = !$this->status;
@@ -27,6 +36,7 @@ class CartCard extends Component
     public function addressSelect($id)
     {
         $this->addressSelected = $id;
+        $this->mount();
         // dd($id);
     }
     public function mount()
@@ -34,6 +44,7 @@ class CartCard extends Component
         $user_id = Auth::id();
         $this->order = Cart::where('user_id', $user_id)->get();
         $this->address();
+        $this->carttotal();
     }
 
     public function removeitemfromCart($id)
@@ -44,7 +55,8 @@ class CartCard extends Component
         $item->delete();
         $this->mount();
     }
-    public function emptyAdd(){
+    public function emptyAdd()
+    {
         $this->name = '';
         $this->state = '';
         $this->city = '';
@@ -56,15 +68,15 @@ class CartCard extends Component
     public function addAddress()
     {
         $data = $this->validate([
-            'name'=>'required',
-            'state'=>'required',
-            'city'=>'required',
-            'pincode'=>'required',
-            'street'=>'required',
-            'type'=>'required',
-            'landmark'=>'nullable',
+            'name' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required',
+            'street' => 'required',
+            'type' => 'required',
+            'landmark' => 'nullable',
         ]);
-    
+
         $user_id = Auth::id();
         $addres = new Address();
         $addres->name = $data['name'];
@@ -84,7 +96,99 @@ class CartCard extends Component
     }
     public function checkout()
     {
+        if ($this->addressSelected == null) {
+            session()->flash('add', 'Please select a address to checkout');
+        } else {
+            $user_id = Auth::user();
+              $data = Cart::where("user_id", $user_id->id)->with('product')->get();
+          
+              if (count($data) == 0) {
+                session()->flash('add', 'Add Item to checkout');
+              } else {
+                $array = [];
+          
+                $order = new order();
+                if ($this->total['cstatus'] == true) {
+                  $order->coupon_id = $this->total['coupon_id'];
+                }
+                $order->address_id = $this->addressSelected;
+                $order->dateofordered = strtotime("now");
+                $order->user_id = $user_id->id;
+                $order->gst = $this->total['gst'];
+                $order->discount = $this->total['discount'];
+                $order->total =$this->total['total'];
+                $order->slugid = md5($user_id->id . time());
+                $order->save();
+          
+          
+                foreach ($data as $value) {
+                  $orderItem = new orderItem();
+                  $orderItem->orders_id = $order->id;
+                  $orderItem->products_id = $value->product->id;
+                  $orderItem->save();
+                  $value->delete();
+                }
+                $array['total'] = $this->total['total'];
+                $array['checksum'] = "asdsadasdasdas";
+                $array['orderid'] = $order->slugid;
+                
+                $this->mount();
+                // return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
+              }
+        }
     }
+    public function carttotal()
+    {
+
+        $user_id = Auth::id();
+        $data = Cart::where("user_id", $user_id)->with('product')->get();
+
+        if (empty($data)) {
+            return response()->json(['msg' => 'Empty Cart', 'status' => false]);
+        } else {
+            $array = [];
+           
+            if (!empty($this->code)) {
+                $coupon = coupon::where('code', $this->code)->where('status', false)->first();
+                if (empty($coupon)) {
+                    $array['cmsg'] = "Invalid Coupon";
+                    $array['cstatus'] = false;
+                    session()->flash('coupon','<p class="text-danger">Invalid Coupon!</p>');
+                } else {
+                    $array['cmsg'] = "Valid Coupon";
+                    $array['cstatus'] = true;
+                    $array['coupon_id'] = $coupon->id;
+                    session()->flash('coupon','<p class="text-success">Valid Coupon!</p>');
+
+                }
+            } else {
+                $array['cmsg'] = "Coupon Not Found";
+                $array['cstatus'] = false;
+                // session()->flash('coupon','<p class="text-danger">Invalid Coupon!</p>');
+            }
+
+            $total = $data->sum(function ($product) {
+                // dd($product);
+                return $product->product->price;
+            });
+            $dicount =  0;
+            if (!empty($coupon)) {
+                $dicount = ($total / 100) * $coupon->percent;
+                $total = $total - $dicount;
+            }
+
+           
+            $gst = ($total / 100) * 18;
+            $array['gst'] = $gst;
+            $array['discount'] = $dicount;
+            $array['total'] = ( $total + $gst) - $dicount;
+            $array['cart'] = $data;
+
+            $this->total = $array;
+
+        }
+    }
+ 
     public function render()
     {
         return view('livewire.user.cart-card');

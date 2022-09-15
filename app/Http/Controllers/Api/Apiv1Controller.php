@@ -1081,7 +1081,7 @@ class Apiv1Controller extends Controller
 
   public function orderSucces(Request $request)
   {
-    if (empty($request->user)) {
+     if (empty($request->user)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
     }
     $user_id =  User::where("slugid", $request->user)->first();
@@ -1097,8 +1097,8 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
     }
     $oder = $oder[0];
-
-
+    
+    
     $oder->payment = "Done";
     $oder->save();
     foreach ($oder->orderItem as $value) {
