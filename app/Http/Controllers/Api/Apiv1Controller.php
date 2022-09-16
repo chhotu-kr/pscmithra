@@ -55,7 +55,7 @@ use App\Models\UserPlan;
 use App\Models\userPlans;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\map;
@@ -104,12 +104,42 @@ class Apiv1Controller extends Controller
 
   public function api_sendOTP(Request $request)
   {
+
+    $m = $request->contact;
     if (empty($request->contact)) {
       return response()->json(['status' => false, 'msg' => 'Enter mobile number']);
     }
-    $randomNumber = random_int(1000, 9999);
-    $data['otp'] = $randomNumber;
-    return response()->json(['status' => true, 'msg' => 'Otp Send', 'data' => $data]);
+
+
+    $response = Http::get('https://2factor.in/API/V1/4e2ac173-2ffa-11ed-9c12-0200cd936042/SMS/+91' . $m . '/AUTOGEN/defalut');
+    // $randomNumber = random_int(1000, 9999);
+    // $data['otp'] = $randomNumber;
+    $area = json_decode($response->body(), true);
+    if ($area['Status'] == "Success") {
+      return response()->json(['status' => true, 'msg' => 'Otp Send', 'data' => $area['Details']]);
+    } else {
+      return response()->json(['status' => false, 'msg' => 'Otp Not Send']);
+    }
+  }
+  public function updatePassword(Request $request)
+  {
+
+    $o = $request->otp;
+    $d = $request->data;
+    if (empty($o)) {
+      return response()->json(['status' => false, 'msg' => 'Enter OTP']);
+    }    
+    $response = Http::get('https://2factor.in/API/V1/4e2ac173-2ffa-11ed-9c12-0200cd936042/SMS/VERIFY/'.$d.'/' . $o );
+    // $randomNumber = random_int(1000, 9999);
+    // $data['otp'] = $randomNumber;
+    $area = json_decode($response->body(), true);
+
+    
+    if ($area['Status'] == "Success") {
+      return response()->json(['status' => true, 'msg' => 'Otp Matched']);
+    } else {
+      return response()->json(['status' => false, 'msg' => 'Invalid Otp']);
+    }
   }
 
   public function api_login(Request $request)
@@ -1001,6 +1031,58 @@ class Apiv1Controller extends Controller
     }
   }
 
+
+  
+
+  public function getOrderList(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    $data = order::where("user_id", $user_id->id)->get();
+
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'No Order Found', 'status' => true]);
+    } else {
+      
+
+      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $data]);
+    }
+  }
+
+  public function getOrderItemList(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::select('id')->where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+   
+    $data = order::where("user_id", $user_id->id)->where("slugid", $request->orderId)->with('orderItem.product')->get();
+
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'No Order Found', 'status' => true]);
+    } else {
+      $data = $data[0]->orderItem->map(function($item){
+        return [
+          'status'=>$item->status,
+          'tittle'=>$item->product->title,
+          'type'=>$item->product->type,
+          'price'=>$item->product->price,
+          'bannerimage'=>$item->product->bannerimage,
+      ];
+      });
+
+      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $data]);
+    }
+  }
 
 
   public function startOrder(Request $request)
@@ -2702,11 +2784,11 @@ class Apiv1Controller extends Controller
         $exp = round($datediff / (60 * 60 * 24));
       }
 
-      
+
 
       $final = [];
       if ($singlePlan->type == "liveexam") {
-        $final = ["title" => "LiveExam", "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+        $final = ["title" => "LiveExam", "isUsed" => $item->isused, "isExpired" => $item->isExpired, "freetest" => $singlePlan->freemocktest, "duration" => $exp];
       } else if ($singlePlan->type == "mocktest") {
 
         $tittle = "MockTest - " . $singlePlan->cat->category;
@@ -2714,7 +2796,7 @@ class Apiv1Controller extends Controller
           $tittle = $tittle . " - " . $singlePlan->subcat->subcategory;
         }
 
-        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+        $final = ["title" => $tittle, "isUsed" => $item->isused, "isExpired" => $item->isExpired, "freetest" => $singlePlan->freemocktest, "duration" => $exp];
       } else if ($singlePlan->type == "studymetrial") {
 
         $tittle = "Study Material - " . $singlePlan->smc->name;
@@ -2722,7 +2804,7 @@ class Apiv1Controller extends Controller
           $tittle = $tittle . " - " . $singlePlan->smt->name;
         }
 
-        $final = ["title" => $tittle, "isExpired"=>$item->isExpired,"duration" => $exp];
+        $final = ["title" => $tittle, "isExpired" => $item->isExpired, "duration" => $exp];
       } else if ($singlePlan->type == "quiz") {
         $tittle = "Quiz - " . $singlePlan->qcat->name;
         if (!empty($singlePlan->qsubcat)) {
@@ -2734,7 +2816,7 @@ class Apiv1Controller extends Controller
         if (!empty($singlePlan->qtopics)) {
           $tittle = $tittle . " - " . $singlePlan->qtopics->name;
         }
-        $final = ["title" => $tittle, "isUsed"=>$item->isused, "isExpired"=>$item->isExpired,"freetest" => $singlePlan->freemocktest, "duration" => $exp];
+        $final = ["title" => $tittle, "isUsed" => $item->isused, "isExpired" => $item->isExpired, "freetest" => $singlePlan->freemocktest, "duration" => $exp];
       }
 
       //     $final = ["title" => $tittle, "freetest" => $singlePlan->freemocktest, "duration" => $singlePlan->examduration];
@@ -2744,22 +2826,41 @@ class Apiv1Controller extends Controller
       // });
 
 
-      return 
-        $final
-      ;
+      return
+        $final;
     });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
   function getCourse(Request $request)
-  { 
+  {
     if (empty($request->user)) {
-    return response()->json(['msg' => 'Enter User', 'status' => false]);
-  }
-  $user_id =  User::where("slugid", $request->user)->first();
-  if (!$user_id) {
-    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
-  }
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
     return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+  }
+
+
+  function updateUserImage(Request $request)
+  {
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if ($request->hasFile('image')) {
+      $filename = $request->file('image')->getClientOriginalName();
+      $request->image->move(('upload'), $filename);
+      $user_id->image = $filename;
+      $user_id->save();
+      return response()->json(['msg' => 'Image Updated', 'status' => true]);
+    }
+    return response()->json(['msg' => 'Image Not Found', 'status' => false]);
   }
 }
