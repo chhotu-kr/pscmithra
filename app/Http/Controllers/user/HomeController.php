@@ -346,7 +346,7 @@ class HomeController extends Controller
         return view('user.About.aboutus');
     }
 
-    public function getTest(){
-        return view('test.test');
-    }
+    // public function getTest(){
+    //     return view('test.test');
+    // }
 }

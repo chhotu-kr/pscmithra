@@ -112,7 +112,7 @@ Route::get('/term/condition', [HomeController::class, 'term'])->name('view.term'
 Route::get('/refund/cancel', [HomeController::class, 'refund'])->name('view.refund');
 Route::get('/test/view',[HomeController::class,'get_Test'])->name('view.test');
 Route::get('/order/details',[HomeController::class,'get_orderdetails'])->name('order.details');
-Route::get('/view/test',[HomeController::class,'getTest'])->name('view.test');
+// Route::get('/view/test',[HomeController::class,'getTest'])->name('view.test');
 //................calling Data ..........
 
 Route::get('/view/home/{id}', [HomeController::class, 'filter'])->name('filter.cate');
