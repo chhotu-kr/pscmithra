@@ -43,7 +43,9 @@
                                           <td>{{$req->id}}</td>
                                           <td>{{$req->name}}</td>
                                           <td>{{$req->contact}}</td>
-                                          <td>{{$req->image}}</td>
+                                          <td>
+                                            <img src="{{asset("upload/".$req->image)}}" width="100" height="100" alt="">
+                                        </td>
                                           <td>{{$req->gender}}</td>
                                           <td>{{$req->type}}</td>
                                           {{-- <td>{{$req->pincode}}</td> --}}

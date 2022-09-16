@@ -27,7 +27,10 @@ class userController extends Controller
         $data->contact=$request->contact;
         $data->password=Hash::make($request->password);
     
-        $data->image=$request->image;
+        $filename = $request->image->getClientOriginalName();
+        $request->image->move(('upload'),$filename);
+        $data->image = $filename;
+        
         $data->amount=$request->amount;
         $data->gender=$request->gender;
         $data->type=$request->type;

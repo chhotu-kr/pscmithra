@@ -42,10 +42,13 @@ class HomeController extends Controller
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
 
+
         $data['product'] = Product::paginate(2);
         $data['img'] = Image::all();
         $data['user'] = User::all();
         $data['testimonials'] = TestiMonials::all();
+
+       
         return view('user.Viewhome', $data);
     }
 
@@ -98,11 +101,13 @@ class HomeController extends Controller
         return view('user.BlogDetails');
     }
     //...............Course...............//
-    public function get_ViewCourse()
+    public function get_Product()
     {
-        return view('user.ViewCourse');
+        
+        return view('user.Product');
     }
     //................CourseDetails..............//
+
 
     public function get_ViewCourseDetails($id)
     {
@@ -110,6 +115,14 @@ class HomeController extends Controller
         $data['language'] = Language::where('id', $id)->first();
 
         return view('user.ViewCoursedetails', $data);
+
+   }
+    public function get_ProductDetails($id){
+        $data['product']=Product::where('id',$id)->first();
+        $data['language']=Language::where('id',$id)->first();
+       
+        return view('user.Productdetails',$data);
+
     }
     //..............Quiz.............//
 
@@ -340,6 +353,7 @@ class HomeController extends Controller
         // $data['user']=User::all();
         return view('user.profile.userDashboard');
     }
+
     //.................Payment....................//
     public function order(Request $req)
     {
@@ -452,5 +466,23 @@ class HomeController extends Controller
         //get important parameters via public methods
         $transaction->getOrderId(); // Get order id
         $transaction->getTransactionId(); // Get transaction i
+}
+
+    public function get_Test(){
+
+        return view('user.Test.viewtest');
+    }
+
+    public function get_orderdetails(){
+        return view('user.cart.Orderdetails');
+    }
+
+    public function AboutPage(){
+        return view('user.About.aboutus');
+    }
+
+    public function getTest(){
+        return view('test.test');
+
     }
 }
