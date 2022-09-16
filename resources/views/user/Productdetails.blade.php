@@ -5,12 +5,12 @@
     <div class="container">
         <div class="breadcrumb-inner">
             <div class="page-title">
-                <h1 class="title">Course Details</h1>
+                <h1 class="title">Product Details</h1>
             </div>
             <ul class="education-breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="separator"><i class="icon-angle-right"></i></li>
-                <li class="breadcrumb-item active" aria-current="page">Course Details</li>
+                <li class="breadcrumb-item active" aria-current="page">Product Details</li>
             </ul>
         </div>
     </div>

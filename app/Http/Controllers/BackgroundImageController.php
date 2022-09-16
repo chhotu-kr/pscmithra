@@ -33,7 +33,7 @@ class BackgroundImageController extends Controller
         $data->pagename=$request->pagename;
         //image
         $filename = $request->image->getClientOriginalName();
-        $request->image->move(('images'),$filename);
+        $request->image->move(('upload'),$filename);
         $data->image = $filename;
         $data->save();
         return redirect()->route('manage.image');
@@ -65,7 +65,7 @@ class BackgroundImageController extends Controller
         $bi->pagename=$request->pagename;
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $bi->image = $filename;
         $bi->save();
         return redirect()->route('manage.image');

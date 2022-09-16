@@ -65,8 +65,16 @@
                     </div>
                     <div class="header-top-right">
                         <ul class="header-info">
-                            <li><a href="{{ route('user.login') }}">Login</a></li>
-                            <li><a href="{{ route('user.register') }}">Register</a></li>
+                          @if (Auth::user()===Null)
+                          <li><a href="{{ route('user.login') }}">Login</a></li>
+                          {{-- elseif --}}
+                          {{-- <li class="nav-item"><a href="{{route('logout')}}" class="nav-link text-white fw-bold">LogOut</a></li> --}}
+                          @else
+                          {{-- <li><a href="{{ route('user.register') }}">Register</a></li>  --}}
+                          <li class="nav-item"><a href="{{route('logout')}}" class="">LogOut</a></li>
+                          
+                          @endif
+                            
                             <li><span>Call:</span><a href="tel:+04844632514">+04844632514</a></li>
                         </ul>
                     </div>
@@ -105,7 +113,8 @@
                                 </li>
                                 <li><a href="{{ route('view.quiz') }}">Quizes</a></li>
                                 <li><a href="{{ route('quiz.result') }}">Live Exam</a></li>
-                                <li><a href="contact.php">Contact Us</a></li>
+                                <li><a href="{{route('about.page')}}">About Us</a></li>
+                                {{-- <li><a href="contact.php">Contact Us</a></li> --}}
                             </ul>
                         </nav>
                     </div>
@@ -171,17 +180,17 @@
                             <h4 class="widget-title">Links</h4>
                             <div class="inner">
                                 <ul class="footer-link link-hover">
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Services</a></li>
+                                    <li><a href="{{route('about.page')}}">About</a></li>
+                                    {{-- <li><a href="#">Services</a></li> --}}
                                     <li><a href="{{ route('view.course') }}">Courses</a></li>
                                     <li><a href="{{ route('view.blog') }}">Blog</a></li>
-                                    <li><a href="#">Events</a></li>
-                                    <li><a href="#">Become a Teacher</a></li>
+                                    {{-- <li><a href="#">Events</a></li>
+                                    <li><a href="#">Become a Teacher</a></li> --}}
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-sm-6">
+                    {{-- <div class="col-lg-2 col-sm-6">
                         <div class="education-footer-widget quick-link-widget">
                             <h4 class="widget-title">Services</h4>
                             <div class="inner">
@@ -194,7 +203,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-4 col-md-6">
                         <div class="education-footer-widget">
                             <h4 class="widget-title">Contacts</h4>

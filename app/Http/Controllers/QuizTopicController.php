@@ -27,7 +27,7 @@ class QuizTopicController extends Controller
 
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $data->image = $filename;
         $data->save();
 
@@ -49,7 +49,7 @@ class QuizTopicController extends Controller
 
          //image
          $filename = $request->image->getClientOriginalName();
-         $request->image->move(('images'),$filename);
+         $request->image->move(('upload'),$filename);
          $quiztop->image = $filename;
         $quiztop->save();
 
