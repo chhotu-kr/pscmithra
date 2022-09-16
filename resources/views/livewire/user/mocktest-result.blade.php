@@ -462,14 +462,31 @@
                                                 </div>
 
                                             </div>
-                                         
-                                            <div class="text-light btn btn-success"
-                                                data-bs-toggle="modal" data-bs-target="#languagereattempt"
-                                                style="height: 31px">
-                                                <span style="font-size: 14px">
-                                                    Reattempt
-                                                </span>
-                                            </div>
+
+                                            @if ($data['reAttempId'] == '' && $data['reAttempResult'] == false)
+                                                {{-- New Reattempt --}}
+                                                <div class="text-light btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#languagereattempt" style="height: 31px">
+                                                    <span style="font-size: 14px">
+                                                        Reattempt
+                                                    </span>
+                                                </div>
+                                                {{-- Resume reattempt --}}
+                                            @elseif ($data['reAttempId'] != '' && $data['reAttempResult'] == false)
+                                                <div class="text-light btn btn-success" style="height: 31px" wire:click.prevent="reattempt()">
+                                                    <span style="font-size: 14px">
+                                                        Resume Reattempt
+                                                    </span>
+                                                </div>
+                                            @elseif ($data['reAttempId'] != '' && $data['reAttempResult'] == true)
+                                                {{-- New Reattempt and Result --}}
+                                                <div class="text-light btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#languagereattempt" style="height: 31px">
+                                                    <span style="font-size: 14px">
+                                                        Reattempt
+                                                    </span>
+                                                </div>
+                                            @endif
                                             {{-- language modal --}}
                                             <div wire:ignore.self class="modal fade" id="languagereattempt"
                                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -503,6 +520,10 @@
                                                         <div class="modal-footer">
                                                             <button type="button" wire:click.prevent="reattempt()"
                                                                 class="education-btn btn-small btn-primary">Continue</button>
+                                                            @if ($data['reAttempId'] != '' && $data['reAttempResult'] == true)
+                                                                <button type="button" wire:click.prevent="result()"
+                                                                    class="education-btn btn-small btn-primary">Result</button>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

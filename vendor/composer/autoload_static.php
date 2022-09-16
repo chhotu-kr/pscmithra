@@ -42,6 +42,10 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         array (
             'voku\\' => 5,
         ),
+        'p' => 
+        array (
+            'paytm\\paytmchecksum\\' => 20,
+        ),
         'W' => 
         array (
             'Whoops\\' => 7,
@@ -179,6 +183,10 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'paytm\\paytmchecksum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paytm/paytmchecksum/paytmchecksum',
         ),
         'Whoops\\' => 
         array (
@@ -597,6 +605,7 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Livewire\\Admin\\Course\\Coursetype' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Course/Coursetype.php',
         'App\\Http\\Livewire\\Admin\\LiveExam\\SelectQuestion' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/LiveExam/SelectQuestion.php',
+        'App\\Http\\Livewire\\Admin\\Liveexam\\Selecques' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Liveexam/Selecques.php',
         'App\\Http\\Livewire\\Admin\\Product\\Quiz' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/Quiz.php',
         'App\\Http\\Livewire\\Admin\\Product\\Sm' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/Sm.php',
         'App\\Http\\Livewire\\Admin\\Product\\StudyMaterial' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Product/StudyMaterial.php',
@@ -624,7 +633,6 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'App\\Http\\Livewire\\User\\CartCard' => __DIR__ . '/../..' . '/app/Http/Livewire/User/CartCard.php',
         'App\\Http\\Livewire\\User\\Categoryslider' => __DIR__ . '/../..' . '/app/Http/Livewire/User/Categoryslider.php',
         'App\\Http\\Livewire\\User\\Dashboard\\Profile' => __DIR__ . '/../..' . '/app/Http/Livewire/User/Dashboard/Profile.php',
-        'App\\Http\\Livewire\\User\\LiveQuiz' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuiz.php',
         'App\\Http\\Livewire\\User\\LiveQuizResult' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizResult.php',
         'App\\Http\\Livewire\\User\\LiveQuizSolution' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizSolution.php',
         'App\\Http\\Livewire\\User\\LiveQuizStart' => __DIR__ . '/../..' . '/app/Http/Livewire/User/LiveQuizStart.php',
@@ -6098,6 +6106,7 @@ class ComposerStaticInitb51fdab41c48b7a7b5c90ad5bd45e3a9
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'paytm\\paytmchecksum\\PaytmChecksum' => __DIR__ . '/..' . '/paytm/paytmchecksum/paytmchecksum/PaytmChecksum.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );
 

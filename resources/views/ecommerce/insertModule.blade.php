@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header ps-2 h4">Insert Module</div>
             <div class="card-body">
-                <form action="{{ route('module.store') }}" class="row g-3 needs-validation" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('module.store') }}" class="row g-3" method="POST" enctype="multipart/form-data" novalidate>
 
                     @csrf
                     <input type="number" name="course_id" hidden value = "{{$id}}">
@@ -22,6 +22,14 @@
                         <div class="col">
                             <label for="validationTooltip02">Module Name</label>
                             <input type="text"  class="form-control" id="validationTooltip02" name="name">
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="validationTooltip055">Module Time(in Mints)</label>
+                            <input type="number"  class="form-control" id="validationTooltip055" name="time">
                             <div class="valid-tooltip">
                                 Looks good!
                             </div>
@@ -45,7 +53,10 @@
                             Looks good!
                         </div>
                     </div>
-                    <input type="submit" value="Create" class="btn btn-primary w-100">
+                    
+
+
+                    <button type="submit" class="btn btn-primary w-100" > Create</button>
     </form>
 
 </div>

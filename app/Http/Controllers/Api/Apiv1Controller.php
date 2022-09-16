@@ -60,6 +60,10 @@ use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\map;
 
+use paytm\paytmchecksum;
+use paytm\paytmchecksum\PaytmChecksum as PaytmchecksumPaytmChecksum;
+use PaytmChecksum as GlobalPaytmChecksum;
+
 class Apiv1Controller extends Controller
 {
   public function index($contact)
@@ -121,20 +125,20 @@ class Apiv1Controller extends Controller
       return response()->json(['status' => false, 'msg' => 'Otp Not Send']);
     }
   }
-  public function updatePassword(Request $request)
+  public function verifyOtp(Request $request)
   {
 
     $o = $request->otp;
     $d = $request->data;
     if (empty($o)) {
       return response()->json(['status' => false, 'msg' => 'Enter OTP']);
-    }    
-    $response = Http::get('https://2factor.in/API/V1/4e2ac173-2ffa-11ed-9c12-0200cd936042/SMS/VERIFY/'.$d.'/' . $o );
+    }
+    $response = Http::get('https://2factor.in/API/V1/4e2ac173-2ffa-11ed-9c12-0200cd936042/SMS/VERIFY/' . $d . '/' . $o);
     // $randomNumber = random_int(1000, 9999);
     // $data['otp'] = $randomNumber;
     $area = json_decode($response->body(), true);
 
-    
+
     if ($area['Status'] == "Success") {
       return response()->json(['status' => true, 'msg' => 'Otp Matched']);
     } else {
@@ -142,9 +146,26 @@ class Apiv1Controller extends Controller
     }
   }
 
+
+  public function updatePassword(Request $request)
+  {
+    $user = User::where('contact', $request->contact)->first();
+    if (!$user) {
+      return response()->json(['msg' => 'Mobile no Not Register', 'status' => false,]);
+    }
+
+    if (empty($request->password)) {
+      return response()->json(['msg' => 'Enter Password', 'status' => false,]);
+    }
+
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return response()->json(['msg' => 'Password Updates', 'status' => true]);
+  }
+
   public function api_login(Request $request)
   {
-
     if (empty($request->type)) {
       return response()->json(['msg' => 'Enter Login Type', 'status' => false]);
     }
@@ -852,7 +873,7 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid Product', 'status' => false]);
     }
     $cart = new Cart();
-    $cart->prdoucts_id = $product->id;
+    $cart->products_id = $product->id;
     $cart->user_id = $user_id->id;
     $cart->qty = 1;
     $cart->slugid = md5($request->productId . time());
@@ -1032,7 +1053,7 @@ class Apiv1Controller extends Controller
   }
 
 
-  
+
 
   public function getOrderList(Request $request)
   {
@@ -1048,7 +1069,7 @@ class Apiv1Controller extends Controller
     if (count($data) == 0) {
       return response()->json(['msg' => 'No Order Found', 'status' => true]);
     } else {
-      
+
 
       return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $data]);
     }
@@ -1064,20 +1085,20 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
 
-   
+
     $data = order::where("user_id", $user_id->id)->where("slugid", $request->orderId)->with('orderItem.product')->get();
 
     if (count($data) == 0) {
       return response()->json(['msg' => 'No Order Found', 'status' => true]);
     } else {
-      $data = $data[0]->orderItem->map(function($item){
+      $data = $data[0]->orderItem->map(function ($item) {
         return [
-          'status'=>$item->status,
-          'tittle'=>$item->product->title,
-          'type'=>$item->product->type,
-          'price'=>$item->product->price,
-          'bannerimage'=>$item->product->bannerimage,
-      ];
+          'status' => $item->status,
+          'tittle' => $item->product->title,
+          'type' => $item->product->type,
+          'price' => $item->product->price,
+          'bannerimage' => $item->product->bannerimage,
+        ];
       });
 
       return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $data]);
@@ -1236,11 +1257,13 @@ class Apiv1Controller extends Controller
         $userpdf->courses_id = $product->course->course_id;
         $userpdf->order_id = $oder->id;
         $userpdf->time = strtotime("now");
+        $userpdf->slugid = md5($product->course->course_id . time());
         $userpdf->save();
         foreach ($product->course->modules as $value) {
           $userModule =  new userCourseModule();
           $userModule->modules_id = $value->id;
           $userModule->user_courses_id = $userpdf->id;
+          $userModule->slugid = md5($userpdf->id . time());
           $userModule->save();
         }
       }
@@ -2841,7 +2864,34 @@ class Apiv1Controller extends Controller
     if (!$user_id) {
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
-    return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+
+    $data = userCourse::where("user_id", $user_id->id)->with('product.course')->get();
+
+    // foreach ($data as $item) {
+    //   $time = $item->time;
+    //   $add  = "+" . $item->product->course->forTime . " " . $item->product->course->forUnit;
+    //   $timea = strtotime($add, $time);
+    //   $datediff = $timea - strtotime('now');
+    //   $exp = round($datediff / (60 * 60 * 24));
+    //   echo $exp;
+    // }
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Empty', 'status' => true]);
+    }
+    $data = $data->map(function ($item) {
+      $total = $item->course->modules->sum(function ($value) {
+        return $value->time;
+      });
+      return [
+        "name" => $item->product->title,
+        "id" => $item->slugid,
+        "totalTime" => $total,
+        "bannerimage" => $item->course->slugid,
+        "ExpireOn" => '24-5-2022',
+        "count" => count($item->course->modules),
+      ];
+    });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
 
@@ -2862,5 +2912,73 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Image Updated', 'status' => true]);
     }
     return response()->json(['msg' => 'Image Not Found', 'status' => false]);
+  }
+
+  public function checkSum()
+  {
+    $paytmParams = array();
+    $mk = "Yn%RvdobV4YIskJ6";
+    $orderId = "ORDERID_" . mt_rand(); // generate order id
+    $paytmParams["body"] = array(
+      "requestType"  => "Payment",
+      "mid"  =>  'dfkPSH30981190572294', // this you will get from  paytm dashboard
+      "websiteName"  => "DEFAULT",
+      "industryType" => "Retail",
+      "orderId"  => $orderId,
+      "callbackUrl"  => "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=" . $orderId,
+      "txnAmount"  => array(
+        "value" => "1",
+        "currency" => "INR",
+      ),
+      "userInfo" => array(
+        "custId" => "12sada", // customer id
+        "mobile" => "8273648087",
+      ),
+    );
+    $checksum = PaytmchecksumPaytmChecksum::generateSignature(json_encode($paytmParams["body"], JSON_UNESCAPED_SLASHES), $mk);
+
+    $paytmParams["head"] = array(
+      "signature" => $checksum // pass check in head , checksum in basically is signature.
+    );
+    $post_data = json_encode($paytmParams, JSON_UNESCAPED_SLASHES);
+
+    $url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=dfkPSH30981190572294&orderId=" . $orderId;
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+    $res = curl_exec($ch);
+
+    $res_json = json_decode($res, true);
+    echo json_encode($res_json);
+    if ($res_json["body"]["resultInfo"]["resultCode"] == "0000") {
+
+      return response()->json(['msg' => $res_json["body"]["resultInfo"]["resultMsg"], 'status' => false]);
+    } else {
+      return response()->json(['msg' => $res_json["body"]["resultInfo"]["resultMsg"], 'status' => false]);
+    }
+
+
+
+
+    //   $paytmParams = array();
+    //   $paytmParams["MID"] = ;
+    // $paytmParams["ORDER_ID"] = "12345678944";
+    // $paytmParams["CUST_ID"] = "test111";
+    // $paytmParams["CHANNEL_ID"] = "WEA";
+    // $paytmParams["INDUSTRY_TYPE_ID"] = "Retail";
+    // $paytmParams["WEBSITE"] = "";
+    // $paytmParams["TXN_AMOUNT"] = "1";
+    // 
+    //   $paytmChecksum = PaytmchecksumPaytmChecksum::generateSignature(
+    //     json_encode($paytmParams)
+    //     ,$mk);
+
+    //  $verifySignature = PaytmchecksumPaytmChecksum::verifySignature( json_encode($paytmParams), $mk, $paytmChecksum);
+    // echo sprintf("generateSignature Returns: %s\n", $paytmChecksum);
+    // echo "<br>";
+    // echo sprintf("verifySignature Returns: %b\n\n", $verifySignature);
+
   }
 }
