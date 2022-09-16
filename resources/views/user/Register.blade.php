@@ -29,41 +29,9 @@
                 <div class="col-lg-5">
                     <img src="{{asset('nassets/img/registration-form-login-user.webp')}}">
                 </div>
-                <div class="col-lg-5">
-                    <div class="login-form-box registration-form">
-                        <h3 class="title">Registration</h3>
-                        <p>Already have an account? <a href="{{route('user.login')}}">Sign in</a></p>
-                        <form action="{{route('user.signup')}}"  method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="reg-name">Name</label>
-                                <input type="text" name="name" id="reg-name" placeholder="Full name">
-                            </div>
-                            <div class="form-group">
-                                <label for="log-email">UserEmail</label>
-                                <input type="text" name="email" id="log-email" placeholder="Email or username">
-                            </div>
-                            <div class="form-group">
-                                <label for="log-email">UserContact</label>
-                                <input type="text" name="contact" id="log-email" placeholder="Email or username">
-                            </div>
-                            <div class="form-group">
-                                <label for="log-password">Password</label>
-                                <input type="text" name="password" id="log-password" placeholder="Password">
-                                <span class="password-show"><i class="icon-76"></i></span>
-                            </div>
-                            <div class="form-group chekbox-area">
-                                <div class="education-form-check">
-                                    <input type="checkbox" id="terms-condition">
-                                    <label for="terms-condition">I agree the User Agreement and <a href="terms-condition.html">Terms & Condition.</a> </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="education-btn btn-medium">Create Account <i class="icon-4"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+               <div class="col-lg-5">
+                @livewire('user.user-register')
+               </div>
             </div>
             <ul class="shape-group">
                 <li class="shape-1 scene"><img data-depth="2" src="{{asset('nassets/images/about/shape-07.png')}}" alt="Shape"></li>

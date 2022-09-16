@@ -3,18 +3,87 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\livetest\liveAttemp;
+use App\Models\livetest\liveAttempQuestion;
 use App\Models\livetest\liveExam;
+use App\Models\livetest\liveQuestion;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LiveQuizResult extends Component
 {
-  public $data;
-  public function solution(){
+  public $data, $lang, $checked = false;
+  public $returndata;
+  public function selectLang($id)
+  {
+    $this->lang = $id;
+    // dd($id);
+    $this->checked = true;
+  }
+  public function result()
+  {
+    return redirect()->route('view.liveresult', ['testID' => $this->data['reAttempId'], 'examId' => $this->data['examId']]);
+  }
 
-    return redirect()->route('view.livesolution',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);
-    
-  } 
+  public function solution()
+  {
+
+    return redirect()->route('view.livesolution', ['testID' => $this->data['testID'], 'examId' => $this->data['examId']]);
+  }
+  public function reattempt()
+  {
+    // dd($ifLoginData);
+    $user_id = Auth::id();
+    $examination_id = liveExam::select('id', 'start', 'time_duration')->where("slugid", $this->data['examId'])->first();
+
+    $start = $examination_id->start;
+    $ss = strtotime("now");
+    $final_start = $start - $ss;
+    // dd($examination_id);
+    if ($final_start < 0) {
+      $get = liveAttemp::where('live_exams_id', $examination_id->id)->where('testtype', "reattemp")->where('users_id', $user_id)->first();
+      // dd($get);
+
+      if (empty($get)) {
+        $Attemp = new liveAttemp();
+        $Attemp->slugid = md5($user_id . time());
+        $Attemp->live_exams_id = $examination_id->id;
+        $Attemp->users_id = $user_id;
+        $Attemp->language_id = $this->lang;
+        // dd($examination_id);
+        $Attemp->testtype = "reattemp"; 
+
+        $Attemp->remain_time = $examination_id->time_duration * 60;
+        $Attemp->save();
+        $examQuestion =  liveQuestion::where('live_exams_id', $examination_id->id)->pluck('question_id');
+
+        foreach ($examQuestion as $value) {
+
+          $mock = new liveAttempQuestion();
+          $mock->users_id =  $user_id;
+          $mock->questions_id = $value;
+          $mock->live_attemps_id = $Attemp->id;
+          $mock->save();
+        }
+        $this->returnData['data'] = ['testId' => $Attemp->slugid, "examinationId" => $examination_id->id];
+
+      } else {
+        $get->lastQues = 0;
+        $get->type = "resume";
+        $get->remain_time = $examination_id->time_duration * 60;
+        $get->save();
+
+        $data =   liveAttempQuestion::where('live_attemps_id', $get->id)->where('users_id', $user_id)->update([
+          "QuesSeen" => "false",
+          "QuesSelect" => "",
+          "time" => 0,
+        ]);
+
+        $this->returndata['data'] = ['testId' => $get->slugid, "examinationId" => $examination_id->id];
+      }
+    } 
+    return redirect()->route('quiz.livequizstart', $this->returndata);
+
+  }
   public function mount($testid, $examinationId)
   {
 
@@ -40,6 +109,8 @@ class LiveQuizResult extends Component
           $q->with(['question.liveAttemp' => function ($q) use ($testId, $user_id) {
             $q->where('live_attemps_id', $testId->id)->where('users_id', $user_id)->orderBy('questions_id', 'DESC');
           }]);
+        }])->with(['attm' => function ($aaa) {
+          $aaa->where('testtype', 'reattemp');
         }]);
       }]
     )
@@ -47,6 +118,15 @@ class LiveQuizResult extends Component
       ->get()
       ->map(
         function ($d) {
+          $reattempId = "";
+          $reattempResult = false;
+
+          if (!empty($d->examination->attm)) {
+            $reattempId = $d->examination->attm->slugid;
+            if ($d->examination->attm->type == "result") {
+              $reattempResult = true;
+            }
+          }
 
           $per = ($d->totalmarks / $d->examination->marks) * 100;
           return [
@@ -65,6 +145,8 @@ class LiveQuizResult extends Component
             "wMarks" => $d->examination->wrongmarks,
             "rMarks" => $d->examination->rightmarks,
             'noQues' => $d->examination->noQues,
+            "reAttempId" => $reattempId,
+            "reAttempResult" => $reattempResult,
             "questionslist" => $d->examination->examQ->map(function ($fff, $key) {
 
               $resaaa = "skip";
