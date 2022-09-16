@@ -9,8 +9,19 @@ use Livewire\Component;
 
 class MocktestResult extends Component
 {
-    public $data;
+    public $data,$lang,$checked = false;
     
+   
+    public function reattempt(){
+        $newData = ['testID' => $this->data['testID'],'examId' => $this->data['examId'],'language_id' => $this->lang];
+      dd($newData);
+    }
+    public function selectLang($id)
+    {
+        $this->lang = $id;
+        // dd($id);
+        $this->checked = true;
+    }
     public function solution(){
 
       return redirect()->route('view.mocktestsolution',['testID' => $this->data['testID'],'examId' => $this->data['examId']]);

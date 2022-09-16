@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8ea9a1ab7d95413d205cc58b4aa67a8a600f6fdc',
+        'reference' => '6f222afdac910ecb9d32805441cb524e2396db14',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'anandsiddharth/laravel-paytm-wallet' => array(
+            'pretty_version' => 'v2.0.0',
+            'version' => '2.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../anandsiddharth/laravel-paytm-wallet',
+            'aliases' => array(),
+            'reference' => '5342add0719e9c5ca94fdd13f766e6a810f2ef45',
+            'dev_requirement' => false,
+        ),
         'brick/math' => array(
             'pretty_version' => '0.10.2',
             'version' => '0.10.2.0',
@@ -379,7 +388,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8ea9a1ab7d95413d205cc58b4aa67a8a600f6fdc',
+            'reference' => '6f222afdac910ecb9d32805441cb524e2396db14',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

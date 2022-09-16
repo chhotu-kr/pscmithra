@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->foreignId('pdf_subscriptions_id')->constrained();
             $table->string('slugid');
+            $table->integer('forTime');
+            $table->enum('forUnit',['Days','Months','Years'])->default('Days');
             $table->timestamps();
         });
     }

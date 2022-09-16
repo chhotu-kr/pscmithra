@@ -16,6 +16,16 @@ public $planType;
 
 public $type;
 public $list;
+public $screen= false;
+
+public function ScreenShots(){
+if($this->screen){ 
+    $this->screen = false;
+}else{
+    $this->screen = true;
+}
+}
+
 public function updatedplanType(){
     if ($this->planType=='book'){
         $this->list=Book::all();

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\user;
 
+use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\QuizCategory;
 use App\Models\Product;
@@ -14,13 +16,20 @@ use App\Models\QuizTopic;
 use App\Models\image;
 use App\Models\User;
 use App\Models\Language;
+use App\Models\order;
 use App\Models\TestiMonials;
+use App\Models\userBook;
+use App\Models\userCourse;
+use App\Models\userCourseModule;
+use App\Models\UserPdf;
+use App\Models\userPdfSubscriptions;
+use App\Models\userPlans;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Auth;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
+// use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class HomeController extends Controller
 {
@@ -33,10 +42,13 @@ class HomeController extends Controller
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
 
-        $data['product'] = Product::paginate(4);
-        $data['img']=Image::all();
-        $data['user']=User::all();
-        $data['testimonials']=TestiMonials::all();
+
+        $data['product'] = Product::paginate(2);
+        $data['img'] = Image::all();
+        $data['user'] = User::all();
+        $data['testimonials'] = TestiMonials::all();
+
+       
         return view('user.Viewhome', $data);
     }
 
@@ -95,12 +107,22 @@ class HomeController extends Controller
         return view('user.Product');
     }
     //................CourseDetails..............//
-   
+
+
+    public function get_ViewCourseDetails($id)
+    {
+        $data['product'] = Product::where('id', $id)->first();
+        $data['language'] = Language::where('id', $id)->first();
+
+        return view('user.ViewCoursedetails', $data);
+
+   }
     public function get_ProductDetails($id){
         $data['product']=Product::where('id',$id)->first();
         $data['language']=Language::where('id',$id)->first();
        
         return view('user.Productdetails',$data);
+
     }
     //..............Quiz.............//
 
@@ -128,20 +150,20 @@ class HomeController extends Controller
     //............... Quiz Chapter..............//
     public function get_Quiz_SubCategory(Request $req)
     {
-        $sub = QuizSubCategory::where('id',$req->sub_cat_id)->first();
+        $sub = QuizSubCategory::where('id', $req->sub_cat_id)->first();
 
         if ($sub->ifnested == "true") {
             $data['sub_cat_id'] = $req->sub_cat_id;
             $data['cat_id'] = $req->cat_id;
         } else {
-            return redirect()->route('view.quizpage', ['cat_id'=>$req->cat_id,"sub_cat_id" => $req->sub_cat_id]);
+            return redirect()->route('view.quizpage', ['cat_id' => $req->cat_id, "sub_cat_id" => $req->sub_cat_id]);
         }
         return view("user.Quiz_QuizChapter", $data);
     }
     //..............Topic Page..................//
 
     public function get_TopicPage(Request $req)
-    {   
+    {
         $cha = QuizChapter::where('id', $req->chapter_id)->first();
 
         if ($cha->ifnested == "true") {
@@ -149,30 +171,30 @@ class HomeController extends Controller
             $data['cat_id'] = $req->cat_id;
             $data['sub_cat_id'] = $req->sub_cat_id;
         } else {
-            return redirect()->route('view.quizpage', ['cat_id'=>$req->cat_id,"sub_cat_id" => $req->sub_cat_id,"chapter_id" => $req->chapter_id]);
+            return redirect()->route('view.quizpage', ['cat_id' => $req->cat_id, "sub_cat_id" => $req->sub_cat_id, "chapter_id" => $req->chapter_id]);
         }
         return view("user.Quiz_TopicPage", $data);
     }
     //...............Quiz Page..................//
     public function get_QuizPage(Request $req)
     {
-      if(FacadesAuth::user()){
-        $data['cat'] = $req->cat_id;
-        $data['sub_cat'] = $req->sub_cat_id;
-        $data['chapter'] = $req->chapter_id;
-        $data['topic'] = $req->topic_id;
-        // return $data;
-        return view('user.QuizPage', $data);
-      }
+        if (Auth::user()) {
+            $data['cat'] = $req->cat_id;
+            $data['sub_cat'] = $req->sub_cat_id;
+            $data['chapter'] = $req->chapter_id;
+            $data['topic'] = $req->topic_id;
+            // return $data;
+            return view('user.QuizPage', $data);
+        }
     }
     //..............Quiz pAge Start.............//
 
     public function get_QuizPageStart(Request $req)
     {
-      if(FacadesAuth::user()){
-        $data['data'] = $req->data;
-        return view('user.QuizAttemptStart', $data);
-      }
+        if (Auth::user()) {
+            $data['data'] = $req->data;
+            return view('user.QuizAttemptStart', $data);
+        }
     }
 
     //.................Mock Test................//
@@ -180,12 +202,11 @@ class HomeController extends Controller
     {
 
         //return dd($request);
-       
-            $data['cat_id'] = $request->cat_id;
-            $data['sub_cat_id'] = $request->sub_cat_id;
-            $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
-            return view('user.MockTest', $data);
-       
+
+        $data['cat_id'] = $request->cat_id;
+        $data['sub_cat_id'] = $request->sub_cat_id;
+        $data['cat'] = SubCategory::find($request->sub_cat_id)->first();
+        return view('user.MockTest', $data);
     }
     //..............Mock Test Start..............//
     public function get_MockTestStart(Request $req)
@@ -333,6 +354,120 @@ class HomeController extends Controller
         return view('user.profile.userDashboard');
     }
 
+    //.................Payment....................//
+    public function order(Request $req)
+    {
+
+        $user = Auth::user();
+        $payment = PaytmWallet::with('receive');
+        $payment->prepare([
+            'order' => $req->orderid,
+            'user' => $user->id,
+            'mobile_number' => $user->contact,
+            'email' => $user->email,
+            'amount' => $req->total,
+            'callback_url' => 'http://localhost:8000/payment/call-back'
+        ]);
+        return $payment->receive();
+    }
+    public function paymentcallBack()
+    {
+        $transaction = PaytmWallet::with('receive');
+
+        $response = $transaction->response();
+        if ($transaction->isSuccessful()) {
+
+            // return dd(Auth::user());
+            $oder =  order::where("slugid", $response['ORDERID'])->where("payment", 'Pending')->with('orderItem')->get();
+                // return dd($oder);
+            $oder = $oder[0];
+            $user_id = Auth::id();
+            $data = Cart::where("user_id", $oder['user_id'])->with('product')->get();
+            foreach($data as $value){
+                $value->delete();
+            }
+            $oder->payment = "Done";
+            $oder->txn_id = $response['TXNID'];
+            $oder->dateofpayement = $response['TXNDATE'];
+            $oder->save();
+            foreach ($oder->orderItem as $value) {
+                $product = $value->product;
+
+                if ($product->type == "pdf") {
+                    $value->status = "isDeliverd";
+                    $value->save();
+                    $userpdf = new UserPdf();
+                    $userpdf->user_id = $user_id;
+                    $userpdf->product_id = $product->id;
+                    $userpdf->pdfs_id = $product->pdfs->pdf_id;
+                    $userpdf->order_id = $oder->id;
+                    $userpdf->slugid = md5($oder->id . time());
+                    $userpdf->save();
+                } else if ($product->type == "plan") {
+                    $value->status = "isDeliverd";
+                    $value->save();
+                    foreach ($product->plans as $value) {
+                        $userpdf = new  userPlans();
+                        $userpdf->user_id = $user_id;
+                        $userpdf->product_id = $product->id;
+                        $userpdf->product_plans_id = $value->id;
+                        $userpdf->order_id = $oder->id;
+                        $userpdf->time = strtotime("now");
+                        $userpdf->save();
+                    }
+                } else if ($product->type == "ebook") {
+                    $value->status = "isDeliverd";
+                    $value->save();
+                    $userpdf = new  userPdfSubscriptions();
+                    $userpdf->user_id = $user_id;
+                    $userpdf->product_id = $product->id;
+                    $userpdf->pdf_subscriptions_id = $product->ebook->pdf_subscriptions_id;
+                    $userpdf->order_id = $oder->id;
+                    $userpdf->slugid = md5($oder->id . time());
+                    $userpdf->save();
+
+                } else if ($product->type == "book") {
+                    $value->status = "isDeliverd";
+                    $value->save();
+                    $userpdf = new userBook();
+                    $userpdf->user_id = $user_id;
+                    $userpdf->product_id = $product->id;
+                    $userpdf->books_id = $product->book->book_id;
+                    $userpdf->order_id = $oder->id;
+                    $userpdf->slugid = md5($oder->id . time());
+                    $userpdf->save();
+                } else if ($product->type == "course") {
+                    $value->status = "isDeliverd";
+                    $value->save();
+                    $userpdf = new userCourse();
+                    $userpdf->user_id = $user_id;
+                    $userpdf->product_id = $product->id;
+                    $userpdf->courses_id = $product->course->course_id;
+                    $userpdf->order_id = $oder->id;
+                    $userpdf->time = strtotime("now");
+                    $userpdf->save();
+                    foreach ($product->course->modules as $value) {
+                        $userModule =  new userCourseModule();
+                        $userModule->modules_id = $value->id;
+                        $userModule->user_courses_id = $userpdf->id;
+                        $userModule->save();
+                    }
+                }
+            }
+            return redirect()->route('view.home')->with('success','Ordered Successfully');
+
+        } else if ($transaction->isFailed()) {
+            return redirect()->route('view.home')->with('error','Error in Transaction');
+
+        } else if ($transaction->isOpen()) {
+            //Transaction Open/Processing
+        }
+        $transaction->getResponseMessage(); //Get Response Message If Available
+        //get important parameters via public methods
+        $transaction->getOrderId(); // Get order id
+        $transaction->getTransactionId(); // Get transaction i
+}
+
     public function get_Test(){
 
         return view('user.Test.viewtest');
@@ -346,7 +481,8 @@ class HomeController extends Controller
         return view('user.About.aboutus');
     }
 
-    // public function getTest(){
-    //     return view('test.test');
-    // }
+    public function getTest(){
+        return view('test.test');
+
+    }
 }

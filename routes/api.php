@@ -26,6 +26,9 @@ Route::post("login", [Apiv1Controller::class, "api_login"])->name("api.login");
 Route::get("sign/{contact}", [Apiv1Controller::class, "index"])->name("api.sign");
 Route::post("signup", [Apiv1Controller::class, "api_signup"])->name("api.signup");
 Route::post("send-otp", [Apiv1Controller::class, "api_sendOTP"])->name("api.signup");
+Route::post("verify-otp", [Apiv1Controller::class, "verifyOtp"]);
+Route::post("updatePassword", [Apiv1Controller::class, "updatePassword"]);
+Route::post("updateUserImage", [Apiv1Controller::class, "updateUserImage"]);
 
 
 //category
@@ -118,6 +121,8 @@ Route::post('/addAddress',[Apiv1Controller::class,'addAddress']);
 Route::post('/getAddressList',[Apiv1Controller::class,'getAddressList']);
 Route::post('/deleteAddress',[Apiv1Controller::class,'deleteAddress']);
 Route::post('/startOrder',[Apiv1Controller::class,'startOrder']);
+Route::post('/getOrderList',[Apiv1Controller::class,'getOrderList']);
+Route::post('/getOrderItemList',[Apiv1Controller::class,'getOrderItemList']);
 Route::post('/orderSucces',[Apiv1Controller::class,'orderSucces']);
 
 Route::post('/getSesionalPdf',[Apiv1Controller::class,'getSesionalPdf']);
@@ -125,6 +130,7 @@ Route::post('/getSesionalPdfItems',[Apiv1Controller::class,'getSesionalPdfItems'
 
 Route::post('/getPdf',[Apiv1Controller::class,'getPdf']);
 Route::post('/getPlans',[Apiv1Controller::class,'getPlans']);
+
 
 
 

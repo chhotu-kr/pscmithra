@@ -23,9 +23,6 @@ class ProductController extends Controller
     public function get_Book()
     {
         $data = Book::all();
-
-
-
         return response()->json($data);
     }
 
@@ -97,7 +94,8 @@ class ProductController extends Controller
             $course_product->product_id = $data->id;
             $course_product->slugid = md5("ghtrjfh" . time() . "hjfhjf33fghf");
             $course_product->course_id = $request->data;
-
+            $course_product->forUnit = $request->timetype;
+            $course_product->forTime = $request->time;
             $course_product->save();
         } else if ($request->type == 'pdf') {
             $pdf_product = new PdfProduct();
@@ -111,7 +109,8 @@ class ProductController extends Controller
             $pdfsubs->product_id = $data->id;
              $pdfsubs->slugid=md5("ghjfyfdt" .time()."hjfwhfgfffhf");
             $pdfsubs->pdf_subscriptions_id = $request->data;
-
+            $pdfsubs->forUnit = $request->timetype;
+            $pdfsubs->forTime = $request->time;
             $pdfsubs->save();
         } else if ($request->type = 'plan') {
             if (!empty($request->liveD) || !empty($request->liveN)) {
