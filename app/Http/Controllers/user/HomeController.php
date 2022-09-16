@@ -445,11 +445,13 @@ class HomeController extends Controller
                     $userpdf->courses_id = $product->course->course_id;
                     $userpdf->order_id = $oder->id;
                     $userpdf->time = strtotime("now");
+                    $userpdf->slugid = md5($product->course->course_id . time());
                     $userpdf->save();
                     foreach ($product->course->modules as $value) {
                         $userModule =  new userCourseModule();
                         $userModule->modules_id = $value->id;
                         $userModule->user_courses_id = $userpdf->id;
+                        $userModule->slugid = md5($userpdf->id . time());
                         $userModule->save();
                     }
                 }
@@ -484,5 +486,8 @@ class HomeController extends Controller
     public function getTest(){
         return view('test.test');
 
+    }
+    public function coursedetail(){
+        return view('user.CourseDetail');
     }
 }

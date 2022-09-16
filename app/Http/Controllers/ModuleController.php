@@ -42,6 +42,7 @@ class ModuleController extends Controller
         $data->slugid=md5($request->course_id .time());
         $data->type=$request->typp;
         $data->name=$request->name;
+        $data->time=$request->time;
 if(($request->typp== "voice") || ($request->typp== "video")){
     //......url.......//
     $filename = $request->url->getClientOriginalName();

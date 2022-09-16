@@ -9,6 +9,9 @@ class UserPdf extends Model
 {
     use HasFactory;
 
+    public function pdf(){
+        return $this->hasone(Pdf::class,'id','pdfs_id');
+    }
     public function sessionpdf(){
         return $this->hasMany(Pdf::class,'pdf_id','id');
     }
