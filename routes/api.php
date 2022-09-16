@@ -105,6 +105,7 @@ Route::post('/getData-quiz',[Apiv1Controller::class,'get_QuizExamData']);
 
 
 
+
 //........product......
 Route::get('/product',[Apiv1Controller::class,'get_Product'])->name('product.show');
 Route::get('/product/filter',[Apiv1Controller::class,'getProductFilter']);
@@ -148,10 +149,13 @@ Route::post('/livetest/list',[Apiv1Controller::class,'liveExamData']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/checkSum',[Apiv1Controller::class,'checkSum']); 
 Route::group(["prefix" => "quiz"], function ($router) {
 Route::post('/category',[Apiv1Controller::class,'quizCategory']);
 Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);
 Route::post('/chapter',[Apiv1Controller::class,'quizChapter']);
 Route::post('/topic',[Apiv1Controller::class,'quizTopic']);
 Route::post('/getQuiz',[Apiv1Controller::class,'get_Quiz']); 
+
 });

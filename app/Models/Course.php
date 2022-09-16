@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\CourseModule\Module;
+use App\Models\Module as ModelsModule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +29,7 @@ class Course extends Model
         'slugid',
         'createdby',
     ];
-    // public function product(){
-    //     return $this->hasOne(Product::class,'id','product_id');
-    // }
+    public function modules(){
+        return $this->hasMany(ModelsModule::class,'course_id','id');
+    }
 }

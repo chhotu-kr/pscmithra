@@ -1,7 +1,7 @@
 <div>
 
 
-  <div class="col ">
+  <div class="col">
     <label>Type</label>
     <select wire:model="typp" name="typp" class="form-control">
       <option value="">select</option>
@@ -37,7 +37,7 @@
     <tbody>
       @foreach ($quiz as $vale)
       <tr>
-        <td><input type='checkbox' value='{{$vale->id}}' name='data[]'></td>
+        <td><input type='checkbox' value='{{$vale->id}}' name="data[]"></td>
         <td>{{$vale->id}}</td>
         <td>{{$vale->CQname}}</td>
       <tr>
@@ -48,11 +48,3 @@
 
   @endif
 </div>
-<script>
-$(document).ready(function () {
-
-  $('#with').DataTable({
-      scrollX:true
-  });
-});
-</script>

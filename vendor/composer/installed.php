@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6f222afdac910ecb9d32805441cb524e2396db14',
+        'reference' => '672ad4441328a38bb46871c09461d7c1de7fa024',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -388,7 +388,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6f222afdac910ecb9d32805441cb524e2396db14',
+            'reference' => '672ad4441328a38bb46871c09461d7c1de7fa024',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -557,6 +557,15 @@
             'install_path' => __DIR__ . '/../nunomaduro/termwind',
             'aliases' => array(),
             'reference' => '10065367baccf13b6e30f5e9246fa4f63a79eb1d',
+            'dev_requirement' => false,
+        ),
+        'paytm/paytmchecksum' => array(
+            'pretty_version' => 'v1.1.0',
+            'version' => '1.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../paytm/paytmchecksum',
+            'aliases' => array(),
+            'reference' => 'a032d3cbeb3846720c2c606b9f3c8057c355042e',
             'dev_requirement' => false,
         ),
         'phar-io/manifest' => array(
