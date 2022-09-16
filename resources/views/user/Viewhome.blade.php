@@ -1,7 +1,40 @@
 @extends('user/dashboard')
 @section('pscmithra')
 
-
+{!! Session::get('error') !!}
+{!! Session::get('success') !!}
+@if (Session::get('success'))
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+         
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-success">
+         Ordered Successfully
+        </div>
+        
+      </div>
+    </div>
+  </div>
+@endif
+@if (Session::get('error'))
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+         
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-danger">
+        Payment Error
+        </div>
+        
+      </div>
+    </div>
+  </div>
+@endif
 <div class="main-home-slider">
     @foreach ($img as $item)
     <div class="item">
@@ -124,7 +157,7 @@
                         <div class="product-hover-info">
                             <ul>
                                 <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                <li><a href="{{ route('add.cart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
+                                <li><a href="{{ route('addToCart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -179,6 +212,9 @@
         </div>
     </div>
 </div>
-
+<script>
+    $("#successModal").modal('show');
+    $("#errorModal").modal('show');
+</script>
 
 @endsection

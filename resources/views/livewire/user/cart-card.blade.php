@@ -50,7 +50,7 @@
             </div>
             <div class="row mt-3 px-2">
                 <a href="" class="btn btn-success col">Continue Shopping</a>
-                <a href="" wire:click.prevent="checkout()" class="btn btn-danger col ms-2">checkout</a>
+                <a href="" wire:click.prevent="checkout()"  class="btn btn-danger col ms-2">Checkout</a>
                 <p class="text-danger mt-2"> {!! Session::get('add') !!}</p>
             </div>
 

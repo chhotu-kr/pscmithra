@@ -1087,6 +1087,16 @@ class Apiv1Controller extends Controller
     }
     $user_id =  User::where("slugid", $request->user)->first();
     if (!$user_id) {
+<<<<<<< HEAD
+
+    $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
+    if (count($oder)==0) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+    if (empty($request->oderid)) {
+      return response()->json(['msg' => 'Enter order id', 'status' => false]);
+    }
+=======
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
     if (empty($request->oderid)) {
@@ -1096,6 +1106,7 @@ class Apiv1Controller extends Controller
     $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
     if (count($oder) == 0) {
       return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
+>>>>>>> 8bf03004e2cbf3b0424f3c01ba9b741d234bf6c5
     }
     $oder = $oder[0];
 

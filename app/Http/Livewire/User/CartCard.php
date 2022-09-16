@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\coupon;
@@ -18,7 +19,7 @@ class CartCard extends Component
     public $address;
     public $status;
     public $addressSelected = null;
-    public $total;
+    public $total ,$array;
 
 public function updatedcode(){
     $this->carttotal();
@@ -118,25 +119,29 @@ public function updatedcode(){
                 $order->discount = $this->total['discount'];
                 $order->total =$this->total['total'];
                 $order->slugid = md5($user_id->id . time());
-                $order->save();
+                  $saved =  $order->save();
           
-          
+                // return dd($data);
                 foreach ($data as $value) {
                   $orderItem = new orderItem();
                   $orderItem->orders_id = $order->id;
                   $orderItem->products_id = $value->product->id;
                   $orderItem->save();
-                  $value->delete();
                 }
-                $array['total'] = $this->total['total'];
-                $array['checksum'] = "asdsadasdasdas";
-                $array['orderid'] = $order->slugid;
-                
-                $this->mount();
-                // return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
+                $this->array['total'] = 1;
+                $this->array['checksum'] = "asdsadasdasdas";
+                $this->array['orderid'] = $order->slugid;
+              
+              if($saved){
+                return redirect()->route('makePayment',$this->array);
               }
+
+              }
+             
         }
+
     }
+
     public function carttotal()
     {
 
@@ -168,9 +173,9 @@ public function updatedcode(){
             }
 
             $total = $data->sum(function ($product) {
-                // dd($product);
                 return $product->product->price;
             });
+               
             $dicount =  0;
             if (!empty($coupon)) {
                 $dicount = ($total / 100) * $coupon->percent;

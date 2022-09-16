@@ -181,6 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -213,6 +214,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Image' => Intervention\Image\Facades\Image::class,
+        'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
+
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
