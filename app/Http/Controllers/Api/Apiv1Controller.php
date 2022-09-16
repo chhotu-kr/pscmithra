@@ -2555,10 +2555,10 @@ class Apiv1Controller extends Controller
   }
 
 
-  function getCourse()
-  {
-    return response()->json(['msg' => 'Data Fetched', 'status' => true]);
-  }
+  // function getCourse()
+  // {
+  //   return response()->json(['msg' => 'Data Fetched', 'status' => true]);
+  // }
 
 
   function updateUserDetails(Request $request)
@@ -2756,5 +2756,17 @@ class Apiv1Controller extends Controller
       ;
     });
     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+  }
+
+  function getCourse(Request $request)
+  { 
+    if (empty($request->user)) {
+    return response()->json(['msg' => 'Enter User', 'status' => false]);
+  }
+  $user_id =  User::where("slugid", $request->user)->first();
+  if (!$user_id) {
+    return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+  }
+    return response()->json(['msg' => 'Data Fetched', 'status' => true]);
   }
 }

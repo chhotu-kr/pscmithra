@@ -129,6 +129,7 @@ Route::post('/getPlans',[Apiv1Controller::class,'getPlans']);
 
 
 
+
 //........Coupon..........
 Route::get('/coupon/{id}',[Apiv1Controller::class,'get_Verification'])->name('coupon.show');
 //............blog............
