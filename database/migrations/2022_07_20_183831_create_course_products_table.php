@@ -18,6 +18,8 @@ return new class extends Migration
             $table->boolean('isVisble')->default('1');
             $table->foreignId('product_id')->constrained();
             $table->foreignId('course_id')->constrained();
+            $table->integer('forTime');
+            $table->enum('forUnit',['Days','Months','Years'])->default('Days');
             $table->string('slugid');
             $table->timestamps();
         });
