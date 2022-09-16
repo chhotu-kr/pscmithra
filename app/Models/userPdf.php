@@ -13,6 +13,8 @@ class UserPdf extends Model
         return $this->hasMany(Pdf::class,'pdf_id','id');
     }
 
+   
+
     public function currentuser(){
         return $this->hasOne(User::class,'id','user_id');
     }

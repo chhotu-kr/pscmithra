@@ -15,5 +15,5 @@ class Pdf extends Model
       'pdf_url',
     ];
 
-    
+  
 }

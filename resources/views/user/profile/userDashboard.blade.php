@@ -12,11 +12,22 @@
 
 				
 			</div>
+			<div class=" mb-lg-0 mb-3 col-lg-10 order-0">
+				@livewire('sessionalpdf.pdf')
+
+				
+			</div>
+			<div class=" mb-lg-0 mb-3 col-lg-10 order-0">
+				@livewire('p-df.pdf')
+
+				
+			</div>
 			
-			<div class="col-lg-10 order-lg-last order-1 tab-content">
+			{{-- <div class="col-lg-10 order-lg-last order-1 tab-content">
 				<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
 				    
 					<div class="row gutters">
+						
 						<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
 							<div class="info-stats4">
 								<div class="info-icon">
@@ -421,7 +432,7 @@
 					</div>
 				</div>
 			
-			</div><!-- End .tab-content -->
+			</div><!-- End .tab-content --> --}}
 		</div>
 	</div>
 </div>   
