@@ -65,12 +65,12 @@
                     </div>
                     <div class="header-top-right">
                         <ul class="header-info">
-                          @if (Auth::user()===Null)
+                          @if (!Auth::user())
                           <li><a href="{{ route('user.login') }}">Login</a></li>
+                          <li class="nav-item"><a href="{{route('user.register')}}" class="nav-link text-white ">Register</a></li>
+
                           {{-- elseif --}}
-                          {{-- <li class="nav-item"><a href="{{route('logout')}}" class="nav-link text-white fw-bold">LogOut</a></li> --}}
                           @else
-                          {{-- <li><a href="{{ route('user.register') }}">Register</a></li>  --}}
                           <li class="nav-item"><a href="{{route('logout')}}" class="">LogOut</a></li>
                           
                           @endif

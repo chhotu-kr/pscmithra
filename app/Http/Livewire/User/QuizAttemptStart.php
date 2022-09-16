@@ -36,9 +36,6 @@ class QuizAttemptStart extends Component
     $user = Auth::id();
     $examination_id =  QuizExamination::where("slugid",  $this->data['quizid'])->first();
 
-
-
-
     $testId = quizAttemp::where("slugid",  $this->data['testID'])->where("quiz_examinations_id", $examination_id->id)->where("users_id", $user)->first();
 
     foreach($this->data['questionslist'] as $index => $value) {

@@ -80,6 +80,7 @@ Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('us
 
 //............//..............//...........User Page.............//................//...............//
 
+Route::get('/coursedetail', [HomeController::class, 'coursedetail'])->name('view.course');
 Route::get('/', [HomeController::class, 'get_ViewHome'])->name('view.home');
 Route::get('/mock-test/category', [HomeController::class, 'get_Category'])->name('view.category');
 Route::get('/mock-test-exam', [HomeController::class, 'get_MockTest'])->name('view.mocktestexam');

@@ -485,4 +485,7 @@ class HomeController extends Controller
         return view('test.test');
 
     }
+    public function coursedetail(){
+        return view('user.CourseDetail');
+    }
 }
