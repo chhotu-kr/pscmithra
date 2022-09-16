@@ -157,7 +157,7 @@
                         <div class="product-hover-info">
                             <ul>
                                 <li><a href="#">Buy Now <i class="icon-4"></i></a></li>
-                                <li><a href="{{ route('addToCart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
+                                <li><a href="{{ route('addtocart',['p_id'=>$item->id]) }}"><i class="icon-3"></i> Add to Cart</a></li>
                             </ul>
                         </div>
                     </div>

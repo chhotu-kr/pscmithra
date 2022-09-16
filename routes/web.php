@@ -47,7 +47,7 @@ Route::get('/about',[HomeController::class,'AboutPage'])->name('about.page');
 
 
 
-// Route::get('/addcart/{p_id}',[addToCartController::class,'addcart'])->name('add.cart');
+ //Route::get('/addcart/{p_id}',[addToCartController::class,'addcart'])->name('add.cart');
 Route::get('/user/cart',[addToCartController::class,'index'])->name('usercart.index');
 Route::get("/add-to-cart/{p_id}",[addToCartController::class,"addToCart"])->name("addtocart");
 Route::get("/remove-from-cart/{p_id}",[addToCartController::class,"removeFromCart"])->name("removefromcart");
