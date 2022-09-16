@@ -150,18 +150,18 @@ class Apiv1Controller extends Controller
   public function updatePassword(Request $request)
   {
     $user = User::where('contact', $request->contact)->first();
-      if (!$user) {
-        return response()->json(['msg' => 'Mobile no Not Register', 'status' => false,]);
-      }
+    if (!$user) {
+      return response()->json(['msg' => 'Mobile no Not Register', 'status' => false,]);
+    }
 
-if(empty($request->password)){
-  return response()->json(['msg' => 'Enter Password', 'status' => false,]);
-}
+    if (empty($request->password)) {
+      return response()->json(['msg' => 'Enter Password', 'status' => false,]);
+    }
 
-      $user->password =Hash::make($request->password);
-$user->save();
-    
-return response()->json(['msg' => 'Password Updates', 'status' => true]);
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return response()->json(['msg' => 'Password Updates', 'status' => true]);
   }
 
   public function api_login(Request $request)
@@ -873,7 +873,7 @@ return response()->json(['msg' => 'Password Updates', 'status' => true]);
       return response()->json(['msg' => 'Invalid Product', 'status' => false]);
     }
     $cart = new Cart();
-    $cart->prdoucts_id = $product->id;
+    $cart->products_id = $product->id;
     $cart->user_id = $user_id->id;
     $cart->qty = 1;
     $cart->slugid = md5($request->productId . time());
@@ -1257,11 +1257,13 @@ return response()->json(['msg' => 'Password Updates', 'status' => true]);
         $userpdf->courses_id = $product->course->course_id;
         $userpdf->order_id = $oder->id;
         $userpdf->time = strtotime("now");
+        $userpdf->slugid = md5($product->course->course_id . time());
         $userpdf->save();
         foreach ($product->course->modules as $value) {
           $userModule =  new userCourseModule();
           $userModule->modules_id = $value->id;
           $userModule->user_courses_id = $userpdf->id;
+          $userModule->slugid = md5($userpdf->id . time());
           $userModule->save();
         }
       }
@@ -2863,22 +2865,33 @@ return response()->json(['msg' => 'Password Updates', 'status' => true]);
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
 
-    $data = userCourse::where("user_id", $user_id->id)->with('course.modules')->get();
+    $data = userCourse::where("user_id", $user_id->id)->with('product.course')->get();
 
-// $data=$data->map(function($item){
-// return [
-//   "name"=>$item->course->name,
-//   "id"=>$item->course->slugid,
-//   "id"=>$item->course->slugid,
-// ];
-// });
-
-
-    return response()->json(['msg' => 'Data Fetched', 'status' => true,'data'=>$data]);
-
-
-
-
+    // foreach ($data as $item) {
+    //   $time = $item->time;
+    //   $add  = "+" . $item->product->course->forTime . " " . $item->product->course->forUnit;
+    //   $timea = strtotime($add, $time);
+    //   $datediff = $timea - strtotime('now');
+    //   $exp = round($datediff / (60 * 60 * 24));
+    //   echo $exp;
+    // }
+    if (count($data) == 0) {
+      return response()->json(['msg' => 'Data Empty', 'status' => true]);
+    }
+    $data = $data->map(function ($item) {
+      $total = $item->course->modules->sum(function ($value) {
+        return $value->time;
+      });
+      return [
+        "name" => $item->product->title,
+        "id" => $item->slugid,
+        "totalTime" => $total,
+        "bannerimage" => $item->course->slugid,
+        "ExpireOn" => '24-5-2022',
+        "count" => count($item->course->modules),
+      ];
+    });
+    return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
   }
 
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('user_courses_id')->constrained();
             $table->foreignId('modules_id')->constrained();
             $table->boolean('isCompleted')->default(0);
+            $table->text('slugid');
             $table->timestamps();
         });
     }
