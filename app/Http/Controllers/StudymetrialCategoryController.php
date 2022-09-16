@@ -33,7 +33,7 @@ class StudymetrialCategoryController extends Controller
         
         //image work
        $filename = $request->image->getClientOriginalName();
-       $request->image->move(('images'),$filename);
+       $request->image->move(('upload'),$filename);
        $data->image = $filename;
        $data-> slugid = md5($request->name . time());
          $data->save();
@@ -62,7 +62,7 @@ class StudymetrialCategoryController extends Controller
         
         //image work
        $filename = $request->image->getClientOriginalName();
-       $request->image->move(('images'),$filename);
+       $request->image->move(('upload'),$filename);
        $studymetrialcategory->image = $filename;
        $studymetrialcategory-> slugid = md5($request->name . time());
          $studymetrialcategory->save();

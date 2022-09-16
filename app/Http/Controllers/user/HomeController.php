@@ -33,7 +33,7 @@ class HomeController extends Controller
         $data['category'] = Category::all();
         $data['subcategory'] = SubCategory::all();
 
-        $data['product'] = Product::paginate(2);
+        $data['product'] = Product::paginate(4);
         $data['img']=Image::all();
         $data['user']=User::all();
         $data['testimonials']=TestiMonials::all();
@@ -89,17 +89,18 @@ class HomeController extends Controller
         return view('user.BlogDetails');
     }
     //...............Course...............//
-    public function get_ViewCourse()
+    public function get_Product()
     {
-        return view('user.ViewCourse');
+        
+        return view('user.Product');
     }
     //................CourseDetails..............//
    
-    public function get_ViewCourseDetails($id){
+    public function get_ProductDetails($id){
         $data['product']=Product::where('id',$id)->first();
         $data['language']=Language::where('id',$id)->first();
        
-        return view('user.ViewCoursedetails',$data);
+        return view('user.Productdetails',$data);
     }
     //..............Quiz.............//
 
@@ -330,5 +331,22 @@ class HomeController extends Controller
     {
         // $data['user']=User::all();
         return view('user.profile.userDashboard');
+    }
+
+    public function get_Test(){
+
+        return view('user.Test.viewtest');
+    }
+
+    public function get_orderdetails(){
+        return view('user.cart.Orderdetails');
+    }
+
+    public function AboutPage(){
+        return view('user.About.aboutus');
+    }
+
+    public function getTest(){
+        return view('test.test');
     }
 }

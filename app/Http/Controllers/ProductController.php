@@ -245,7 +245,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         //image work
         $filename = $request->bannerimage->getClientOriginalName();
-        $request->bannerimage->move(('images'), $filename);
+        $request->bannerimage->move(('upload'), $filename);
         $product->bannerimage = $filename;
 
         $product->bycount = $request->bycount;

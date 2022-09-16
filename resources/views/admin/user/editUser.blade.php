@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-header">Edit User</div>
           <div class="card-body">
-            <form action="{{route('user.update',$subuser)}}" method="post">
+            <form action="{{route('user.update',$subuser)}}" method="post" enctype="multipart/form-data">
               @csrf
           
             <div class="mb-3">
@@ -32,6 +32,9 @@
                 <label for="">Image</label>
                 <input type="file" name="image" class="form-control" value={{$subuser->image}} required>
             </div>
+            <td>
+              <img src="{{asset("upload/".$subuser->image)}}" width="100" height="100" alt="">
+          </td>
               <div class="mb-3">
                 <label for="">Gender</label>
                 <input type="text" name="gender" class="form-control" value={{$subuser->gender}} required>
@@ -49,7 +52,7 @@
               </div>
               
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary w-100">Create</button>
+            <button type="submit" class="btn btn-primary w-100">Update</button>
             </div>
           </form>
           </div>
