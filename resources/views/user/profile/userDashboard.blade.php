@@ -1,9 +1,6 @@
 @extends('user/dashboard')
 @section('pscmithra')
 <div class="seller-dashboard-page">
-    
-
-
 
     <div class="container-fluid">
 		<div class="row">
@@ -12,7 +9,8 @@
 
 			    
 			</div>
-			<div class="col-lg-10 order-lg-last order-1 tab-content">
+			{{-- absd,ndn,b --}}
+			<div class="col-lg-10 order-lg-last order-1 ">
 				<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
 				    
 					<div class="row gutters">
@@ -122,7 +120,7 @@
 				</div>
 	
 
-				<div class="tab-pane fade" id="order" role="tabpanel">
+				<div class="tab-pane " id="order" role="tabpanel">
 					
                       
                       <div class="order-table-container viewButtonshow">
@@ -157,7 +155,7 @@
 						</div>
                
                         
-                        <div class="order-table-container viewButtonshow1" style="display:none;">
+                        <div class="order-table-container viewButtonshow1" >
                             <a href="#" class="viewButtonshow2">Back</a>
                             <h4>Product Name</h4>
                         	<table class="table table-order text-left">
@@ -198,7 +196,7 @@
                         
 				</div>
 
-				<div class="tab-pane fade" id="download" role="tabpanel">
+				<div class="tab-pane " id="download" role="tabpanel">
 					<div class="order-content">
 						<h3 class="account-sub-title d-none d-md-block"><i class="sicon-social-dropbox align-middle mr-3"></i>Orders</h3>
 				
@@ -209,7 +207,7 @@
                                 <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">Order History</a></li>
                             </ul>
                             <!-- Tab panes -->
-                            <div class="tab-content">
+                            <div class="">
                                 <div role="tabpanel" class="tab-pane active" id="Section1">
                                    <div class="order-table-container text-center">
             							<table class="table table-order text-left">
@@ -420,7 +418,7 @@
 					</div>
 				</div>
 			
-			</div><!-- End .tab-content -->
+			</div>
 		</div>
 	</div>
 </div>   
