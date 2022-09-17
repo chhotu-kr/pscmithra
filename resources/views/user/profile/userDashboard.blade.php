@@ -17,11 +17,7 @@
 
 				
 			</div>
-			<div class=" mb-lg-0 mb-3 col-lg-10 order-0">
-				@livewire('p-df.pdf')
-
-				
-			</div>
+			
 			
 			{{-- <div class="col-lg-10 order-lg-last order-1 tab-content">
 				<div class="tab-pane fade show active" id="dashboard" role="tabpanel">

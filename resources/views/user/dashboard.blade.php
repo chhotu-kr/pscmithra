@@ -71,7 +71,9 @@
 
                           {{-- elseif --}}
                           @else
+                          <li class="nav-item"><a href="{{route('user.dashboard')}}" class="nav-link text-white ">Dashboard</a></li>
                           <li class="nav-item"><a href="{{route('logout')}}" class="">LogOut</a></li>
+                   
                           
                           @endif
                             
