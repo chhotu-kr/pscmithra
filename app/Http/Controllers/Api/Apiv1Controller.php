@@ -977,7 +977,7 @@ class Apiv1Controller extends Controller
     $coupon = Coupon::where('code', $code)->first();
     if (!$coupon) {
 
-      return response()->json(['msg' => 'Coupon not exist', 'status' => true]);
+      return response()->json(['msg' => 'Coupon exist', 'status' => true]);
     } else {
       return response()->json(['msg' => 'Coupon allready used', 'status' => false]);
     }
@@ -1103,7 +1103,7 @@ class Apiv1Controller extends Controller
       $array['discount'] = $dicount;
       $array['data'] = $data;
 
-      return response()->json(['msg' => 'Empty Cart', 'status' => $array]);
+      return response()->json(['msg' => 'Data Fetch ', 'status' => true ,'data'=>$array]);
     }
   }
 
@@ -1228,6 +1228,14 @@ class Apiv1Controller extends Controller
         $orderItem->save();
         $value->delete();
       }
+
+
+
+      
+
+
+
+
       $array['total'] = $total;
       $array['checksum'] = "asdsadasdasdas";
       $array['orderid'] = $order->slugid;
@@ -1250,14 +1258,16 @@ class Apiv1Controller extends Controller
     if (empty($request->oderid)) {
       return response()->json(['msg' => 'Enter User', 'status' => false]);
     }
+    if (empty($request->TXNID)) {
+      return response()->json(['msg' => 'Enter TXN', 'status' => false]);
+    }
 
-    $oder =  order::where("slugid", $request->oderid)->where("payment", 'Pending')->with('orderItem')->get();
-    if (count($oder) == 0) {
+    $oder =  order::where("slugid", $request->oderid)->where("user_id",$user_id->id)->where("payment", 'Pending')->with('orderItem')->first();
+    if (empty($oder)) {
       return response()->json(['msg' => 'Invalid Order ID', 'status' => false]);
     }
-    $oder = $oder[0];
-
-
+    $oder->txn_id = $request->TXNID;
+    $oder->dateofpayement = $request->TXNDATE;
     $oder->payment = "Done";
     $oder->save();
     foreach ($oder->orderItem as $value) {
@@ -3074,109 +3084,125 @@ class Apiv1Controller extends Controller
     } else {
 
       $dataa = userCourseModule::where("modules_id", $data->id)->with('usercourse.product.course')->with('module.quiz.questions.question.secondquestion.language')->first();
-
+      
       if (empty($dataa)) {
+        
         if ($data->isfree == "true") {
-
-
-          //return $data->slugid;
-
           $final =  [
             "id" => $data->slugid,
             "name" => $data->name,
             "type" => $data->type,
             "time" => $data->time,
-           
             "text" => $data->text,
-           // "adadadad" => $data,
-            
+            // "adadadad" => $data,
+
           ];
 
-if($data->type=="quiz" && !empty ($data->quiz_id)){
-  $final ['question'] =  $data->quiz->questions;
-}else{
-  $final['url'] = $data->url;
-}
-// ->questions->question->secondquestion->map(function ($ques) {
-//   return collect([
-//     "id" => $ques->language->id,
-//     "language" => $ques->language->languagename,
-//     "question" => $ques->question,
-//     "option1" => $ques->option1,
-//     "option2" => $ques->option2,
-//     "option3" => $ques->option3,
-//     "option4" => $ques->option4,
-//     "direction" => $ques->direction,
-//     "rightans" => $ques->rightans,
+          if ($data->type == "quiz" && !empty($data->quiz_id)) {
+            $final['questionlist'] =  $data->quiz->questions->map(function ($item) {
 
+              return
 
-//     "explain" => $ques->explanation,
-//   ]);
-// });
+                [
+                  "rightans" => $item->question->rightans,
 
-          
-          return response()->json(['msg' => 'Course is Expired', 'status' => $final]);
-        }
-      }
+                  "Question" => $item->question->secondquestion->map(function ($ques) {
+                    return collect([
+                      "id" => $ques->language->id,
 
-      if ($data->usercourse->isExpired) {
-        return response()->json(['msg' => 'Course is Expired', 'status' => true]);
-      } else {
-        $time = $data->usercourse->time;
-        $timeFor = "+" . $data->usercourse->product->course->forTime . " " . $data->usercourse->product->course->forUnit;
-
-
-        $timea = strtotime($timeFor, $time);
-        $datediff = $timea - strtotime('now');
-        $exp = round($datediff / (60 * 60 * 24));
-        if ($exp < 0) {
-          $data->usercourse->isExpired = true;
-          $data->usercourse->save();
-          return response()->json(['msg' => 'Course is Expired', 'status' => $exp]);
-        } else {
-
-          $complete = false;
-          $lock = false;
-          if ($data->isCompleted) {
-            $complete = true;
+                      "language" => $ques->language->languagename,
+                      "question" => $ques->question,
+                      "option1" => $ques->option1,
+                      "option2" => $ques->option2,
+                      "option3" => $ques->option3,
+                      "option4" => $ques->option4,
+                      "direction" => $ques->direction,
+                      "explain" => $ques->explanation,
+                    ]);
+                  })
+                ];
+            });
+          } else {
+            $final['url'] = $data->url;
           }
 
-          $final =  [
-            "id" => $data->module->slugid,
-            "name" => $data->module->name,
-            "type" => $data->module->type,
-            "time" => $data->module->time,
-            "url" => $data->module->url,
-            "text" => $data->module->text,
-            "adadadad" => $data->module,
-            "isCompleted" => $complete,
-          ];
 
-if($data->module->type=="quiz" && !empty ($data->module->quiz_id)){
-  $final ['question'] =  $data->module->quiz->question->secondquestion
-  ->map(function ($ques) {
-    return collect([
-      "id" => $ques->language->id,
-      "language" => $ques->language->languagename,
-      "question" => $ques->question,
-      "option1" => $ques->option1,
-      "option2" => $ques->option2,
-      "option3" => $ques->option3,
-      "option4" => $ques->option4,
-      "direction" => $ques->direction,
-      "rightans" => $ques->rightans,
+          return response()->json(['msg' => 'Course is Expdired', 'status' => true, 'data' => $final]);
+        }else{
+ return response()->json(['msg' => 'Module Not Free is Expired', 'status' => true]);
 
-
-      "explain" => $ques->explanation,
-    ]);
-  });
-}
-
-
-          
-          return response()->json(['msg' => 'Course is Expired', 'status' => $data]);
         }
+      }else{
+
+        $data = $dataa;
+        if ($dataa->usercourse->isExpired) {
+          return response()->json(['msg' => 'Course is Expired', 'status' => true]);
+        } else {
+          $time = $data->usercourse->time;
+          $timeFor = "+" . $data->usercourse->product->course->forTime . " " . $data->usercourse->product->course->forUnit;
+  
+  
+          $timea = strtotime($timeFor, $time);
+          $datediff = $timea - strtotime('now');
+          $exp = round($datediff / (60 * 60 * 24));
+          if ($exp < 0) {
+            $data->usercourse->isExpired = true;
+            $data->usercourse->save();
+            return response()->json(['msg' => 'Course is Expired', 'status' => true]);
+          } else {
+  
+            $complete = false;
+            $lock = false;
+            if ($data->isCompleted) {
+              $complete = true;
+            }
+            $final =  [
+              "id" => $data->module->slugid,
+              "name" => $data->module->name,
+              "type" => $data->module->type,
+              "time" => $data->module->time,
+              "text" => $data->module->text,
+              "isCompleted" => $complete,
+            ];
+  
+            if ($data->module->type == "quiz" && !empty($data->module->quiz_id)) {
+              $final['questionlist'] =  $data->module->quiz->questions->map(function ($item) {
+  
+                return
+  
+                  [
+                    "rightans" => $item->question->rightans,
+  
+                    "Question" => $item->question->secondquestion->map(function ($ques) {
+                      return collect([
+                        "id" => $ques->language->id,
+  
+                        "language" => $ques->language->languagename,
+                        "question" => $ques->question,
+                        "option1" => $ques->option1,
+                        "option2" => $ques->option2,
+                        "option3" => $ques->option3,
+                        "option4" => $ques->option4,
+                        "direction" => $ques->direction,
+                        "explain" => $ques->explanation,
+                      ]);
+                    })
+                  ];
+              });
+            } else {
+              $final['url'] = $data->module->url;
+            }
+  
+  
+  
+  
+  
+            return response()->json(['msg' => 'Data Fetched', 'status' => true,'data' =>$final]);
+          }
+        }
+
       }
+
       // return response()->json(['msg' => 'Course is Expired', 'status' => $timeFor]);
     }
   }
@@ -3202,11 +3228,23 @@ if($data->module->type=="quiz" && !empty ($data->module->quiz_id)){
     return response()->json(['msg' => 'Image Not Found', 'status' => false]);
   }
 
-  public function checkSum()
+  public function checkSum(Request $request)
   {
+
+    if (empty($request->user)) {
+      return response()->json(['msg' => 'Enter User', 'status' => false]);
+    }
+    $user_id =  User::where("slugid", $request->user)->first();
+    if (!$user_id) {
+      return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
+    }
+
+    $order =order::where("slugid",$request->order)->get();
+
+
     $paytmParams = array();
     $mk = "Yn%RvdobV4YIskJ6";
-    $orderId = "ORDERID_" . mt_rand(); // generate order id
+    $orderId = "ORDERID_" ; // generate order id
     $paytmParams["body"] = array(
       "requestType"  => "Payment",
       "mid"  =>  'dfkPSH30981190572294', // this you will get from  paytm dashboard
@@ -3239,34 +3277,15 @@ if($data->module->type=="quiz" && !empty ($data->module->quiz_id)){
     $res = curl_exec($ch);
 
     $res_json = json_decode($res, true);
-    echo json_encode($res_json);
+   
     if ($res_json["body"]["resultInfo"]["resultCode"] == "0000") {
 
-      return response()->json(['msg' => $res_json["body"]["resultInfo"]["resultMsg"], 'status' => false]);
-    } else {
+      return response()->json(['msg' => "Token Genrated", 'status' => true , 'data' => $res_json["body"]["txnToken"]]);
+    } else if ($res_json["body"]["resultInfo"]["resultCode"] == "0002") {
+
+      return response()->json(['msg' => "Token Genrated", 'status' => true , 'data' => $res_json["body"]["txnToken"]]);
+    }else {
       return response()->json(['msg' => $res_json["body"]["resultInfo"]["resultMsg"], 'status' => false]);
     }
-
-
-
-
-    //   $paytmParams = array();
-    //   $paytmParams["MID"] = ;
-    // $paytmParams["ORDER_ID"] = "12345678944";
-    // $paytmParams["CUST_ID"] = "test111";
-    // $paytmParams["CHANNEL_ID"] = "WEA";
-    // $paytmParams["INDUSTRY_TYPE_ID"] = "Retail";
-    // $paytmParams["WEBSITE"] = "";
-    // $paytmParams["TXN_AMOUNT"] = "1";
-    // 
-    //   $paytmChecksum = PaytmchecksumPaytmChecksum::generateSignature(
-    //     json_encode($paytmParams)
-    //     ,$mk);
-
-    //  $verifySignature = PaytmchecksumPaytmChecksum::verifySignature( json_encode($paytmParams), $mk, $paytmChecksum);
-    // echo sprintf("generateSignature Returns: %s\n", $paytmChecksum);
-    // echo "<br>";
-    // echo sprintf("verifySignature Returns: %b\n\n", $verifySignature);
-
   }
 }
