@@ -29,5 +29,11 @@ class Module extends Model
     public function course(){
         return $this->hasOne(Course::class,'id','course_id');
     }
+    public function userModule(){
+        return $this->hasOne(userCourseModule::class,'modules_id','id');
+    }
+    public function quiz(){
+        return $this->hasOne(CourseQuiz::class,'id','quiz_id');
+    }
 }
 

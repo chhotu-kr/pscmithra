@@ -13,4 +13,8 @@ class CourseProduct extends Model
         return $this->hasMany(Module::class, 'course_id','course_id');
     }
 
+    public function product(){
+        return $this->hasOne(Product::class, 'id','product_id');
+    }
+
 }

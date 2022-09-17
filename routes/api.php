@@ -112,6 +112,8 @@ Route::get('/product/filter',[Apiv1Controller::class,'getProductFilter']);
 Route::post('/getUserDetails',[Apiv1Controller::class,'getUserDetails']);
 Route::post('/updateUserDetails',[Apiv1Controller::class,'updateUserDetails']);
 Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
+Route::post('/getCourseDetailsModuleList',[Apiv1Controller::class,'getCourseDetailsModuleList']);
+Route::post('/getModule',[Apiv1Controller::class,'getModule']);
 
 //........cart.........
 
