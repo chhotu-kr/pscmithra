@@ -106,9 +106,9 @@ class QuizResult extends Component
 
           $reattempId = "";
           $reattempResult = false;
-          if (!empty($d->examination->attm)) {
-            $reattempId = $d->examination->attm->slugid;
-            if ($d->examination->attm->type == "result") {
+          if (!empty($d->examination->quizattm)) {
+            $reattempId = $d->examination->quizattm->slugid;
+            if ($d->examination->quizattm->type == "result") {
               $reattempResult = true;
             }
           }

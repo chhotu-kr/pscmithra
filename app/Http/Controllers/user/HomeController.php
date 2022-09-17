@@ -490,4 +490,11 @@ class HomeController extends Controller
     public function coursedetail(){
         return view('user.CourseDetail');
     }
+    public function order_history(){
+        return view('user.Orderhistory');
+    }
+    public function getPdf(){
+        return view('user.GetPdf');
+    }
+    
 }
