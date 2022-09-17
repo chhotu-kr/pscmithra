@@ -37,7 +37,7 @@
     <tbody>
       @foreach ($quiz as $vale)
       <tr>
-        <td><input type='checkbox' value='{{$vale->id}}' name="data[]"></td>
+        <td><input type='checkbox' value='{{$vale->id}}' name="quiz_id"></td>
         <td>{{$vale->id}}</td>
         <td>{{$vale->CQname}}</td>
       <tr>

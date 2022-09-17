@@ -112,6 +112,8 @@ Route::get('/product/filter',[Apiv1Controller::class,'getProductFilter']);
 Route::post('/getUserDetails',[Apiv1Controller::class,'getUserDetails']);
 Route::post('/updateUserDetails',[Apiv1Controller::class,'updateUserDetails']);
 Route::post('/getCourseDetails',[Apiv1Controller::class,'getCourse']);
+Route::post('/getCourseDetailsModuleList',[Apiv1Controller::class,'getCourseDetailsModuleList']);
+Route::post('/getModule',[Apiv1Controller::class,'getModule']);
 
 //........cart.........
 
@@ -150,7 +152,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/checkSum',[Apiv1Controller::class,'checkSum']); 
+Route::post('/checkSum',[Apiv1Controller::class,'checkSum']); 
 Route::group(["prefix" => "quiz"], function ($router) {
 Route::post('/category',[Apiv1Controller::class,'quizCategory']);
 Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);

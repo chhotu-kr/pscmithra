@@ -453,10 +453,10 @@ select.form-control:not([size]):not([multiple]) {
 <h2 class="text-uppercase"><i class="fa fa-th-large" aria-hidden="true"></i> Dashboard</h2>
 <ul class="nav nav-tabs list flex-column mb-0" role="tablist">
 	<li class="nav-item">
-		<a class="nav-link" href="dashboard.php"><i class="fa fa-eye"></i> Overview</a>
+		<a class="nav-link" href="{{ route('user.dashboard') }}"><i class="fa fa-eye"></i> Overview</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="history.php"><i class="fa fa-eye"></i> History</a>
+		<a class="nav-link" href="{{ route('order.history') }}"><i class="fa fa-eye"></i>Order History</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="{{route('user.profile')}}"><i class="fa fa-eye"></i> Profile</a>
@@ -465,8 +465,12 @@ select.form-control:not([size]):not([multiple]) {
 		<a class="nav-link" href="plan.php"><i class="fa fa-eye"></i> Plan</a>
 	</li>
 	<li class="nav-item">
+<<<<<<< HEAD
 		<a class="nav-link" href="{{route('view.test')}}"><i class="fa fa-eye"></i> Sessional PDF</a>
        
+=======
+		<a class="nav-link" href="{{ route('user.getpdf') }}"><i class="fa fa-eye"></i> Sessional PDF</a>
+>>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="{{route('view.course')}}"><i class="fa fa-eye"></i> Course</a>

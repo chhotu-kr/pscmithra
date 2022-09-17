@@ -13,4 +13,10 @@ class CourseQuiz extends Model
         'CQname',
         'slugid',
     ];
+
+    public function questions(){
+        return $this->hasMany(CourseQuizQuestion::class,'course_quizzes_id','id');
+    }
+
+
 }

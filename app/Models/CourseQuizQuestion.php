@@ -9,10 +9,14 @@ class CourseQuizQuestion extends Model
 {
     use HasFactory;
 
-    public function Quizexam(){
-        return $this->hasMany(Examquestion::class,'quiz_examinations_id','id');
-    }
-    public function secondquestion(){
-        return $this->hasOne(SecondQuestion::class,'id','question_id');
+    // public function Quizexam(){
+    //     return $this->hasMany(Examquestion::class,'quiz_examinations_id','id');
+    // }
+    // public function secondquestion(){
+    //     return $this->hasOne(SecondQuestion::class,'id','question_id');
+    // }
+
+    public function question(){
+        return $this->hasOne(Question::class,"id","question_id");
     }
 }

@@ -366,7 +366,7 @@ class HomeController extends Controller
             'mobile_number' => $user->contact,
             'email' => $user->email,
             'amount' => $req->total,
-            'callback_url' => 'http://localhost:8000/payment/call-back'
+            'callback_url' => env('APP_URL').'/payment/call-back'
         ]);
         return $payment->receive();
     }
@@ -490,4 +490,11 @@ class HomeController extends Controller
     public function coursedetail(){
         return view('user.CourseDetail');
     }
+    public function order_history(){
+        return view('user.Orderhistory');
+    }
+    public function getPdf(){
+        return view('user.GetPdf');
+    }
+    
 }
