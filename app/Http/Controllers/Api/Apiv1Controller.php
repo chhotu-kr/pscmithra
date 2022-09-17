@@ -1236,11 +1236,9 @@ class Apiv1Controller extends Controller
 
 
 
-      $array['total'] = $total;
-      $array['checksum'] = "asdsadasdasdas";
-      $array['orderid'] = $order->slugid;
 
-      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $array]);
+
+      return response()->json(['msg' => 'Order Start', 'status' => true, 'data' => $order->slugid]);
     }
   }
 
@@ -1337,7 +1335,7 @@ class Apiv1Controller extends Controller
 
 
 
-    //return response()->json(['msg' => 'Invalid User ID', 'status' => $oder]);
+    return response()->json(['msg' => 'Order Scuccess', 'status' => true]);
 
 
   }
@@ -3239,12 +3237,14 @@ class Apiv1Controller extends Controller
       return response()->json(['msg' => 'Invalid User ID', 'status' => false]);
     }
 
-    $order =order::where("slugid",$request->order)->get();
-
-
+    $oder =  order::where("slugid", $request->oderid)->first();
+    if (empty($oder)) {
+      return response()->json(['msg' => 'Invalid Order ID', 'status' => $oder]);
+    }
+  
     $paytmParams = array();
     $mk = "Yn%RvdobV4YIskJ6";
-    $orderId = "ORDERID_" ; // generate order id
+    $orderId = $request->oderid ; // generate order id
     $paytmParams["body"] = array(
       "requestType"  => "Payment",
       "mid"  =>  'dfkPSH30981190572294', // this you will get from  paytm dashboard
@@ -3253,12 +3253,12 @@ class Apiv1Controller extends Controller
       "orderId"  => $orderId,
       "callbackUrl"  => "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=" . $orderId,
       "txnAmount"  => array(
-        "value" => "1",
+        "value" => $oder->total,
         "currency" => "INR",
       ),
       "userInfo" => array(
-        "custId" => "12sada", // customer id
-        "mobile" => "8273648087",
+        "custId" => $user_id->slugid, // customer id
+        "mobile" => $user_id->contact,
       ),
     );
     $checksum = PaytmchecksumPaytmChecksum::generateSignature(json_encode($paytmParams["body"], JSON_UNESCAPED_SLASHES), $mk);
@@ -3278,9 +3278,14 @@ class Apiv1Controller extends Controller
 
     $res_json = json_decode($res, true);
    
-    if ($res_json["body"]["resultInfo"]["resultCode"] == "0000") {
 
-      return response()->json(['msg' => "Token Genrated", 'status' => true , 'data' => $res_json["body"]["txnToken"]]);
+
+
+    if ($res_json["body"]["resultInfo"]["resultCode"] == "0000") {
+      $data['txn'] = $res_json["body"]["txnToken"];
+      $data['amnt'] =$oder->total;
+      $data['orderid'] =$orderId;
+      return response()->json(['msg' => "Token Genrated", 'status' => true , 'data' =>$data ]);
     } else if ($res_json["body"]["resultInfo"]["resultCode"] == "0002") {
 
       return response()->json(['msg' => "Token Genrated", 'status' => true , 'data' => $res_json["body"]["txnToken"]]);

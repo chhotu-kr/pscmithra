@@ -152,7 +152,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/checkSum',[Apiv1Controller::class,'checkSum']); 
+Route::post('/checkSum',[Apiv1Controller::class,'checkSum']); 
 Route::group(["prefix" => "quiz"], function ($router) {
 Route::post('/category',[Apiv1Controller::class,'quizCategory']);
 Route::post('/subcategory',[Apiv1Controller::class,'quizSubCategory']);
