@@ -21,7 +21,7 @@ class Mypdf extends Component
           });
     }
     
-      
+      // dd($data);
     
     }
     public function render()

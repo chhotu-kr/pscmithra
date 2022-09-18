@@ -1,12 +1,7 @@
 @extends('user/dashboard')
 @section('pscmithra')
 <div class="seller-dashboard-page">
-<<<<<<< HEAD
-    
-	
 
-=======
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
 
     <div class="container-fluid">
 		<div class="row">
@@ -15,19 +10,20 @@
 
 				
 			</div>
-<<<<<<< HEAD
+
 			<div class=" mb-lg-0 mb-3 col-lg-10 order-0">
 				@livewire('sessionalpdf.pdf')
+				
 
 				
 			</div>
 			
 			
 			{{-- <div class="col-lg-10 order-lg-last order-1 tab-content">
-=======
+
 			{{-- absd,ndn,b --}}
 			<div class="col-lg-10 order-lg-last order-1 ">
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
+
 				<div class="tab-pane fade show active" id="dashboard" role="tabpanel">
 				    
 					<div class="row gutters">
@@ -436,11 +432,10 @@
 					</div>
 				</div>
 			
-<<<<<<< HEAD
-			</div><!-- End .tab-content --> --}}
-=======
+
 			</div>
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
+			</div>
+
 		</div>
 	</div>
 </div>   

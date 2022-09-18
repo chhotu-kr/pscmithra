@@ -465,12 +465,12 @@ select.form-control:not([size]):not([multiple]) {
 		<a class="nav-link" href="plan.php"><i class="fa fa-eye"></i> Plan</a>
 	</li>
 	<li class="nav-item">
-<<<<<<< HEAD
+
 		<a class="nav-link" href="{{route('view.test')}}"><i class="fa fa-eye"></i> Sessional PDF</a>
        
-=======
+
 		<a class="nav-link" href="{{ route('user.getpdf') }}"><i class="fa fa-eye"></i> Sessional PDF</a>
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
+
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="{{route('view.course')}}"><i class="fa fa-eye"></i> Course</a>

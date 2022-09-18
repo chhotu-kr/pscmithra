@@ -2,11 +2,11 @@
 @section('pscmithra')
     <div class="seller-dashboard-page">
 
-<<<<<<< HEAD
+
  <section class="section profile">
     <div class="row">
       <div class="col-xl-4">
-=======
+
         <div class="container-fluid">
             <div class="row">
                 <div class="mb-lg-0 mb-3 col-lg-2 order-0">
@@ -23,7 +23,7 @@
                                     <button class="nav-link active" data-bs-toggle="tab"
                                         data-bs-target="#profile-overview">Overview</button>
                                 </li>
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
+
 
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
@@ -204,12 +204,12 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
+
   </section>
    
    
             
 @endsection
-=======
-@endsection
->>>>>>> b39d8aaa1aa40eba3c9e96e14794243465bed72a
+
+
+
