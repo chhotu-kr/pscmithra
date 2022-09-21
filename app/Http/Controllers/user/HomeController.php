@@ -350,7 +350,7 @@ class HomeController extends Controller
 
     public function user_Dashboard()
     {
-        // $data['user']=User::all();
+        
         return view('user.profile.userDashboard');
     }
 
@@ -495,6 +495,10 @@ class HomeController extends Controller
     }
     public function getPdf(){
         return view('user.GetPdf');
+    }
+
+    public function sessionalPdf(){
+        return view('user.Sessional.sessionalPdf');
     }
     
 }

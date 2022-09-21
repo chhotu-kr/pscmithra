@@ -8,18 +8,19 @@ use Livewire\Component;
 
 class GetPdf extends Component
 {
+    public $data=[];
     public function mount(){
-        // $user_id = Auth::user();
-        //   $data  =  UserPdf::where("user_id", $user_id->id)->with('pdf')->get();
-        //   if (count($data) == 0) {
-        //     return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
-        //   }
-        //   $data = $data->map(function ($item) {
-        //     return [
-        //       "pdf" => $item->pdf->pdf_url,
-        //       "name" => $item->pdf->name,
-        //     ];
-        //   });
+        $user_id = Auth::user();
+          $data  =  UserPdf::where("user_id", $user_id)->with('pdf')->get();
+          if (count($data) == 0) {
+            return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
+          }
+          $data = $data->map(function ($item) {
+            return [
+              "pdf" => $item->pdf->pdf_url,
+              "name" => $item->pdf->name,
+            ];
+          });
         //   dd($data);
     }
 

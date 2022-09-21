@@ -3,9 +3,8 @@
     <div class="seller-dashboard-page">
 
 
- <section class="section profile">
-    <div class="row">
-      <div class="col-xl-4">
+      <section class="section profile">
+   
 
         <div class="container-fluid">
             <div class="row">
@@ -203,9 +202,11 @@
                 </div>
             </div>
         </div>
-    </div>
+ 
 
-  </section>
+     </section>
+
+    </div>
    
    
             

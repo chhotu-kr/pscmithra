@@ -11,16 +11,24 @@ class Mypdf extends Component
     public function mount(){
 
       $user_id=Auth::user();  
-    $data  =  userPdf::where("user_id", $user_id)->with('pdf')->get();
+    $data  =   UserPdf::where("user_id", $user_id)->with('pdf')->get();
     if (count($data) == 0) {
-        $this->data = $data->map(function ($item) {
-            return collect ([
-              "pdf" => $item->pdf->pdf_url,
-              "name" => $item->pdf->name,
-            ]);
-          });
+        // $this->data = $data->map(function ($item) {
+        //     return collect ([
+        //       "pdf" => $item->pdf->pdf_url,
+        //       "name" => $item->pdf->name,
+        //     ]);
+        //   });
+        // return response()->json(['msg' => 'Data Fetched', 'status' => true, 'data' => $data]);
     }
-    
+
+    $data = $data->map(function ($item) {
+      return collect ([
+        "pdf" => $item->pdf->pdf_url,
+        "name" => $item->pdf->name,
+      ]);
+    });
+   
       // dd($data);
     
     }

@@ -71,9 +71,10 @@ Route::get('add/cart/{p_id}',[addToCartController::class,'addToCart'])->name('ad
 
 Route::get('/user/profile',[HomeController::class,'get_profile'])->name('user.profile');
 
-Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('user.dashboard');
+// Route::get('/user/dashboard',[HomeController::class,'user_dashboard'])->name('user.dashboard');
 Route::get('/order/history',[HomeController::class,'order_history'])->name('order.history');
 Route::get('/get/pdf',[HomeController::class,'getPdf'])->name('user.getpdf');
+Route::get('/get/sessional/pdf',[HomeController::class,'sessionalPdf'])->name('user.sessionalpdf');
 
 
 Route::get('/user/dashboard',[HomeController::class,'user_Dashboard'])->name('user.dashboard');

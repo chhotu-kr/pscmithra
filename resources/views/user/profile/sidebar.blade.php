@@ -466,10 +466,10 @@ select.form-control:not([size]):not([multiple]) {
 	</li>
 	<li class="nav-item">
 
-		<a class="nav-link" href="{{route('view.test')}}"><i class="fa fa-eye"></i> Sessional PDF</a>
+		<a class="nav-link" href="{{route('user.getpdf')}}"><i class="fa fa-eye"></i>PDF</a>
        
 
-		<a class="nav-link" href="{{ route('user.getpdf') }}"><i class="fa fa-eye"></i> Sessional PDF</a>
+		<a class="nav-link" href="{{ route('user.sessionalpdf') }}"><i class="fa fa-eye"></i> Sessional PDF</a>
 
 	</li>
 	<li class="nav-item">
