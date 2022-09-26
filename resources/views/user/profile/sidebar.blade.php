@@ -246,7 +246,7 @@
 .tab-main .nav-tabs {
     position: relative;
 }
-/*.tab-main .nav-tabs > li:hover:after,
+.tab-main .nav-tabs > li:hover:after,
 .tab-main .nav-tabs .active:after{
     content: "";
     border-top: 10px solid #dc005a;
@@ -255,7 +255,7 @@
     position: absolute;
     top:41px;
     right: 38%;
-}*/
+}
 .tab-main .nav-tabs > li > a{
     border-radius: 0px;
     background: #272d33;

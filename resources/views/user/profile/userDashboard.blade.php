@@ -10,14 +10,15 @@
 
 			
 			</div>
-{{-- 
+		
+
 			<div class=" mb-lg-0 mb-3 col-lg-10 order-0">
 				
-			
+				@livewire('user.get-pdf')
 				
 
 				
-			</div> --}}
+			</div>
 			
 			
 			
